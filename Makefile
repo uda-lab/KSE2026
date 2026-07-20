@@ -1,22 +1,25 @@
 # Build system for the KSE 2026 paper.
-# Prefers tectonic (single binary, runs BibTeX automatically); falls back to
-# latexmk if tectonic is absent. Both write the PDF to build/.
+# Primary engine: pdflatex via latexmk (TeX Live) — matches the IEEE
+# conference submission pipeline (PDF eXpress validates pdflatex output).
+# Fallback: tectonic (single binary, XeTeX-based) for environments without
+# TeX Live; fine for drafts, NOT for camera-ready.
 
-TECTONIC := $(shell command -v tectonic 2>/dev/null)
 LATEXMK  := $(shell command -v latexmk 2>/dev/null)
+TECTONIC := $(shell command -v tectonic 2>/dev/null)
 CHKTEX   := $(shell command -v chktex 2>/dev/null)
 
 .PHONY: pdf lint verify clean
 
 pdf:
-ifdef TECTONIC
+ifdef LATEXMK
 	mkdir -p build
+	cd paper && latexmk -pdf -interaction=nonstopmode -outdir=../build main.tex
+else ifdef TECTONIC
+	mkdir -p build
+	@echo "NOTE: building with tectonic (XeTeX) — draft only; camera-ready must use pdflatex"
 	cd paper && tectonic --outdir ../build main.tex
-else ifdef LATEXMK
-	mkdir -p build
-	cd paper && latexmk -pdf -outdir=../build main.tex
 else
-	$(error No LaTeX engine found: install tectonic (single binary) or latexmk)
+	$(error No LaTeX engine found: install TeX Live (latexmk) or tectonic)
 endif
 	@echo "==> build/main.pdf"
 

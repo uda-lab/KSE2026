@@ -6,6 +6,7 @@ scientific owner による確定判断のみを記録する（提案・候補は
 | 日付 | 判断 | 根拠 / 備考 |
 |---|---|---|
 | 2026-07-20 | 参照対象を leray-hopf v0.1.0-rc1（7c15710a）に暫定固定 | scaffold 時点の最新 release tag．Phase 6 で最終固定を再確認 |
+| 2026-07-20 | ビルド主系を TeX Live pdflatex + latexmk に決定（tectonic は draft fallback） | owner 指示．IEEE 投稿パイプライン（PDF eXpress 等）は pdflatex 出力前提のため |
 | （未定） | 論文主題 A/B/C の選択（PLAN.md §6） | Phase 2–3，incident-ranking の結果による |
 | （未定） | contribution 3 点の確定（Phase 3） | |
 | （未定） | タイトル・abstract の確定（Phase 3） | |
