@@ -25,7 +25,8 @@ endif
 
 lint:
 ifdef CHKTEX
-	chktex -q paper/main.tex paper/sections/*.tex
+	# informational for now (matches CI); tighten to a hard gate once drafting starts
+	-chktex -q paper/main.tex paper/sections/*.tex
 else
 	@echo "chktex not installed; skipping LaTeX lint"
 endif
