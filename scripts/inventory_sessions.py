@@ -20,6 +20,7 @@ import argparse
 import csv
 import fcntl
 import hashlib
+import os
 import re
 import sys
 from datetime import datetime, timezone
@@ -66,11 +67,13 @@ def main() -> int:
     if not args.directory.is_dir():
         ap.error(f"not a directory: {args.directory}")
     # fail closed: only the designated raw area may be inventoried, so relpaths
-    # in the public manifest can never encode host-specific layouts
-    raw_root = REPO_ROOT / "private" / "raw-sessions"
-    resolved = args.directory.resolve()
-    if raw_root.resolve() not in resolved.parents and resolved != raw_root.resolve():
-        ap.error(f"refusing to inventory outside {raw_root} (got {resolved}); "
+    # in the public manifest can never encode host-specific layouts. Compare
+    # logical (symlink-preserving) paths: private/raw-sessions may itself be a
+    # symlink into the host-mounted read-only evidence area (/private/sources).
+    raw_root = Path(os.path.abspath(REPO_ROOT / "private" / "raw-sessions"))
+    logical = Path(os.path.abspath(args.directory))
+    if raw_root not in logical.parents and logical != raw_root:
+        ap.error(f"refusing to inventory outside {raw_root} (got {logical}); "
                  "copy raw files there first (see private/README.md)")
 
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
