@@ -2,7 +2,7 @@
 """Verify that every claim/evidence reference resolves (AGENTS.md rule 4).
 
 Checks:
-  - every `EV-NNNN` referenced in claims/, analysis/, paper/ exists in
+  - every `EV-NNNN` referenced in claims/, analysis/, paper/, notes/ exists in
     evidence/manifest.csv
   - every `INC-NNN` referenced anywhere has a card evidence/incidents/INC-NNN.md
   - every `CLM-NNN` referenced in paper/ is defined in claims/paper-claims.md
@@ -39,7 +39,7 @@ def main() -> int:
         with MANIFEST.open(newline="") as f:
             known_ev = {r["evidence_id"] for r in csv.DictReader(f)}
     known_inc = {p.stem for p in INCIDENT_DIR.glob("INC-*.md")}
-    claims_text = CLAIMS_FILE.read_text() if CLAIMS_FILE.is_file() else ""
+    claims_text = CLAIMS_FILE.read_text(encoding="utf-8") if CLAIMS_FILE.is_file() else ""
     known_clm = set(CLM_DEF_RE.findall(claims_text))
 
     errors = []
@@ -48,7 +48,7 @@ def main() -> int:
         for path in sorted((ROOT / d).rglob("*")):
             if not path.is_file() or path.suffix not in (".md", ".tex"):
                 continue
-            text = strip_placeholders(path.read_text(errors="replace"))
+            text = strip_placeholders(path.read_text(encoding="utf-8", errors="replace"))
             rel = path.relative_to(ROOT)
             for ev in set(EV_RE.findall(text)) - known_ev:
                 errors.append(f"{rel}: {ev} not in evidence/manifest.csv")

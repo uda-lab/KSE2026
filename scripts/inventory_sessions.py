@@ -65,6 +65,13 @@ def main() -> int:
 
     if not args.directory.is_dir():
         ap.error(f"not a directory: {args.directory}")
+    # fail closed: only the designated raw area may be inventoried, so relpaths
+    # in the public manifest can never encode host-specific layouts
+    raw_root = REPO_ROOT / "private" / "raw-sessions"
+    resolved = args.directory.resolve()
+    if raw_root.resolve() not in resolved.parents and resolved != raw_root.resolve():
+        ap.error(f"refusing to inventory outside {raw_root} (got {resolved}); "
+                 "copy raw files there first (see private/README.md)")
 
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
 
@@ -97,7 +104,9 @@ def main() -> int:
                 "collected_relpath": path.relative_to(args.directory).as_posix(),
                 "size_bytes": st.st_size,
                 "mtime_utc": iso(st.st_mtime),
-                "ctime_utc": iso(st.st_ctime),
+                # st_ctime is inode-change time on Unix, NOT creation time;
+                # column name says so to keep cross-host timelines honest
+                "stat_ctime_utc": iso(st.st_ctime),
                 "session_id": m.group(1).lower() if m else "",
                 "tool_or_model": args.tool,
                 "collected_at_utc": now,

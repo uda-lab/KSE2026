@@ -57,7 +57,7 @@ def main() -> int:
     for p in sorted(src.rglob("*.lean")):
         files += 1
         in_block_comment = 0
-        for line in p.read_text(errors="replace").splitlines():
+        for line in p.read_text(encoding="utf-8", errors="replace").splitlines():
             lines += 1
             stripped = line.strip()
             # approximate code-LOC: skip blanks, `--` lines, and /- ... -/ blocks

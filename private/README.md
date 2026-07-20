@@ -8,7 +8,11 @@ private/raw-sessions/
 ├── vps/                # VPS 由来（~/.claude/projects/ 等のコピー）
 ├── local-main/         # 主 local machine 由来
 └── local-secondary/    # 副 local machine 由来
+private/derived/        # normalize_sessions.py 等の中間生成物（JSONL はここ止まり）
 ```
+
+`.jsonl` はリポジトリ全域でコミット禁止（CI が強制）．公開するのは
+`evidence/redacted-excerpts/` の選別済み Markdown のみ．
 
 ## 規約（AGENTS.md 規則 1–3）
 

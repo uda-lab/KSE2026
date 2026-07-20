@@ -44,9 +44,17 @@ PUBLIC_REPO_ALLOWLIST = re.compile(
 GITHUB_URL = re.compile(r"https?://github\.com/[A-Za-z0-9._-]+/[A-Za-z0-9._-]+")
 
 
+def mask(s: str) -> str:
+    """Masked preview so the scanner itself never echoes a full secret."""
+    if len(s) <= 12:
+        return s[:4] + "…"
+    return f"{s[:8]}…{s[-4:]} (len {len(s)})"
+
+
 def load_name_denylist():
     if NAME_DENYLIST_FILE.is_file():
-        names = [ln.strip() for ln in NAME_DENYLIST_FILE.read_text().splitlines()
+        names = [ln.strip()
+                 for ln in NAME_DENYLIST_FILE.read_text(encoding="utf-8").splitlines()
                  if ln.strip() and not ln.startswith("#")]
         return [(f"name:{n}", re.compile(re.escape(n))) for n in names]
     return []
@@ -55,14 +63,14 @@ def load_name_denylist():
 def scan_file(path: Path, extra_patterns) -> int:
     hits = 0
     try:
-        text = path.read_text(errors="replace")
+        text = path.read_text(encoding="utf-8", errors="replace")
     except OSError as e:
         print(f"ERROR reading {path}: {e}", file=sys.stderr)
         return 1
     for lineno, line in enumerate(text.splitlines(), 1):
         for label, rx in PATTERNS + extra_patterns:
             for m in rx.finditer(line):
-                print(f"{path}:{lineno}: [{label}] {m.group(0)[:60]}")
+                print(f"{path}:{lineno}: [{label}] {mask(m.group(0))}")
                 hits += 1
         for m in GITHUB_URL.finditer(line):
             if not PUBLIC_REPO_ALLOWLIST.search(m.group(0)):

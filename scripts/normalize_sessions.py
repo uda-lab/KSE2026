@@ -3,8 +3,12 @@
 
 Reads a raw session file (never modified) and writes one compact record per
 event: timestamp, event type, role, model, cwd, git branch, and a truncated
-text preview. Output is NOT automatically publishable — run redact_check.py
-before moving anything into evidence/.
+text preview.
+
+Output stays under private/ (e.g. private/derived/): the repo policy is that
+NO .jsonl is ever committed (CI enforces this). Public excerpts under
+evidence/redacted-excerpts/ are curated Markdown that passed redact_check.py,
+not machine-dumped JSONL.
 
 Usage:
   python3 scripts/normalize_sessions.py RAW.jsonl -o OUT.normalized.jsonl \
@@ -49,7 +53,8 @@ def main() -> int:
     args = ap.parse_args()
 
     n_in = n_out = n_bad = 0
-    with args.raw.open() as fin, args.output.open("w") as fout:
+    with args.raw.open(encoding="utf-8") as fin, \
+            args.output.open("w", encoding="utf-8") as fout:
         for line in fin:
             line = line.strip()
             if not line:
