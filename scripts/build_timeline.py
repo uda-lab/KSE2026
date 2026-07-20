@@ -2,7 +2,8 @@
 """Build a merged project timeline (PLAN.md Phase 2) as a Markdown table.
 
 Merges, in timestamp order:
-  - git commits from a local leray-hopf checkout (kind: commit)
+  - git commits from a local leray-hopf checkout (kind: commit), OR from an
+    exported snapshot (--commits-json evidence/repository-snapshots/...)
   - session events from evidence/manifest.csv (kind: session, using mtime as
     the session's end-time proxy)
 
@@ -26,7 +27,8 @@ MANIFEST = Path(__file__).resolve().parent.parent / "evidence" / "manifest.csv"
 
 
 def parse_ts(ts: str) -> datetime:
-    """Parse ISO-ish timestamps ('+09:00', '+0900', date-only) to aware UTC."""
+    """Parse ISO-ish timestamps ('Z', '+09:00', '+0900', date-only) to aware UTC."""
+    ts = ts.replace("Z", "+00:00")  # fromisoformat rejects 'Z' before Python 3.11
     for fmt in None, "%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%d":
         try:
             dt = datetime.fromisoformat(ts) if fmt is None \
@@ -54,6 +56,14 @@ def git_commits(repo: Path, since: str | None):
                "summary": subject.replace("|", "\\|"), "evidence": ""}
 
 
+def snapshot_commits(path: Path):
+    import json
+    for c in json.loads(path.read_text(encoding="utf-8")):
+        yield {"ts": c["authored_date"], "kind": "commit",
+               "ref": f"leray-hopf@{c['sha'][:8]}",
+               "summary": c["subject"].replace("|", "\\|"), "evidence": ""}
+
+
 def manifest_sessions():
     if not MANIFEST.is_file():
         return
@@ -68,12 +78,20 @@ def manifest_sessions():
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--repo", type=Path, help="local leray-hopf checkout")
+    ap.add_argument("--commits-json", type=Path,
+                    help="commits.json from export_repo_snapshot.py "
+                         "(alternative to --repo)")
     ap.add_argument("--since", help="only include events after this date")
     args = ap.parse_args()
+    if args.repo and args.commits_json:
+        ap.error("--repo and --commits-json are mutually exclusive "
+                 "(both would duplicate commit rows)")
 
     events = list(manifest_sessions())
     if args.repo:
         events += list(git_commits(args.repo, args.since))
+    elif args.commits_json:
+        events += list(snapshot_commits(args.commits_json))
     # normalize mixed timezones (git author offsets vs manifest UTC) before
     # comparing or sorting
     for e in events:
