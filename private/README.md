@@ -3,16 +3,25 @@
 このディレクトリは `.gitignore` により **本 README 以外すべて Git 管理外**．
 raw セッションログ，未 redaction の抜粋，認証情報を含みうる一切のファイルはここに置く．
 
+## 物理レイアウト（2026-07-21 owner 決定，issue #9）
+
+リポジトリ内のパスは互換のため維持しつつ，実体は host bind-mount に置く:
+
 ```text
-private/raw-sessions/
-├── vps/                # VPS 由来（~/.claude/projects/ 等のコピー）
+private/raw-sessions -> /private/sources/KSE2026/raw-sessions/   (symlink)
+├── vps/                # VPS 由来（~/.claude/projects/ + ~/.hermes/ の選別コピー）
 ├── local-main/         # 主 local machine 由来
 └── local-secondary/    # 副 local machine 由来
-private/derived/        # normalize_sessions.py 等の中間生成物（JSONL はここ止まり）
+private/derived      -> /private/derived/KSE2026/                (symlink)
+                        # normalize_sessions.py 等の中間生成物（JSONL はここ止まり）
 ```
 
-`.jsonl` はリポジトリ全域でコミット禁止（CI が強制）．公開するのは
-`evidence/redacted-excerpts/` の選別済み Markdown のみ．
+- `/private/sources` は**コンテナ内 read-only**．書込（転送・移設）はホスト側から行う．
+  これにより escrow の不変性が chmod より強く保証され，コンテナ再構築からも独立する．
+- local 2 環境からの転送はホスト側の `/private/sources/KSE2026/raw-sessions/<host>/`
+  へ直接 rsync/scp する（コンテナを経由しない）．収集元のディレクトリ構造を保つこと．
+- `.jsonl` はリポジトリ全域でコミット禁止（CI が強制）．公開するのは
+  `evidence/redacted-excerpts/` の選別済み Markdown のみ．
 
 ## 規約（AGENTS.md 規則 1–3）
 

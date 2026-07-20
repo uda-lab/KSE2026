@@ -20,6 +20,7 @@ import argparse
 import csv
 import fcntl
 import hashlib
+import os
 import re
 import sys
 from datetime import datetime, timezone
@@ -66,11 +67,21 @@ def main() -> int:
     if not args.directory.is_dir():
         ap.error(f"not a directory: {args.directory}")
     # fail closed: only the designated raw area may be inventoried, so relpaths
-    # in the public manifest can never encode host-specific layouts
+    # in the public manifest can never encode host-specific layouts. Two checks:
+    # (1) logical (symlink-preserving) path is under private/raw-sessions —
+    #     which may itself be a symlink into the host-mounted read-only
+    #     evidence area (/private/sources);
+    # (2) fully resolved path is under the resolved raw root, so a nested
+    #     symlink placed inside the escrow cannot smuggle in outside trees.
     raw_root = REPO_ROOT / "private" / "raw-sessions"
-    resolved = args.directory.resolve()
-    if raw_root.resolve() not in resolved.parents and resolved != raw_root.resolve():
-        ap.error(f"refusing to inventory outside {raw_root} (got {resolved}); "
+    raw_root_logical = Path(os.path.abspath(raw_root))
+    logical = Path(os.path.abspath(args.directory))
+    raw_root_real = raw_root.resolve()
+    real = args.directory.resolve()
+    if not ((raw_root_logical in logical.parents or logical == raw_root_logical)
+            and (raw_root_real in real.parents or real == raw_root_real)):
+        ap.error(f"refusing to inventory outside {raw_root_logical} "
+                 f"(logical {logical}, resolved {real}); "
                  "copy raw files there first (see private/README.md)")
 
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -79,8 +90,19 @@ def main() -> int:
     # exclusive lock so concurrent runs cannot duplicate EV numbers
     # (cross-host collection is additionally serialized by policy, issue #2)
     candidates = []
+    skipped_links = 0
     for path in sorted(p for p in args.directory.rglob("*") if p.is_file()):
+        # same containment guarantee at file level: never follow symlinks out
+        # of the escrow (their targets are not preserved evidence)
+        if path.is_symlink():
+            skipped_links += 1
+            print(f"skip (symlink, not preserved evidence): {path}",
+                  file=sys.stderr)
+            continue
         candidates.append((path, sha256_file(path)))
+    if skipped_links:
+        print(f"warning: {skipped_links} symlink(s) skipped — record their "
+              "targets in SOURCES.md if they matter", file=sys.stderr)
 
     with MANIFEST.open("a+", newline="") as f:
         fcntl.flock(f, fcntl.LOCK_EX)
