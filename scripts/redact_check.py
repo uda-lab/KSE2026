@@ -31,8 +31,9 @@ PATTERNS = [
     ("jwt", re.compile(r"eyJ[A-Za-z0-9_-]{10,}\.eyJ[A-Za-z0-9_-]{10,}")),
     ("email", re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")),
     ("ssh-url", re.compile(r"git@[A-Za-z0-9.-]+:[A-Za-z0-9._/-]+")),
+    # quotes around the key are optional so JSON forms ("api_key": "...") match too
     ("generic-secret-assign",
-     re.compile(r"(?i)(api[_-]?key|token|secret|password)\s*[=:]\s*['\"][^'\"]{8,}")),
+     re.compile(r"(?i)['\"]?(api[_-]?key|token|secret|password)['\"]?\s*[=:]\s*['\"][^'\"]{8,}")),
 ]
 
 # Repos that are public and citable; any other owner/repo URL is flagged.
@@ -73,12 +74,13 @@ def scan_file(path: Path, extra_patterns) -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("files", nargs="*", type=Path)
-    ap.add_argument("--dir", type=Path, help="recursively scan a directory")
+    ap.add_argument("--dir", type=Path, action="append", default=[],
+                    help="recursively scan a directory (repeatable)")
     args = ap.parse_args()
 
     targets = list(args.files)
-    if args.dir:
-        targets += [p for p in sorted(args.dir.rglob("*"))
+    for d in args.dir:
+        targets += [p for p in sorted(d.rglob("*"))
                     if p.is_file() and p.name != ".gitkeep"]
     if not targets:
         ap.error("nothing to scan")

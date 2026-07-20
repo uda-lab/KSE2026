@@ -4,9 +4,13 @@
 
 - `manifest.csv` — 収集した証拠アイテムの台帳．`scripts/inventory_sessions.py` が
   追記する．列: `evidence_id`（EV-NNNN，連番），`sha256`，`host`
-  （vps / local-main / local-secondary），`original_path`，`size_bytes`，
+  （vps / local-main / local-secondary），`collected_relpath`，`size_bytes`，
   `mtime_utc`，`ctime_utc`，`session_id`（推定），`tool_or_model`，
   `collected_at_utc`，`evidence_type`（primary / reconstructed），`notes`．
+  **PLAN.md §4 からの意図的な逸脱**: 元の絶対パスは username や非公開プロジェクト名を
+  含みうるため，公開 manifest にはスキャン root からの相対パスのみを記録する．
+  収集元マシン上の絶対パスとの対応は，収集時に
+  `private/raw-sessions/<host>/SOURCES.md`（gitignored）へ記録すること．
 - `repository-snapshots/` — leray-hopf 等の Git 証跡スナップショット（commit list，
   issue/PR エクスポートなど機械抽出物）．
 - `session-index/` — セッション単位の索引（正規化メタデータ．本文は含まない）．

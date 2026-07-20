@@ -12,6 +12,11 @@ private/raw-sessions/
 
 ## 規約（AGENTS.md 規則 1–3）
 
+- 収集時に各 host ディレクトリ直下へ `SOURCES.md`（gitignored）を作り，
+  **収集元マシン上の絶対パス**と収集先 relpath の対応を記録する（公開 manifest には
+  相対パスしか載らないため，これが唯一の対応表になる）．
+- 収集元パスに含まれる username・非公開プロジェクト名は `private/redact-names.txt`
+  （1 行 1 語）に追加し，`scripts/redact_check.py` の denylist として効かせる．
 - 収集した元ファイルは **read-only**（`chmod -R a-w`）とし，以後変更しない．
 - 収集直後に `python3 scripts/inventory_sessions.py private/raw-sessions/<host> --host <host>`
   を実行して `evidence/manifest.csv` に登録する．

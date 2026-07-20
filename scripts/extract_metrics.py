@@ -53,11 +53,19 @@ def main() -> int:
 
     src = args.repo / args.src_dir
     decls = {}
-    files = lines = sorries = 0
+    files = lines = code_lines = sorries = 0
     for p in sorted(src.rglob("*.lean")):
         files += 1
+        in_block_comment = 0
         for line in p.read_text(errors="replace").splitlines():
             lines += 1
+            stripped = line.strip()
+            # approximate code-LOC: skip blanks, `--` lines, and /- ... -/ blocks
+            in_block_comment += stripped.count("/-") - stripped.count("-/")
+            is_comment = (in_block_comment > 0 or stripped.startswith("--")
+                          or stripped.endswith("-/"))
+            if stripped and not is_comment:
+                code_lines += 1
             if m := DECL_RE.match(line):
                 decls[m.group(1)] = decls.get(m.group(1), 0) + 1
             if SORRY_RE.search(line):
@@ -69,7 +77,8 @@ def main() -> int:
         "described_by": git(args.repo, "describe", "--tags", "--always"),
         "src_dir": args.src_dir,
         "lean_files": files,
-        "lean_lines": lines,
+        "lean_lines_physical": lines,
+        "lean_lines_code": code_lines,
         "declarations": dict(sorted(decls.items())),
         "sorry_occurrences": sorries,
         "commit_count": int(git(args.repo, "rev-list", "--count", "HEAD")),
@@ -78,7 +87,10 @@ def main() -> int:
         "last_commit_date": git(args.repo, "log", "-1", "--format=%aI"),
         "note": "declaration counts are regex-based (source-text level), not "
                 "elaborator-verified; sorry count is textual and may include "
-                "comments/strings",
+                "comments/strings; lean_lines_code approximates non-blank "
+                "non-comment LOC (block-comment tracking is line-granular) — "
+                "state which definition the paper cites and match it against "
+                "the upstream repo's own LOC figures before quoting",
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(metrics, indent=2) + "\n")

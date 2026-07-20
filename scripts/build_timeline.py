@@ -13,13 +13,32 @@ analysis/project-timeline.md.
 Usage:
   python3 scripts/build_timeline.py --repo /path/to/leray-hopf [--since 2026-01-01]
 """
+from __future__ import annotations
+
 import argparse
 import csv
 import subprocess
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 MANIFEST = Path(__file__).resolve().parent.parent / "evidence" / "manifest.csv"
+
+
+def parse_ts(ts: str) -> datetime:
+    """Parse ISO-ish timestamps ('+09:00', '+0900', date-only) to aware UTC."""
+    for fmt in None, "%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%d":
+        try:
+            dt = datetime.fromisoformat(ts) if fmt is None \
+                else datetime.strptime(ts, fmt)
+            break
+        except ValueError:
+            continue
+    else:
+        raise ValueError(f"unparsable timestamp: {ts!r}")
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc)
 
 
 def git_commits(repo: Path, since: str | None):
@@ -41,7 +60,7 @@ def manifest_sessions():
     with MANIFEST.open(newline="") as f:
         for r in csv.DictReader(f):
             yield {"ts": r["mtime_utc"], "kind": "session",
-                   "ref": r["session_id"] or r["original_path"],
+                   "ref": r["session_id"] or r["collected_relpath"],
                    "summary": f"session on {r['host']} ({r['tool_or_model']})",
                    "evidence": r["evidence_id"]}
 
@@ -55,14 +74,20 @@ def main() -> int:
     events = list(manifest_sessions())
     if args.repo:
         events += list(git_commits(args.repo, args.since))
+    # normalize mixed timezones (git author offsets vs manifest UTC) before
+    # comparing or sorting
+    for e in events:
+        e["ts_utc"] = parse_ts(e["ts"])
     if args.since:
-        events = [e for e in events if e["ts"] >= args.since]
-    events.sort(key=lambda e: e["ts"])
+        since = parse_ts(args.since)
+        events = [e for e in events if e["ts_utc"] >= since]
+    events.sort(key=lambda e: e["ts_utc"])
 
     print("| 日時 (UTC) | 種別 | 参照 | 概要 | Evidence |")
     print("|---|---|---|---|---|")
     for e in events:
-        print(f"| {e['ts']} | {e['kind']} | {e['ref']} | {e['summary']} | {e['evidence']} |")
+        ts = e["ts_utc"].isoformat(timespec="seconds")
+        print(f"| {ts} | {e['kind']} | {e['ref']} | {e['summary']} | {e['evidence']} |")
     print(f"\n<!-- generated: {len(events)} events -->", file=sys.stderr)
     return 0
 

@@ -41,14 +41,14 @@ def main() -> int:
     for sha, group in sorted(dup_sha.items()):
         print(f"  {sha[:16]}…")
         for r in group:
-            print(f"    {r['evidence_id']} {r['host']} {r['original_path']}")
+            print(f"    {r['evidence_id']} {r['host']} {r['collected_relpath']}")
 
     print(f"session_id seen in multiple files: {len(multi_sess)} group(s)")
     for sid, group in sorted(multi_sess.items()):
         hosts = sorted({r["host"] for r in group})
         print(f"  {sid} (hosts: {', '.join(hosts)})")
         for r in group:
-            print(f"    {r['evidence_id']} {r['host']} {r['original_path']}")
+            print(f"    {r['evidence_id']} {r['host']} {r['collected_relpath']}")
 
     return 0
 
