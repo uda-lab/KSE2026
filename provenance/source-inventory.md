@@ -7,9 +7,9 @@ inventory 化する）．
 
 | Host ID | 実体 | 想定所在 | 収集状態 | 備考 |
 |---|---|---|---|---|
-| vps | VPS | `~/.claude/projects/` ほか（要列挙） | 未着手 | |
-| local-main | 主 local machine | 同上 | 未着手 | |
-| local-secondary | 副 local machine | 同上 | 未着手 | |
+| vps | VPS devcontainer | `~/.claude/projects/`，`~/.hermes/` | **収集済 2026-07-20**（EV-0001〜EV-1633） | 1777 ファイル escrow（762MB），内容重複 144 を除く 1633 件を manifest 登録．Claude Code 6 プロジェクト（leray-hopf 本体 12 sessions を含む）+ Hermes orchestrator sessions/logs/relay-prompts/kanban + bash history．除外・対応表は escrow 内 SOURCES.md（gitignored）．issue #3 参照 |
+| local-main | 主 local machine | `~/.claude/projects/` ほか（要列挙） | 未着手 | 転送後に inventory（#4，vps の次） |
+| local-secondary | 副 local machine | 同上 | 未着手 | #5，local-main の次 |
 
 各 host で Phase 1 に列挙すべきもの: Claude Code セッション（`*.jsonl`），memory
 ディレクトリ，shell history，build log，handoff 文書．
