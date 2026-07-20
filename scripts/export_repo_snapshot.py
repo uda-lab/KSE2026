@@ -78,7 +78,7 @@ def main() -> int:
         "authored_date": c["commit"]["author"]["date"],
         "committer_login": (c.get("committer") or {}).get("login"),
         "committed_date": c["commit"]["committer"]["date"],
-        "subject": c["commit"]["message"].split("\n")[0],
+        "subject": scrub(c["commit"]["message"].split("\n")[0]),
         "parents": [p["sha"] for p in c["parents"]],
     } for c in gh_api(f"repos/{args.repo}/commits?per_page=100")]
     write_json(out / "commits.json", commits)
@@ -87,7 +87,7 @@ def main() -> int:
         "number": i["number"],
         "kind": "pr" if "pull_request" in i else "issue",
         "state": i["state"],
-        "title": i["title"],
+        "title": scrub(i["title"]),
         "body": scrub(i.get("body") or ""),
         "user_login": (i.get("user") or {}).get("login"),
         "labels": [lb["name"] for lb in i.get("labels", [])],
@@ -111,7 +111,7 @@ def main() -> int:
 
     releases = [{
         "tag_name": r["tag_name"],
-        "name": r.get("name"),
+        "name": scrub(r.get("name") or "") or None,
         "created_at": r["created_at"],
         "published_at": r.get("published_at"),
         "body": scrub(r.get("body") or ""),
@@ -122,10 +122,13 @@ def main() -> int:
             for t in gh_api(f"repos/{args.repo}/tags?per_page=100")]
     write_json(out / "tags.json", tags)
 
+    gh_version = subprocess.run(["gh", "--version"], capture_output=True,
+                                text=True).stdout.splitlines()[0]
     meta = {
         "repo": args.repo,
         "head_sha_at_fetch": head,
         "fetched_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "tool_versions": {"python": sys.version.split()[0], "gh": gh_version},
         "counts": {"commits": len(commits), "issues_and_prs": len(issues),
                    "comments": len(comments), "releases": len(releases),
                    "tags": len(tags)},

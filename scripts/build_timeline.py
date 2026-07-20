@@ -27,7 +27,8 @@ MANIFEST = Path(__file__).resolve().parent.parent / "evidence" / "manifest.csv"
 
 
 def parse_ts(ts: str) -> datetime:
-    """Parse ISO-ish timestamps ('+09:00', '+0900', date-only) to aware UTC."""
+    """Parse ISO-ish timestamps ('Z', '+09:00', '+0900', date-only) to aware UTC."""
+    ts = ts.replace("Z", "+00:00")  # fromisoformat rejects 'Z' before Python 3.11
     for fmt in None, "%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%d":
         try:
             dt = datetime.fromisoformat(ts) if fmt is None \
@@ -82,11 +83,14 @@ def main() -> int:
                          "(alternative to --repo)")
     ap.add_argument("--since", help="only include events after this date")
     args = ap.parse_args()
+    if args.repo and args.commits_json:
+        ap.error("--repo and --commits-json are mutually exclusive "
+                 "(both would duplicate commit rows)")
 
     events = list(manifest_sessions())
     if args.repo:
         events += list(git_commits(args.repo, args.since))
-    if args.commits_json:
+    elif args.commits_json:
         events += list(snapshot_commits(args.commits_json))
     # normalize mixed timezones (git author offsets vs manifest UTC) before
     # comparing or sorting
