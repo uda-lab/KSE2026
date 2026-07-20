@@ -3,7 +3,7 @@
 
 Merges, in timestamp order:
   - git commits from a local leray-hopf checkout (kind: commit), OR from an
-    exported snapshot (--commits-jsonl evidence/repository-snapshots/.../commits.jsonl)
+    exported snapshot (--commits-json evidence/repository-snapshots/...)
   - session events from evidence/manifest.csv (kind: session, using mtime as
     the session's end-time proxy)
 
@@ -57,12 +57,10 @@ def git_commits(repo: Path, since: str | None):
 
 def snapshot_commits(path: Path):
     import json
-    with path.open(encoding="utf-8") as f:
-        for line in f:
-            c = json.loads(line)
-            yield {"ts": c["authored_date"], "kind": "commit",
-                   "ref": f"leray-hopf@{c['sha'][:8]}",
-                   "summary": c["subject"].replace("|", "\\|"), "evidence": ""}
+    for c in json.loads(path.read_text(encoding="utf-8")):
+        yield {"ts": c["authored_date"], "kind": "commit",
+               "ref": f"leray-hopf@{c['sha'][:8]}",
+               "summary": c["subject"].replace("|", "\\|"), "evidence": ""}
 
 
 def manifest_sessions():
@@ -79,8 +77,8 @@ def manifest_sessions():
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--repo", type=Path, help="local leray-hopf checkout")
-    ap.add_argument("--commits-jsonl", type=Path,
-                    help="commits.jsonl from export_repo_snapshot.py "
+    ap.add_argument("--commits-json", type=Path,
+                    help="commits.json from export_repo_snapshot.py "
                          "(alternative to --repo)")
     ap.add_argument("--since", help="only include events after this date")
     args = ap.parse_args()
@@ -88,8 +86,8 @@ def main() -> int:
     events = list(manifest_sessions())
     if args.repo:
         events += list(git_commits(args.repo, args.since))
-    if args.commits_jsonl:
-        events += list(snapshot_commits(args.commits_jsonl))
+    if args.commits_json:
+        events += list(snapshot_commits(args.commits_json))
     # normalize mixed timezones (git author offsets vs manifest UTC) before
     # comparing or sorting
     for e in events:

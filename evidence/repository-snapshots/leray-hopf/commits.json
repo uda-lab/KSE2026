@@ -1,0 +1,3883 @@
+[
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-20T09:26:09Z",
+  "committed_date": "2026-07-20T09:26:09Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "f36a789982239474373aab937c67e4f2caa8f7e7"
+  ],
+  "sha": "8ef11145d56336239cf47664a8bc5e6f2205847a",
+  "subject": "docs: link to permanent v0.1.0-rc1 release-attestation evidence (#194)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-20T08:43:44Z",
+  "committed_date": "2026-07-20T08:43:44Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "c85fafd6f1efc05226712de5eb83219b672939fb"
+  ],
+  "sha": "f36a789982239474373aab937c67e4f2caa8f7e7",
+  "subject": "docs: add deterministic code-LOC treemap as repository map (#193)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-20T08:28:00Z",
+  "committed_date": "2026-07-20T08:28:00Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "3e0ecab48adac4fc482175790b3bf6a7341c0a76"
+  ],
+  "sha": "c85fafd6f1efc05226712de5eb83219b672939fb",
+  "subject": "docs: add Star History chart to README (#192)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-20T07:56:53Z",
+  "committed_date": "2026-07-20T07:56:53Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "b017f97ed990f7a28341732c35ec3e1b3ebac446"
+  ],
+  "sha": "3e0ecab48adac4fc482175790b3bf6a7341c0a76",
+  "subject": "docs: restructure README as a general-reader entry point (#190)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-20T03:31:04Z",
+  "committed_date": "2026-07-20T03:31:04Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "7c15710a7b9068a2aa105fc7c11b432e7685b7b5"
+  ],
+  "sha": "b017f97ed990f7a28341732c35ec3e1b3ebac446",
+  "subject": "release-attestation: build Experimental opt-in module before check-axioms-live (#185) (#186)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T14:32:27Z",
+  "committed_date": "2026-07-19T14:32:27Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "a559a96cf83dc6521385cc54a0745cd7cafd8bfb",
+   "3ee0af246a41992382bd837c7725d8f5cd6b11d1"
+  ],
+  "sha": "7c15710a7b9068a2aa105fc7c11b432e7685b7b5",
+  "subject": "Merge pull request #181 from uda-lab/issue-155-wave2"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T13:15:46Z",
+  "committed_date": "2026-07-19T13:15:46Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "06eb4968119643d6c9d006a06136c2bc2f238fd8",
+   "7c9a602a372468530453da73d60504cbb505e1b1"
+  ],
+  "sha": "a559a96cf83dc6521385cc54a0745cd7cafd8bfb",
+  "subject": "Merge pull request #182 from uda-lab/issue-152-annotate"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T13:11:48Z",
+  "committed_date": "2026-07-19T13:11:48Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "0785f225e0389a1fef5d5c69dd6f79eed6003306",
+   "1bca24ca5df772957f36598c42f00a3b97e83203"
+  ],
+  "sha": "06eb4968119643d6c9d006a06136c2bc2f238fd8",
+  "subject": "Merge pull request #183 from uda-lab/issue-178-expdoc-notation"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T13:04:58Z",
+  "committed_date": "2026-07-19T13:04:58Z",
+  "committer_login": null,
+  "parents": [
+   "0785f225e0389a1fef5d5c69dd6f79eed6003306"
+  ],
+  "sha": "1bca24ca5df772957f36598c42f00a3b97e83203",
+  "subject": "docs(Experimental): fix malformed Sobolev-space notation in module index"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T11:44:05Z",
+  "committed_date": "2026-07-19T11:44:05Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "105c659489ebc9458e0e4d6e24833067e80f8b2b"
+  ],
+  "sha": "0785f225e0389a1fef5d5c69dd6f79eed6003306",
+  "subject": "docs(w1pTime_continuous_in_H): sync Temam citation to owner-verified 1973 edition (#180)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T10:55:48Z",
+  "committed_date": "2026-07-19T10:55:48Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "53c996115039cf73bc82d0027871433650994a95"
+  ],
+  "sha": "105c659489ebc9458e0e4d6e24833067e80f8b2b",
+  "subject": "issue #178: correct malformed Sobolev formula and hT justification (#179)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T09:40:45Z",
+  "committed_date": "2026-07-19T09:40:45Z",
+  "committer_login": null,
+  "parents": [
+   "ec09b5d261134cd59c7d8605ef9b326ad07a17d2"
+  ],
+  "sha": "7c9a602a372468530453da73d60504cbb505e1b1",
+  "subject": "issue #152: finalize GoodRepresentative.lean maxHeartbeats annotations"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-19T09:34:14Z",
+  "committed_date": "2026-07-19T09:34:14Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "f35ab0a84de978338a325f12bda50b1a3daefe1f"
+  ],
+  "sha": "53c996115039cf73bc82d0027871433650994a95",
+  "subject": "docs: correct w1pTime formula and Temam locator (#177)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T08:44:57Z",
+  "committed_date": "2026-07-19T08:44:57Z",
+  "committer_login": null,
+  "parents": [
+   "f35ab0a84de978338a325f12bda50b1a3daefe1f"
+  ],
+  "sha": "ec09b5d261134cd59c7d8605ef9b326ad07a17d2",
+  "subject": "issue #152: measure and annotate 31 declaration-local maxHeartbeats overrides"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T04:54:10Z",
+  "committed_date": "2026-07-19T04:54:10Z",
+  "committer_login": null,
+  "parents": [
+   "f35ab0a84de978338a325f12bda50b1a3daefe1f"
+  ],
+  "sha": "3ee0af246a41992382bd837c7725d8f5cd6b11d1",
+  "subject": "issue #155 wave 2: docstring triage for remaining heuristic-flagged declarations"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T03:36:21Z",
+  "committed_date": "2026-07-19T03:36:21Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "a8af94954824036d13743e1b50fbbdded3e99400",
+   "595bdb6f1c1e9e101721ab7925a0b750c037e589"
+  ],
+  "sha": "f35ab0a84de978338a325f12bda50b1a3daefe1f",
+  "subject": "Merge pull request #175 from uda-lab/issue-155-docstring-boundary"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T03:15:19Z",
+  "committed_date": "2026-07-19T03:15:19Z",
+  "committer_login": null,
+  "parents": [
+   "6831a2b46e2eff81fab873b72ced6e296ed32661"
+  ],
+  "sha": "595bdb6f1c1e9e101721ab7925a0b750c037e589",
+  "subject": "issue #155: fix inverted docstring term coarser → higher-cutoff in velocityProjection_n_eq_of_le"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T00:19:06Z",
+  "committed_date": "2026-07-19T00:19:06Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "51d720a14dbeb7ce1dc7640910ad366dc89c915b",
+   "c0217277996823fc70dc6d500b00a2665ede2313"
+  ],
+  "sha": "a8af94954824036d13743e1b50fbbdded3e99400",
+  "subject": "Merge pull request #174 from uda-lab/issue-156-contributor-files"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-18T13:12:52Z",
+  "committed_date": "2026-07-18T13:12:52Z",
+  "committer_login": null,
+  "parents": [
+   "2765bee9ed963a1cde425b1c091e29734fdf293f"
+  ],
+  "sha": "c0217277996823fc70dc6d500b00a2665ede2313",
+  "subject": "address review round 3: propagate the contributor/agent SoT boundary down to"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-18T13:06:46Z",
+  "committed_date": "2026-07-18T13:06:46Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "cce4b63fb24c82d1446dab326b87002b576e4850"
+  ],
+  "sha": "51d720a14dbeb7ce1dc7640910ad366dc89c915b",
+  "subject": "issue #154: extract textbook-step lemmas from ballLimits_are_consistent (wave 1) (#176)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-18T11:57:01Z",
+  "committed_date": "2026-07-18T11:57:01Z",
+  "committer_login": null,
+  "parents": [
+   "ae369c3298f644253b7d30c505a8e38bba93d672"
+  ],
+  "sha": "2765bee9ed963a1cde425b1c091e29734fdf293f",
+  "subject": "address review round 2: fix SoT contradiction, narrow non-Lean validation bucket"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-18T11:54:13Z",
+  "committed_date": "2026-07-18T11:54:13Z",
+  "committer_login": null,
+  "parents": [
+   "cce4b63fb24c82d1446dab326b87002b576e4850"
+  ],
+  "sha": "6831a2b46e2eff81fab873b72ced6e296ed32661",
+  "subject": "issue #155: triage docstring/private boundary in ConvectionExtension files"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-18T09:23:42Z",
+  "committed_date": "2026-07-18T09:23:42Z",
+  "committer_login": null,
+  "parents": [
+   "e4af17b70cbeeeb806bdbe133490320c61e91533"
+  ],
+  "sha": "ae369c3298f644253b7d30c505a8e38bba93d672",
+  "subject": "address review: stop framing internal agent tooling as an external contributor gate"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-18T05:42:53Z",
+  "committed_date": "2026-07-18T05:42:53Z",
+  "committer_login": null,
+  "parents": [
+   "cce4b63fb24c82d1446dab326b87002b576e4850"
+  ],
+  "sha": "e4af17b70cbeeeb806bdbe133490320c61e91533",
+  "subject": "docs: add CONTRIBUTING.md, SECURITY.md, and bug/theorem-statement/build-failure issue templates"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T22:59:43Z",
+  "committed_date": "2026-07-17T22:59:43Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "dbd8888f8a35c9bce5bc13fbb44160be24fd3c33"
+  ],
+  "sha": "cce4b63fb24c82d1446dab326b87002b576e4850",
+  "subject": "issue #152: audit maxHeartbeats overrides — remove/narrow file-scope, finite-ize unlimited (#173)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T20:00:03Z",
+  "committed_date": "2026-07-17T20:00:03Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "bee51d191bb800e5e92a21cc1b762418d55e25a0"
+  ],
+  "sha": "dbd8888f8a35c9bce5bc13fbb44160be24fd3c33",
+  "subject": "guardrail: strengthen release-cone guard with axiom + placeholder-namespace checks (#151) (#172)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T11:12:15Z",
+  "committed_date": "2026-07-17T11:12:15Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "d1e94a06e29c90f31423cd6fa78c2071cc24f9ae"
+  ],
+  "sha": "bee51d191bb800e5e92a21cc1b762418d55e25a0",
+  "subject": "issue #158: postmortem, statement-gate policy, statement-card regression guard, axiom-profile visibility (#170)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T07:44:26Z",
+  "committed_date": "2026-07-17T07:44:26Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "d5f91f7e88c337b85623d7af6f7cb01cd136f97c"
+  ],
+  "sha": "d1e94a06e29c90f31423cd6fa78c2071cc24f9ae",
+  "subject": "sync source repo to the uda-lab/leray-hopf rename (issue #157) (#171)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T05:12:26Z",
+  "committed_date": "2026-07-17T05:12:26Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "499c95266ca5f5e7e5de988c655ad66cfa9fa905",
+   "c23f607b17f2f16fa0d5bc6372d0ee36a94ce584"
+  ],
+  "sha": "d5f91f7e88c337b85623d7af6f7cb01cd136f97c",
+  "subject": "Merge pull request #169 from uda-lab/issue-168-hotfix-timesobolev"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T02:45:27Z",
+  "committed_date": "2026-07-17T02:45:27Z",
+  "committer_login": null,
+  "parents": [
+   "499c95266ca5f5e7e5de988c655ad66cfa9fa905"
+  ],
+  "sha": "c23f607b17f2f16fa0d5bc6372d0ee36a94ce584",
+  "subject": "hotfix: fix orphaned doc comment breaking TimeSobolev.lean build"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T02:10:40Z",
+  "committed_date": "2026-07-17T02:10:40Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "6a628330e626ef022380878b2b0ba312649ceaff",
+   "bba942b17eea21ec1faf0e3082929eb16b8b8b80"
+  ],
+  "sha": "499c95266ca5f5e7e5de988c655ad66cfa9fa905",
+  "subject": "Merge pull request #167 from uda-lab/issue-166-extractor-experimental"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T01:35:01Z",
+  "committed_date": "2026-07-17T01:35:01Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "f0e67598c712e48e74252ea41192515b832879cf",
+   "cdf7b2b929326b0caf467f9db24351e446effb8f"
+  ],
+  "sha": "6a628330e626ef022380878b2b0ba312649ceaff",
+  "subject": "Merge pull request #165 from uda-lab/issue-150-build-attestation"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T01:17:01Z",
+  "committed_date": "2026-07-17T01:17:01Z",
+  "committer_login": null,
+  "parents": [
+   "f0e67598c712e48e74252ea41192515b832879cf"
+  ],
+  "sha": "bba942b17eea21ec1faf0e3082929eb16b8b8b80",
+  "subject": "extract_notes: include LerayHopf.Experimental in the notes extraction universe"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T01:14:35Z",
+  "committed_date": "2026-07-17T01:14:35Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "9f46ad5a3291428a9564b4ee82704144dba49b04",
+   "7c9270b0c33f4f5f0004520bba2975524bfb13cd"
+  ],
+  "sha": "f0e67598c712e48e74252ea41192515b832879cf",
+  "subject": "Merge pull request #163 from uda-lab/issue-149-lake-metadata"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T01:14:18Z",
+  "committed_date": "2026-07-17T01:14:18Z",
+  "committer_login": null,
+  "parents": [
+   "f940f8944c3f30bfe889d1bb275f975fd14d3be6"
+  ],
+  "sha": "cdf7b2b929326b0caf467f9db24351e446effb8f",
+  "subject": "codex pre-review: pin job shell to guarantee pipefail, cap artifact retention at 90 days"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T01:13:29Z",
+  "committed_date": "2026-07-17T01:13:29Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "c5bad88ce994206df249943e8e4d261ec8976520",
+   "6eef287abbd4ceae8e403f61863268e7ffbec626"
+  ],
+  "sha": "9f46ad5a3291428a9564b4ee82704144dba49b04",
+  "subject": "Merge pull request #164 from uda-lab/issue-148-docs-cleanup"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T01:12:22Z",
+  "committed_date": "2026-07-17T01:12:22Z",
+  "committer_login": null,
+  "parents": [
+   "3185c2a51cdafa062a82cd9bdcc6933e4933953d"
+  ],
+  "sha": "6eef287abbd4ceae8e403f61863268e7ffbec626",
+  "subject": "docs: repair relative links broken by the docs/archive/ move (codex review, PR #164)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T01:09:24Z",
+  "committed_date": "2026-07-17T01:09:24Z",
+  "committer_login": null,
+  "parents": [
+   "7c9270b0c33f4f5f0004520bba2975524bfb13cd"
+  ],
+  "sha": "f940f8944c3f30bfe889d1bb275f975fd14d3be6",
+  "subject": "release-attestation: manual full-build evidence workflow + badge (issue #150)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T01:04:21Z",
+  "committed_date": "2026-07-17T01:04:21Z",
+  "committer_login": null,
+  "parents": [
+   "fc6950b46eda22e127b703fae6cdf5d741cbd788",
+   "c5bad88ce994206df249943e8e4d261ec8976520"
+  ],
+  "sha": "3185c2a51cdafa062a82cd9bdcc6933e4933953d",
+  "subject": "Merge remote-tracking branch 'origin/main' into issue-148-docs-cleanup"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T01:01:48Z",
+  "committed_date": "2026-07-17T01:01:48Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "f17a3c8470b5cab6630cc6c622a1e8e44fe010c9",
+   "2f0fa1d1abdf9e30b878ea41291a3b47de02f87e"
+  ],
+  "sha": "c5bad88ce994206df249943e8e4d261ec8976520",
+  "subject": "Merge pull request #162 from uda-lab/issue-147-experimental-split"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T00:55:26Z",
+  "committed_date": "2026-07-17T00:55:26Z",
+  "committer_login": null,
+  "parents": [
+   "7b08ee31da2d08e38ee4d5d826b0ddd51a59ce73"
+  ],
+  "sha": "7c9270b0c33f4f5f0004520bba2975524bfb13cd",
+  "subject": "docs: soften toolchain-pin rationale to match actual evidence strength"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T00:51:11Z",
+  "committed_date": "2026-07-17T00:51:11Z",
+  "committer_login": null,
+  "parents": [
+   "bbc68c4549f4468e06c3073dd1a09579cb9b7290"
+  ],
+  "sha": "2f0fa1d1abdf9e30b878ea41291a3b47de02f87e",
+  "subject": "Fix P0 soundness bug in extracted theorem per issue #158 review"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T00:50:33Z",
+  "committed_date": "2026-07-17T00:50:33Z",
+  "committer_login": null,
+  "parents": [
+   "fc6950b46eda22e127b703fae6cdf5d741cbd788"
+  ],
+  "sha": "7b08ee31da2d08e38ee4d5d826b0ddd51a59ce73",
+  "subject": "lakefile.toml: publish-ready Lake package metadata for Reservoir (issue #149)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T00:48:30Z",
+  "committed_date": "2026-07-17T00:48:30Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "20d365bfa02fb50858d5ef6e5dba547640102b28",
+   "e4fd76842a216db0d35ee2eb2da42d3f147134be"
+  ],
+  "sha": "f17a3c8470b5cab6630cc6c622a1e8e44fe010c9",
+  "subject": "Merge pull request #161 from uda-lab/issue-153-nonvacuity-comments"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T00:48:27Z",
+  "committed_date": "2026-07-17T00:48:27Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "1483dbfd6e72c6095cd4a86e8db850fdb16aa35f",
+   "f884009a091ead47bfe49f1508b6dbe99da75542"
+  ],
+  "sha": "20d365bfa02fb50858d5ef6e5dba547640102b28",
+  "subject": "Merge pull request #160 from uda-lab/issue-146-solution-claims"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T00:48:25Z",
+  "committed_date": "2026-07-17T00:48:25Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "0afd65fb971277b290911d099e112e0ac40ab1f0",
+   "2bdd82e3acc41a0e1a3339b3c982c6d33c3ffd88"
+  ],
+  "sha": "1483dbfd6e72c6095cd4a86e8db850fdb16aa35f",
+  "subject": "Merge pull request #159 from uda-lab/issue-144-cleanup"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T00:45:07Z",
+  "committed_date": "2026-07-17T00:45:07Z",
+  "committer_login": null,
+  "parents": [
+   "706ad2d4faa803eb11a5d56c127903f386c5cad2",
+   "bbc68c4549f4468e06c3073dd1a09579cb9b7290"
+  ],
+  "sha": "fc6950b46eda22e127b703fae6cdf5d741cbd788",
+  "subject": "Merge branch 'issue-147-experimental-split' into issue-148-docs-cleanup"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T00:40:03Z",
+  "committed_date": "2026-07-17T00:40:03Z",
+  "committer_login": null,
+  "parents": [
+   "8c9f773238bc13482946edac7842ef7dbf7343a6"
+  ],
+  "sha": "706ad2d4faa803eb11a5d56c127903f386c5cad2",
+  "subject": "docs: reconcile stale/contradictory documentation with the current axiom-free state (issue #148)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T00:24:21Z",
+  "committed_date": "2026-07-17T00:24:21Z",
+  "committer_login": null,
+  "parents": [
+   "8c9f773238bc13482946edac7842ef7dbf7343a6"
+  ],
+  "sha": "bbc68c4549f4468e06c3073dd1a09579cb9b7290",
+  "subject": "Address codex pre-review: fail-closed grep status + stale doc references"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T18:07:12Z",
+  "committed_date": "2026-07-16T18:07:12Z",
+  "committer_login": null,
+  "parents": [
+   "e4fd76842a216db0d35ee2eb2da42d3f147134be"
+  ],
+  "sha": "8c9f773238bc13482946edac7842ef7dbf7343a6",
+  "subject": "Split incomplete Bochner time-layer work into LerayHopf.Experimental (issue #147)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T17:40:09Z",
+  "committed_date": "2026-07-16T17:40:09Z",
+  "committer_login": null,
+  "parents": [
+   "f884009a091ead47bfe49f1508b6dbe99da75542"
+  ],
+  "sha": "e4fd76842a216db0d35ee2eb2da42d3f147134be",
+  "subject": "docs: weaken non-vacuity overclaims to match formal evidence (issue #153)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T17:09:30Z",
+  "committed_date": "2026-07-16T17:09:30Z",
+  "committer_login": null,
+  "parents": [
+   "f8612f3b96f080a730522d415ac43fcd72ef9341"
+  ],
+  "sha": "f884009a091ead47bfe49f1508b6dbe99da75542",
+  "subject": "docs: address codex pre-review wording nits (issue #146)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T17:05:49Z",
+  "committed_date": "2026-07-16T17:05:49Z",
+  "committer_login": null,
+  "parents": [
+   "2bdd82e3acc41a0e1a3339b3c982c6d33c3ffd88"
+  ],
+  "sha": "f8612f3b96f080a730522d415ac43fcd72ef9341",
+  "subject": "docs: align public claims with the types the solution bundle actually carries (issue #146)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T16:38:57Z",
+  "committed_date": "2026-07-16T16:38:57Z",
+  "committer_login": null,
+  "parents": [
+   "383341e37d93adc0d3acf7d5b413220aacd2136b"
+  ],
+  "sha": "2bdd82e3acc41a0e1a3339b3c982c6d33c3ffd88",
+  "subject": "fix stale scaffold reference in SolutionInterfaces.lean docstring (codex pre-review, issue #144)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T16:33:48Z",
+  "committed_date": "2026-07-16T16:33:48Z",
+  "committer_login": null,
+  "parents": [
+   "2d079979317070d2e9e24485106eeab1085179d4"
+  ],
+  "sha": "383341e37d93adc0d3acf7d5b413220aacd2136b",
+  "subject": "remove empty scaffold API from public import surface (issue #144)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T15:35:52Z",
+  "committed_date": "2026-07-16T15:35:52Z",
+  "committer_login": null,
+  "parents": [
+   "0afd65fb971277b290911d099e112e0ac40ab1f0"
+  ],
+  "sha": "2d079979317070d2e9e24485106eeab1085179d4",
+  "subject": "remove 6 zero-reference scaffold declarations (issue #144, pre-scope cleanup)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-12T08:53:24Z",
+  "committed_date": "2026-07-12T08:53:24Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "13b57d430a5f9e32d15498b470539a4479d26cbc",
+   "2baa8db0990ba2bbe809d9e5ae7e04f4445a6a02"
+  ],
+  "sha": "0afd65fb971277b290911d099e112e0ac40ab1f0",
+  "subject": "Merge pull request #143 from uda-lab/issue-135-restatement"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-12T08:47:36Z",
+  "committed_date": "2026-07-12T08:47:36Z",
+  "committer_login": null,
+  "parents": [
+   "13b57d430a5f9e32d15498b470539a4479d26cbc"
+  ],
+  "sha": "2baa8db0990ba2bbe809d9e5ae7e04f4445a6a02",
+  "subject": "refactor(r3): narrow solution-data hypothesis to generic bundle (issue #135, reduced scope)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-11T11:45:52Z",
+  "committed_date": "2026-07-11T11:45:52Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "db665f40a3fc3ec0e489b41aae4b4d8e5dc81b7d",
+   "2fadbfee66db66098accbc03defb806b40bcaa86"
+  ],
+  "sha": "13b57d430a5f9e32d15498b470539a4479d26cbc",
+  "subject": "Merge pull request #142 from uda-lab/issue-1-componentwise-dedup"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-11T11:40:45Z",
+  "committed_date": "2026-07-11T11:40:45Z",
+  "committer_login": null,
+  "parents": [
+   "a33de86522a13d05d7cee67fbc27b1b9106822f8"
+  ],
+  "sha": "2fadbfee66db66098accbc03defb806b40bcaa86",
+  "subject": "refactor(torus): centralize componentwise round-trip lemmas in DivergenceFree.lean (issue #1 finding 6)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-11T07:53:23Z",
+  "committed_date": "2026-07-11T07:53:23Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "9cc6897a245aaa905249b325e6519e40cfaee7bd",
+   "c317af094014b6b7e4f0384f11fbbc42ca36c2d6"
+  ],
+  "sha": "db665f40a3fc3ec0e489b41aae4b4d8e5dc81b7d",
+  "subject": "Merge pull request #141 from uda-lab/docs/archive-issue4-plan"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T07:41:42Z",
+  "committed_date": "2026-07-11T07:41:42Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "6f591f7ceda897387525df062d3744f174d97169"
+  ],
+  "sha": "c317af094014b6b7e4f0384f11fbbc42ca36c2d6",
+  "subject": "docs: ARCHIVED banner on the issue #4 plan — do not execute the stale checkout recipe (codex P2)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-11T06:58:36Z",
+  "committed_date": "2026-07-11T06:58:36Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "a33de86522a13d05d7cee67fbc27b1b9106822f8",
+   "6f591f7ceda897387525df062d3744f174d97169"
+  ],
+  "sha": "9cc6897a245aaa905249b325e6519e40cfaee7bd",
+  "subject": "Merge pull request #139 from uda-lab/docs/archive-issue4-plan"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T05:53:55Z",
+  "committed_date": "2026-07-11T05:53:55Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "a33de86522a13d05d7cee67fbc27b1b9106822f8"
+  ],
+  "sha": "6f591f7ceda897387525df062d3744f174d97169",
+  "subject": "docs: archive issue #4 limit-passage campaign plan under docs/scratch"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-11T04:53:01Z",
+  "committed_date": "2026-07-11T04:53:01Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "abaebe237c8ab247fb21d4549ef09044033d31ca",
+   "e50b8c1a30715221b0c42a775fc2359fc728ed27"
+  ],
+  "sha": "a33de86522a13d05d7cee67fbc27b1b9106822f8",
+  "subject": "Merge pull request #138 from uda-lab/issue-131-traceenergy-dedup"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-11T04:48:40Z",
+  "committed_date": "2026-07-11T04:48:40Z",
+  "committer_login": null,
+  "parents": [
+   "abaebe237c8ab247fb21d4549ef09044033d31ca"
+  ],
+  "sha": "e50b8c1a30715221b0c42a775fc2359fc728ed27",
+  "subject": "refactor(torus): rewire TraceEnergy's Hilbert-toolkit duplicates to WeakLimitToolkit (issue #131)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-11T04:31:41Z",
+  "committed_date": "2026-07-11T04:31:41Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "9ebecc3e80ec6a5b9fca3fecd397d0d6278dc1df",
+   "c9aa928e1c8ccaf4cc3ea978defed703cf9485e8"
+  ],
+  "sha": "abaebe237c8ab247fb21d4549ef09044033d31ca",
+  "subject": "Merge pull request #137 from uda-lab/issue-118-flock-fallback"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-11T04:28:39Z",
+  "committed_date": "2026-07-11T04:28:39Z",
+  "committer_login": null,
+  "parents": [
+   "10a5143fb2700c1518e9d55d27e33c03fc019564"
+  ],
+  "sha": "c9aa928e1c8ccaf4cc3ea978defed703cf9485e8",
+  "subject": "fix(hooks): replace mkdir fallback with kernel flock(2) via perl (codex pass-2)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-11T04:13:33Z",
+  "committed_date": "2026-07-11T04:13:33Z",
+  "committer_login": null,
+  "parents": [
+   "e5878681fd5d407aad926ee305a52f5eb51600e8"
+  ],
+  "sha": "10a5143fb2700c1518e9d55d27e33c03fc019564",
+  "subject": "fix(hooks): make stale-lock reclaim ownership-safe (codex finding)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-11T04:05:08Z",
+  "committed_date": "2026-07-11T04:05:08Z",
+  "committer_login": null,
+  "parents": [
+   "9ebecc3e80ec6a5b9fca3fecd397d0d6278dc1df"
+  ],
+  "sha": "e5878681fd5d407aad926ee305a52f5eb51600e8",
+  "subject": "fix(hooks): mkdir-lock fallback in pre-push when flock is absent (#118)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-11T03:35:35Z",
+  "committed_date": "2026-07-11T03:35:35Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "147d062f1f6455bade6e1942be8a8613b15c8177",
+   "e5820026b46daaf9b5ce95f96f86054d66c80ac1"
+  ],
+  "sha": "9ebecc3e80ec6a5b9fca3fecd397d0d6278dc1df",
+  "subject": "Merge pull request #136 from uda-lab/issue-112-pr-d"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-11T03:34:39Z",
+  "committed_date": "2026-07-11T03:34:39Z",
+  "committer_login": null,
+  "parents": [
+   "a801d7f3b50a91100f318f0d9639e06b6dc542f1"
+  ],
+  "sha": "e5820026b46daaf9b5ce95f96f86054d66c80ac1",
+  "subject": "docs(#112): narrow STATUS.md M1 vacuity supersession per codex P2 finding"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-11T03:28:48Z",
+  "committed_date": "2026-07-11T03:28:48Z",
+  "committer_login": null,
+  "parents": [
+   "51caca73cdc52d5bf49cda48c0a6440ed71b712b"
+  ],
+  "sha": "a801d7f3b50a91100f318f0d9639e06b6dc542f1",
+  "subject": "docs(#112): codex-finding remediation — STATUS.md/REPORT.md M1 supersession banners"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-11T03:18:07Z",
+  "committed_date": "2026-07-11T03:18:07Z",
+  "committer_login": null,
+  "parents": [
+   "d4a0434ad009eb8c9bcf7d278d2b610f1790d340"
+  ],
+  "sha": "51caca73cdc52d5bf49cda48c0a6440ed71b712b",
+  "subject": "docs(#112): PR-D de-stale architecture/pdelib-staging/milestone/mvp-plan"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-11T03:08:12Z",
+  "committed_date": "2026-07-11T03:08:12Z",
+  "committer_login": null,
+  "parents": [
+   "147d062f1f6455bade6e1942be8a8613b15c8177"
+  ],
+  "sha": "d4a0434ad009eb8c9bcf7d278d2b610f1790d340",
+  "subject": "refactor(#112): PR-D delete old Prop-placeholder scaffolds + spike (campaign close)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-11T03:02:50Z",
+  "committed_date": "2026-07-11T03:02:50Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "547e753e1ea9d4ac3d2072978ae08ec00b37b38e",
+   "b268a7e32c1185f1c652d7aa04fa0a1b25ce8281"
+  ],
+  "sha": "147d062f1f6455bade6e1942be8a8613b15c8177",
+  "subject": "Merge pull request #134 from uda-lab/issue-112-pr-c"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-11T02:50:57Z",
+  "committed_date": "2026-07-11T02:50:57Z",
+  "committer_login": null,
+  "parents": [
+   "547e753e1ea9d4ac3d2072978ae08ec00b37b38e"
+  ],
+  "sha": "b268a7e32c1185f1c652d7aa04fa0a1b25ce8281",
+  "subject": "feat(#112): PR-C generic Galerkin Domain + solution bundles (R3/Torus unification)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-11T00:51:00Z",
+  "committed_date": "2026-07-11T00:51:00Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "140715f1ed9bb68519a3189f8167cf8642d9d0a5",
+   "c6009cc71e67f06a7afd4aa2f966fd50d816e5e3"
+  ],
+  "sha": "547e753e1ea9d4ac3d2072978ae08ec00b37b38e",
+  "subject": "Merge pull request #133 from uda-lab/issue-112-pr-b"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-10T16:45:14Z",
+  "committed_date": "2026-07-10T16:45:14Z",
+  "committer_login": null,
+  "parents": [
+   "fe99314823ee16048816cb21fd6e608f1a336966"
+  ],
+  "sha": "c6009cc71e67f06a7afd4aa2f966fd50d816e5e3",
+  "subject": "refactor(galerkin): delete dead lane ODE bodies now superseded by generic corollaries (issue #112 PR-B)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-10T16:26:57Z",
+  "committed_date": "2026-07-10T16:26:57Z",
+  "committer_login": null,
+  "parents": [
+   "df287b63932e25616f428c1124dc43323c83a368"
+  ],
+  "sha": "fe99314823ee16048816cb21fd6e608f1a336966",
+  "subject": "feat(galerkin): PR-B bridges + lane ODE corollaries (issue #112)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-10T14:52:19Z",
+  "committed_date": "2026-07-10T14:52:19Z",
+  "committer_login": null,
+  "parents": [
+   "bca562f545a5d459b9d5a1c5188e381ffbbb8f1f"
+  ],
+  "sha": "df287b63932e25616f428c1124dc43323c83a368",
+  "subject": "refactor(r3): relocate stokesTestPairing_R3_symm to break r3FieldForms's sV_symm scaffold"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-10T14:43:37Z",
+  "committed_date": "2026-07-10T14:43:37Z",
+  "committer_login": null,
+  "parents": [
+   "140715f1ed9bb68519a3189f8167cf8642d9d0a5"
+  ],
+  "sha": "bca562f545a5d459b9d5a1c5188e381ffbbb8f1f",
+  "subject": "feat(galerkin): lane FieldForms witnesses + equality-bridge scaffolds (PR-B coder, issue #112)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-10T14:31:21Z",
+  "committed_date": "2026-07-10T14:31:21Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "b896afbecbe34a7aa6145a6d3768c5f8834f6a13",
+   "a1fa3750288932c4883557648c58a649066a1b9d"
+  ],
+  "sha": "140715f1ed9bb68519a3189f8167cf8642d9d0a5",
+  "subject": "Merge pull request #132 from uda-lab/issue-112-pr-a"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-10T13:23:00Z",
+  "committed_date": "2026-07-10T13:23:00Z",
+  "committer_login": null,
+  "parents": [
+   "cbf5e7ec044e285cbd2d72dd6324039ca28336c5"
+  ],
+  "sha": "a1fa3750288932c4883557648c58a649066a1b9d",
+  "subject": "fix(galerkin): restore frozen fully-qualified Set/Metric spellings in statements"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-10T13:13:15Z",
+  "committed_date": "2026-07-10T13:13:15Z",
+  "committer_login": null,
+  "parents": [
+   "8b324f241d3e13c76e2994708fd0f6e7ea00b23c"
+  ],
+  "sha": "cbf5e7ec044e285cbd2d72dd6324039ca28336c5",
+  "subject": "feat(galerkin): fill QuadraticField proof bodies (PR-A, issue #112)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-10T13:04:49Z",
+  "committed_date": "2026-07-10T13:04:49Z",
+  "committer_login": null,
+  "parents": [
+   "87d456aad3c294cb4402f67d73cc62a55c8cb103"
+  ],
+  "sha": "8b324f241d3e13c76e2994708fd0f6e7ea00b23c",
+  "subject": "feat(galerkin): fill DissipativeODE proof bodies (issue #112 PR-A)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-10T12:58:08Z",
+  "committed_date": "2026-07-10T12:58:08Z",
+  "committer_login": null,
+  "parents": [
+   "91fdfb0e45b95c2c92dbdeee4a41f39c7674e0e6"
+  ],
+  "sha": "87d456aad3c294cb4402f67d73cc62a55c8cb103",
+  "subject": "fix(galerkin): QuadraticField imports DissipativeODE for its frozen proof route"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-10T12:51:50Z",
+  "committed_date": "2026-07-10T12:51:50Z",
+  "committer_login": null,
+  "parents": [
+   "d630b83954a9ec65146b5d99907e200d6a5475ee"
+  ],
+  "sha": "91fdfb0e45b95c2c92dbdeee4a41f39c7674e0e6",
+  "subject": "feat(galerkin): scaffold Galerkin/DissipativeODE + QuadraticField (issue #112 PR-A)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-10T12:20:24Z",
+  "committed_date": "2026-07-10T12:20:24Z",
+  "committer_login": null,
+  "parents": [
+   "b896afbecbe34a7aa6145a6d3768c5f8834f6a13"
+  ],
+  "sha": "d630b83954a9ec65146b5d99907e200d6a5475ee",
+  "subject": "docs(galerkin): add issue #112 campaign plan + feasibility spike (provenance)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-10T10:52:46Z",
+  "committed_date": "2026-07-10T10:52:46Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "594997be77d5b4ae3472ea84810e5b0329f9496c",
+   "f49474e1eb29c29ad59b94bdc763d7665dc8b461"
+  ],
+  "sha": "b896afbecbe34a7aa6145a6d3768c5f8834f6a13",
+  "subject": "Merge pull request #130 from uda-lab/issue-114-tier1"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T10:44:13Z",
+  "committed_date": "2026-07-10T10:44:13Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "a9aa6fcf495691993a1f475e9deac13b613ab137"
+  ],
+  "sha": "f49474e1eb29c29ad59b94bdc763d7665dc8b461",
+  "subject": "refactor(r3): drop ALP's dead imports; fix stale import comments"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T10:35:19Z",
+  "committed_date": "2026-07-10T10:35:19Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "c827f638744f978810b73b7d48c53298ec98ac50"
+  ],
+  "sha": "a9aa6fcf495691993a1f475e9deac13b613ab137",
+  "subject": "refactor(r3): update EnergyWeakLsc references after the rename (fold-in)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T10:34:27Z",
+  "committed_date": "2026-07-10T10:34:27Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "776f6fe7ee6176b6f1aa80d4b2cabcb05848a0e9"
+  ],
+  "sha": "c827f638744f978810b73b7d48c53298ec98ac50",
+  "subject": "refactor(r3): rename ViscousWeakLsc → EnergyWeakLsc to match its full Tier-E scope"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T10:30:48Z",
+  "committed_date": "2026-07-10T10:30:48Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "b70b0a7ebf4bad162d5b8144d84e4ee905f4de1a"
+  ],
+  "sha": "776f6fe7ee6176b6f1aa80d4b2cabcb05848a0e9",
+  "subject": "refactor(R3): split the three weakFormNS/bForm limit-passage monoliths (issue #114 Tier 1 commit 3)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T09:55:41Z",
+  "committed_date": "2026-07-10T09:55:41Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "70b524b255446c2d91a18966725d96ce26125a1c"
+  ],
+  "sha": "b70b0a7ebf4bad162d5b8144d84e4ee905f4de1a",
+  "subject": "refactor(r3): split Tier C-prep Steklov building blocks into SteklovAverages.lean"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T09:44:08Z",
+  "committed_date": "2026-07-10T09:44:08Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "594997be77d5b4ae3472ea84810e5b0329f9496c"
+  ],
+  "sha": "70b524b255446c2d91a18966725d96ce26125a1c",
+  "subject": "refactor(r3): split Tier E energy-inequality section into ViscousWeakLsc.lean"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-10T09:30:33Z",
+  "committed_date": "2026-07-10T09:30:33Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "3d804b8c0be6f385ec64059cb8a1c1d1d7cde7e8",
+   "bf24fedefe2f80ed375b6eed4805c3e98ad54901"
+  ],
+  "sha": "594997be77d5b4ae3472ea84810e5b0329f9496c",
+  "subject": "Merge pull request #129 from uda-lab/issue-114-tier2"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T09:17:35Z",
+  "committed_date": "2026-07-10T09:17:35Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "f62a536354bc857e8c0e2cefb5587282030e31e4"
+  ],
+  "sha": "bf24fedefe2f80ed375b6eed4805c3e98ad54901",
+  "subject": "refactor(r3): named-lemma extraction for the post-#126 Tier-2 R3-side items"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T08:50:22Z",
+  "committed_date": "2026-07-10T08:50:22Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "4819908738b0e629c6d3dc886b5fb4cf9aa3fbf5"
+  ],
+  "sha": "f62a536354bc857e8c0e2cefb5587282030e31e4",
+  "subject": "refactor(torus): extract exists_weak_representative's Cauchy/Riesz chain"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T08:45:36Z",
+  "committed_date": "2026-07-10T08:45:36Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "3d804b8c0be6f385ec64059cb8a1c1d1d7cde7e8"
+  ],
+  "sha": "4819908738b0e629c6d3dc886b5fb4cf9aa3fbf5",
+  "subject": "refactor(torus): extract energy_ineq_of_representative into 3 named steps"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-10T08:37:00Z",
+  "committed_date": "2026-07-10T08:37:00Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "50646feeb21a26190e988b17bc9366fd285033d0",
+   "04b29a30571a553065253748c2b0efebf4537c80"
+  ],
+  "sha": "3d804b8c0be6f385ec64059cb8a1c1d1d7cde7e8",
+  "subject": "Merge pull request #128 from uda-lab/issue-114-tier3"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T08:32:22Z",
+  "committed_date": "2026-07-10T08:32:22Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "a334e5a93d17e966742447216457452570c83abc"
+  ],
+  "sha": "04b29a30571a553065253748c2b0efebf4537c80",
+  "subject": "docs(frechet-kolmogorov): relabel FK steps to match dependency order"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T08:24:35Z",
+  "committed_date": "2026-07-10T08:24:35Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "50646feeb21a26190e988b17bc9366fd285033d0"
+  ],
+  "sha": "a334e5a93d17e966742447216457452570c83abc",
+  "subject": "feat(interfaces): add b(u,v,v)=0 free-v corollaries"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-10T08:18:19Z",
+  "committed_date": "2026-07-10T08:18:19Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "141ab6357b589af145334e0f590766c10848c6e2",
+   "d888e80444f008d94eda008be0f6fa62a6252751"
+  ],
+  "sha": "50646feeb21a26190e988b17bc9366fd285033d0",
+  "subject": "Merge pull request #127 from uda-lab/issue-113-pr4-generalize"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T08:17:04Z",
+  "committed_date": "2026-07-10T08:17:04Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "54ca3deece0294f8f4b40667612c3e3d530979e5"
+  ],
+  "sha": "d888e80444f008d94eda008be0f6fa62a6252751",
+  "subject": "docs(pdelib-staging): split Analysis lift-readiness by import status"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T07:36:26Z",
+  "committed_date": "2026-07-10T07:36:26Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "4514ab36ec01541773ff2920420094d84414fa74"
+  ],
+  "sha": "54ca3deece0294f8f4b40667612c3e3d530979e5",
+  "subject": "docs(architecture): add BoundedMultiplier to the Analysis table"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T07:31:52Z",
+  "committed_date": "2026-07-10T07:31:52Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "e9d3583c9e0ac10206c878fab624e25f85228dd4"
+  ],
+  "sha": "4514ab36ec01541773ff2920420094d84414fa74",
+  "subject": "docs: add pdelib-staging.md lift-candidate inventory"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T07:29:11Z",
+  "committed_date": "2026-07-10T07:29:11Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "e3943ef8e1e3570ae62c060c0815cde57082d202"
+  ],
+  "sha": "e9d3583c9e0ac10206c878fab624e25f85228dd4",
+  "subject": "refactor(bochner): delete dead GelfandTriple.ιCLM shim"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T07:25:27Z",
+  "committed_date": "2026-07-10T07:25:27Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "55aa4e299699747a9d2dd5765507bfe1fc1080e5"
+  ],
+  "sha": "e3943ef8e1e3570ae62c060c0815cde57082d202",
+  "subject": "refactor(analysis): extract mulBdd bounded-multiplier block to generic module"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T07:15:49Z",
+  "committed_date": "2026-07-10T07:15:49Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "141ab6357b589af145334e0f590766c10848c6e2"
+  ],
+  "sha": "55aa4e299699747a9d2dd5765507bfe1fc1080e5",
+  "subject": "refactor(R3): generalize TrilinearEstimate local helpers to Fin n"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-10T07:00:52Z",
+  "committed_date": "2026-07-10T07:00:52Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "f9491c4eb2779ef4d4b8c1cb4ebda5a67bc03eaa",
+   "2fa1acf3c4d63a79c9c96e6476b9ec1dc20179a6"
+  ],
+  "sha": "141ab6357b589af145334e0f590766c10848c6e2",
+  "subject": "Merge pull request #126 from uda-lab/issue-113-pr2-extract-infra"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T06:50:29Z",
+  "committed_date": "2026-07-10T06:50:29Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "a53f53b9fbdab290944a20af6c97cea697931c54"
+  ],
+  "sha": "2fa1acf3c4d63a79c9c96e6476b9ec1dc20179a6",
+  "subject": "docs+refactor: fix dangling FK references; re-privatize antiHermitianTest_integral_zero"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T06:40:57Z",
+  "committed_date": "2026-07-10T06:40:57Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "c53eeae4cf2346d162f149d328fe65e9c9bc4626"
+  ],
+  "sha": "a53f53b9fbdab290944a20af6c97cea697931c54",
+  "subject": "docs(architecture): document the Analysis/ layer; fix TensorIntersection location"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T06:33:06Z",
+  "committed_date": "2026-07-10T06:33:06Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "8d3f6ac5f8a6839a26d9e9d395229cd1f1838c0f"
+  ],
+  "sha": "c53eeae4cf2346d162f149d328fe65e9c9bc4626",
+  "subject": "refactor(dedup): delete orphaned Bessel-weight scaffolding from FrechetKolmogorov (issue #113 PR-2, 7/7)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T06:26:57Z",
+  "committed_date": "2026-07-10T06:26:57Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "af556e8982dc545a651d8fde036546b274f7d1d0"
+  ],
+  "sha": "8d3f6ac5f8a6839a26d9e9d395229cd1f1838c0f",
+  "subject": "refactor(layering): extract FourierParseval.lean and StokesFourier.lean from CurlDensity (issue #113 PR-2, 6/7)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T06:11:13Z",
+  "committed_date": "2026-07-10T06:11:13Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "cdd3fd68d54b855d166f62e22b0c0c2a819ecc4f"
+  ],
+  "sha": "af556e8982dc545a651d8fde036546b274f7d1d0",
+  "subject": "refactor(layering): extract WeakLeibniz.lean from EnergyClassConvection (issue #113 PR-2, 4/7)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T06:04:20Z",
+  "committed_date": "2026-07-10T06:04:20Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "1c97933a8ab4fedbcc557a78277e1769b2cfb70a"
+  ],
+  "sha": "cdd3fd68d54b855d166f62e22b0c0c2a819ecc4f",
+  "subject": "refactor(layering): extract LpInterpolation.lean from EnergyClassConvection (issue #113 PR-2, 5/7)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T05:56:59Z",
+  "committed_date": "2026-07-10T05:56:59Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "c1819a1cfc7a7332abd125225284dcb4bcedcf9a"
+  ],
+  "sha": "1c97933a8ab4fedbcc557a78277e1769b2cfb70a",
+  "subject": "refactor(layering): extract SpectralWeakGradient.lean from EnergyClassConvection (issue #113 PR-2, 3/7)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T05:47:55Z",
+  "committed_date": "2026-07-10T05:47:55Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "d82ac17d4d34e72aa557b98431acb3297da0f331"
+  ],
+  "sha": "c1819a1cfc7a7332abd125225284dcb4bcedcf9a",
+  "subject": "refactor(layering): extract RealComplexLpBridge.lean from EnergyClassConvection (issue #113 PR-2, 2/7)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T05:43:16Z",
+  "committed_date": "2026-07-10T05:43:16Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "82948baa1e865529284c17287501bc41e3d4d86a"
+  ],
+  "sha": "d82ac17d4d34e72aa557b98431acb3297da0f331",
+  "subject": "refactor(layering): complete TensorIntersection.lean relocation (issue #113 PR-2, 1b/7)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T05:42:47Z",
+  "committed_date": "2026-07-10T05:42:47Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "f9491c4eb2779ef4d4b8c1cb4ebda5a67bc03eaa"
+  ],
+  "sha": "82948baa1e865529284c17287501bc41e3d4d86a",
+  "subject": "refactor(layering): relocate TensorIntersection.lean to Analysis/ (issue #113 PR-2, 1/7)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-10T05:37:44Z",
+  "committed_date": "2026-07-10T05:37:44Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "8a6928f9b86d004f036925a94157091fbde02577",
+   "e1b3cb9414625a3487ab26bff4a7c3f24e950790"
+  ],
+  "sha": "f9491c4eb2779ef4d4b8c1cb4ebda5a67bc03eaa",
+  "subject": "Merge pull request #125 from uda-lab/issue-113-pr1-import-decouple"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T05:30:05Z",
+  "committed_date": "2026-07-10T05:30:05Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "f5a1329399462c55a9c54823e21a213c17f41c5c"
+  ],
+  "sha": "e1b3cb9414625a3487ab26bff4a7c3f24e950790",
+  "subject": "docs(architecture): list CurlSchwartzConstruction and H1SigmaDensity"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T05:24:55Z",
+  "committed_date": "2026-07-10T05:24:55Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "6d999f76d7216db9403e1dc02852d0e91aad9058"
+  ],
+  "sha": "f5a1329399462c55a9c54823e21a213c17f41c5c",
+  "subject": "refactor(imports): split H1SigmaDensity.lean out of SobolevEmbedding (issue #113 PR-1, 4/4)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T05:16:38Z",
+  "committed_date": "2026-07-10T05:16:38Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "eae5872273c45e50194f26957bdd0a3e4219f2be"
+  ],
+  "sha": "6d999f76d7216db9403e1dc02852d0e91aad9058",
+  "subject": "refactor(imports): split CurlSchwartzConstruction.lean out of SchwartzDivFreeBasis (issue #113 PR-1, 3/4)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T05:16:27Z",
+  "committed_date": "2026-07-10T05:16:27Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "5165475d02f4d76e766cfc69367bb5ec5c614cf9"
+  ],
+  "sha": "eae5872273c45e50194f26957bdd0a3e4219f2be",
+  "subject": "refactor(imports): move L2VF_injectComponent to DivergenceFree.lean (issue #113 PR-1, 2/4)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T05:15:35Z",
+  "committed_date": "2026-07-10T05:15:35Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "8a6928f9b86d004f036925a94157091fbde02577"
+  ],
+  "sha": "5165475d02f4d76e766cfc69367bb5ec5c614cf9",
+  "subject": "refactor(imports): swap GalerkinProjection's dead Leray import for FunctionSpaces (issue #113 PR-1, 1/4)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-10T04:33:06Z",
+  "committed_date": "2026-07-10T04:33:06Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "c01021148e9a572efc1d70dbd66f952464ae3bf7",
+   "f134ae148e10414c89c5c49434e8850ab321f5ee"
+  ],
+  "sha": "8a6928f9b86d004f036925a94157091fbde02577",
+  "subject": "Merge pull request #124 from uda-lab/issue-111-pr5-strays"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T04:32:15Z",
+  "committed_date": "2026-07-10T04:32:15Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "7998ab049912f21a0f3a3c0ee654838debff6d79"
+  ],
+  "sha": "f134ae148e10414c89c5c49434e8850ab321f5ee",
+  "subject": "refactor(dedup): keep summable_norm_mFourierCoeff3_sq under the Torus namespace after hoist"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T03:36:32Z",
+  "committed_date": "2026-07-10T03:36:32Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "a4726882d05348e2ae622f579454a46177816652"
+  ],
+  "sha": "7998ab049912f21a0f3a3c0ee654838debff6d79",
+  "subject": "docs(architecture): add AubinLionsLimitPassage.lean to the Bochner import list (issue #111 PR-5, 5/5)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T03:36:32Z",
+  "committed_date": "2026-07-10T03:36:32Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "2560bf9dbbfe8a9c3da87fc819259c4871476fa0"
+  ],
+  "sha": "a4726882d05348e2ae622f579454a46177816652",
+  "subject": "refactor(dedup): collapse the convFormH1 add/smul sextet onto 2 scaffolds (issue #111 PR-5, 4/5)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T03:36:20Z",
+  "committed_date": "2026-07-10T03:36:20Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "a06da06d8cb791ff2e39bb0cf68ab19817855796"
+  ],
+  "sha": "2560bf9dbbfe8a9c3da87fc819259c4871476fa0",
+  "subject": "refactor(dedup): resolve the coeff_zero_outside_box duplicate-name hazard (issue #111 PR-5, 3/5)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T03:36:00Z",
+  "committed_date": "2026-07-10T03:36:00Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "fa5299ebef2dcdda0a26a7199dae9de9a969f04a"
+  ],
+  "sha": "a06da06d8cb791ff2e39bb0cf68ab19817855796",
+  "subject": "refactor(dedup): import-add/hoist the remaining trivial cross-file duplicates (issue #111 PR-5, 2/5)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T03:21:46Z",
+  "committed_date": "2026-07-10T03:21:46Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "c01021148e9a572efc1d70dbd66f952464ae3bf7"
+  ],
+  "sha": "fa5299ebef2dcdda0a26a7199dae9de9a969f04a",
+  "subject": "refactor(dedup): de-privatize trivial cross-file duplicate lemmas (issue #111 PR-5, 1/5)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-10T03:02:50Z",
+  "committed_date": "2026-07-10T03:02:50Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "cf7b0cb89abf61706e9007efac94ec64d445ff65",
+   "8666ccefeb1a5bb0a1f8bac8fc98e419ad38609f"
+  ],
+  "sha": "c01021148e9a572efc1d70dbd66f952464ae3bf7",
+  "subject": "Merge pull request #123 from uda-lab/issue-111-pr4-blt-tower"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T02:50:45Z",
+  "committed_date": "2026-07-10T02:50:45Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "41e0a56b0befaa3e832cfce65c1b06f2ec9afd8b"
+  ],
+  "sha": "8666ccefeb1a5bb0a1f8bac8fc98e419ad38609f",
+  "subject": "refactor(dedup): rewire ConvectionExtension onto the generic BLT tower (issue #111 PR-4, 2/2)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T02:34:12Z",
+  "committed_date": "2026-07-10T02:34:12Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "cf7b0cb89abf61706e9007efac94ec64d445ff65"
+  ],
+  "sha": "41e0a56b0befaa3e832cfce65c1b06f2ec9afd8b",
+  "subject": "refactor(dedup): extract generic bounded-bilinear-extension lemma (issue #111 PR-4, 1/2)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-10T02:25:02Z",
+  "committed_date": "2026-07-10T02:25:02Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "ae5311013a38545b1810ee87e7fc33b67970210b",
+   "ae627d262d8db2989ce3c2bb575c00cbb6fbdbe1"
+  ],
+  "sha": "cf7b0cb89abf61706e9007efac94ec64d445ff65",
+  "subject": "Merge pull request #122 from uda-lab/issue-111-pr3-private-copies"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T02:08:23Z",
+  "committed_date": "2026-07-10T02:08:23Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "5b722d4ba2910e841736abd311b66d8472d939b8"
+  ],
+  "sha": "ae627d262d8db2989ce3c2bb575c00cbb6fbdbe1",
+  "subject": "refactor(dedup): dedupe RellichBall.lean copies found via repo-wide grep (issue #111 PR-3, 4/3)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T01:59:30Z",
+  "committed_date": "2026-07-10T01:59:30Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "2cf658af7676c3f28e6a53c79cf2e93e94de7415"
+  ],
+  "sha": "5b722d4ba2910e841736abd311b66d8472d939b8",
+  "subject": "refactor(dedup): use mathlib ODE.ExistUnique directly, drop 10 local wrappers (issue #111 PR-3, 3/3)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T01:48:43Z",
+  "committed_date": "2026-07-10T01:48:43Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "5ed44974e5b0dd881d8fa27ba426eeb31a11a584"
+  ],
+  "sha": "2cf658af7676c3f28e6a53c79cf2e93e94de7415",
+  "subject": "refactor(dedup): import Bochner.kineticEnergy_lsc_transfer, drop local copy (issue #111 PR-3, 2/3)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T01:44:33Z",
+  "committed_date": "2026-07-10T01:44:33Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "ae5311013a38545b1810ee87e7fc33b67970210b"
+  ],
+  "sha": "5ed44974e5b0dd881d8fa27ba426eeb31a11a584",
+  "subject": "refactor(dedup): consolidate restrictToBall family into SpatialCompactness (issue #111 PR-3, 1/3)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-10T01:23:34Z",
+  "committed_date": "2026-07-10T01:23:34Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "cf0433ebbea3107954554fcbbbefce6ed5ba60d6",
+   "b1c792660a38650fbd41f70cae7d7e4de4b39a0a"
+  ],
+  "sha": "ae5311013a38545b1810ee87e7fc33b67970210b",
+  "subject": "Merge pull request #121 from uda-lab/issue-111-pr2-plancherel"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T01:18:59Z",
+  "committed_date": "2026-07-10T01:18:59Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "42629543097b616d0eddf88f3dc4f49e549b2bf7"
+  ],
+  "sha": "b1c792660a38650fbd41f70cae7d7e4de4b39a0a",
+  "subject": "docs(dedup): drop stale eLpNorm mention from AubinLionsLimitPassage docstring"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T01:11:50Z",
+  "committed_date": "2026-07-10T01:11:50Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "bd2c36ac08d7d6a07cc532944bdad4522acc113d"
+  ],
+  "sha": "42629543097b616d0eddf88f3dc4f49e549b2bf7",
+  "subject": "refactor(dedup): fold eLpNorm_two_eq_ofReal_sqrt into PlancherelKernels (issue #111 PR-2, 2/2)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T00:57:27Z",
+  "committed_date": "2026-07-10T00:57:27Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "cf0433ebbea3107954554fcbbbefce6ed5ba60d6"
+  ],
+  "sha": "bd2c36ac08d7d6a07cc532944bdad4522acc113d",
+  "subject": "refactor(dedup): extract shared Plancherel-kernel module (issue #111 PR-2, 1/2)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-10T00:39:28Z",
+  "committed_date": "2026-07-10T00:39:28Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "ba66b00a15fb3580a854ef6c5f48d54a21230fcc",
+   "05f3967bcf807f887c2b096df5266b9eeb5c9f18"
+  ],
+  "sha": "cf0433ebbea3107954554fcbbbefce6ed5ba60d6",
+  "subject": "Merge pull request #120 from uda-lab/issue-111-pr1-tensor-glue"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T00:17:02Z",
+  "committed_date": "2026-07-10T00:17:02Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "5528204d9911d872bd307f22a2eea349deb08104"
+  ],
+  "sha": "05f3967bcf807f887c2b096df5266b9eeb5c9f18",
+  "subject": "refactor(dedup): restore edge_inf_eq_schwartz_tensor wrapper; fix stale header list"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T00:04:34Z",
+  "committed_date": "2026-07-10T00:04:34Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "e39838eb7795dcc20b9c955373f42584df328f24"
+  ],
+  "sha": "5528204d9911d872bd307f22a2eea349deb08104",
+  "subject": "refactor(dedup): rewire Torus ConvectionExtension onto shared TensorEdgeGluing (issue #111 PR-1, 3/3)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-10T00:00:17Z",
+  "committed_date": "2026-07-10T00:00:17Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "5a8934735858a09e849e1b63c6b888b6adefb5a2"
+  ],
+  "sha": "e39838eb7795dcc20b9c955373f42584df328f24",
+  "subject": "refactor(dedup): rewire R3 ConvectionExtension onto shared TensorEdgeGluing (issue #111 PR-1, 2/3)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-09T23:52:46Z",
+  "committed_date": "2026-07-09T23:52:46Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "ba66b00a15fb3580a854ef6c5f48d54a21230fcc"
+  ],
+  "sha": "5a8934735858a09e849e1b63c6b888b6adefb5a2",
+  "subject": "refactor(dedup): extract shared tensor/edge-gluing module (issue #111 PR-1, 1/3)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-09T18:42:49Z",
+  "committed_date": "2026-07-09T18:42:49Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "6987eed491438888b2cf6a82c6d1bd4b3b731185",
+   "6e01846e73327ca94b759ce87dfe2b9b67d41a72"
+  ],
+  "sha": "ba66b00a15fb3580a854ef6c5f48d54a21230fcc",
+  "subject": "Merge pull request #119 from uda-lab/issue-110-destale-docs"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-09T18:40:39Z",
+  "committed_date": "2026-07-09T18:40:39Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "b1d10b1757e4896b92c27079ad0dc72fde72f13f"
+  ],
+  "sha": "6e01846e73327ca94b759ce87dfe2b9b67d41a72",
+  "subject": "docs: fix codex review findings (capstone re-export path, Core surface, banner axiom name)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-09T18:28:49Z",
+  "committed_date": "2026-07-09T18:28:49Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "b5607f7dc85acef5e2af663ec4002d749fa05e19"
+  ],
+  "sha": "b1d10b1757e4896b92c27079ad0dc72fde72f13f",
+  "subject": "docs(references): banner mathlib-api-survey.md as a historical snapshot"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-09T18:27:41Z",
+  "committed_date": "2026-07-09T18:27:41Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "374dc08d2e29a6b27a825d5e10413d9aeb2eccfb"
+  ],
+  "sha": "b5607f7dc85acef5e2af663ec4002d749fa05e19",
+  "subject": "docs: add architecture.md module map"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-09T18:27:41Z",
+  "committed_date": "2026-07-09T18:27:41Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "bfa241765b5e804e1bbf12b8419787f078450d23"
+  ],
+  "sha": "374dc08d2e29a6b27a825d5e10413d9aeb2eccfb",
+  "subject": "docs(README): mark docs/scratch/ internal, add repository hygiene note"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-09T18:25:41Z",
+  "committed_date": "2026-07-09T18:25:41Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "c1485ccf9f003cf1859b42b0290c1cd83fda4f0e"
+  ],
+  "sha": "bfa241765b5e804e1bbf12b8419787f078450d23",
+  "subject": "docs(LerayHopf): rewrite root docstring for current project state"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-09T18:25:12Z",
+  "committed_date": "2026-07-09T18:25:12Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "6987eed491438888b2cf6a82c6d1bd4b3b731185"
+  ],
+  "sha": "c1485ccf9f003cf1859b42b0290c1cd83fda4f0e",
+  "subject": "docs(ja-review): fix stale file paths and axiom counts"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-09T12:25:53Z",
+  "committed_date": "2026-07-09T12:25:53Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "8e57ccf17b7e0bd073b079954e3ddc600fa6421b",
+   "376d5be05e3010f0724bd8c05f278a564b618385"
+  ],
+  "sha": "6987eed491438888b2cf6a82c6d1bd4b3b731185",
+  "subject": "Merge pull request #117 from uda-lab/issue-108-retire-axiomatic-vocabulary"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-09T12:10:21Z",
+  "committed_date": "2026-07-09T12:23:04Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "8e57ccf17b7e0bd073b079954e3ddc600fa6421b"
+  ],
+  "sha": "376d5be05e3010f0724bd8c05f278a564b618385",
+  "subject": "refactor: retire axiomatic public names"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-09T11:52:49Z",
+  "committed_date": "2026-07-09T11:52:49Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "3bef3d5bc60ebc708636ad89019049032623d159"
+  ],
+  "sha": "8e57ccf17b7e0bd073b079954e3ddc600fa6421b",
+  "subject": "refactor(layout): move the 𝕋³ lane under LerayHopf/Torus/ (#116)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-07T16:34:02Z",
+  "committed_date": "2026-07-07T16:34:02Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "013c4a0189577c79df76b14d13b4b901918eff72"
+  ],
+  "sha": "3bef3d5bc60ebc708636ad89019049032623d159",
+  "subject": "Add Apache-2.0 license and citation metadata (#107)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-06T06:18:57Z",
+  "committed_date": "2026-07-06T06:18:57Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "dd998bc8af2d5740e94ba3da8e9f2aac57c60c0d"
+  ],
+  "sha": "013c4a0189577c79df76b14d13b4b901918eff72",
+  "subject": "feat: extract_notes exe — 宣言メタデータ JSON 抽出（proof-notes UI 供給） (#105)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-05T16:32:35Z",
+  "committed_date": "2026-07-05T16:32:35Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "187a46323e4e55472e17f731237652a746824e7f"
+  ],
+  "sha": "dd998bc8af2d5740e94ba3da8e9f2aac57c60c0d",
+  "subject": "docs: de-stale post-completion (kernel-only, full textbook LH) (#103)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-05T15:49:40Z",
+  "committed_date": "2026-07-05T15:49:40Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "66a0ce93d02dc1ad6674b86f4a4b920b07eff62b"
+  ],
+  "sha": "187a46323e4e55472e17f731237652a746824e7f",
+  "subject": "feat: thread AEStronglyMeasurable into LH solution structures (full textbook Leray–Hopf) (#102)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-05T10:20:27Z",
+  "committed_date": "2026-07-05T10:20:27Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "009c1bd12a66c90f5e06c8bb04d9d7705661f112"
+  ],
+  "sha": "66a0ce93d02dc1ad6674b86f4a4b920b07eff62b",
+  "subject": "ci: abolish auto full-build — PR grep-only, full build manual; pre-push local gate (#101)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-05T09:22:40Z",
+  "committed_date": "2026-07-05T09:22:40Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "ae8423b0180a76d7c0df70b158733b6aae680295"
+  ],
+  "sha": "009c1bd12a66c90f5e06c8bb04d9d7705661f112",
+  "subject": "docs(R3 #4): de-stale post-flip axiom-count comments (kernel-only) (#100)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-05T05:37:41Z",
+  "committed_date": "2026-07-05T05:37:41Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "7036a2e580848ce344d8cb97f17363c2ee4033c6"
+  ],
+  "sha": "ae8423b0180a76d7c0df70b158733b6aae680295",
+  "subject": "feat(R3 #4, PR-6): ∀t energy + assembly + AXIOM FLIP — exists_lerayHopf_r3_axiomatic KERNEL-ONLY (#99)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-05T02:27:47Z",
+  "committed_date": "2026-07-05T02:27:47Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "7c1642094424907638184d62fee6c4b67c1f1fcb"
+  ],
+  "sha": "7036a2e580848ce344d8cb97f17363c2ee4033c6",
+  "subject": "feat(R3 #4, PR-5): good representative + weak-limit toolkit hoist (sorry-free) (#98)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-05T01:42:07Z",
+  "committed_date": "2026-07-05T01:42:07Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "78716c31fd3cff3e7b95916db8ebe9a5ad3e90ae"
+  ],
+  "sha": "7c1642094424907638184d62fee6c4b67c1f1fcb",
+  "subject": "feat(R3 #4, PR-4): W2 test extension — weakFormNS_limit_passage (sorry-free) (#97)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-04T23:39:41Z",
+  "committed_date": "2026-07-04T23:39:41Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "6f699342e1b97a21838ba7b9030ba7996c4a78b1"
+  ],
+  "sha": "78716c31fd3cff3e7b95916db8ebe9a5ad3e90ae",
+  "subject": "feat(R3 #4, PR-3): strengthened basis + R3TestApproxH1 discharge (scaffold) (#96)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-04T22:33:45Z",
+  "committed_date": "2026-07-04T22:33:45Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "25fbd803bff7264d99b91cf6ed959038ed463c5d"
+  ],
+  "sha": "6f699342e1b97a21838ba7b9030ba7996c4a78b1",
+  "subject": "feat(R3 #4, PR-2): H¹ curl approximation kernel (curl_approx_H1) (#94)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-04T21:17:11Z",
+  "committed_date": "2026-07-04T21:17:11Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "a07571b70e4b5d610f61f7fbb7c5fd585cfb6544"
+  ],
+  "sha": "25fbd803bff7264d99b91cf6ed959038ed463c5d",
+  "subject": "feat(R3 #4, PR-1/W1): weak identity vs Galerkin tests + ConvectionForm adoption (#95)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-04T06:48:14Z",
+  "committed_date": "2026-07-04T06:48:14Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "c647b850cb9ec1ce2e0ebb83f24f0605a7015260"
+  ],
+  "sha": "a07571b70e4b5d610f61f7fbb7c5fd585cfb6544",
+  "subject": "fix(tooling #84): worktree-safe + ARG_MAX-safe check scripts (#92)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-04T05:03:21Z",
+  "committed_date": "2026-07-04T05:03:21Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "d47535fe936d2bd9e920dd09b230950256bfbd9f"
+  ],
+  "sha": "c647b850cb9ec1ce2e0ebb83f24f0605a7015260",
+  "subject": "refactor(torus #23): dedup TorusProjectionAdjoint helpers + make P0.8/P0.16 private (#91)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-04T04:50:31Z",
+  "committed_date": "2026-07-04T04:50:31Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "d929fecbe55f8bf9b9f6e03e06ecdeb97b71481f"
+  ],
+  "sha": "d47535fe936d2bd9e920dd09b230950256bfbd9f",
+  "subject": "docs(torus #23): de-stale aubin_lions references post-removal + fix missing aggregator import (#90)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-04T04:15:02Z",
+  "committed_date": "2026-07-04T04:15:02Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "1082dec674f18c83ec248069bdf8e5b8af247472"
+  ],
+  "sha": "d929fecbe55f8bf9b9f6e03e06ecdeb97b71481f",
+  "subject": "feat(torus #23, T-AL-6): remove axiom aubin_lions — T³ Leray–Hopf capstone UNCONDITIONAL (#89)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-04T02:23:22Z",
+  "committed_date": "2026-07-04T02:23:22Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "554361b96def191fffcb3f6e7781f6d94a7b6c31"
+  ],
+  "sha": "1082dec674f18c83ec248069bdf8e5b8af247472",
+  "subject": "feat(torus #23, T-AL-5): Step-E mode-wise tail bounds (sorry-free) (#88)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-03T15:32:03Z",
+  "committed_date": "2026-07-03T15:32:03Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "ee49c9aff16f8f06aac63d96c968cf4731931c1e"
+  ],
+  "sha": "554361b96def191fffcb3f6e7781f6d94a7b6c31",
+  "subject": "feat(R3 #46, PR-4): File E + discharge galerkin_spacetime_precompact_R3 (axiom → theorem, R3 frontier 2 → 1) (#87)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-03T13:05:13Z",
+  "committed_date": "2026-07-03T13:05:13Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "3be04d5a6d9f8a4896d05ac7cc808fb8cc7c0ce4"
+  ],
+  "sha": "ee49c9aff16f8f06aac63d96c968cf4731931c1e",
+  "subject": "feat(R3 #46, PR-3): File D — Galerkin time-sampling modulus (D1-D3, sorry-free) (#86)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-03T12:38:57Z",
+  "committed_date": "2026-07-03T12:38:57Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "1fdcd9251a8ef0f9648342007d3c4e4ba9cb7e80"
+  ],
+  "sha": "3be04d5a6d9f8a4896d05ac7cc808fb8cc7c0ce4",
+  "subject": "feat(torus #23, T-AL-4): Riesz limit curve + Step-D DCT (sorry-free) (#85)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-03T11:59:19Z",
+  "committed_date": "2026-07-03T11:59:19Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "095bdcce3997e51a8989c5ee150c21f75e544785"
+  ],
+  "sha": "1fdcd9251a8ef0f9648342007d3c4e4ba9cb7e80",
+  "subject": "docs(#82): sync axiom-frontier status surfaces to live pin (T³=1, R3=2) (#83)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-03T11:16:25Z",
+  "committed_date": "2026-07-03T11:16:25Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "e7c8a9ce92a7dc514459fde92844963b657932f9"
+  ],
+  "sha": "095bdcce3997e51a8989c5ee150c21f75e544785",
+  "subject": "feat(R3 #46, PR-2): File C — Galerkin energy-class trilinear bound chain (C1–C6 + B9, sorry-free) (#81)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-03T11:15:32Z",
+  "committed_date": "2026-07-03T11:15:32Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "85079d4fb16d3b3e1d4ed99afbbc6f7959e06c83"
+  ],
+  "sha": "e7c8a9ce92a7dc514459fde92844963b657932f9",
+  "subject": "feat(torus #23, T-AL-3): mode-wise Galerkin extraction (sorry-free) (#80)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-03T10:28:07Z",
+  "committed_date": "2026-07-03T10:28:07Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "7e77c790cdc03fc519115957608490b178d65d58"
+  ],
+  "sha": "85079d4fb16d3b3e1d4ed99afbbc6f7959e06c83",
+  "subject": "feat(torus #23, T-AL-2): domain-neutral scalar equicontinuity engine (sorry-free) (#79)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-03T09:49:50Z",
+  "committed_date": "2026-07-03T09:49:50Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "07cdff4877fcfe34e2e0ed40cf613d50989e37fc"
+  ],
+  "sha": "7e77c790cdc03fc519115957608490b178d65d58",
+  "subject": "feat(torus #23, T-AL-1): torus test family + stokes pairing bound (sorry-free) (#78)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-03T03:50:44Z",
+  "committed_date": "2026-07-03T03:50:44Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "d195b816afb5713a60eda87ae9de3f5310b08847"
+  ],
+  "sha": "07cdff4877fcfe34e2e0ed40cf613d50989e37fc",
+  "subject": "feat(R3 #46, PR-1): step-curve Lp compactness + Galerkin curve library (sorry-free) (#74)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-03T02:02:09Z",
+  "committed_date": "2026-07-03T02:02:09Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "13346df40f33bc61b85b929529f0ae5d9961fed4"
+  ],
+  "sha": "d195b816afb5713a60eda87ae9de3f5310b08847",
+  "subject": "feat(torus #23, Phase-0): aubin_lions mode-wise spike — 11 statements typecheck, verdict GO (#77)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-03T01:16:54Z",
+  "committed_date": "2026-07-03T01:16:54Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "148ee598954b8bc34299d18d644971153f6a294c"
+  ],
+  "sha": "13346df40f33bc61b85b929529f0ae5d9961fed4",
+  "subject": "docs(replan): torus aubin_lions mode-wise campaign + orchestration doctrine D1-D8 + lean-architect role (#76)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-02T13:44:46Z",
+  "committed_date": "2026-07-02T13:44:46Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "839a7a9d3e952fe520e877a7549bf0c45a8af6f3"
+  ],
+  "sha": "148ee598954b8bc34299d18d644971153f6a294c",
+  "subject": "feat(torus #25): remove galerkin_limit_passage axiom — frontier 4→3"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-02T10:24:50Z",
+  "committed_date": "2026-07-02T10:24:50Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "8b6f690731d554c141ae54042984e5c06f026a0d"
+  ],
+  "sha": "839a7a9d3e952fe520e877a7549bf0c45a8af6f3",
+  "subject": "refactor(torus trace-energy): expose viscousEnn quartet for the conjunct-(4) h4 development (#73)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-02T07:11:36Z",
+  "committed_date": "2026-07-02T07:11:36Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "827a36cb8bb07a64848a601b163f891254ba24a9"
+  ],
+  "sha": "8b6f690731d554c141ae54042984e5c06f026a0d",
+  "subject": "feat(torus #25): trace+energy pillar — weakly-continuous representative + conjuncts (1)&(3), conditional on conjunct-(4) h4 (#72)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-02T01:01:45Z",
+  "committed_date": "2026-07-02T01:01:45Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "14fe95697730a28092aa2aa0440db799638e1a98"
+  ],
+  "sha": "827a36cb8bb07a64848a601b163f891254ba24a9",
+  "subject": "feat(torus #25): conjunct 2 complete — TorusLimitPassage sorry-free (WeakFormNS limit passage) (#71)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-01T14:52:26Z",
+  "committed_date": "2026-07-01T14:52:26Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "a1778d6f55dd3ae17ae1a99e5f80106882998976"
+  ],
+  "sha": "14fe95697730a28092aa2aa0440db799638e1a98",
+  "subject": "feat(torus #25, conjunct 2): WeakFormNS limit passage — density-free (sorry-reduced)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-01T04:14:11Z",
+  "committed_date": "2026-07-01T04:14:11Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "d2c8190265725e2c38701344ec2a63a6005079e6"
+  ],
+  "sha": "a1778d6f55dd3ae17ae1a99e5f80106882998976",
+  "subject": "feat(P0.5): R3GalerkinScheme nesting field (mono_range) — prerequisite for galerkin_limit_passage_R3 removal"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-06-30T08:58:32Z",
+  "committed_date": "2026-06-30T08:58:32Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "1971ac5fcd27d86aad6ca5e30b5eb02dcb9a5172",
+   "d6a0bb0c83cce4ae3f10d3b29edc4f91bbf3110f"
+  ],
+  "sha": "d2c8190265725e2c38701344ec2a63a6005079e6",
+  "subject": "Merge pull request #67 from uda-lab/docs/terminology-ja-glossary"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-30T08:35:39Z",
+  "committed_date": "2026-06-30T08:35:39Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "1971ac5fcd27d86aad6ca5e30b5eb02dcb9a5172"
+  ],
+  "sha": "d6a0bb0c83cce4ae3f10d3b29edc4f91bbf3110f",
+  "subject": "docs(references): add Japanese terminology SSoT glossary"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-06-30T05:35:34Z",
+  "committed_date": "2026-06-30T05:35:34Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "c347d934c1e3234f5c6c823bec3aaf1ed31e9312",
+   "85907769c115613f6ea577452da5ccad3b9d5ed4"
+  ],
+  "sha": "1971ac5fcd27d86aad6ca5e30b5eb02dcb9a5172",
+  "subject": "Merge pull request #66 from uda-lab/issue-64-quality-posture"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-30T05:34:11Z",
+  "committed_date": "2026-06-30T05:34:11Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "7f30ff28349cce0f605f8d65637694be351a76ae"
+  ],
+  "sha": "85907769c115613f6ea577452da5ccad3b9d5ed4",
+  "subject": "docs: fix stale cross-reference in mathlib-api-survey (codex/pr-review nit)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-30T04:16:01Z",
+  "committed_date": "2026-06-30T04:16:01Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "c347d934c1e3234f5c6c823bec3aaf1ed31e9312"
+  ],
+  "sha": "7f30ff28349cce0f605f8d65637694be351a76ae",
+  "subject": "Align axiom frontier documentation"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-06-30T03:45:54Z",
+  "committed_date": "2026-06-30T03:45:54Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "b6effca371d0711b0461c1108c31a7bcdfd1dca9",
+   "74554495282e520ac23e2773ecaccbf399ee42dd"
+  ],
+  "sha": "c347d934c1e3234f5c6c823bec3aaf1ed31e9312",
+  "subject": "Merge pull request #65 from uda-lab/chore-agent-log-hygiene"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-30T03:36:08Z",
+  "committed_date": "2026-06-30T03:36:08Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "b6effca371d0711b0461c1108c31a7bcdfd1dca9"
+  ],
+  "sha": "74554495282e520ac23e2773ecaccbf399ee42dd",
+  "subject": "docs: cap Lean build log intake for agents"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-06-30T03:25:33Z",
+  "committed_date": "2026-06-30T03:25:33Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "7dde402da823cd17cd7b1982dbfe61eace797483",
+   "1e689dc12c491d5f22e354b6cc331f0db9572985"
+  ],
+  "sha": "b6effca371d0711b0461c1108c31a7bcdfd1dca9",
+  "subject": "Merge pull request #63 from uda-lab/lane-bochner-f3"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-29T11:18:40Z",
+  "committed_date": "2026-06-29T11:18:40Z",
+  "committer_login": null,
+  "parents": [
+   "5e23349ef361c00e58a05221267f348525f1189c"
+  ],
+  "sha": "1e689dc12c491d5f22e354b6cc331f0db9572985",
+  "subject": "fix(bochner): harden signatures per codex review (CompleteSpace, LocallyIntegrable)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-29T11:00:16Z",
+  "committed_date": "2026-06-29T11:00:16Z",
+  "committer_login": null,
+  "parents": [
+   "b8a3399492a32c933bad2510973be1f1293c48c0"
+  ],
+  "sha": "5e23349ef361c00e58a05221267f348525f1189c",
+  "subject": "fix(C-route): define strong_convergence_ae field + wire (resolves codex P1)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-29T10:47:40Z",
+  "committed_date": "2026-06-29T10:47:40Z",
+  "committer_login": null,
+  "parents": [
+   "2be2a98894601e65b163bca83112afc1d2134284"
+  ],
+  "sha": "b8a3399492a32c933bad2510973be1f1293c48c0",
+  "subject": "feat(C-route atom b, Step 1): fixed-Schwartz-w integral representation (sorry-free)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-28T18:06:16Z",
+  "committed_date": "2026-06-28T18:06:16Z",
+  "committer_login": null,
+  "parents": [
+   "cb54e01cc92ec7f4a36e55da21c987f475e05b9d"
+  ],
+  "sha": "2be2a98894601e65b163bca83112afc1d2134284",
+  "subject": "feat(C-route atom a): viscous Plancherel–Laplacian reformulation (sorry-free)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-28T14:43:21Z",
+  "committed_date": "2026-06-28T14:43:21Z",
+  "committer_login": null,
+  "parents": [
+   "ff4f8ba83eb426ebaf363c19e0f836730d4bc17e"
+  ],
+  "sha": "cb54e01cc92ec7f4a36e55da21c987f475e05b9d",
+  "subject": "feat(C-route conjunct 2): faithful weakFormNS_limit_passage + Temam-III.3 skeleton (3 atoms isolated)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-28T14:21:48Z",
+  "committed_date": "2026-06-28T14:21:48Z",
+  "committer_login": null,
+  "parents": [
+   "6d906948fcd768ed446336563022084d75d06373"
+  ],
+  "sha": "ff4f8ba83eb426ebaf363c19e0f836730d4bc17e",
+  "subject": "docs(C-route): correct stale 'weeks-class wall' prose on viscous_pointwise_lsc"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-28T14:16:27Z",
+  "committed_date": "2026-06-28T14:16:27Z",
+  "committer_login": null,
+  "parents": [
+   "a8b4f5cccda07be8e00b50d4cf00aa32a878ba23"
+  ],
+  "sha": "6d906948fcd768ed446336563022084d75d06373",
+  "subject": "feat(C-route): viscous_pointwise_lsc SORRY-FREE — weak-H¹ lsc via Fourier-Plancherel (no abstract H¹ infra, no axiom)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-28T09:35:43Z",
+  "committed_date": "2026-06-28T09:35:43Z",
+  "committer_login": null,
+  "parents": [
+   "927f11130fe6dd7849486850554f962f7c0b7194"
+  ],
+  "sha": "a8b4f5cccda07be8e00b50d4cf00aa32a878ba23",
+  "subject": "feat(bochner b-route N1): viscous_lsc_under_strongL2 — integrated lsc on one isolated weak-H¹ wall"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-28T09:08:48Z",
+  "committed_date": "2026-06-28T09:08:48Z",
+  "committer_login": null,
+  "parents": [
+   "7bb9b276e6e17724aeefcdbe9a325b8ab77f830d"
+  ],
+  "sha": "927f11130fe6dd7849486850554f962f7c0b7194",
+  "subject": "feat(bochner): R1 V'-continuous representative (the ∀t supplier) + (b)-route plan"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-28T07:59:34Z",
+  "committed_date": "2026-06-28T07:59:34Z",
+  "committer_login": null,
+  "parents": [
+   "a4383049605424eb0da193535ef03b4622f3caf7"
+  ],
+  "sha": "7bb9b276e6e17724aeefcdbe9a325b8ab77f830d",
+  "subject": "docs(bochner): consumer verdict — w1pTime_continuous_in_H is OFF critical path; C is days-class (b)-route"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-28T07:57:01Z",
+  "committed_date": "2026-06-28T07:57:01Z",
+  "committer_login": null,
+  "parents": [
+   "8b4740555b6e45df2835ae0a181f6e630e27ec15"
+  ],
+  "sha": "a4383049605424eb0da193535ef03b4622f3caf7",
+  "subject": "docs(bochner): sound non-circular route to w1pTime_continuous_in_H (interior mollification)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-28T07:35:24Z",
+  "committed_date": "2026-06-28T07:35:24Z",
+  "committer_login": null,
+  "parents": [
+   "806750812bfe9a0bb7a299729d2a6661a1fe27ce"
+  ],
+  "sha": "8b4740555b6e45df2835ae0a181f6e630e27ec15",
+  "subject": "feat(bochner PR-F3 S1): B2 cutoff + WALL A commutation identity proved; B1 circularity found"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-28T06:36:43Z",
+  "committed_date": "2026-06-28T06:36:43Z",
+  "committer_login": null,
+  "parents": [
+   "c9e08b1065f3bd1ca7384b6bd982bc9b7baef706"
+  ],
+  "sha": "806750812bfe9a0bb7a299729d2a6661a1fe27ce",
+  "subject": "feat(bochner PR-F3 S1): isWeakTimeDerivℝ_comp_clm sorry-free; cutoff re-tagged Opus"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-28T06:05:24Z",
+  "committed_date": "2026-06-28T06:05:24Z",
+  "committer_login": null,
+  "parents": [
+   "a0517669afa69670317f3ae59a1f2c56e8a91a97"
+  ],
+  "sha": "c9e08b1065f3bd1ca7384b6bd982bc9b7baef706",
+  "subject": "refactor(bochner PR-F3 S1): IsWeakTimeDerivℝ predicate + corrected-A signature + B-sub-lemma scaffolds"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-28T05:42:42Z",
+  "committed_date": "2026-06-28T05:42:42Z",
+  "committer_login": null,
+  "parents": [
+   "df55e8cac5052cb8708fac5ca375bd7a0f7c04fa"
+  ],
+  "sha": "a0517669afa69670317f3ae59a1f2c56e8a91a97",
+  "subject": "feat(bochner PR-F3 S1.2): interval mollification convergence (sorry-free) + reflection/commutation isolated"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-28T05:21:53Z",
+  "committed_date": "2026-06-28T05:21:53Z",
+  "committer_login": null,
+  "parents": [
+   "17febde6ca41aa9b388026ffa5b6bd3be269b68f"
+  ],
+  "sha": "df55e8cac5052cb8708fac5ca375bd7a0f7c04fa",
+  "subject": "feat(bochner PR-F3 S1.1): TimeConvolution + whole-line eLpNorm Young bound (sorry-free)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-28T05:05:46Z",
+  "committed_date": "2026-06-28T05:05:46Z",
+  "committer_login": null,
+  "parents": [
+   "14ed935d9e30590fc82d364f849cbd5dd00db08d"
+  ],
+  "sha": "17febde6ca41aa9b388026ffa5b6bd3be269b68f",
+  "subject": "fix(bochner PR-F3): conv_uV L²(H)→L²(V) per codex P1 (sound strengthening)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-06-28T04:50:05Z",
+  "committed_date": "2026-06-28T04:50:05Z",
+  "committer_login": null,
+  "parents": [
+   "7dde402da823cd17cd7b1982dbfe61eace797483"
+  ],
+  "sha": "14ed935d9e30590fc82d364f849cbd5dd00db08d",
+  "subject": "feat(bochner PR-F3 WIP): TimeMollification interface + constructor; S1 core isolated"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-28T04:06:09Z",
+  "committed_date": "2026-06-28T04:06:09Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "cabd2d95f882bbfa245f34715697cca994326476"
+  ],
+  "sha": "7dde402da823cd17cd7b1982dbfe61eace797483",
+  "subject": "feat(torus #53): genuine convection operator → 𝕋³ capstone 3→2 (WIP) (#62)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-27T15:47:28Z",
+  "committed_date": "2026-06-27T15:47:28Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "12f322a86884475a8858dccd76706ff38cdfaec7"
+  ],
+  "sha": "cabd2d95f882bbfa245f34715697cca994326476",
+  "subject": "feat(R3 #56): remove convection axiom via genuine (u·∇)v operator — R3 capstone 3→2 (#60)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-27T13:21:52Z",
+  "committed_date": "2026-06-27T13:21:52Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "350546e0dd370d66b0749d9d0dafb7cdc3f8786d"
+  ],
+  "sha": "12f322a86884475a8858dccd76706ff38cdfaec7",
+  "subject": "ci: halve Actions cost — push only on main + paths-ignore docs (#61)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-26T16:00:58Z",
+  "committed_date": "2026-06-26T16:00:58Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "f217420a1232166a549c6917214ad693b452e863"
+  ],
+  "sha": "350546e0dd370d66b0749d9d0dafb7cdc3f8786d",
+  "subject": "feat(R3 #56 PR-2): energy-class convection form on H¹_σ (convFormH1, sorry-free) (#59)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-26T07:24:40Z",
+  "committed_date": "2026-06-26T07:24:40Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "8826e5878df00a828c02f390f95275ce8ed1fbbd"
+  ],
+  "sha": "f217420a1232166a549c6917214ad693b452e863",
+  "subject": "feat(R3 #56 PR-1): Sobolev embedding H¹(ℝ³)↪L⁶ (toward genuine convection-axiom removal, 3→2) (#58)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-25T17:20:17Z",
+  "committed_date": "2026-06-25T17:20:17Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "7dae0709a7e1274da089f6d9b01418a5c44a2056"
+  ],
+  "sha": "8826e5878df00a828c02f390f95275ce8ed1fbbd",
+  "subject": "chore(docs): sync current-axiom listings to r3ConvectionGapOp_exists (#48 rename) (#57)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-25T17:00:57Z",
+  "committed_date": "2026-06-25T17:00:57Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "9b95f863be7971b5b0919104cecac028d4f703e0"
+  ],
+  "sha": "7dae0709a7e1274da089f6d9b01418a5c44a2056",
+  "subject": "refactor(R3 #48): reorganize r3_NSForms_exist into the operator-gap form r3ConvectionGapOp_exists (#55)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-24T02:46:09Z",
+  "committed_date": "2026-06-24T02:46:09Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "9ac0f343c8d16076fe5ab2edcfe79b8a49200abd"
+  ],
+  "sha": "9b95f863be7971b5b0919104cecac028d4f703e0",
+  "subject": "chore(docs): janitor sweep — refresh stale docs to current 3+3 axiom frontier (#54)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-23T04:54:03Z",
+  "committed_date": "2026-06-23T04:54:03Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "f84124532b7dc6af980108831c5ec32a6276d975"
+  ],
+  "sha": "9ac0f343c8d16076fe5ab2edcfe79b8a49200abd",
+  "subject": "feat(R3 #47): prove galerkin_weakLimit_R3 (strong ball-exhaustion + Mazur) → remove axiom (R3 4→3) (#52)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-22T22:38:22Z",
+  "committed_date": "2026-06-22T22:38:22Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "93f74f498eb65899fa240bff124ef3c39b93d62f"
+  ],
+  "sha": "f84124532b7dc6af980108831c5ec32a6276d975",
+  "subject": "feat(R3 #3): prove CurlSchwartzDense via Fourier route → remove curlSchwartzDense_holds axiom (R3 5→4) (#51)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-22T19:03:53Z",
+  "committed_date": "2026-06-22T19:03:53Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "11a20739cc388816ffd2f40666a3671abb518dad"
+  ],
+  "sha": "93f74f498eb65899fa240bff124ef3c39b93d62f",
+  "subject": "refactor(Bochner #1): bundle GelfandTriple.ι as a continuous linear map (#50)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-22T18:13:25Z",
+  "committed_date": "2026-06-22T18:13:25Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "9df860d02a36b3510905aa0fd996d8fb64d2217d"
+  ],
+  "sha": "11a20739cc388816ffd2f40666a3671abb518dad",
+  "subject": "feat(R3 #48): prove Schwartz-div-free density chain — content reduction toward r3_NSForms_exist (#49)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-22T14:49:42Z",
+  "committed_date": "2026-06-22T14:49:42Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "0fd49fb6da5fce56157e748ad257d5b21d5616db"
+  ],
+  "sha": "9df860d02a36b3510905aa0fd996d8fb64d2217d",
+  "subject": "feat(R3 #44): prove Aubin–Lions time diagonalization; galerkinSpaceTimeExtraction_R3 axiom → theorem (#45)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-22T07:47:46Z",
+  "committed_date": "2026-06-22T07:47:46Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "0c101cad1d882acbb1b3e2aa4e28f26082ca18d2"
+  ],
+  "sha": "0fd49fb6da5fce56157e748ad257d5b21d5616db",
+  "subject": "feat(R3 #15): close C2 Aubin–Lions constructor sorry-free; aubin_lions_R3 → one thin unconditional time axiom (4→4) (#43)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-22T03:30:01Z",
+  "committed_date": "2026-06-22T03:30:01Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "88813c89ce34c88bf3b9ca707a14364b75de2f79"
+  ],
+  "sha": "0c101cad1d882acbb1b3e2aa4e28f26082ca18d2",
+  "subject": "feat(R3): close viscous Steklov–Jensen gate sorry-free + finite-dim curve-continuity enrichment (toward #15) (#42)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-21T14:30:35Z",
+  "committed_date": "2026-06-21T14:30:35Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "147d402640dd432881ad1cff467fa43ef213d11b"
+  ],
+  "sha": "88813c89ce34c88bf3b9ca707a14364b75de2f79",
+  "subject": "feat(torus): remove galerkin_ode_solution via proved finite-dim Galerkin ODE solver (issue #24) (#41)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-06-21T11:35:12Z",
+  "committed_date": "2026-06-21T11:35:12Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "71bef66f6d7fbfb5aec034d89800e25d78ca907b"
+  ],
+  "sha": "147d402640dd432881ad1cff467fa43ef213d11b",
+  "subject": "Revert accidental empty placeholder file"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-06-21T11:34:59Z",
+  "committed_date": "2026-06-21T11:34:59Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "6137804f23202901f51a6f941375ee85227ca177"
+  ],
+  "sha": "71bef66f6d7fbfb5aec034d89800e25d78ca907b",
+  "subject": ""
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-06-21T11:34:44Z",
+  "committed_date": "2026-06-21T11:34:44Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "611d53546c876d8083667f1a843b944076ef529b"
+  ],
+  "sha": "6137804f23202901f51a6f941375ee85227ca177",
+  "subject": "Revert accidental empty placeholder file"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-06-21T11:34:18Z",
+  "committed_date": "2026-06-21T11:34:18Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "a0eba433c9b99bc477372e59b34a93daab510475"
+  ],
+  "sha": "611d53546c876d8083667f1a843b944076ef529b",
+  "subject": ""
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-06-21T11:33:55Z",
+  "committed_date": "2026-06-21T11:33:55Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "80d894b9fbb3a9d2002fa3f46175ca04bf82593c"
+  ],
+  "sha": "a0eba433c9b99bc477372e59b34a93daab510475",
+  "subject": "Remove accidental placeholder file"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-06-21T11:33:22Z",
+  "committed_date": "2026-06-21T11:33:22Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "7e241c7d4b1108de5b0bbc677970d9988fe898c7"
+  ],
+  "sha": "80d894b9fbb3a9d2002fa3f46175ca04bf82593c",
+  "subject": ""
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-06-21T11:32:56Z",
+  "committed_date": "2026-06-21T11:32:56Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "c02a5a8b711e34220b2743e36510de4ce6c5cfcb"
+  ],
+  "sha": "7e241c7d4b1108de5b0bbc677970d9988fe898c7",
+  "subject": "Remove accidental placeholder file"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-06-21T11:32:34Z",
+  "committed_date": "2026-06-21T11:32:34Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "d76f5c8bc99830fe87bb9f018ea5a67a9b49b7df"
+  ],
+  "sha": "c02a5a8b711e34220b2743e36510de4ce6c5cfcb",
+  "subject": ""
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-06-21T11:32:12Z",
+  "committed_date": "2026-06-21T11:32:12Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "0ff5a2c993e488e8717b4d59bc2ef4bdc63983fe"
+  ],
+  "sha": "d76f5c8bc99830fe87bb9f018ea5a67a9b49b7df",
+  "subject": "Remove accidental placeholder file"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-06-21T11:31:45Z",
+  "committed_date": "2026-06-21T11:31:45Z",
+  "committer_login": "t-uda",
+  "parents": [
+   "c3937956bbf7a343878998c9ffba2c0c17f8b760"
+  ],
+  "sha": "0ff5a2c993e488e8717b4d59bc2ef4bdc63983fe",
+  "subject": ""
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-21T11:20:00Z",
+  "committed_date": "2026-06-21T11:20:00Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "5b3c561cd6dfdb99154708f27bff4c1cd4378287"
+  ],
+  "sha": "c3937956bbf7a343878998c9ffba2c0c17f8b760",
+  "subject": "feat(torus): remove torus3_NSForms_exist via thin TorusConvectionGap (#22) (#40)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-21T09:23:54Z",
+  "committed_date": "2026-06-21T09:23:54Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "e57465785f2828e6d8066b6a2baf51883b12189a"
+  ],
+  "sha": "5b3c561cd6dfdb99154708f27bff4c1cd4378287",
+  "subject": "feat(R3): discharge galerkin_ode_solution_R3 via concrete-scheme ODE wiring (issue #10) (#39)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-21T06:57:26Z",
+  "committed_date": "2026-06-21T06:57:26Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "ef8be12d1f64892149c97f9bef4fd03192604385"
+  ],
+  "sha": "e57465785f2828e6d8066b6a2baf51883b12189a",
+  "subject": "feat(R3): swap r3GalerkinScheme_exists axiom for thin curlSchwartzDense_holds (issue #21) (#38)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-21T06:50:30Z",
+  "committed_date": "2026-06-21T06:50:30Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "56b9cfc0bbfea606e76223fa65f85f6b6757d9e8"
+  ],
+  "sha": "ef8be12d1f64892149c97f9bef4fd03192604385",
+  "subject": "feat(lane-d): strengthen strong_convergence to eLpNorm-form; close E1 (#31) (#37)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-21T03:17:38Z",
+  "committed_date": "2026-06-21T03:17:38Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "8aa567d10acfbf7195e5cb12fab371d5697c13f5"
+  ],
+  "sha": "56b9cfc0bbfea606e76223fa65f85f6b6757d9e8",
+  "subject": "feat(lane-t): concrete T³ convection form — begin axiom removal for issue #22 (#27)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-21T02:20:55Z",
+  "committed_date": "2026-06-21T02:20:55Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "f0c55ce00eb0fc5d2a3ec6738e8c7d45a2df1580"
+  ],
+  "sha": "8aa567d10acfbf7195e5cb12fab371d5697c13f5",
+  "subject": "docs: sync axiom-count prose to 6→5 after spatial_compactness_R3 removal (#2/#9) (#36)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-21T01:55:15Z",
+  "committed_date": "2026-06-21T01:55:15Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "6d635da9f5b9f8ae264f2880139cfa2011de8f24"
+  ],
+  "sha": "f0c55ce00eb0fc5d2a3ec6738e8c7d45a2df1580",
+  "subject": "feat(R3): remove spatial_compactness_R3 axiom (#2) — wire FK chain (6→5) (#35)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-21T01:44:06Z",
+  "committed_date": "2026-06-21T01:44:06Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "347522102ecd4ba1626a3330b88598a61c2d8cf2"
+  ],
+  "sha": "6d635da9f5b9f8ae264f2880139cfa2011de8f24",
+  "subject": "feat(R3/C2): prove fourier_proj_steklovAvg_eq; shrink viscous Steklov Jensen frontier (#15) (#34)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-21T00:39:31Z",
+  "committed_date": "2026-06-21T00:39:31Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "b5e41c679ecfa9189e9e0066662a925c1aa458f1"
+  ],
+  "sha": "347522102ecd4ba1626a3330b88598a61c2d8cf2",
+  "subject": "feat(R3/C2): H¹/Jensen Steklov scaffold — prove Hilbert-space Bochner-average Jensen core sorry-free; isolate viscous bound to the Lp-coeFn frontier (#15) (#33)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-21T00:22:00Z",
+  "committed_date": "2026-06-21T00:22:00Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "ad06e8d3f09078fc5ddc73398a2aa3cc32c5ecca"
+  ],
+  "sha": "b5e41c679ecfa9189e9e0066662a925c1aa458f1",
+  "subject": "feat(FK): discharge convL2_coeFn_ae frontier — FK file now sorry-free (#11) (#32)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-20T23:52:38Z",
+  "committed_date": "2026-06-20T23:52:38Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "bbbfec6ced46294e49b586f5abf8cd71d4a26aa3"
+  ],
+  "sha": "ad06e8d3f09078fc5ddc73398a2aa3cc32c5ecca",
+  "subject": "feat(R3/E1): discharge kineticEnergy_lsc_bound modulo one isolated field-level integrability gap (#14-P) (#30)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-20T23:52:34Z",
+  "committed_date": "2026-06-20T23:52:34Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "f3a03c56184f8dbce02983cca2539f88eb7f7445"
+  ],
+  "sha": "bbbfec6ced46294e49b586f5abf8cd71d4a26aa3",
+  "subject": "docs(lane-t): document aubin_lions Bochner-time frontier; axiom KEPT (#23) (#29)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-20T16:50:46Z",
+  "committed_date": "2026-06-20T16:50:46Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "0060317dc47b6acf2f928132d5d496f2f7e6141a"
+  ],
+  "sha": "f3a03c56184f8dbce02983cca2539f88eb7f7445",
+  "subject": "Stream D (#13-B): discharge isWeakTimeDeriv_unique sorry-free under [CompleteSpace X] (#28)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-20T15:59:06Z",
+  "committed_date": "2026-06-20T15:59:06Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "55bff936660de100465d81dc166f37f52f74a5eb"
+  ],
+  "sha": "0060317dc47b6acf2f928132d5d496f2f7e6141a",
+  "subject": "Stream D (#13-A): reduce W1pTime.ofHValuedDeriv to two isolated integrability gaps (#20)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-20T14:03:57Z",
+  "committed_date": "2026-06-20T14:03:57Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "377b68f3d4f0c7a10e12611a80764c7604f32bb6"
+  ],
+  "sha": "55bff936660de100465d81dc166f37f52f74a5eb",
+  "subject": "feat(docs): convection frontier gate note for issue #12 (#19)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-20T14:00:39Z",
+  "committed_date": "2026-06-20T14:00:39Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "a7a410cfbb4d2c17fa8cceb065fd9b133a3a4b6d"
+  ],
+  "sha": "377b68f3d4f0c7a10e12611a80764c7604f32bb6",
+  "subject": "feat(R3/AxiomaticClosure): add u_aestronglyMeasurable field to AubinLionsPackage_R3 (#14-C) (#18)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-20T12:58:25Z",
+  "committed_date": "2026-06-20T12:58:25Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "3a66d66c1ddba62fc09773fc4126e2eeab037538"
+  ],
+  "sha": "a7a410cfbb4d2c17fa8cceb065fd9b133a3a4b6d",
+  "subject": "Stream A (curl density): prove (P1) Lp Hermitian-reflection, collapse frontier to single P2 (#17)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-20T12:10:51Z",
+  "committed_date": "2026-06-20T12:10:51Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "e9de67be73685ad37604bd56d8884ec41971e7aa"
+  ],
+  "sha": "3a66d66c1ddba62fc09773fc4126e2eeab037538",
+  "subject": "Stream B (FK): discharge Young/Minkowski walls; isolate frontier to convL2_coeFn_ae (7→1 sorry) (#16)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-20T08:06:00Z",
+  "committed_date": "2026-06-20T08:06:00Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "67ad0a5f7e7a3db29265191c54ba2f14c395c8bc"
+  ],
+  "sha": "e9de67be73685ad37604bd56d8884ec41971e7aa",
+  "subject": "feat(lane-c): fill Tier S (11) + Tier G (9) convection proof bodies — 20 sorry discharged (#8)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-20T06:35:56Z",
+  "committed_date": "2026-06-20T06:35:56Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "77154212e544707f7def469bf003b0d65544a1f5"
+  ],
+  "sha": "67ad0a5f7e7a3db29265191c54ba2f14c395c8bc",
+  "subject": "Stream D (Bochner-time): GelfandTriple interface fix + D1/D2 lemmas + D2 statement-gate fix (#7)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-06-20T05:13:56Z",
+  "committed_date": "2026-06-20T05:13:56Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "144c1efbc25f4697135fc75dfccfa96620b100f2"
+  ],
+  "sha": "77154212e544707f7def469bf003b0d65544a1f5",
+  "subject": "feat(Wave-0): infra unblocker — flock lock, Core.lean, _axiomatic names, CI axiom-leak gate (live pin)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-19T14:13:42Z",
+  "committed_date": "2026-06-19T14:13:42Z",
+  "committer_login": null,
+  "parents": [
+   "5cf964a883095321ddf09096a4f61c5a4ca88144"
+  ],
+  "sha": "144c1efbc25f4697135fc75dfccfa96620b100f2",
+  "subject": "fix(FK): same-line ALLOW_SORRY marker on mollifyRep_eq_lp_integral (clear no-sorry guard)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-19T14:12:04Z",
+  "committed_date": "2026-06-19T14:12:04Z",
+  "committer_login": null,
+  "parents": [
+   "17062b9684f02194d0435a7845b52b6be2c04b92"
+  ],
+  "sha": "5cf964a883095321ddf09096a4f61c5a4ca88144",
+  "subject": "Burn round (partial, infra-limited): FK Bochner scaffolding + GelfandTriple bridge"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-19T06:44:16Z",
+  "committed_date": "2026-06-19T06:44:16Z",
+  "committer_login": null,
+  "parents": [
+   "fe5e62543be0aa815c5518ab1add2aeff1bbcf41"
+  ],
+  "sha": "17062b9684f02194d0435a7845b52b6be2c04b92",
+  "subject": "docs(STATUS): goal a+b proof progress — FK sub-library + Fourier lemmas; 2 walls isolated"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-19T02:07:47Z",
+  "committed_date": "2026-06-19T02:07:47Z",
+  "committer_login": null,
+  "parents": [
+   "26dac2b1f02a125704c083fa3d4ae0e84b50a312"
+  ],
+  "sha": "fe5e62543be0aa815c5518ab1add2aeff1bbcf41",
+  "subject": "a: add mass_one/nonneg/even fields to MollifierKernel (fixes convolution-rate statement gap)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-19T02:00:39Z",
+  "committed_date": "2026-06-19T02:00:39Z",
+  "committer_login": null,
+  "parents": [
+   "4cf624697e2ba28379e767e4d4f1a22e0c8062b4"
+  ],
+  "sha": "26dac2b1f02a125704c083fa3d4ae0e84b50a312",
+  "subject": "a: restructure FK convolution crux into named analytic helpers + bump kernel constructor"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-19T01:50:02Z",
+  "committed_date": "2026-06-19T01:50:02Z",
+  "committer_login": null,
+  "parents": [
+   "29f33211af189b70373e25f6f2fcf89a9c122b0f"
+  ],
+  "sha": "4cf624697e2ba28379e767e4d4f1a22e0c8062b4",
+  "subject": "docs(FK): record precise blockers for convolution_l2_tendsto_uniform (Young + Minkowski + bump import)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-18T12:16:40Z",
+  "committed_date": "2026-06-18T12:16:40Z",
+  "committer_login": null,
+  "parents": [
+   "40f49b441fa71994caf08331d9df43e0b6fef7ed"
+  ],
+  "sha": "29f33211af189b70373e25f6f2fcf89a9c122b0f",
+  "subject": "a: prove mollified_family_totallyBounded_L2 (Arzela-Ascoli via eps-net + L2 transfer)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-18T11:20:00Z",
+  "committed_date": "2026-06-18T11:20:00Z",
+  "committer_login": null,
+  "parents": [
+   "b3dd508f6534fc2d20084c810301236c796d870a"
+  ],
+  "sha": "40f49b441fa71994caf08331d9df43e0b6fef7ed",
+  "subject": "fix(CurlDensity): reword docstring 'constant'->'factor' to clear no-axiom guard false-positive"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-18T11:18:17Z",
+  "committed_date": "2026-06-18T11:18:17Z",
+  "committer_login": null,
+  "parents": [
+   "451ee8f1d5f78965509521124ac8e8f27c73f9af"
+  ],
+  "sha": "b3dd508f6534fc2d20084c810301236c796d870a",
+  "subject": "a: prove mollifyRep_sub_le (all 3 FK helpers done); b: anti-Hermitian symmetry helpers"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-18T09:06:46Z",
+  "committed_date": "2026-06-18T09:06:46Z",
+  "committer_login": null,
+  "parents": [
+   "a0b0c57b0665f872c398907099a3741561eac98b"
+  ],
+  "sha": "451ee8f1d5f78965509521124ac8e8f27c73f9af",
+  "subject": "a: prove mollifyRep_sup_le (Young/CS); b: prove mem_sigma reverse + Fourier-Hermitian"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-18T08:20:35Z",
+  "committed_date": "2026-06-18T08:20:35Z",
+  "committer_login": null,
+  "parents": [
+   "80845c5cf9aa059666abd36bd410cce5fc257781"
+  ],
+  "sha": "a0b0c57b0665f872c398907099a3741561eac98b",
+  "subject": "B: prove kernel_translate_L2_tendsto (L²-continuity of kernel translation, DCT)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-18T07:47:27Z",
+  "committed_date": "2026-06-18T07:47:27Z",
+  "committer_login": null,
+  "parents": [
+   "cce429148edcaf191fab05a6881c1a98f62db29a"
+  ],
+  "sha": "80845c5cf9aa059666abd36bd410cce5fc257781",
+  "subject": "B: factor FK mollifier sub-library into 3 helper lemmas; family lemmas now proven"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-18T06:29:07Z",
+  "committed_date": "2026-06-18T06:29:07Z",
+  "committer_login": null,
+  "parents": [
+   "493913938931f3bbb303fbeb155cd81d1cf8bc6b"
+  ],
+  "sha": "cce429148edcaf191fab05a6881c1a98f62db29a",
+  "subject": "docs(STATUS): four-stream proving outcome — RellichBall discharged; named FK/density walls"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-18T06:15:51Z",
+  "committed_date": "2026-06-18T06:15:51Z",
+  "committer_login": null,
+  "parents": [
+   "b747d93ce94743e9f6680d0322c0894ec7b2a991"
+  ],
+  "sha": "493913938931f3bbb303fbeb155cd81d1cf8bc6b",
+  "subject": "B: RellichBall now sorry-free (integrability discharged); A: density-proof helpers"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-18T04:24:38Z",
+  "committed_date": "2026-06-18T04:24:38Z",
+  "committer_login": null,
+  "parents": [
+   "95571d31f1ba45b6fa1aa2d8811652cb32790bf9"
+  ],
+  "sha": "b747d93ce94743e9f6680d0322c0894ec7b2a991",
+  "subject": "A/B provers (partial): discharge reachable lemmas; analytic pillars remain"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-17T17:24:32Z",
+  "committed_date": "2026-06-17T17:24:32Z",
+  "committer_login": null,
+  "parents": [
+   "000acd57e4ba77c7f062fc1fa77e770fc4458380"
+  ],
+  "sha": "95571d31f1ba45b6fa1aa2d8811652cb32790bf9",
+  "subject": "4-stream scaffold: gate-approved statement layer for the four remaining pillars"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-17T15:59:13Z",
+  "committed_date": "2026-06-17T15:59:13Z",
+  "committer_login": null,
+  "parents": [
+   "4bc7b74bf37df92338084d3a9f3cdcd11a550b7c"
+  ],
+  "sha": "000acd57e4ba77c7f062fc1fa77e770fc4458380",
+  "subject": "Track 3: finite-dim Galerkin ODE global existence (axiom-free) + roadmap re-cut"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-17T11:56:09Z",
+  "committed_date": "2026-06-17T11:56:09Z",
+  "committer_login": null,
+  "parents": [
+   "fbce64209b65db6ea4a238ad093c4b9e25fc1dc4"
+  ],
+  "sha": "4bc7b74bf37df92338084d3a9f3cdcd11a550b7c",
+  "subject": "FourierL2 foundation (proven) + forward-time core soundness fix + T0b"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-17T10:40:32Z",
+  "committed_date": "2026-06-17T10:40:32Z",
+  "committer_login": null,
+  "parents": [
+   "2c048c9b7d1f655f82152a14054f9f3b02297de3"
+  ],
+  "sha": "fbce64209b65db6ea4a238ad093c4b9e25fc1dc4",
+  "subject": "B/D/E: parallel frontier-thinning substantiations (D,E axiom-clean; B honest partial)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-17T04:48:07Z",
+  "committed_date": "2026-06-17T04:48:07Z",
+  "committer_login": null,
+  "parents": [
+   "c8616ff634781e4faf679757a4b9b73cbbd6d382"
+  ],
+  "sha": "2c048c9b7d1f655f82152a14054f9f3b02297de3",
+  "subject": "ODE: Galerkin energy/regularity algebra (axiom-free) + reg_bound soundness fix"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-17T01:56:13Z",
+  "committed_date": "2026-06-17T02:21:39Z",
+  "committer_login": null,
+  "parents": [
+   "3aaaa9b8d4391471eb883d27b06f04a58120e164"
+  ],
+  "sha": "c8616ff634781e4faf679757a4b9b73cbbd6d382",
+  "subject": "P2 (partial): Aubin–Lions reusable analytic core + Steklov building blocks (axiom-free)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-16T06:11:57Z",
+  "committed_date": "2026-06-16T06:11:57Z",
+  "committer_login": null,
+  "parents": [
+   "37630dffa5ef1fed11fb5de386ae3684d6a995d9"
+  ],
+  "sha": "3aaaa9b8d4391471eb883d27b06f04a58120e164",
+  "subject": "P3: LOCAL Rellich–Kondrachov on ℝ³ — axiom-free reduction (sorry-free)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-15T11:11:58Z",
+  "committed_date": "2026-06-15T11:11:58Z",
+  "committer_login": null,
+  "parents": [
+   "6e00fa1e3a0e5ef4f5eb776407207232c99c52e7"
+  ],
+  "sha": "37630dffa5ef1fed11fb5de386ae3684d6a995d9",
+  "subject": "P5: construct R3GalerkinScheme from a Schwartz div-free basis (axiom-free)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-15T08:11:08Z",
+  "committed_date": "2026-06-15T08:11:08Z",
+  "committer_login": null,
+  "parents": [
+   "5aae1d65b0549031b209dd1dec7d74b7a2e66a0c"
+  ],
+  "sha": "6e00fa1e3a0e5ef4f5eb776407207232c99c52e7",
+  "subject": "R3-d: concrete trilinear convection estimate for convIntegralSchwartz (axiom-free)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-11T04:22:28Z",
+  "committed_date": "2026-06-11T04:22:28Z",
+  "committer_login": null,
+  "parents": [
+   "0f6f52e4834683f27a56322ea5eefbe1a3d71cf6"
+  ],
+  "sha": "5aae1d65b0549031b209dd1dec7d74b7a2e66a0c",
+  "subject": "docs: HANDOFF.md — self-contained project handoff (state, axioms, de-axiomatization cost, strategy, conventions)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T14:43:24Z",
+  "committed_date": "2026-06-10T14:43:24Z",
+  "committer_login": null,
+  "parents": [
+   "672b0cc28c20959af8cc9d301925434e2cf1ef1e"
+  ],
+  "sha": "0f6f52e4834683f27a56322ea5eefbe1a3d71cf6",
+  "subject": "docs: 形式化レビュー（要所の定義・補題、難所、非自明タクティク、自然言語証明とのギャップ）"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T12:52:25Z",
+  "committed_date": "2026-06-10T12:52:25Z",
+  "committer_login": null,
+  "parents": [
+   "d6a2e609eb74c4ea36a61cf0fa8e88a15f45f2e2"
+  ],
+  "sha": "672b0cc28c20959af8cc9d301925434e2cf1ef1e",
+  "subject": "R3-c-fix: canonical Schwartz div-free weak formulation for exists_lerayHopf_r3"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T12:46:12Z",
+  "committed_date": "2026-06-10T12:46:12Z",
+  "committer_login": null,
+  "parents": [
+   "d4794c7242a717009fe9b30b149b9440d7be6a47"
+  ],
+  "sha": "d6a2e609eb74c4ea36a61cf0fa8e88a15f45f2e2",
+  "subject": "R3-c: close whole-space ℝ³ Leray–Hopf weak existence modulo 6 Codex-audited axioms"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T11:44:36Z",
+  "committed_date": "2026-06-10T11:44:36Z",
+  "committer_login": null,
+  "parents": [
+   "b2996b97b98ae440b0f52a5609580b726ec08ca0"
+  ],
+  "sha": "d4794c7242a717009fe9b30b149b9440d7be6a47",
+  "subject": "R3-b: ℝ³ H¹ regularity, Schwartz test class, viscous functionals (axiom-free)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T11:32:48Z",
+  "committed_date": "2026-06-10T11:32:48Z",
+  "committer_login": null,
+  "parents": [
+   "9218752a07008a024b80383b788585f544776633"
+  ],
+  "sha": "b2996b97b98ae440b0f52a5609580b726ec08ca0",
+  "subject": "R3-a: ℝ³ divergence-free space L²_σ(ℝ³) + Leray projection (axiom-free)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T10:56:06Z",
+  "committed_date": "2026-06-10T10:56:06Z",
+  "committer_login": null,
+  "parents": [
+   "99c8663f362bc0b1c7d6eaeb863b3d110fbe62fa"
+  ],
+  "sha": "9218752a07008a024b80383b788585f544776633",
+  "subject": "docs: record M6 axiomatic T³ closure in final report"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T10:54:52Z",
+  "committed_date": "2026-06-10T10:54:52Z",
+  "committer_login": null,
+  "parents": [
+   "da4849fe36816a8c06d7920331647373ae980f71"
+  ],
+  "sha": "99c8663f362bc0b1c7d6eaeb863b3d110fbe62fa",
+  "subject": "M6b: close T³ Leray–Hopf weak existence modulo 4 Codex-audited axioms"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T09:42:55Z",
+  "committed_date": "2026-06-10T09:42:55Z",
+  "committer_login": null,
+  "parents": [
+   "dea9985c4287d8c0012a77d768a2e6397b207969"
+  ],
+  "sha": "da4849fe36816a8c06d7920331647373ae980f71",
+  "subject": "M6a: H¹_σ regularity functional + abstract dissipative-evolution framework (axiom-free)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T07:27:38Z",
+  "committed_date": "2026-06-10T07:27:38Z",
+  "committer_login": null,
+  "parents": [
+   "4d74e1dffd199b79546148b86d84d802dc360578"
+  ],
+  "sha": "dea9985c4287d8c0012a77d768a2e6397b207969",
+  "subject": "docs: autonomous-run final report"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T07:26:27Z",
+  "committed_date": "2026-06-10T07:26:27Z",
+  "committer_login": null,
+  "parents": [
+   "a5c20bdb777eeb8c725e8d91884617f118a7d4a9"
+  ],
+  "sha": "4d74e1dffd199b79546148b86d84d802dc360578",
+  "subject": "M5: Rellich sequential-compactness corollary (axiom-free)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T07:20:58Z",
+  "committed_date": "2026-06-10T07:20:58Z",
+  "committer_login": null,
+  "parents": [
+   "15ff4a2e935d285bbd711d78b288d4e51d354ee8"
+  ],
+  "sha": "a5c20bdb777eeb8c725e8d91884617f118a7d4a9",
+  "subject": "M5: Fourier-tail Rellich compact embedding H¹(𝕋³) ↪ L²(𝕋³) (axiom-free)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T06:39:39Z",
+  "committed_date": "2026-06-10T06:39:39Z",
+  "committer_login": null,
+  "parents": [
+   "80ef6088dfb9a9408db75f8443d528253651b196"
+  ],
+  "sha": "15ff4a2e935d285bbd711d78b288d4e51d354ee8",
+  "subject": "M4 (abstract): Galerkin energy identity → inequality → nonincreasing energy (axiom-free)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T06:01:49Z",
+  "committed_date": "2026-06-10T06:01:49Z",
+  "committer_login": null,
+  "parents": [
+   "4e4ac80466f96fbbb2811529bea3aedf75839b65"
+  ],
+  "sha": "80ef6088dfb9a9408db75f8443d528253651b196",
+  "subject": "M3 (part 2): velocity Fourier–Galerkin projection + L²_σ preservation — M3 complete"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T05:27:38Z",
+  "committed_date": "2026-06-10T05:27:38Z",
+  "committer_login": null,
+  "parents": [
+   "fbb39e57298648a960578ebeb733f355c835fadf"
+  ],
+  "sha": "4e4ac80466f96fbbb2811529bea3aedf75839b65",
+  "subject": "M3 (part 1): Leray projection Π_div + Fourier–Galerkin projection Pₙ (axiom-free)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T04:46:11Z",
+  "committed_date": "2026-06-10T04:46:11Z",
+  "committer_login": null,
+  "parents": [
+   "f64e2d349c45b87cbc16f1fe2f5b02a920195b09"
+  ],
+  "sha": "fbb39e57298648a960578ebeb733f355c835fadf",
+  "subject": "M2 (part 3): H¹(𝕋³) Fourier-weighted Sobolev predicate — M2 complete"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T04:37:15Z",
+  "committed_date": "2026-06-10T04:37:15Z",
+  "committer_login": null,
+  "parents": [
+   "a33ff303a7c8a223517157a9440d097cd5a25ff3"
+  ],
+  "sha": "f64e2d349c45b87cbc16f1fe2f5b02a920195b09",
+  "subject": "M2 (part 2): divergence-free predicate and L²_σ(𝕋³) as a closed subspace (axiom-free)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T03:58:28Z",
+  "committed_date": "2026-06-10T03:58:28Z",
+  "committer_login": null,
+  "parents": [
+   "5c7d3a2e2c3d5a1ee0676676cb9bf4cf77d69387"
+  ],
+  "sha": "a33ff303a7c8a223517157a9440d097cd5a25ff3",
+  "subject": "M2 (part 1): real torus domain, L² spaces, Fourier basis, measure bridge"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T03:29:16Z",
+  "committed_date": "2026-06-10T03:29:16Z",
+  "committer_login": null,
+  "parents": [
+   "9885f7ebe3163503ccd54421d48f97bf16730e57"
+  ],
+  "sha": "5c7d3a2e2c3d5a1ee0676676cb9bf4cf77d69387",
+  "subject": "Side branches A/B: blow-up lower bound (proved) + nonuniqueness statement"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T03:03:08Z",
+  "committed_date": "2026-06-10T03:03:08Z",
+  "committer_login": null,
+  "parents": [
+   "9232c0502953200c8da6308bf60e8d7f2efcb038"
+  ],
+  "sha": "9885f7ebe3163503ccd54421d48f97bf16730e57",
+  "subject": "M1: structural spine on a scaffold domain (build green, Codex-reviewed)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T02:30:14Z",
+  "committed_date": "2026-06-10T02:30:14Z",
+  "committer_login": null,
+  "parents": [
+   "7ebcf7de7684a7ebac066457d8a6874947c31702"
+  ],
+  "sha": "9232c0502953200c8da6308bf60e8d7f2efcb038",
+  "subject": "docs: resolve plan-interface conflicts to make MVP execution-ready"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T02:15:42Z",
+  "committed_date": "2026-06-10T02:15:42Z",
+  "committer_login": null,
+  "parents": [
+   "36ef30163ec530544d580d29997e49f31076e4c4"
+  ],
+  "sha": "7ebcf7de7684a7ebac066457d8a6874947c31702",
+  "subject": "chore: gitignore machine-local .claude/skills symlinks"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T02:15:03Z",
+  "committed_date": "2026-06-10T02:15:03Z",
+  "committer_login": null,
+  "parents": [
+   "1457164ac33f79b62495c35e897e4c33ae869e09"
+  ],
+  "sha": "36ef30163ec530544d580d29997e49f31076e4c4",
+  "subject": "docs: add thin CLAUDE.md importing AGENTS.md as single source of truth"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T02:08:09Z",
+  "committed_date": "2026-06-10T02:08:09Z",
+  "committer_login": null,
+  "parents": [
+   "4976e37e5422927fa0f4451ae1b8e1d468289f54"
+  ],
+  "sha": "1457164ac33f79b62495c35e897e4c33ae869e09",
+  "subject": "chore: define reusable agent team and Codex review protocol"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T02:08:09Z",
+  "committed_date": "2026-06-10T02:08:09Z",
+  "committer_login": null,
+  "parents": [
+   "ea3fce4de15ad71c8794171a53f9c029efa23a59"
+  ],
+  "sha": "4976e37e5422927fa0f4451ae1b8e1d468289f54",
+  "subject": "build: minimal Lake + mathlib skeleton (no theorems)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T02:08:09Z",
+  "committed_date": "2026-06-10T02:08:09Z",
+  "committer_login": null,
+  "parents": [
+   "cf79cc9f281aa16d5efd079c3a93299056704875"
+  ],
+  "sha": "ea3fce4de15ad71c8794171a53f9c029efa23a59",
+  "subject": "chore: add agent harness and guardrail layer"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T01:37:12Z",
+  "committed_date": "2026-06-10T01:37:12Z",
+  "committer_login": null,
+  "parents": [
+   "3d79b0c37ffd6fb1da3d19bf6bacd2eb194d5b39"
+  ],
+  "sha": "cf79cc9f281aa16d5efd079c3a93299056704875",
+  "subject": "docs: rewrite milestone.md into a clean T³→R³ roadmap"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-06-10T01:36:14Z",
+  "committed_date": "2026-06-10T01:36:14Z",
+  "committer_login": null,
+  "parents": [],
+  "sha": "3d79b0c37ffd6fb1da3d19bf6bacd2eb194d5b39",
+  "subject": "docs: add initial Leray–Hopf Lean formalization plans (raw)"
+ }
+]

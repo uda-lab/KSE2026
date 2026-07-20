@@ -2,12 +2,17 @@
 """Export a reproducible GitHub-evidence snapshot of uda-lab/leray-hopf.
 
 Writes to evidence/repository-snapshots/<repo-name>/:
-  commits.jsonl   — full history: sha, author/committer login+name, dates, subject
-  issues.jsonl    — issues AND PRs (state=all): number, kind, title, body, dates,
+  commits.json    — full history: sha, author/committer login+name, dates, subject
+  issues.json     — issues AND PRs (state=all): number, kind, title, body, dates,
                     labels, author login, closed_by-ish fields
-  comments.jsonl  — all issue/PR comments (repo-wide endpoint)
-  releases.jsonl  — releases; tags.jsonl — tags
+  comments.json   — all issue/PR comments (repo-wide endpoint)
+  releases.json   — releases; tags.json — tags
   EXPORT.json     — fetch metadata (fetched_at, head sha, tool versions)
+
+JSON arrays (not JSONL): the repo-wide rule is that no .jsonl is ever
+committed — the CI leakage guard treats the extension as raw-session-log
+material. Snapshot data is regenerable public JSON, so plain arrays keep the
+guard simple and strict.
 
 Email addresses are deliberately NOT exported (repo redaction gate); authors
 are identified by GitHub login (fallback: display name). Everything here is
@@ -49,10 +54,10 @@ def gh_api(path: str, paginate: bool = True):
     return data
 
 
-def write_jsonl(path: Path, rows):
+def write_json(path: Path, rows):
     with path.open("w", encoding="utf-8") as f:
-        for r in rows:
-            f.write(json.dumps(r, ensure_ascii=False, sort_keys=True) + "\n")
+        json.dump(rows, f, ensure_ascii=False, sort_keys=True, indent=1)
+        f.write("\n")
     print(f"{path.name}: {len(rows)} rows", file=sys.stderr)
 
 
@@ -76,7 +81,7 @@ def main() -> int:
         "subject": c["commit"]["message"].split("\n")[0],
         "parents": [p["sha"] for p in c["parents"]],
     } for c in gh_api(f"repos/{args.repo}/commits?per_page=100")]
-    write_jsonl(out / "commits.jsonl", commits)
+    write_json(out / "commits.json", commits)
 
     issues = [{
         "number": i["number"],
@@ -92,7 +97,7 @@ def main() -> int:
         "comments": i.get("comments"),
         "milestone": (i.get("milestone") or {}).get("title"),
     } for i in gh_api(f"repos/{args.repo}/issues?state=all&per_page=100")]
-    write_jsonl(out / "issues.jsonl", issues)
+    write_json(out / "issues.json", issues)
 
     comments = [{
         "issue_number": int(c["issue_url"].rsplit("/", 1)[1]),
@@ -102,7 +107,7 @@ def main() -> int:
         "updated_at": c["updated_at"],
         "body": scrub(c.get("body") or ""),
     } for c in gh_api(f"repos/{args.repo}/issues/comments?per_page=100")]
-    write_jsonl(out / "comments.jsonl", comments)
+    write_json(out / "comments.json", comments)
 
     releases = [{
         "tag_name": r["tag_name"],
@@ -111,11 +116,11 @@ def main() -> int:
         "published_at": r.get("published_at"),
         "body": scrub(r.get("body") or ""),
     } for r in gh_api(f"repos/{args.repo}/releases?per_page=100")]
-    write_jsonl(out / "releases.jsonl", releases)
+    write_json(out / "releases.json", releases)
 
     tags = [{"name": t["name"], "commit_sha": t["commit"]["sha"]}
             for t in gh_api(f"repos/{args.repo}/tags?per_page=100")]
-    write_jsonl(out / "tags.jsonl", tags)
+    write_json(out / "tags.json", tags)
 
     meta = {
         "repo": args.repo,
