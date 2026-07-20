@@ -37,9 +37,10 @@ PATTERNS = [
 ]
 
 # Repos that are public and citable; any other owner/repo URL is flagged.
+# lean-pde(-notes) are the former names of leray-hopf(-notes) — public redirects.
 PUBLIC_REPO_ALLOWLIST = re.compile(
-    r"github\.com/(uda-lab/(leray-hopf|leray-hopf-notes|KSE2026)|leanprover|"
-    r"leanprover-community)([/#?].*)?$"
+    r"github\.com/(uda-lab/(leray-hopf|leray-hopf-notes|lean-pde|lean-pde-notes"
+    r"|KSE2026)|leanprover|leanprover-community)([/#?].*)?$"
 )
 GITHUB_URL = re.compile(r"https?://github\.com/[A-Za-z0-9._-]+/[A-Za-z0-9._-]+")
 
