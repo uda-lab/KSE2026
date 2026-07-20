@@ -8,8 +8,11 @@ inventory 化する）．
 | Host ID | 実体 | 想定所在 | 収集状態 | 備考 |
 |---|---|---|---|---|
 | vps | VPS devcontainer | `~/.claude/projects/`，`~/.hermes/` | **収集済 2026-07-20**（EV-0001〜EV-1633） | 1777 ファイル escrow（762MB），内容重複 144 を除く 1633 件を manifest 登録．Claude Code 6 プロジェクト（leray-hopf 本体 12 sessions を含む）+ Hermes orchestrator sessions/logs/relay-prompts/kanban + bash history．除外・対応表は escrow 内 SOURCES.md（gitignored）．issue #3 参照 |
-| local-main | 主 local machine | `~/.claude/projects/` ほか（要列挙） | 未着手 | 転送後に inventory（#4，vps の次） |
-| local-secondary | 副 local machine | 同上 | 未着手 | #5，local-main の次 |
+| local-main | 自宅ノート PC（macOS）※ | `~/.claude/projects/`，`~/.claude/tasks/`，`~/.claude/plans/`，`~/.claude/history.jsonl`，shell history | **収集済 2026-07-20**（EV-1634〜EV-1679） | 46 ファイル escrow（33MB）．leray-hopf 関連 3 project dir・7 sessions（orchestration subagent transcript 16 本含む）+ tasks/plans/global history/shell history．`~/.claude/todos/` は不存在（新形式 tasks/ を収集），build log は残存せず．対応表は escrow 内 SOURCES.md（gitignored）．issue #4 参照 |
+| local-secondary | 大学 PC（主 local machine）※ | `~/.claude/projects/` ほか（要列挙） | 未着手 | #5，local-main の次 |
+
+※ 当初計画から host 割当てを入替え（owner 判断 2026-07-20，#4 コメント参照）: 収集順の都合で
+自宅ノート PC を local-main，主たる作業機である大学 PC を local-secondary とした．
 
 各 host で Phase 1 に列挙すべきもの: Claude Code セッション（`*.jsonl`），memory
 ディレクトリ，shell history，build log，handoff 文書．
