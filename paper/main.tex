@@ -1,0 +1,67 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+% Lean 4 listings setup (minimal; extend as needed)
+\lstdefinelanguage{lean}{
+  keywords={theorem,lemma,def,structure,instance,noncomputable,exists,fun,let,match,with,by,import,open,namespace,end},
+  sensitive=true,
+  comment=[l]{--},
+  morecomment=[s]{/-}{-/},
+}
+\lstset{
+  language=lean,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\bfseries,
+  commentstyle=\itshape\color{gray},
+  breaklines=true,
+  columns=fullflexible,
+}
+
+% Draft helpers --- remove before submission
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+% Evidence cross-reference (draft-only; renders as a marginal tag, disabled for submission)
+\newcommand{\evref}[1]{\textcolor{blue}{\footnotesize[#1]}}
+
+\begin{document}
+
+\title{Formalizing Leray--Hopf Weak Solutions in Lean~4 with
+Agent-Orchestrated Development\\
+{\footnotesize \todo{Working title --- freeze at Phase 3 (see notes/title-and-abstract.md)}}}
+
+\author{\IEEEauthorblockN{Anonymous Author(s)}
+\IEEEauthorblockA{\todo{Affiliation --- check KSE 2026 double-blind policy before filling}}}
+
+\maketitle
+
+\begin{abstract}
+\todo{Abstract --- draft at Phase 3 after contribution freeze. See
+notes/title-and-abstract.md for candidates.}
+\end{abstract}
+
+\begin{IEEEkeywords}
+formal verification, Lean 4, Navier--Stokes equations, Leray--Hopf weak solutions,
+AI agents, large language models, proof engineering
+\end{IEEEkeywords}
+
+\input{sections/01-introduction}
+\input{sections/02-formalization}
+\input{sections/03-agent-workflow}
+\input{sections/04-incidents}
+\input{sections/05-discussion}
+\input{sections/06-conclusion}
+
+% Draft-only: cite everything so the bibliography is non-empty before real
+% \cite commands exist. Remove at Phase 4.
+\nocite{*}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}
