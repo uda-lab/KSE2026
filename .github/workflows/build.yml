@@ -1,0 +1,46 @@
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  paper:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install tectonic
+        run: |
+          curl -fsSL \
+            https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%400.15.0/tectonic-0.15.0-x86_64-unknown-linux-musl.tar.gz \
+            | tar -xz -C /usr/local/bin
+          tectonic --version
+
+      - name: Verify claim links
+        run: python3 scripts/verify_claim_links.py
+
+      - name: Lint LaTeX
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq chktex
+          # informational for now; tighten to a hard gate once drafting starts
+          chktex -q paper/main.tex paper/sections/*.tex || true
+
+      - name: Guard against raw-log leakage
+        run: |
+          # tracked files must never include private/ payloads or session jsonl
+          leaked=$(git ls-files | grep -E '^private/' | grep -v '^private/README.md$' || true)
+          leaked="$leaked$(git ls-files | grep -E '\.jsonl$' || true)"
+          if [ -n "$leaked" ]; then
+            echo "raw-log leakage detected in tracked files:"; echo "$leaked"; exit 1
+          fi
+
+      - name: Build PDF
+        run: make pdf
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paper-pdf
+          path: build/main.pdf
+          if-no-files-found: error
