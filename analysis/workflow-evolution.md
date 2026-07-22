@@ -21,7 +21,7 @@ incident card・GitHub snapshot で裏付けられた変更のみを記載する
 | 2026-06-15 | **no-smuggle statement gate**: planner が過大主張（`tendsto_id` の全称形は基底の性質上偽）を statement 段階で弱形に修正 | 同上（gate が初日から機能した実例） | EV-2076（WEAKEN 06-15T10:14） |
 | 2026-06-16〜19 | **死亡 prover の disk 再検証規律**: サブエージェント異常死（計 8 回）の残骸は disk 状態を再検証してから信頼し，破損分は committed-green へ revert．commit 前 `#print axioms` exact-pin 確認と併せ FALSE-SUCCESS 0 件を維持 | prover の反復死（SSL/socket/idle-timeout）という環境 incident | EV-2076（RESOURCE 06-16〜19，補足欄） |
 | 2026-06-17 | **worktree/編集権限の設計的衝突回避**: 「各 stream は自分のファイルのみ新規作成，root import はまとめて 1 回」ルール | 競合の予見（未然回避） | EV-2076（WT-CONFLICT 06-17T05:38） |
-| 2026-06-19 | **local-only 運用から GitHub + PR ベース運用へ移行**開始（`uda-lab/lean-pde`，現 leray-hopf） | インフラ判断．auto-mode safety classifier の hard-block（MODEL-ESC）を owner 手動実行で回避した摩擦を含む | EV-2076（MODEL-ESC 06-19T13:54，成果欄） |
+| 2026-06-19 | **local-only 運用から GitHub への移行**（`uda-lab/lean-pde`，現 leray-hopf，への push と VPS バックアップ開始）．PR ベースの `/github-driven-workflow` はこの時点では権限設定待ちで未開始（同セッション内 PR 0 件） | インフラ判断．auto-mode safety classifier の hard-block（MODEL-ESC）を owner 手動実行で回避した摩擦を含む | EV-2076（MODEL-ESC 06-19T13:54，成果欄） |
 | 2026-06-20 | **独立アジュディケータ（実装と別系統の agent）による PR 単位審査**を運用．初日に PR #20 の過強 statement（`p,q<1` で証明不能）をマージ前検出 | PR 運用開始と同時（検出実績が即日発生） | EV-0925（STMT-MISMATCH 06-20T13:54）／incident 候補 #1 |
 | 2026-06-21 | **数値反例テストを含む adversarial review** が偽命題上の `ALLOW_SORRY` をマージ前検出（反例の数値差 80.7 / `Vₙ` 制約下 1e-13） | INC-002（検出成功により手法が定着） | EV-0925，INC-002 |
 | 2026-06-27 | **CI からローカル検証（`lake build` + `flock` 直列化）へ切替** | GitHub Actions 課金上限到達（RESOURCE） | EV-0925（06-27T23:31）／incident 候補 #7 |
