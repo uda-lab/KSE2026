@@ -76,7 +76,7 @@ def main() -> int:
     ap.add_argument("--gap-thresholds", default="60,300,900",
                     help="comma-separated active-time gap caps in seconds")
     args = ap.parse_args()
-    thresholds = [int(x) for x in args.gap_thresholds.split(",")]
+    thresholds = [int(x.strip()) for x in args.gap_thresholds.split(",") if x.strip()]
 
     seen_msgs = set()
     # (model, date, host) -> dict of counters
