@@ -7,7 +7,7 @@ inventory 化する）．
 
 | Host ID | 実体 | 想定所在 | 収集状態 | 備考 |
 |---|---|---|---|---|
-| vps | VPS devcontainer | `~/.claude/projects/`，`~/.hermes/` | **収集済 2026-07-20**（EV-0001〜EV-1633） | 1777 ファイル escrow（762MB），内容重複 144 を除く 1633 件を manifest 登録．Claude Code 6 プロジェクト（leray-hopf 本体 12 sessions を含む）+ Hermes orchestrator sessions/logs/relay-prompts/kanban + bash history．除外・対応表は escrow 内 SOURCES.md（gitignored）．issue #3 参照 |
+| vps | VPS devcontainer | `~/.claude/projects/`，`~/.hermes/` | **収集済 2026-07-20**（EV-0001〜EV-1633）**+ 追補 2026-07-22**（EV-2127〜EV-2145） | 1777 ファイル escrow（762MB），内容重複 144 を除く 1633 件を manifest 登録．Claude Code 6 プロジェクト（leray-hopf 本体 12 sessions を含む）+ Hermes orchestrator sessions/logs/relay-prompts/kanban + bash history．追補: local 2 host と揃える種別補完（global prompt history 全量スナップショット，leray 突合 12 task dirs，leray 関連 7 plans = 33 ファイル中 sha256 重複 14 を除く 19 件登録．owner がホスト側で転送）．除外・対応表は escrow 内 SOURCES.md（gitignored）．issue #3 / #21 参照 |
 | local-main | 自宅ノート PC（macOS）※ | `~/.claude/projects/` ほか | **収集済 2026-07-20**（EV-1634〜EV-1680） | 48 ファイル escrow（33MB）中，内容重複 1 を除く 47 件登録．leray-hopf 関連は grep により 3 project dir・7 セッションに閉じることを owner が確認（subagent transcript 16 本含む）．global prompt history・plans・tasks・shell history 込み．対応表は escrow 内 SOURCES.md．issue #4 参照 |
 | local-secondary | 大学 PC（当初計画の「主 local machine」）※ | `~/.claude/projects/` ほか | **収集済 2026-07-21，登録 2026-07-22**（EV-1681〜EV-2126） | 455 ファイル escrow（92MB）中，内容重複 9（空 `.lock` 等）を除く 446 件登録．leray-hopf 関連は grep により 14 project dir 中 6 dir・36 top-level sessions に閉じることを owner が確認（最初期 2026-06-15 からのセッションを含む．subagent transcripts 171 本，plans 4 件，global prompt history・tasks・shell history 込み）．対応表は escrow 内 SOURCES.md（gitignored）．issue #5 参照 |
 
