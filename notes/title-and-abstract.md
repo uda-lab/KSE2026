@@ -1,15 +1,18 @@
 # Title and abstract（Phase 3 で確定）
 
-## Title 候補
+## Title（確定 2026-07-23，owner．issue #35 / #49）
 
-- Formalizing Leray–Hopf Weak Solutions in Lean 4 with Agent-Orchestrated
-  Development（現行 working title）
-- （ログ分析後，主題 A/B/C の判断に合わせて追加）
+**Formalizing Leray–Hopf in Lean 4 with AI Agents: Workflow, Incidents, and Recovery**
+
+（owner は issue #35 コメントで案 2 preferred・合体形 OK と回答し，チャットで
+合体形を確定．旧 working title "…with Agent-Orchestrated Development" は破棄）
 
 ## Abstract 草稿
 
-（Phase 3 の contribution freeze 後に起草．3 contribution + scope 限定 + 実証根拠の
-構成で 150–200 語を目安）
+（claim freeze（CLM-001〜005，2026-07-23）済み．Phase 4 の front-matter PR で
+150–200 語を起草する．構成: 3 contribution + scope 限定 + 実証根拠．
+主張は全て frozen claim に対応させ，数値は CLM の校正済み値
+（$6,972.83 / 199.1h / ¥54,868 ほか）のみを使う）
 
 ## 制約
 

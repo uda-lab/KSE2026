@@ -14,20 +14,20 @@
 - Notes: 確度，再構成か一次資料か，など
 ```
 
-Phase 3（contribution freeze）で `frozen` にした claim のみ本文に残す．
+Phase 3（contribution freeze）で `frozen` にした claim のみ本文に残す（CLM-001〜005 は 2026-07-23 に freeze．issue #35/#42/#49）．
 contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 
 ---
 
 ## CLM-001: Leray–Hopf 弱解存在（𝕋³ および ℝ³）が Lean 4 + mathlib 上で project axiom なしに形式化された
-- Status: candidate
+- Status: frozen
 - Paper location: planned (sections/02-formalization.tex)
 - Evidence: leray-hopf@7c15710a7b9068a2aa105fc7c11b432e7685b7b5, decl:exists_lerayHopf_torus3, decl:exists_lerayHopf_r3
 - Notes: 範囲の上限は claims/formalization-scope.md．kernel-only の根拠は release
   attestation と `#print axioms`（Phase 2 で attestation run へのリンクを EV 化する）．
 
 ## CLM-002: 形式化キャンペーン（2026-06-10〜07-20，release 日終端）では，収集済みセッションログ上で確認できるだけでも output 15.1M tokens・API 換算 $6,972.83・アクティブ時間 199.1h（5 分 gap cap）の AI 計算が投入された（いずれも下界）
-- Status: candidate
+- Status: frozen
 - Paper location: planned
 - Evidence: EV-0001〜EV-2126（escrow 一次記録），`evidence/metrics/usage-metrics.json`（`scripts/extract_usage.py` により再現可能）
 - Notes: 一次資料は各 JSONL の `message.usage`（API レスポンス由来）．方法論・
@@ -39,7 +39,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   gap 閾値感度: active = 94.8h (1m) / 199.1h (5m) / 309.8h (15m)，wall-clock 総和 1,022.8h．
 
 ## CLM-003: Vertex 完成フェーズ（2026-07-02〜03 PT）の実請求は machine-wide 実測 ¥54,868（無条件）であり，escrow 上の leray-hopf 分は公表単価換算 $258.28（無条件）．leray-hopf 単独の実請求 ¥41,421〜41,796（75.5〜76.2%）は条件付き導出値である
-- Status: candidate
+- Status: frozen
 - Paper location: planned
 - Evidence: `evidence/metrics/vertex-completion-phase-billing.csv`・`vertex-completion-phase-billing-sku.csv`（redaction 済み集計），`scripts/extract_vertex_phase.py`（再現可能），EV-1681〜EV-2126（escrow 一次記録）
 - Notes: 2 層区分（provider-billed actual / 導出値）は `analysis/cost-attribution-methodology.md`
@@ -54,7 +54,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   raw export は Git 外（sha256 記録済み）．
 
 ## CLM-004: purposive に選んだ符号化 6 セッションの記述統計として，WEAKEN/STMT-MISMATCH 系 4 件・RECOVERY 19 件・RESOURCE 12 件・WT-CONFLICT 5 件が観測され，FALSE-SUCCESS（イベント符号: 実行時の成功報告と disk 状態の不一致の残存）は観測されなかった
-- Status: candidate
+- Status: frozen
 - Paper location: planned (sections/03 or 04)
 - Evidence: `evidence/session-index/` の 6 index（EV-0247，EV-0925，EV-1669，EV-2076 ほかを一次資料とする符号化），`analysis/session-coding-schema.md`
 - Notes: 母集合は purposive sample（符号化済み 6 セッション）であり，全キャンペーンの
@@ -67,7 +67,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   「statement intact」記載）とは別概念（session-coding-schema.md の定義注記参照）．
 
 ## CLM-005: 同型の盲点（プレースホルダ上の偽 statement）について，release 直前まで残存した例（INC-001，独立 statement 検査は行われなかった）とマージ前検出に成功した例（INC-002，独立検査時に数値反例で検出）が同一プロジェクト内に併存する — この対は独立 statement 検査の価値と整合的（consistent with）な対照例である
-- Status: candidate
+- Status: frozen
 - Paper location: planned (sections/04-incidents.tex)
 - Evidence: INC-001，INC-002，EV-0925，leray-hopf#27，leray-hopf#158
 - Notes: 観測事実（INC-001 では検査が行われず残存した／INC-002 では検査時に
