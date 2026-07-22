@@ -12,6 +12,12 @@ line per content block) sharing `message.id`; a global seen-set keyed on
 `message.id` (fallback `requestId`) prevents double counting, including
 identical files that exist in more than one host escrow.
 
+Provider attribution: Vertex AI responses carry a `_vrtx_` marker in their
+message/tool-use IDs (e.g. `msg_vrtx_...`), first-party API responses do not
+(issue #24). Rows and totals are split on this marker so the Vertex period
+(2026-07-02..07-04, local-secondary) can be cross-checked against Google
+Cloud billing records.
+
 Exclusions (documented in analysis/usage-metrics-methodology.md):
   - `<synthetic>` model records (harness-internal, no API usage)
   - `hermes/` orchestrator sessions (pre-leray-hopf project work, issue #14)
@@ -79,7 +85,7 @@ def main() -> int:
     thresholds = [int(x.strip()) for x in args.gap_thresholds.split(",") if x.strip()]
 
     seen_msgs = set()
-    # (model, date, host) -> dict of counters
+    # (model, date, host, provider) -> dict of counters
     agg = defaultdict(lambda: defaultdict(int))
     unknown_models = defaultdict(int)
     synthetic = 0
@@ -122,9 +128,10 @@ def main() -> int:
                     if not key or key in seen_msgs:
                         continue
                     seen_msgs.add(key)
+                    provider = "vertex" if "_vrtx_" in key else "first-party"
                     ts = d.get("timestamp") or ""
                     day = ts[:10] if len(ts) >= 10 else "unknown"
-                    row = agg[(model, day, host)]
+                    row = agg[(model, day, host, provider)]
                     row["turns"] += 1
                     row["input_tokens"] += usage.get("input_tokens") or 0
                     row["output_tokens"] += usage.get("output_tokens") or 0
@@ -165,14 +172,19 @@ def main() -> int:
 
     rows = []
     by_model = defaultdict(lambda: defaultdict(int))
-    for (model, day, host), row in sorted(agg.items()):
+    by_provider = defaultdict(lambda: defaultdict(int))
+    for (model, day, host, provider), row in sorted(agg.items()):
         c = cost(model, row)
         rows.append({"model": model, "date_utc": day, "host": host,
-                     **row, "api_cost_usd": round(c, 4)})
+                     "provider": provider, **row, "api_cost_usd": round(c, 4)})
         bm = by_model[model]
         for k, v in row.items():
             bm[k] += v
         bm["api_cost_usd"] = round(bm.get("api_cost_usd", 0.0) + c, 4)
+        bp = by_provider[provider]
+        for k, v in row.items():
+            bp[k] += v
+        bp["api_cost_usd"] = round(bp.get("api_cost_usd", 0.0) + c, 4)
 
     totals = defaultdict(float)
     for bm in by_model.values():
@@ -204,6 +216,7 @@ def main() -> int:
         },
         "totals": totals,
         "by_model": {m: dict(v) for m, v in sorted(by_model.items())},
+        "by_provider": {p: dict(v) for p, v in sorted(by_provider.items())},
         "by_model_date_host": rows,
         "time": time_summary,
         "sessions": sorted(sessions, key=lambda s: (s["host"], s["session_id"])),

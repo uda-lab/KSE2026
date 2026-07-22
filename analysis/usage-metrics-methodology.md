@@ -49,6 +49,30 @@ PoC（600 sessions, output 67.6M, ≈$19,157, active(5m) 389.7h）と本集計�
 
 論文には本集計（再現可能・evidence 対応済み）のみを用いる．
 
+## Provider 区分 — VertexAI 経由期間（2026-07-02〜07-04）
+
+owner 報告（2026-07-22）により，Fable 5 再公開直後の一時期，local-secondary の
+作業の一部が subscription ではなく Google Compute 上の **VertexAI 経由**で実施
+されていたことが判明した．Vertex 経由の API レスポンスは message / tool-use ID
+に `_vrtx_` プレフィックス（`msg_vrtx_…` / `toolu_vrtx_…`）を持つため，
+`extract_usage.py` は全メッセージを `provider = vertex / first-party` に機械判別
+して集計する（出力 JSON の `by_provider` と各行の `provider` 列）．
+
+| provider | 期間 | turns | output tok | API 換算 |
+|---|---|---:|---:|---:|
+| vertex | 2026-07-02〜07-04（local-secondary，`research-lean-lean-pde` 17 sessions） | 1,154 | 802,530 | **$258.28**（fable-5 $193.02 / opus-4-8 $65.25） |
+| first-party | 全期間 | 47,579 | 14,346,785 | $6,722.29 |
+
+- **Google Cloud 側記録との突合キー**: 日次×モデル×メッセージ数・トークン内訳
+  （input 186,836 / output 802,530 / cache write 12,024,194 全量 5m TTL /
+  cache read 131,232,324）．単価は公表 per-MTok 表（Vertex も同一）で換算．
+- 傍証: vertex 行は `service_tier` 欠落・`inference_geo` 空．当時のモデル可用性
+  （該当デプロイでは fable-5 と opus-4-8 のみ）と routing 判断は escrow 内 memory
+  `subagent-model-routing.md`（EV 登録済）に記録がある．
+- 限界: ログ外の消費（CLI 可用性プローブ等の微小分），課税・通貨換算，Claude 以外の
+  Vertex 費用は本集計に含まれない．Google Cloud 側の billing/monitoring 統計の
+  evidence 化は owner が別途判断（issue #24）．
+
 ## 既知のカバレッジ欠損（本集計は下界）
 
 1. **ログローテーション**: 2026-06-10〜06-14 のセッションは全 host で喪失
