@@ -1,0 +1,5 @@
+date_pt,model,service_id,billed_jpy,cost_reduction_jpy,billed_jpy_pre_rounding
+2026-07-02,claude-fable-5,8FD9-BA7E-C2DA,14741,0,14741.469912
+2026-07-02,claude-opus-4-8,E04E-95AD-51AA,4578,0,4578.427714
+2026-07-03,claude-fable-5,8FD9-BA7E-C2DA,21380,0,21379.908712
+2026-07-03,claude-opus-4-8,E04E-95AD-51AA,14168,0,14168.118767

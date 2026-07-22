@@ -70,8 +70,10 @@ owner 報告（2026-07-22）により，Fable 5 再公開直後の一時期，lo
   （該当デプロイでは fable-5 と opus-4-8 のみ）と routing 判断は escrow 内 memory
   `subagent-model-routing.md`（EV 登録済）に記録がある．
 - 限界: ログ外の消費（CLI 可用性プローブ等の微小分），課税・通貨換算，Claude 以外の
-  Vertex 費用は本集計に含まれない．Google Cloud 側の billing/monitoring 統計の
-  evidence 化は owner が別途判断（issue #24）．
+  Vertex 費用は本集計に含まれない．
+- **実請求額との照合は完了**（issue #23/#26）: provider-billed actual cost は
+  ¥54,867（machine-wide）．照合方法・差の要因は `billing-reconciliation.md`，
+  API-equivalent / provider-billed の区分規約は `cost-attribution-methodology.md`．
 
 ## 既知のカバレッジ欠損（本集計は下界）
 

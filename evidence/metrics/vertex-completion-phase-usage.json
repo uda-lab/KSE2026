@@ -1,0 +1,173 @@
+{
+ "bucket_timezone": "America/Los_Angeles (fixed UTC-7, matches GCP daily billing)",
+ "by_pt_day_model": [
+  {
+   "cache_read_tokens": 27477396,
+   "cache_write_tokens_5m": 3416385,
+   "date_pt": "2026-07-02",
+   "est_usd_long_context_rule": 85.4568,
+   "est_usd_std": 77.8658,
+   "input_tokens": 42557,
+   "model": "claude-fable-5",
+   "output_tokens": 145161,
+   "turns": 247,
+   "turns_over_200k_context": 30
+  },
+  {
+   "cache_read_tokens": 14285035,
+   "cache_write_tokens_5m": 1725585,
+   "date_pt": "2026-07-02",
+   "est_usd_long_context_rule": 31.4087,
+   "est_usd_std": 22.8846,
+   "input_tokens": 20828,
+   "model": "claude-opus-4-8",
+   "output_tokens": 194121,
+   "turns": 151,
+   "turns_over_200k_context": 24
+  },
+  {
+   "cache_read_tokens": 36463926,
+   "cache_write_tokens_5m": 5232712,
+   "date_pt": "2026-07-03",
+   "est_usd_long_context_rule": 120.9105,
+   "est_usd_std": 115.1556,
+   "input_tokens": 70509,
+   "model": "claude-fable-5",
+   "output_tokens": 251554,
+   "turns": 372,
+   "turns_over_200k_context": 13
+  },
+  {
+   "cache_read_tokens": 53005967,
+   "cache_write_tokens_5m": 1649512,
+   "date_pt": "2026-07-03",
+   "est_usd_long_context_rule": 60.1107,
+   "est_usd_std": 42.3695,
+   "input_tokens": 52942,
+   "model": "claude-opus-4-8",
+   "output_tokens": 211694,
+   "turns": 384,
+   "turns_over_200k_context": 122
+  }
+ ],
+ "cost_rules": {
+  "long_context_rule": {
+   "input_family_mult": 2.0,
+   "output_mult": 1.5,
+   "threshold_prompt_tokens": 200000
+  },
+  "std": {
+   "cache_read": 0.1,
+   "cache_write_5m": 1.25
+  }
+ },
+ "host": "local-secondary",
+ "period_utc": {
+  "first_api_message": "2026-07-02T12:06:07.602Z",
+  "last_api_message": "2026-07-04T06:56:33.050Z"
+ },
+ "pricing_usd_per_mtok": {
+  "claude-fable-5": {
+   "input": 10.0,
+   "output": 50.0
+  },
+  "claude-opus-4-8": {
+   "input": 5.0,
+   "output": 25.0
+  }
+ },
+ "provider_marker": "_vrtx_ in message/tool-use IDs",
+ "scope_note": "leray-hopf escrow scope only. Machine-wide Vertex usage in the same window (setup / unrelated-project sessions, evidenced in global prompt history) is billed but not in this aggregate — see analysis/billing-reconciliation.md.",
+ "sessions": [
+  {
+   "first_utc": "2026-07-02T12:06:07.602Z",
+   "last_utc": "2026-07-02T13:36:04.190Z",
+   "session_id": "17c882c1-48ba-491f-a37f-cd1bc4deee2d"
+  },
+  {
+   "first_utc": "2026-07-02T12:19:30.035Z",
+   "last_utc": "2026-07-02T13:40:08.020Z",
+   "session_id": "9c4ea03f-855d-48cb-b785-7e1249f47771"
+  },
+  {
+   "first_utc": "2026-07-02T13:31:47.709Z",
+   "last_utc": "2026-07-02T13:32:36.847Z",
+   "session_id": "09e2fb67-71e3-4605-8e66-a0972705a4c4"
+  },
+  {
+   "first_utc": "2026-07-02T13:50:01.838Z",
+   "last_utc": "2026-07-04T06:56:33.050Z",
+   "session_id": "560753bd-2fd3-4f67-bd98-71e1a572ea0f"
+  },
+  {
+   "first_utc": "2026-07-03T04:13:42.351Z",
+   "last_utc": "2026-07-03T04:13:42.351Z",
+   "session_id": "60a45b8d-9a89-4acb-ada3-2e66035c6679"
+  },
+  {
+   "first_utc": "2026-07-03T04:17:29.632Z",
+   "last_utc": "2026-07-03T04:17:29.632Z",
+   "session_id": "7e434e3c-44a2-4459-97a2-5b89ae65d8e6"
+  },
+  {
+   "first_utc": "2026-07-03T04:21:46.215Z",
+   "last_utc": "2026-07-03T04:27:28.424Z",
+   "session_id": "fad79b4f-df52-4001-b21e-c5ae67044d1c"
+  },
+  {
+   "first_utc": "2026-07-03T04:29:19.266Z",
+   "last_utc": "2026-07-03T05:42:35.581Z",
+   "session_id": "1ac0c468-4c13-4f7f-9533-4926450a2aa8"
+  },
+  {
+   "first_utc": "2026-07-03T05:59:16.764Z",
+   "last_utc": "2026-07-03T05:59:22.231Z",
+   "session_id": "dd6f1806-aab5-4ed9-a98e-825a2edc2a29"
+  },
+  {
+   "first_utc": "2026-07-03T06:13:49.199Z",
+   "last_utc": "2026-07-03T07:16:21.262Z",
+   "session_id": "1426f771-78f9-44fc-9962-4d697fc68f4b"
+  },
+  {
+   "first_utc": "2026-07-03T07:18:26.348Z",
+   "last_utc": "2026-07-03T07:18:37.591Z",
+   "session_id": "f6ed5831-08fa-4249-a9ff-0ef3279b4bfd"
+  },
+  {
+   "first_utc": "2026-07-03T07:33:58.804Z",
+   "last_utc": "2026-07-03T07:34:19.606Z",
+   "session_id": "47c3e88a-009c-4695-ab7b-36a1c50b832c"
+  },
+  {
+   "first_utc": "2026-07-03T07:45:11.919Z",
+   "last_utc": "2026-07-03T07:45:18.092Z",
+   "session_id": "2961dcdc-cb6d-4f12-a9f3-795f46a75945"
+  },
+  {
+   "first_utc": "2026-07-03T08:01:14.106Z",
+   "last_utc": "2026-07-03T08:01:14.106Z",
+   "session_id": "93bf4062-ddbd-4f18-bbb6-2ff39479c97a"
+  },
+  {
+   "first_utc": "2026-07-03T08:16:22.548Z",
+   "last_utc": "2026-07-03T09:14:24.677Z",
+   "session_id": "c5128e13-9cfd-4d0c-9b08-85a0f8b9583b"
+  },
+  {
+   "first_utc": "2026-07-03T10:08:33.813Z",
+   "last_utc": "2026-07-03T10:35:43.028Z",
+   "session_id": "2bb93260-f3ed-488c-a620-689995ab5249"
+  },
+  {
+   "first_utc": "2026-07-03T10:37:12.975Z",
+   "last_utc": "2026-07-03T10:38:28.995Z",
+   "session_id": "c87e4f09-d417-4011-b18f-14bf60701e30"
+  }
+ ],
+ "window_utc": {
+  "end_exclusive": "2026-07-05T00:00:00Z",
+  "out_of_window_vrtx_records_skipped": 0,
+  "start_inclusive": "2026-07-02T00:00:00Z"
+ }
+}
