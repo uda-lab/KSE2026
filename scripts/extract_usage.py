@@ -22,11 +22,19 @@ Exclusions (documented in analysis/usage-metrics-methodology.md):
   - `<synthetic>` model records (harness-internal, no API usage)
   - `hermes/` orchestrator sessions (pre-leray-hopf project work, issue #14)
   - history.jsonl / tasks / plans (no usage records)
+  - records at or after --campaign-end (default 2026-07-21T00:00:00Z): the
+    formalization campaign ends at the v0.1.0-rc1 release day (2026-07-20);
+    sessions from 07-21 onward are KSE2026 evidence-collection / paper work
+    and are excluded from the campaign aggregate (issue #42 item 4). The cut
+    is applied to both usage records and session wall/active time, so
+    re-running after later paper-work sessions land in escrow cannot inflate
+    the campaign numbers.
 
 Output: evidence/metrics/usage-metrics.json (JSON, sorted keys).
 
 Usage:
   python3 scripts/extract_usage.py [--gap-thresholds 60,300,900]
+                                   [--campaign-end 2026-07-21T00:00:00+00:00]
 """
 import argparse
 import json
@@ -81,8 +89,18 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--gap-thresholds", default="60,300,900",
                     help="comma-separated active-time gap caps in seconds")
+    ap.add_argument("--campaign-end", default="2026-07-21T00:00:00+00:00",
+                    help="exclusive ISO cutoff; records at/after it are "
+                         "excluded (campaign = through release day 07-20)")
     args = ap.parse_args()
     thresholds = [int(x.strip()) for x in args.gap_thresholds.split(",") if x.strip()]
+    campaign_end = parse_ts(args.campaign_end)
+    if campaign_end is None:
+        print(f"error: unparsable --campaign-end {args.campaign_end!r}",
+              file=sys.stderr)
+        return 1
+    excluded_after_end = 0
+    excluded_no_timestamp = 0
 
     seen_msgs = set()
     # (model, date, host, provider) -> dict of counters
@@ -130,7 +148,17 @@ def main() -> int:
                     seen_msgs.add(key)
                     provider = "vertex" if "_vrtx_" in key else "first-party"
                     ts = d.get("timestamp") or ""
-                    day = ts[:10] if len(ts) >= 10 else "unknown"
+                    ts_epoch = parse_ts(ts)
+                    if ts_epoch is None:
+                        # fail closed: a record whose timestamp cannot be
+                        # parsed cannot be placed inside the campaign window,
+                        # so it must not enter the fixed campaign aggregate
+                        excluded_no_timestamp += 1
+                        continue
+                    if ts_epoch >= campaign_end:
+                        excluded_after_end += 1
+                        continue
+                    day = ts[:10]
                     row = agg[(model, day, host, provider)]
                     row["turns"] += 1
                     row["input_tokens"] += usage.get("input_tokens") or 0
@@ -148,6 +176,8 @@ def main() -> int:
                     row["cache_write_1h_tokens"] += w1 or 0
                     if price_for(model) is None:
                         unknown_models[model] += 1
+            if is_toplevel:
+                timestamps = [t for t in timestamps if t < campaign_end]
             if is_toplevel and len(timestamps) >= 2:
                 timestamps.sort()
                 gaps = [b - a for a, b in zip(timestamps, timestamps[1:])]
@@ -204,7 +234,8 @@ def main() -> int:
     out = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "script": "scripts/extract_usage.py",
-        "params": {"gap_thresholds_s": thresholds},
+        "params": {"gap_thresholds_s": thresholds,
+                   "campaign_end_utc": args.campaign_end},
         "pricing_usd_per_mtok": {k: {"input": v[0], "output": v[1]} for k, v in PRICES.items()},
         "cache_multipliers": {"write_5m": CACHE_W_5M, "write_1h": CACHE_W_1H, "read": CACHE_R},
         "scan": {
@@ -212,6 +243,8 @@ def main() -> int:
             "files_scanned": files_scanned,
             "deduped_api_messages": len(seen_msgs),
             "synthetic_records_excluded": synthetic,
+            "records_excluded_after_campaign_end": excluded_after_end,
+            "records_excluded_unparsable_timestamp": excluded_no_timestamp,
             "unknown_model_turns": dict(unknown_models),
         },
         "totals": totals,

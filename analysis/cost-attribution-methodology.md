@@ -6,8 +6,8 @@
 
 - **定義**: escrow セッションログの `message.usage`（API レスポンス由来の一次記録）に
   公表 per-MTok 単価を適用した換算額．
-- **対象**: 全キャンペーン（2026-06-10〜07-21）．算出は `scripts/extract_usage.py`，
-  現行値は `evidence/metrics/usage-metrics.json`（$6,980.57，provider 別内訳あり）．
+- **対象**: 全キャンペーン（2026-06-10〜07-20，release 日終端．issue #42 項目 4）．算出は `scripts/extract_usage.py`，
+  現行値は `evidence/metrics/usage-metrics.json`（$6,972.83，provider 別内訳あり）．
 - **性質**: ログ欠損（6/10〜6/14 ほか）と escrow 選別のため**下界**．subscription
   期間については実支出とは無関係（定額）であり，「実請求額」とは呼ばない．
   呼称は *API-equivalent cost (reconstructed lower bound)* に統一する．
