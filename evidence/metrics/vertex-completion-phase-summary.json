@@ -1,48 +1,255 @@
 {
- "billed_jpy_total": 54867,
- "blended_implied_jpy_per_usd": {
-  "long_context_rule": 184.2,
-  "std": 212.4
- },
- "by_cell": [
+ "billed_jpy_total": 54867.93,
+ "by_sku_cell": [
   {
-   "billed_jpy": 14741,
-   "date_pt": "2026-07-02",
-   "est_usd_long_context_rule": 85.46,
-   "est_usd_std": 77.87,
-   "implied_jpy_per_usd_long_context_rule": 172.5,
-   "implied_jpy_per_usd_std": 189.3,
-   "model": "claude-fable-5"
+   "billed_jpy": 9199.43,
+   "category": "cache_read",
+   "context_tier": "0-200k",
+   "escrow_qty_tokens": 54860358,
+   "escrow_usd_at_std_price": 54.86,
+   "implied_jpy_per_usd": 167.7,
+   "model": "claude-fable-5",
+   "region": "global",
+   "residual_jpy_at_fx": 321.6,
+   "residual_tokens_at_fx": 1987465
   },
   {
-   "billed_jpy": 4578,
-   "date_pt": "2026-07-02",
-   "est_usd_long_context_rule": 31.41,
-   "est_usd_std": 22.88,
-   "implied_jpy_per_usd_long_context_rule": 145.8,
-   "implied_jpy_per_usd_std": 200.0,
-   "model": "claude-opus-4-8"
+   "billed_jpy": 1531.91,
+   "category": "cache_read",
+   "context_tier": "200k-1m",
+   "escrow_qty_tokens": 9080964,
+   "escrow_usd_at_std_price": 9.08,
+   "implied_jpy_per_usd": 168.7,
+   "model": "claude-fable-5",
+   "region": "global",
+   "residual_jpy_at_fx": 62.5,
+   "residual_tokens_at_fx": 386369
   },
   {
-   "billed_jpy": 21380,
-   "date_pt": "2026-07-03",
-   "est_usd_long_context_rule": 120.91,
-   "est_usd_std": 115.16,
-   "implied_jpy_per_usd_long_context_rule": 176.8,
-   "implied_jpy_per_usd_std": 185.7,
-   "model": "claude-fable-5"
+   "billed_jpy": 18115.44,
+   "category": "cache_write",
+   "context_tier": "0-200k",
+   "escrow_qty_tokens": 8328019,
+   "escrow_usd_at_std_price": 104.1,
+   "implied_jpy_per_usd": 174.0,
+   "model": "claude-fable-5",
+   "region": "global",
+   "residual_jpy_at_fx": 1269.3,
+   "residual_tokens_at_fx": 627484
   },
   {
-   "billed_jpy": 14168,
-   "date_pt": "2026-07-03",
-   "est_usd_long_context_rule": 60.11,
-   "est_usd_std": 42.37,
-   "implied_jpy_per_usd_long_context_rule": 235.7,
-   "implied_jpy_per_usd_std": 334.4,
-   "model": "claude-opus-4-8"
+   "billed_jpy": 650.5,
+   "category": "cache_write",
+   "context_tier": "200k-1m",
+   "escrow_qty_tokens": 321078,
+   "escrow_usd_at_std_price": 4.01,
+   "implied_jpy_per_usd": 162.1,
+   "model": "claude-fable-5",
+   "region": "global",
+   "residual_jpy_at_fx": 1.6,
+   "residual_tokens_at_fx": 779
+  },
+  {
+   "billed_jpy": 208.62,
+   "category": "input",
+   "context_tier": "0-200k",
+   "escrow_qty_tokens": 108387,
+   "escrow_usd_at_std_price": 1.08,
+   "implied_jpy_per_usd": 192.5,
+   "model": "claude-fable-5",
+   "region": "global",
+   "residual_jpy_at_fx": 33.8,
+   "residual_tokens_at_fx": 20916
+  },
+  {
+   "billed_jpy": 0.07,
+   "category": "input",
+   "context_tier": "0-200k",
+   "escrow_qty_tokens": 0,
+   "escrow_usd_at_std_price": 0.0,
+   "implied_jpy_per_usd": null,
+   "model": "claude-fable-5",
+   "region": "us",
+   "residual_jpy_at_fx": 0.1,
+   "residual_tokens_at_fx": 43
+  },
+  {
+   "billed_jpy": 13.83,
+   "category": "input",
+   "context_tier": "200k-1m",
+   "escrow_qty_tokens": 4679,
+   "escrow_usd_at_std_price": 0.05,
+   "implied_jpy_per_usd": 295.6,
+   "model": "claude-fable-5",
+   "region": "global",
+   "residual_jpy_at_fx": 5.7,
+   "residual_tokens_at_fx": 3546
+  },
+  {
+   "billed_jpy": 5652.84,
+   "category": "output",
+   "context_tier": "0-200k",
+   "escrow_qty_tokens": 388529,
+   "escrow_usd_at_std_price": 19.43,
+   "implied_jpy_per_usd": 291.0,
+   "model": "claude-fable-5",
+   "region": "global",
+   "residual_jpy_at_fx": 2508.5,
+   "residual_tokens_at_fx": 310029
+  },
+  {
+   "billed_jpy": 10.72,
+   "category": "output",
+   "context_tier": "0-200k",
+   "escrow_qty_tokens": 0,
+   "escrow_usd_at_std_price": 0.0,
+   "implied_jpy_per_usd": null,
+   "model": "claude-fable-5",
+   "region": "us",
+   "residual_jpy_at_fx": 10.7,
+   "residual_tokens_at_fx": 1325
+  },
+  {
+   "billed_jpy": 738.03,
+   "category": "output",
+   "context_tier": "200k-1m",
+   "escrow_qty_tokens": 8186,
+   "escrow_usd_at_std_price": 0.41,
+   "implied_jpy_per_usd": 1803.1,
+   "model": "claude-fable-5",
+   "region": "global",
+   "residual_jpy_at_fx": 671.7,
+   "residual_tokens_at_fx": 83012
+  },
+  {
+   "billed_jpy": 3866.81,
+   "category": "cache_read",
+   "context_tier": "0-200k",
+   "escrow_qty_tokens": 32096517,
+   "escrow_usd_at_std_price": 16.05,
+   "implied_jpy_per_usd": 240.9,
+   "model": "claude-opus-4-8",
+   "region": "global",
+   "residual_jpy_at_fx": 1269.5,
+   "residual_tokens_at_fx": 15689558
+  },
+  {
+   "billed_jpy": 2959.65,
+   "category": "cache_read",
+   "context_tier": "200k-1m",
+   "escrow_qty_tokens": 35194485,
+   "escrow_usd_at_std_price": 17.6,
+   "implied_jpy_per_usd": 168.2,
+   "model": "claude-opus-4-8",
+   "region": "global",
+   "residual_jpy_at_fx": 111.5,
+   "residual_tokens_at_fx": 1378049
+  },
+  {
+   "billed_jpy": 4750.66,
+   "category": "cache_write",
+   "context_tier": "0-200k",
+   "escrow_qty_tokens": 2183046,
+   "escrow_usd_at_std_price": 13.64,
+   "implied_jpy_per_usd": 348.2,
+   "model": "claude-opus-4-8",
+   "region": "global",
+   "residual_jpy_at_fx": 2543.3,
+   "residual_tokens_at_fx": 2514638
+  },
+  {
+   "billed_jpy": 1208.0,
+   "category": "cache_write",
+   "context_tier": "200k-1m",
+   "escrow_qty_tokens": 1192051,
+   "escrow_usd_at_std_price": 7.45,
+   "implied_jpy_per_usd": 162.1,
+   "model": "claude-opus-4-8",
+   "region": "global",
+   "residual_jpy_at_fx": 2.4,
+   "residual_tokens_at_fx": 2365
+  },
+  {
+   "billed_jpy": 86.38,
+   "category": "input",
+   "context_tier": "0-200k",
+   "escrow_qty_tokens": 64156,
+   "escrow_usd_at_std_price": 0.32,
+   "implied_jpy_per_usd": 269.3,
+   "model": "claude-opus-4-8",
+   "region": "global",
+   "residual_jpy_at_fx": 34.6,
+   "residual_tokens_at_fx": 42756
+  },
+  {
+   "billed_jpy": 7.78,
+   "category": "input",
+   "context_tier": "200k-1m",
+   "escrow_qty_tokens": 9614,
+   "escrow_usd_at_std_price": 0.05,
+   "implied_jpy_per_usd": 161.8,
+   "model": "claude-opus-4-8",
+   "region": "global",
+   "residual_jpy_at_fx": 0.0,
+   "residual_tokens_at_fx": 0
+  },
+  {
+   "billed_jpy": 4344.18,
+   "category": "output",
+   "context_tier": "0-200k",
+   "escrow_qty_tokens": 312238,
+   "escrow_usd_at_std_price": 7.81,
+   "implied_jpy_per_usd": 556.5,
+   "model": "claude-opus-4-8",
+   "region": "global",
+   "residual_jpy_at_fx": 3080.3,
+   "residual_tokens_at_fx": 761387
+  },
+  {
+   "billed_jpy": 1523.09,
+   "category": "output",
+   "context_tier": "200k-1m",
+   "escrow_qty_tokens": 93577,
+   "escrow_usd_at_std_price": 2.34,
+   "implied_jpy_per_usd": 651.1,
+   "model": "claude-opus-4-8",
+   "region": "global",
+   "residual_jpy_at_fx": 1144.4,
+   "residual_tokens_at_fx": 282875
   }
  ],
- "est_usd_long_context_rule_total": 297.89,
- "est_usd_std_total": 258.28,
- "interpretation": "Log-side estimates are LOWER BOUNDS on billed usage: the billing covers all Vertex traffic of the machine while the escrow covers only leray-hopf-related sessions. Residuals per cell (esp. opus 2026-07-03) are consistent with the known unescrowed sessions; see billing-reconciliation.md."
+ "effective_jpy_per_usd": {
+  "interval": [
+   160.4,
+   161.8
+  ],
+  "lower_bound_rationale": "below this FX the implied non-escrow residual tokens would exceed the machine-wide Monitoring token integrals",
+  "point_estimate": 161.8,
+  "point_estimate_rationale": "three cells of different category/model converge within 0.2% at the upper bound and the residual then nearly saturates the monitoring gap",
+  "upper_bound_rationale": "min implied ratio over SKU cells; each cell satisfies implied >= FX since non-escrow usage >= 0"
+ },
+ "escrow_usd_at_std_prices": 258.28,
+ "interpretation": "SKU totals equal the service-level bill; unit prices are standard on both tiers (no long-context premium); the effective FX is identified from binding cells; positive residuals quantify machine-wide usage outside the leray-hopf escrow and agree with the independent Cloud Monitoring token integrals.",
+ "leray_hopf_billed_jpy_derived": {
+  "interval": [
+   41421,
+   41796
+  ],
+  "point_estimate": 41796
+ },
+ "leray_hopf_share_of_bill": 0.762,
+ "residual_vs_monitoring": {
+  "claude-fable-5": {
+   "escrow_tokens": 73100200,
+   "monitoring_machine_wide_tokens": 77214740,
+   "monitoring_minus_escrow": 4114540,
+   "residual_tokens_at_fx": 3420968
+  },
+  "claude-opus-4-8": {
+   "escrow_tokens": 71145684,
+   "monitoring_machine_wide_tokens": 92648850,
+   "monitoring_minus_escrow": 21503166,
+   "residual_tokens_at_fx": 20671628
+  }
+ }
 }

@@ -15,13 +15,15 @@
 ## 層 2 — provider-billed actual cost（実測値）
 
 - **定義**: provider の請求記録に基づく実請求額．現状唯一の対象は **Vertex 完成
-  フェーズ**（PT 2026-07-02〜07-03）: **¥54,867**（JPY 建て，credits/discounts 0，
-  `evidence/metrics/vertex-completion-phase-billing.csv`）．
+  フェーズ**（PT 2026-07-02〜07-03）: **¥54,868**（JPY 建て，credits/discounts 0，
+  `evidence/metrics/vertex-completion-phase-billing{,-sku}.csv`）．
 - **性質**: 課金主体側の実測であり最も硬い数字だが，**当該マシンの全 Vertex
-  トラフィック**を含む（leray-hopf 外の利用が混在．`billing-reconciliation.md`）．
-  leray-hopf 単独の実請求額は現資料では確定できない．
-- 呼称は *provider-billed actual cost* に統一し，スコープ（machine-wide）を
-  脚注で必ず添える．
+  トラフィック**を含む（leray-hopf 外の利用が混在）．SKU レベル照合（#28）により
+  **leray-hopf 単独分は ¥41,421〜41,796（総請求の 75.5〜76.2%，点推定 ≈¥41,796）と導出済み** — 実効レート
+  区間 [160.4, 161.8] ¥/$ を SKU 残差非負制約（上界）と Monitoring 実測制約（下界）の両側から同定した
+  （`billing-reconciliation.md`）．
+- 呼称: machine-wide の実測は *provider-billed actual cost*，leray 単独分は
+  *derived actual cost (SKU-reconciled)* と区別して呼び，導出である旨を脚注に添える．
 
 ## 提示規約
 
