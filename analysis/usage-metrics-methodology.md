@@ -21,17 +21,26 @@
   gap 閾値 1 / 5 / 15 分の 3 通りを出力に含める．subagent の活動は親セッションの
   時間窓に概ね含まれるため時間集計には独立計上しない．
 
-## 主要結果（2026-07-22 実行，EV-0001〜EV-2126 時点）
+## キャンペーン期間の定義（issue #42 項目 4）
+
+形式化キャンペーンの終端は **v0.1.0-rc1 release 日 2026-07-20** に固定する
+（`--campaign-end 2026-07-21T00:00:00Z`，既定値）．07-21 以降のセッションは
+KSE2026 の証跡収集・論文作業であり，形式化キャンペーンの集計から機械的に除外
+される（本実行で 46 レコード除外）．除外は usage レコードとセッション
+wall/active 時間の両方に適用されるため，後日の論文作業ログが escrow に追加
+されても再実行で集計は増えない．
+
+## 主要結果（2026-07-23 実行，EV-0001〜EV-2126 時点，campaign end 07-20）
 
 | 指標 | 値 |
 |---|---|
-| 走査ファイル / dedup 後 API メッセージ数 | 809 / 48,733 |
-| output tokens | 15.1M |
+| 走査ファイル / dedup 後 API メッセージ数 | 809 / 48,733（うち期間外除外 46） |
+| output tokens | 15.1M（15,124,942） |
 | cache read tokens | 8.78B |
-| **API 換算コスト** | **$6,980**（内訳: Opus 4.8 $3,513，Fable 5 $1,756，Sonnet 5 $1,297，Sonnet 4.6 $410，Haiku 4.5 $5） |
-| top-level セッション数 | 61 |
-| wall-clock 総和 | 1,023.5h |
-| active（gap cap 1m / 5m / 15m） | 95.3h / 199.7h / 310.5h |
+| **API 換算コスト** | **$6,972.83**（内訳: Opus 4.8 $3,513，Fable 5 $1,748，Sonnet 5 $1,297，Sonnet 4.6 $410，Haiku 4.5 $5） |
+| top-level セッション数 | 60 |
+| wall-clock 総和 | 1,022.8h |
+| active（gap cap 1m / 5m / 15m） | 94.8h / 199.1h / 309.8h |
 
 モデル別・日次の内訳は `evidence/metrics/usage-metrics.json` の
 `by_model` / `by_model_date_host` を参照．
@@ -61,7 +70,7 @@ owner 報告（2026-07-22）により，Fable 5 再公開直後の一時期，lo
 | provider | 期間 | turns | output tok | API 換算 |
 |---|---|---:|---:|---:|
 | vertex | 2026-07-02〜07-04（local-secondary，`research-lean-lean-pde` 17 sessions） | 1,154 | 802,530 | **$258.28**（fable-5 $193.02 / opus-4-8 $65.25） |
-| first-party | 全期間 | 47,579 | 14,346,785 | $6,722.29 |
+| first-party | 全期間（campaign end 07-20） | 47,533 | 14,322,412 | $6,714.56 |
 
 - **Google Cloud 側記録との突合キー**: 日次×モデル×メッセージ数・トークン内訳
   （input 186,836 / output 802,530 / cache write 12,024,194 全量 5m TTL /

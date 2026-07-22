@@ -12,7 +12,7 @@
 | WEAKEN | theorem weakening / vacuous discharge / assumption smuggling |
 | PROOF-STUCK | proof engineering の行き詰まり |
 | HANDOFF-FAIL | agent 間の責任境界または handoff の失敗 |
-| FALSE-SUCCESS | build 成功報告と実際の状態の不一致 |
+| FALSE-SUCCESS | build 成功報告と実際の状態の不一致（セッション内の実行時報告に関する定義．エージェントの成功報告が disk 上の実状態と食い違ったまま残存した場合に付す．検出・隔離された場合は RECOVERY 側に記録） |
 | WT-CONFLICT | worktree / branch / file ownership の衝突 |
 | RESOURCE | memory exhaustion / swap / build lock / cold build 等の資源問題 |
 | MODEL-ESC | モデル選択または escalation の失敗 |
