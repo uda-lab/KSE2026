@@ -9,7 +9,7 @@
 
 ## Abstract 草稿
 
-（claim freeze（CLM-001〜005，2026-07-23）済み．Phase 4 の front-matter PR で
+（claim freeze（CLM-001〜006，2026-07-23）済み．Phase 4 の front-matter PR で
 150–200 語を起草する．構成: 3 contribution + scope 限定 + 実証根拠．
 主張は全て frozen claim に対応させ，数値は CLM の校正済み値
 （$6,972.83 / 199.1h / ¥54,868 ほか）のみを使う）
