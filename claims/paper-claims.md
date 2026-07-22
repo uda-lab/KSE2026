@@ -95,4 +95,14 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   事実は述べない（下界主義）．2026-07-23 夜間 freeze 分 — 朝の owner 通読での
   追認対象（CLM-006 と同扱い）．
 
+## CLM-008: 04 節（incidents）で述べる個別の incident 経緯・時刻・件数・機構の記述は，incident card INC-001〜INC-005（各 card が evidence_type と confidence を明記）に裏付けられた範囲に限る
+- Status: frozen
+- Paper location: sections/04-incidents.tex
+- Evidence: INC-001，INC-002，INC-003，INC-004，INC-005（card 内の Primary evidence が EV / snapshot へ解決）
+- Notes: 04 節の各段落は本 claim を経由して該当 card へ解決する（本文中の
+  `% CLAIM: CLM-008, INC-00N` タグが対応 card を指す）．card 側で reconstructed /
+  medium とされた事項は本文でも同じ強度で書く（例: INC-001 の導入セッション未特定，
+  INC-005 の累積カウンタ帰属限界）．2026-07-23 夜間 freeze 分 — 朝の owner 通読での
+  追認対象（CLM-006/007 と同扱い）．
+
 <!-- 以降の claim は必要に応じて追加する． -->
