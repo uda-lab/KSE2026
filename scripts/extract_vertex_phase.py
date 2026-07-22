@@ -38,6 +38,10 @@ OUT_USAGE = REPO_ROOT / "evidence" / "metrics" / "vertex-completion-phase-usage.
 OUT_SUMMARY = REPO_ROOT / "evidence" / "metrics" / "vertex-completion-phase-summary.json"
 
 PT = timezone(timedelta(hours=-7))  # PDT (UTC-7) throughout the July window
+# Documented completion-phase window (issue #23). Records outside it are
+# rejected so a rerun after new _vrtx_ escrow data cannot silently drift
+# away from the fixed two-day billing CSV.
+WINDOW_START, WINDOW_END = "2026-07-02T00:00:00Z", "2026-07-05T00:00:00Z"
 PRICES = {"claude-fable-5": (10.0, 50.0), "claude-opus-4-8": (5.0, 25.0)}
 CACHE_W, CACHE_R = 1.25, 0.1
 LONG_CTX_THRESHOLD = 200_000
@@ -48,6 +52,7 @@ def main() -> int:
     cells = defaultdict(lambda: defaultdict(float))
     sessions = {}
     first = last = None
+    out_of_window = 0
     seen = set()
     for f in sorted(ROOT.rglob("*.jsonl")):
         for line in f.open(errors="replace"):
@@ -63,6 +68,9 @@ def main() -> int:
                 continue
             seen.add(mid)
             ts_utc = d.get("timestamp")
+            if not (WINDOW_START <= ts_utc < WINDOW_END):
+                out_of_window += 1
+                continue
             dt = datetime.fromisoformat(ts_utc.replace("Z", "+00:00"))
             day_pt = dt.astimezone(PT).date().isoformat()
             pin, pout = PRICES[mod]
@@ -119,6 +127,8 @@ def main() -> int:
         })
 
     usage = {
+        "window_utc": {"start_inclusive": WINDOW_START, "end_exclusive": WINDOW_END,
+                       "out_of_window_vrtx_records_skipped": out_of_window},
         "period_utc": {"first_api_message": first, "last_api_message": last},
         "host": "local-secondary",
         "provider_marker": "_vrtx_ in message/tool-use IDs",
@@ -160,6 +170,9 @@ def main() -> int:
     print(f"wrote {OUT_USAGE}\nwrote {OUT_SUMMARY}")
     print(f"cells={len(rows)} sessions={len(sessions)} "
           f"std=${tot_std} long_ctx=${tot_prem} billed=¥{tot_y}")
+    if out_of_window:
+        print(f"warning: {out_of_window} _vrtx_ record(s) outside "
+              f"[{WINDOW_START}, {WINDOW_END}) were excluded", file=sys.stderr)
     return 0
 
 

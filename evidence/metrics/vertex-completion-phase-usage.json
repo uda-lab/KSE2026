@@ -164,5 +164,10 @@
    "last_utc": "2026-07-03T10:38:28.995Z",
    "session_id": "c87e4f09-d417-4011-b18f-14bf60701e30"
   }
- ]
+ ],
+ "window_utc": {
+  "end_exclusive": "2026-07-05T00:00:00Z",
+  "out_of_window_vrtx_records_skipped": 0,
+  "start_inclusive": "2026-07-02T00:00:00Z"
+ }
 }
