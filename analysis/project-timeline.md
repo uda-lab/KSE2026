@@ -10,7 +10,7 @@ Git commit・Issue/PR・セッションログを統合した leray-hopf 開発�
 
 | # | 期間 | 名称 | 根拠（issue/PR・commit 密度・セッション） |
 |---|---|---|---|
-| C0 | 06-10〜06-11 | Bootstrap（repo init） | init 日 27 commits + 1．**セッションログ欠損期間**（全 host，ローテーション喪失．`vps-snapshot-20260710-verification.md`） |
+| C0 | 06-10〜06-11 | Bootstrap（repo init） | init 日（06-10）に 27 commits，翌 06-11 に 1 commit．**セッションログ欠損期間**（全 host，ローテーション喪失．`vps-snapshot-20260710-verification.md`） |
 | — | 06-12〜06-14 | 休止 | commits 0．ログも無し（欠損期間の続き） |
 | C1 | 06-15〜06-18 | 初期開発（local のみ） | commits 2/1/6/9．最古の一次ログ = local-secondary `research-lean-pde` セッション（06-15〜） |
 | C2 | 06-19〜07-05 | Axiom-removal キャンペーン | 06-19 leray-hopf#1（architecture audit）を起点に 06-20 だけで #2〜#31 の 30 件を起票し Stream A–D / R3・Torus lane 構造を確立．06-21 に 21 commits．07-04 #89 で T³ capstone 無条件化，07-05 #99 axiom flip → #102/#103 で kernel-only「full textbook LH」宣言．VPS の関与は 06-19 開始（同検証文書） |
@@ -75,7 +75,7 @@ Git commit・Issue/PR・セッションログを統合した leray-hopf 開発�
    この期間の記述はすべて evidence_type=reconstructed として Git/GitHub 証跡のみ
    から行う）．
 2. sessions 列は mtime（終端）proxy であり，活動日そのものではない．07-03 の
-   ls×21 は local-secondary 上の `research-lean-lean-pde` 期の一斉終端で，
+   ls×21 は local-secondary 上の `research-lean-lean-pde` 期（cwd `~/Documents/research/lean/lean-pde`．最初期 dir `research-lean-pde` = `~/Documents/research/lean-pde` とは別の実在ディレクトリ）の一斉終端で，
    実活動は 06-30〜07-03 に分布する．
 3. VPS escrow は 06-19 以降を連続カバー，local-main escrow は 07-07 以降のみ
    （それ以前の local 作業は local-secondary 側に記録されている）．
