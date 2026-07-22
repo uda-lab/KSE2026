@@ -100,6 +100,7 @@ def main() -> int:
               file=sys.stderr)
         return 1
     excluded_after_end = 0
+    excluded_no_timestamp = 0
 
     seen_msgs = set()
     # (model, date, host, provider) -> dict of counters
@@ -148,10 +149,16 @@ def main() -> int:
                     provider = "vertex" if "_vrtx_" in key else "first-party"
                     ts = d.get("timestamp") or ""
                     ts_epoch = parse_ts(ts)
-                    if ts_epoch is not None and ts_epoch >= campaign_end:
+                    if ts_epoch is None:
+                        # fail closed: a record whose timestamp cannot be
+                        # parsed cannot be placed inside the campaign window,
+                        # so it must not enter the fixed campaign aggregate
+                        excluded_no_timestamp += 1
+                        continue
+                    if ts_epoch >= campaign_end:
                         excluded_after_end += 1
                         continue
-                    day = ts[:10] if len(ts) >= 10 else "unknown"
+                    day = ts[:10]
                     row = agg[(model, day, host, provider)]
                     row["turns"] += 1
                     row["input_tokens"] += usage.get("input_tokens") or 0
@@ -237,6 +244,7 @@ def main() -> int:
             "deduped_api_messages": len(seen_msgs),
             "synthetic_records_excluded": synthetic,
             "records_excluded_after_campaign_end": excluded_after_end,
+            "records_excluded_unparsable_timestamp": excluded_no_timestamp,
             "unknown_model_turns": dict(unknown_models),
         },
         "totals": totals,

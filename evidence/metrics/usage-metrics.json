@@ -1477,7 +1477,7 @@
   "write_1h": 2.0,
   "write_5m": 1.25
  },
- "generated_at_utc": "2026-07-22T17:02:08+00:00",
+ "generated_at_utc": "2026-07-22T17:16:24+00:00",
  "params": {
   "campaign_end_utc": "2026-07-21T00:00:00+00:00",
   "gap_thresholds_s": [
@@ -1517,6 +1517,7 @@
    "local-secondary"
   ],
   "records_excluded_after_campaign_end": 46,
+  "records_excluded_unparsable_timestamp": 0,
   "synthetic_records_excluded": 188,
   "unknown_model_turns": {}
  },
