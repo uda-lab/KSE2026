@@ -35,5 +35,19 @@ inventory 化する）．
 | lerayhopf2026repo | ✓（2026-07-20，repo README と照合） |
 | leray1934 | 未 |
 | hopf1951 | 未 |
+| agenticprs2026security | ✓（2026-07-23，arXiv abstract 照合） |
+| armstrong2026degiorginashmoser | ✓（2026-07-23，arXiv abstract 照合） |
+| boldo2010wave | ✓（2026-07-23，ITP 2010 出版情報照合） |
+| commelin2023abstraction | ✓（2026-07-23，arXiv 照合） |
+| deepmind2025alphaproof | ✓（2026-07-23，Nature 書誌 + 著者リストは PubMed 経由で照合） |
+| gonthier2013oddorder | ✓（2026-07-23，ITP 2013 出版情報照合） |
+| immler2012ode | ✓（2026-07-23，ITP 2012 出版情報照合） |
+| metr2025longtasks | ✓（2026-07-23，arXiv 照合） |
+| miller2026vlasov | ✓（2026-07-23，arXiv abstract 照合） |
+| tauceti2026 | ✓（2026-07-23，repo 4 本を実読・pinned commit 3a933bde．論文/CITATION.cff 不在も確認） |
+| vandoorn2024gns | ✓（2026-07-23，ITP 2024 LIPIcs 照合） |
+| xin2025deepseekproverv2 | ✓（2026-07-23，arXiv 照合） |
+| yang2023leandojo | ✓（2026-07-23，NeurIPS 2023 D&B 照合） |
+| zhou2026leanatlas | **要再照合**（著者名が arXiv abstract のみ由来．投稿前に本体ページで確認） |
 | moura2021lean4 | 未 |
 | mathlib2020 | 未 |

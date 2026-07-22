@@ -77,4 +77,13 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   観測的表現とする．INC-001 側で検査が「行われなかった」ことの記録が一次資料
   （EV-0925 の consumer verdict 過程）にある点が対比の根拠．
 
+## CLM-006: 2026-07-23 時点の調査（notes/related-work.md 記載の探索条件）では，非線形流体 PDE（Navier–Stokes を含む）の存在理論の機械検証済み形式化は Lean・Coq・Isabelle/HOL のいずれにも確認できなかった（否定的・調査条件付きの主張）
+- Status: candidate
+- Paper location: planned (related work / sections/01)
+- Evidence: `notes/related-work.md`（探索語・照合した近接先行例の記録: `armstrong2026degiorginashmoser`（楕円型正則性），`miller2026vlasov`（線形運動論・AI 支援），`boldo2010wave`（線形波動スキーム収束），`immler2012ode`（ODE），mathlib GNS `vandoorn2024gns`）
+- Notes: **非存在の証明ではなく「調査で確認できなかった」という下界的主張**として
+  書く．本文表現は "to our knowledge, no machine-checked existence theory for a
+  nonlinear fluid PDE has been reported in Lean, Coq, or Isabelle/HOL" の水準に
+  限定し，調査日と探索方法への脚注参照を付す．投稿直前に再検索して時点を更新する．
+
 <!-- 以降の claim は必要に応じて追加する． -->
