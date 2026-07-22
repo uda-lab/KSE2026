@@ -1,25 +1,28 @@
 #!/usr/bin/env python3
-"""Vertex completion-phase usage extraction and billing reconciliation (issue #23/#26).
+"""Vertex completion-phase usage extraction and SKU-level billing reconciliation
+(issue #23 / #26 / #28).
 
-Re-aggregates the `_vrtx_`-marked usage records (Vertex AI period,
-2026-07-02..07-04 UTC, host local-secondary) from the escrow, bucketed by
-**America/Los_Angeles (PT) day** to match Google Cloud billing's daily
-granularity, and reconciles against the redacted billing aggregate
-`evidence/metrics/vertex-completion-phase-billing.csv`.
+Aggregates the `_vrtx_`-marked usage records (Vertex AI period, 2026-07-02..
+07-04 UTC, host local-secondary) from the escrow and reconciles them against
+the redacted SKU-level billing aggregate
+`evidence/metrics/vertex-completion-phase-billing-sku.csv`.
 
-Two cost rules are computed from the published per-MTok prices:
-  - `std`:  input x1, output x1, cache write x1.25 (all 5m TTL), cache read x0.1
-  - `long_context_rule`: requests whose prompt-side tokens (input + cache
-    write + cache read) exceed 200K are charged at input-family x2 /
-    output x1.5 (the published >200K long-context premium), others as `std`.
+Established by the SKU-level data (issue #28, supersedes the #26 premium
+hypothesis):
+  - Billing SKUs split by context tier (0-200K / 200K-1M) but the UNIT PRICE
+    is the standard published per-MTok rate on both tiers (no long-context
+    premium for Claude Fable 5 / Opus 4.8 — consistent with first-party).
+  - The effective JPY/USD conversion is identified from binding cells
+    (zero-residual SKUs where escrow quantities explain the whole charge):
+    FX = min over cells of billed_jpy / (escrow_qty * unit price).
+  - Per-cell positive residuals correspond to machine-wide usage outside the
+    leray-hopf escrow; their token equivalents are cross-checked against the
+    Cloud Monitoring `publisher/online_serving/token_count` machine-wide
+    integrals (raw export kept privately; totals embedded below).
 
 Outputs (JSON, sorted keys):
   evidence/metrics/vertex-completion-phase-usage.json
   evidence/metrics/vertex-completion-phase-summary.json
-
-Both are derived artifacts; the authoritative raw inputs are the escrow
-session logs (EV-registered) and the owner-provided Google Cloud export
-(kept privately, sha256 recorded in analysis/billing-reconciliation.md).
 
 Usage:
   python3 scripts/extract_vertex_phase.py
@@ -33,23 +36,38 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 ROOT = REPO_ROOT / "private" / "raw-sessions" / "local-secondary" / "claude-projects"
-BILLING = REPO_ROOT / "evidence" / "metrics" / "vertex-completion-phase-billing.csv"
+BILLING_SKU = REPO_ROOT / "evidence" / "metrics" / "vertex-completion-phase-billing-sku.csv"
 OUT_USAGE = REPO_ROOT / "evidence" / "metrics" / "vertex-completion-phase-usage.json"
 OUT_SUMMARY = REPO_ROOT / "evidence" / "metrics" / "vertex-completion-phase-summary.json"
 
 PT = timezone(timedelta(hours=-7))  # PDT (UTC-7) throughout the July window
 # Documented completion-phase window (issue #23). Records outside it are
 # rejected so a rerun after new _vrtx_ escrow data cannot silently drift
-# away from the fixed two-day billing CSV.
+# away from the fixed billing aggregate.
 WINDOW_START, WINDOW_END = "2026-07-02T00:00:00Z", "2026-07-05T00:00:00Z"
-PRICES = {"claude-fable-5": (10.0, 50.0), "claude-opus-4-8": (5.0, 25.0)}
-CACHE_W, CACHE_R = 1.25, 0.1
-LONG_CTX_THRESHOLD = 200_000
-LONG_IN_MULT, LONG_OUT_MULT = 2.0, 1.5
+TIER_THRESHOLD = 200_000  # prompt-side tokens; selects the billing SKU tier
+
+# Published USD per MTok (standard rates; SKU data shows the same unit price
+# applies on both context tiers for these models).
+PRICES = {
+    "claude-fable-5": {"input": 10.0, "output": 50.0,
+                       "cache_write": 12.5, "cache_read": 1.0},
+    "claude-opus-4-8": {"input": 5.0, "output": 25.0,
+                        "cache_write": 6.25, "cache_read": 0.5},
+}
+
+# Machine-wide token integrals from Cloud Monitoring
+# publisher/online_serving/token_count (rate x 300s over 2026-07-02..07-04,
+# grouped by model_user_id). Raw monitoring export is kept privately
+# (sha256 in analysis/billing-reconciliation.md); constants recorded here for
+# the residual cross-check.
+MONITORING_TOKENS = {"claude-fable-5": 77_214_740, "claude-opus-4-8": 92_648_850}
 
 
 def main() -> int:
-    cells = defaultdict(lambda: defaultdict(float))
+    # escrow aggregation
+    cells_day = defaultdict(lambda: defaultdict(float))   # (pt_day, model)
+    qty = defaultdict(int)                                # (model, category, tier)
     sessions = {}
     first = last = None
     out_of_window = 0
@@ -73,7 +91,6 @@ def main() -> int:
                 continue
             dt = datetime.fromisoformat(ts_utc.replace("Z", "+00:00"))
             day_pt = dt.astimezone(PT).date().isoformat()
-            pin, pout = PRICES[mod]
             inp = u.get("input_tokens") or 0
             out = u.get("output_tokens") or 0
             cr = u.get("cache_read_input_tokens") or 0
@@ -81,50 +98,62 @@ def main() -> int:
             w = ((cc.get("ephemeral_5m_input_tokens")
                   or u.get("cache_creation_input_tokens") or 0)
                  + (cc.get("ephemeral_1h_input_tokens") or 0))
-            std = (inp * pin + out * pout + w * pin * CACHE_W + cr * pin * CACHE_R) / 1e6
-            ctx = inp + cr + w
-            if ctx > LONG_CTX_THRESHOLD:
-                prem = (inp * pin * LONG_IN_MULT + out * pout * LONG_OUT_MULT
-                        + w * pin * CACHE_W * LONG_IN_MULT
-                        + cr * pin * CACHE_R * LONG_IN_MULT) / 1e6
-            else:
-                prem = std
-            c = cells[(day_pt, mod)]
+            tier = "200k-1m" if (inp + cr + w) > TIER_THRESHOLD else "0-200k"
+            p = PRICES[mod]
+            usd = (inp * p["input"] + out * p["output"]
+                   + w * p["cache_write"] + cr * p["cache_read"]) / 1e6
+            c = cells_day[(day_pt, mod)]
             c["turns"] += 1
             c["input_tokens"] += inp
             c["output_tokens"] += out
             c["cache_write_tokens_5m"] += w
             c["cache_read_tokens"] += cr
-            c["turns_over_200k_context"] += (ctx > LONG_CTX_THRESHOLD)
-            c["est_usd_std"] += std
-            c["est_usd_long_context_rule"] += prem
+            c["turns_over_200k_context"] += (tier == "200k-1m")
+            c["est_usd"] += usd
+            for cat, v in (("input", inp), ("output", out),
+                           ("cache_write", w), ("cache_read", cr)):
+                qty[(mod, cat, tier)] += v
             sid = d.get("sessionId") or f.stem
             a, b = sessions.get(sid, (ts_utc, ts_utc))
             sessions[sid] = (min(a, ts_utc), max(b, ts_utc))
             first = ts_utc if first is None or ts_utc < first else first
             last = ts_utc if last is None or ts_utc > last else last
 
-    billed = {}
-    if BILLING.is_file():
-        for r in csv.DictReader(BILLING.open()):
-            billed[(r["date_pt"], r["model"])] = int(r["billed_jpy"])
+    # SKU-level billing
+    sku = defaultdict(float)  # (model, category, tier, region) -> jpy
+    for r in csv.DictReader(BILLING_SKU.open()):
+        sku[(r["model"], r["category"], r["context_tier"], r["region"])] += \
+            float(r["billed_jpy_pre_rounding"])
+    billed_total = sum(sku.values())
 
-    rows, recon = [], []
-    for (day, mod), c in sorted(cells.items()):
-        row = {"date_pt": day, "model": mod,
-               **{k: (round(v, 4) if k.startswith("est_") else int(v))
-                  for k, v in c.items()}}
-        rows.append(row)
-        y = billed.get((day, mod))
-        recon.append({
-            "date_pt": day, "model": mod, "billed_jpy": y,
-            "est_usd_std": round(c["est_usd_std"], 2),
-            "est_usd_long_context_rule": round(c["est_usd_long_context_rule"], 2),
-            "implied_jpy_per_usd_std":
-                round(y / c["est_usd_std"], 1) if y else None,
-            "implied_jpy_per_usd_long_context_rule":
-                round(y / c["est_usd_long_context_rule"], 1) if y else None,
-        })
+    # per-cell implied rate at standard unit prices; FX = min over cells with
+    # escrow quantity (binding cells have ~zero non-escrow usage)
+    recon = []
+    implied = []
+    for (mod, cat, tier, reg), y in sorted(sku.items()):
+        q = qty.get((mod, cat, tier), 0) if reg == "global" else 0
+        usd = q * PRICES[mod][cat] / 1e6
+        imp = y / usd if usd > 0 else None
+        if imp:
+            implied.append(imp)
+        recon.append({"model": mod, "category": cat, "context_tier": tier,
+                      "region": reg, "billed_jpy": round(y, 2),
+                      "escrow_qty_tokens": q,
+                      "escrow_usd_at_std_price": round(usd, 2),
+                      "implied_jpy_per_usd": round(imp, 1) if imp else None})
+    fx = min(implied)
+    residual_tokens = defaultdict(float)
+    for row in recon:
+        p = PRICES[row["model"]][row["category"]]
+        resid = row["billed_jpy"] - fx * row["escrow_usd_at_std_price"]
+        row["residual_jpy_at_fx"] = round(max(resid, 0.0), 1)
+        row["residual_tokens_at_fx"] = round(max(resid, 0.0) / fx / p * 1e6)
+        residual_tokens[row["model"]] += row["residual_tokens_at_fx"]
+
+    leray_usd = sum(c["est_usd"] for c in cells_day.values())
+    escrow_tokens = defaultdict(int)
+    for (mod, cat, tier), v in qty.items():
+        escrow_tokens[mod] += v
 
     usage = {
         "window_utc": {"start_inclusive": WINDOW_START, "end_exclusive": WINDOW_END,
@@ -133,43 +162,50 @@ def main() -> int:
         "host": "local-secondary",
         "provider_marker": "_vrtx_ in message/tool-use IDs",
         "bucket_timezone": "America/Los_Angeles (fixed UTC-7, matches GCP daily billing)",
-        "pricing_usd_per_mtok": {k: {"input": v[0], "output": v[1]} for k, v in PRICES.items()},
-        "cost_rules": {
-            "std": {"cache_write_5m": CACHE_W, "cache_read": CACHE_R},
-            "long_context_rule": {"threshold_prompt_tokens": LONG_CTX_THRESHOLD,
-                                  "input_family_mult": LONG_IN_MULT,
-                                  "output_mult": LONG_OUT_MULT},
-        },
-        "by_pt_day_model": rows,
+        "pricing_usd_per_mtok": PRICES,
+        "pricing_note": ("standard rates on BOTH context tiers — SKU-level billing "
+                         "shows no long-context premium for these models (issue #28)"),
+        "by_pt_day_model": [
+            {"date_pt": day, "model": mod,
+             **{k: (round(v, 4) if k == "est_usd" else int(v)) for k, v in c.items()}}
+            for (day, mod), c in sorted(cells_day.items())],
+        "escrow_qty_by_model_category_tier": [
+            {"model": mod, "category": cat, "context_tier": tier, "tokens": v}
+            for (mod, cat, tier), v in sorted(qty.items())],
         "sessions": [{"session_id": s, "first_utc": a, "last_utc": b}
                      for s, (a, b) in sorted(sessions.items(), key=lambda x: x[1][0])],
-        "scope_note": ("leray-hopf escrow scope only. Machine-wide Vertex usage in the "
-                       "same window (setup / unrelated-project sessions, evidenced in "
-                       "global prompt history) is billed but not in this aggregate — "
-                       "see analysis/billing-reconciliation.md."),
+        "scope_note": ("leray-hopf escrow scope only; billing covers all Vertex "
+                       "traffic of the machine (see summary residuals)."),
     }
-    tot_std = round(sum(c["est_usd_std"] for c in cells.values()), 2)
-    tot_prem = round(sum(c["est_usd_long_context_rule"] for c in cells.values()), 2)
-    tot_y = sum(v for v in billed.values()) if billed else None
     summary = {
-        "billed_jpy_total": tot_y,
-        "est_usd_std_total": tot_std,
-        "est_usd_long_context_rule_total": tot_prem,
-        "blended_implied_jpy_per_usd":
-            {"std": round(tot_y / tot_std, 1) if tot_y else None,
-             "long_context_rule": round(tot_y / tot_prem, 1) if tot_y else None},
-        "by_cell": recon,
-        "interpretation": ("Log-side estimates are LOWER BOUNDS on billed usage: the "
-                           "billing covers all Vertex traffic of the machine while the "
-                           "escrow covers only leray-hopf-related sessions. Residuals "
-                           "per cell (esp. opus 2026-07-03) are consistent with the "
-                           "known unescrowed sessions; see billing-reconciliation.md."),
+        "billed_jpy_total": round(billed_total, 2),
+        "escrow_usd_at_std_prices": round(leray_usd, 2),
+        "effective_jpy_per_usd": round(fx, 1),
+        "fx_estimator": ("min of billed_jpy / (escrow_qty x std unit price) over SKU "
+                         "cells with escrow quantity; binding cells have ~zero "
+                         "non-escrow usage"),
+        "leray_hopf_billed_jpy_derived": round(fx * leray_usd),
+        "leray_hopf_share_of_bill": round(fx * leray_usd / billed_total, 3),
+        "by_sku_cell": recon,
+        "residual_vs_monitoring": {
+            mod: {"residual_tokens_at_fx": round(residual_tokens[mod]),
+                  "monitoring_machine_wide_tokens": MONITORING_TOKENS[mod],
+                  "escrow_tokens": escrow_tokens[mod],
+                  "monitoring_minus_escrow": MONITORING_TOKENS[mod] - escrow_tokens[mod]}
+            for mod in sorted(MONITORING_TOKENS)},
+        "interpretation": ("SKU totals equal the service-level bill; unit prices are "
+                           "standard on both tiers (no long-context premium); the "
+                           "effective FX is identified from binding cells; positive "
+                           "residuals quantify machine-wide usage outside the "
+                           "leray-hopf escrow and agree with the independent "
+                           "Cloud Monitoring token integrals."),
     }
     OUT_USAGE.write_text(json.dumps(usage, indent=1, sort_keys=True, ensure_ascii=False) + "\n")
     OUT_SUMMARY.write_text(json.dumps(summary, indent=1, sort_keys=True, ensure_ascii=False) + "\n")
     print(f"wrote {OUT_USAGE}\nwrote {OUT_SUMMARY}")
-    print(f"cells={len(rows)} sessions={len(sessions)} "
-          f"std=${tot_std} long_ctx=${tot_prem} billed=¥{tot_y}")
+    print(f"sessions={len(sessions)} leray_usd=${leray_usd:.2f} "
+          f"billed=¥{billed_total:,.1f} fx={fx:.1f} "
+          f"leray_billed≈¥{fx*leray_usd:,.0f}")
     if out_of_window:
         print(f"warning: {out_of_window} _vrtx_ record(s) outside "
               f"[{WINDOW_START}, {WINDOW_END}) were excluded", file=sys.stderr)
