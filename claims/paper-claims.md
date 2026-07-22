@@ -14,7 +14,7 @@
 - Notes: 確度，再構成か一次資料か，など
 ```
 
-Phase 3（contribution freeze）で `frozen` にした claim のみ本文に残す（CLM-001〜005 は 2026-07-23 に freeze．issue #35/#42/#49）．
+Phase 3（contribution freeze）で `frozen` にした claim のみ本文に残す（CLM-001〜006 は 2026-07-23 に freeze．issue #35/#42/#49．CLM-006 は #48 レビューで追加登録された contribution 1 の baseline 主張であり，夜間 freeze 分として朝の owner 通読での追認対象）．
 contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 
 ---
@@ -78,7 +78,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   （EV-0925 の consumer verdict 過程）にある点が対比の根拠．
 
 ## CLM-006: 2026-07-23 時点の調査（notes/related-work.md 記載の探索条件）では，非線形流体 PDE（Navier–Stokes を含む）の存在理論の機械検証済み形式化は Lean・Coq・Isabelle/HOL のいずれにも確認できなかった（否定的・調査条件付きの主張）
-- Status: candidate
+- Status: frozen
 - Paper location: planned (related work / sections/01)
 - Evidence: `notes/related-work.md`（探索語・照合した近接先行例の記録: `armstrong2026degiorginashmoser`（楕円型正則性），`miller2026vlasov`（線形運動論・AI 支援），`boldo2010wave`（線形波動スキーム収束），`immler2012ode`（ODE），mathlib GNS `vandoorn2024gns`）
 - Notes: **非存在の証明ではなく「調査で確認できなかった」という下界的主張**として
