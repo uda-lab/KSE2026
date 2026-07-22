@@ -80,17 +80,27 @@ def main() -> int:
         "lean_lines_physical": lines,
         "lean_lines_code": code_lines,
         "declarations": dict(sorted(decls.items())),
-        "sorry_occurrences": sorries,
+        "sorry_occurrences_textual": sorries,
         "commit_count": int(git(args.repo, "rev-list", "--count", "HEAD")),
-        "first_commit_date": git(args.repo, "log", "--reverse",
-                                 "--format=%aI", "--max-count=1"),
+        # root commit(s) via --max-parents=0: `git log --reverse --max-count=1`
+        # would return the LATEST commit (count is applied before reverse)
+        "first_commit_date": min(
+            git(args.repo, "log", "-1", "--format=%aI", root)
+            for root in git(args.repo, "rev-list", "--max-parents=0",
+                            "HEAD").split()
+        ),
         "last_commit_date": git(args.repo, "log", "-1", "--format=%aI"),
         "note": "declaration counts are regex-based (source-text level), not "
-                "elaborator-verified; sorry count is textual and may include "
-                "comments/strings; lean_lines_code approximates non-blank "
-                "non-comment LOC (block-comment tracking is line-granular) — "
-                "state which definition the paper cites and match it against "
-                "the upstream repo's own LOC figures before quoting",
+                "elaborator-verified; sorry_occurrences_textual is a textual "
+                "count over the whole src tree (may include comments/strings/"
+                "Experimental modules) and is NOT the release-surface "
+                "sorry-free guarantee — that guarantee comes from the "
+                "upstream repo's check-release-cone.sh + release attestation, "
+                "cite those for sorry-freeness claims; lean_lines_code "
+                "approximates non-blank non-comment LOC (block-comment "
+                "tracking is line-granular) — state which definition the "
+                "paper cites and match it against the upstream repo's own "
+                "LOC figures before quoting",
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(metrics, indent=2) + "\n")

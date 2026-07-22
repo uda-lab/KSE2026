@@ -20,15 +20,17 @@ Leray–Hopf 弱解存在の Lean 4 + mathlib 形式化）に関する KSE 2026 
 ## ビルド
 
 ```sh
-make pdf      # paper/main.tex → build/main.pdf（tectonic 優先，latexmk fallback）
+make pdf      # paper/main.tex → build/main.pdf（latexmk/pdflatex 優先，tectonic fallback）
 make lint     # chktex（導入済みの場合）
 make verify   # claims ↔ evidence の対応検査（scripts/verify_claim_links.py）
 make clean
 ```
 
-ローカルに TeX 環境が無い場合は，単一バイナリの
+主エンジンは pdflatex（latexmk 経由，IEEE の投稿パイプラインに一致）．ローカルに
+TeX 環境が無い場合は，単一バイナリの
 [tectonic](https://tectonic-typesetting.github.io/)（`~/.local/bin` へ配置）で
-ビルドできる．CI（`.github/workflows/build.yml`）は push ごとに PDF artifact を生成する．
+draft ビルドできる（camera-ready は pdflatex）．CI（`.github/workflows/build.yml`）は
+push ごとに PDF artifact を生成する．
 
 ## ディレクトリ
 
@@ -53,10 +55,12 @@ make clean
 
 ## 作業状況
 
-- [x] Phase 0: Scaffold（本コミット）
-- [ ] Phase 1: Evidence preservation（3環境のログ収集）
-- [ ] Phase 2: Timeline and incident reconstruction
-- [ ] Phase 3: Contribution freeze
-- [ ] Phase 4: Drafting
+- [x] Phase 0: Scaffold
+- [x] Phase 1: Evidence preservation（3 host 収集済: EV-0001〜EV-2145）
+- [x] Phase 2: Timeline and incident reconstruction（session index 6 本，INC-001〜005，
+  usage/billing 照合）
+- [ ] Phase 3: Contribution freeze（進行中: 主題 B+C 統合・incident 採否・タイトルは
+  issue #35 で確定済み．claim freeze = 全 CLM の frozen 化は issue #42 校正の反映後）
+- [ ] Phase 4: Drafting（進行中）
 - [ ] Phase 5: Adversarial review
 - [ ] Phase 6: Submission snapshot
