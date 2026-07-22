@@ -12,9 +12,16 @@ hypothesis):
   - Billing SKUs split by context tier (0-200K / 200K-1M) but the UNIT PRICE
     is the standard published per-MTok rate on both tiers (no long-context
     premium for Claude Fable 5 / Opus 4.8 — consistent with first-party).
-  - The effective JPY/USD conversion is identified from binding cells
-    (zero-residual SKUs where escrow quantities explain the whole charge):
-    FX = min over cells of billed_jpy / (escrow_qty * unit price).
+  - The effective JPY/USD conversion is bracketed from both sides:
+    upper bound = min over SKU cells of billed_jpy / (escrow_qty * unit
+    price) (each cell's implied ratio >= FX because non-escrow usage U >= 0);
+    lower bound = the FX below which the implied non-escrow residual tokens
+    would exceed the machine-wide Cloud Monitoring token integrals (an
+    independent physical ceiling). The interval is reported; the upper
+    bound is used as the point estimate because three cells of different
+    category/model converge within 0.2% (coincidentally proportional
+    non-escrow usage in all three is implausible) and the residual then
+    nearly saturates the monitoring gap.
   - Per-cell positive residuals correspond to machine-wide usage outside the
     leray-hopf escrow; their token equivalents are cross-checked against the
     Cloud Monitoring `publisher/online_serving/token_count` machine-wide
@@ -141,7 +148,37 @@ def main() -> int:
                       "escrow_qty_tokens": q,
                       "escrow_usd_at_std_price": round(usd, 2),
                       "implied_jpy_per_usd": round(imp, 1) if imp else None})
-    fx = min(implied)
+    fx_upper = min(implied)
+
+    escrow_tok = defaultdict(int)
+    for (mod, cat, tier), v in qty.items():
+        escrow_tok[mod] += v
+
+    def residual_tokens_at(fx):
+        rt = defaultdict(float)
+        for row in recon:
+            p = PRICES[row["model"]][row["category"]]
+            resid = row["billed_jpy"] - fx * row["escrow_usd_at_std_price"]
+            if resid > 0:
+                rt[row["model"]] += resid / fx / p * 1e6
+        return rt
+
+    # lower bound: largest FX at which some model's residual tokens would
+    # exceed its machine-wide monitoring gap (residuals are monotonically
+    # decreasing in FX, so bisect per model and take the max)
+    def fx_lower_for(mod):
+        gap = MONITORING_TOKENS[mod] - escrow_tok[mod]
+        lo, hi = 1.0, fx_upper
+        for _ in range(60):
+            mid = (lo + hi) / 2
+            if residual_tokens_at(mid)[mod] > gap:
+                lo = mid
+            else:
+                hi = mid
+        return hi
+    fx_lower = max(fx_lower_for(mod) for mod in MONITORING_TOKENS)
+
+    fx = fx_upper  # point estimate; see docstring / summary rationale
     residual_tokens = defaultdict(float)
     for row in recon:
         p = PRICES[row["model"]][row["category"]]
@@ -151,9 +188,7 @@ def main() -> int:
         residual_tokens[row["model"]] += row["residual_tokens_at_fx"]
 
     leray_usd = sum(c["est_usd"] for c in cells_day.values())
-    escrow_tokens = defaultdict(int)
-    for (mod, cat, tier), v in qty.items():
-        escrow_tokens[mod] += v
+    escrow_tokens = escrow_tok
 
     usage = {
         "window_utc": {"start_inclusive": WINDOW_START, "end_exclusive": WINDOW_END,
@@ -180,11 +215,24 @@ def main() -> int:
     summary = {
         "billed_jpy_total": round(billed_total, 2),
         "escrow_usd_at_std_prices": round(leray_usd, 2),
-        "effective_jpy_per_usd": round(fx, 1),
-        "fx_estimator": ("min of billed_jpy / (escrow_qty x std unit price) over SKU "
-                         "cells with escrow quantity; binding cells have ~zero "
-                         "non-escrow usage"),
-        "leray_hopf_billed_jpy_derived": round(fx * leray_usd),
+        "effective_jpy_per_usd": {
+            "point_estimate": round(fx, 1),
+            "interval": [round(fx_lower, 1), round(fx_upper, 1)],
+            "upper_bound_rationale": ("min implied ratio over SKU cells; each cell "
+                                      "satisfies implied >= FX since non-escrow "
+                                      "usage >= 0"),
+            "lower_bound_rationale": ("below this FX the implied non-escrow residual "
+                                      "tokens would exceed the machine-wide "
+                                      "Monitoring token integrals"),
+            "point_estimate_rationale": ("three cells of different category/model "
+                                         "converge within 0.2% at the upper bound "
+                                         "and the residual then nearly saturates "
+                                         "the monitoring gap"),
+        },
+        "leray_hopf_billed_jpy_derived": {
+            "point_estimate": round(fx * leray_usd),
+            "interval": [round(fx_lower * leray_usd), round(fx_upper * leray_usd)],
+        },
         "leray_hopf_share_of_bill": round(fx * leray_usd / billed_total, 3),
         "by_sku_cell": recon,
         "residual_vs_monitoring": {
@@ -204,8 +252,9 @@ def main() -> int:
     OUT_SUMMARY.write_text(json.dumps(summary, indent=1, sort_keys=True, ensure_ascii=False) + "\n")
     print(f"wrote {OUT_USAGE}\nwrote {OUT_SUMMARY}")
     print(f"sessions={len(sessions)} leray_usd=${leray_usd:.2f} "
-          f"billed=¥{billed_total:,.1f} fx={fx:.1f} "
-          f"leray_billed≈¥{fx*leray_usd:,.0f}")
+          f"billed=¥{billed_total:,.1f} fx=[{fx_lower:.1f}, {fx_upper:.1f}] "
+          f"(point {fx:.1f}) leray_billed≈¥{fx*leray_usd:,.0f} "
+          f"[¥{fx_lower*leray_usd:,.0f}, ¥{fx_upper*leray_usd:,.0f}]")
     if out_of_window:
         print(f"warning: {out_of_window} _vrtx_ record(s) outside "
               f"[{WINDOW_START}, {WINDOW_END}) were excluded", file=sys.stderr)

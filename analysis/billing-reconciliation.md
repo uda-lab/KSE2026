@@ -16,8 +16,8 @@ Monitoring 実測**で完全に閉じた．raw export は Git 外
 |---|---|
 | 総請求（PT 07-02〜07-03，credits 0，JPY） | **¥54,867.9**（SKU 18 本の合計と一致 ±0） |
 | escrow（leray-hopf 分）の公表単価換算 | **$258.28** |
-| 実効換算レート | **161.8 ¥/$**（下記の binding セル同定） |
-| **leray-hopf 単独の実請求（導出値）** | **≈ ¥41,796**（総請求の **76.2%**） |
+| 実効換算レート | **[160.4, 161.8] ¥/$**（両側同定．点推定 161.8，下記） |
+| **leray-hopf 単独の実請求（導出値）** | **¥41,421〜41,796**（点推定 ≈¥41,796，総請求の **75.5〜76.2%**） |
 | escrow 外（machine-wide 残余）の相当額 | ≈ ¥13,072（23.8%） |
 
 ## 方法と根拠
@@ -28,10 +28,15 @@ Monitoring 実測**で完全に閉じた．raw export は Git 外
    存在するが**単価は標準レートと同一**（hi-tier セルの implied レートが標準単価で
    161.8〜162.1 に収束する事実による．first-party の「Opus 4.8 は 1M context を
    標準単価で提供」とも整合）．
-2. **実効レートの同定**: 各 SKU セルで `implied = 請求¥ / (escrow 数量 × 標準単価)` を
-   計算すると下限が 161.8 で，3 セル（fable cache write hi / opus cache write hi /
-   opus input hi）がほぼ一致して張り付く．これらは「escrow 外利用がほぼゼロの
-   セル」であり，レートの同定点になる（レートはこれ以上下がれない: 残差非負制約）．
+2. **実効レートの両側同定**: 各 SKU セルの `implied = 請求¥ / (escrow 数量 × 標準単価)`
+   は escrow 外利用 U ≥ 0 により常に FX 以上，したがって **min implied = 161.8 は
+   FX の上界**である（codex レビュー指摘のとおり，これ単独では点推定にならない）．
+   一方 FX を下げると各セルの残差トークンが単調増加し，machine-wide の Monitoring
+   実測（物理的上限）を超えてしまう — この制約から **下界 160.4** が得られる．
+   よって **FX ∈ [160.4, 161.8]**．点推定として上界 161.8 を採るのは，(a) カテゴリ・
+   モデルの異なる 3 セル（fable cache write hi / opus cache write hi / opus input hi）
+   が 0.2% 以内で収束しており，3 セル同時に比例的な escrow 外利用を持つことは考え
+   にくい，(b) その場合の残差が Monitoring gap をほぼ飽和する（83% / 96%），の 2 点による．
 3. **残差 = escrow 外利用の定量化**: FX=161.8 でセル残差をトークン換算すると
    fable ≈ 3.42M / opus ≈ 20.67M．これは**独立の実測**である Cloud Monitoring
    `publisher/online_serving/token_count`（machine-wide，5 分 rate の区間積分）の
@@ -46,15 +51,17 @@ Monitoring 実測**で完全に閉じた．raw export は Git 外
 ## 論文で使ってよい数字（cost-attribution-methodology.md の区分に従う）
 
 - **provider-billed actual cost（machine-wide，実測）**: ¥54,868
-- **leray-hopf 単独の実請求（導出値）**: ≈ ¥41,796 = 161.8 ¥/$ × $258.28．
-  「SKU レベル照合で同定した実効レートによる導出値」である旨を脚注に付す．
+- **leray-hopf 単独の実請求（導出値）**: ¥41,421〜41,796（= FX 区間 × $258.28，
+  点推定 ≈¥41,796）．「SKU レベル照合で同定した実効レート区間による導出値」で
+  ある旨を脚注に付す．
 - **API-equivalent（全キャンペーン下界）**: $6,980.57（`usage-metrics.json`）．
   うち Vertex 期間 $258.28．
 
 ## 残る限界
 
-- 実効レート 161.8 ¥/$ は請求からの同定値であり，reseller の公称レート・手数料率の
-  内訳（Google 月次レート + 手数料等）はこの資料からは分解できない（必要なら
-  reseller へ照会，issue #23 owner 判断）．
+- 実効レート区間 [160.4, 161.8] は請求からの同定値であり，reseller の公称レート・
+  手数料率の内訳（Google 月次レート + 手数料等）はこの資料からは分解できない
+  （必要なら reseller へ照会，issue #23 owner 判断）．公称レートが判明すれば
+  点推定は不要になる．
 - escrow 外利用のセッションログは leray-hopf の証跡ではないため取得しない
   （トークン量は上記のとおり残差と monitoring で十分に拘束されている）．

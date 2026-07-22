@@ -19,8 +19,8 @@
   `evidence/metrics/vertex-completion-phase-billing{,-sku}.csv`）．
 - **性質**: 課金主体側の実測であり最も硬い数字だが，**当該マシンの全 Vertex
   トラフィック**を含む（leray-hopf 外の利用が混在）．SKU レベル照合（#28）により
-  **leray-hopf 単独分は ≈ ¥41,796（総請求の 76.2%）と導出済み** — 実効レート
-  161.8 ¥/$ を binding セルから同定し，残差を独立の Monitoring 実測で裏づけた
+  **leray-hopf 単独分は ¥41,421〜41,796（総請求の 75.5〜76.2%，点推定 ≈¥41,796）と導出済み** — 実効レート
+  区間 [160.4, 161.8] ¥/$ を SKU 残差非負制約（上界）と Monitoring 実測制約（下界）の両側から同定した
   （`billing-reconciliation.md`）．
 - 呼称: machine-wide の実測は *provider-billed actual cost*，leray 単独分は
   *derived actual cost (SKU-reconciled)* と区別して呼び，導出である旨を脚注に添える．
