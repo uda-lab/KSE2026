@@ -1,0 +1,22 @@
+{
+  "repo": "uda-lab/leray-hopf",
+  "commit": "7c15710a7b9068a2aa105fc7c11b432e7685b7b5",
+  "described_by": "v0.1.0-rc1",
+  "src_dir": "LerayHopf",
+  "lean_files": 96,
+  "lean_lines_physical": 42012,
+  "lean_lines_code": 25396,
+  "declarations": {
+    "abbrev": 18,
+    "def": 236,
+    "instance": 26,
+    "lemma": 58,
+    "structure": 35,
+    "theorem": 1000
+  },
+  "sorry_occurrences_textual": 183,
+  "commit_count": 315,
+  "first_commit_date": "2026-06-10T10:36:14+09:00",
+  "last_commit_date": "2026-07-19T23:32:27+09:00",
+  "note": "declaration counts are regex-based (source-text level), not elaborator-verified; sorry_occurrences_textual is a textual count over the whole src tree (may include comments/strings/Experimental modules) and is NOT the release-surface sorry-free guarantee \u2014 that guarantee comes from the upstream repo's check-release-cone.sh + release attestation, cite those for sorry-freeness claims; lean_lines_code approximates non-blank non-comment LOC (block-comment tracking is line-granular) \u2014 state which definition the paper cites and match it against the upstream repo's own LOC figures before quoting"
+}

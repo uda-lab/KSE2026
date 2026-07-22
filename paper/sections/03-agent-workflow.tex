@@ -1,8 +1,231 @@
 \section{Agent-Orchestrated Development Workflow}\label{sec:workflow}
 
 % Scope (PLAN.md §7.3): role separation (architect / planner / coder / prover /
-% reviewer), statement freeze, edit permissions, skill use, model escalation.
-% Workflow claims must be backed by session logs (EV-NNNN), not impressions
-% (PLAN.md §8, workflow reviewer).
+% reviewer / orchestrator), statement freeze, edit permissions, adversarial /
+% independent review gates, skill / model escalation, worktree-based parallel
+% dispatch, resource-aware orchestration (brief; case study in sec:incidents),
+% and evolution across campaigns. Workflow claims are backed by the six coded
+% sessions in evidence/session-index/ (EV-NNNN), not by impressions.
+%
+% NOTE for reviewers: analysis/workflow-evolution.md itself was left as an
+% unpopulated template (headers only, no rows) at the time this section was
+% drafted. Every claim below is therefore anchored directly to the six
+% session-index records and analysis/incident-candidates.md rather than to
+% that file; see the accompanying handoff note for what this implies.
 
-\todo{Draft at Phase 4, after analysis/workflow-evolution.md is populated.}
+Over the six-week formalization campaign the project ran as a sequence of
+long-lived orchestrating sessions, each directing a changing population of
+delegated sub-agents. Measured only over the sessions collected in the
+project's evidence store (a documented lower bound, since a June logging gap
+and other coverage gaps remain, \S\ref{sec:discussion}), the campaign consumed
+at least 15.1M output tokens, an API-equivalent cost of \$6{,}973, and 199.1h
+of active engagement time under a 5-minute inter-event gap cap; the campaign
+window is fixed at 2026-06-10 through the release day 2026-07-20, with later
+evidence-collection work mechanically excluded. % CLM-002
+This section describes the workflow mechanisms that structured that effort,
+as reconstructed from six sessions that were independently event-coded
+against a fixed vocabulary (Table~\ref{tab:event-codes}) rather than
+summarized impressionistically; the six sessions are a purposive sample
+chosen for reconstruction value, not a random or exhaustive one. % CLM-004
+
+\subsection{Role separation and delegation}
+
+From the earliest surviving session (2026-06-15--06-20, spanning the initial
+local-only development period into the opening of the axiom-removal
+campaign) the orchestrator was already constrained to a single rule: it does
+not edit target-language files itself; every change is dispatched through a
+sub-agent call. In that session a single opus-class orchestrator issued 107
+dispatches across three roles --- 47 to a coder role, 45 to a prover role,
+and 12 to a planning role that vets statements before implementation begins,
+plus 3 read-only exploration calls --- and used its own tool budget only for
+planning, gating, and version-control operations.
+% CLAIM: CLM-007, EV-2076 (session 74aab39b)
+The same separation held during the axiom-removal campaign, where the
+orchestrator's 152 dispatches were checked against an independently invoked
+adjudicator process rather than against the orchestrator's own judgment.
+% CLAIM: CLM-007, EV-0925 (session 90fa24bb)
+
+By the pre-publication refactoring campaign the role set had differentiated
+further. One session in that campaign ran an orchestrator plus five named
+teammates and, beneath one of those teammates, eight further dynamically
+spawned sub-agents, giving five distinguishable roles in total: an
+orchestrator/architect that plans work, judges merge gates, and executes
+merges; a documentation-normalization coder; an implementation coder
+carrying a full issue end-to-end across multiple pull requests; a read-only
+scout role that checks an issue's stated assumptions against the current
+code before any implementation starts; and two structurally independent
+reviewer roles running in parallel --- one auditing module layering, the
+other performing an exhaustive per-declaration comparison against the target
+branch, itself spawning one single-purpose verification sub-agent per pull
+request rather than reviewing the batch serially. % EV-1669 (session 7e6156bf)
+The scout role paid for itself directly: it pre-corrected eight
+issue/code mismatches before implementation began, in each case avoiding
+either an unnecessary re-proof or an incorrect refactor plan. % EV-1669
+
+\subsection{Statement freeze and independent verification}
+
+The organizing discipline for statement integrity is that a merged
+declaration's type is treated as frozen: a later pull request may extend a
+proof but may not narrow, delete, or silently generalize the statement it
+proves without that change surfacing at review. Two independent-review
+mechanisms enforce this in practice. First, an adjudicator process
+structurally separate from the implementing coder inspects each candidate
+statement before merge. During the axiom-removal campaign this adjudicator
+rejected an over-strong hypothesis-free statement of a derivative-continuity
+lemma --- provably false for the excluded parameter range --- before the
+missing hypotheses were added and the corrected statement merged; the same
+mechanism later found a \texttt{sorry} placed under a proposition that was
+outright false for unconstrained inputs, settled by exhibiting a numeric
+counterexample (a magnitude-80 discrepancy) against the constrained case (a
+near-zero residual), after which the statement was narrowed to the
+constrained domain before the placeholder was removed. % EV-0925, leray-hopf#20, leray-hopf#27
+Second, during the refactoring campaign the per-declaration byte-diff
+reviewer caught an unannounced deletion of a previously public theorem
+inside a large extraction refactor; the theorem was restored as a thin
+wrapper and re-verified before merge. % EV-1669, leray-hopf#120
+
+These catches sit in deliberate contrast with one release-blocking
+postmortem case (\S\ref{sec:incidents}) in which a declaration's
+type was never subjected to this kind of independent scrutiny before it
+shipped. % INC-001
+An earlier direct-proof campaign against that same declaration, during the
+axiom-removal campaign, ended not with a soundness verdict on its statement
+but with a ``consumer'' verdict --- a finding that nothing downstream
+referenced the declaration, which redirected effort elsewhere within
+minutes of a months-scale attack plan being adopted. No point in that
+session's log shows the statement's truth being checked directly, and the
+false generalization was caught only later, during a separate release-time
+review pass. % EV-0925
+We state this as a contrast in review coverage, not as a claim that
+independent statement review would necessarily have caught the defect
+earlier; the two cases differ in more ways than the presence of that gate
+alone.
+
+\subsection{Adversarial review and merge gates}
+
+An adversarial review pass, run at high effort against every pull request as
+a final soundness gate, is a third, independent check layered on top of the
+adjudicator and the byte-diff reviewer. In the earliest session it caught a
+sub-agent's own incorrect claim that a reduction step was mathematically
+unsound, showing a valid averaging-based route existed after all. % EV-2076
+The gate's plumbing needed its own iteration: in the refactoring campaign,
+the merge monitor initially watched only formal review events on the pull
+request and missed a review that had in fact been delivered as a top-level
+comment, stalling a ready-to-merge change for roughly twenty minutes until
+the human supervisor pointed out the discrepancy. The monitor was rewritten
+to watch three channels at once --- a formal review event, a bot-authored
+top-level comment, and an in-repository acknowledgment marker --- and no
+repeat occurred across the ten pull requests that followed in the same
+session. % EV-1669
+A later transient non-response from the same reviewer (a thirty-minute
+timeout against a typical few-minute turnaround) was resolved by
+re-requesting review rather than by falling back to an alternate route.
+% EV-1669
+Separately, during the axiom-removal campaign the review tool itself was
+found pinned to an unavailable model identifier, causing every review call
+to fail outright until the identifier was corrected. % EV-0925
+
+\subsection{Model and skill escalation}
+
+Orchestrator model choice changed over the campaign: an opus-class model
+drove the orchestrator in the two earliest coded sessions, while by the
+refactoring campaign the orchestrator ran on a newer general-purpose model
+with all five named teammates and their dynamically spawned sub-agents
+assigned to a lighter model; an escalation to the heavier model was
+considered at several explicit decision points in that session but never
+exercised, i.e.\ the documented escalation threshold was not crossed even
+though the option remained available throughout. % EV-1669
+Within a single session, model assignment was also role-typed rather than
+uniform: in the earliest session, 104 of 107 sub-agent dispatches used a
+long-context variant of the heavier model for proof and implementation
+work, while the three read-only exploration dispatches ran on the lightest
+available model. % EV-2076
+Escalation failures were rarer than tooling failures but did occur: an
+automatic safety classifier hard-blocked a repository-creation and push
+action toward the target organization even after the human supervisor had
+approved it explicitly in conversation; the action was completed by the
+human supervisor directly from a terminal, and the agent wired the
+resulting remote afterward. This is recorded as friction at the
+local-only-to-hosted transition, not as a case resolved by any escalation
+path available to the agent itself. % EV-2076
+
+\subsection{Worktree-based parallel dispatch and conflict handling}
+
+Parallel dispatch across separate worktrees became the default execution
+shape from the axiom-removal campaign onward, rising from a single
+orchestrator issuing sequential sub-agent calls to, by the release
+campaign, multiple independently named agents each owning a worktree and
+running concurrently under one supervising session. % EV-0925, EV-0247
+Some conflicts were designed out pre-emptively: a single shared
+root-level import file was restricted to one coder at a time once a
+concurrent-edit collision on it was foreseen, and a workspace-cleanup
+tool's file-discovery scope was narrowed after an early run matched
+vendored dependency repositories rather than only the project's own files.
+% EV-2076
+Others surfaced live and were caught procedurally rather than avoided: a
+reviewer detected that its review target was being concurrently edited by
+an unrelated import-cleanup task mid-review and re-verified the final diff
+before passing it, rather than passing the version it had started
+reviewing; % EV-1669
+and, during the release campaign, a stale-liveness misjudgment led to a
+second named agent being dispatched onto a worktree already owned by a
+first agent that had in fact not died, so that both ran against the same
+worktree until the duplication was noticed and the second dispatch was
+stopped. % EV-0247
+
+\subsection{Resource-aware orchestration}
+
+Resource management is treated only briefly here; the incident that forced
+it into an explicit, standing set of rules --- a memory-exhaustion cascade
+during the release campaign, traced to accumulated helper-process chains
+left behind by prior review tooling rather than to the Lean build itself
+--- is analyzed as a case study in \S\ref{sec:incidents}. The rules now in
+force (a single global build lock, a shared hard-linked build cache across
+worktrees, a pre-build memory-headroom check, and mandatory cleanup of an
+agent's own helper processes on task completion) did not exist in any
+earlier coded session; they are a direct, incident-triggered addition to
+the workflow rather than an anticipated design choice. % EV-0247
+
+\begin{table}[t]
+\centering
+\caption{Event-code counts across the six independently coded sessions
+(population: the coded sessions only, not the full campaign). % CLM-004
+\texttt{FALSE-SUCCESS} did not occur in any coded session.}
+\label{tab:event-codes}
+\begin{tabular}{@{}lr@{}}
+\toprule
+Event code (grouped) & Count \\
+\midrule
+WEAKEN / STMT-MISMATCH & 4 \\
+RECOVERY & 19 \\
+RESOURCE & 12 \\
+WT-CONFLICT & 5 \\
+FALSE-SUCCESS & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Evolution across the campaign}
+
+Table~\ref{tab:event-codes} summarizes event counts over the six sessions
+that were independently coded against a fixed event vocabulary (event codes
+for statement errors, resource exhaustion, worktree conflicts, escalation
+failures, and successful recovery, applied uniformly across sessions); this
+is not a census of the full campaign, only of the sampled sessions. % CLM-004
+Read against the chronology, almost every standing rule described above
+traces to a specific, dated failure rather than to upfront design: the
+statement-freeze discipline hardened after the earliest WEAKEN catches; the
+three-channel review monitor followed directly from one missed top-level
+comment; the resource rules followed directly from the memory-exhaustion
+cascade. The one discipline present from the very first coded session is
+commit-time re-verification of on-disk state before trusting a sub-agent's
+reported progress, adopted after repeated unrelated-cause process deaths
+(network and idle-timeout failures, not logic errors) left partially
+written files behind; every one of those deaths was caught and reverted
+before commit in that session. % EV-2076
+We do not treat this single early practice as sufficient on its own to
+explain the zero \texttt{FALSE-SUCCESS} count in Table~\ref{tab:event-codes}
+--- the later sessions layer independent adjudication, byte-diff review, and
+adversarial review on top of it, and the coded sample is six sessions, not
+the whole campaign --- but it is the one mechanism common to all of them,
+and no coded session records a false success reaching a merge.
