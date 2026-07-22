@@ -4,8 +4,6 @@
 
 ## Open
 
-- [ ] 三環境（vps / local-main / local-secondary）それぞれのログの所在と網羅期間は？
-      （Phase 1 の inventory で確定）
 - [ ] ログ欠損期間はどこか？Git/Issue/PR でどこまで再構成できるか？
       （2026-07-22 更新: セッションログの真の欠損は **2026-06-10〜06-14 のみ**に確定．
       6/15〜6/18 は local-secondary escrow がカバー，VPS 側 6/10〜6/18 は喪失ではなく
@@ -16,6 +14,11 @@
       **投稿締切 2026-07-31 (extended)** — Phase 1–4 の日程をこれに合わせて圧縮する）
 ## Closed
 
+- [x] **三環境それぞれのログの所在と網羅期間は？** → Phase 1 完了（EV-0001〜EV-2126）．
+      vps: 2026-06-19〜07-20 連続（leray-hopf 関連 6 project dir + Hermes 別プロジェクト分）．
+      local-main: 07-07〜07-20（それ以前の local 作業は local-secondary 側）．
+      local-secondary: 06-15〜07-21（最初期セッションを含む）．
+      詳細は `provenance/source-inventory.md` と `analysis/project-timeline.md`．
 - [x] **VPS 7/10 スナップショットから創成期ログを回復できるか？** → 回復対象なし．
       当該期間の leray-hopf セッションは VPS 上に元々存在しなかった（作業は local 側）．
       根拠: バックアップは現行 escrow の真部分集合（新規ファイル 0 件），かつ
