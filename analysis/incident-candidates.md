@@ -21,3 +21,11 @@
 - 2026-05-11: umbrella #266 / PR #267 フローでの orchestrator による review 引き取り
   未遂（ユーザーが拒否し，「orchestrator は review handling を引き取らない」規約が
   恒常化）．→ HANDOFF-FAIL / RECOVERY 候補．
+- 2026-06〜07: **ログローテーション（`cleanupPeriodDays` 30 日）による研究記録の
+  不可逆喪失と部分復元の試み**．創成期 2026-06-10〜06-14 のセッションログは全 host で
+  喪失（local-secondary 上でのローテーション削除が有力，同 escrow の最古生存が 6/15）．
+  VPS 7/10 スナップショットからの復元試行（issue #15）は「VPS 側には当該期間の記録が
+  元々存在しない」ことの確定という負の結果に終わった（一次資料:
+  `analysis/vps-snapshot-20260710-verification.md`）．`cleanupPeriodDays=9999` の
+  全 host 設定（2026-07-21）で以後の喪失は停止．→ LOSS / RECOVERY 候補．
+  research-record retention をツール既定値に任せたことによるメタ・インシデント．
