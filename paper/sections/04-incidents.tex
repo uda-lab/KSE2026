@@ -5,4 +5,248 @@
 % Each incident presented here must have a card evidence/incidents/INC-NNN.md
 % with confidence-of-reconstruction stated. Reference as: % CLAIM: INC-NNN
 
-\todo{Draft at Phase 4, after incident ranking (analysis/incident-ranking.md).}
+Neither a green build nor a kernel-level axiom check is sufficient to
+guarantee that a formalization campaign is proceeding soundly: a build
+verifies that whatever is currently stated type-checks, and an axiom check
+verifies that whatever is currently proved rests on no unexpected
+assumptions, but neither mechanism inspects whether an unproved placeholder's
+\emph{statement} is true, nor whether a declaration silently disappeared, nor
+whether the host running the campaign has enough memory left to finish. This
+section examines four incidents in which exactly this kind of gap opened up,
+what mechanism outside the build eventually closed it, and what standing
+guardrail was left behind. A fifth coded failure mode --- the loss of the
+project's earliest session logs to a default log-retention setting --- is a
+research-record integrity problem rather than a formalization failure and is
+treated with the paper's evidence-coverage limitations elsewhere rather than
+here. % CLAIM: CLM-008, INC-003 (forward reference only)
+
+\subsection{Descriptive statistics from the coded sessions}
+
+Six sessions spanning the campaign were independently event-coded against a
+fixed vocabulary (statement-intent mismatches, theorem weakenings,
+mathematical errors, resource exhaustion, worktree conflicts, handoff
+failures, model-escalation failures, proof-engineering deadlocks, successful
+recoveries, and false success reports, where the last denotes a run-time
+build-success claim that is contradicted by on-disk state and is never
+corrected within the session). Table~\ref{tab:event-codes} reports the
+counts relevant to this section; the remaining four codes not broken out
+there occurred as follows: handoff failures 4, model-escalation failures 2,
+mathematical errors 2, and a proof-engineering deadlock 1. % CLAIM: CLM-004
+These six sessions were chosen purposively --- to cover the campaign's
+distinct phases and hosts, not by random or exhaustive sampling of the full
+campaign --- so the counts describe only this sample and must not be read as
+a prevalence estimate, a failure rate, or a measurement of guardrail
+effectiveness. % CLAIM: CLM-004
+In particular, no false success report was observed in any coded session;
+this is consistent with a discipline, present from the earliest coded
+session onward, of re-verifying on-disk state before trusting a sub-agent's
+progress report and before committing, rather than a claim that this
+discipline caused the absence. % CLAIM: CLM-004
+
+\begin{table}[t]
+\centering
+\caption{Additional event-code counts across the six coded sessions,
+supplementing Table~\ref{tab:event-codes} (same population and caveats).}
+\label{tab:event-codes-supplement}
+\begin{tabular}{@{}lr@{}}
+\toprule
+Event code & Count \\
+\midrule
+HANDOFF-FAIL & 4 \\
+MODEL-ESC & 2 \\
+MATH-ERR & 2 \\
+PROOF-STUCK & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{A false generalization that survived to pre-release review}
+\label{sec:inc001}
+
+The most consequential incident concerns a single public declaration,
+\texttt{w1pTime\_continuous\_in\_H}, introduced with an honest \texttt{sorry}
+and a generic hypothesis pair (exponents $p,q \geq 1$) as part of a
+multi-file scaffold. % CLAIM: CLM-008, INC-001
+The only proof attempt ever actually carried out for this declaration
+assumed the special case $p=q=2$, where the relevant energy-pairing
+limit-passage argument is available via Cauchy--Schwarz; the public
+signature, however, was never narrowed to match, and continued to assert the
+general statement. That general statement is false: a pre-release soundness
+review constructed an explicit counterexample at $p=q=1$, using a weighted
+Hilbert-triple with a spike sequence, showing that the hypotheses admit
+inputs for which no continuous representative exists. % CLAIM: CLM-008, INC-001
+Between the scaffold's introduction and that review, roughly a month
+elapsed, reconstructed from commit records since the introducing session
+itself was not identified among the collected logs. % CLAIM: CLM-008, INC-001
+A mid-campaign session did stage a multi-hour direct attack on this
+declaration, but after running into a circular proof route it closed the
+investigation on the basis of a one-minute check that the declaration was
+unreferenced by any other proof, not on any check of the statement's truth
+--- so the false generalization survived a direct engagement with the
+declaration without being caught. % CLAIM: CLM-008, INC-001
+The declaration was never on the critical path of either capstone theorem,
+so the machine-checked, axiom-free proof was never at risk; but the false
+statement was carried, restated with increasing confidence, into adjoining
+design documents and a companion notes corpus before detection.
+
+The pre-release review that finally caught the error named eleven
+recurring anti-patterns behind it; five of the most transferable are worth
+naming individually. An \emph{honest-\texttt{sorry} does not imply a true
+statement} fallacy treated the placeholder's visible honesty about being
+unproved as a substitute for checking that what it asserted was even
+correct. A \emph{special-case-proof, general-signature} mismatch let a
+public type stay broader than anything actually established for it.
+\emph{Dead-declaration rot} meant that because the theorem was unused, no
+downstream consumer's own review would ever have surfaced the defect, so its
+statement went essentially unaudited for the same reason it was harmless.
+\emph{Self-referential verification} in the companion notes corpus re-derived
+its confidence from the same source docstring it was supposed to be checking
+independently, rather than from the Lean statement or the literature.
+Finally, \emph{large-batch review dilution} meant that when many scaffolded
+declarations were reviewed together, the density of attention on any one
+statement dropped. % CLAIM: CLM-008, INC-001
+The recovery narrowed the declaration to the case actually proved, split it
+into an experimental namespace, and introduced a standing regression guard
+(checked in continuous integration) against two concrete violations:
+reintroduction of the general signature, and any placeholder declaration
+missing an accompanying statement card that records its adjudicated scope
+and required adversarial substitutions. % CLAIM: CLM-008, INC-001
+Tellingly, two days after that guardrail work merged, a follow-up pull
+request touching the same files' documentation was merged with no requested
+or submitted independent review at all, reproducing --- inside the very
+postmortem's aftermath --- the same class of unreviewed-merge handoff
+failure the postmortem had just been written to prevent; a subsequent audit
+caught two residual inaccuracies from that merge and closed the loop with a
+properly reviewed follow-up. % CLAIM: CLM-008, INC-001
+That recurrence is itself evidence that adopting a policy is not the same as
+the policy holding on the next low-priority pull request.
+
+\subsection{A contrast: the same blind spot caught before merge}
+
+A structurally identical blind spot --- an unproved placeholder standing in
+for a proposition whose truth had never actually been established, sitting
+inside two abandoned proof attempts --- arose earlier in the campaign in a
+different theorem, a box-truncated antisymmetry property of a convection
+form on the three-torus. % CLAIM: CLM-008, INC-002
+Here, an independent adjudicator reviewing the pull request before merge
+constructed a numerical counterexample for the unconstrained case (a
+discrepancy of roughly 80.7) and confirmed that the property held, to
+numerical precision, only once the inputs were restricted to a
+finite-dimensional projected subspace. The author acknowledged that both
+prior attempts had in fact been unsound. The signature was narrowed to the
+provable, restricted case, the proof completed, and the placeholder removed
+and merged the same day: detection to merge took about sixteen minutes.
+% CLAIM: CLM-008, INC-002
+Neither the compiler nor the project's syntactic sorry/axiom checks
+distinguished this false placeholder from a true one; only the adversarial,
+numerically-grounded review did. Read together with the previous case, this
+is a contrast --- one instance of the same blind spot reaching a pre-release
+soundness review after roughly a month, the other caught before merge on the
+same day it was introduced --- consistent with the value of independent
+statement review backed by concrete counterexample testing; it does not
+establish that such review would have caught the first case had it been
+applied there, since the two declarations were not reviewed under identical
+conditions. % CLAIM: CLM-005
+
+\subsection{A short example: silent deletion caught by declaration-level review}
+
+A large deduplication refactor extracted duplicated tensor and edge-gluing
+code from two files into a shared module and rewired the original public
+declarations as thin instantiations. In that rewiring, one public theorem,
+\texttt{edge\_inf\_eq\_schwartz\_tensor}, was silently dropped from the list
+of declarations to re-wire and disappeared from the file entirely, while
+neighboring public declarations were correctly preserved. % CLAIM: CLM-008, INC-004
+Neither the build nor an earlier structural review of the refactor's module
+boundaries caught this, because nothing downstream referenced the deleted
+theorem and both checks operate above the level of individual declarations.
+Detection came from a per-declaration, byte-level comparison against the
+pre-refactor file, carried out by a reviewer that spawned one verification
+sub-agent per pull request rather than reviewing the batch of twelve
+refactor pull requests serially; the missing theorem was restored, verified
+byte-identical to its pre-refactor statement, and the pull request merged
+within roughly four and a half minutes of detection. % CLAIM: CLM-008, INC-004
+The general point survives the small scale of this instance: build success
+does not guarantee that a public theorem still exists, and only a
+declaration-level, exhaustive comparison against the prior state catches its
+quiet removal.
+
+\subsection{A resource case: side-process accumulation and a memory-exhaustion cascade}
+\label{sec:inc005}
+
+The fourth incident is not a soundness failure but a resource-management
+one, arising in a memory-constrained container (a hard cgroup ceiling under
+3.5\,GiB) running a continuous multi-worktree orchestration. % CLAIM: CLM-008, INC-005
+A prior night's wave of per-worktree code-review invocations had each left
+behind a broker/application-server side-process chain that is not reclaimed
+automatically; by the next morning fourteen such stale, orphaned chains
+(traceable to worktrees that had since been merged and deleted) had
+accumulated across roughly one to 1.5\,GB. Independently, an orchestrator
+misjudgment --- treating a slow-responding prior agent as dead and
+dispatching a successor into the same worktree, when the prior agent was in
+fact still alive --- produced several hours of duplicated work, and the
+successor, unaware of a hard-linked shared build-cache convention, began a
+cold rebuild of the entire mathlib dependency from source. % CLAIM: CLM-008, INC-005
+The combined load produced repeated silent build deaths near the end of the
+heaviest compilation step, indistinguishable at first from ordinary build
+failures; routine progress checks that looked only at the visible Lean
+process's memory use reported ample headroom, missing both the accumulated
+side-process chains and the shrinking system-wide available memory.
+Detection was triggered not by the orchestration's own monitoring but by an
+incidental owner status check, after which the available-memory figure (as
+opposed to used-memory) was checked directly, the stale chains were
+identified by tracing each process's working directory against currently
+live worktrees, killed in one pass, and the kernel's out-of-memory counter
+was read for the first time --- confirming retrospectively that every prior
+silent build death had in fact been a kernel out-of-memory kill, though the
+counter is cumulative since container start and so does not itself attribute
+which kill happened when. % CLAIM: CLM-008, INC-005
+Recovery restored available memory, and a rebuild under a single global
+build lock succeeded.
+
+Two further points make this incident more than a one-off cleanup. First,
+the underlying lesson --- that a tool's own long-running helper processes
+must be reclaimed structurally, not left to chance --- had already been
+learned once before, in an unrelated project, after a comparable
+process-accumulation cascade; because that lesson had been recorded only in
+project-scoped memory rather than generalized across projects, it was not
+applied here until the same failure class recurred in a different concrete
+form. The standing guardrails written afterward were deliberately placed
+in a project-independent location for exactly this reason. Second, the
+mitigation targeted the path that had actually caused the cascade
+(accumulated side-process chains), and within the same day a second,
+structurally different low-memory episode occurred --- this time the
+legitimate peak memory use of a single heavy compilation, with no
+accumulated chains and no change in the out-of-memory counter. Because the
+guardrails also included a symptom-based rule (report whenever available
+memory drops below a fixed threshold, regardless of cause), this second
+episode was self-reported and confirmed harmless without incident, whereas
+a narrower guardrail aimed only at the original cause would have missed it.
+% CLAIM: CLM-008, INC-005
+The general point is that in a memory-constrained, agent-orchestrated Lean
+development setting, resource management is not a peripheral operational
+concern but part of orchestration itself, and monitoring built around
+symptoms generalizes further than monitoring built around a single
+identified cause.
+
+\subsection{What the incidents show together}
+
+Across these four cases, the standing discipline that now governs the
+project's formalization workflow was in every instance a response to a
+specific, dated failure rather than a design anticipated in advance: the
+statement-gate policy and its regression guard followed the false
+generalization of \S\ref{sec:inc001}; the practice of exhaustive
+declaration-level byte comparison on large refactors followed the silent
+deletion; and the resource guardrails followed the memory-exhaustion
+cascade. What is transferable across them is not any single fix but three
+detection mechanisms that generalize beyond this project: independent
+statement review backed by concrete counterexample construction, exhaustive
+declaration-level comparison against a prior known-good state, and
+symptom-based (rather than single-cause-based) resource monitoring. The
+recurrence inside \S\ref{sec:inc001} of an unreviewed merge two days after
+the very postmortem meant to prevent it, and the recurrence inside
+\S\ref{sec:inc005} of a
+structurally different low-memory episode the same afternoon the targeted
+fix landed, both indicate that adopting a guardrail is a beginning, not a
+guarantee, and that the discipline observed in this project is itself
+incident-driven and still failure-prone at the point a new guardrail is
+introduced.
