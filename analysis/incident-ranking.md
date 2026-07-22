@@ -1,19 +1,43 @@
-# Incident ranking（Phase 2–3 で作成）
+# Incident ranking（Phase 2–3）
 
 card 化されたインシデントを重要度で順位付けし，論文（sections/04-incidents.tex）に
 載せる代表例を選ぶ．選定は「都合の良い失敗例の選択」にならないよう，除外した card と
-除外理由も残す（PLAN.md Phase 5）．
+除外理由も残す（PLAN.md Phase 5）．順位は 6 軸（影響範囲 / 検出困難性 / 回復費用 /
+再発可能性 / 一般化可能性 / 一次資料の完全性）の総合による agent 提案であり，
+**採否の確定は Phase 3 で owner が行う**．
 
-## 評価軸（PLAN.md §5）
+## Ranking（2026-07-22 初版，INC-001〜004）
 
-影響範囲 / 検出困難性 / 回復費用 / 再発可能性 / 一般化可能性 / 一次資料の完全性
-
-## Ranking
-
-| Rank | INC | 総合評価の根拠 | 論文採用 | 不採用理由 |
+| Rank | INC | 総合評価の根拠 | 論文採用（提案） | 不採用理由 |
 |---|---|---|---|---|
+| 1 | INC-001（`w1pTime_continuous_in_H` 偽一般化） | 影響範囲=公開 API の soundness そのもの．検出困難性=高（sorry 上の型は build では検査されず，直接攻撃キャンペーン中ですら型の独立精査が起きなかった過程が一次ログで追える）．release 前 review で検出→statement-gate 政策という再発防止まで完結．一般化可能性=「プレースホルダの上の主張は検証対象から漏れる」という agentic 形式化の構造的盲点 | **採用（主例）** | — |
+| 2 | INC-002（偽命題上の `ALLOW_SORRY`） | INC-001 と同型の盲点だが**マージ前に検出成功**した対照例．独立アジュディケータ + 数値反例という検出機構が具体的で，成功例と失敗例の対（PLAN.md §6 の「失敗事例 + 再発防止策の対」）を INC-001 と構成できる | **採用（対照例）** | — |
+| 3 | INC-004（公開定理の無断削除を byte-diff 検出） | 「build green は定理の存在を保証しない」という教訓が明快で，宣言単位 byte-diff レビューという移植可能な対策を持つ．ただし混入から検出まで数分・単一 PR 内で完結し，影響の実現前に止まったため事例の重みは 1・2 に劣る | 採用（短例 or 表内 1 行） | 紙幅次第で表内言及に格下げ可 |
+| 4 | INC-003（ログローテーション喪失） | 証明でなく research-record のメタ・インシデント．evidence 完全性の議論（欠損期間の明示）とセットで方法論節に置くのが適切で，incident case study の主戦場からは外す | 方法論節で言及 | incident 節の主題（形式化の失敗様態）と位相が異なる |
+
+## 未 card 化候補の扱い（除外理由つき）
+
+`analysis/incident-candidates.md` の残 9 候補:
+
+- 候補 #1（PR #20 過強 statement）: INC-002 と同型（マージ前検出）で片方あれば足りる．
+  card 化保留．
+- 候補 #3（B5 符号誤り）: 単純な定義ミスの即日修正で，教訓が既存 card に包含される．
+- 候補 #6（codex レビュー検出漏れ 19 分）: 影響が軽微（遅延のみ）．workflow 節の
+  1 文で足りる．
+- 候補 #7（Actions 課金上限）・#10（attestation 失敗）: 運用ノイズ．重大性低．
+- 候補 #8（OOM cascade 7/18）: **一般化可能性は高い**（RESOURCE 系の代表例候補）が
+  primary セッションの符号化が未了．card 化するなら第 2 陣（要 7/18 vps セッションの
+  符号化）．現時点では reconstructed のみのため保留．
+- 候補 #11〜13（74aab39b 系: 偽 UNSOUND 主張，prover 死亡 8 回，classifier ブロック）:
+  いずれも一次資料は完全だが，個別より「創成期オーケストレーションの規律」として
+  workflow 節（sections/03）に集約するのが適切．
 
 ## 論文主題 A/B/C 判断への入力（PLAN.md §6）
 
-- 強い失敗事例 + 再発防止策の対の数: （未集計）
-- 判断: （Phase 3 で `provenance/author-decisions.md` に記録）
+- **強い失敗事例 + 再発防止策の対**: 2 対が成立 —
+  (i) INC-001（失敗が release 直前まで残存）× INC-002（同型の盲点をマージ前検出）
+  → 「プレースホルダ上の statement 検証」という単一テーマで失敗と防御の両側を持つ．
+  (ii) INC-004 単独でも「検出機構（byte-diff 悉皆）が働いた」小さな対になる．
+- 統計的裏付け: 符号化 3 セッションで WEAKEN/STMT-MISMATCH 系 4 件・RECOVERY 15 件，
+  FALSE-SUCCESS 0 件（74aab39b の commit 前 disk 再検証の規律による）．
+- 判断は Phase 3 で owner が `provenance/author-decisions.md` に記録する．
