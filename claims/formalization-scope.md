@@ -8,8 +8,11 @@
 - Repository: `uda-lab/leray-hopf`（public）
 - Release tag: `v0.1.0-rc1`（"release-candidate build attestation"，published 2026-07-20）
 - Commit: `7c15710a7b9068a2aa105fc7c11b432e7685b7b5`
-- 出典: repo README / `docs/claims-and-scope.md`（scope の一次資料はこちら．本文書は
-  その要約であり，齟齬がある場合は pinned commit の `docs/claims-and-scope.md` が優先）
+- 出典: pinned commit の `README.md`（"What is actually proved" の claims table と
+  Honest scope callout を含む．scope の一次資料はこちら．本文書はその要約であり，
+  齟齬がある場合は pinned commit の `README.md` が優先）．
+  注: 旧記載の `docs/claims-and-scope.md` は pinned commit に存在しない
+  （tree 全走査で確認，issue #38）．
 
 参照 commit を更新する場合は `provenance/author-decisions.md` に記録し，本文書・
 README.md・`paper/references.bib` を同時に更新する．
