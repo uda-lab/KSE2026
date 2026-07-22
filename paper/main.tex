@@ -44,9 +44,30 @@ Workflow, Incidents, and Recovery}
 \maketitle
 
 \begin{abstract}
-\todo{Abstract --- draft at Phase 3 after contribution freeze. See
-notes/title-and-abstract.md for candidates.}
+Large language model agents can now sustain formalization efforts
+spanning weeks and more than a hundred pull requests, which shifts the central
+reliability question from proof search to process governance: a kernel
+check verifies that a proved declaration is correct given its stated type,
+but not that the type is what was intended, that it is still present
+after a later refactor, or that a reported build success reflects genuine
+on-disk state. We report a completed, kernel-only Lean~4 and mathlib
+formalization of Leray--Hopf weak-solution existence for the homogeneous
+Navier--Stokes equations on the 3-torus and on $\mathbb{R}^3$, developed
+over roughly six weeks under an agent-orchestrated regime that consumed,
+on evidence collected so far, at least 15.1M output tokens and 199.1
+active hours. To our knowledge, no machine-checked existence theory for a
+nonlinear fluid PDE has previously been reported in Lean, Coq, or
+Isabelle/HOL. We present the workflow that produced this result --
+statement-first development, independent adversarial review, and
+machine-checked verification gates -- an evidence-backed account of four
+incidents where build success and axiom checking alone were insufficient
+to guarantee sound progress, and an evidence methodology combining
+session-log escrow, machine-checked claim-to-evidence verification, and
+cost accounting reconciled against actual billing records.
 \end{abstract}
+% Abstract claims map: CLM-001 (result), CLM-002 (scale, lower bounds),
+% CLM-006 (survey-conditioned novelty), CLM-004/005 (incidents account),
+% CLM-003 (billing reconciliation).
 
 \begin{IEEEkeywords}
 formal verification, Lean 4, Navier--Stokes equations, Leray--Hopf weak solutions,
@@ -60,9 +81,6 @@ AI agents, large language models, proof engineering
 \input{sections/05-discussion}
 \input{sections/06-conclusion}
 
-% Draft-only: cite everything so the bibliography is non-empty before real
-% \cite commands exist. Remove at Phase 4.
-\nocite{*}
 \bibliographystyle{IEEEtran}
 \bibliography{references}
 

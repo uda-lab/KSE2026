@@ -59,10 +59,9 @@ push ごとに PDF artifact を生成する．
 - [x] Phase 1: Evidence preservation（3 host 収集済: EV-0001〜EV-2145）
 - [x] Phase 2: Timeline and incident reconstruction（session index 6 本，INC-001〜005，
   usage/billing 照合）
-- [ ] Phase 3: Contribution freeze（ほぼ完了: 主題 B+C 統合・contribution 3 点・
-  incident 採否・タイトル確定 + CLM-001〜006 freeze 済（issue #35 / #42 / #49，
-  2026-07-23）．残: abstract 本文の起草（Phase 4 front-matter PR で確定し，
-  完了時に本項をチェック））
+- [x] Phase 3: Contribution freeze（主題 B+C 統合・contribution 3 点・incident 採否・
+  タイトル・abstract 確定 + CLM-001〜008 freeze．issue #35 / #42 / #49 / #55，
+  2026-07-23．CLM-006/007/008 は夜間 freeze 分で owner 追認対象）
 - [ ] Phase 4: Drafting（進行中）
 - [ ] Phase 5: Adversarial review
 - [ ] Phase 6: Submission snapshot

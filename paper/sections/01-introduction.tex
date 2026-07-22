@@ -1,8 +1,92 @@
 \section{Introduction}\label{sec:introduction}
 
-% Scope (PLAN.md §7.1): problem setting, scale of the formalization, and the
-% reliability challenge in AI-assisted formalization.
-% Every technical/historical claim here must have a CLM entry in
-% claims/paper-claims.md, referenced as: % CLAIM: CLM-NNN
+Large language model agents can now sustain mathematical formalization
+efforts spanning weeks and more than a hundred pull requests, rather
+than single proof-search episodes, shifting the central reliability
+question. A proof assistant's kernel guarantees that a \emph{proved}
+declaration is correct given its stated type, but kernel checking is
+silent on whether that type is the theorem the author actually
+intended; whether a previously proved declaration silently disappeared
+during a refactor; whether a build genuinely succeeded, versus being
+reported successful over a stale disk state; and whether the project's
+own development record is itself accurate. These statement-, process-,
+and record-level failure modes are the load-bearing risk that remains
+once proof-checking is presumed reliable.
 
-\todo{Draft at Phase 4. Do not draft before contribution freeze (Phase 3).}
+We report on a formalization campaign that ran under exactly this
+regime. Over roughly six weeks (2026-06-10 through the 2026-07-20
+release day), the project consumed, on evidence collected so far, at
+least 15.1M output tokens, an API-equivalent cost of \$6{,}972.83, and
+199.1\,h of active engagement time under a five-minute inter-event gap
+cap -- documented lower bounds, since coverage gaps in the session-log
+record remain. % CLAIM: CLM-002
+The campaign's central artifact is a kernel-only Lean~4~\cite{moura2021lean4}
+formalization, built on mathlib~\cite{mathlib2020}, of existence of
+Leray--Hopf weak solutions~\cite{leray1934,hopf1951} to the homogeneous,
+incompressible Navier--Stokes equations, comprising two capstone existence
+theorems -- one on the periodic 3-torus $\mathbb{T}^3$, one on
+$\mathbb{R}^3$ -- whose \texttt{\#print axioms} output is exactly the
+three standard Lean kernel axioms, with zero project-declared axioms and
+no \texttt{sorryAx} on either theorem~\cite{lerayhopf2026repo}.
+% CLAIM: CLM-001
+To our knowledge, based on a literature and repository survey conducted in
+July 2026 and summarized in the related-work discussion below, no
+machine-checked existence theory for a nonlinear fluid PDE has previously
+been reported in Lean, Coq, or Isabelle/HOL; we state this as a bound on
+what our survey found, not as a proof of non-existence.\footnote{Search
+terms, dates, and the nearest adjacent results are recorded in the
+project's related-work notes and re-checked immediately before
+submission.}
+% CLAIM: CLM-006
+
+Three literatures bound this work. Among AI-authored Lean projects,
+TauCeti~\cite{tauceti2026}, incubated by the Lean FRO and the Mathlib
+Initiative, pursues breadth over a thirteen-area roadmap under human
+governance, but reports no accompanying paper, incident-level account,
+or session-level evidence trail; we instead pursue depth against a
+single frozen scope, with a named-incident case study as a central
+artifact. Among formalized analysis adjacent to fluid PDE, mathlib's
+Gagliardo--Nirenberg--Sobolev inequality~\cite{vandoorn2024gns} and a
+De Giorgi--Nash--Moser elliptic regularity
+formalization~\cite{armstrong2026degiorginashmoser} establish a
+building-block inequality and a regularity theory respectively, neither
+an existence theorem for a nonlinear PDE; the nearest precedent, an
+AI-assisted formalization of well-posedness for the linear, kinetic
+Vlasov equation~\cite{miller2026vlasov}, is single-author and
+single-agent, with no multi-agent governance or incident structure.
+Large-scale human-team formalizations such as the Odd Order
+Theorem~\cite{gonthier2013oddorder} and the Liquid Tensor
+Experiment~\cite{commelin2023abstraction} manage complexity through a
+human team and a specification-driven blueprint; our setting substitutes
+a single scientific owner governing agent-authored implementation, with
+a frozen scope document as blueprint. Finally, the agentic and LLM
+theorem-proving
+literature~\cite{xin2025deepseekproverv2,yang2023leandojo,deepmind2025alphaproof,zhou2026leanatlas}
+reports session- or benchmark-scale results, not a project-scale
+process with recorded incidents; rising autonomous task
+horizons~\cite{metr2025longtasks} and a study of agentic pull
+requests~\cite{agenticprs2026security} motivate the reliability question
+from outside formalization but do not instrument a single campaign to
+this depth.
+
+This paper makes three contributions:
+\begin{enumerate}
+\item A completed, kernel-only Lean~4 and mathlib formalization of
+  Leray--Hopf weak-solution existence on $\mathbb{T}^3$ and $\mathbb{R}^3$,
+  under an agent-orchestrated regime over roughly six weeks.
+\item A workflow design -- statement-first development, independent
+  adversarial review, and machine-checked verification gates -- with an
+  evidence-backed account of what it caught and missed, drawn from named
+  incidents rather than impressions.
+\item An evidence methodology for AI-assisted research: session-log
+  escrow with a manifest, machine-checked claim-to-evidence verification,
+  and cost accounting reconciled against billing records.
+\end{enumerate}
+
+Section~\ref{sec:formalization} states the two capstone theorems.
+Section~\ref{sec:workflow} describes the agent-orchestrated workflow.
+Section~\ref{sec:incidents} presents four incidents where a build or
+axiom check alone was insufficient to guarantee soundness, and what
+closed the gap. Section~\ref{sec:discussion} discusses the resulting
+governance picture and limitations; Section~\ref{sec:conclusion}
+concludes.

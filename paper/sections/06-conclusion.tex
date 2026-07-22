@@ -1,6 +1,23 @@
 \section{Conclusion}\label{sec:conclusion}
 
-% Scope (PLAN.md §7.7): process-level reliability management beyond proof
-% checking, required for large-scale AI-assisted formalization.
-
-\todo{Draft at Phase 4.}
+We reported a completed, kernel-only Lean~4 and mathlib formalization of
+Leray--Hopf weak-solution existence on $\mathbb{T}^3$ and $\mathbb{R}^3$,
+built over roughly six weeks under an agent-orchestrated development
+regime, together with the workflow that produced it and an
+evidence-backed account of four incidents in which a green build and a
+passing axiom check were not sufficient to guarantee the campaign was
+proceeding soundly. In each incident the gap was closed by a mechanism
+external to the build -- independent statement review backed by a
+concrete counterexample, exhaustive declaration-level comparison against
+a prior known-good state, or symptom-based resource monitoring -- and the
+same evidence also showed that mechanism's limits: a guardrail closed the
+specific gap that exposed it, not the class of gap in general. This is
+not a claim that kernel checking is dispensable, but the opposite: it is
+necessary and was never violated in the delivered capstones, while being
+demonstrably insufficient, on its own, to have caught what threatened the
+campaign's reliability along the way. Process-level reliability
+management -- statement-first review, exhaustive comparison against
+prior state, and resource-aware orchestration, each backed by recorded,
+checkable evidence -- is therefore not an optional supplement to proof
+checking in agent-orchestrated formalization, but a necessary and, as
+this campaign shows, implementable part of it.
