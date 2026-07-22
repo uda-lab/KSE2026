@@ -22,9 +22,9 @@ inventory 化する）．
 | 資料 | 所在 | 収集状態 |
 |---|---|---|
 | leray-hopf Git 履歴 | `uda-lab/leray-hopf`（public） | pinned: v0.1.0-rc1 / 7c15710a |
-| leray-hopf Issues / PRs | 同上 | 未収集（Phase 2 で export → `evidence/repository-snapshots/`） |
-| CI / build attestation 記録 | 同上 Actions | 未収集 |
-| leray-hopf-notes（companion site） | `uda-lab/leray-hopf-notes` | 未収集 |
+| leray-hopf Issues / PRs | 同上 | **収集済 2026-07-21**（`evidence/repository-snapshots/leray-hopf/`: issues.json 195 件 = issue+PR，comments.json，commits.json 320 件，tags.json，releases.json，EXPORT.json = 再現手順．PR #13） |
+| CI / build attestation 記録 | 同上 Actions | releases.json / tags.json に attestation メタ収集済．Actions run log 本体は未収集（必要時に export） |
+| leray-hopf-notes（companion site） | `uda-lab/leray-hopf-notes` | 未収集（論文の一次資料としては不使用．参照時に個別収集） |
 
 ## 文献
 

@@ -23,7 +23,7 @@
 
 ## ビルドと検査
 
-- `make pdf` — LaTeX ビルド（tectonic 優先）．原稿を触ったら必ずビルドが通ることを確認．
+- `make pdf` — LaTeX ビルド（latexmk/pdflatex 優先，tectonic fallback）．原稿を触ったら必ずビルドが通ることを確認．
 - `make verify` — claim ↔ evidence リンク検査．claims/ か paper/ を触ったら実行．
 - `make lint` — chktex（存在する場合のみ）．
 - スクリプトは Python 3 標準ライブラリのみで動くこと（依存追加は不可）．
