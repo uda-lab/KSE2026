@@ -106,7 +106,10 @@ The 96-file, $\sim$42{,}000-line \texttt{LerayHopf/} tree (measured at the
 pinned commit; \texttt{evidence/metrics/formalization-metrics.json})
 % CLAIM: CLM-001 (formalization-metrics.json, measured at leray-hopf@7c15710a)
 is organized around three domain-neutral layers shared by both lanes, plus
-per-domain instantiations. \emph{Galerkin approximation and finite-dimensional ODE
+per-domain instantiations; the layer description below follows the pinned
+commit's own architecture documentation.
+% source: leray-hopf@7c15710a docs/architecture.md (module organization)
+\emph{Galerkin approximation and finite-dimensional ODE
 existence}: for each finite-dimensional Galerkin subspace $V_n$, the
 truncated quadratic vector field is shown $C^1$ with a dissipative
 inner-product estimate, and forward-global existence on $V_n$ is obtained
@@ -114,10 +117,9 @@ by a tiling/gluing argument over local Picard--Lindelöf solutions driven
 by an a~priori energy bound, rather than by invoking a global
 existence theorem from mathlib directly. \emph{Spatial compactness}:
 $\mathbb{T}^3$ uses a Fourier mode-tail Rellich argument; $\mathbb{R}^3$
-uses a local Rellich--Kondrachov embedding on balls (the one classical
-input not otherwise derived from mathlib) combined with a
-Fréchet--Kolmogorov criterion and a countable diagonal argument over an
-exhausting sequence of balls. \emph{Aubin--Lions compactness in time and
+uses a local Rellich--Kondrachov embedding on balls, formalized in-repo,
+combined with a Fréchet--Kolmogorov criterion and a countable diagonal
+argument over an exhausting sequence of balls. \emph{Aubin--Lions compactness in time and
 limit passage}: a shared Gelfand-triple/Bochner-space layer supplies the
 time-compactness and weak-limit toolkit consumed by both lanes' passage
 from the Galerkin sequence to a solution of the weak equation, energy

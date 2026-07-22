@@ -86,4 +86,13 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   nonlinear fluid PDE has been reported in Lean, Coq, or Isabelle/HOL" の水準に
   限定し，調査日と探索方法への脚注参照を付す．投稿直前に再検索して時点を更新する．
 
+## CLM-007: 03 節（workflow）で述べる個別の歴史的事実（役割構成，dispatch 件数，規律・ゲートの導入時期と契機，モデル選択の推移）は，`analysis/workflow-evolution.md` の時系列表と `evidence/session-index/` の符号化 6 セッションに裏付けられた範囲に限る
+- Status: frozen
+- Paper location: sections/03-agent-workflow.tex
+- Evidence: `analysis/workflow-evolution.md`（全行 Evidence 付き時系列表），`evidence/session-index/` 6 index（EV-2076・EV-0925・EV-1669・EV-0247 ほか）
+- Notes: 03 節の各主張は本 claim を経由して workflow-evolution.md / session-index の
+  該当行へ解決する（本文中の `% EV-NNNN` コメントが対応行を指す）．未符号化期間の
+  事実は述べない（下界主義）．2026-07-23 夜間 freeze 分 — 朝の owner 通読での
+  追認対象（CLM-006 と同扱い）．
+
 <!-- 以降の claim は必要に応じて追加する． -->
