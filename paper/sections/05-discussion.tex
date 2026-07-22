@@ -1,87 +1,70 @@
 \section{Discussion and Limitations}\label{sec:discussion}
 
-\subsection{What the incidents imply about governance}
-
 The four incidents of Section~\ref{sec:incidents} converge on a single
-picture: a build and a kernel-level axiom check verify that whatever is
-currently stated type-checks and rests on no unexpected assumptions, but
-neither verifies that a statement means what it claims, that a public
-declaration is still present, or that the host running the campaign has
-enough memory to finish. Each gap this project actually hit was closed by
-a mechanism external to the build -- independent statement review backed
-by a concrete counterexample, exhaustive declaration-level comparison
-against a prior known-good state, and symptom-based resource
-monitoring -- and each of those three mechanisms generalizes beyond this
-project to any agent-orchestrated formalization effort, not because it is
-exotic but because none of the three is implied by the other two or by
-kernel checking itself. % CLAIM: INC-001, INC-002, INC-004, INC-005
+picture: a build and axiom check verify that whatever is stated
+type-checks and rests on no unexpected assumptions, but neither verifies
+that a statement means what it claims, that a declaration is still
+present, or that the host has enough memory to finish. Each gap this
+project hit was closed by a mechanism external to the build --
+independent statement review backed by a concrete counterexample,
+exhaustive declaration-level comparison against a prior known-good
+state, and symptom-based resource monitoring. None is specific to this
+codebase or implied by kernel checking itself, so we offer them as
+candidate mechanisms for other agent-orchestrated efforts -- while
+noting, consistent with the limitations below, that a single case study
+cannot validate their generality. % CLAIM: CLM-008, INC-001, INC-002, INC-004, INC-005
 
 The same evidence, however, shows these mechanisms functioning as
-detection layers rather than as a completeness argument. The postmortem
+detection layers rather than a completeness argument. The postmortem
 that closed the false-generalization incident (\S\ref{sec:inc001}) was
 itself followed, two days later, by a documentation pull request on the
-very files it had just fixed, merged with no requested or submitted
-independent review -- the same handoff failure the postmortem existed to
-prevent, recurring inside its own aftermath. % CLAIM: INC-001
+same files, merged with no independent review -- the same handoff
+failure the postmortem existed to prevent, recurring inside its own
+aftermath. % CLAIM: INC-001
 Symmetrically, the resource guardrails written after the
 memory-exhaustion cascade (\S\ref{sec:inc005}) stopped the accumulated
-side-process path they targeted, but a structurally different low-memory
-episode -- the legitimate peak memory use of a single heavy compilation,
-with no accumulated side-processes and no change in the
-out-of-memory counter -- recurred that same afternoon; it was caught only
-because the guardrails happened to include a symptom-based check
-(available memory against a fixed threshold) rather than a check aimed
-only at the identified cause. % CLAIM: INC-005
-Taken together, these two recurrences indicate that in this project a
-governance mechanism was adopted only after a specific, dated failure
-exposed the gap it fills, and that adopting a mechanism narrowed but did
-not close the class of failure it targeted: the next pull request, or the
-next afternoon, could still slip through a differently shaped instance of
-the same problem. Reliability governance in this setting is additive and
-incident-driven rather than complete, and treating any fixed set of
-guardrails as sufficient would repeat the same optimism that each
-guardrail was introduced to correct.
+side-process path they targeted, but a structurally different
+low-memory episode -- legitimate peak use of a single heavy compilation,
+no accumulated side-processes, no change in the out-of-memory counter --
+recurred that same afternoon, caught only because the guardrails
+happened to include a symptom-based check rather than one aimed only at
+the identified cause. % CLAIM: INC-005
+Taken together, these recurrences indicate that a governance mechanism
+was adopted only after a specific, dated failure exposed the gap it
+fills, and that adopting it narrowed but did not close the targeted
+class of failure. Reliability governance here is additive and
+incident-driven rather than complete.
 
-\subsection{Limitations}
-
-This work is a single-project, single-team case study, and the workflow
-and incident patterns reported here should not be read as a general
-prevalence estimate or as validated guidance beyond this setting.
-The session-log record has coverage gaps -- most notably an early
-log-rotation loss -- and portions of the reported timeline are
-reconstructed from Git and issue history rather than from primary session
-transcripts; every incident and metric in this paper states its evidence
-type and, where reconstruction was needed, a confidence level, rather than
-presenting reconstructed and directly observed material as
-equally certain. The AI models and tools used are updated on a schedule
-outside this project's control, so the specific agent behaviors described
-here -- both the failures and the recoveries -- are not guaranteed to
-reproduce under later model or tool versions, even holding the workflow
-fixed. Some of what is reported is specific to the particular
-proprietary coding-agent tooling used in this campaign, and we have tried
-to separate those operational details from the more general
-statement-first, independent-review methodology, but the line between the
-two is not always sharp and a reader adapting this workflow to different
-tooling should expect to redraw it. We report what happened in one
-campaign, not a controlled comparison: there is no matched control group
-run without agent orchestration or without the specific guardrails
-described, and no claim of a causal effect of any workflow element on
-outcomes should be read into the incident evidence, which is offered as
-observations consistent with the value of independent review
-(\S\ref{sec:incidents}), not as a counterfactual
+This work is a single-project, single-team case study; the patterns
+reported here should not be read as a general prevalence estimate or
+validated guidance beyond this setting. The session-log record has
+coverage gaps -- most notably an early log-rotation loss -- and portions
+of the timeline are reconstructed from Git and issue history rather
+than primary session transcripts; every incident and metric states its
+evidence type and, where reconstruction was needed, a confidence level,
+rather than presenting reconstructed and observed material as equally
+certain. The AI models and tools used are updated on a schedule outside
+this project's control, so the agent behaviors described are not
+guaranteed to reproduce under later versions. Some of what is reported
+is specific to the particular proprietary tooling used; the line
+between that and the general statement-first, independent-review
+methodology is not always sharp. We report what happened in one
+campaign, not a controlled comparison: there is no matched control
+group run without agent orchestration or the guardrails described, and
+no claim of a causal effect on outcomes should be read into the
+evidence, offered as observations consistent with the value of
+independent review (\S\ref{sec:incidents}), not a counterfactual
 demonstration. % CLAIM: CLM-005
-Throughout, the scientific owner's direct supervision,
-judgment, and intervention are inseparable from the reported outcomes; this
-is a report on an agent-orchestrated process under close human governance,
-not on agents operating unsupervised. Finally, the formalization result
-itself is bounded exactly as stated in Section~\ref{sec:formalization}:
-the homogeneous equations only, a finite (if arbitrary) time horizon, weak
-equality tested only against separated-variable test functions, and no
-claim of uniqueness or of regularity beyond the exhibited energy class;
-none of these boundaries should be read as implicitly lifted elsewhere in
-the paper.
+Throughout, the scientific owner's direct supervision is inseparable
+from the reported outcomes; this is a report on an agent-orchestrated
+process under close human governance, not agents operating
+unsupervised. Finally, the formalization result is bounded exactly as
+stated in Section~\ref{sec:formalization}: the homogeneous equations
+only, a finite (if arbitrary) time horizon, weak equality tested only
+against separated-variable test functions, and no claim of uniqueness
+or regularity beyond the exhibited energy class.
 
-Redacted evidence excerpts, claim-to-evidence manifests, and the scripts
-used to reproduce the reported metrics are included in the paper's
-repository; raw session logs are withheld to protect the privacy of the
-individuals and systems they record.
+Redacted evidence excerpts, claim-to-evidence manifests, and scripts to
+reproduce the reported metrics are in the paper's repository; raw
+session logs are withheld to protect the privacy of the individuals and
+systems they record.
