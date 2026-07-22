@@ -18,7 +18,7 @@ Monitoring 実測**で完全に閉じた．raw export は Git 外
 | escrow（leray-hopf 分）の公表単価換算 | **$258.28** |
 | 実効換算レート | **[160.4, 161.8] ¥/$**（両側同定．点推定 161.8，下記） |
 | **leray-hopf 単独の実請求（導出値）** | **¥41,421〜41,796**（点推定 ≈¥41,796，総請求の **75.5〜76.2%**） |
-| escrow 外（machine-wide 残余）の相当額 | ≈ ¥13,072（23.8%） |
+| escrow 外（machine-wide 残余）の相当額 | ¥13,072〜13,447（23.8〜24.5%） |
 
 ## 方法と根拠
 
@@ -41,7 +41,7 @@ Monitoring 実測**で完全に閉じた．raw export は Git 外
    fable ≈ 3.42M / opus ≈ 20.67M．これは**独立の実測**である Cloud Monitoring
    `publisher/online_serving/token_count`（machine-wide，5 分 rate の区間積分）の
    escrow 超過分 fable 4.11M / opus 21.50M と両モデルで符合する（83% / 96%．
-   FX を下限で取る保守性と計測粒度の差で残差側がやや小さく出る）．
+   点推定を FX 上界に取るため残差は最小評価となり，gap をやや下回る側に出る）．
    escrow 外利用の実体は，全 project 混在 prompt history で確認済みの
    Vertex 設定作業セッションと別プロジェクト作業（07-02〜07-03）．
 4. **補助証拠**: region=us の SKU（計 ¥10.8）は region を global に設定する前の
