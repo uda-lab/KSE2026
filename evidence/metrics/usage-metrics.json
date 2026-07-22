@@ -1,0 +1,2036 @@
+{
+ "by_model": {
+  "claude-fable-5": {
+   "api_cost_usd": 1755.6383,
+   "cache_read_tokens": 1007815072,
+   "cache_write_1h_tokens": 17823136,
+   "cache_write_5m_tokens": 17003222,
+   "input_tokens": 908511,
+   "output_tokens": 3394697,
+   "turns": 4753
+  },
+  "claude-haiku-4-5-20251001": {
+   "api_cost_usd": 5.4094,
+   "cache_read_tokens": 28409784,
+   "cache_write_1h_tokens": 214936,
+   "cache_write_5m_tokens": 1288612,
+   "input_tokens": 2595,
+   "output_tokens": 105069,
+   "turns": 750
+  },
+  "claude-opus-4-8": {
+   "api_cost_usd": 3512.9191,
+   "cache_read_tokens": 4144922633,
+   "cache_write_1h_tokens": 38918281,
+   "cache_write_5m_tokens": 128484719,
+   "input_tokens": 3422106,
+   "output_tokens": 9245401,
+   "turns": 21458
+  },
+  "claude-sonnet-4-6": {
+   "api_cost_usd": 409.9398,
+   "cache_read_tokens": 871950687,
+   "cache_write_1h_tokens": 231410,
+   "cache_write_5m_tokens": 33340640,
+   "input_tokens": 192954,
+   "output_tokens": 1423979,
+   "turns": 10375
+  },
+  "claude-sonnet-5": {
+   "api_cost_usd": 1296.661,
+   "cache_read_tokens": 2728742092,
+   "cache_write_1h_tokens": 43826,
+   "cache_write_5m_tokens": 122713672,
+   "input_tokens": 965516,
+   "output_tokens": 980169,
+   "turns": 11397
+  }
+ },
+ "by_model_date_host": [
+  {
+   "api_cost_usd": 8.5666,
+   "cache_read_tokens": 5071798,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 259949,
+   "date_utc": "2026-07-01",
+   "host": "vps",
+   "input_tokens": 7718,
+   "model": "claude-fable-5",
+   "output_tokens": 3366,
+   "turns": 54
+  },
+  {
+   "api_cost_usd": 46.8062,
+   "cache_read_tokens": 21920307,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 1588709,
+   "date_utc": "2026-07-02",
+   "host": "local-secondary",
+   "input_tokens": 30532,
+   "model": "claude-fable-5",
+   "output_tokens": 94435,
+   "turns": 178
+  },
+  {
+   "api_cost_usd": 146.8126,
+   "cache_read_tokens": 78664438,
+   "cache_write_1h_tokens": 339850,
+   "cache_write_5m_tokens": 4337709,
+   "date_utc": "2026-07-02",
+   "host": "vps",
+   "input_tokens": 103454,
+   "model": "claude-fable-5",
+   "output_tokens": 121905,
+   "turns": 342
+  },
+  {
+   "api_cost_usd": 118.8972,
+   "cache_read_tokens": 26933223,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 6439139,
+   "date_utc": "2026-07-03",
+   "host": "local-secondary",
+   "input_tokens": 64539,
+   "model": "claude-fable-5",
+   "output_tokens": 216586,
+   "turns": 323
+  },
+  {
+   "api_cost_usd": 61.8982,
+   "cache_read_tokens": 21986733,
+   "cache_write_1h_tokens": 838701,
+   "cache_write_5m_tokens": 1517026,
+   "date_utc": "2026-07-03",
+   "host": "vps",
+   "input_tokens": 87185,
+   "model": "claude-fable-5",
+   "output_tokens": 66056,
+   "turns": 145
+  },
+  {
+   "api_cost_usd": 27.3181,
+   "cache_read_tokens": 15087792,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 621249,
+   "date_utc": "2026-07-04",
+   "host": "local-secondary",
+   "input_tokens": 17995,
+   "model": "claude-fable-5",
+   "output_tokens": 85694,
+   "turns": 118
+  },
+  {
+   "api_cost_usd": 17.7388,
+   "cache_read_tokens": 6434454,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 845208,
+   "date_utc": "2026-07-04",
+   "host": "vps",
+   "input_tokens": 19113,
+   "model": "claude-fable-5",
+   "output_tokens": 10962,
+   "turns": 27
+  },
+  {
+   "api_cost_usd": 16.1414,
+   "cache_read_tokens": 2882745,
+   "cache_write_1h_tokens": 157677,
+   "cache_write_5m_tokens": 695149,
+   "date_utc": "2026-07-05",
+   "host": "vps",
+   "input_tokens": 35061,
+   "model": "claude-fable-5",
+   "output_tokens": 21303,
+   "turns": 38
+  },
+  {
+   "api_cost_usd": 66.5705,
+   "cache_read_tokens": 34176244,
+   "cache_write_1h_tokens": 1052935,
+   "cache_write_5m_tokens": 8404,
+   "date_utc": "2026-07-06",
+   "host": "vps",
+   "input_tokens": 28256,
+   "model": "claude-fable-5",
+   "output_tokens": 218958,
+   "turns": 218
+  },
+  {
+   "api_cost_usd": 37.217,
+   "cache_read_tokens": 13708731,
+   "cache_write_1h_tokens": 908921,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-07",
+   "host": "vps",
+   "input_tokens": 12116,
+   "model": "claude-fable-5",
+   "output_tokens": 104173,
+   "turns": 89
+  },
+  {
+   "api_cost_usd": 16.7599,
+   "cache_read_tokens": 5855967,
+   "cache_write_1h_tokens": 411359,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-09",
+   "host": "local-main",
+   "input_tokens": 18888,
+   "model": "claude-fable-5",
+   "output_tokens": 49758,
+   "turns": 56
+  },
+  {
+   "api_cost_usd": 135.517,
+   "cache_read_tokens": 117494864,
+   "cache_write_1h_tokens": 437044,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-10",
+   "host": "local-main",
+   "input_tokens": 26664,
+   "model": "claude-fable-5",
+   "output_tokens": 180292,
+   "turns": 303
+  },
+  {
+   "api_cost_usd": 41.8594,
+   "cache_read_tokens": 15651701,
+   "cache_write_1h_tokens": 651949,
+   "cache_write_5m_tokens": 690680,
+   "date_utc": "2026-07-10",
+   "host": "vps",
+   "input_tokens": 32889,
+   "model": "claude-fable-5",
+   "output_tokens": 84126,
+   "turns": 105
+  },
+  {
+   "api_cost_usd": 253.5505,
+   "cache_read_tokens": 150118124,
+   "cache_write_1h_tokens": 3936150,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-11",
+   "host": "local-secondary",
+   "input_tokens": 122380,
+   "model": "claude-fable-5",
+   "output_tokens": 469711,
+   "turns": 484
+  },
+  {
+   "api_cost_usd": 58.2369,
+   "cache_read_tokens": 27531759,
+   "cache_write_1h_tokens": 1225453,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-11",
+   "host": "vps",
+   "input_tokens": 24968,
+   "model": "claude-fable-5",
+   "output_tokens": 118928,
+   "turns": 152
+  },
+  {
+   "api_cost_usd": 9.9969,
+   "cache_read_tokens": 454746,
+   "cache_write_1h_tokens": 475564,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-12",
+   "host": "local-secondary",
+   "input_tokens": 4,
+   "model": "claude-fable-5",
+   "output_tokens": 617,
+   "turns": 2
+  },
+  {
+   "api_cost_usd": 17.4255,
+   "cache_read_tokens": 6580780,
+   "cache_write_1h_tokens": 441072,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-12",
+   "host": "vps",
+   "input_tokens": 25678,
+   "model": "claude-fable-5",
+   "output_tokens": 35329,
+   "turns": 62
+  },
+  {
+   "api_cost_usd": 85.3528,
+   "cache_read_tokens": 48482871,
+   "cache_write_1h_tokens": 1364088,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-14",
+   "host": "local-secondary",
+   "input_tokens": 693,
+   "model": "claude-fable-5",
+   "output_tokens": 191625,
+   "turns": 142
+  },
+  {
+   "api_cost_usd": 93.8412,
+   "cache_read_tokens": 66942382,
+   "cache_write_1h_tokens": 644351,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-15",
+   "host": "vps",
+   "input_tokens": 40197,
+   "model": "claude-fable-5",
+   "output_tokens": 272197,
+   "turns": 332
+  },
+  {
+   "api_cost_usd": 116.2955,
+   "cache_read_tokens": 68401971,
+   "cache_write_1h_tokens": 1850302,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-16",
+   "host": "vps",
+   "input_tokens": 40129,
+   "model": "claude-fable-5",
+   "output_tokens": 209723,
+   "turns": 301
+  },
+  {
+   "api_cost_usd": 135.915,
+   "cache_read_tokens": 97599160,
+   "cache_write_1h_tokens": 1279655,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-17",
+   "host": "vps",
+   "input_tokens": 66872,
+   "model": "claude-fable-5",
+   "output_tokens": 241080,
+   "turns": 401
+  },
+  {
+   "api_cost_usd": 37.0806,
+   "cache_read_tokens": 22750023,
+   "cache_write_1h_tokens": 453575,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-18",
+   "host": "vps",
+   "input_tokens": 26344,
+   "model": "claude-fable-5",
+   "output_tokens": 99912,
+   "turns": 150
+  },
+  {
+   "api_cost_usd": 169.9309,
+   "cache_read_tokens": 131017586,
+   "cache_write_1h_tokens": 966705,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-19",
+   "host": "vps",
+   "input_tokens": 56300,
+   "model": "claude-fable-5",
+   "output_tokens": 380324,
+   "turns": 555
+  },
+  {
+   "api_cost_usd": 2.5961,
+   "cache_read_tokens": 927413,
+   "cache_write_1h_tokens": 46918,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-20",
+   "host": "local-main",
+   "input_tokens": 38,
+   "model": "claude-fable-5",
+   "output_tokens": 14598,
+   "turns": 20
+  },
+  {
+   "api_cost_usd": 25.5805,
+   "cache_read_tokens": 17917502,
+   "cache_write_1h_tokens": 176819,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-20",
+   "host": "vps",
+   "input_tokens": 19329,
+   "model": "claude-fable-5",
+   "output_tokens": 78666,
+   "turns": 110
+  },
+  {
+   "api_cost_usd": 7.7331,
+   "cache_read_tokens": 3221758,
+   "cache_write_1h_tokens": 164048,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-21",
+   "host": "local-secondary",
+   "input_tokens": 1169,
+   "model": "claude-fable-5",
+   "output_tokens": 24373,
+   "turns": 46
+  },
+  {
+   "api_cost_usd": 0.8859,
+   "cache_read_tokens": 4543661,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 247589,
+   "date_utc": "2026-06-15",
+   "host": "local-secondary",
+   "input_tokens": 324,
+   "model": "claude-haiku-4-5-20251001",
+   "output_tokens": 24353,
+   "turns": 111
+  },
+  {
+   "api_cost_usd": 0.0355,
+   "cache_read_tokens": 44403,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 21633,
+   "date_utc": "2026-06-17",
+   "host": "local-secondary",
+   "input_tokens": 20,
+   "model": "claude-haiku-4-5-20251001",
+   "output_tokens": 801,
+   "turns": 4
+  },
+  {
+   "api_cost_usd": 0.0416,
+   "cache_read_tokens": 142085,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 21224,
+   "date_utc": "2026-06-19",
+   "host": "vps",
+   "input_tokens": 49,
+   "model": "claude-haiku-4-5-20251001",
+   "output_tokens": 172,
+   "turns": 11
+  },
+  {
+   "api_cost_usd": 1.9204,
+   "cache_read_tokens": 11506032,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 504559,
+   "date_utc": "2026-06-20",
+   "host": "vps",
+   "input_tokens": 776,
+   "model": "claude-haiku-4-5-20251001",
+   "output_tokens": 27671,
+   "turns": 304
+  },
+  {
+   "api_cost_usd": 1.1222,
+   "cache_read_tokens": 7045994,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 285384,
+   "date_utc": "2026-06-21",
+   "host": "vps",
+   "input_tokens": 357,
+   "model": "claude-haiku-4-5-20251001",
+   "output_tokens": 12098,
+   "turns": 192
+  },
+  {
+   "api_cost_usd": 0.21,
+   "cache_read_tokens": 774990,
+   "cache_write_1h_tokens": 52563,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-03",
+   "host": "vps",
+   "input_tokens": 150,
+   "model": "claude-haiku-4-5-20251001",
+   "output_tokens": 5443,
+   "turns": 18
+  },
+  {
+   "api_cost_usd": 0.4944,
+   "cache_read_tokens": 1665213,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 208223,
+   "date_utc": "2026-07-04",
+   "host": "local-secondary",
+   "input_tokens": 161,
+   "model": "claude-haiku-4-5-20251001",
+   "output_tokens": 13497,
+   "turns": 38
+  },
+  {
+   "api_cost_usd": 0.1253,
+   "cache_read_tokens": 525757,
+   "cache_write_1h_tokens": 25181,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-10",
+   "host": "local-main",
+   "input_tokens": 123,
+   "model": "claude-haiku-4-5-20251001",
+   "output_tokens": 4444,
+   "turns": 14
+  },
+  {
+   "api_cost_usd": 0.1545,
+   "cache_read_tokens": 163155,
+   "cache_write_1h_tokens": 67279,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-14",
+   "host": "local-secondary",
+   "input_tokens": 36,
+   "model": "claude-haiku-4-5-20251001",
+   "output_tokens": 717,
+   "turns": 4
+  },
+  {
+   "api_cost_usd": 0.1878,
+   "cache_read_tokens": 886239,
+   "cache_write_1h_tokens": 33436,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-17",
+   "host": "local-main",
+   "input_tokens": 361,
+   "model": "claude-haiku-4-5-20251001",
+   "output_tokens": 6390,
+   "turns": 25
+  },
+  {
+   "api_cost_usd": 0.2318,
+   "cache_read_tokens": 1112255,
+   "cache_write_1h_tokens": 36477,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-17",
+   "host": "local-secondary",
+   "input_tokens": 238,
+   "model": "claude-haiku-4-5-20251001",
+   "output_tokens": 9483,
+   "turns": 29
+  },
+  {
+   "api_cost_usd": 26.988,
+   "cache_read_tokens": 27761124,
+   "cache_write_1h_tokens": 613960,
+   "cache_write_5m_tokens": 420317,
+   "date_utc": "2026-06-15",
+   "host": "local-secondary",
+   "input_tokens": 28295,
+   "model": "claude-opus-4-8",
+   "output_tokens": 167974,
+   "turns": 318
+  },
+  {
+   "api_cost_usd": 54.1344,
+   "cache_read_tokens": 54279885,
+   "cache_write_1h_tokens": 1226853,
+   "cache_write_5m_tokens": 1784760,
+   "date_utc": "2026-06-16",
+   "host": "local-secondary",
+   "input_tokens": 7875,
+   "model": "claude-opus-4-8",
+   "output_tokens": 141273,
+   "turns": 578
+  },
+  {
+   "api_cost_usd": 194.8267,
+   "cache_read_tokens": 229893552,
+   "cache_write_1h_tokens": 4142683,
+   "cache_write_5m_tokens": 3761930,
+   "date_utc": "2026-06-17",
+   "host": "local-secondary",
+   "input_tokens": 114145,
+   "model": "claude-opus-4-8",
+   "output_tokens": 574811,
+   "turns": 1819
+  },
+  {
+   "api_cost_usd": 48.7566,
+   "cache_read_tokens": 46976496,
+   "cache_write_1h_tokens": 987745,
+   "cache_write_5m_tokens": 1949100,
+   "date_utc": "2026-06-18",
+   "host": "local-secondary",
+   "input_tokens": 10916,
+   "model": "claude-opus-4-8",
+   "output_tokens": 126176,
+   "turns": 687
+  },
+  {
+   "api_cost_usd": 57.535,
+   "cache_read_tokens": 37388150,
+   "cache_write_1h_tokens": 1014655,
+   "cache_write_5m_tokens": 3984736,
+   "date_utc": "2026-06-19",
+   "host": "local-secondary",
+   "input_tokens": 9692,
+   "model": "claude-opus-4-8",
+   "output_tokens": 149654,
+   "turns": 439
+  },
+  {
+   "api_cost_usd": 2.5618,
+   "cache_read_tokens": 1316541,
+   "cache_write_1h_tokens": 112791,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-06-19",
+   "host": "vps",
+   "input_tokens": 10522,
+   "model": "claude-opus-4-8",
+   "output_tokens": 28921,
+   "turns": 21
+  },
+  {
+   "api_cost_usd": 8.1917,
+   "cache_read_tokens": 32444,
+   "cache_write_1h_tokens": 808775,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-06-20",
+   "host": "local-secondary",
+   "input_tokens": 290,
+   "model": "claude-opus-4-8",
+   "output_tokens": 3451,
+   "turns": 2
+  },
+  {
+   "api_cost_usd": 270.3177,
+   "cache_read_tokens": 304240716,
+   "cache_write_1h_tokens": 3329639,
+   "cache_write_5m_tokens": 8944249,
+   "date_utc": "2026-06-20",
+   "host": "vps",
+   "input_tokens": 505940,
+   "model": "claude-opus-4-8",
+   "output_tokens": 1058788,
+   "turns": 1856
+  },
+  {
+   "api_cost_usd": 671.9174,
+   "cache_read_tokens": 1125508116,
+   "cache_write_1h_tokens": 2330685,
+   "cache_write_5m_tokens": 9894448,
+   "date_utc": "2026-06-21",
+   "host": "vps",
+   "input_tokens": 343024,
+   "model": "claude-opus-4-8",
+   "output_tokens": 892043,
+   "turns": 4803
+  },
+  {
+   "api_cost_usd": 262.8486,
+   "cache_read_tokens": 338978366,
+   "cache_write_1h_tokens": 2284354,
+   "cache_write_5m_tokens": 7591407,
+   "date_utc": "2026-06-22",
+   "host": "vps",
+   "input_tokens": 178645,
+   "model": "claude-opus-4-8",
+   "output_tokens": 887053,
+   "turns": 1346
+  },
+  {
+   "api_cost_usd": 57.899,
+   "cache_read_tokens": 87167152,
+   "cache_write_1h_tokens": 1055587,
+   "cache_write_5m_tokens": 286140,
+   "date_utc": "2026-06-23",
+   "host": "vps",
+   "input_tokens": 10462,
+   "model": "claude-opus-4-8",
+   "output_tokens": 76756,
+   "turns": 420
+  },
+  {
+   "api_cost_usd": 4.9935,
+   "cache_read_tokens": 4524436,
+   "cache_write_1h_tokens": 148357,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-06-24",
+   "host": "vps",
+   "input_tokens": 11253,
+   "model": "claude-opus-4-8",
+   "output_tokens": 47658,
+   "turns": 44
+  },
+  {
+   "api_cost_usd": 18.0111,
+   "cache_read_tokens": 19192267,
+   "cache_write_1h_tokens": 454924,
+   "cache_write_5m_tokens": 118689,
+   "date_utc": "2026-06-25",
+   "host": "vps",
+   "input_tokens": 7773,
+   "model": "claude-opus-4-8",
+   "output_tokens": 123402,
+   "turns": 86
+  },
+  {
+   "api_cost_usd": 254.4215,
+   "cache_read_tokens": 316882970,
+   "cache_write_1h_tokens": 3545916,
+   "cache_write_5m_tokens": 7715607,
+   "date_utc": "2026-06-26",
+   "host": "vps",
+   "input_tokens": 171407,
+   "model": "claude-opus-4-8",
+   "output_tokens": 457653,
+   "turns": 1728
+  },
+  {
+   "api_cost_usd": 287.3598,
+   "cache_read_tokens": 250410324,
+   "cache_write_1h_tokens": 1924980,
+   "cache_write_5m_tokens": 19872685,
+   "date_utc": "2026-06-27",
+   "host": "vps",
+   "input_tokens": 207365,
+   "model": "claude-opus-4-8",
+   "output_tokens": 706551,
+   "turns": 999
+  },
+  {
+   "api_cost_usd": 389.5613,
+   "cache_read_tokens": 427303412,
+   "cache_write_1h_tokens": 3096679,
+   "cache_write_5m_tokens": 18437366,
+   "date_utc": "2026-06-28",
+   "host": "vps",
+   "input_tokens": 386261,
+   "model": "claude-opus-4-8",
+   "output_tokens": 1111120,
+   "turns": 1655
+  },
+  {
+   "api_cost_usd": 101.9728,
+   "cache_read_tokens": 58543802,
+   "cache_write_1h_tokens": 601669,
+   "cache_write_5m_tokens": 10220296,
+   "date_utc": "2026-06-29",
+   "host": "vps",
+   "input_tokens": 28013,
+   "model": "claude-opus-4-8",
+   "output_tokens": 106692,
+   "turns": 182
+  },
+  {
+   "api_cost_usd": 18.6835,
+   "cache_read_tokens": 19595781,
+   "cache_write_1h_tokens": 355399,
+   "cache_write_5m_tokens": 198852,
+   "date_utc": "2026-06-30",
+   "host": "local-secondary",
+   "input_tokens": 57464,
+   "model": "claude-opus-4-8",
+   "output_tokens": 152060,
+   "turns": 122
+  },
+  {
+   "api_cost_usd": 94.8556,
+   "cache_read_tokens": 59535355,
+   "cache_write_1h_tokens": 4130137,
+   "cache_write_5m_tokens": 2058096,
+   "date_utc": "2026-07-01",
+   "host": "vps",
+   "input_tokens": 164987,
+   "model": "claude-opus-4-8",
+   "output_tokens": 403940,
+   "turns": 358
+  },
+  {
+   "api_cost_usd": 0.7335,
+   "cache_read_tokens": 126979,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 87504,
+   "date_utc": "2026-07-02",
+   "host": "local-secondary",
+   "input_tokens": 4322,
+   "model": "claude-opus-4-8",
+   "output_tokens": 4062,
+   "turns": 5
+  },
+  {
+   "api_cost_usd": 24.7688,
+   "cache_read_tokens": 21352743,
+   "cache_write_1h_tokens": 886634,
+   "cache_write_5m_tokens": 147784,
+   "date_utc": "2026-07-02",
+   "host": "vps",
+   "input_tokens": 17069,
+   "model": "claude-opus-4-8",
+   "output_tokens": 168682,
+   "turns": 127
+  },
+  {
+   "api_cost_usd": 64.5205,
+   "cache_read_tokens": 67164023,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 3287593,
+   "date_utc": "2026-07-03",
+   "host": "local-secondary",
+   "input_tokens": 69448,
+   "model": "claude-opus-4-8",
+   "output_tokens": 401753,
+   "turns": 530
+  },
+  {
+   "api_cost_usd": 44.1926,
+   "cache_read_tokens": 50832545,
+   "cache_write_1h_tokens": 700213,
+   "cache_write_5m_tokens": 931927,
+   "date_utc": "2026-07-03",
+   "host": "vps",
+   "input_tokens": 64764,
+   "model": "claude-opus-4-8",
+   "output_tokens": 225032,
+   "turns": 316
+  },
+  {
+   "api_cost_usd": 19.4,
+   "cache_read_tokens": 16363087,
+   "cache_write_1h_tokens": 700647,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-04",
+   "host": "local-secondary",
+   "input_tokens": 27245,
+   "model": "claude-opus-4-8",
+   "output_tokens": 163032,
+   "turns": 66
+  },
+  {
+   "api_cost_usd": 173.3364,
+   "cache_read_tokens": 209318609,
+   "cache_write_1h_tokens": 1699856,
+   "cache_write_5m_tokens": 6583681,
+   "date_utc": "2026-07-04",
+   "host": "vps",
+   "input_tokens": 165206,
+   "model": "claude-opus-4-8",
+   "output_tokens": 388181,
+   "turns": 756
+  },
+  {
+   "api_cost_usd": 76.3154,
+   "cache_read_tokens": 83858871,
+   "cache_write_1h_tokens": 1375107,
+   "cache_write_5m_tokens": 2047507,
+   "date_utc": "2026-07-05",
+   "host": "vps",
+   "input_tokens": 129965,
+   "model": "claude-opus-4-8",
+   "output_tokens": 287525,
+   "turns": 446
+  },
+  {
+   "api_cost_usd": 120.6376,
+   "cache_read_tokens": 133767210,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 7764332,
+   "date_utc": "2026-07-06",
+   "host": "vps",
+   "input_tokens": 364660,
+   "model": "claude-opus-4-8",
+   "output_tokens": 136144,
+   "turns": 885
+  },
+  {
+   "api_cost_usd": 4.5935,
+   "cache_read_tokens": 2490470,
+   "cache_write_1h_tokens": 180583,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-07",
+   "host": "local-main",
+   "input_tokens": 7437,
+   "model": "claude-opus-4-8",
+   "output_tokens": 60210,
+   "turns": 38
+  },
+  {
+   "api_cost_usd": 64.6323,
+   "cache_read_tokens": 75356670,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 3979415,
+   "date_utc": "2026-07-07",
+   "host": "vps",
+   "input_tokens": 170130,
+   "model": "claude-opus-4-8",
+   "output_tokens": 49279,
+   "turns": 350
+  },
+  {
+   "api_cost_usd": 0.4589,
+   "cache_read_tokens": 205444,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 52040,
+   "date_utc": "2026-07-09",
+   "host": "local-main",
+   "input_tokens": 6039,
+   "model": "claude-opus-4-8",
+   "output_tokens": 29,
+   "turns": 8
+  },
+  {
+   "api_cost_usd": 25.8722,
+   "cache_read_tokens": 20226722,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 2403922,
+   "date_utc": "2026-07-10",
+   "host": "vps",
+   "input_tokens": 49463,
+   "model": "claude-opus-4-8",
+   "output_tokens": 19482,
+   "turns": 130
+  },
+  {
+   "api_cost_usd": 0.7333,
+   "cache_read_tokens": 331867,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 81691,
+   "date_utc": "2026-07-11",
+   "host": "local-secondary",
+   "input_tokens": 11138,
+   "model": "claude-opus-4-8",
+   "output_tokens": 44,
+   "turns": 15
+  },
+  {
+   "api_cost_usd": 29.8279,
+   "cache_read_tokens": 25299033,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 2630915,
+   "date_utc": "2026-07-11",
+   "host": "vps",
+   "input_tokens": 54733,
+   "model": "claude-opus-4-8",
+   "output_tokens": 18458,
+   "turns": 145
+  },
+  {
+   "api_cost_usd": 4.775,
+   "cache_read_tokens": 642282,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 673620,
+   "date_utc": "2026-07-12",
+   "host": "vps",
+   "input_tokens": 23173,
+   "model": "claude-opus-4-8",
+   "output_tokens": 5113,
+   "turns": 11
+  },
+  {
+   "api_cost_usd": 10.193,
+   "cache_read_tokens": 3062879,
+   "cache_write_1h_tokens": 490837,
+   "cache_write_5m_tokens": 574110,
+   "date_utc": "2026-07-14",
+   "host": "local-secondary",
+   "input_tokens": 275,
+   "model": "claude-opus-4-8",
+   "output_tokens": 6544,
+   "turns": 51
+  },
+  {
+   "api_cost_usd": 22.0922,
+   "cache_read_tokens": 24992310,
+   "cache_write_1h_tokens": 718616,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-20",
+   "host": "vps",
+   "input_tokens": 2710,
+   "model": "claude-opus-4-8",
+   "output_tokens": 95855,
+   "turns": 116
+  },
+  {
+   "api_cost_usd": 0.9494,
+   "cache_read_tokens": 1332388,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 132312,
+   "date_utc": "2026-06-15",
+   "host": "local-secondary",
+   "input_tokens": 50,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 3558,
+   "turns": 44
+  },
+  {
+   "api_cost_usd": 1.4489,
+   "cache_read_tokens": 2075881,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 203936,
+   "date_utc": "2026-06-19",
+   "host": "vps",
+   "input_tokens": 61,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 4077,
+   "turns": 55
+  },
+  {
+   "api_cost_usd": 74.4977,
+   "cache_read_tokens": 163354331,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 4683693,
+   "date_utc": "2026-06-20",
+   "host": "vps",
+   "input_tokens": 7426,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 527015,
+   "turns": 2085
+  },
+  {
+   "api_cost_usd": 2.3921,
+   "cache_read_tokens": 4247236,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 260634,
+   "date_utc": "2026-06-21",
+   "host": "vps",
+   "input_tokens": 565,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 9257,
+   "turns": 75
+  },
+  {
+   "api_cost_usd": 34.6373,
+   "cache_read_tokens": 69574394,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 3220451,
+   "date_utc": "2026-06-22",
+   "host": "vps",
+   "input_tokens": 54852,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 101585,
+   "turns": 940
+  },
+  {
+   "api_cost_usd": 32.8259,
+   "cache_read_tokens": 88057632,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 1425166,
+   "date_utc": "2026-06-23",
+   "host": "vps",
+   "input_tokens": 4996,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 69947,
+   "turns": 817
+  },
+  {
+   "api_cost_usd": 1.3433,
+   "cache_read_tokens": 3052563,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 87105,
+   "date_utc": "2026-06-24",
+   "host": "vps",
+   "input_tokens": 4263,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 5873,
+   "turns": 48
+  },
+  {
+   "api_cost_usd": 17.7187,
+   "cache_read_tokens": 48833771,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 667344,
+   "date_utc": "2026-06-25",
+   "host": "vps",
+   "input_tokens": 431,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 37647,
+   "turns": 423
+  },
+  {
+   "api_cost_usd": 12.593,
+   "cache_read_tokens": 27558364,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 1011356,
+   "date_utc": "2026-06-26",
+   "host": "vps",
+   "input_tokens": 346,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 35460,
+   "turns": 328
+  },
+  {
+   "api_cost_usd": 22.3102,
+   "cache_read_tokens": 48698178,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 1866658,
+   "date_utc": "2026-06-27",
+   "host": "vps",
+   "input_tokens": 19799,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 42757,
+   "turns": 581
+  },
+  {
+   "api_cost_usd": 9.5032,
+   "cache_read_tokens": 15088896,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 1192599,
+   "date_utc": "2026-06-28",
+   "host": "vps",
+   "input_tokens": 1160,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 33387,
+   "turns": 206
+  },
+  {
+   "api_cost_usd": 3.196,
+   "cache_read_tokens": 6839722,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 245902,
+   "date_utc": "2026-06-29",
+   "host": "vps",
+   "input_tokens": 150,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 14765,
+   "turns": 142
+  },
+  {
+   "api_cost_usd": 14.9196,
+   "cache_read_tokens": 25208792,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 1587988,
+   "date_utc": "2026-06-30",
+   "host": "local-secondary",
+   "input_tokens": 79659,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 77536,
+   "turns": 389
+  },
+  {
+   "api_cost_usd": 0.5172,
+   "cache_read_tokens": 274181,
+   "cache_write_1h_tokens": 68838,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-06-30",
+   "host": "vps",
+   "input_tokens": 14,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 1457,
+   "turns": 8
+  },
+  {
+   "api_cost_usd": 1.4907,
+   "cache_read_tokens": 2839949,
+   "cache_write_1h_tokens": 43766,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-01",
+   "host": "local-secondary",
+   "input_tokens": 73,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 25061,
+   "turns": 58
+  },
+  {
+   "api_cost_usd": 83.1637,
+   "cache_read_tokens": 186767359,
+   "cache_write_1h_tokens": 94775,
+   "cache_write_5m_tokens": 6152206,
+   "date_utc": "2026-07-01",
+   "host": "vps",
+   "input_tokens": 1954,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 232549,
+   "turns": 1900
+  },
+  {
+   "api_cost_usd": 35.0235,
+   "cache_read_tokens": 78368661,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 2803651,
+   "date_utc": "2026-07-02",
+   "host": "vps",
+   "input_tokens": 835,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 66450,
+   "turns": 787
+  },
+  {
+   "api_cost_usd": 4.7063,
+   "cache_read_tokens": 5904185,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 756799,
+   "date_utc": "2026-07-03",
+   "host": "vps",
+   "input_tokens": 165,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 6435,
+   "turns": 137
+  },
+  {
+   "api_cost_usd": 23.2946,
+   "cache_read_tokens": 38572667,
+   "cache_write_1h_tokens": 24031,
+   "cache_write_5m_tokens": 2869548,
+   "date_utc": "2026-07-04",
+   "host": "vps",
+   "input_tokens": 830,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 54352,
+   "turns": 560
+  },
+  {
+   "api_cost_usd": 27.2335,
+   "cache_read_tokens": 48449048,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 3150179,
+   "date_utc": "2026-07-05",
+   "host": "vps",
+   "input_tokens": 710,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 58898,
+   "turns": 642
+  },
+  {
+   "api_cost_usd": 6.175,
+   "cache_read_tokens": 6852489,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 1023113,
+   "date_utc": "2026-07-06",
+   "host": "vps",
+   "input_tokens": 14615,
+   "model": "claude-sonnet-4-6",
+   "output_tokens": 15913,
+   "turns": 150
+  },
+  {
+   "api_cost_usd": 15.9581,
+   "cache_read_tokens": 11979725,
+   "cache_write_1h_tokens": 23483,
+   "cache_write_5m_tokens": 2994545,
+   "date_utc": "2026-07-07",
+   "host": "vps",
+   "input_tokens": 58505,
+   "model": "claude-sonnet-5",
+   "output_tokens": 54551,
+   "turns": 181
+  },
+  {
+   "api_cost_usd": 15.299,
+   "cache_read_tokens": 28491890,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 1676587,
+   "date_utc": "2026-07-09",
+   "host": "local-main",
+   "input_tokens": 59005,
+   "model": "claude-sonnet-5",
+   "output_tokens": 19147,
+   "turns": 198
+  },
+  {
+   "api_cost_usd": 413.8309,
+   "cache_read_tokens": 984781579,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 30015112,
+   "date_utc": "2026-07-10",
+   "host": "local-main",
+   "input_tokens": 812875,
+   "model": "claude-sonnet-5",
+   "output_tokens": 226745,
+   "turns": 2270
+  },
+  {
+   "api_cost_usd": 88.7533,
+   "cache_read_tokens": 232862057,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 4845359,
+   "date_utc": "2026-07-10",
+   "host": "vps",
+   "input_tokens": 1420,
+   "model": "claude-sonnet-5",
+   "output_tokens": 48019,
+   "turns": 710
+  },
+  {
+   "api_cost_usd": 0.073,
+   "cache_read_tokens": 0,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 19418,
+   "date_utc": "2026-07-11",
+   "host": "local-secondary",
+   "input_tokens": 2,
+   "model": "claude-sonnet-5",
+   "output_tokens": 12,
+   "turns": 1
+  },
+  {
+   "api_cost_usd": 18.5096,
+   "cache_read_tokens": 20988868,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 3232403,
+   "date_utc": "2026-07-11",
+   "host": "vps",
+   "input_tokens": 368,
+   "model": "claude-sonnet-5",
+   "output_tokens": 6023,
+   "turns": 184
+  },
+  {
+   "api_cost_usd": 5.0432,
+   "cache_read_tokens": 8214348,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 673351,
+   "date_utc": "2026-07-12",
+   "host": "vps",
+   "input_tokens": 132,
+   "model": "claude-sonnet-5",
+   "output_tokens": 3562,
+   "turns": 66
+  },
+  {
+   "api_cost_usd": 0.2867,
+   "cache_read_tokens": 377663,
+   "cache_write_1h_tokens": 20343,
+   "cache_write_5m_tokens": 0,
+   "date_utc": "2026-07-14",
+   "host": "local-main",
+   "input_tokens": 18,
+   "model": "claude-sonnet-5",
+   "output_tokens": 3416,
+   "turns": 9
+  },
+  {
+   "api_cost_usd": 0.1811,
+   "cache_read_tokens": 101209,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 37936,
+   "date_utc": "2026-07-14",
+   "host": "local-secondary",
+   "input_tokens": 17,
+   "model": "claude-sonnet-5",
+   "output_tokens": 560,
+   "turns": 10
+  },
+  {
+   "api_cost_usd": 25.4282,
+   "cache_read_tokens": 34904889,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 3817624,
+   "date_utc": "2026-07-15",
+   "host": "vps",
+   "input_tokens": 952,
+   "model": "claude-sonnet-5",
+   "output_tokens": 42518,
+   "turns": 477
+  },
+  {
+   "api_cost_usd": 28.1489,
+   "cache_read_tokens": 52317474,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 3150297,
+   "date_utc": "2026-07-16",
+   "host": "vps",
+   "input_tokens": 913,
+   "model": "claude-sonnet-5",
+   "output_tokens": 42485,
+   "turns": 461
+  },
+  {
+   "api_cost_usd": 332.8063,
+   "cache_read_tokens": 722227295,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 29907995,
+   "date_utc": "2026-07-17",
+   "host": "vps",
+   "input_tokens": 7053,
+   "model": "claude-sonnet-5",
+   "output_tokens": 264134,
+   "turns": 2964
+  },
+  {
+   "api_cost_usd": 68.705,
+   "cache_read_tokens": 149833258,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 6102750,
+   "date_utc": "2026-07-18",
+   "host": "vps",
+   "input_tokens": 8858,
+   "model": "claude-sonnet-5",
+   "output_tokens": 56208,
+   "turns": 801
+  },
+  {
+   "api_cost_usd": 245.4145,
+   "cache_read_tokens": 411181777,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 31848768,
+   "date_utc": "2026-07-19",
+   "host": "vps",
+   "input_tokens": 11058,
+   "model": "claude-sonnet-5",
+   "output_tokens": 172926,
+   "turns": 2467
+  },
+  {
+   "api_cost_usd": 38.2232,
+   "cache_read_tokens": 70480060,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 4391527,
+   "date_utc": "2026-07-20",
+   "host": "vps",
+   "input_tokens": 4340,
+   "model": "claude-sonnet-5",
+   "output_tokens": 39863,
+   "turns": 598
+  }
+ ],
+ "cache_multipliers": {
+  "read": 0.1,
+  "write_1h": 2.0,
+  "write_5m": 1.25
+ },
+ "generated_at_utc": "2026-07-22T05:18:59+00:00",
+ "params": {
+  "gap_thresholds_s": [
+   60,
+   300,
+   900
+  ]
+ },
+ "pricing_usd_per_mtok": {
+  "claude-fable-5": {
+   "input": 10.0,
+   "output": 50.0
+  },
+  "claude-haiku-4-5": {
+   "input": 1.0,
+   "output": 5.0
+  },
+  "claude-opus-4": {
+   "input": 5.0,
+   "output": 25.0
+  },
+  "claude-sonnet-4": {
+   "input": 3.0,
+   "output": 15.0
+  },
+  "claude-sonnet-5": {
+   "input": 3.0,
+   "output": 15.0
+  }
+ },
+ "scan": {
+  "deduped_api_messages": 48733,
+  "files_scanned": 809,
+  "hosts": [
+   "vps",
+   "local-main",
+   "local-secondary"
+  ],
+  "synthetic_records_excluded": 188,
+  "unknown_model_turns": {}
+ },
+ "script": "scripts/extract_usage.py",
+ "sessions": [
+  {
+   "active_s": {
+    "300": 183,
+    "60": 183,
+    "900": 183
+   },
+   "host": "local-main",
+   "session_id": "2390d519-344c-450c-9f85-da64894eccc9",
+   "wall_clock_s": 183
+  },
+  {
+   "active_s": {
+    "300": 124,
+    "60": 124,
+    "900": 124
+   },
+   "host": "local-main",
+   "session_id": "6755bd14-9908-4e6c-8bf7-2d85eda77ae9",
+   "wall_clock_s": 124
+  },
+  {
+   "active_s": {
+    "300": 29745,
+    "60": 13979,
+    "900": 41222
+   },
+   "host": "local-main",
+   "session_id": "7e6156bf-4a4b-40e2-aa46-95822f4d9aa7",
+   "wall_clock_s": 62619
+  },
+  {
+   "active_s": {
+    "300": 1922,
+    "60": 1606,
+    "900": 1922
+   },
+   "host": "local-main",
+   "session_id": "814c1dc0-8166-4689-bb71-a0da30ffb4d4",
+   "wall_clock_s": 1922
+  },
+  {
+   "active_s": {
+    "300": 474,
+    "60": 425,
+    "900": 474
+   },
+   "host": "local-main",
+   "session_id": "81ef94ea-8219-46b4-8656-ddd6e5dfcb99",
+   "wall_clock_s": 474
+  },
+  {
+   "active_s": {
+    "300": 243,
+    "60": 243,
+    "900": 243
+   },
+   "host": "local-main",
+   "session_id": "c0e2f385-505e-4cb0-8db0-f03028bb523b",
+   "wall_clock_s": 243
+  },
+  {
+   "active_s": {
+    "300": 1815,
+    "60": 1500,
+    "900": 1815
+   },
+   "host": "local-main",
+   "session_id": "ea950c4f-be6a-45d4-becc-f082ee791798",
+   "wall_clock_s": 1815
+  },
+  {
+   "active_s": {
+    "300": 3648,
+    "60": 2050,
+    "900": 5069
+   },
+   "host": "local-secondary",
+   "session_id": "001dc97d-0407-4c21-ad52-f9d0a1354556",
+   "wall_clock_s": 6493
+  },
+  {
+   "active_s": {
+    "300": 77,
+    "60": 77,
+    "900": 77
+   },
+   "host": "local-secondary",
+   "session_id": "09e2fb67-71e3-4605-8e66-a0972705a4c4",
+   "wall_clock_s": 77
+  },
+  {
+   "active_s": {
+    "300": 1912,
+    "60": 747,
+    "900": 3681
+   },
+   "host": "local-secondary",
+   "session_id": "1426f771-78f9-44fc-9962-4d697fc68f4b",
+   "wall_clock_s": 3754
+  },
+  {
+   "active_s": {
+    "300": 1236,
+    "60": 593,
+    "900": 1836
+   },
+   "host": "local-secondary",
+   "session_id": "17c882c1-48ba-491f-a37f-cd1bc4deee2d",
+   "wall_clock_s": 5491
+  },
+  {
+   "active_s": {
+    "300": 3202,
+    "60": 1772,
+    "900": 4398
+   },
+   "host": "local-secondary",
+   "session_id": "1ac0c468-4c13-4f7f-9533-4926450a2aa8",
+   "wall_clock_s": 4398
+  },
+  {
+   "active_s": {
+    "300": 310,
+    "60": 70,
+    "900": 741
+   },
+   "host": "local-secondary",
+   "session_id": "2961dcdc-cb6d-4f12-a9f3-795f46a75945",
+   "wall_clock_s": 741
+  },
+  {
+   "active_s": {
+    "300": 1545,
+    "60": 1149,
+    "900": 1652
+   },
+   "host": "local-secondary",
+   "session_id": "2bb93260-f3ed-488c-a620-689995ab5249",
+   "wall_clock_s": 1652
+  },
+  {
+   "active_s": {
+    "300": 466,
+    "60": 158,
+    "900": 641
+   },
+   "host": "local-secondary",
+   "session_id": "322c509e-c659-442d-ad12-a19eda767985",
+   "wall_clock_s": 641
+  },
+  {
+   "active_s": {
+    "300": 2,
+    "60": 2,
+    "900": 2
+   },
+   "host": "local-secondary",
+   "session_id": "3493aaa2-87d0-4c6b-a409-aad1ac6c4b46",
+   "wall_clock_s": 2
+  },
+  {
+   "active_s": {
+    "300": 9452,
+    "60": 4420,
+    "900": 15743
+   },
+   "host": "local-secondary",
+   "session_id": "37d9e29c-0df3-47ad-8cde-008348f86be2",
+   "wall_clock_s": 18413
+  },
+  {
+   "active_s": {
+    "300": 325,
+    "60": 85,
+    "900": 638
+   },
+   "host": "local-secondary",
+   "session_id": "47c3e88a-009c-4695-ab7b-36a1c50b832c",
+   "wall_clock_s": 638
+  },
+  {
+   "active_s": {
+    "300": 27803,
+    "60": 12005,
+    "900": 43221
+   },
+   "host": "local-secondary",
+   "session_id": "560753bd-2fd3-4f67-bd98-71e1a572ea0f",
+   "wall_clock_s": 154250
+  },
+  {
+   "active_s": {
+    "300": 1,
+    "60": 1,
+    "900": 1
+   },
+   "host": "local-secondary",
+   "session_id": "60a45b8d-9a89-4acb-ada3-2e66035c6679",
+   "wall_clock_s": 1
+  },
+  {
+   "active_s": {
+    "300": 2,
+    "60": 2,
+    "900": 2
+   },
+   "host": "local-secondary",
+   "session_id": "69c0a704-a7cd-4731-becc-f80835348eb5",
+   "wall_clock_s": 2
+  },
+  {
+   "active_s": {
+    "300": 618,
+    "60": 138,
+    "900": 1818
+   },
+   "host": "local-secondary",
+   "session_id": "6cdc0c9b-2a80-4c73-a686-ab8e0c283cbe",
+   "wall_clock_s": 124381
+  },
+  {
+   "active_s": {
+    "300": 64131,
+    "60": 26056,
+    "900": 114688
+   },
+   "host": "local-secondary",
+   "session_id": "74aab39b-4afe-44f7-a15c-72653b46a1b8",
+   "wall_clock_s": 753141
+  },
+  {
+   "active_s": {
+    "300": 3444,
+    "60": 2026,
+    "900": 4644
+   },
+   "host": "local-secondary",
+   "session_id": "769e4619-8d36-4ede-989e-d407d6ba411f",
+   "wall_clock_s": 5028
+  },
+  {
+   "active_s": {
+    "300": 1,
+    "60": 1,
+    "900": 1
+   },
+   "host": "local-secondary",
+   "session_id": "7e434e3c-44a2-4459-97a2-5b89ae65d8e6",
+   "wall_clock_s": 1
+  },
+  {
+   "active_s": {
+    "300": 2,
+    "60": 2,
+    "900": 2
+   },
+   "host": "local-secondary",
+   "session_id": "8108a5d1-b94e-451f-b998-1404c3a3502e",
+   "wall_clock_s": 2
+  },
+  {
+   "active_s": {
+    "300": 1,
+    "60": 1,
+    "900": 1
+   },
+   "host": "local-secondary",
+   "session_id": "93bf4062-ddbd-4f18-bbb6-2ff39479c97a",
+   "wall_clock_s": 1
+  },
+  {
+   "active_s": {
+    "300": 3927,
+    "60": 1905,
+    "900": 5268
+   },
+   "host": "local-secondary",
+   "session_id": "9c4ea03f-855d-48cb-b785-7e1249f47771",
+   "wall_clock_s": 5680
+  },
+  {
+   "active_s": {
+    "300": 2,
+    "60": 2,
+    "900": 2
+   },
+   "host": "local-secondary",
+   "session_id": "a3ba701b-4b1e-4ce2-9761-03620be4b0cb",
+   "wall_clock_s": 2
+  },
+  {
+   "active_s": {
+    "300": 171,
+    "60": 60,
+    "900": 171
+   },
+   "host": "local-secondary",
+   "session_id": "a659b49c-da14-4fff-82fc-62168d888f46",
+   "wall_clock_s": 171
+  },
+  {
+   "active_s": {
+    "300": 348,
+    "60": 334,
+    "900": 348
+   },
+   "host": "local-secondary",
+   "session_id": "a6e84919-0204-418e-9467-8bdba08103da",
+   "wall_clock_s": 348
+  },
+  {
+   "active_s": {
+    "300": 2,
+    "60": 2,
+    "900": 2
+   },
+   "host": "local-secondary",
+   "session_id": "b3be70fa-2b63-4a40-bfba-58382c631e67",
+   "wall_clock_s": 2
+  },
+  {
+   "active_s": {
+    "300": 2414,
+    "60": 1826,
+    "900": 2466
+   },
+   "host": "local-secondary",
+   "session_id": "b60e5aa1-826d-4e9f-968c-dd35335822fe",
+   "wall_clock_s": 2466
+  },
+  {
+   "active_s": {
+    "300": 2328,
+    "60": 1317,
+    "900": 2928
+   },
+   "host": "local-secondary",
+   "session_id": "c1dc1608-a402-4123-91c8-5fd61ce4ea10",
+   "wall_clock_s": 8519
+  },
+  {
+   "active_s": {
+    "300": 1480,
+    "60": 376,
+    "900": 3412
+   },
+   "host": "local-secondary",
+   "session_id": "c5128e13-9cfd-4d0c-9b08-85a0f8b9583b",
+   "wall_clock_s": 3487
+  },
+  {
+   "active_s": {
+    "300": 98,
+    "60": 98,
+    "900": 98
+   },
+   "host": "local-secondary",
+   "session_id": "c87e4f09-d417-4011-b18f-14bf60701e30",
+   "wall_clock_s": 98
+  },
+  {
+   "active_s": {
+    "300": 24072,
+    "60": 16406,
+    "900": 33656
+   },
+   "host": "local-secondary",
+   "session_id": "d8278af5-c7c3-47d0-892f-f56574c23839",
+   "wall_clock_s": 296918
+  },
+  {
+   "active_s": {
+    "300": 607,
+    "60": 127,
+    "900": 834
+   },
+   "host": "local-secondary",
+   "session_id": "dd6f1806-aab5-4ed9-a98e-825a2edc2a29",
+   "wall_clock_s": 834
+  },
+  {
+   "active_s": {
+    "300": 3573,
+    "60": 2447,
+    "900": 3903
+   },
+   "host": "local-secondary",
+   "session_id": "e0f00b46-f2af-4e6a-97a2-24e1a85be67b",
+   "wall_clock_s": 3903
+  },
+  {
+   "active_s": {
+    "300": 30201,
+    "60": 13108,
+    "900": 49595
+   },
+   "host": "local-secondary",
+   "session_id": "e7bd8268-11e6-46be-8fbb-7fe117d79873",
+   "wall_clock_s": 187804
+  },
+  {
+   "active_s": {
+    "300": 1,
+    "60": 1,
+    "900": 1
+   },
+   "host": "local-secondary",
+   "session_id": "ec67602b-f671-4036-ac68-d62b383c8597",
+   "wall_clock_s": 1
+  },
+  {
+   "active_s": {
+    "300": 0,
+    "60": 0,
+    "900": 0
+   },
+   "host": "local-secondary",
+   "session_id": "f63796ad-3004-4c63-ad6a-8a643922eb34",
+   "wall_clock_s": 0
+  },
+  {
+   "active_s": {
+    "300": 316,
+    "60": 76,
+    "900": 841
+   },
+   "host": "local-secondary",
+   "session_id": "f6ed5831-08fa-4249-a9ff-0ef3279b4bfd",
+   "wall_clock_s": 841
+  },
+  {
+   "active_s": {
+    "300": 344,
+    "60": 336,
+    "900": 344
+   },
+   "host": "local-secondary",
+   "session_id": "fad79b4f-df52-4001-b21e-c5ae67044d1c",
+   "wall_clock_s": 344
+  },
+  {
+   "active_s": {
+    "300": 51208,
+    "60": 26759,
+    "900": 78830
+   },
+   "host": "vps",
+   "session_id": "0ab9d3a4-ce9b-4370-ac19-0ba05e25b7fe",
+   "wall_clock_s": 152788
+  },
+  {
+   "active_s": {
+    "300": 20095,
+    "60": 10373,
+    "900": 27618
+   },
+   "host": "vps",
+   "session_id": "1197b048-4047-41da-8d5d-0645bb1df189",
+   "wall_clock_s": 98366
+  },
+  {
+   "active_s": {
+    "300": 4270,
+    "60": 2458,
+    "900": 7293
+   },
+   "host": "vps",
+   "session_id": "1536c25b-49cd-4c82-a438-069a6e304162",
+   "wall_clock_s": 54443
+  },
+  {
+   "active_s": {
+    "300": 33101,
+    "60": 16534,
+    "900": 55628
+   },
+   "host": "vps",
+   "session_id": "4ba59ecd-1752-4aa3-b47e-83df40da0ee4",
+   "wall_clock_s": 144592
+  },
+  {
+   "active_s": {
+    "300": 28259,
+    "60": 14817,
+    "900": 47460
+   },
+   "host": "vps",
+   "session_id": "65108870-fc7d-4b66-917e-86d60ebd8466",
+   "wall_clock_s": 89213
+  },
+  {
+   "active_s": {
+    "300": 1,
+    "60": 1,
+    "900": 1
+   },
+   "host": "vps",
+   "session_id": "668d1710-6298-4bf7-9ac0-45f38b61b49d",
+   "wall_clock_s": 1
+  },
+  {
+   "active_s": {
+    "300": 22156,
+    "60": 13370,
+    "900": 31043
+   },
+   "host": "vps",
+   "session_id": "6bc8a041-41f1-4ab4-9587-8bfed29a7d17",
+   "wall_clock_s": 79205
+  },
+  {
+   "active_s": {
+    "300": 2444,
+    "60": 1351,
+    "900": 3309
+   },
+   "host": "vps",
+   "session_id": "6f145164-d024-4eef-8e70-c5d817bab182",
+   "wall_clock_s": 36068
+  },
+  {
+   "active_s": {
+    "300": 9,
+    "60": 9,
+    "900": 9
+   },
+   "host": "vps",
+   "session_id": "6f39c50c-5e00-4c7f-8f84-c4306c1220a5",
+   "wall_clock_s": 9
+  },
+  {
+   "active_s": {
+    "300": 189,
+    "60": 189,
+    "900": 189
+   },
+   "host": "vps",
+   "session_id": "720389ae-bb40-4b62-9b9c-dcf299daec65",
+   "wall_clock_s": 189
+  },
+  {
+   "active_s": {
+    "300": 197600,
+    "60": 80899,
+    "900": 302529
+   },
+   "host": "vps",
+   "session_id": "90fa24bb-c5e4-43ff-8d27-1799177561a0",
+   "wall_clock_s": 777159
+  },
+  {
+   "active_s": {
+    "300": 1,
+    "60": 1,
+    "900": 1
+   },
+   "host": "vps",
+   "session_id": "a400c3c0-041c-4050-bb4e-199c161a207b",
+   "wall_clock_s": 1
+  },
+  {
+   "active_s": {
+    "300": 84737,
+    "60": 43593,
+    "900": 132415
+   },
+   "host": "vps",
+   "session_id": "de129390-559a-4ecd-950e-3667cf1c1c3c",
+   "wall_clock_s": 281264
+  },
+  {
+   "active_s": {
+    "300": 27454,
+    "60": 12423,
+    "900": 41214
+   },
+   "host": "vps",
+   "session_id": "deb9f9b6-cba0-49c1-b601-6b62afa1c3e2",
+   "wall_clock_s": 166242
+  },
+  {
+   "active_s": {
+    "300": 2850,
+    "60": 1809,
+    "900": 3728
+   },
+   "host": "vps",
+   "session_id": "df0803d6-0fa8-4fc0-b7b6-75148471a092",
+   "wall_clock_s": 3728
+  },
+  {
+   "active_s": {
+    "300": 199,
+    "60": 158,
+    "900": 199
+   },
+   "host": "vps",
+   "session_id": "e9c5be49-2768-401f-82fd-b27bc2d675cf",
+   "wall_clock_s": 199
+  },
+  {
+   "active_s": {
+    "300": 21923,
+    "60": 10669,
+    "900": 37724
+   },
+   "host": "vps",
+   "session_id": "ec461e31-812e-4b34-8dde-3d22982bf07c",
+   "wall_clock_s": 143089
+  }
+ ],
+ "time": {
+  "active_hours_by_gap_threshold_s": {
+   "300": 199.7,
+   "60": 95.3,
+   "900": 310.5
+  },
+  "sessions_counted": 61,
+  "wall_clock_hours_sum": 1023.5
+ },
+ "totals": {
+  "api_cost_usd": 6980.57,
+  "cache_read_tokens": 8781840268,
+  "cache_write_1h_tokens": 57231589,
+  "cache_write_5m_tokens": 302830865,
+  "input_tokens": 5491682,
+  "output_tokens": 15149315,
+  "turns": 48733
+ }
+}

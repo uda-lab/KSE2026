@@ -26,4 +26,13 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 - Notes: 範囲の上限は claims/formalization-scope.md．kernel-only の根拠は release
   attestation と `#print axioms`（Phase 2 で attestation run へのリンクを EV 化する）．
 
+## CLM-002: 形式化キャンペーン（2026-06-10〜07-21）では，収集済みセッションログ上で確認できるだけでも output 15.1M tokens・API 換算 $6,980・アクティブ時間 199.7h（5 分 gap cap）の AI 計算が投入された（いずれも下界）
+- Status: candidate
+- Paper location: planned
+- Evidence: EV-0001〜EV-2126（escrow 一次記録），`evidence/metrics/usage-metrics.json`（`scripts/extract_usage.py` により再現可能）
+- Notes: 一次資料は各 JSONL の `message.usage`（API レスポンス由来）．方法論・
+  カバレッジ欠損（ローテーション喪失 6/10〜6/14，レビュワー側計算資源など）は
+  `analysis/usage-metrics-methodology.md`．下界であることを本文でも明記する．
+  gap 閾値感度: active = 95.3h (1m) / 199.7h (5m) / 310.5h (15m)，wall-clock 総和 1,023.5h．
+
 <!-- 以降の claim はログ分析（Phase 2）後に追加する． -->
