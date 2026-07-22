@@ -57,6 +57,7 @@
    "input_tokens": 7718,
    "model": "claude-fable-5",
    "output_tokens": 3366,
+   "provider": "first-party",
    "turns": 54
   },
   {
@@ -69,6 +70,7 @@
    "input_tokens": 30532,
    "model": "claude-fable-5",
    "output_tokens": 94435,
+   "provider": "vertex",
    "turns": 178
   },
   {
@@ -81,6 +83,7 @@
    "input_tokens": 103454,
    "model": "claude-fable-5",
    "output_tokens": 121905,
+   "provider": "first-party",
    "turns": 342
   },
   {
@@ -93,6 +96,7 @@
    "input_tokens": 64539,
    "model": "claude-fable-5",
    "output_tokens": 216586,
+   "provider": "vertex",
    "turns": 323
   },
   {
@@ -105,6 +109,7 @@
    "input_tokens": 87185,
    "model": "claude-fable-5",
    "output_tokens": 66056,
+   "provider": "first-party",
    "turns": 145
   },
   {
@@ -117,6 +122,7 @@
    "input_tokens": 17995,
    "model": "claude-fable-5",
    "output_tokens": 85694,
+   "provider": "vertex",
    "turns": 118
   },
   {
@@ -129,6 +135,7 @@
    "input_tokens": 19113,
    "model": "claude-fable-5",
    "output_tokens": 10962,
+   "provider": "first-party",
    "turns": 27
   },
   {
@@ -141,6 +148,7 @@
    "input_tokens": 35061,
    "model": "claude-fable-5",
    "output_tokens": 21303,
+   "provider": "first-party",
    "turns": 38
   },
   {
@@ -153,6 +161,7 @@
    "input_tokens": 28256,
    "model": "claude-fable-5",
    "output_tokens": 218958,
+   "provider": "first-party",
    "turns": 218
   },
   {
@@ -165,6 +174,7 @@
    "input_tokens": 12116,
    "model": "claude-fable-5",
    "output_tokens": 104173,
+   "provider": "first-party",
    "turns": 89
   },
   {
@@ -177,6 +187,7 @@
    "input_tokens": 18888,
    "model": "claude-fable-5",
    "output_tokens": 49758,
+   "provider": "first-party",
    "turns": 56
   },
   {
@@ -189,6 +200,7 @@
    "input_tokens": 26664,
    "model": "claude-fable-5",
    "output_tokens": 180292,
+   "provider": "first-party",
    "turns": 303
   },
   {
@@ -201,6 +213,7 @@
    "input_tokens": 32889,
    "model": "claude-fable-5",
    "output_tokens": 84126,
+   "provider": "first-party",
    "turns": 105
   },
   {
@@ -213,6 +226,7 @@
    "input_tokens": 122380,
    "model": "claude-fable-5",
    "output_tokens": 469711,
+   "provider": "first-party",
    "turns": 484
   },
   {
@@ -225,6 +239,7 @@
    "input_tokens": 24968,
    "model": "claude-fable-5",
    "output_tokens": 118928,
+   "provider": "first-party",
    "turns": 152
   },
   {
@@ -237,6 +252,7 @@
    "input_tokens": 4,
    "model": "claude-fable-5",
    "output_tokens": 617,
+   "provider": "first-party",
    "turns": 2
   },
   {
@@ -249,6 +265,7 @@
    "input_tokens": 25678,
    "model": "claude-fable-5",
    "output_tokens": 35329,
+   "provider": "first-party",
    "turns": 62
   },
   {
@@ -261,6 +278,7 @@
    "input_tokens": 693,
    "model": "claude-fable-5",
    "output_tokens": 191625,
+   "provider": "first-party",
    "turns": 142
   },
   {
@@ -273,6 +291,7 @@
    "input_tokens": 40197,
    "model": "claude-fable-5",
    "output_tokens": 272197,
+   "provider": "first-party",
    "turns": 332
   },
   {
@@ -285,6 +304,7 @@
    "input_tokens": 40129,
    "model": "claude-fable-5",
    "output_tokens": 209723,
+   "provider": "first-party",
    "turns": 301
   },
   {
@@ -297,6 +317,7 @@
    "input_tokens": 66872,
    "model": "claude-fable-5",
    "output_tokens": 241080,
+   "provider": "first-party",
    "turns": 401
   },
   {
@@ -309,6 +330,7 @@
    "input_tokens": 26344,
    "model": "claude-fable-5",
    "output_tokens": 99912,
+   "provider": "first-party",
    "turns": 150
   },
   {
@@ -321,6 +343,7 @@
    "input_tokens": 56300,
    "model": "claude-fable-5",
    "output_tokens": 380324,
+   "provider": "first-party",
    "turns": 555
   },
   {
@@ -333,6 +356,7 @@
    "input_tokens": 38,
    "model": "claude-fable-5",
    "output_tokens": 14598,
+   "provider": "first-party",
    "turns": 20
   },
   {
@@ -345,6 +369,7 @@
    "input_tokens": 19329,
    "model": "claude-fable-5",
    "output_tokens": 78666,
+   "provider": "first-party",
    "turns": 110
   },
   {
@@ -357,6 +382,7 @@
    "input_tokens": 1169,
    "model": "claude-fable-5",
    "output_tokens": 24373,
+   "provider": "first-party",
    "turns": 46
   },
   {
@@ -369,6 +395,7 @@
    "input_tokens": 324,
    "model": "claude-haiku-4-5-20251001",
    "output_tokens": 24353,
+   "provider": "first-party",
    "turns": 111
   },
   {
@@ -381,6 +408,7 @@
    "input_tokens": 20,
    "model": "claude-haiku-4-5-20251001",
    "output_tokens": 801,
+   "provider": "first-party",
    "turns": 4
   },
   {
@@ -393,6 +421,7 @@
    "input_tokens": 49,
    "model": "claude-haiku-4-5-20251001",
    "output_tokens": 172,
+   "provider": "first-party",
    "turns": 11
   },
   {
@@ -405,6 +434,7 @@
    "input_tokens": 776,
    "model": "claude-haiku-4-5-20251001",
    "output_tokens": 27671,
+   "provider": "first-party",
    "turns": 304
   },
   {
@@ -417,6 +447,7 @@
    "input_tokens": 357,
    "model": "claude-haiku-4-5-20251001",
    "output_tokens": 12098,
+   "provider": "first-party",
    "turns": 192
   },
   {
@@ -429,6 +460,7 @@
    "input_tokens": 150,
    "model": "claude-haiku-4-5-20251001",
    "output_tokens": 5443,
+   "provider": "first-party",
    "turns": 18
   },
   {
@@ -441,6 +473,7 @@
    "input_tokens": 161,
    "model": "claude-haiku-4-5-20251001",
    "output_tokens": 13497,
+   "provider": "first-party",
    "turns": 38
   },
   {
@@ -453,6 +486,7 @@
    "input_tokens": 123,
    "model": "claude-haiku-4-5-20251001",
    "output_tokens": 4444,
+   "provider": "first-party",
    "turns": 14
   },
   {
@@ -465,6 +499,7 @@
    "input_tokens": 36,
    "model": "claude-haiku-4-5-20251001",
    "output_tokens": 717,
+   "provider": "first-party",
    "turns": 4
   },
   {
@@ -477,6 +512,7 @@
    "input_tokens": 361,
    "model": "claude-haiku-4-5-20251001",
    "output_tokens": 6390,
+   "provider": "first-party",
    "turns": 25
   },
   {
@@ -489,6 +525,7 @@
    "input_tokens": 238,
    "model": "claude-haiku-4-5-20251001",
    "output_tokens": 9483,
+   "provider": "first-party",
    "turns": 29
   },
   {
@@ -501,6 +538,7 @@
    "input_tokens": 28295,
    "model": "claude-opus-4-8",
    "output_tokens": 167974,
+   "provider": "first-party",
    "turns": 318
   },
   {
@@ -513,6 +551,7 @@
    "input_tokens": 7875,
    "model": "claude-opus-4-8",
    "output_tokens": 141273,
+   "provider": "first-party",
    "turns": 578
   },
   {
@@ -525,6 +564,7 @@
    "input_tokens": 114145,
    "model": "claude-opus-4-8",
    "output_tokens": 574811,
+   "provider": "first-party",
    "turns": 1819
   },
   {
@@ -537,6 +577,7 @@
    "input_tokens": 10916,
    "model": "claude-opus-4-8",
    "output_tokens": 126176,
+   "provider": "first-party",
    "turns": 687
   },
   {
@@ -549,6 +590,7 @@
    "input_tokens": 9692,
    "model": "claude-opus-4-8",
    "output_tokens": 149654,
+   "provider": "first-party",
    "turns": 439
   },
   {
@@ -561,6 +603,7 @@
    "input_tokens": 10522,
    "model": "claude-opus-4-8",
    "output_tokens": 28921,
+   "provider": "first-party",
    "turns": 21
   },
   {
@@ -573,6 +616,7 @@
    "input_tokens": 290,
    "model": "claude-opus-4-8",
    "output_tokens": 3451,
+   "provider": "first-party",
    "turns": 2
   },
   {
@@ -585,6 +629,7 @@
    "input_tokens": 505940,
    "model": "claude-opus-4-8",
    "output_tokens": 1058788,
+   "provider": "first-party",
    "turns": 1856
   },
   {
@@ -597,6 +642,7 @@
    "input_tokens": 343024,
    "model": "claude-opus-4-8",
    "output_tokens": 892043,
+   "provider": "first-party",
    "turns": 4803
   },
   {
@@ -609,6 +655,7 @@
    "input_tokens": 178645,
    "model": "claude-opus-4-8",
    "output_tokens": 887053,
+   "provider": "first-party",
    "turns": 1346
   },
   {
@@ -621,6 +668,7 @@
    "input_tokens": 10462,
    "model": "claude-opus-4-8",
    "output_tokens": 76756,
+   "provider": "first-party",
    "turns": 420
   },
   {
@@ -633,6 +681,7 @@
    "input_tokens": 11253,
    "model": "claude-opus-4-8",
    "output_tokens": 47658,
+   "provider": "first-party",
    "turns": 44
   },
   {
@@ -645,6 +694,7 @@
    "input_tokens": 7773,
    "model": "claude-opus-4-8",
    "output_tokens": 123402,
+   "provider": "first-party",
    "turns": 86
   },
   {
@@ -657,6 +707,7 @@
    "input_tokens": 171407,
    "model": "claude-opus-4-8",
    "output_tokens": 457653,
+   "provider": "first-party",
    "turns": 1728
   },
   {
@@ -669,6 +720,7 @@
    "input_tokens": 207365,
    "model": "claude-opus-4-8",
    "output_tokens": 706551,
+   "provider": "first-party",
    "turns": 999
   },
   {
@@ -681,6 +733,7 @@
    "input_tokens": 386261,
    "model": "claude-opus-4-8",
    "output_tokens": 1111120,
+   "provider": "first-party",
    "turns": 1655
   },
   {
@@ -693,6 +746,7 @@
    "input_tokens": 28013,
    "model": "claude-opus-4-8",
    "output_tokens": 106692,
+   "provider": "first-party",
    "turns": 182
   },
   {
@@ -705,6 +759,7 @@
    "input_tokens": 57464,
    "model": "claude-opus-4-8",
    "output_tokens": 152060,
+   "provider": "first-party",
    "turns": 122
   },
   {
@@ -717,6 +772,7 @@
    "input_tokens": 164987,
    "model": "claude-opus-4-8",
    "output_tokens": 403940,
+   "provider": "first-party",
    "turns": 358
   },
   {
@@ -729,6 +785,7 @@
    "input_tokens": 4322,
    "model": "claude-opus-4-8",
    "output_tokens": 4062,
+   "provider": "vertex",
    "turns": 5
   },
   {
@@ -741,6 +798,7 @@
    "input_tokens": 17069,
    "model": "claude-opus-4-8",
    "output_tokens": 168682,
+   "provider": "first-party",
    "turns": 127
   },
   {
@@ -753,6 +811,7 @@
    "input_tokens": 69448,
    "model": "claude-opus-4-8",
    "output_tokens": 401753,
+   "provider": "vertex",
    "turns": 530
   },
   {
@@ -765,6 +824,7 @@
    "input_tokens": 64764,
    "model": "claude-opus-4-8",
    "output_tokens": 225032,
+   "provider": "first-party",
    "turns": 316
   },
   {
@@ -777,6 +837,7 @@
    "input_tokens": 27245,
    "model": "claude-opus-4-8",
    "output_tokens": 163032,
+   "provider": "first-party",
    "turns": 66
   },
   {
@@ -789,6 +850,7 @@
    "input_tokens": 165206,
    "model": "claude-opus-4-8",
    "output_tokens": 388181,
+   "provider": "first-party",
    "turns": 756
   },
   {
@@ -801,6 +863,7 @@
    "input_tokens": 129965,
    "model": "claude-opus-4-8",
    "output_tokens": 287525,
+   "provider": "first-party",
    "turns": 446
   },
   {
@@ -813,6 +876,7 @@
    "input_tokens": 364660,
    "model": "claude-opus-4-8",
    "output_tokens": 136144,
+   "provider": "first-party",
    "turns": 885
   },
   {
@@ -825,6 +889,7 @@
    "input_tokens": 7437,
    "model": "claude-opus-4-8",
    "output_tokens": 60210,
+   "provider": "first-party",
    "turns": 38
   },
   {
@@ -837,6 +902,7 @@
    "input_tokens": 170130,
    "model": "claude-opus-4-8",
    "output_tokens": 49279,
+   "provider": "first-party",
    "turns": 350
   },
   {
@@ -849,6 +915,7 @@
    "input_tokens": 6039,
    "model": "claude-opus-4-8",
    "output_tokens": 29,
+   "provider": "first-party",
    "turns": 8
   },
   {
@@ -861,6 +928,7 @@
    "input_tokens": 49463,
    "model": "claude-opus-4-8",
    "output_tokens": 19482,
+   "provider": "first-party",
    "turns": 130
   },
   {
@@ -873,6 +941,7 @@
    "input_tokens": 11138,
    "model": "claude-opus-4-8",
    "output_tokens": 44,
+   "provider": "first-party",
    "turns": 15
   },
   {
@@ -885,6 +954,7 @@
    "input_tokens": 54733,
    "model": "claude-opus-4-8",
    "output_tokens": 18458,
+   "provider": "first-party",
    "turns": 145
   },
   {
@@ -897,6 +967,7 @@
    "input_tokens": 23173,
    "model": "claude-opus-4-8",
    "output_tokens": 5113,
+   "provider": "first-party",
    "turns": 11
   },
   {
@@ -909,6 +980,7 @@
    "input_tokens": 275,
    "model": "claude-opus-4-8",
    "output_tokens": 6544,
+   "provider": "first-party",
    "turns": 51
   },
   {
@@ -921,6 +993,7 @@
    "input_tokens": 2710,
    "model": "claude-opus-4-8",
    "output_tokens": 95855,
+   "provider": "first-party",
    "turns": 116
   },
   {
@@ -933,6 +1006,7 @@
    "input_tokens": 50,
    "model": "claude-sonnet-4-6",
    "output_tokens": 3558,
+   "provider": "first-party",
    "turns": 44
   },
   {
@@ -945,6 +1019,7 @@
    "input_tokens": 61,
    "model": "claude-sonnet-4-6",
    "output_tokens": 4077,
+   "provider": "first-party",
    "turns": 55
   },
   {
@@ -957,6 +1032,7 @@
    "input_tokens": 7426,
    "model": "claude-sonnet-4-6",
    "output_tokens": 527015,
+   "provider": "first-party",
    "turns": 2085
   },
   {
@@ -969,6 +1045,7 @@
    "input_tokens": 565,
    "model": "claude-sonnet-4-6",
    "output_tokens": 9257,
+   "provider": "first-party",
    "turns": 75
   },
   {
@@ -981,6 +1058,7 @@
    "input_tokens": 54852,
    "model": "claude-sonnet-4-6",
    "output_tokens": 101585,
+   "provider": "first-party",
    "turns": 940
   },
   {
@@ -993,6 +1071,7 @@
    "input_tokens": 4996,
    "model": "claude-sonnet-4-6",
    "output_tokens": 69947,
+   "provider": "first-party",
    "turns": 817
   },
   {
@@ -1005,6 +1084,7 @@
    "input_tokens": 4263,
    "model": "claude-sonnet-4-6",
    "output_tokens": 5873,
+   "provider": "first-party",
    "turns": 48
   },
   {
@@ -1017,6 +1097,7 @@
    "input_tokens": 431,
    "model": "claude-sonnet-4-6",
    "output_tokens": 37647,
+   "provider": "first-party",
    "turns": 423
   },
   {
@@ -1029,6 +1110,7 @@
    "input_tokens": 346,
    "model": "claude-sonnet-4-6",
    "output_tokens": 35460,
+   "provider": "first-party",
    "turns": 328
   },
   {
@@ -1041,6 +1123,7 @@
    "input_tokens": 19799,
    "model": "claude-sonnet-4-6",
    "output_tokens": 42757,
+   "provider": "first-party",
    "turns": 581
   },
   {
@@ -1053,6 +1136,7 @@
    "input_tokens": 1160,
    "model": "claude-sonnet-4-6",
    "output_tokens": 33387,
+   "provider": "first-party",
    "turns": 206
   },
   {
@@ -1065,6 +1149,7 @@
    "input_tokens": 150,
    "model": "claude-sonnet-4-6",
    "output_tokens": 14765,
+   "provider": "first-party",
    "turns": 142
   },
   {
@@ -1077,6 +1162,7 @@
    "input_tokens": 79659,
    "model": "claude-sonnet-4-6",
    "output_tokens": 77536,
+   "provider": "first-party",
    "turns": 389
   },
   {
@@ -1089,6 +1175,7 @@
    "input_tokens": 14,
    "model": "claude-sonnet-4-6",
    "output_tokens": 1457,
+   "provider": "first-party",
    "turns": 8
   },
   {
@@ -1101,6 +1188,7 @@
    "input_tokens": 73,
    "model": "claude-sonnet-4-6",
    "output_tokens": 25061,
+   "provider": "first-party",
    "turns": 58
   },
   {
@@ -1113,6 +1201,7 @@
    "input_tokens": 1954,
    "model": "claude-sonnet-4-6",
    "output_tokens": 232549,
+   "provider": "first-party",
    "turns": 1900
   },
   {
@@ -1125,6 +1214,7 @@
    "input_tokens": 835,
    "model": "claude-sonnet-4-6",
    "output_tokens": 66450,
+   "provider": "first-party",
    "turns": 787
   },
   {
@@ -1137,6 +1227,7 @@
    "input_tokens": 165,
    "model": "claude-sonnet-4-6",
    "output_tokens": 6435,
+   "provider": "first-party",
    "turns": 137
   },
   {
@@ -1149,6 +1240,7 @@
    "input_tokens": 830,
    "model": "claude-sonnet-4-6",
    "output_tokens": 54352,
+   "provider": "first-party",
    "turns": 560
   },
   {
@@ -1161,6 +1253,7 @@
    "input_tokens": 710,
    "model": "claude-sonnet-4-6",
    "output_tokens": 58898,
+   "provider": "first-party",
    "turns": 642
   },
   {
@@ -1173,6 +1266,7 @@
    "input_tokens": 14615,
    "model": "claude-sonnet-4-6",
    "output_tokens": 15913,
+   "provider": "first-party",
    "turns": 150
   },
   {
@@ -1185,6 +1279,7 @@
    "input_tokens": 58505,
    "model": "claude-sonnet-5",
    "output_tokens": 54551,
+   "provider": "first-party",
    "turns": 181
   },
   {
@@ -1197,6 +1292,7 @@
    "input_tokens": 59005,
    "model": "claude-sonnet-5",
    "output_tokens": 19147,
+   "provider": "first-party",
    "turns": 198
   },
   {
@@ -1209,6 +1305,7 @@
    "input_tokens": 812875,
    "model": "claude-sonnet-5",
    "output_tokens": 226745,
+   "provider": "first-party",
    "turns": 2270
   },
   {
@@ -1221,6 +1318,7 @@
    "input_tokens": 1420,
    "model": "claude-sonnet-5",
    "output_tokens": 48019,
+   "provider": "first-party",
    "turns": 710
   },
   {
@@ -1233,6 +1331,7 @@
    "input_tokens": 2,
    "model": "claude-sonnet-5",
    "output_tokens": 12,
+   "provider": "first-party",
    "turns": 1
   },
   {
@@ -1245,6 +1344,7 @@
    "input_tokens": 368,
    "model": "claude-sonnet-5",
    "output_tokens": 6023,
+   "provider": "first-party",
    "turns": 184
   },
   {
@@ -1257,6 +1357,7 @@
    "input_tokens": 132,
    "model": "claude-sonnet-5",
    "output_tokens": 3562,
+   "provider": "first-party",
    "turns": 66
   },
   {
@@ -1269,6 +1370,7 @@
    "input_tokens": 18,
    "model": "claude-sonnet-5",
    "output_tokens": 3416,
+   "provider": "first-party",
    "turns": 9
   },
   {
@@ -1281,6 +1383,7 @@
    "input_tokens": 17,
    "model": "claude-sonnet-5",
    "output_tokens": 560,
+   "provider": "first-party",
    "turns": 10
   },
   {
@@ -1293,6 +1396,7 @@
    "input_tokens": 952,
    "model": "claude-sonnet-5",
    "output_tokens": 42518,
+   "provider": "first-party",
    "turns": 477
   },
   {
@@ -1305,6 +1409,7 @@
    "input_tokens": 913,
    "model": "claude-sonnet-5",
    "output_tokens": 42485,
+   "provider": "first-party",
    "turns": 461
   },
   {
@@ -1317,6 +1422,7 @@
    "input_tokens": 7053,
    "model": "claude-sonnet-5",
    "output_tokens": 264134,
+   "provider": "first-party",
    "turns": 2964
   },
   {
@@ -1329,6 +1435,7 @@
    "input_tokens": 8858,
    "model": "claude-sonnet-5",
    "output_tokens": 56208,
+   "provider": "first-party",
    "turns": 801
   },
   {
@@ -1341,6 +1448,7 @@
    "input_tokens": 11058,
    "model": "claude-sonnet-5",
    "output_tokens": 172926,
+   "provider": "first-party",
    "turns": 2467
   },
   {
@@ -1353,15 +1461,36 @@
    "input_tokens": 4340,
    "model": "claude-sonnet-5",
    "output_tokens": 39863,
+   "provider": "first-party",
    "turns": 598
   }
  ],
+ "by_provider": {
+  "first-party": {
+   "api_cost_usd": 6722.2921,
+   "cache_read_tokens": 8650607944,
+   "cache_write_1h_tokens": 57231589,
+   "cache_write_5m_tokens": 290806671,
+   "input_tokens": 5304846,
+   "output_tokens": 14346785,
+   "turns": 47579
+  },
+  "vertex": {
+   "api_cost_usd": 258.2755,
+   "cache_read_tokens": 131232324,
+   "cache_write_1h_tokens": 0,
+   "cache_write_5m_tokens": 12024194,
+   "input_tokens": 186836,
+   "output_tokens": 802530,
+   "turns": 1154
+  }
+ },
  "cache_multipliers": {
   "read": 0.1,
   "write_1h": 2.0,
   "write_5m": 1.25
  },
- "generated_at_utc": "2026-07-22T05:18:59+00:00",
+ "generated_at_utc": "2026-07-22T11:47:33+00:00",
  "params": {
   "gap_thresholds_s": [
    60,

@@ -48,7 +48,7 @@ Git commit・Issue/PR・セッションログを統合した leray-hopf 開発�
 | 06-29 | 3 | #64 (1) | vps×1 | `90fa24bb` 終端（符号化済，EV-0925） |
 | 06-30 | 8 | #65–#67 (3) | vps×1, ls×1 | |
 | 07-01 | 2 | #68–#71 (4) | ls×1 | |
-| 07-02 | 4 | #72–#76 (5) | ls×4, vps×1 | torus aubin_lions mode-wise 再計画（#76） |
+| 07-02 | 4 | #72–#76 (5) | ls×4, vps×1 | torus aubin_lions mode-wise 再計画（#76）．**ls の一部は VertexAI 経由**（〜07-04，下記 4） |
 | 07-03 | 11 | #77–#87 (11) | ls×21, vps×3 | T-AL-1〜4 連続投入 |
 | 07-04 | 8 | #88–#96 (9) | vps×2, ls×2 | **T³ capstone 無条件化（#89）** |
 | 07-05 | 7 | #97–#103 (7) | | **R3 axiom flip（#99）→ kernel-only（#102/#103）** |
@@ -79,3 +79,7 @@ Git commit・Issue/PR・セッションログを統合した leray-hopf 開発�
    実活動は 06-30〜07-03 に分布する．
 3. VPS escrow は 06-19 以降を連続カバー，local-main escrow は 07-07 以降のみ
    （それ以前の local 作業は local-secondary 側に記録されている）．
+4. **07-02〜07-04 の local-secondary 作業の一部（1,154 API メッセージ，17 sessions）
+   は subscription ではなく VertexAI 経由**．message ID の `_vrtx_` マーカーで機械
+   判別可能で，ログ自体は同一 escrow に含まれる（コスト内訳は
+   `usage-metrics-methodology.md` の provider 区分節，issue #24）．
