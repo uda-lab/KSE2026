@@ -1,0 +1,48 @@
+{
+ "billed_jpy_total": 54867,
+ "blended_implied_jpy_per_usd": {
+  "long_context_rule": 184.2,
+  "std": 212.4
+ },
+ "by_cell": [
+  {
+   "billed_jpy": 14741,
+   "date_pt": "2026-07-02",
+   "est_usd_long_context_rule": 85.46,
+   "est_usd_std": 77.87,
+   "implied_jpy_per_usd_long_context_rule": 172.5,
+   "implied_jpy_per_usd_std": 189.3,
+   "model": "claude-fable-5"
+  },
+  {
+   "billed_jpy": 4578,
+   "date_pt": "2026-07-02",
+   "est_usd_long_context_rule": 31.41,
+   "est_usd_std": 22.88,
+   "implied_jpy_per_usd_long_context_rule": 145.8,
+   "implied_jpy_per_usd_std": 200.0,
+   "model": "claude-opus-4-8"
+  },
+  {
+   "billed_jpy": 21380,
+   "date_pt": "2026-07-03",
+   "est_usd_long_context_rule": 120.91,
+   "est_usd_std": 115.16,
+   "implied_jpy_per_usd_long_context_rule": 176.8,
+   "implied_jpy_per_usd_std": 185.7,
+   "model": "claude-fable-5"
+  },
+  {
+   "billed_jpy": 14168,
+   "date_pt": "2026-07-03",
+   "est_usd_long_context_rule": 60.11,
+   "est_usd_std": 42.37,
+   "implied_jpy_per_usd_long_context_rule": 235.7,
+   "implied_jpy_per_usd_std": 334.4,
+   "model": "claude-opus-4-8"
+  }
+ ],
+ "est_usd_long_context_rule_total": 297.89,
+ "est_usd_std_total": 258.28,
+ "interpretation": "Log-side estimates are LOWER BOUNDS on billed usage: the billing covers all Vertex traffic of the machine while the escrow covers only leray-hopf-related sessions. Residuals per cell (esp. opus 2026-07-03) are consistent with the known unescrowed sessions; see billing-reconciliation.md."
+}
