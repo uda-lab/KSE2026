@@ -18,6 +18,9 @@
 }
 \lstset{
   language=lean,
+  % render the Unicode used in verbatim-quoted Lean statements under pdflatex
+  literate={∃}{{$\exists$}}1 {ν}{{$\nu$}}1 {ℝ}{{$\mathbb{R}$}}1
+           {₀}{{$_0$}}1 {𝔊}{{$\mathfrak{G}$}}1,
   basicstyle=\ttfamily\footnotesize,
   keywordstyle=\bfseries,
   commentstyle=\itshape\color{gray},

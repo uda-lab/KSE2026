@@ -22,7 +22,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 ## CLM-001: Leray–Hopf 弱解存在（𝕋³ および ℝ³）が Lean 4 + mathlib 上で project axiom なしに形式化された
 - Status: frozen
 - Paper location: planned (sections/02-formalization.tex)
-- Evidence: leray-hopf@7c15710a7b9068a2aa105fc7c11b432e7685b7b5, decl:exists_lerayHopf_torus3, decl:exists_lerayHopf_r3
+- Evidence: leray-hopf@7c15710a7b9068a2aa105fc7c11b432e7685b7b5, decl:exists_lerayHopf_torus3, decl:exists_lerayHopf_r3, `evidence/metrics/formalization-metrics.json`（pinned commit checkout 上で `scripts/extract_metrics.py` により実測: 96 files / 42,012 lines / theorem 1,000 + lemma 58 / 315 commits．2026-07-23）
 - Notes: 範囲の上限は claims/formalization-scope.md．kernel-only の根拠は release
   attestation と `#print axioms`（Phase 2 で attestation run へのリンクを EV 化する）．
 
