@@ -53,25 +53,25 @@ def scan_lines(lines: list[str]) -> list[tuple[int, str]]:
     findings = []
     in_listing = False
     for lineno, raw in enumerate(lines, 1):
-        line = strip_comment(raw)
         cursor = 0
         prose_segments = []
-        while cursor < len(line):
+        while cursor < len(raw):
             if in_listing:
-                end_at = line.find(LISTING_END, cursor)
+                end_at = raw.find(LISTING_END, cursor)
                 if end_at < 0:
                     break
                 in_listing = False
                 cursor = end_at + len(LISTING_END)
                 continue
 
-            begin_at = line.find(LISTING_BEGIN, cursor)
+            prose_tail = strip_comment(raw[cursor:])
+            begin_at = prose_tail.find(LISTING_BEGIN)
             if begin_at < 0:
-                prose_segments.append(line[cursor:])
+                prose_segments.append(prose_tail)
                 break
-            prose_segments.append(line[cursor:begin_at])
+            prose_segments.append(prose_tail[:begin_at])
             in_listing = True
-            cursor = begin_at + len(LISTING_BEGIN)
+            cursor += begin_at + len(LISTING_BEGIN)
 
         for prose in prose_segments:
             for label, pattern in FORBIDDEN:

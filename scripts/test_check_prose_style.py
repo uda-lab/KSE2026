@@ -46,6 +46,14 @@ class ScanLinesTest(unittest.TestCase):
         ])
         self.assertEqual([(1, "casual scope phrase")], findings)
 
+    def test_literal_percent_inside_listing_does_not_hide_end(self) -> None:
+        findings = scan_lines([
+            r"\begin{lstlisting}",
+            r"let r := n % 2 \end{lstlisting}",
+            "This has no more supporting detail.",
+        ])
+        self.assertEqual([(3, "casual scope phrase")], findings)
+
 
 if __name__ == "__main__":
     unittest.main()
