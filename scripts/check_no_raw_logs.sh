@@ -36,3 +36,5 @@ if [ -n "$leaked" ]; then
 fi
 
 echo "check_no_raw_logs: no raw-log leakage in tracked files"
+
+# (path-filter verification for issue #61; this branch is not merged)
