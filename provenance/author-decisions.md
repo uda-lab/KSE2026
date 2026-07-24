@@ -16,5 +16,6 @@ scientific owner による確定判断のみを記録する（提案・候補は
 | 2026-07-23 | **claim freeze の前提条件**: CLM-002〜005 は issue #42 の校正（期間分離・条件付き化・強度弱化）を反映した文言で freeze する．freeze 作業自体は夜間自律実行を owner 承認 | owner（issue #35 補足コメント 2026-07-23 + チャット判断: 「夜間に freeze まで実施」）．校正の実装は PR #44 |
 | 2026-07-23 | **FX 下界の扱い**: Monitoring `token_count` の metric 解釈が既存 export から検証不能と確認されたため，[160.4, 161.8] の下界側は条件付き表記で維持（撤回しない）．¥54,868・$258.28 は無条件 | owner（チャット判断 2026-07-23）．再 export（Group by type + explicit_caching）が得られれば無条件化できる |
 | 2026-07-24 | **content-first 全面改稿**: method/harness を主，incident をその検出範囲と限界の証拠として再配置する．想定読者は AI for Math に関心がある harness 初学者の数学者．同じ粒度の反復，repo 固有識別子への依存，口語・過剰列挙・ダッシュを除去し，独立 prose/claim/audience review を必須化する | owner の改稿指示．過去の B+C の比重，section 配分，exact-six-page drafting を事後改訂する権限を明示的に付与 |
+| 2026-07-24 | **2026-07-23 のタイトル確定を再検討対象へ戻す**: harness-led 改稿に整合する新タイトルを PR #59 で提案し，最終確定は owner review まで保留する | owner は既存の repo 内決定事項を本改稿で一律に事後改訂してよいと明示．旧タイトルは当時の決定記録として残し，新タイトルの status は `notes/title-and-abstract.md` に proposal として記録 |
 | 2026-07-24 | **ページ制約の段階分離**: KSE の最終6ページ上限は維持するが，内容・論旨・文章品質を確定する PR ではページ数を acceptance gate にしない．圧縮は独立した後続段階で行う | owner の改稿指示．issue #57 の旧 acceptance を更新 |
 | 2026-07-24 | **主図を別 issue #58 で owner が清書**: 本改稿 PR は synthesized end-state harness の図案・挿入位置を記録し，未完成画像を本文に置かない | owner の改稿指示．最終 artwork の採否と清書は owner |

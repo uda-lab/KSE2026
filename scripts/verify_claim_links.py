@@ -13,6 +13,8 @@ Checks:
     evidence/repository-snapshots/leray-hopf/commits.json (prefix match)
   - every `leray-hopf#<num>` reference resolves against issues.json (which
     includes PRs; GitHub issue/PR numbers share one sequence)
+  - every `cite:<bibkey>` evidence reference resolves in paper/references.bib
+    and is marked verified in provenance/source-inventory.md
 
 NOT machine-checked (documented guarantee scope, issue #42 item 5):
   - `decl:<Lean.Name>` references — no Lean source snapshot is kept here;
@@ -31,6 +33,8 @@ MANIFEST = ROOT / "evidence" / "manifest.csv"
 CLAIMS_FILE = ROOT / "claims" / "paper-claims.md"
 INCIDENT_DIR = ROOT / "evidence" / "incidents"
 SNAPSHOT_DIR = ROOT / "evidence" / "repository-snapshots" / "leray-hopf"
+REFERENCES_FILE = ROOT / "paper" / "references.bib"
+SOURCE_INVENTORY = ROOT / "provenance" / "source-inventory.md"
 
 EV_RE = re.compile(r"\bEV-\d{4}\b")
 INC_RE = re.compile(r"\bINC-\d{3}\b")
@@ -38,6 +42,13 @@ CLM_RE = re.compile(r"\bCLM-\d{3}\b")
 CLM_DEF_RE = re.compile(r"^##\s+(CLM-\d{3}):", re.M)
 REPO_SHA_RE = re.compile(r"\bleray-hopf@([0-9a-f]{7,40})\b")
 REPO_NUM_RE = re.compile(r"\bleray-hopf#(\d+)\b")
+CITE_RE = re.compile(r"\bcite:([A-Za-z0-9_.:-]+)\b")
+BIB_ENTRY_RE = re.compile(r"@\w+\s*\{\s*([^,\s]+)\s*,", re.I)
+VERIFIED_BIB_RE = re.compile(r"^\|\s*([^|\s]+)\s*\|\s*✓", re.M)
+EVIDENCE_TOKEN_RE = re.compile(
+    r"\b(?:EV-\d{4}|INC-\d{3}|leray-hopf@[0-9a-f]{7,40}|"
+    r"leray-hopf#\d+|decl:[A-Za-z0-9_.]+|cite:[A-Za-z0-9_.:-]+)\b"
+)
 
 SCAN_DIRS = ["claims", "analysis", "paper", "notes"]
 PLACEHOLDER_RE = re.compile(r"(NNNN|NNN)")
@@ -73,6 +84,18 @@ def main() -> int:
         known_shas = [c["sha"] for c in json.loads(commits_f.read_text())]
     if issues_f.is_file():
         known_nums = {it["number"] for it in json.loads(issues_f.read_text())}
+    references_text = (
+        REFERENCES_FILE.read_text(encoding="utf-8")
+        if REFERENCES_FILE.is_file()
+        else ""
+    )
+    inventory_text = (
+        SOURCE_INVENTORY.read_text(encoding="utf-8")
+        if SOURCE_INVENTORY.is_file()
+        else ""
+    )
+    known_bib = set(BIB_ENTRY_RE.findall(references_text))
+    verified_bib = set(VERIFIED_BIB_RE.findall(inventory_text))
 
     errors = []
 
@@ -110,6 +133,16 @@ def main() -> int:
                 elif num not in known_nums:
                     errors.append(f"{rel}: leray-hopf#{num} not in "
                                   f"repository snapshot issues.json")
+            for key in set(CITE_RE.findall(text)):
+                if key not in known_bib:
+                    errors.append(
+                        f"{rel}: cite:{key} not in paper/references.bib"
+                    )
+                elif key not in verified_bib:
+                    errors.append(
+                        f"{rel}: cite:{key} is not marked verified in "
+                        f"provenance/source-inventory.md"
+                    )
 
     # every defined claim must carry at least one evidence reference
     for m in CLM_DEF_RE.finditer(claims_text):
@@ -119,6 +152,11 @@ def main() -> int:
         ev_line = re.search(r"^- Evidence:\s*(\S.*)$", block, re.M)
         if not ev_line or not ev_line.group(1).strip():
             errors.append(f"claims/paper-claims.md: {m.group(1)} has no Evidence entry")
+        elif not EVIDENCE_TOKEN_RE.search(ev_line.group(1)):
+            errors.append(
+                f"claims/paper-claims.md: {m.group(1)} Evidence entry has no "
+                f"recognized evidence identifier"
+            )
 
     if errors:
         print("claim-link verification FAILED:")
@@ -129,7 +167,8 @@ def main() -> int:
     print(f"claim-link verification OK "
           f"(EV known: {len(known_ev)}, INC cards: {len(known_inc)}, "
           f"claims defined: {len(known_clm)} ({frozen} frozen), "
-          f"snapshot: {len(known_shas)} commits / {len(known_nums)} issue-PR nums)")
+          f"snapshot: {len(known_shas)} commits / {len(known_nums)} issue-PR nums, "
+          f"verified citations: {len(verified_bib)})")
     return 0
 
 

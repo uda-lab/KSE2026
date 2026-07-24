@@ -10,13 +10,14 @@
 ## CLM-NNN: <一文で述べた主張>
 - Status: candidate | frozen | dropped
 - Paper location: sections/NN-*.tex（未執筆なら planned）
-- Evidence: EV-NNNN / INC-NNN / leray-hopf@<sha> / leray-hopf#<num> / decl:<Lean.Name>
+- Evidence: EV-NNNN / INC-NNN / leray-hopf@<sha> / leray-hopf#<num> /
+  decl:<Lean.Name> / cite:<verified-bibkey>
 - Notes: 確度，再構成か一次資料か，など
 ```
 
 Phase 3（contribution freeze）で `frozen` にした claim のみ本文に残す（CLM-001〜008 は
 2026-07-23 に freeze．CLM-009 は content-first 改稿指示 2026-07-24 に基づく
-harness synthesis）．
+harness synthesis，CLM-010 は同改稿の related-work 比較を追跡する）．
 contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 
 ---
@@ -87,7 +88,9 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 ## CLM-006: 2026-07-23 時点の調査（notes/related-work.md 記載の探索条件）では，非線形流体 PDE（Navier–Stokes を含む）の存在理論の機械検証済み形式化は Lean・Coq・Isabelle/HOL のいずれにも確認できなかった（否定的・調査条件付きの主張）
 - Status: frozen
 - Paper location: paper/main.tex, paper/sections/01-introduction.tex
-- Evidence: `notes/related-work.md`（探索語・照合した近接先行例の記録: `armstrong2026degiorginashmoser`（楕円型正則性），`miller2026vlasov`（線形運動論・AI 支援），`boldo2010wave`（線形波動スキーム収束），`immler2012ode`（ODE），mathlib GNS `vandoorn2024gns`）
+- Evidence: cite:armstrong2026degiorginashmoser, cite:miller2026vlasov,
+  cite:boldo2010wave, cite:immler2012ode, cite:vandoorn2024gns;
+  `notes/related-work.md`（探索語・照合した近接先行例の記録）
 - Notes: **非存在の証明ではなく「調査で確認できなかった」という下界的主張**として
   書く．本文表現は "to our knowledge, no machine-checked existence theory for a
   nonlinear fluid PDE has been reported in Lean, Coq, or Isabelle/HOL" の水準に
@@ -120,5 +123,15 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   終了時点の構成を合成した記述であり，全期間に同じ harness が存在したという主張では
   ない．各 control が特定の defect を観測・検出した事例は述べてよいが，生産性向上，
   一般的有効性，因果効果は主張しない．第三者向け記述は candidate recommendation とする．
+
+## CLM-010: TauCeti は，人間が統制する roadmap と常設 review rubric の下で AI が Lean 4 数学ライブラリを著述する project として公開されている
+- Status: frozen
+- Paper location: paper/sections/01-introduction.tex
+- Evidence: cite:tauceti2026
+- Notes: `notes/related-work.md` の 2026-07-22/23 一次資料調査に基づく．書誌は
+  TauCetiProject の四つの repository を照合した pinned commit
+  `3a933bde5e379d3b1d4610166090f207a5a90bb2` に固定し，
+  `provenance/source-inventory.md` で照合済みとする．本文では governance と
+  standing rubric の存在だけを述べ，個別 control の効果は主張しない．
 
 <!-- 以降の claim は必要に応じて追加する． -->

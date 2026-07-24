@@ -15,7 +15,9 @@
    email，未公開 repo URL，個人名が対象．
 4. **主張には証拠識別子を付ける．** `claims/paper-claims.md` の各 claim には
    `EV-NNNN` / `INC-NNN` / `leray-hopf@<sha>` / `decl:<name>` のいずれかを付ける．
-   `make verify` を通らない参照を残さない．
+   外部文献に関する歴史的主張は，`provenance/source-inventory.md` で照合済みの
+   BibTeX key を `cite:<key>` として用いてよい．`make verify` を通らない参照を
+   残さない．
 5. **再構成情報と一次ログを混同しない．** ログ欠損期間の再構成には evidence type
    （primary / reconstructed）と confidence を明記する（PLAN.md §4）．
 6. **AI 利用を記録する．** 原稿・分析への AI の関与（モデル，範囲，日付）は作業の
