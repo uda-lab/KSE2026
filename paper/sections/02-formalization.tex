@@ -116,7 +116,7 @@ For both capstones, \texttt{\#print axioms} reports exactly
 \texttt{propext},
 \texttt{Classical.choice}, and \texttt{Quot.sound}. There are no
 axioms declared by the project or occurrences of \texttt{sorryAx} in either
-capstone. Continuous integration checks this list and rejects
-\texttt{sorry} or project axioms reachable through the public root import.
-The full build for commit \texttt{7c15710a} is recorded under tag
-\texttt{v0.1.0-rc1}.
+capstone. Each PR ran textual guards for \texttt{sorry} and the public
+import closure. A manually dispatched full build checked the live
+declarations and recorded this exact axiom list for commit
+\texttt{7c15710a} under tag \texttt{v0.1.0-rc1}. % CLAIM: CLM-001
