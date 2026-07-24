@@ -29,8 +29,11 @@ make clean
 主エンジンは pdflatex（latexmk 経由，IEEE の投稿パイプラインに一致）．ローカルに
 TeX 環境が無い場合は，単一バイナリの
 [tectonic](https://tectonic-typesetting.github.io/)（`~/.local/bin` へ配置）で
-draft ビルドできる（camera-ready は pdflatex）．CI（`.github/workflows/build.yml`）は
-push ごとに PDF artifact を生成する．
+draft ビルドできる（camera-ready は pdflatex）．CI は 2 本に分かれており，
+`checks`（TeX 不要，全 PR で実行）が claim リンク・raw ログ漏洩・redaction・lint を
+検査し，`paper`（`paper/**`・`Makefile` の変更時，`main` への push，手動 dispatch）が
+PDF artifact を生成する（PR の artifact は 7 日保持）．詳細は
+[.github/workflows/README.md](.github/workflows/README.md)．
 
 ## ディレクトリ
 

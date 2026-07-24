@@ -8,7 +8,11 @@ LATEXMK  := $(shell command -v latexmk 2>/dev/null)
 TECTONIC := $(shell command -v tectonic 2>/dev/null)
 CHKTEX   := $(shell command -v chktex 2>/dev/null)
 
-.PHONY: pdf lint verify clean
+# Public directories the redaction scan must cover. CI and local runs read the
+# list from here so the gate cannot drift between them.
+REDACT_DIRS := evidence claims analysis provenance notes paper
+
+.PHONY: pdf lint verify leakcheck redact integrity clean
 
 pdf:
 ifdef LATEXMK
@@ -37,6 +41,16 @@ endif
 
 verify:
 	python3 scripts/verify_claim_links.py
+
+leakcheck:
+	bash scripts/check_no_raw_logs.sh
+
+redact:
+	python3 scripts/redact_check.py $(REDACT_DIRS:%=--dir %)
+
+# The three content gates that need no TeX. Kept as one target so the
+# lightweight CI workflow and a manual full build run an identical set.
+integrity: verify leakcheck redact
 
 clean:
 	rm -rf build
