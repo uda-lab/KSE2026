@@ -1,5 +1,12 @@
 # CI workflows
 
+> **If you are enabling branch protection, read
+> [Contexts that must never be required](#contexts-that-must-never-be-required)
+> first.** The only status context that is safe to require is **`integrity`**.
+> Requiring `checks`, `paper`, `build`, or `pdf` deadlocks every pull request
+> permanently. Three of those four are offered by GitHub's required-checks
+> picker and look entirely legitimate.
+
 Two workflows, split by cost. `checks` is cheap and unconditional; `paper` is
 expensive and conditional. This file records why the split exists, why the
 expensive one is constrained, and why the TeX installation was left alone.
@@ -40,15 +47,21 @@ is weakened again later.
 The three TeX-free gates are defined once, in the `integrity` target of the
 `Makefile`, so CI and local runs cannot drift apart.
 
-## Branch protection: which workflow may be required
+## Branch protection: which context may be required
 
-**The `checks` workflow is the one to require. `paper` must not be required.**
+**Require exactly one context: `integrity`.**
 
-The status context to name in a ruleset is the **job** name, not the workflow
-name. The job in `checks.yml` is `integrity`, so the required check to configure
-is `integrity` — confirmed on PR #65, where `gh pr checks` reported the context
-as `integrity`. Naming `checks` would configure a context that never reports and
-would itself cause the permanent-pending failure described below.
+Not `checks`. The thing a ruleset names is the **job** name, not the workflow
+name, and this repository's workflow names and job names deliberately do not
+match. `checks.yml` contains a job called `integrity`; `paper.yml` contains a job
+called `pdf`. Confirmed empirically rather than assumed — on PR #65 and on commit
+`b797810`, the API reports exactly the contexts `integrity` and `pdf`, never
+`checks` or `paper`.
+
+Requiring `checks` would therefore configure a context that is never reported,
+which stays pending forever and blocks every pull request. That failure is the
+one this whole split exists to prevent, so getting it wrong here would reintroduce
+it through the fix.
 
 GitHub does not report a neutral or passing status for a path-filtered workflow
 whose filter does not match — it reports nothing at all. A required check that
@@ -67,16 +80,32 @@ Naming the wrong context is the easiest way to deadlock this repository, and the
 required-checks picker actively invites it: GitHub offers any context reported in
 roughly the last week, including ones that will never be reported again.
 
-| context | status | why |
-| --- | --- | --- |
-| `integrity` | **require this one** | job in `checks.yml`; always reports |
-| `pdf` | never require | job in `paper.yml`; path-filtered, reports nothing on unrelated pull requests |
-| `paper` | never require | the **job** name of the deleted `build.yml`. The current workflow is *also* named `paper`, so this looks legitimate in the picker. It will never be reported again |
-| `build` | never require | the deleted workflow's name |
+| context | offered by the picker? | verdict | why |
+| --- | --- | --- | --- |
+| `integrity` | yes | **require this one** | job in `checks.yml`; no path filter, so it always reports |
+| `pdf` | yes | never require | job in `paper.yml`; path-filtered, so it reports nothing at all on pull requests that do not touch the manuscript |
+| `paper` | yes | never require | the **job** name of the deleted `build.yml`. A workflow named `paper` still exists, so this looks current. It will never be reported again |
+| `build` | briefly | never require | the deleted workflow's name |
+| `checks` | no | not a context | a workflow name, not a job name. Nothing ever reports under it |
 
-`paper` is the dangerous one. It is a genuine historical context, it matches the
-name of a workflow that still exists, and selecting it blocks every pull request
-forever.
+`paper` is the dangerous one, and it is dangerous specifically because of how
+this repository changed. Before #61 the workflow was named `build` and its job
+was named `paper`, so `paper` is a genuine historical context. After #61 the
+*workflow* is named `paper` and its job is named `pdf`. An admin scanning the
+picker sees `paper`, recognises it as the name of a workflow that plainly still
+exists, and selects it. Nothing will ever report it again, and every pull request
+blocks forever.
+
+The general rule, since context names will keep drifting: pick the context from
+what a recent pull request actually reported, not from what looks familiar.
+
+```sh
+gh pr view <N> --repo uda-lab/KSE2026 --json statusCheckRollup \
+  --jq '.statusCheckRollup | map({name, workflowName})'
+```
+
+Anything not in that output on a pull request that touches nothing special is
+not safe to require.
 
 Merge queues are the other way to hit the same failure. `checks.yml` triggers on
 `merge_group` so that `integrity` reports for the `refs/gh-readonly-queue/...`
