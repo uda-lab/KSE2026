@@ -1,4 +1,8 @@
 \documentclass[conference]{IEEEtran}
+% IEEEtran silently discards \thanks in conference mode; restore it so the
+% funding acknowledgment can be typeset as the unmarked first-page footnote.
+% This only re-lets commands and emits nothing on its own.
+\IEEEoverridecommandlockouts%
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -8,6 +12,17 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
+
+% --- Submission anonymity switch --------------------------------------------
+% \anonymoustrue  : blind byline, funding acknowledgment suppressed (current).
+% \anonymousfalse : named byline plus the funding acknowledgment.
+% Anonymity for the KSE 2026 submission is a deferred owner decision, and the
+% byline is already blind, so the default below reproduces today's PDF exactly.
+% Flipping the single line is the only edit this file needs; the named branch
+% still needs the real byline from the owner. Identity leaks the switch does
+% not cover are listed in notes/deanonymization-checklist.md.
+\newif\ifanonymous%
+\anonymoustrue%
 
 % Lean 4 listings setup (minimal; extend as needed)
 \lstdefinelanguage{lean}{
@@ -33,7 +48,15 @@
 \title{Formalizing Leray--Hopf in Lean~4 with AI Agents:\\
 Harness Design and Reliability Lessons}
 
-\author{\IEEEauthorblockN{Anonymous Author(s)}}
+\ifanonymous%
+  \author{\IEEEauthorblockN{Anonymous Author(s)}}
+\else
+  % TODO(owner): substitute the real byline and affiliation here. An affiliation
+  % email address will fail scripts/redact_check.py, which scans paper/.
+  \author{\IEEEauthorblockN{Anonymous Author(s)}%
+    \thanks{This work was supported by JST-Mirai Program Grant Number
+      \mbox{JPMJMI22G1}, Japan.}}
+\fi
 
 \maketitle
 
