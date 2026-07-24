@@ -1,170 +1,127 @@
-\section{Harness Design for Agent-Assisted Formalization}\label{sec:workflow}
+\section{Harness Design for Formalization with Agents}\label{sec:workflow}
 
-% The proposed harness-architecture figure is tracked in a separate figure
-% issue.  Do not add a rendered figure or a figure reference until the
-% author-supplied artwork is available.
+% The proposed architecture figure is tracked in a separate figure Issue.
+% Do not add a rendered figure or a figure reference until the author supplies
+% the artwork.
 %
-% Historical workflow facts in this section are bound by CLM-007 to
+% Historical facts in this section are bound by CLM-007 to
 % analysis/workflow-evolution.md and the six coded session indices in
-% evidence/session-index/.  The architecture is an end-of-campaign synthesis,
-% not a claim that every component was present throughout the campaign.
+% evidence/session-index/. The architecture in CLM-009 describes the final
+% arrangement assembled from controls introduced at different times.
 
-We reconstruct the campaign's end-state harness from controls introduced at
-different stages. It separates scientific authority and implementation from
-checks matched to the mathematical statement, Lean artifact, and public
-declaration set, together with operational control and evidence capture.
-% CLAIM: CLM-009
-The resulting architecture is a synthesis of the final project state, not a
-claim that every component operated throughout the campaign.
+The work ran across two local computers and an isolated development
+container on a virtual private server (VPS). Many parallel orchestration
+sessions used the VPS container. Agents worked in separate Git worktrees
+but shared the repository, Lean build cache, and a memory ceiling of
+3.42\,GiB. This setting made computing resources part of the harness rather
+than background infrastructure. % CLAIM: CLM-007, CLM-009, EV-0247
 
-\subsection{Scientific authority and issue-scoped work}
+\subsection{Owner authority and the GitHub workflow}
 
-The scientific owner retained authority over the mathematical scope. An issue
-specified the intended result and acceptance conditions; for statements that
-were easy to overgeneralize, a statement card recorded the hypotheses,
-target conclusion, and permitted proof boundary before implementation. The
-issue and statement card thus served different purposes: the issue bounded a
-unit of work, while the card made the mathematical contract reviewable.
-% CLAIM: CLM-009
+The scientific owner retained authority over theorem scope. A GitHub Issue
+(hereafter Issue) defined each unit of work and its acceptance conditions.
+When a proposition could easily be overstated, a separate statement card
+recorded its hypotheses, conclusion, and permitted proof boundary. The
+Issue bounded implementation. The statement card exposed the mathematical
+contract to review. % CLAIM: CLM-009
 
-The orchestrator coordinated work but did not edit Lean files. Implementing
-agents received issue-scoped Git worktrees, separate working directories tied
-to distinct branches, and returned changes through pull requests. The pull
-request consolidated the committed candidate, validation results, and review
-record. Coded records show that coordination and implementation were distinct
-roles from the earliest observed session; later phases made the pull
-request their durable boundary. % CLAIM: CLM-007, EV-2076, EV-0925
+The main orchestrator assigned agents and checked their returned artifacts
+without editing Lean files itself. The repository skill
+\texttt{github-driven-workflow} required every change to begin with an
+Issue and pass through a PR. This workflow predated Fable. The project
+began using GitHub on June~19, and the first documented independent PR
+review occurred on June~20. Earlier orchestrators used Opus. When Fable~5 became
+available again in early July, it assumed the existing orchestrator role
+without changing the workflow's authority or merge contract. An
+implementing agent received its own branch
+and Git worktree, then returned a committed candidate through a GitHub pull
+request (PR). Direct pushes to the main branch were prohibited. A PR could
+merge only after the checks relevant to its changed artifacts had passed,
+an independent reviewer had left an attributable result, and all review
+threads were resolved. % CLAIM: CLM-007, CLM-009, EV-2076, EV-0925
 
-For the large refactoring campaign, a read-only scout examined repository
-state and issue assumptions before an implementing agent was assigned.
-Implementation and inspection therefore did not share edit authority. Two
-review roles were also separated: one checked module structure, and another
-compared public declarations before and after each refactor. This role
-structure was observed in the July campaign; it should not be projected onto
-earlier phases. % CLAIM: CLM-007, EV-1669
+This workflow also separated the destinations of review findings.
+Questions about mathematical meaning returned to the owner and statement
+card. Lean errors and build failures returned to the implementing
+worktree. During the large July refactor, the orchestrator first assigned a
+scout that could inspect repository assumptions but not edit them, then assigned separate
+agents to implementation, module inspection, and comparison of public
+declarations. Inspection roles had no edit authority. % CLAIM: CLM-007, EV-1669
 
-The minimal change contract was therefore as follows. The issue fixed scope
-and acceptance conditions, a worktree held one implementation candidate, and
-the pull request recorded the checks applicable to the changed artifact. The
-scientific owner revised the statement contract after semantic findings;
-implementers addressed code or build failures in the worktree. A candidate
-advanced only after the applicable check results and a reviewer-attributed
-completion record were attached to the pull request. % CLAIM: CLM-009
+\subsection{Checks selected by artifact}
 
-\subsection{Verification by artifact}
-
-The harness assigned a distinct check to each artifact at risk.
-% CLAIM: CLM-009
-
-\paragraph{Mathematical statement.}
-An agent independent of the implementer examined whether the proposition
-matched the intended mathematics and whether its hypotheses were sufficient.
-Reviewers tested candidate statements with concrete counterexamples when
-appropriate. This semantic gate assessed the intended proposition and returned
-scope corrections to the statement contract; the contrasting outcomes are
-analyzed in Section~\ref{sec:incidents}.
+\emph{Mathematical statement.}
+An agent independent of the implementer checked whether the proposition
+matched the intended mathematics and whether its hypotheses were
+sufficient. For statements near a boundary of validity, the reviewer
+looked for concrete counterexamples before proof search continued.
+Section~\ref{sec:incidents} contrasts a defect found by this procedure
+before merge with one that remained until release preparation.
 % CLAIM: CLM-005, CLM-007, EV-0925
 
-\paragraph{Lean artifact and axiom footprint.}
-The build checked elaboration and type correctness. A separate
-\texttt{\#print axioms} result recorded the assumptions of designated
-declarations, while release-surface checks excluded experimental modules.
-Together they certified the Lean artifact and its dependency boundary. A
-release candidate then received a recorded full-build attestation for its
-specific commit.
+\emph{Lean declaration and assumptions.}
+The Lean build checked elaboration and type correctness.
+\texttt{\#print axioms} recorded the assumptions of designated
+declarations, and an import check kept experimental modules outside the
+public root import. A full build was recorded for the release commit.
 % CLAIM: CLM-009
 
-\paragraph{Public declarations.}
-Refactoring was checked against the prior public declaration set, independently
-of downstream use. The declaration-level comparison certified interface
-preservation by comparing the candidate inventory and, where exact
-preservation was required, statement text. Section~\ref{sec:incidents}
-describes the omission that motivated this boundary.
+\emph{Public declarations.}
+Refactoring was checked against the preceding inventory of public
+declarations. When exact preservation was required, the comparison also
+covered statement text. This check was independent of downstream use and
+therefore detected an unreferenced theorem omitted during refactoring.
 % CLAIM: CLM-007, EV-1669
 
-\paragraph{Independent review record.}
-A pull request required durable evidence that a reviewer distinct from the
-implementer had examined the change. A dispatched review did not satisfy the
-gate. The pull request needed an attributable record naming the reviewer and
-result; the gate checked this completion evidence separately from the
-substantive findings.
-% CLAIM: CLM-007, EV-1669
+The GitHub workflow preserved these results with the candidate they
+assessed. A review request alone was insufficient. The PR needed the
+reviewer's identity and result. This prevented a dispatched but unfinished
+review from being mistaken for completed assurance.
+% CLAIM: CLM-007, CLM-009, EV-1669
 
-\subsection{Ownership, liveness, and resource control}
+\subsection{Ownership, liveness, and computing resources}
 
-Parallel work used independently named worktrees with one active implementing
-owner per worktree. Shared import files were assigned to a single writer.
-Silence alone did not transfer ownership: the orchestrator was expected to
-check agent and process state before replacing an unresponsive worker. These
-rules address two different risks, concurrent edits to shared state and
-duplicated work caused by an incorrect liveness judgment.
-% CLAIM: CLM-007, EV-2076, EV-1669, EV-0247
+Each Git worktree had one active implementing owner, and shared import
+files had one designated writer. An apparent loss of contact did not by
+itself transfer ownership. The orchestrator first checked the agent and
+its process state, because starting a replacement in the same worktree
+could duplicate both edits and builds. % CLAIM: CLM-007, EV-2076, EV-1669, EV-0247
 
-Lean builds shared a cache and ran under a global lock. Before a build, the
-harness checked available memory across the container and removed stale helper
-processes; under pressure it reduced Lean's thread count. These checks formed
-the final operating arrangement and determined whether verification could
-complete. Assurance about the mathematical statement came from the
-checks above. % CLAIM: CLM-007, CLM-009, EV-0247
+Heavy Lean builds shared a cache and ran under a global lock. Before
+starting one, the harness checked memory available to the whole VPS
+container and removed helper processes left by completed jobs. Under
+pressure, it also reduced Lean's thread count. These requirements were
+placed in standing agent instructions and repeated in dispatch prompts.
+They did not depend on an agent recalling an earlier incident.
+% CLAIM: CLM-007, CLM-009, EV-0247
 
-Agent assignments changed across the campaign. The durable role definitions
-were therefore expressed through permissions and recorded outputs rather than
-through model names. % CLAIM: CLM-007, EV-2076, EV-0925, EV-1669
+\subsection{Evidence and measured use}
 
-\subsection{Evidence capture and observed events}
+Session records, GitHub Issues and PRs, build results, and release
+artifacts were retained as separate sources. Claim identifiers connect
+paper statements to those sources, while reconstructed intervals remain
+distinguishable from primary session evidence. % CLAIM: CLM-009
 
-Session records, pull-request discussions, build results, and release
-artifacts were retained as separate evidence sources. Claim identifiers link
-paper statements to those sources, and reconstructed intervals are marked
-separately from primary session evidence. This evidence layer supports audit
-and later reconstruction alongside the verification artifacts.
-% CLAIM: CLM-009
+From 2026-06-10 through the release on 2026-07-20, the collected logs
+record at least 15.1M output tokens, a cost of \$6{,}973 at published API
+rates, and 199.1h of active engagement when adjacent events are joined
+only across gaps of at most five minutes. These values are lower bounds
+because some session records were lost or unavailable. % CLAIM: CLM-002
 
-Across the campaign period from 2026-06-10 through the 2026-07-20 release,
-the collected session logs record at least 15.1M output tokens, an
-API-equivalent cost of \$6{,}973, and 199.1h of active engagement under a
-5-minute inter-event gap cap. API-equivalent cost applies the published API
-rates to recorded token classes; active engagement sums adjacent events only
-when their separation is at most five minutes. The values are lower bounds
-because the evidence store has known coverage gaps. % CLAIM: CLM-002
+The July 2--3 completion phase occurred immediately after Fable~5 became
+available again. Fable orchestrated that work through Google Cloud's
+Vertex AI, with Opus agents used for some delegated tasks. The provider
+export records a charge of JPY~54{,}868 for all activity on the machine,
+while applying published API prices to the project logs gives
+\(\$258.28\). If the provider's aggregate token metric measures the same
+token classes as the logs, the project's share of the charge is
+JPY~41{,}421--41{,}796. % CLAIM: CLM-003, CLM-007
 
-For the Vertex-hosted completion phase on July 2--3, 2026 (Pacific Time),
-billing reconciliation kept three quantities separate. The provider export
-measured a machine-wide actual charge of JPY~54{,}868; applying published
-prices to the project logs yielded an unconditional calculation of
-\(\$258.28\). Under the stated interpretation of the provider's aggregate
-token metric, the project's derived share of the actual charge was
-JPY~41{,}421--41{,}796. This attribution range is conditional on that metric
-interpretation. % CLAIM: CLM-003
-
-Six sessions were selected purposively for reconstruction value and coded by
-the incident analyst against a fixed event vocabulary, separately from
-evaluation of the formal result. Table~\ref{tab:event-codes}
-reports a selected subset of event families used in this paper's control
-analysis, not the complete coded vocabulary; the full indices remain in the
-evidence repository. The selected families connect the evidence to the design:
-statement and mathematical events call for semantic gates, whereas ownership,
-handoff, and resource events call for operational and review-completion
-controls.
-% CLAIM: CLM-004
-
-\begin{table}[t]
-\centering
-\caption{Selected event counts in the six purposively selected sessions.}\label{tab:event-codes}
-\begin{tabular}{@{}p{0.72\linewidth}r@{}}
-\toprule
-Observed event & Count \\
-\midrule
-Statement mismatch or weakening & 4 \\
-Recovery action & 19 \\
-Resource failure & 12 \\
-Worktree ownership conflict & 5 \\
-Uncorrected false success report & 0 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-No uncorrected false success report, defined here as a mismatch
-between a runtime success report and on-disk state, was observed in the coded
-sessions. This is a descriptive count for the purposive sample.
-% CLAIM: CLM-004
+For incident analysis, six sessions were selected for their
+reconstruction value and coded independently of the formal result. They
+contain four statement mismatches or weakenings, nineteen recovery
+actions, twelve resource failures, and five Git worktree ownership
+conflicts. No unresolved mismatch between a runtime success report and
+the state on disk was found. These counts describe the selected sessions.
+They do not estimate rates for the project or for agent systems in
+general. % CLAIM: CLM-004

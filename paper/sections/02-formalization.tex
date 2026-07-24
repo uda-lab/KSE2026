@@ -5,7 +5,7 @@
 % Statements MUST match claims/formalization-scope.md (pinned at
 % leray-hopf v0.1.0-rc1, commit 7c15710a). No claim beyond that file.
 
-The formalization target is the classical existence theorem for
+The target is the classical existence theorem for
 Leray--Hopf weak solutions of the homogeneous, incompressible
 Navier--Stokes equations~\cite{leray1934,hopf1951}: given a
 divergence-free initial datum $u_0 \in L^2$, a viscosity $\nu > 0$, and a
@@ -13,38 +13,38 @@ time horizon $T > 0$, a weak solution on $[0,T]$ exists. We report a
 Lean~4~\cite{moura2021lean4} formalization, built on
 mathlib~\cite{mathlib2020}, on two domains: the periodic unit 3-torus
 $\mathbb{T}^3$ and the whole space $\mathbb{R}^3$. All statements below are
-quoted from pinned reference commit \texttt{7c15710a}, release
+quoted from commit \texttt{7c15710a}, tagged
 \texttt{v0.1.0-rc1}~\cite{lerayhopf2026repo}, whose scope statement defines
 the result reported here. % CLAIM: CLM-001 (leray-hopf@7c15710a7b9068a2aa105fc7c11b432e7685b7b5)
 
 \subsection{Weak solutions as formalized}
 
-A weak solution is represented by a structure containing a trajectory
-$u : \mathrm{Time} \to D_\sigma$ and proofs of the properties in
-Table~\ref{tab:solution-fields}. The domain-specific abbreviations are
+A weak solution is represented by a velocity field
+$u : \mathrm{Time} \to D_\sigma$ that depends on time, together with proofs of the properties in
+Table~\ref{tab:solution-fields}. The abbreviations for the two domains are
 \texttt{LerayHopfSolutionFull} on $\mathbb{T}^3$ and
-\texttt{LerayHopfSolutionFull\_R3} on $\mathbb{R}^3$; both instantiate
-one domain-neutral \texttt{Galerkin.LerayHopfSolution} structure.
+\texttt{LerayHopfSolutionFull\_R3} on $\mathbb{R}^3$. Both instantiate
+the common \texttt{Galerkin.LerayHopfSolution} structure.
 
-The weak identity is formulated for separated-variable test functions
-$\psi(t)w(x)$. General space-time tests $\varphi(t,x)$ are outside the
-formalized relation. The initial trace is the one-sided strong limit
-$u(t)\to u_0$ in the ambient $L^2$ norm as $t\to0^+$; it does not assert
+The weak identity is formulated for test functions separated in time and space,
+$\psi(t)w(x)$. General tests $\varphi(t,x)$ that depend jointly on time
+and space are outside the formalized relation. The initial trace is the one-sided strong limit
+$u(t)\to u_0$ in the ambient $L^2$ norm as $t\to0^+$. It does not assert
 weak continuity on the whole interval.
 
 \begin{table}[h]
 \centering
-\caption{Solution-structure fields realizing the weak formulation.}\label{tab:solution-fields}
+\caption{Fields in the formalized weak solution.}\label{tab:solution-fields}
 \begin{tabular}{@{}p{0.25\linewidth}p{0.65\linewidth}@{}}
 \toprule
 Component & What is guaranteed \\
 \midrule
-Trajectory & valued in the closed divergence-free subspace $D_\sigma$ at every $t$ \\
-Weak identity & Navier--Stokes identity against separated-variable tests $\psi(t)w(x)$, with no forcing term \\
+Velocity field & valued in the closed divergence-free subspace $D_\sigma$ at every $t$ \\
+Weak identity & Navier--Stokes identity against tests $\psi(t)w(x)$ separated in time and space, with no forcing term \\
 Energy inequality & $\tfrac12\|u(t)\|^2 + \int_0^t \mathrm{dissip}(\nu,u(s))\,ds \le \tfrac12\|u_0\|^2$ for $t\in[0,T]$ \\
 Initial trace & $u(t)\to u_0$ in $L^2$ as $t\to 0^+$ \\
 Energy class & a.e.\ membership in the $H^1$ class and integrable viscous dissipation \\
-Measurability & a.e.-strong measurability of $t\mapsto u(t)$ into the ambient $L^2$ space \\
+Measurability & strong measurability almost everywhere of $t\mapsto u(t)$ into the ambient $L^2$ space \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -75,55 +75,48 @@ witness scheme $\mathfrak{G}$ (a concrete Galerkin scheme built from a
 Schwartz divergence-free basis) is itself produced by the proof, not
 assumed.
 
-The formalized result concerns the homogeneous equation on an arbitrary
-fixed finite horizon, using the separated-variable weak formulation and
+The result concerns the homogeneous equation on an arbitrary
+fixed finite horizon, using the separated weak formulation and
 the stated energy class. It establishes existence and does not address
-uniqueness, non-uniqueness, or higher regularity. Developments outside this scope are
+uniqueness, nonuniqueness, or higher regularity. Developments outside this scope are
 kept in an experimental namespace that neither capstone imports
 (Section~\ref{sec:release-surface}).
 
 \subsection{Main analytic difficulties}
 
-The 96-file, approximately 42,000-line formalization tree, measured at the
-pinned commit,
+At the pinned commit, the formalization contains 96 files and about
+42,000 lines.
 % CLAIM: CLM-001 (formalization-metrics.json, measured at leray-hopf@7c15710a)
-is organized around three analytic tasks shared by both domains.
+It is organized around three analytic tasks shared by both domains.
 % source: leray-hopf@7c15710a docs/architecture.md (module organization)
 
 \emph{Galerkin approximation.}
 On each finite-dimensional subspace $V_n$, the truncated quadratic
-vector field is $C^1$ and satisfies a dissipative inner-product estimate.
-Forward-global existence is assembled by gluing local
+vector field is $C^1$ and satisfies a dissipative estimate for its inner
+product with the state. Forward global existence is assembled by gluing local
 Picard--Lindelöf solutions.
 
 \emph{Spatial compactness.}
-The torus proof uses a Fourier mode-tail Rellich argument. The
-$\mathbb{R}^3$ proof uses an in-repository local Rellich--Kondrachov
+The torus proof uses a Rellich argument based on the tail of the Fourier
+modes. The $\mathbb{R}^3$ proof uses a local Rellich--Kondrachov
 embedding based on a Fréchet--Kolmogorov criterion.
 
 \emph{Time compactness and limit passage.}
-A shared Gelfand-triple and Bochner-space layer provides the
-Aubin--Lions and weak-limit arguments. It uses mode-wise spectral
-decomposition on $\mathbb{T}^3$ and Steklov time averaging on
+A shared Gelfand triple and Bochner space layer provides the
+Aubin--Lions and weak limit arguments. It uses a spectral decomposition by
+mode on $\mathbb{T}^3$ and Steklov time averaging on
 $\mathbb{R}^3$. The nonlinear convection term is represented through a
-proof-carrying trilinear extension for the Schwartz/Galerkin test class;
-the development does not postulate a bounded operator on
+trilinear extension with explicit proofs for the Schwartz/Galerkin test class.
+The development does not postulate a bounded operator on
 $L^2\times L^2\times L^2$.
 
-\subsection{Kernel-only axiom check and release-surface enforcement}\label{sec:release-surface}
+\subsection{Kernel axioms and public imports}\label{sec:release-surface}
 
-Both capstones are \emph{kernel-only}: \texttt{\#print axioms} returns
+For both capstones, \texttt{\#print axioms} returns
 exactly the three standard Lean kernel axioms \texttt{propext},
 \texttt{Classical.choice}, and \texttt{Quot.sound}. There are no
-project-declared axioms or occurrences of \texttt{sorryAx} in either
-capstone. A CI script fails if the pinned list changes.
-\texttt{import LerayHopf} is the complete release surface. A guardrail
-script walks the transitive import closure and fails if any reachable
-file contains a \texttt{sorry} or a project \texttt{axiom}. This static
-source check runs on every pull
-request; \texttt{LerayHopf.Experimental} is thereby unreachable from
-the release surface. A full \texttt{lake build} with the axiom check
-is recorded separately as a release-candidate attestation for a specific
-commit. The result reported here is attested at \texttt{7c15710a} under
-release tag \texttt{v0.1.0-rc1}; it is not inferred from the status of an
-unpinned branch head.
+axioms declared by the project or occurrences of \texttt{sorryAx} in either
+capstone. Continuous integration checks this list and rejects
+\texttt{sorry} or project axioms reachable through the public root import.
+The full build for commit \texttt{7c15710a} is recorded under tag
+\texttt{v0.1.0-rc1}.

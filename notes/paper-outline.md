@@ -1,16 +1,16 @@
 # Paper outline — content-first revision
 
 現在の改稿ではページ配分を固定しない．各 section は次の機能を担い，内容・論旨・
-独立レビューが収束した後に Phase 5.5 で6ページへ圧縮する．
+owner review が収束した後に Phase 5.5 で6ページへ圧縮する．
 
 | Section | Reader-facing function |
 |---|---|
 | Abstract | 問題，形式化成果，harness 方法，限定された含意を各一度だけ要約 |
 | 1. Introduction | AI-for-Math 上の問題設定，先行研究，3 contribution，paper map |
-| 2. Formalization | capstone，正確な scope，解析的構成，release attestation |
-| 3. Harness Design | authority，issue/worktree/PR，assurance stack，資源・証跡基盤 |
-| 4. Incidents | 不変条件→事象→検出→対策→教訓→証拠強度の事例分析 |
-| 5. Recommendations and Limitations | 第三者向け推奨と，因果・一般化・再現性の限界 |
+| 2. Formalization | capstone，正確な scope，解析的構成，pinned build と公理検査 |
+| 3. Harness Design | owner 権限，Fable 以前からの `github-driven-workflow`，model-independent な orchestrator 役（後期に Fable），Git worktree，VPS コンテナ，artifact 別検査，証跡 |
+| 4. Incidents | 事象→検出・対策→教訓を明示し，PR 番号へ接続する事例分析 |
+| 5. Engineering Implications and Limitations | AI for Math に固有の設計知見と，因果・一般化・再現性の限界 |
 | 6. Conclusion | 数学的成果と工程上の含意を一段抽象化して結ぶ |
 
 図 #58 は Section 3 の opening overview 直後に配置する．本文は図がなくても完結させる．

@@ -43,7 +43,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   （除外 46 レコード．issue #42 項目 4）．
   gap 閾値感度: active = 94.8h (1m) / 199.1h (5m) / 309.8h (15m)，wall-clock 総和 1,022.8h．
 
-## CLM-003: Vertex 完成フェーズ（2026-07-02〜03 PT）の実請求は machine-wide 実測 ¥54,868（無条件）であり，escrow 上の leray-hopf 分は公表単価換算 $258.28（無条件）．leray-hopf 単独の実請求 ¥41,421〜41,796（75.5〜76.2%）は条件付き導出値である
+## CLM-003: Fable 5 再公開直後の Vertex 完成フェーズ（2026-07-02〜03 PT）の実請求は machine-wide 実測 ¥54,868（無条件）であり，escrow 上の leray-hopf 分は公表単価換算 $258.28（無条件）．leray-hopf 単独の実請求 ¥41,421〜41,796（75.5〜76.2%）は条件付き導出値である
 - Status: frozen
 - Paper location: paper/sections/03-agent-workflow.tex
 - Evidence: `evidence/metrics/vertex-completion-phase-billing.csv`・`vertex-completion-phase-billing-sku.csv`（redaction 済み集計），`scripts/extract_vertex_phase.py`（再現可能），EV-1681〜EV-2126（escrow 一次記録）
@@ -98,7 +98,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 
 ## CLM-007: 03 節（workflow）で述べる個別の歴史的事実（役割構成，dispatch 件数，規律・ゲートの導入時期と契機，モデル選択の推移）は，`analysis/workflow-evolution.md` の時系列表と `evidence/session-index/` の符号化 6 セッションに裏付けられた範囲に限る
 - Status: frozen
-- Paper location: paper/sections/03-agent-workflow.tex
+- Paper location: paper/main.tex, paper/sections/01-introduction.tex, paper/sections/03-agent-workflow.tex, paper/sections/06-conclusion.tex
 - Evidence: `analysis/workflow-evolution.md`（全行 Evidence 付き時系列表），`evidence/session-index/` 6 index（EV-2076・EV-0925・EV-1669・EV-0247 ほか）
 - Notes: 03 節の各主張は本 claim を経由して workflow-evolution.md / session-index の
   該当行へ解決する（本文中の `% EV-NNNN` コメントが対応行を指す）．未符号化期間の
@@ -115,9 +115,9 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   INC-005 の累積カウンタ帰属限界）．2026-07-23 夜間 freeze 分 — 朝の owner 通読での
   追認対象（CLM-006/007 と同扱い）．
 
-## CLM-009: 本 campaign の最終的な harness は，scientific scope，issue-scoped implementation，semantic statement review，Lean/kernel verification，public-declaration preservation，release attestation，resource/liveness control，evidence capture を別の責務として扱った
+## CLM-009: 本 project の最終 harness は，scientific owner の権限下で，Fable 登場以前からの repository-local `github-driven-workflow` が model-independent な orchestrator 役を規律し，GitHub Issue・専用 branch/Git worktree・GitHub PR を接続した．Fable は後期に既存の orchestrator 役を担った．semantic statement review，Lean/kernel verification，public declaration preservation，VPS container の resource/liveness control，evidence capture は別の責務として扱われた
 - Status: frozen
-- Paper location: paper/sections/03-agent-workflow.tex, paper/sections/05-discussion.tex, paper/sections/06-conclusion.tex
+- Paper location: paper/main.tex, paper/sections/01-introduction.tex, paper/sections/03-agent-workflow.tex, paper/sections/05-discussion.tex, paper/sections/06-conclusion.tex
 - Evidence: EV-2076，EV-0925，EV-1669，EV-0247，INC-001，INC-002，INC-003，INC-004，INC-005，leray-hopf#158
 - Notes: 個々の責務と導入時期は CLM-007/008 の一次・再構成証拠に従う．これは campaign
   終了時点の構成を合成した記述であり，全期間に同じ harness が存在したという主張では

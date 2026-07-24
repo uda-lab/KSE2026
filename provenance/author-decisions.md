@@ -19,3 +19,5 @@ scientific owner による確定判断のみを記録する（提案・候補は
 | 2026-07-24 | **2026-07-23 のタイトル確定を再検討対象へ戻す**: harness-led 改稿に整合する新タイトルを PR #59 で提案し，最終確定は owner review まで保留する | owner は既存の repo 内決定事項を本改稿で一律に事後改訂してよいと明示．旧タイトルは当時の決定記録として残し，新タイトルの status は `notes/title-and-abstract.md` に proposal として記録 |
 | 2026-07-24 | **ページ制約の段階分離**: KSE の最終6ページ上限は維持するが，内容・論旨・文章品質を確定する PR ではページ数を acceptance gate にしない．圧縮は独立した後続段階で行う | owner の改稿指示．issue #57 の旧 acceptance を更新 |
 | 2026-07-24 | **主図を別 issue #58 で owner が清書**: 本改稿 PR は synthesized end-state harness の図案・挿入位置を記録し，未完成画像を本文に置かない | owner の改稿指示．最終 artwork の採否と清書は owner |
+| 2026-07-25 | **owner review へ移行し，追加の Codex/Copilot 自動レビューを停止**: 防御的な review 痕跡，非標準的なハイフン複合語，過剰なコロン・セミコロン，repo 識別子中心の説明を本文から除く．一般的な software ceremony ではなく，owner が準備した `github-driven-workflow`，Git worktree，専門役割，VPS container の実態を中心にする | owner の本文レビュー．追加自動レビューの費用対効果が低いとの判断を受け，以後の品質判断は owner review に委ねる |
+| 2026-07-25 | **`github-driven-workflow` は Fable 登場以前からの owner 提供 harness**: Fable は後期に既存の model-independent な orchestrator 役を担ったのであり，workflow の成立主体・所有者・設計者として書かない | owner の時系列・権限関係の訂正．paper，claim ledger，contribution map，figure spec の全てでこの関係を維持する |

@@ -5,11 +5,14 @@ The paper must remain readable until that artwork is added.
 
 ## Message
 
-The figure presents a synthesized end-state architecture reconstructed from
-controls introduced at different stages, not a configuration that existed
-throughout the campaign. It separates scientific authority, implementation,
-semantic adjudication, mechanical verification, runtime governance, and
-evidence capture.
+The figure should show the final architecture assembled during the project.
+The central idea is a division of authority: the scientific owner decides
+mathematical scope, a model independent orchestrator coordinates bounded work,
+specialist agents inspect different artifacts, and the runtime and evidence
+systems supply the state needed to trust a result. Fable should appear only as
+the model that filled the existing orchestrator role in later phases. The
+caption should state briefly that individual controls entered the project at
+different times.
 
 ## Layout
 
@@ -18,59 +21,69 @@ Use a two-column IEEE `figure*`.
 Central lifecycle:
 
 1. Scientific owner
-2. Issue and statement contract
-3. Orchestrator
-4. Issue-scoped implementing worktree
-5. Pull request candidate
+2. GitHub Issue and, when needed, a statement card
+3. Orchestrator in Claude Code, annotated `Fable in later phases`
+4. Implementing agent on a dedicated branch and Git worktree
+5. GitHub pull request candidate
 6. Applicable assurance gates
-7. Merged project state
-8. Release candidate
-9. Full-build attestation
-10. Attested release artifact
+7. Main branch
+8. Release commit and recorded full build
 
-The assurance gateway is labeled `select gates by changed artifact` and
-contains four distinct controls:
+Place the owner defined repository skill `github-driven-workflow` around
+stages 2--7 rather than inside the orchestrator box or as a separate agent. Its
+label should say that it enforces the path from Issue to Git worktree to pull
+request, prohibits direct pushes to the main branch, and checks the fixed merge
+conditions. The visual hierarchy must make clear that this workflow predates
+Fable and governs whichever model fills the orchestrator role.
+
+The assurance gateway is labeled `select checks by changed artifact` and
+contains four controls:
 
 - semantic statement review and counterexample search;
-- Lean build, axiom pin, and release-surface check;
-- public-declaration comparison;
-- review-completion record.
+- Lean build, axiom check, and public import check;
+- comparison of public declarations;
+- completed independent review recorded on the pull request.
 
-A read-only scout and a statement contract are conditional controls, used when
-repository assumptions or mathematical scope require them. Semantic findings
-return to the scientific owner and statement contract. Implementation and
-mechanical findings return to the issue worktree. PR assurance advances a
-candidate into the merged project state; release-candidate attestation is a
-separate full-build boundary.
+A read only scout and a statement card are conditional. Semantic findings
+return to the scientific owner and statement card. Lean and build findings
+return to the implementing Git worktree. This split should be visually
+prominent because it distinguishes scientific authority from orchestration.
 
-Two horizontal rails span the lifecycle:
+Show the execution environment beneath the lifecycle:
 
-- operational substrate: exclusive worktree ownership, liveness checks, shared
-  build cache, global build lock, process cleanup, and available-memory monitoring;
-- evidence rail: session, issue, PR, review, build, and release artifacts flow to
-  the escrow/manifest and then to paper claims.
+- two local computers and an isolated development container on a virtual private
+  server (VPS);
+- agents in separate Git worktrees;
+- a shared Lean build cache and a global build lock;
+- one active owner per Git worktree, process cleanup, liveness checks, and
+  monitoring of available memory in the VPS container.
+
+An evidence path should carry session, GitHub Issue, pull request, review,
+build, and release records into the escrow and claim manifest.
 
 ## Drawing constraints
 
-- Use generic reader-facing terms, not model names, session IDs, EV codes, issue
+- Use Fable only as a later model annotation inside the generic orchestrator
+  role. Do not include session IDs, evidence codes, Issue numbers, pull request
   numbers, or Lean declaration names.
 - Label arrows with short actions: `scope`, `bounded contract`, `committed diff`,
   `review finding`, `attested pass`, and `append evidence`.
-- Distinguish semantic feedback to the owner/contract from technical feedback
-  to the worktree.
-- Mark the scout, statement contract, and declaration comparison as conditional
+- Distinguish semantic feedback to the owner and statement card from technical
+  feedback to the Git worktree.
+- Mark the scout, statement card, and declaration comparison as conditional
   rather than universal stages.
 - Keep labels legible at two-column width and in grayscale.
 - Supply vector PDF or SVG source and accessible alternative text.
 
 ## Caption draft
 
-> Synthesized end-state architecture reconstructed from controls introduced at
-> different stages of the Leray--Hopf campaign. Scientific authority,
-> implementation, semantic adjudication, mechanical verification, runtime
-> governance, and evidence capture follow separate paths; applicable checks are
-> selected by the changed artifact, and release attestation occurs after pull-
-> request assurance.
+> Final harness used in the Leray--Hopf project. Under the scientific owner's
+> authority, a model independent orchestrator routes each GitHub Issue through
+> an implementing Git worktree and pull request. Fable filled this existing role
+> in later phases. Checks are selected according to the mathematical, Lean,
+> interface, and runtime artifacts at risk. The lower plane shows the shared VPS
+> container and evidence paths. Individual controls entered the project at
+> different times.
 
 ## Evidence anchors
 
@@ -78,11 +91,12 @@ EV-2076, EV-0925, EV-1669, EV-0247, INC-001, INC-003, INC-004, and INC-005.
 
 ## Progress and remaining work
 
-- Complete: the paper now describes the synthesized end-state harness without
+- Complete: the paper now describes the final harness without
   depending on a rendered figure.
-- Complete: lifecycle, conditional controls, feedback paths, operational rail,
-  evidence rail, PR-assurance boundary, and release-attestation boundary are
-  specified.
+- Complete: the preexisting `github-driven-workflow`, the model independent
+  orchestrator role, Fable's later use, Git worktrees, pull requests, the
+  semantic and technical feedback paths, the VPS container, and the evidence
+  path are specified.
 - Owner TODO: draw and approve the final vector artwork.
 - Owner TODO: confirm the IEEE placement, caption, and accessible alternative
   text.

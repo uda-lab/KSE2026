@@ -253,9 +253,10 @@ abstract，introduction，本文，discussion，conclusion に異なる役割を
 
 ### Phase 5.5: Compression and layout
 
-内容と独立レビューが収束した後，6ページ上限へ圧縮する．削除候補は重複，補助的な
+内容と owner review が収束した後，6ページ上限へ圧縮する．削除候補は重複，補助的な
 運用数値，本文で再利用されない分類から選び，主張の資格条件，数学的 scope，
-incident の evidence strength，第三者向け教訓を削らない．
+第三者向け教訓を削らない．incident の evidence type と confidence は incident card
+に保持し，本文では内部 rubric の小見出しを置かず，対応する PR と必要な資格条件を示す．
 
 ### Phase 6: Submission snapshot
 

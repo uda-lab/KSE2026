@@ -19,6 +19,10 @@ FORBIDDEN = [
     ("decorative metaphor", re.compile(r"\bload-bearing\b", re.IGNORECASE)),
     ("casual implementation metaphor", re.compile(r"\bplumbing\b", re.IGNORECASE)),
     ("business idiom", re.compile(r"\bclosed the loop\b", re.IGNORECASE)),
+    ("imprecise solution label", re.compile(r"\btrajectory\b", re.IGNORECASE)),
+    ("nonstandard weak-limit spelling", re.compile(r"\bweak-limit\b", re.IGNORECASE)),
+    ("hyphenated pull-request spelling", re.compile(r"\bpull-request\b", re.IGNORECASE)),
+    ("paper-internal evidence rubric", re.compile(r"\bevidence strength\b", re.IGNORECASE)),
     (
         "formulaic negative framing",
         re.compile(r"\bnot\b[^.\n]{0,80}\bbut the opposite\b", re.IGNORECASE),

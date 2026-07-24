@@ -1,15 +1,16 @@
 \section{Conclusion}\label{sec:conclusion}
 
-We formalized Leray--Hopf weak-solution existence on $\mathbb{T}^3$ and
+We formalized Leray--Hopf weak solution existence on $\mathbb{T}^3$ and
 $\mathbb{R}^3$ in Lean~4 and mathlib. At the pinned release, the two
-kernel-checked capstone theorems depend on no project axioms.
+capstone theorems depend on no project axioms.
 % CLAIM: CLM-001
 
-The development record shows why project reliability must be assigned
-to more than the proof kernel. The incidents mark boundaries between
-mathematical intent, the public declaration set, and reliable project
-execution. They motivate the synthesized end-state harness and candidate
-practices for similar formalization projects. Because the evidence comes
-from one supervised campaign, the effectiveness of these practices remains
-to be tested.
-% CLAIM: CLM-009
+The engineering contribution is a concrete division of responsibility.
+The scientific owner controls theorem scope. A model independent
+orchestrator role coordinates bounded work through GitHub Issues, Git
+worktrees, and PRs. Fable filled that role in later phases. Specialist
+reviewers assess the statement, Lean assumptions, and public declarations. The
+runtime contract covers the VPS container and its shared resources. The
+incidents show defects observed at each boundary, while the evidence
+record preserves what was checked. These observations come from one
+supervised project and require evaluation elsewhere. % CLAIM: CLM-007, CLM-009

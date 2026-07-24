@@ -1,69 +1,68 @@
-\section{Recommendations and Limitations}\label{sec:discussion}
+\section{Engineering Implications and Limitations}\label{sec:discussion}
 
-\subsection{Candidate practices for similar projects}
+\subsection{Implications for AI in mathematics}
 
-The case study supports four candidate practices. They are design
-recommendations grounded in observed failures and successful detections,
-not estimates
-of causal effectiveness. % CLAIM: CLM-005, CLM-009
+The principal design question is which artifact each control can assess.
+The observed cases support the following recommendations for projects in
+which agents develop a substantial formalization under a mathematical
+owner. They do not establish the causal effectiveness of the harness.
+% CLAIM: CLM-005, CLM-009
 
-\emph{Treat the public statement as a proof obligation.}
-Elaboration establishes that a proposition is well formed; it does not
-establish that the proposition expresses the intended mathematics.
-Statement review should therefore include scope comparison, boundary
-cases, and counterexample search before proof work is accepted. The
-paired statement incidents in Section~\ref{sec:incidents} show one
-contrast: Case B was corrected before merge, whereas Case A remained
-unreviewed until the pre-release audit. % CLAIM: CLM-005, INC-001, INC-002
+\emph{Keep mathematical authority outside the implementation role.}
+Elaboration establishes that a proposition is well formed, not that it
+expresses the intended mathematics. The scientific owner should approve a
+statement contract before implementation when the scope is delicate, and
+a reviewer who did not write the proof should test its hypotheses and
+boundary cases. Cases A and B show the different outcomes when this review
+occurs during release preparation or before merge.
+% CLAIM: CLM-005, INC-001, INC-002
 
-\emph{Assign one control to each artifact at risk.}
-The typed theorem, its proof assumptions, the public declaration set,
-and the release import surface are distinct artifacts. Semantic review,
-axiom inspection, declaration comparison, and release attestation
-observe different properties; success in one is not evidence that the
-others were checked. % CLAIM: CLM-009, INC-001, INC-004
+\emph{Use the GitHub workflow to route mathematical feedback.}
+The repository's \texttt{github-driven-workflow} gave each approved Issue
+one branch, one Git worktree owner, and one PR record. Its mathematical
+value came from routing semantic findings to the owner and statement
+contract, while returning implementation findings to the worktree. The PR
+then preserved the candidate, the applicable checks, and the decision in
+one durable record. % CLAIM: CLM-007, CLM-009, EV-2076, EV-1669
 
-\emph{Use an issue and pull request as the durable unit of work.}
-A bounded issue records scope and acceptance criteria. An isolated
-worktree gives one implementing agent ownership of the candidate, and
-the pull request records the committed diff, validation results, and an
-durable independent review record. Status reports remain provisional until
-the committed diff and validation outputs are rechecked.
-% CLAIM: CLM-007, CLM-009, EV-2076, EV-1669
+\emph{Separate observation from modification.}
+A scout inspected repository assumptions without edit permission, and
+specialist reviewers examined mathematical scope, module structure, or
+the public declaration inventory. These roles received only the authority
+needed for their task. The declaration comparison in PR~\#120 found a
+missing theorem after both the build and a structural review had passed.
+% CLAIM: CLM-007, CLM-008, CLM-009, INC-004
 
-\emph{Include operational state in the harness contract.}
-Liveness, process cleanup, build serialization, cache reuse, and
-available-memory checks affect whether a candidate can be reproduced and
-reviewed. Monitoring the complete process tree and resource headroom is
-more informative than inspecting the visible Lean process alone.
-Section~\ref{sec:incidents} provides one observed resource failure, not
-a benchmark of the proposed controls.
-% CLAIM: CLM-008, CLM-009, INC-005
+\emph{Place resource rules in the dispatch path.}
+In the VPS container, exclusive Git worktree ownership, cleanup of helper
+processes, cache reuse, a global build lock, and available memory checks
+were prerequisites for verification. Recording an incident in an agent's
+memory was insufficient because later agents and tools could change. The
+resource contract was therefore placed in standing instructions and
+repeated in each relevant dispatch. % CLAIM: CLM-007, CLM-008, CLM-009, INC-005
 
 \subsection{Evidence and limits}
 
-The campaign covered one project under one scientific owner. Six
-sessions were selected purposively for event coding, so their counts
-describe that sample and cannot estimate failure prevalence or guardrail
-effectiveness. There is no matched campaign without agent orchestration,
-and the observations do not identify causal effects.
-% CLAIM: CLM-004, CLM-005
+The study concerns one project under one scientific owner. Six sessions
+were chosen for incident reconstruction, so their coded events cannot
+estimate failure prevalence or the effectiveness of a control. There is
+no matched project without agent orchestration, and the observations do
+not identify causal effects. % CLAIM: CLM-004, CLM-005
 
-The session record also has coverage gaps, including an early loss caused
-by log retention. Reconstructed events are marked separately from
-primary session evidence and carry an explicit confidence assessment.
-The models and proprietary tools changed outside the project's control,
-which limits behavioral reproducibility. Tool-specific mechanisms are
-reported as implementation details; the candidate practices above are
-phrased in terms of artifacts and responsibilities that do not require
-the same software. % CLAIM: CLM-008, INC-003
+The session record has gaps, including early records lost to log
+retention. Reconstructed events are distinguished from primary session
+evidence and carry an explicit confidence assessment. The models and
+proprietary tools also changed outside the project's control, which limits
+behavioral reproducibility. The recommendations are therefore expressed
+through artifacts, responsibilities, and observable checks rather than a
+requirement to use the same software. % CLAIM: CLM-008, INC-003
 
-The scientific owner's supervision was part of the observed harness and
-cannot be separated from its outcome. The mathematical result is also
-bounded by Section~\ref{sec:formalization}: homogeneous equations, an
-arbitrary fixed finite horizon, separated-variable test functions, and
-the stated energy class. The paper makes no claim about uniqueness or
-higher regularity.
+The owner's supervision was part of the harness and cannot be separated
+from its outcome. Section~\ref{sec:formalization} bounds the mathematical
+result to the homogeneous equations, an arbitrary
+fixed finite horizon, test functions separated in time and space, and the
+stated energy class. The paper makes no claim about uniqueness or higher
+regularity.
 
 Redacted evidence excerpts, claim-to-evidence manifests, and scripts for
 the reported metrics are available in the paper repository. Raw session
