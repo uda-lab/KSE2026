@@ -688,5 +688,35 @@
   "performed_via_github_app": "chatgpt-codex-connector",
   "updated_at": "2026-07-24T17:44:26Z",
   "user_login": "t-uda"
+ },
+ {
+  "author_association": "NONE",
+  "body": "To use Codex here, [create a Codex account and connect to github](https://chatgpt.com/codex/cloud/settings/connectors).",
+  "created_at": "2026-07-24T18:34:43Z",
+  "id": 5073226550,
+  "issue_number": 64,
+  "performed_via_github_app": "chatgpt-codex-connector",
+  "updated_at": "2026-07-24T18:34:43Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "author_association": "MEMBER",
+  "body": "## Observed instance during PR #59 review (2026-07-24)\n\nTwo pushes to the PR branch produced measurements that make the duplicate-execution problem concrete, and show it is a reliability problem as well as a cost one.\n\n**Head `d01c43a`** — both runs completed:\n\n| Event | Result | Wall clock |\n|---|---|---|\n| `push` (30114995118) | success | ~1m28s |\n| `pull_request` (30114997764) | success | ~1m34s |\n\n**Head `a81d3ed`** — the pair diverged:\n\n| Event | Result | Wall clock |\n|---|---|---|\n| `push` (30115865971) | success | 1m49s |\n| `pull_request` (30115868435) | **cancelled** | 12m20s |\n\nThe cancelled run never left step 3, `Install TeX Live`. It sat in `apt-get` for twelve minutes while the `push` run for the same SHA installed and finished in under two. Steps 4–9 — claim links, lint, leakage guard, redaction scan, PDF build, artifact upload — are all recorded as `skipped`.\n\n### Why this is worth adding\n\nThe Problem section frames duplicate execution as waste. This instance adds two points:\n\n1. **The duplicate runs contend rather than merely repeat.** Both start within seconds of each other and race on the same `apt-get` provisioning. The outcome is nondeterministic: identical configuration, one pair green, the next pair split.\n\n2. **A cancelled duplicate degrades the check signal.** `gh pr checks 59` afterwards shows one `pass` row and one `cancel` row for the same workflow name on the same SHA. At a glance that is not distinguishable from a genuine failure, and it takes run-level inspection to establish that the surviving run did execute every gate. This bears directly on acceptance criterion 4 (\"lightweight integrity checks continue to run under the intended branch-protection policy\") — a required check that can be cancelled by its own twin is not a dependable gate.\n\nRequired changes 1 and 2 (single execution per PR push, plus `cancel-in-progress` concurrency keyed by ref) would remove both effects. No new requirement is implied beyond what the issue already specifies.\n\n### Provenance of the current configuration\n\nThe `on: push / pull_request / workflow_dispatch` trigger set with no path filters and no concurrency group was introduced in `4aaed09` (2026-07-20, \"ci: build PDF artifact with claim-link, lint, and leakage gates\"), authored as `uda-lab-agent` with `Co-Authored-By: Claude Fable 5`. `4705d2c` the same day replaced tectonic with the TeX Live `apt-get` installation, which is what makes each duplicate expensive. `bed2c84` (2026-07-24) tightened the lint step to `make lint` but did not touch the triggers.\n",
+  "created_at": "2026-07-24T18:35:33Z",
+  "id": 5073233426,
+  "issue_number": 61,
+  "performed_via_github_app": null,
+  "updated_at": "2026-07-24T18:35:33Z",
+  "user_login": "t-uda"
+ },
+ {
+  "author_association": "MEMBER",
+  "body": "Verification complete: this scripts-only PR ran only the `checks` workflow (`integrity`, pass, 21s) and produced no `paper` status, confirming both that unrelated changes skip the TeX/PDF build and that a required `paper` check would have left this PR permanently pending. Recorded in #63. Closing without merging.",
+  "created_at": "2026-07-24T18:38:39Z",
+  "id": 5073259193,
+  "issue_number": 65,
+  "performed_via_github_app": null,
+  "updated_at": "2026-07-24T18:38:39Z",
+  "user_login": "uda-lab-agent"
  }
 ]

@@ -8,20 +8,27 @@ login and, when present, the GitHub App slug recorded in
 App connector (e.g. "chatgpt-codex-connector") rather than posted directly by
 a PAT-holding process.
 
-Four categories fall out of the observed data (any repo/login combination not
-seen simply does not appear in the output — nothing is hardcoded per-repo):
+These are mechanical groupings of raw API fields, not authorship claims — see
+the LOWER_BOUND_CAVEAT below before reading anything into a login or a null.
+As of this writing, four (login, performed_via_github_app, is_bot_account)
+combinations are observed across the two tracked repos (any combination not
+present in a given snapshot simply does not appear in the output — nothing
+is hardcoded per-repo):
 
-  - a human/agent login with performed_via_github_app == null
-    ("<login> (direct or PAT-authenticated)")
-  - a human login with a non-null performed_via_github_app
-    ("<login> via connector (<slug>)")
-  - a GitHub App bot account (login ending in "[bot]") — reported as "bot"
-    regardless of performed_via_github_app, since the bot IS the poster
+  - login "uda-lab-agent", performed_via_github_app null, is_bot_account false
+  - login "t-uda", performed_via_github_app null, is_bot_account false
+  - login "t-uda", performed_via_github_app "chatgpt-codex-connector",
+    is_bot_account false
+  - a GitHub App bot account (login ending in "[bot]", e.g.
+    "chatgpt-codex-connector[bot]") — is_bot_account true regardless of
+    performed_via_github_app, since the bot account itself is the poster
 
 Writes:
   evidence/metrics/mediation-census.json — full breakdown + source provenance
   evidence/metrics/mediation-census.csv  — flat rows: repo,item_type,login,
-                                            performed_via_github_app,count
+                                            performed_via_github_app,
+                                            is_bot_account,
+                                            count_lower_bound,caveat_ref
 
 THIS IS A LOWER BOUND, NOT A CENSUS. See LOWER_BOUND_CAVEAT below and
 analysis/mediation-census-methodology.md — do not quote counts from here
@@ -56,6 +63,11 @@ LOWER_BOUND_CAVEAT = (
     "history is not retroactively available, and deleted/minimized comments "
     "are absent from the export. Do not infer productivity, effectiveness, "
     "or causation from these counts."
+)
+
+CAVEAT_REF = (
+    "LOWER BOUND, not a census — see lower_bound_caveat in "
+    "mediation-census.json / analysis/mediation-census-methodology.md"
 )
 
 
@@ -124,7 +136,8 @@ def main() -> int:
                     "login": row["login"],
                     "performed_via_github_app": row["performed_via_github_app"] or "",
                     "is_bot_account": row["is_bot_account"],
-                    "count": row["count"],
+                    "count_lower_bound": row["count"],
+                    "caveat_ref": CAVEAT_REF,
                 })
 
     out = {
@@ -144,7 +157,7 @@ def main() -> int:
     with OUT_CSV.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=[
             "repo", "item_type", "login", "performed_via_github_app",
-            "is_bot_account", "count",
+            "is_bot_account", "count_lower_bound", "caveat_ref",
         ])
         writer.writeheader()
         for row in csv_rows:

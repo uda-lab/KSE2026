@@ -5,55 +5,71 @@
 `performed_via_github_app` と `author_association` を追加）から，投稿チャネルの
 機械集計を行う．出力は `evidence/metrics/mediation-census.json` と `.csv`．
 
+**本ページの数値はすべて下界（LOWER BOUND）であり，census（悉皆調査）ではない．**
+理由は「下界であることの注記」節に述べる．以下の各表もその注記を前提として読むこと
+（表の直前に短い再掲を置く）．
+
 ## 集計方法
 
-- **区分キー**: `(user_login, performed_via_github_app のスラグまたは null)`．
-  login が `[bot]` で終わる場合は `is_bot_account = true` として区別する（投稿者
-  自体が bot アカウントであるため）．
+区分キーは `(user_login, performed_via_github_app のスラグまたは null, is_bot_account)`
+という **API フィールドの機械的な組**であり，それ自体は誰が文面を書いたかの主張では
+ない（解釈は下記「下界であることの注記」節でのみ行う）．login が `[bot]` で終わる
+場合は `is_bot_account = true` とする（投稿者自体が bot アカウントであるため）．
+
 - **対象**: リポジトリ全体の issue／PR 作成（`issues.json`，`kind` を問わない）と，
   issue／PR コメント（`comments.json`，repo-wide comments endpoint）．
-- **観測されたカテゴリ**: 両リポジトリとも次の 4 通りのみが出現する（ハードコード
-  ではなく，データに現れた組のみを出力する）．
-  1. `uda-lab-agent`（`performed_via_github_app: null`）— PAT 認証プロセスによる
-     直接投稿．
-  2. `t-uda`（`performed_via_github_app: null`）— 同上，owner アカウント名義．
-  3. bot アカウント（`chatgpt-codex-connector[bot]`）— bot 自身が投稿したコメント．
-  4. `t-uda` かつ `performed_via_github_app: chatgpt-codex-connector` — ChatGPT
-     Connector 経由で `t-uda` 名義に投稿されたコメント／issue．
+- **観測された組**: 両リポジトリとも次の 4 通りのみが出現する（ハードコードでは
+  なく，データに現れた組のみを出力する）．
+  1. `user_login = uda-lab-agent`, `performed_via_github_app = null`
+  2. `user_login = t-uda`, `performed_via_github_app = null`
+  3. `user_login = t-uda`, `performed_via_github_app = chatgpt-codex-connector`
+  4. `user_login = chatgpt-codex-connector[bot]`（`is_bot_account = true`），
+     `performed_via_github_app = chatgpt-codex-connector`
 
-## 主要結果（2026-07-24 実行時点，`fetched_at` は各 snapshot の EXPORT.json 参照）
+  上記のラベルは GitHub API が返す値をそのまま転記したものであり，「直接投稿」
+  「PAT 認証」「owner 名義」等の解釈語をここでは使わない．null が直接的な人間執筆を
+  意味しないことは下記の通り．
+
+## 主要結果（`fetched_at` は各 snapshot の EXPORT.json 参照; leray-hopf
+2026-07-24T18:28:30Z, KSE2026 2026-07-24T18:41:10Z — KSE2026 は独立レビュー中の
+再検証実行により本 PR 内で 2 度再取得されている．いずれの再取得も
+`evidence/repository-snapshots/KSE2026/EXPORT.json` の値が正）
+
+**以下はすべて下界．`performed_via_github_app: null` は人間による直接執筆を証明
+せず，non-null は伝送チャネルの証明に過ぎない（詳細は次節）．**
 
 コメント，`performed_via_github_app` 別:
 
 | repo | uda-lab-agent / null | t-uda / null | bot | t-uda via connector |
 |---|---:|---:|---:|---:|
 | uda-lab/leray-hopf | 190 | 146 | 69 | 37 |
-| uda-lab/KSE2026 | 21 | 37 | 6 | 5 |
+| uda-lab/KSE2026 | 22 | 38 | 7 | 5 |
 
 Issue／PR 作成:
 
 | repo | uda-lab-agent / null | t-uda / null | t-uda via connector |
 |---|---:|---:|---:|
 | uda-lab/leray-hopf | 132 | 31 | 32 |
-| uda-lab/KSE2026 | 54 | 1 | 6 |
+| uda-lab/KSE2026 | 58 | 1 | 6 |
 
-leray-hopf の connector 経由 issue／PR 番号（32 件，`#1` は起業 issue を含む）:
+leray-hopf の connector 経由 issue／PR 番号（32 件，`#1` は最初に作成された
+issue = founding issue を含む）:
 `#1 #10 #11 #12 #13 #14 #15 #64 #82 #106 #145 #146 #147 #148 #149 #150 #151`
 `#152 #153 #154 #155 #156 #157 #158 #177 #178 #184 #187 #188 #189 #191 #195`．
 
 KSE2026 の connector 経由 issue 番号は `#23 #42 #58 #59 #60` に加え，本 issue #60
-の作業中に作成された `#61` を含む 6 件（KSE2026 の件数は作業継続中のため増加し得る
-— 本表は `evidence/metrics/mediation-census.json` の `fetched_at` 時点の値であり，
-再実行すると増える．増加そのものが「連続的に issue が作成される」という運用の事実
-であって，集計誤りではない）．
+の作業中に作成された `#61` を含む 6 件．KSE2026 の件数は作業継続中のため本表より
+増加し得る（`fetched_at` 時点のスナップショット固定値であり，再実行すると増える）．
 
 ## 下界であることの注記（数値を引用する箇所には必ず併記する）
 
 `performed_via_github_app: null` は，直接的な人間による執筆・投稿を証明しない．
 gh CLI，オーケストレータ，harness など PAT を保持する任意のプロセスも null を
-返す．実例: KSE2026 PR #59 で `t-uda` 名義で投稿された agent 生成コメント
-（「Final proposal gate for head…」「@codex please review this PR」）は，いずれも
-`performed_via_github_app: null` である．
+返す．実例: KSE2026 PR #59 で `t-uda` 名義で投稿されたコメント（「Final proposal
+gate for head…」「@codex please review this PR」）は，いずれも
+`performed_via_github_app: null` である（これらのコメントがオーケストレータ由来
+であることは `provenance/ai-use.md` の当該日付の行に別途記録されている一次資料で
+あり，本 census 自体からの推論ではない）．
 
 逆に，`performed_via_github_app` が non-null（connector 経由）であることは，
 **伝送チャネル** の証明に過ぎない．文面を誰が作成したか，人間が投稿前に読んだかは
@@ -63,6 +79,10 @@ gh CLI，オーケストレータ，harness など PAT を保持する任意の�
 
 以上より，本集計から生産性・有効性・因果関係を推論しない（PLAN.md §9 Phase 5）．
 
+`evidence/metrics/mediation-census.csv` の各行は `count_lower_bound` 列（値の
+性質を列名自体に明記）と `caveat_ref` 列（本節への固定ポインタ文字列）を持つ．
+JSON 側は `lower_bound_caveat` フィールドに本節と同内容を格納する．
+
 ## 公開性の非対称性
 
 `uda-lab/leray-hopf` は public repo であり，本 census は誰でも `gh api` で再現
@@ -71,10 +91,13 @@ gh CLI，オーケストレータ，harness など PAT を保持する任意の�
 ある．この非対称性は，`evidence/repository-snapshots/KSE2026/EXPORT.json` の
 `note` フィールドにも明記されている．
 
-## 権威に関する立場（issue #60 governing premise）
+## 権威に関する立場（issue #60 Wave A dispatch の前提）
 
-`t-uda` アカウントから発せられた判断は，文面を ChatGPT が起草したか否かに関わらず
-owner 権威である（2026-07-25 owner ruling）．本 census が示すのは伝送チャネルの
-下界統計のみであり，owner 権威に対する反証ではない．「最終判断は常に scientific
-owner が行う」（`provenance/ai-use.md`）および「AI は著者にしない」（`AGENTS.md`）
-は本集計と矛盾しない．
+issue #60 の Wave A 作業指示は，「`t-uda` アカウントから発せられた判断は，文面を
+ChatGPT が起草したか否かに関わらず owner 権威である」という前提の下で本 census を
+作成するよう求めている．この前提そのものの正式な記録化（`provenance/author-
+decisions.md` への転記や owner による確定）は本 PR の範囲外であり，未実施である
+（記録化の要否は owner 判断待ち）．本 census が示すのは伝送チャネルの下界統計のみ
+であり，上記前提の真偽を証明も反証もしない．「最終判断は常に scientific owner が
+行う」（`provenance/ai-use.md`）および「AI は著者にしない」（`AGENTS.md`）は本集計
+と矛盾しない．

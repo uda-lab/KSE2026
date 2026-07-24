@@ -1,15 +1,15 @@
-repo,item_type,login,performed_via_github_app,is_bot_account,count
-uda-lab/leray-hopf,issue_or_pr,t-uda,,False,31
-uda-lab/leray-hopf,issue_or_pr,t-uda,chatgpt-codex-connector,False,32
-uda-lab/leray-hopf,issue_or_pr,uda-lab-agent,,False,132
-uda-lab/leray-hopf,comment,chatgpt-codex-connector[bot],chatgpt-codex-connector,True,69
-uda-lab/leray-hopf,comment,t-uda,,False,146
-uda-lab/leray-hopf,comment,t-uda,chatgpt-codex-connector,False,37
-uda-lab/leray-hopf,comment,uda-lab-agent,,False,190
-uda-lab/KSE2026,issue_or_pr,t-uda,,False,1
-uda-lab/KSE2026,issue_or_pr,t-uda,chatgpt-codex-connector,False,6
-uda-lab/KSE2026,issue_or_pr,uda-lab-agent,,False,54
-uda-lab/KSE2026,comment,chatgpt-codex-connector[bot],chatgpt-codex-connector,True,6
-uda-lab/KSE2026,comment,t-uda,,False,37
-uda-lab/KSE2026,comment,t-uda,chatgpt-codex-connector,False,5
-uda-lab/KSE2026,comment,uda-lab-agent,,False,21
+repo,item_type,login,performed_via_github_app,is_bot_account,count_lower_bound,caveat_ref
+uda-lab/leray-hopf,issue_or_pr,t-uda,,False,31,"LOWER BOUND, not a census — see lower_bound_caveat in mediation-census.json / analysis/mediation-census-methodology.md"
+uda-lab/leray-hopf,issue_or_pr,t-uda,chatgpt-codex-connector,False,32,"LOWER BOUND, not a census — see lower_bound_caveat in mediation-census.json / analysis/mediation-census-methodology.md"
+uda-lab/leray-hopf,issue_or_pr,uda-lab-agent,,False,132,"LOWER BOUND, not a census — see lower_bound_caveat in mediation-census.json / analysis/mediation-census-methodology.md"
+uda-lab/leray-hopf,comment,chatgpt-codex-connector[bot],chatgpt-codex-connector,True,69,"LOWER BOUND, not a census — see lower_bound_caveat in mediation-census.json / analysis/mediation-census-methodology.md"
+uda-lab/leray-hopf,comment,t-uda,,False,146,"LOWER BOUND, not a census — see lower_bound_caveat in mediation-census.json / analysis/mediation-census-methodology.md"
+uda-lab/leray-hopf,comment,t-uda,chatgpt-codex-connector,False,37,"LOWER BOUND, not a census — see lower_bound_caveat in mediation-census.json / analysis/mediation-census-methodology.md"
+uda-lab/leray-hopf,comment,uda-lab-agent,,False,190,"LOWER BOUND, not a census — see lower_bound_caveat in mediation-census.json / analysis/mediation-census-methodology.md"
+uda-lab/KSE2026,issue_or_pr,t-uda,,False,1,"LOWER BOUND, not a census — see lower_bound_caveat in mediation-census.json / analysis/mediation-census-methodology.md"
+uda-lab/KSE2026,issue_or_pr,t-uda,chatgpt-codex-connector,False,6,"LOWER BOUND, not a census — see lower_bound_caveat in mediation-census.json / analysis/mediation-census-methodology.md"
+uda-lab/KSE2026,issue_or_pr,uda-lab-agent,,False,58,"LOWER BOUND, not a census — see lower_bound_caveat in mediation-census.json / analysis/mediation-census-methodology.md"
+uda-lab/KSE2026,comment,chatgpt-codex-connector[bot],chatgpt-codex-connector,True,7,"LOWER BOUND, not a census — see lower_bound_caveat in mediation-census.json / analysis/mediation-census-methodology.md"
+uda-lab/KSE2026,comment,t-uda,,False,38,"LOWER BOUND, not a census — see lower_bound_caveat in mediation-census.json / analysis/mediation-census-methodology.md"
+uda-lab/KSE2026,comment,t-uda,chatgpt-codex-connector,False,5,"LOWER BOUND, not a census — see lower_bound_caveat in mediation-census.json / analysis/mediation-census-methodology.md"
+uda-lab/KSE2026,comment,uda-lab-agent,,False,22,"LOWER BOUND, not a census — see lower_bound_caveat in mediation-census.json / analysis/mediation-census-methodology.md"
