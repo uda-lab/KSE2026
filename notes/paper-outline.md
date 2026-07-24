@@ -1,25 +1,25 @@
-# Paper outline — ページ配分（Phase 3 で確定）
+# Paper outline — content-first revision
 
-暫定構成は PLAN.md §7．6ページ制限（IEEE conference）での配分案:
+現在の改稿ではページ配分を固定しない．各 section は次の機能を担い，内容・論旨・
+独立レビューが収束した後に Phase 5.5 で6ページへ圧縮する．
 
-| Section | ファイル | ページ目安 |
-|---|---|---|
-| 1. Introduction | 01-introduction.tex | 0.75 |
-| 2. Formalization Target and Verified Results | 02-formalization.tex | 1.5 |
-| 3. Agent-Orchestrated Development Workflow | 03-agent-workflow.tex | 1.0 |
-| 4. Failures, Incidents, and Recovery | 04-incidents.tex | 1.25 |
-| 5. Verification and Governance + Discussion | 05-discussion.tex | 1.0 |
-| 6. Conclusion + refs | 06-conclusion.tex | 0.5 |
+| Section | Reader-facing function |
+|---|---|
+| Abstract | 問題，形式化成果，harness 方法，限定された含意を各一度だけ要約 |
+| 1. Introduction | AI-for-Math 上の問題設定，先行研究，3 contribution，paper map |
+| 2. Formalization | capstone，正確な scope，解析的構成，release attestation |
+| 3. Harness Design | authority，issue/worktree/PR，assurance stack，資源・証跡基盤 |
+| 4. Incidents | 不変条件→事象→検出→対策→教訓→証拠強度の事例分析 |
+| 5. Recommendations and Limitations | 第三者向け推奨と，因果・一般化・再現性の限界 |
+| 6. Conclusion | 数学的成果と工程上の含意を一段抽象化して結ぶ |
 
-注: PLAN.md §7 では Verification and Governance と Discussion は別 section だが，
-ページ制約により 05-discussion.tex に統合する案を暫定採用（Phase 3 で確定し
-author-decisions.md へ）．
+図 #58 は Section 3 の opening overview 直後に配置する．本文は図がなくても完結させる．
 
 ## CFP 確認事項（2026-07-20 確認．出典: kse2026.kse-conferences.org）
 
 - [x] **締切: 2026-07-31（extended）**．notification 08-31，camera-ready 09-10．
 - [x] 書式: 「LaTeX series format as described at IEEE's website」＝ IEEE conference
-      template（IEEEtran conference class で適合），**6ページ以内**．
+      template（IEEEtran conference class で適合），最終稿は **6ページ以内**．
 - [x] 投稿: CMT（https://cmt3.research.microsoft.com/KSE2026 ）．AI4Math session は
       本体 CFP のガイドラインを参照する形式．
 - [x] proceedings は IEEE・DBLP 等へ submit（例年 IEEE Xplore）．選抜論文は

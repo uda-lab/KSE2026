@@ -1,146 +1,168 @@
-\section{Agent-Orchestrated Development Workflow}\label{sec:workflow}
+\section{Harness Design for Agent-Assisted Formalization}\label{sec:workflow}
 
-% Scope (PLAN.md §7.3): role separation (architect / planner / coder / prover /
-% reviewer / orchestrator), statement freeze, edit permissions, adversarial /
-% independent review gates, skill / model escalation, worktree-based parallel
-% dispatch, resource-aware orchestration (brief; case study in sec:incidents),
-% and evolution across campaigns. Workflow claims are backed by the six coded
-% sessions in evidence/session-index/ (EV-NNNN), not by impressions.
+% The proposed harness-architecture figure is tracked in a separate figure
+% issue.  Do not add a rendered figure or a figure reference until the
+% author-supplied artwork is available.
 %
 % Historical workflow facts in this section are bound by CLM-007 to
-% analysis/workflow-evolution.md (populated timeline, every row evidenced)
-% and the six coded session indices in evidence/session-index/.
+% analysis/workflow-evolution.md and the six coded session indices in
+% evidence/session-index/.  The architecture is an end-of-campaign synthesis,
+% not a claim that every component was present throughout the campaign.
 
-Over the six-week campaign (2026-06-10 through the release day 2026-07-20)
-the project ran as long-lived orchestrating sessions, each directing a
-changing population of delegated sub-agents. Measured only over sessions
-in the evidence store (a documented lower bound; a June logging gap and
-other coverage gaps remain, \S\ref{sec:discussion}), it consumed at least
-15.1M output tokens, an API-equivalent cost of \$6{,}973, and 199.1h of
-active engagement time under a 5-minute inter-event gap cap. % CLAIM: CLM-002
-This section reconstructs the workflow from six sessions independently
-event-coded against a fixed vocabulary (Table~\ref{tab:event-codes}) -- a
-purposive sample chosen for reconstruction value, not a random or
-exhaustive one. % CLAIM: CLM-004
+We reconstruct the campaign's end-state harness from controls introduced at
+different stages. It separates scientific authority and implementation from
+checks matched to the mathematical statement, Lean artifact, and public
+declaration set, together with operational control and evidence capture.
+% CLAIM: CLM-009
+The resulting architecture is a synthesis of the final project state, not a
+claim that every component operated throughout the campaign.
 
-\subsection{Role separation and delegation}
+\subsection{Scientific authority and issue-scoped work}
 
-From the earliest surviving session (2026-06-15--06-20) the orchestrator
-was already constrained to a single rule: it does not edit
-target-language files itself; every change is dispatched through a
-sub-agent call. There, a single orchestrator issued 107 dispatches
-across three roles -- 47 coder, 45 prover, 12 planning -- plus 3
-exploration calls. % CLAIM: CLM-007, EV-2076 (session 74aab39b)
-The same separation held later, when 152 dispatches were checked against
-an adjudicator independent of the orchestrator's own judgment. % CLAIM: CLM-007, EV-0925 (session 90fa24bb)
-By the refactoring campaign the role set had differentiated into five:
-an orchestrator/architect; a documentation coder; an implementation
-coder carrying issues end-to-end; a read-only scout checking assumptions
-before implementation starts; and two independent reviewers in
-parallel, one auditing module layering, the other doing exhaustive
-per-declaration comparison via one spawned sub-agent per pull request --
-pre-correcting eight issue/code mismatches before implementation began.
-% EV-1669 (session 7e6156bf)
+The scientific owner retained authority over the mathematical scope. An issue
+specified the intended result and acceptance conditions; for statements that
+were easy to overgeneralize, a statement card recorded the hypotheses,
+target conclusion, and permitted proof boundary before implementation. The
+issue and statement card thus served different purposes: the issue bounded a
+unit of work, while the card made the mathematical contract reviewable.
+% CLAIM: CLM-009
 
-\subsection{Statement freeze, independent verification, and adversarial review}
+The orchestrator coordinated work but did not edit Lean files. Implementing
+agents received issue-scoped Git worktrees, separate working directories tied
+to distinct branches, and returned changes through pull requests. The pull
+request consolidated the committed candidate, validation results, and review
+record. Coded records show that coordination and implementation were distinct
+roles from the earliest observed session; later phases made the pull
+request their durable boundary. % CLAIM: CLM-007, EV-2076, EV-0925
 
-A merged declaration's type is treated as frozen: a later pull request
-may extend a proof but not narrow, delete, or silently generalize it
-without that surfacing at review. An adjudicator, structurally separate
-from the implementing coder, inspects each candidate statement before
-merge: it rejected an over-strong, hypothesis-free derivative-continuity
-lemma, and later found a \texttt{sorry} under a proposition false for
-unconstrained inputs, settled by a numeric counterexample (a
-magnitude-80 discrepancy) against a near-zero residual. A byte-diff
-reviewer separately caught an unannounced deletion of a public theorem
-inside a large refactor, restored as a thin wrapper before merge.
-% EV-0925, EV-1669, leray-hopf\#20, leray-hopf\#27, leray-hopf\#120
-These catches contrast with one release-blocking postmortem case
-(\S\ref{sec:incidents}) where a declaration's type never faced this
-scrutiny: an earlier campaign against it ended with a ``consumer''
-verdict -- nothing downstream referenced it -- not a soundness verdict,
-and the false generalization was caught only later. This is a contrast
-in review coverage, not a claim independent review would necessarily
-have caught the defect earlier. % INC-001, EV-0925
+For the large refactoring campaign, a read-only scout examined repository
+state and issue assumptions before an implementing agent was assigned.
+Implementation and inspection therefore did not share edit authority. Two
+review roles were also separated: one checked module structure, and another
+compared public declarations before and after each refactor. This role
+structure was observed in the July campaign; it should not be projected onto
+earlier phases. % CLAIM: CLM-007, EV-1669
 
-An adversarial review pass, run at high effort against every pull
-request as a final gate, sits atop the adjudicator and byte-diff
-reviewer; it once caught a sub-agent's own incorrect unsoundness claim.
-Its plumbing needed iteration: the merge monitor initially watched only
-formal review events and missed one delivered as a top-level comment,
-stalling a merge until the supervisor caught the discrepancy; it was
-rewritten to watch three channels at once, with no repeat across the
-ten pull requests that followed, and the review tool was once found
-pinned to an unavailable model identifier, failing every call until
-corrected. % EV-1669, EV-0925, EV-2076
+The minimal change contract was therefore as follows. The issue fixed scope
+and acceptance conditions, a worktree held one implementation candidate, and
+the pull request recorded the checks applicable to the changed artifact. The
+scientific owner revised the statement contract after semantic findings;
+implementers addressed code or build failures in the worktree. A candidate
+advanced only after the applicable check results and a reviewer-attributed
+completion record were attached to the pull request. % CLAIM: CLM-009
 
-\subsection{Model escalation, worktree conflicts, and resource-aware orchestration}
+\subsection{Verification by artifact}
 
-Orchestrator model choice changed over the campaign: an opus-class model
-drove the earliest sessions, while later the orchestrator ran a newer
-general-purpose model with teammates on a lighter one; escalation was
-considered repeatedly but never exercised, and assignment was role-typed
-(104 of 107 earliest-session dispatches used a long-context
-heavier-model variant for proof work, exploration the lightest). A
-safety classifier once hard-blocked a repository push even after the
-supervisor had approved it in conversation; the supervisor completed it
-from a terminal, friction not resolved by any escalation path available
-to the agent. % EV-1669, EV-2076
+The harness assigned a distinct check to each artifact at risk.
+% CLAIM: CLM-009
 
-Parallel dispatch across worktrees became the default shape from the
-axiom-removal campaign onward, rising to multiple independently named
-agents each owning a worktree concurrently. Some conflicts were
-designed out pre-emptively (a shared import file restricted to one
-coder); others surfaced live: a reviewer re-verified a diff after
-detecting concurrent editing mid-review, and a stale-liveness
-misjudgment dispatched a second agent onto a worktree a first, still-live
-agent already owned, until noticed and stopped. % EV-0925, EV-2076, EV-1669, EV-0247
+\paragraph{Mathematical statement.}
+An agent independent of the implementer examined whether the proposition
+matched the intended mathematics and whether its hypotheses were sufficient.
+Reviewers tested candidate statements with concrete counterexamples when
+appropriate. This semantic gate assessed the intended proposition and returned
+scope corrections to the statement contract; the contrasting outcomes are
+analyzed in Section~\ref{sec:incidents}.
+% CLAIM: CLM-005, CLM-007, EV-0925
 
-Resource management is treated only briefly here; the incident that
-forced it into standing rules -- a memory-exhaustion cascade traced to
-accumulated helper-process chains, not the Lean build -- is analyzed in
-\S\ref{sec:incidents}. The rules now in force (a global build lock, a
-shared build cache, a pre-build memory check, mandatory helper-process
-cleanup) did not exist earlier; they are a direct, incident-triggered
-addition. % EV-0247
+\paragraph{Lean artifact and axiom footprint.}
+The build checked elaboration and type correctness. A separate
+\texttt{\#print axioms} result recorded the assumptions of designated
+declarations, while release-surface checks excluded experimental modules.
+Together they certified the Lean artifact and its dependency boundary. A
+release candidate then received a recorded full-build attestation for its
+specific commit.
+% CLAIM: CLM-009
+
+\paragraph{Public declarations.}
+Refactoring was checked against the prior public declaration set, independently
+of downstream use. The declaration-level comparison certified interface
+preservation by comparing the candidate inventory and, where exact
+preservation was required, statement text. Section~\ref{sec:incidents}
+describes the omission that motivated this boundary.
+% CLAIM: CLM-007, EV-1669
+
+\paragraph{Independent review record.}
+A pull request required durable evidence that a reviewer distinct from the
+implementer had examined the change. A dispatched review did not satisfy the
+gate. The pull request needed an attributable record naming the reviewer and
+result; the gate checked this completion evidence separately from the
+substantive findings.
+% CLAIM: CLM-007, EV-1669
+
+\subsection{Ownership, liveness, and resource control}
+
+Parallel work used independently named worktrees with one active implementing
+owner per worktree. Shared import files were assigned to a single writer.
+Silence alone did not transfer ownership: the orchestrator was expected to
+check agent and process state before replacing an unresponsive worker. These
+rules address two different risks, concurrent edits to shared state and
+duplicated work caused by an incorrect liveness judgment.
+% CLAIM: CLM-007, EV-2076, EV-1669, EV-0247
+
+Lean builds shared a cache and ran under a global lock. Before a build, the
+harness checked available memory across the container and removed stale helper
+processes; under pressure it reduced Lean's thread count. These checks formed
+the final operating arrangement and determined whether verification could
+complete. Assurance about the mathematical statement came from the
+checks above. % CLAIM: CLM-007, CLM-009, EV-0247
+
+Agent assignments changed across the campaign. The durable role definitions
+were therefore expressed through permissions and recorded outputs rather than
+through model names. % CLAIM: CLM-007, EV-2076, EV-0925, EV-1669
+
+\subsection{Evidence capture and observed events}
+
+Session records, pull-request discussions, build results, and release
+artifacts were retained as separate evidence sources. Claim identifiers link
+paper statements to those sources, and reconstructed intervals are marked
+separately from primary session evidence. This evidence layer supports audit
+and later reconstruction alongside the verification artifacts.
+% CLAIM: CLM-009
+
+Across the campaign period from 2026-06-10 through the 2026-07-20 release,
+the collected session logs record at least 15.1M output tokens, an
+API-equivalent cost of \$6{,}973, and 199.1h of active engagement under a
+5-minute inter-event gap cap. API-equivalent cost applies the published API
+rates to recorded token classes; active engagement sums adjacent events only
+when their separation is at most five minutes. The values are lower bounds
+because the evidence store has known coverage gaps. % CLAIM: CLM-002
+
+For the Vertex-hosted completion phase on July 2--3, 2026 (Pacific Time),
+billing reconciliation kept three quantities separate. The provider export
+measured a machine-wide actual charge of JPY~54{,}868; applying published
+prices to the project logs yielded an unconditional calculation of
+\(\$258.28\). Under the stated interpretation of the provider's aggregate
+token metric, the project's derived share of the actual charge was
+JPY~41{,}421--41{,}796. This attribution range is conditional on that metric
+interpretation. % CLAIM: CLM-003
+
+Six sessions were selected purposively for reconstruction value and coded by
+the incident analyst against a fixed event vocabulary, separately from
+evaluation of the formal result. Table~\ref{tab:event-codes}
+describes only those sessions. The event families connect the evidence to the
+design: statement and mathematical events call for semantic gates, whereas
+ownership, handoff, and resource events call for operational and
+review-completion controls.
+% CLAIM: CLM-004
 
 \begin{table}[t]
 \centering
-\caption{Event-code counts across the six independently coded sessions
-(population: the coded sessions only, not the full campaign). % CLM-004
-\texttt{FALSE-SUCCESS} did not occur in any coded session.}
-\label{tab:event-codes}
-\begin{tabular}{@{}lr@{}}
+\caption{Observed events in the six purposively selected sessions.}\label{tab:event-codes}
+\begin{tabular}{@{}p{0.72\linewidth}r@{}}
 \toprule
-Event code (grouped) & Count \\
+Observed event & Count \\
 \midrule
-WEAKEN / STMT-MISMATCH & 4 \\
-RECOVERY & 19 \\
-RESOURCE & 12 \\
-WT-CONFLICT & 5 \\
-HANDOFF-FAIL & 4 \\
-MODEL-ESC & 2 \\
-MATH-ERR & 2 \\
-PROOF-STUCK & 1 \\
-FALSE-SUCCESS & 0 \\
+Statement mismatch or weakening & 4 \\
+Recovery action & 19 \\
+Resource failure & 12 \\
+Worktree ownership conflict & 5 \\
+Uncorrected false success report & 0 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Evolution across the campaign}
-
-Table~\ref{tab:event-codes} is not a census of the full campaign, only
-the sampled sessions. % CLM-004
-Almost every standing rule above traces to a specific, dated failure
-rather than upfront design: statement-freeze hardened after the
-earliest WEAKEN catches; the review monitor followed one missed
-comment; the resource rules followed the memory-exhaustion cascade. The
-one discipline from the earliest coded session is commit-time
-re-verification of on-disk state before trusting a sub-agent's reported
-progress, adopted after repeated process deaths (network and
-idle-timeout failures) left partially written files behind, every one
-caught and reverted before commit. % EV-2076
-This alone does not explain the zero \texttt{FALSE-SUCCESS} count --
-later sessions layer independent review atop it -- but it is the one
-mechanism common to all six, and none records a false success reaching
-a merge.
+No uncorrected false success report, defined here as a mismatch
+between a runtime success report and on-disk state, was observed in the coded
+sessions. This is a descriptive count for the purposive sample.
+% CLAIM: CLM-004

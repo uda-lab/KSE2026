@@ -1,23 +1,13 @@
 \section{Conclusion}\label{sec:conclusion}
 
-We reported a completed, kernel-only Lean~4 and mathlib formalization of
-Leray--Hopf weak-solution existence on $\mathbb{T}^3$ and $\mathbb{R}^3$,
-built over roughly six weeks under an agent-orchestrated development
-regime, together with the workflow that produced it and an
-evidence-backed account of four incidents in which a green build and a
-passing axiom check were not sufficient to guarantee the campaign was
-proceeding soundly. In each incident the gap was closed by a mechanism
-external to the build -- independent statement review backed by a
-concrete counterexample, exhaustive declaration-level comparison against
-a prior known-good state, or symptom-based resource monitoring -- and the
-same evidence also showed that mechanism's limits: a guardrail closed the
-specific gap that exposed it, not the class of gap in general. This is
-not a claim that kernel checking is dispensable, but the opposite: it is
-necessary and was never violated in the delivered capstones, while being
-demonstrably insufficient, on its own, to have caught what threatened the
-campaign's reliability along the way. Process-level reliability
-management -- statement-first review, exhaustive comparison against
-prior state, and resource-aware orchestration, each backed by recorded,
-checkable evidence -- is therefore not an optional supplement to proof
-checking in agent-orchestrated formalization, but a necessary and, as
-this campaign shows, implementable part of it.
+We formalized Leray--Hopf weak-solution existence on $\mathbb{T}^3$ and
+$\mathbb{R}^3$ in Lean~4 and mathlib. At the pinned release, the two
+kernel-checked capstone theorems depend on no project axioms.
+
+The development record shows why project reliability must be assigned
+to more than the proof kernel. The incidents mark boundaries between
+mathematical intent, the public declaration set, and reliable project
+execution. They motivate the synthesized end-state harness and candidate
+practices for similar formalization projects. Because the evidence comes
+from one supervised campaign, the effectiveness of these practices remains
+to be tested.

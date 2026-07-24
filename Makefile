@@ -24,9 +24,12 @@ endif
 	@echo "==> build/main.pdf"
 
 lint:
+	python3 scripts/check_prose_style.py
 ifdef CHKTEX
-	# informational for now (matches CI); tighten to a hard gate once drafting starts
-	-chktex -q paper/main.tex paper/sections/*.tex
+	# ChkTeX warnings 8/9/12/13/17/36 are disabled because they conflate
+	# correct name/range dashes, math delimiters, and IEEE macros with prose
+	# defects. check_prose_style.py owns spaced prose dashes.
+	chktex -q -n8 -n9 -n12 -n13 -n17 -n36 paper/main.tex
 else
 	@echo "chktex not installed; skipping LaTeX lint"
 endif

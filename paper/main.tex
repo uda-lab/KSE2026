@@ -28,46 +28,40 @@
   columns=fullflexible,
 }
 
-% Draft helpers --- remove before submission
-\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
 % Evidence cross-reference (draft-only; renders as a marginal tag, disabled for submission)
 \newcommand{\evref}[1]{\textcolor{blue}{\footnotesize[#1]}}
 
 \begin{document}
 
 \title{Formalizing Leray--Hopf in Lean~4 with AI Agents:\\
-Workflow, Incidents, and Recovery}
+Harness Design and Reliability Lessons}
 
-\author{\IEEEauthorblockN{Anonymous Author(s)}
-\IEEEauthorblockA{\todo{Affiliation --- check KSE 2026 double-blind policy before filling}}}
+\author{\IEEEauthorblockN{Anonymous Author(s)}}
 
 \maketitle
 
 \begin{abstract}
-Large language model agents can now sustain formalization efforts
-spanning weeks and more than a hundred pull requests, which shifts the central
-reliability question from proof search to process governance: a kernel
-check verifies that a proved declaration is correct given its stated type,
-but not that the type is what was intended, that it is still present
-after a later refactor, or that a reported build success reflects genuine
-on-disk state. We report a completed, kernel-only Lean~4 and mathlib
+Long-running, agent-assisted formalization introduces reliability
+questions outside the proof kernel: the intended meaning of a statement,
+the preservation of the public declaration set, and the state of the
+development process. We report a kernel-only Lean~4 and mathlib
 formalization of Leray--Hopf weak-solution existence for the homogeneous
-Navier--Stokes equations on the 3-torus and on $\mathbb{R}^3$, developed
-over roughly six weeks under an agent-orchestrated regime that consumed,
-on evidence collected so far, at least 15.1M output tokens and 199.1
-active hours. To our knowledge, no machine-checked existence theory for a
-nonlinear fluid PDE has previously been reported in Lean, Coq, or
-Isabelle/HOL. We present the workflow that produced this result --
-statement-first development, independent adversarial review, and
-machine-checked verification gates -- an evidence-backed account of four
-incidents where build success and axiom checking alone were insufficient
-to guarantee sound progress, and an evidence methodology combining
-session-log escrow, machine-checked claim-to-evidence verification, and
-cost accounting reconciled against actual billing records.
+Navier--Stokes equations on the three-torus and on $\mathbb{R}^3$. To our
+knowledge, a literature and repository survey found no earlier
+machine-checked existence theory for a nonlinear fluid PDE in Lean, Coq,
+or Isabelle/HOL. From controls introduced at different stages of the
+six-week campaign, we reconstruct an end-state harness in which
+issue-scoped changes pass through checks matched to each changed artifact, operational
+controls, and evidence capture. Four documented incidents delimit those
+controls: they include statement-scope defects, an omitted public declaration,
+and an operational resource failure. We present these observations as a case
+study rather than a causal evaluation of agent orchestration. The associated
+evidence method preserves redacted session, repository, verification, and
+cost records and links manuscript claims to their supporting artifacts.
 \end{abstract}
 % Abstract claims map: CLM-001 (result), CLM-002 (scale, lower bounds),
 % CLM-006 (survey-conditioned novelty), CLM-004/005 (incidents account),
-% CLM-003 (billing reconciliation).
+% CLM-003 (billing reconciliation), CLM-009 (harness synthesis).
 
 \begin{IEEEkeywords}
 formal verification, Lean 4, Navier--Stokes equations, Leray--Hopf weak solutions,

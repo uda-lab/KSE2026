@@ -24,9 +24,7 @@ jobs:
         run: python3 scripts/verify_claim_links.py
 
       - name: Lint LaTeX
-        run: |
-          # informational for now; tighten to a hard gate once drafting starts
-          chktex -q paper/main.tex paper/sections/*.tex || true
+        run: make lint
 
       - name: Guard against raw-log leakage
         run: |

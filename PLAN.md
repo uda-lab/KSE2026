@@ -161,7 +161,9 @@ Leray–Hopf 形式化を非自明な実証対象とし，役割分離，stateme
 
 AI 支援形式化では，kernel checking や build success だけでは防げない失敗が存在することを，複数の実例と回復策によって示す．
 
-現時点では B を基本案とするが，ログ中に十分に強い失敗事例と再発防止策が確認できれば，B と C を統合する．数学的形式化成果は，いずれの場合も論文全体の信頼性を支える中心的 artifact とする．
+B を主題とし，C の incident は harness design の検出範囲と限界を検討する証拠として
+組み込む．incident の経過自体を論文の中心にせず，第三者が再利用できる設計原理を
+先に提示する．数学的形式化成果は，論文全体の信頼性を支える中心的 artifact とする．
 
 ## 7. 暫定的な論文構成
 
@@ -171,19 +173,18 @@ AI 支援形式化では，kernel checking や build success だけでは防げ�
 2. Formalization Target and Verified Results
    弱解の定義，二つの capstone theorem，正確な scope，主要な解析的難所を示す．
 
-3. Agent-Orchestrated Development Workflow
-   architect，planner，coder，prover，reviewer の役割分離，statement freeze，編集権限，スキル利用，モデル escalation を説明する．
+3. Harness Design for Agent-Assisted Formalization
+   scientific authority，issue-scoped work unit，statement review，artifact ごとの検証
+   gate，worktree ownership，資源管理，証跡保全を，読者が再利用できる構成として説明する．
 
 4. Failures, Incidents, and Recovery
-   数学的意味の誤り，誤った成功報告，資源不足，オーケストレーション障害から代表例を選ぶ．
+   代表例を，不変条件，事象，検出，対策，教訓，証拠強度の共通順序で分析する．
 
-5. Verification and Governance
-   build，axiom check，statement review，blind review，incident-driven guardrails の役割と限界を整理する．
+5. Recommendations and Limitations
+   観測された設計を candidate recommendation として整理し，単一プロジェクト，
+   ログ欠損，モデル更新，因果比較の欠如，人的監督の役割を同じ強度で明記する．
 
-6. Discussion and Limitations
-   単一プロジェクトのケーススタディであること，ログ欠損，モデル更新による再現性の制約，人的監督の役割を述べる．
-
-7. Conclusion
+6. Conclusion
    大規模 AI 支援形式化に必要な，証明検査を超えた工程上の信頼性管理をまとめる．
 
 ## 8. 執筆体制
@@ -204,7 +205,8 @@ AI 支援形式化では，kernel checking や build success だけでは防げ�
   agent orchestration に関する主張が，単なる印象または事後合理化ではなく，ログで裏付けられているか確認する．
 
 * Prose and format editor
-  6ページ制限，IEEE 書式，英語表現，図表，引用を調整する．
+  読者導線，英語表現，重複，図表，引用を調整する．内容と論旨のレビューが完了した
+  後に，独立した圧縮段階で6ページ制限へ合わせる．
 
 AI システムは著者とはせず，使用モデル，使用範囲，原稿生成またはレビューへの関与を `provenance/ai-use.md` に継続的に記録する．
 
@@ -224,11 +226,16 @@ Git commit，Issue，PR，ログを統合した project timeline を作成し，
 
 ### Phase 3: Contribution freeze
 
-論文で主張する contribution を3点以内に絞り，各主張を一次資料へ対応付ける．タイトル，abstract，section 配分をここで確定する．
+論文で主張する contribution を3点以内に絞り，各主張を一次資料へ対応付ける．
+大幅改稿で contribution の階層が変わる場合は scientific owner の指示を記録し，
+claim と contribution map を本文より先に再 freeze する．
 
 ### Phase 4: Drafting
 
-数学的結果，workflow，incident case study を別々に執筆し，最後に統合する．ログの印象的な会話をそのまま引用するのではなく，一般化可能な設計知見へ変換する．
+数学的結果，harness design，incident evidence を別々に執筆し，最後に統合する．
+abstract，introduction，本文，discussion，conclusion に異なる役割を与え，同じ説明を
+同じ粒度で反復しない．ページ数は記録するが，内容・論旨・文章品質が確定するまで
+圧縮しない．ログや repo 固有の経過は，一般化可能な設計知見へ変換する．
 
 ### Phase 5: Adversarial review
 
@@ -239,6 +246,16 @@ Git commit，Issue，PR，ログを統合した project timeline を作成し，
 * 失敗例を都合よく選択していないか．
 * 欠損ログや不完全な再構成を事実として記述していないか．
 * proprietary tool 固有の操作法を一般的方法論として誤認していないか．
+* AI for Math に関心のある harness 初学者が，repo を参照せず論旨を理解できるか．
+* incident の事実，導入した control，観測された効果，第三者への推奨が区別されているか．
+* abstract・introduction・本文・discussion・conclusion が説明を反復していないか．
+* 口語，防御的否定，装飾的列挙，ダッシュ，擬似専門語が主張を代行していないか．
+
+### Phase 5.5: Compression and layout
+
+内容と独立レビューが収束した後，6ページ上限へ圧縮する．削除候補は重複，補助的な
+運用数値，本文で再利用されない分類から選び，主張の資格条件，数学的 scope，
+incident の evidence strength，第三者向け教訓を削らない．
 
 ### Phase 6: Submission snapshot
 

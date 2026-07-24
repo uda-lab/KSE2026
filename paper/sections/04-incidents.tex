@@ -1,157 +1,211 @@
-\section{Failures, Incidents, and Recovery}\label{sec:incidents}
+\section{Incidents and Recovery}\label{sec:incidents}
 
 % Scope (PLAN.md §7.4): representative examples from mathematical-meaning errors,
 % false success reports, resource exhaustion, orchestration failures.
 % Each incident presented here must have a card evidence/incidents/INC-NNN.md
 % with confidence-of-reconstruction stated. Reference as: % CLAIM: INC-NNN
 
-Neither a green build nor a kernel-level axiom check guarantees a
-formalization campaign is proceeding soundly: neither inspects whether
-an unproved placeholder's \emph{statement} is true, whether a
-declaration silently disappeared, or whether the host has enough memory
-to finish. This section examines four incidents where this gap opened,
-what closed it, and what guardrail was left behind. A fifth coded
-failure mode -- loss of the project's earliest session logs to a
-default log-retention setting -- is a research-record integrity
-problem, treated with the evidence-coverage limitations elsewhere.
-% CLAIM: CLM-008, INC-003 (forward reference only)
-Six sessions spanning the campaign were independently event-coded
-against a fixed vocabulary (statement mismatches, weakenings,
-mathematical errors, resource exhaustion, worktree conflicts, handoff
-failures, model-escalation failures, proof-engineering deadlocks,
-recoveries, and false success reports -- a build-success claim
-contradicted by on-disk state and never corrected); Table~\ref{tab:event-codes}
-reports all nine counts. % CLAIM: CLM-008, CLM-004
-These were chosen purposively to cover the campaign's distinct phases
-rather than by random or exhaustive sampling, so the counts describe
-only this sample, not a prevalence estimate or guardrail-effectiveness
-measurement. % CLAIM: CLM-004
-No false success report occurred in any coded session, consistent with
-re-verifying on-disk state before trusting a sub-agent's progress
-report from the earliest coded session onward, not a claim that this
-discipline caused the absence. % CLAIM: CLM-004
+A successful build establishes that Lean accepts the declarations in
+the checked dependency graph, and an axiom check records the assumptions
+on which a selected result depends. Statement review assesses mathematical
+scope, declaration comparison preserves the public interface, and resource
+checks protect execution. We examine four incidents at these three
+boundaries. % CLAIM: CLM-008
 
-\subsection{A false generalization that survived to pre-release review}
-\label{sec:inc001}
+The evidence combines incident records with a purposive sample of six
+agent sessions selected to cover distinct phases of the campaign.
+The sample was neither random nor exhaustive.  The cases therefore
+document observed failures and recoveries; they do not estimate failure
+rates or the causal effect of the guardrails. % CLAIM: CLM-004, CLM-008
 
-The most consequential incident concerns a single public declaration,
-\texttt{w1pTime\_continuous\_in\_H}, introduced with an honest
-\texttt{sorry} and a generic hypothesis pair (exponents $p,q \geq 1$).
-% CLAIM: CLM-008, INC-001
-The only proof attempt ever carried out assumed the special case
-$p=q=2$, via Cauchy--Schwarz; the public signature was never narrowed
-to match, and continued asserting the general statement, which is
-false: a pre-release review constructed an explicit counterexample at
-$p=q=1$ (a weighted Hilbert-triple, spike sequence) showing inputs
-admitting no continuous representative. % CLAIM: CLM-008, INC-001
-Roughly a month elapsed between introduction and review, reconstructed
-from commit records since the introducing session was not identified
-among the collected logs. % CLAIM: CLM-008, INC-001
-A mid-campaign session staged a direct attack, but after hitting a
-circular route closed the investigation on a one-minute check that the
-declaration was unreferenced, not any check of its truth -- so the
-generalization survived direct engagement uncaught. % CLAIM: CLM-008, INC-001
-The declaration was never on either capstone's critical path, so the
-machine-checked proof was never at risk, but the false statement spread
-into design documents and a companion notes corpus before detection.
+\subsection{Statement correctness: two contrasting cases}\label{sec:inc001}
 
-The pre-release review named eleven anti-patterns; five generalize:
-\emph{honest-\texttt{sorry} does not imply a true statement} (honesty
-substituted for correctness-checking); \emph{special-case-proof,
-general-signature} (a type stayed broader than established);
-\emph{dead-declaration rot} (an unused theorem draws no downstream
-review); \emph{self-referential verification} (notes re-derived
-confidence from the docstring meant to be checked independently); and
-\emph{large-batch review dilution} (attention spread thinly across
-declarations reviewed together). % CLAIM: CLM-008, INC-001
-Recovery narrowed the declaration to the case proved, moved it to an
-experimental namespace, and added a regression guard against
-reintroducing the general signature or a placeholder lacking a
-scope-recording card. % CLAIM: CLM-008, INC-001
-Two days later, a follow-up documentation pull request on the same
-files was itself merged with no independent review -- reproducing the
-handoff failure the postmortem had just been written to prevent; a
-subsequent audit caught two residual inaccuracies and closed the loop.
+\paragraph{Case A: a false generalization detected before release.}
+\emph{Invariant at risk.}
+The scope of a public statement must not exceed the scope supported by
+the mathematical argument, even while its proof remains a placeholder.
+In this case, the argument under consideration used the Hilbert-space
+exponents $p=q=2$ and Cauchy--Schwarz, whereas the public declaration
+accepted arbitrary $p,q\geq 1$
+(\texttt{w1pTime\_continuous\_in\_H}). % CLAIM: CLM-008, INC-001
+
+\emph{Incident.}
+The declaration was introduced with an explicit \texttt{sorry}, but its
+general type was false. A subsequent proof attempt ended after checking
+only that no capstone result used the declaration; it did not assess the
+declaration's validity. The declaration remained in the public declaration set for about
+one month.  The capstone theorems were unaffected because neither
+depended on it, but project documentation repeated the unsupported
+generalization. % CLAIM: CLM-008, INC-001
+
+\emph{Detection.}
+A pre-release statement review tested the weakest admitted exponents.
+It constructed a weighted Hilbert triple and a spike sequence at
+$p=q=1$ for which the stated integrability assumptions hold but no
+$H$-continuous almost-everywhere representative exists.  This
+counterexample showed that the problem lay in the statement rather than
+in proof search. % CLAIM: CLM-008, INC-001
+
+\emph{Response.}
+The declaration was restricted to $p=q=2$, moved to an experimental
+namespace, and accompanied by a statement card recording its scope.
+A regression check now rejects both restoration of the unsupported
+generic signature and an approved placeholder without such a card.
 % CLAIM: CLM-008, INC-001
 
-\subsection{A contrast: the same blind spot caught before merge}
+\emph{Transferable lesson.}
+An explicit placeholder records the absence of a proof; it supplies no
+evidence that the proposition is true.  Statement review should
+therefore precede proof search and should instantiate boundary cases
+whenever a declaration is more general than the argument that motivated
+it.  An unused declaration still requires this review if it remains
+public. % CLAIM: CLM-008, INC-001
 
-A structurally identical blind spot -- an unproved placeholder for a
-proposition never established -- arose earlier, in a box-truncated
-antisymmetry property of a convection form on the three-torus.
+\emph{Evidence strength.}
+The counterexample, repair, and review artifacts are primary evidence.
+The introduction date and the approximate one-month interval are
+reconstructed from commits because the introducing session was not
+identified.  The incident record accordingly assigns medium-to-high
+confidence to the combined timeline. % CLAIM: CLM-008, INC-001
+
+\paragraph{Case B: the same boundary checked before merge.}
+\emph{Invariant at risk.}
+A finite-dimensional identity must retain the hypotheses that keep its
+arguments inside the truncated space.  A placeholder for the
+antisymmetry of a box-truncated convection form omitted these
+projection-invariance hypotheses
+(\texttt{galerkinConvection\_antisymm}). % CLAIM: CLM-008, INC-002
+
+\emph{Incident.}
+Two proof revisions had attempted the unrestricted proposition before
+leaving it as an approved placeholder. The review found that the Fourier
+reindexing used by the intended proof required both arguments to belong
+to the finite projection subspace, a condition absent from the proposed
+signature. % CLAIM: CLM-008, INC-002
+
+\emph{Detection.}
+Independent pre-merge review identified this structural closure defect
+and rejected the unrestricted proposition. A numerical test corroborated
+the diagnosis: it produced a discrepancy of approximately $80.7$ without the
+projection hypotheses and approximately $10^{-13}$ after imposing them.
+The numerical values are corroborative observations, not a certified
+exact counterexample.
 % CLAIM: CLM-008, INC-002
-An independent adjudicator reviewing before merge constructed a
-numerical counterexample for the unconstrained case (a discrepancy of
-roughly 80.7), confirming the property held only once restricted to a
-finite-dimensional projected subspace; the signature was narrowed, the
-proof completed, and the placeholder removed and merged the same day:
-detection to merge took about sixteen minutes. % CLAIM: CLM-008, INC-002
-Only the adversarial, numerically-grounded review distinguished this
-false placeholder from a true one -- one instance reaching pre-release
-review after roughly a month, the other caught the same day -- a
-contrast consistent with the value of counterexample-backed review,
-though not establishing it would have caught the first case, since the
-two were not reviewed identically. % CLAIM: CLM-005
 
-\subsection{A short example: silent deletion caught by declaration-level review}
+\emph{Response.}
+The declaration gained hypotheses stating that both arguments are fixed
+by the finite-dimensional projection.  Under those hypotheses, the
+antisymmetry proof was completed and the placeholder removed before
+merge. % CLAIM: CLM-008, INC-002
 
-A large deduplication refactor rewired public declarations in two files
-into thin instantiations of a shared module. One theorem,
-\texttt{edge\_inf\_eq\_schwartz\_tensor}, was silently dropped;
-neither the build nor an earlier structural review caught this, since
-nothing downstream referenced it and both operate above the level of
-individual declarations. % CLAIM: CLM-008, INC-004
-Detection came from a per-declaration, byte-level comparison against
-the pre-refactor file, by a reviewer spawning one sub-agent per pull
-request rather than reviewing twelve pull requests serially; the
-theorem was restored and merged within roughly four and a half minutes.
-Build success does not guarantee a theorem still exists; only
-exhaustive comparison against the prior state catches its quiet
-removal. % CLAIM: CLM-008, INC-004
+\emph{Transferable lesson.}
+For algebraic identities produced by truncation or projection, reviewers
+should test inputs outside the intended invariant subspace.  Here that
+test exposed the missing projection hypotheses, and the restricted
+statement was then proved in Lean. The contrast with Case A is consistent
+with the value of structural and boundary-case statement review; the two cases do not
+constitute a controlled comparison.
+% CLAIM: CLM-005, CLM-008, INC-001, INC-002
 
-\subsection{A resource case: side-process accumulation and a memory-exhaustion cascade}
-\label{sec:inc005}
+\emph{Evidence strength.}
+The session transcript and pull-request record are primary evidence and
+support the incident record's high-confidence reconstruction.  The
+transcript records that two earlier revisions were unsound, although
+their diffs and the numerical test were not independently re-examined
+for this study.
+% CLAIM: CLM-008, INC-002
 
-The fourth incident is a resource-management failure in a
-memory-constrained container (a hard cgroup ceiling under 3.5\,GiB)
-running continuous multi-worktree orchestration. % CLAIM: CLM-008, INC-005
-A prior night's per-worktree code-review invocations had each left
-behind a side-process chain not reclaimed automatically; by morning
-fourteen such stale chains had accumulated across roughly one to
-1.5\,GB. Independently, an orchestrator misjudged a slow-responding,
-still-live agent as dead and dispatched a successor into the same
-worktree, producing hours of duplicated work; unaware of a shared
-build-cache convention, the successor began a cold rebuild of mathlib
-from source. % CLAIM: CLM-008, INC-005
-The combined load produced repeated silent build deaths near the
-heaviest compilation step, indistinguishable from ordinary failures;
-routine checks of only the visible Lean process's memory reported ample
-headroom, missing the side-process chains and shrinking system-wide
-memory. Detection came from an incidental owner status check, not
-orchestration monitoring; the stale chains were traced, killed, and the
-out-of-memory counter read for the first time, confirming every prior
-silent death had been an OOM kill -- though the counter, cumulative
-since container start, does not attribute which kill happened when.
-Recovery restored memory, and a rebuild under a global build lock
-succeeded. % CLAIM: CLM-008, INC-005
+\subsection{Preserving public declarations during refactoring}
 
-The lesson that helper processes must be reclaimed structurally had been
-learned once before, in an unrelated project, but recorded only in
-project-scoped memory, so was not applied until this failure recurred;
-guardrails were then placed project-independently. The fix also
-targeted only the cascade's cause: the same day, a second episode --
-peak use of a single heavy compilation, no accumulated chains, no
-counter change -- was confirmed harmless only because the guardrails
-also included a symptom-based rule (available memory below a
-threshold, regardless of cause), which generalizes further than
-single-cause monitoring. % CLAIM: CLM-008, INC-005
+\emph{Invariant at risk.}
+A behavior-preserving refactor must retain every public declaration,
+including declarations with no current downstream users.  Build success
+alone cannot enforce this invariant because an unreferenced theorem may
+disappear without breaking a dependency. % CLAIM: CLM-008, INC-004
 
-In every case the standing discipline was a response to a specific,
-dated failure, not upfront design. What transfers is not any single fix
-but three mechanisms: independent statement review backed by concrete
-counterexamples, exhaustive declaration-level comparison against a
-prior known-good state, and symptom-based resource monitoring. The
-recurrence inside \S\ref{sec:inc001} two days after its postmortem, and
-inside \S\ref{sec:inc005} the same afternoon the fix landed, indicate a
-guardrail is a beginning, not a guarantee: the discipline is
-incident-driven and still failure-prone.
+\emph{Incident.}
+A deduplication refactor replaced repeated proofs in two files with
+thin instantiations of a shared module.  One public theorem was omitted
+while the remaining declarations were rewired
+(\texttt{edge\_inf\_eq\_schwartz\_tensor}). % CLAIM: CLM-008, INC-004
+
+\emph{Detection.}
+The merge review compared the public declarations in the proposed
+version with those in the pre-refactor version.  A declaration-level
+comparison found that the theorem was present in the baseline and absent
+from the refactored file.  A prior structural review and the Lean build
+had both passed because they checked module structure and referenced
+code, respectively. % CLAIM: CLM-008, INC-004
+
+\emph{Response.}
+The missing theorem was restored as a thin wrapper around the shared
+implementation.  The reviewer then repeated the comparison and
+confirmed that the affected public statements matched the baseline
+before merge. % CLAIM: CLM-008, INC-004
+
+\emph{Transferable lesson.}
+Refactors that promise API preservation need an explicit inventory of
+public declarations.  Comparing that inventory, and the corresponding
+statement text when exact preservation is intended, detects omissions
+that type checking cannot observe. % CLAIM: CLM-008, INC-004
+
+\emph{Evidence strength.}
+The session transcript and pull-request record independently identify
+the omitted declaration and its restoration, yielding a high-confidence
+reconstruction.  Some intermediate reviewer activity survives only in
+agent-message summaries, but the detection and final verification are
+present in primary records. % CLAIM: CLM-008, INC-004
+
+\subsection{Resource availability and orchestration liveness}\label{sec:inc005}
+
+\emph{Invariant at risk.}
+Each worktree should have one active owner, completed review jobs should
+release their helper processes, and a build should start only when the
+container has sufficient available memory.  These conditions protect
+liveness in a container whose effective memory ceiling was
+3.42\,GiB. % CLAIM: CLM-008, INC-005
+
+\emph{Incident.}
+Review commands from the previous night left fourteen helper-process
+chains running after their worktrees were no longer active, consuming
+about 1--1.5\,GiB in total.  The orchestrator incorrectly classified a
+slow-responding agent as inactive and assigned a successor to the same
+worktree.  The successor, unaware of the shared build-cache convention,
+started a cold mathlib build.  Under the combined load, heavy Lean
+builds repeatedly terminated with exit code 137 and no compiler
+diagnostic. % CLAIM: CLM-008, INC-005
+
+\emph{Detection.}
+Routine monitoring had inspected the visible Lean process rather than
+container-wide available memory.  An owner-requested status check showed
+only 606\,MiB available.  Process working-directory inspection traced
+the fourteen stale chains, and the cgroup out-of-memory counter confirmed
+that the silent terminations were OOM kills. % CLAIM: CLM-008, INC-005
+
+\emph{Response.}
+Terminating the stale chains raised available memory from 606\,MiB to
+2.2\,GiB.  Ownership returned to the original agent, the duplicate was
+stopped, and the build succeeded under a global build lock.  Standing
+rules subsequently required helper-process cleanup, a shared build
+cache, serialized heavy builds, and an available-memory check before
+compilation. % CLAIM: CLM-008, INC-005
+
+\emph{Transferable lesson.}
+Agent orchestration must account for the complete process tree, not only
+the foreground prover or compiler.  Cause-specific cleanup should be
+paired with symptom-based monitoring of available memory: later that
+day, the same threshold detected a memory peak from a single active build with no
+stale chains and no new OOM event. An earlier, similar failure in another
+campaign had been documented but not encoded in this campaign's dispatch
+rules. Placing resource checks in the harness made
+them standing requirements. % CLAIM: CLM-008, INC-005
+
+\emph{Evidence strength.}
+Command output in the primary session transcript supports the process
+counts, memory measurements, recovery, and same-day follow-up.  The OOM
+counter was cumulative from container start, so it cannot date or
+attribute each recorded kill.  The incident record therefore uses the
+counter to identify the failure mechanism, not to claim a precise number
+of kills in this cascade.  The earlier cross-project episode is
+secondary evidence and is not needed for the reconstruction of this
+incident. % CLAIM: CLM-008, INC-005
