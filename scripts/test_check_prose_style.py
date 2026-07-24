@@ -32,6 +32,20 @@ class ScanLinesTest(unittest.TestCase):
         ])
         self.assertEqual([(1, "casual scope phrase")], findings)
 
+    def test_prose_after_listing_end_is_checked(self) -> None:
+        findings = scan_lines([
+            r"\begin{lstlisting}",
+            "no more",
+            r"\end{lstlisting} This has no more supporting detail.",
+        ])
+        self.assertEqual([(3, "casual scope phrase")], findings)
+
+    def test_prose_after_inline_listing_pair_is_checked(self) -> None:
+        findings = scan_lines([
+            r"\begin{lstlisting} no more \end{lstlisting} This has no more detail.",
+        ])
+        self.assertEqual([(1, "casual scope phrase")], findings)
+
 
 if __name__ == "__main__":
     unittest.main()
