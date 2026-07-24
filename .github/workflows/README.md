@@ -124,8 +124,9 @@ ephemeral and have no warm image cache, so a generic TeX image pays its full
 pull cost on every run: `texlive/texlive:latest` is 5.53 GB, against 393 MB of
 TeX actually installed by the apt subset (381 MB `/usr/share/texlive`, 12 MB
 `/usr/share/texmf`). Adopting either image route would have made the expensive
-job 27% to 51% slower while also changing the engine provenance that the IEEE
-submission pipeline depends on.
+job 27% to 51% slower. Both image routes did produce a PDF — the benchmark ran
+`make pdf` in the container successfully — so this is a cost argument, not a
+correctness one.
 
 The third candidate, a small repository-specific GHCR image rebuilt only when
 its Dockerfile changes, **was not measured.** Doing so requires publishing a
@@ -141,4 +142,4 @@ measurement to take.
 
 The measurement scaffold used for the table above lived in
 `tex-provisioning-benchmark.yml` and was removed once the numbers were
-recorded; the run it produced remains linked above.
+recorded; the run it produced is referenced above and remains inspectable.
