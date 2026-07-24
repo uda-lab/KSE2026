@@ -82,7 +82,7 @@ Wave A が確定させた伝送チャネル統計（`analysis/mediation-census-m
      `letI` によるインスタンス束縛を伴い，これを再現しないと elaborate しない．
    - `leray-hopf#14` / `leray-hopf#15`: 順序が逆．加えて `leray-hopf#14` が提案する
      field は axiom を**強める**という警告．
-5. 12:27:05Z — connector 自身も `leray-hopf#10` に status 訂正／衝突回避の注記を投稿し，
+5. 12:27:05Z — 同チャネルからも `leray-hopf#10` に status 訂正／衝突回避の注記が投稿され，
    現在の issue 本文が残作業量を過大に記述しており重複・衝突編集を招きうると述べる．
 
 **drift として成立すること**: connector 経由の issue 本文が，未着手作業量を過大に記述し
@@ -152,8 +152,9 @@ ChatGPT による事後監査は独立レビューの証拠になりえない，
    spike による陽な反例と，安全な訂正計画を含む．
 4. 結果: P0/P1 はすべて `completed` で close．`leray-hopf#145` の締めコメント
    （2026-07-20T05:18:45Z）が release candidate の SHA を固定する．
-   `leray-hopf#152`・`leray-hopf#154`・`leray-hopf#184` はリリース後 backlog として
-   open のまま．
+   `leray-hopf#154`・`leray-hopf#184`・`leray-hopf#195` はリリース後 backlog として
+   open のまま（`leray-hopf#152` は 2026-07-20T11:26:50Z に `completed` で close．
+   初稿は open 側に誤記していた）．
 
 **インターフェースについて成立すること**（primary／高）: 15 秒間に毎秒 1 件という
 発行間隔は，connector を通じたプログラム的発行の機械的に観測可能な証拠である．
@@ -176,7 +177,8 @@ ChatGPT による事後監査は独立レビューの証拠になりえない，
 
 **anchor**: `leray-hopf#174`，INC-005
 
-1. 2026-07-18 午前 — `leray-hopf#174` への初回レビューが `CHANGES_REQUESTED` を返す．
+1. 2026-07-18T08:45:40Z — `leray-hopf#174` への初回レビューが `CHANGES_REQUESTED` を返す
+   （`gh api repos/uda-lab/leray-hopf/pulls/174/reviews` で確認）．
 2. 08:53:05Z — connector コメントが第 1 点を訂正・補強する．外部 contributor に
    preflight と full build の一律実行を求める趣旨ではなかったとし，先に示した二択の
    うち「現行方針を維持してこの文書 PR でも full preflight を実行する」を**撤回する**と
@@ -186,8 +188,11 @@ ChatGPT による事後監査は独立レビューの証拠になりえない，
 3. 09:24:52Z — 実装側が初回 `CHANGES_REQUESTED` と訂正コメントの双方に対応したと返答．
 4. さらに 2 巡のレビューを経て 13:52:51Z に merge 許可．
 
-**drift として成立すること**: 二択の是正案を伴うレビュー所見が発され，その一方が数時間の
-うちに明示的に撤回され，blocking finding の性格づけ自体も改められた．
+**drift として成立すること**: 二択の是正案を伴うレビュー所見が発され，その一方が
+**7 分 25 秒後**（08:45:40Z → 08:53:05Z）に明示的に撤回され，blocking finding の
+性格づけ自体も改められた．初稿は「数時間のうちに」と書いていたが誤りである．
+撤回は実装側の応答（09:24:52Z）より前であり，撤回された選択肢に基づく作業は
+記録上発生していない．**同一レビュー巡内の自己訂正であり，drift としては弱い方である**．
 
 **INC との対応**: `leray-hopf#174`・`leray-hopf#175`・`leray-hopf#176` は INC-005 の
 一次証拠として名指しされている．08:53Z の撤回は，07:40Z の検出および 07:47–07:51Z の
@@ -212,7 +217,7 @@ INC-005 の是正と同じ主題であり，同じ午前に別チャネルで到
    ブロックされている，自動レビュー派遣が失敗した．
 3. 16:04:29Z — `copilot-pull-request-reviewer[bot]` による正式 Review（`state: COMMENTED`）．
    `gh api` で確認．
-4. 16:22:50Z — connector コメントが，先の自身のレビューを訂正する．**古い README の
+4. 16:22:50Z — connector コメントが，同チャネルで先に伝送されたレビューを訂正する．**古い README の
    表示に依拠していた**とし，現在の `main` の README は両 capstone が kernel-only／
    project axiom ゼロであると述べていると認めて，判定を反転させる．
 5. 16:34:02Z — `leray-hopf#107` merge，`leray-hopf#106` を `completed` で close．
@@ -242,8 +247,8 @@ ChatGPT のレビューがレビュー証拠として扱われている事実は
    purposive sample に対する記述統計に限定し，prevalence や guardrail 有効性に用いない
    こと；「帰結として解釈」は因果推論が強すぎ `consistent with` 程度が上限であること．
    CLM-005 の「帰結を分けたのは独立 statement 検査の有無だった」は対照例 2 件からの
-   因果帰属として強すぎ，"The paired cases provide a contrast consistent with the value
-   of independent statement review." とすべきこと．
+   因果帰属として強すぎ，`a contrast consistent with the value of independent statement review` 程度の
+   観測的表現へ**弱める**こと（逐語の指定ではなく強度の上限を示す形）．
 2. 16:44:02Z — `KSE2026#29`: Cloud Monitoring の token 計数と escrow の内訳の対応は
    公式の metric description だけからは自明でなく，検証不能なら FX 下界・費用区間を
    「当該 metric 解釈の下での導出」と条件付けるべきである．
@@ -252,17 +257,26 @@ ChatGPT のレビューがレビュー証拠として扱われている事実は
    follow-up の後ろへ送る．
 4. 採用の跡は worktree 内で検証できる: `claims/paper-claims.md` の CLM-004 は purposive な
    6 セッションの記述統計として書かれ，Notes に prevalence・failure rate・guardrail
-   effectiveness の推定に用いない旨と *consistent with* に留める旨がある．CLM-005 は
-   指示された英文をそのまま持つ．CLM-003 は当該 metric 解釈の下での導出である旨を
+   effectiveness の推定に用いない旨と *consistent with* に留める旨がある．CLM-005 の本文は
+   日本語で「独立 statement 検査の価値と整合的（consistent with）な対照例」となり，
+   指示が示した英語表現は `claims/paper-claims.md` の Notes に**本文の目標強度**として
+   記録されている（本文そのものが当該英文であるわけではない）．CLM-003 は当該 metric 解釈の下での導出である旨を
    明示する条件を持つ．
 5. `provenance/ai-use.md` に実装パスの行がある．
 
-**有効な仲介として成立すること**: インターフェースを通じて発された指示が，要求された
-英文の文言も含めて，freeze された claim 本文まで端から端まで追跡できる．
+**有効な仲介として成立すること**: インターフェースを通じて発された指示の**内容**が，
+freeze された claim 本文と Notes まで端から端まで追跡できる．
+初稿は「要求された英文の文言も含めて」と書いていたが誤りである．指示は
+「…程度へ弱めてください」という**強度の上限**の指定であり，逐語の文言指定ではない．
+採用されたのは強度であって文字列ではない．
 
 **成立しないこと**: この指示がなければ最終原稿で claim が過大になっていたこと
 （Phase 5 の adversarial review は独立した gate である）；Cloud Monitoring の意味論に
 関する技術的判断が伝送ではなく ChatGPT に由来すること．
+
+*primary: 3 件のコメント本文と timestamp，および `claims/paper-claims.md` の現在の
+記述 — 高．reconstructed: 文面の起草者，および claim 側の変更が当該指示に**応答して**
+行われたこと（時系列と内容の一致に基づく推定であり，別経路の可能性は排除できない） — 中．*
 
 ### T8 — draft が落としていた失敗記録を復活させた指示
 
@@ -287,6 +301,10 @@ ChatGPT のレビューがレビュー証拠として扱われている事実は
 
 **成立しないこと**: 脱落に気づいたのが誰か；他のレビュアーによって復活しなかったで
 あろうこと；レビュー過程の有効性に関する何か．
+
+*primary: 2 件のコメント本文と timestamp，`provenance/author-decisions.md` と
+`paper/sections/04-incidents.tex` の現在の記述 — 高．reconstructed: 文面の起草者，
+および復活が当該指示に応答して行われたこと — 中．*
 
 ### T9 — インターフェースの能力境界が記録に残っている
 
@@ -320,8 +338,8 @@ HEAD まで同期した一方で，**接続されている GitHub app はリポ�
   04:17:24Z に相互参照され，`leray-hopf#64` は 05:35:36Z に `completed` で close された．
   すなわち「open のままに」という推奨は，`leray-hopf#64` への直接対応ではなく後継 issue に
   よって約 1 時間 41 分後に置き換えられた．
-- `leray-hopf#10`（2026-06-20T12:27:05Z，T2 にも登場）: connector が自身の issue 本文を，
-  残作業を過大に記述していると訂正する．
+- `leray-hopf#10`（2026-06-20T12:27:05Z，T2 にも登場）: 同チャネルが自ら伝送した
+  issue 本文を，残作業を過大に記述していると訂正する．
 
 **成立するパターン**: インターフェースは，自ら伝送した本文を含め，issue 本文が記述する
 状態への訂正を繰り返し投稿していた．これと並行して，`uda-lab-agent` も構造的に同型の
@@ -331,6 +349,34 @@ HEAD まで同期した一方で，**接続されている GitHub app はリポ�
 
 **成立しないこと**: connector 経由の本文が他より高頻度あるいは低頻度に陳腐化したこと
 （比率の比較は試みておらず，データもそれを支持しない）．
+
+*primary: 3 件のコメント本文，timestamp，`leray-hopf#64` の timeline — 高．
+reconstructed: 陳腐化訂正が意識的な規律であったか偶発的であったか — 低．*
+
+### T11 — 承認を保留し，文書上の過大表現 1 点を差し戻したレビュー
+
+**anchor**: `leray-hopf#190`
+
+2026-07-20T07:53:29Z の connector コメントは再レビューの結果であり，前回指摘の 3 点
+（regularity scope，capstone dependency cone への限定，README title）が適切に修正された
+ことを確認したうえで，1 点を残す．`docs/claims-and-scope.md` が axiom チェックスクリプトを
+"a CI gate" と表現しているが，現行運用では PR ごとの CI ではなく手動 dispatch の
+full-build／release-attestation で実行されるため，`a manually triggered verification gate`
+等へ改めるべきである，という指摘である．そのうえで「この一点が修正されれば，内容面では
+merge 可です．修正後に approve します」と述べ，**承認を保留している**．
+
+**成立すること**（primary／高）: 定型の merge 許可とは異なり，追跡可能な推論を伴う
+指摘であり，かつ承認を条件付きで保留している．指摘の対象は，`analysis/workflow-evolution.md`
+および本 Wave の台帳が別途扱っている「manual attestation と PR ごとの CI の区別」と
+同じ論点である．すなわち，文書が検証機構の実施頻度を過大に表現することへの是正である．
+
+**成立しないこと**: この指摘がなければ当該表現が残ったであろうこと；指摘の文面の
+起草者．
+
+**採録の経緯**: 初稿はこの項目を「定型の merge 許可コメント」として除外していた．
+独立レビューが，実際の本文は定型承認ではなく実質的な保留であると指摘し，除外理由が
+事実に反することが確認されたため，trace として採録した．PLAN.md §9 Phase 5 の観点では，
+除外理由が誤っている除外は，意図の有無にかかわらず選択的採録と同じ帰結を持つ．
 
 ## 2. drift の所在と，drift を水増ししていないことの確認
 
@@ -346,8 +392,9 @@ HEAD まで同期した一方で，**接続されている GitHub app はリポ�
 **drift 側を水増ししないための negative finding:**
 
 - **connector 作成の issue で `not planned` として close されたものはない．** leray-hopf の
-  connector 経由 32 件すべてについて `state_reason` を確認した．close 済みはすべて
-  `completed` であり，`leray-hopf#154`・`leray-hopf#184`・`leray-hopf#195` が open のまま．
+  connector 経由 32 件すべてについて `state_reason` を確認した．close 済みの **issue** は
+  すべて `completed` であり，`leray-hopf#154`・`leray-hopf#184`・`leray-hopf#195` が
+  open のまま（`leray-hopf#177` は PR であり `state_reason` は null．merge 済み）．
 - **connector 作成の PR で unmerged のまま close されたものはない．** 両リポジトリに
   connector 作成の PR は `leray-hopf#177` と `KSE2026#59` の 2 件しかなく，どちらも merge
   されている．
@@ -383,7 +430,7 @@ HEAD まで同期した一方で，**接続されている GitHub app はリポ�
 |---|---|---|
 | codex bot によるレビューコメント群 | KSE2026 の複数 PR | 投稿者が bot アカウントであり，`t-uda` 名義の著者インターフェースとは別のアクター．別現象 |
 | `chatgpt-codex-connector[bot]` の「Codex アカウントを作成せよ」定型返信 | — | 非認可 mention に対する定型応答．**何の証拠としても引用しない** |
-| 定型の merge 許可コメント 7 件 | `leray-hopf#172` `leray-hopf#173` `leray-hopf#175` `leray-hopf#176` `leray-hopf#181` `leray-hopf#190` ほか | 1〜3 文の定型承認で，追跡できる推論を含まない．個別 trace ではなく**型**として報告するに留める |
+| 定型の merge 許可コメント 6 件 | `leray-hopf#172` `leray-hopf#175` `leray-hopf#176` `leray-hopf#181` ほか | 1〜3 文の定型承認で，追跡できる推論を含まない．個別 trace ではなく**型**として報告するに留める．**初稿はここに `leray-hopf#190` も入れていたが誤りであり，T11 として採用した．**`leray-hopf#173` も 1〜3 文には収まらないが，先行する指摘の確認に留まるため不採用 |
 | `leray-hopf#82` `leray-hopf#93` `leray-hopf#115` `leray-hopf#106` | — | 定型的で結果に起伏がなく，追うべき分岐・訂正・係争がない |
 | `leray-hopf#187` `leray-hopf#188` `leray-hopf#189` `leray-hopf#191` | — | 体裁・運用の issue で，記録された不一致なく数時間で close．T1–T10 に比して収量が低い |
 | `leray-hopf#184` `leray-hopf#195` | — | connector 作成だがコメント 0 件で open．追うべき下流がない |
@@ -430,7 +477,7 @@ escrow にある符号化済みセッションは 6 件である．connector の
 | 07-20 の締めコメント群 | **完全な欠落** |
 | KSE2026 の connector 項目すべて（07-22 → 07-24，T7・T8） | KSE2026 の論文作業に対する **session index が存在しない**．`evidence/session-index/` は leray-hopf 期の 6 件のみ |
 
-**要約**: 10 件の trace のうち，符号化済みセッション区間の内側に落ちるのは T10 の一部と
+**要約**: 11 件の trace のうち，符号化済みセッション区間の内側に落ちるのは T10 の一部と
 `leray-hopf#64` の作成のみである．**インターフェースの唯一の自己記述的記録（T3）と
 最大の connector バースト（T4）は，いずれも未被覆の窓にある．** それらについて本書が
 述べたことはすべて GitHub 側の一次証拠であり，セッションログによる裏付けはない．
@@ -454,7 +501,7 @@ escrow にある符号化済みセッションは 6 件である．connector の
    `leray-hopf#177` とその timestamp である．本書は connector コメントを
    `leray-hopf#<issue>` + timestamp の形で参照している．
 3. **他リポジトリ（notes 系）への参照は解決不能．** connector 本文には別リポジトリの
-   issue 参照があるが，snapshot も resolver パターンも存在しない．本書の 10 件の trace は
+   issue 参照があるが，snapshot も resolver パターンも存在しない．本書の trace は
    いずれもそれらに荷重を置いていない．
 4. **`decl:<Lean.Name>` は機械検証対象外**（issue #42 項目 5 で文書化済みの保証範囲）．
 5. **snapshot の陳腐化境界**: `leray-hopf#N` は `N ≤ 195` の範囲でのみ解決し，
