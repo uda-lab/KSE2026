@@ -1,0 +1,18 @@
+{
+  "repo": "uda-lab/KSE2026",
+  "private": true,
+  "head_sha_at_fetch": "fc912b925afc720f20f4dbf4ff6a72449cc76004",
+  "fetched_at": "2026-07-24T18:41:10+00:00",
+  "tool_versions": {
+    "python": "3.11.2",
+    "gh": "gh version 2.92.0 (2026-04-28)"
+  },
+  "counts": {
+    "commits": 48,
+    "issues_and_prs": 65,
+    "comments": 72,
+    "releases": 0,
+    "tags": 0
+  },
+  "note": "regenerable from the source repository via `gh api` (see `private` above for who can reproduce it); emails intentionally omitted; per-PR review events are fetched separately when an incident analysis needs them; issues.json and comments.json carry performed_via_github_app (slug or null) and author_association as of this export \u2014 see script docstring for the lower-bound caveat on interpreting these fields. REPRODUCIBILITY ASYMMETRY: this repository is private at fetch time, so \u2014 unlike a public-repo snapshot such as uda-lab/leray-hopf \u2014 this export is NOT publicly re-derivable by a third party; only accounts with read access to the repo can reproduce it via `gh api`."
+}

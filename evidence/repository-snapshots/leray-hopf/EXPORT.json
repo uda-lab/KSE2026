@@ -1,7 +1,8 @@
 {
   "repo": "uda-lab/leray-hopf",
+  "private": false,
   "head_sha_at_fetch": "8ef11145d56336239cf47664a8bc5e6f2205847a",
-  "fetched_at": "2026-07-20T16:17:29+00:00",
+  "fetched_at": "2026-07-24T18:28:30+00:00",
   "tool_versions": {
     "python": "3.11.2",
     "gh": "gh version 2.92.0 (2026-04-28)"
@@ -13,5 +14,5 @@
     "releases": 1,
     "tags": 1
   },
-  "note": "regenerable public data; emails intentionally omitted; per-PR review events are fetched separately when an incident analysis needs them"
+  "note": "regenerable from the source repository via `gh api` (see `private` above for who can reproduce it); emails intentionally omitted; per-PR review events are fetched separately when an incident analysis needs them; issues.json and comments.json carry performed_via_github_app (slug or null) and author_association as of this export \u2014 see script docstring for the lower-bound caveat on interpreting these fields"
 }
