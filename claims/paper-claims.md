@@ -114,7 +114,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 
 ## CLM-009: 本 campaign の最終的な harness は，scientific scope，issue-scoped implementation，semantic statement review，Lean/kernel verification，public-declaration preservation，release attestation，resource/liveness control，evidence capture を別の責務として扱った
 - Status: frozen
-- Paper location: paper/sections/03-agent-workflow.tex, paper/sections/05-discussion.tex
+- Paper location: paper/sections/03-agent-workflow.tex, paper/sections/05-discussion.tex, paper/sections/06-conclusion.tex
 - Evidence: EV-2076，EV-0925，EV-1669，EV-0247，INC-001，INC-002，INC-003，INC-004，INC-005，leray-hopf#158
 - Notes: 個々の責務と導入時期は CLM-007/008 の一次・再構成証拠に従う．これは campaign
   終了時点の構成を合成した記述であり，全期間に同じ harness が存在したという主張では
