@@ -25,6 +25,9 @@ FORBIDDEN = [
     ),
 ]
 
+LISTING_BEGIN = r"\begin{lstlisting}"
+LISTING_END = r"\end{lstlisting}"
+
 
 def strip_comment(line: str) -> str:
     """Remove an unescaped LaTeX comment from one source line."""
@@ -41,23 +44,37 @@ def strip_comment(line: str) -> str:
     return line
 
 
+def scan_lines(lines: list[str]) -> list[tuple[int, str]]:
+    """Return line-numbered findings while ignoring real listing bodies."""
+    findings = []
+    in_listing = False
+    for lineno, raw in enumerate(lines, 1):
+        line = strip_comment(raw)
+        if in_listing:
+            if LISTING_END in line:
+                in_listing = False
+            continue
+
+        begin_at = line.find(LISTING_BEGIN)
+        if begin_at >= 0:
+            prose = line[:begin_at]
+            remainder = line[begin_at + len(LISTING_BEGIN):]
+            in_listing = LISTING_END not in remainder
+        else:
+            prose = line
+
+        for label, pattern in FORBIDDEN:
+            if pattern.search(prose):
+                findings.append((lineno, label))
+    return findings
+
+
 def main() -> int:
     findings = []
     for path in TARGETS:
-        in_listing = False
-        for lineno, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
-            if r"\begin{lstlisting}" in raw:
-                in_listing = True
-                continue
-            if r"\end{lstlisting}" in raw:
-                in_listing = False
-                continue
-            if in_listing:
-                continue
-            line = strip_comment(raw)
-            for label, pattern in FORBIDDEN:
-                if pattern.search(line):
-                    findings.append(f"{path.relative_to(ROOT)}:{lineno}: {label}")
+        source = path.read_text(encoding="utf-8").splitlines()
+        for lineno, label in scan_lines(source):
+            findings.append(f"{path.relative_to(ROOT)}:{lineno}: {label}")
 
     if findings:
         print("prose style check FAILED:")

@@ -24,6 +24,7 @@ endif
 	@echo "==> build/main.pdf"
 
 lint:
+	python3 -m unittest scripts.test_check_prose_style
 	python3 scripts/check_prose_style.py
 ifdef CHKTEX
 	# ChkTeX warnings 8/9/12/13/17/36 are disabled because they conflate
