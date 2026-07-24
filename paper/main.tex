@@ -28,9 +28,6 @@
   columns=fullflexible,
 }
 
-% Evidence cross-reference (draft-only; renders as a marginal tag, disabled for submission)
-\newcommand{\evref}[1]{\textcolor{blue}{\footnotesize[#1]}}
-
 \begin{document}
 
 \title{Formalizing Leray--Hopf in Lean~4 with AI Agents:\\
@@ -58,9 +55,8 @@ these checks detected defects and where they did not. The evidence method
 links manuscript claims to redacted session records, repository history,
 verification results, cost estimates, and billing records.
 \end{abstract}
-% Abstract claims map: CLM-001 (result), CLM-002 (scale, lower bounds),
-% CLM-006 (prior-work comparison), CLM-004/005 (incidents account),
-% CLM-003 (billing reconciliation), CLM-007/009 (harness and orchestration).
+% Abstract claims map: CLM-001 (result), CLM-006 (prior-work comparison),
+% CLM-007, CLM-009 (workflow and harness), CLM-008 (incident account).
 
 \begin{IEEEkeywords}
 formal verification, Lean 4, Navier--Stokes equations, Leray--Hopf weak solutions,

@@ -33,7 +33,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 
 ## CLM-002: 形式化キャンペーン（2026-06-10〜07-20，release 日終端）では，収集済みセッションログ上で確認できるだけでも output 15.1M tokens・公表 API 単価による推定コスト $6,972.83・active session time 199.1h（5 分 gap cap）の AI 計算が投入された（いずれも下界）
 - Status: frozen
-- Paper location: paper/sections/03-agent-workflow.tex
+- Paper location: paper/sections/01-introduction.tex, paper/sections/03-agent-workflow.tex
 - Evidence: EV-0001〜EV-2126（escrow 一次記録），`evidence/metrics/usage-metrics.json`（`scripts/extract_usage.py` により再現可能）
 - Notes: 一次資料は各 JSONL の `message.usage`（API レスポンス由来）．方法論・
   カバレッジ欠損（ローテーション喪失 6/10〜6/14，レビュワー側計算資源など）は
@@ -45,7 +45,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 
 ## CLM-003: Fable 5 再公開直後の Vertex 完成フェーズ（2026-07-02〜03 PT）の実請求は machine-wide 実測 ¥54,868（無条件）であり，escrow 上の leray-hopf 分は公表単価換算 $258.28（無条件）．leray-hopf 単独の実請求 ¥41,421〜41,796（75.5〜76.2%）は条件付き導出値である
 - Status: frozen
-- Paper location: paper/sections/03-agent-workflow.tex
+- Paper location: paper/sections/01-introduction.tex, paper/sections/03-agent-workflow.tex
 - Evidence: `evidence/metrics/vertex-completion-phase-billing.csv`・`vertex-completion-phase-billing-sku.csv`（redaction 済み集計），`scripts/extract_vertex_phase.py`（再現可能），EV-1681〜EV-2126（escrow 一次記録）
 - Notes: 2 層区分（provider-billed actual / 導出値）は `analysis/cost-attribution-methodology.md`
   に従い区別して書く．**条件**: 実効レート区間 [160.4, 161.8] ¥/$ の下界側は，
@@ -73,7 +73,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 
 ## CLM-005: 同型の statement-scope blind spot について，release 直前の監査まで残存した例（INC-001）と，構造的審査と数値診断により無制約 signature をマージ前に棄却し，制約付き statement を Lean で証明した例（INC-002）が同一プロジェクト内に併存する — この対は独立 statement 検査の価値と整合的（consistent with）な対照例である
 - Status: frozen
-- Paper location: paper/sections/01-introduction.tex, paper/sections/04-incidents.tex, paper/sections/05-discussion.tex
+- Paper location: paper/sections/01-introduction.tex, paper/sections/03-agent-workflow.tex, paper/sections/04-incidents.tex, paper/sections/05-discussion.tex
 - Evidence: INC-001，INC-002，EV-0925，leray-hopf#27，leray-hopf#158
 - Notes: 観測事実（INC-001 では pre-release audit まで検査されず残存した／INC-002
   では構造的審査が projection 仮定の欠落を特定し，数値評価が診断を補強した）と
@@ -98,7 +98,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 
 ## CLM-007: 03 節（workflow）で述べる個別の歴史的事実（役割構成，dispatch 件数，規律・ゲートの導入時期と契機，モデル選択の推移）は，`analysis/workflow-evolution.md` の時系列表と `evidence/session-index/` の符号化 6 セッションに裏付けられた範囲に限る
 - Status: frozen
-- Paper location: paper/main.tex, paper/sections/01-introduction.tex, paper/sections/03-agent-workflow.tex, paper/sections/06-conclusion.tex
+- Paper location: paper/main.tex, paper/sections/01-introduction.tex, paper/sections/03-agent-workflow.tex, paper/sections/05-discussion.tex, paper/sections/06-conclusion.tex
 - Evidence: `analysis/workflow-evolution.md`（全行 Evidence 付き時系列表），`evidence/session-index/` 6 index（EV-2076・EV-0925・EV-1669・EV-0247 ほか）
 - Notes: 03 節の各主張は本 claim を経由して workflow-evolution.md / session-index の
   該当行へ解決する（本文中の `% EV-NNNN` コメントが対応行を指す）．未符号化期間の
@@ -107,7 +107,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 
 ## CLM-008: 04 節（incidents）で述べる個別の incident 経緯・時刻・件数・機構の記述は，incident card INC-001〜INC-005（各 card が evidence_type と confidence を明記）に裏付けられた範囲に限る
 - Status: frozen
-- Paper location: paper/sections/04-incidents.tex
+- Paper location: paper/main.tex, paper/sections/01-introduction.tex, paper/sections/04-incidents.tex, paper/sections/05-discussion.tex
 - Evidence: INC-001，INC-002，INC-003，INC-004，INC-005（card 内の Primary evidence が EV / snapshot へ解決）
 - Notes: 04 節の各段落は本 claim を経由して該当 card へ解決する（本文中の
   `% CLAIM: CLM-008, INC-00N` タグが対応 card を指す）．card 側で reconstructed /
