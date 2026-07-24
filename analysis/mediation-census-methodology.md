@@ -91,8 +91,8 @@ gh CLI，オーケストレータ，harness など PAT を保持する任意の�
 `evidence/metrics/mediation-census.csv` の各行は `count_exact` 列（この API
 フィールドの組についての正確な件数であり，それ自体は下界でも上界でもないことを
 列名で明示）と `caveat_ref` 列（上記の非対称性を要約し本節への固定ポインタと
-する文字列）を持つ．JSON 側は `lower_bound_caveat` フィールドに本節と同内容を
-格納する．
+する文字列）を持つ．JSON 側は `authorship_signal_caveat` フィールドに本節と
+同内容を格納する（フィールド名は「下界」限定ではなく非対称性全体を指す）．
 
 ## 公開性の非対称性
 

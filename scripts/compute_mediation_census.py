@@ -9,7 +9,7 @@ App connector (e.g. "chatgpt-codex-connector") rather than posted directly by
 a PAT-holding process.
 
 These are mechanical groupings of raw API fields, not authorship claims — see
-the LOWER_BOUND_CAVEAT below before reading anything into a login or a null.
+the AUTHORSHIP_SIGNAL_CAVEAT below before reading anything into a login or a null.
 As of this writing, four (login, performed_via_github_app, is_bot_account)
 combinations are observed across the two tracked repos (any combination not
 present in a given snapshot simply does not appear in the output — nothing
@@ -34,7 +34,7 @@ Every count is an EXACT tally of the raw (login, performed_via_github_app)
 combination, but the counts are an ASYMMETRIC and INCOMPLETE signal about
 authorship, not a census: non-null performed_via_github_app rows are a
 LOWER BOUND on mediated (connector-transmitted) authorship; null rows are
-NOT proof of direct human authorship either way. See LOWER_BOUND_CAVEAT
+NOT proof of direct human authorship either way. See AUTHORSHIP_SIGNAL_CAVEAT
 below and analysis/mediation-census-methodology.md — do not quote counts
 from here without also quoting the caveat.
 
@@ -53,7 +53,7 @@ SNAPSHOT_ROOT = ROOT / "evidence" / "repository-snapshots"
 OUT_JSON = ROOT / "evidence" / "metrics" / "mediation-census.json"
 OUT_CSV = ROOT / "evidence" / "metrics" / "mediation-census.csv"
 
-LOWER_BOUND_CAVEAT = (
+AUTHORSHIP_SIGNAL_CAVEAT = (
     "These counts are an exact tally of a raw API field combination, but as "
     "a signal about who authored an item they are asymmetric, not a "
     "complete census. `performed_via_github_app: null` does NOT prove "
@@ -64,8 +64,10 @@ LOWER_BOUND_CAVEAT = (
     "5066112755 / 5071134565 / 5071234655 / 5071326489 / 5071415951 "
     "(\"@codex please review this PR\") all posted under login `t-uda` with "
     "performed_via_github_app null — i.e. null spans both possibly-direct "
-    "and demonstrably-process-generated comments, so a null count is "
-    "neither a lower nor an upper bound on direct human authorship. "
+    "comments and comments matching a repeated, formulaic workflow-notice "
+    "pattern (consistent with automated posting, though this data alone "
+    "cannot prove who or what posted them), so a null count is neither a "
+    "lower nor an upper bound on direct human authorship. "
     "Conversely, a non-null performed_via_github_app slug IS a LOWER BOUND "
     "on mediated (connector-transmitted) authorship, but proves only the "
     "transport channel — not who composed the prose, nor whether the human "
@@ -80,7 +82,7 @@ CAVEAT_REF = (
     "count_exact is an exact tally, not itself a bound; as an authorship "
     "signal it is asymmetric (non-null performed_via_github_app is a LOWER "
     "BOUND on mediation; null is NOT proof of direct human authorship) — "
-    "see lower_bound_caveat in mediation-census.json / "
+    "see authorship_signal_caveat in mediation-census.json / "
     "analysis/mediation-census-methodology.md"
 )
 
@@ -161,7 +163,7 @@ def main() -> int:
                   "evidence/repository-snapshots/<repo>/; login values ending "
                   "in '[bot]' are flagged is_bot_account regardless of "
                   "performed_via_github_app.",
-        "lower_bound_caveat": LOWER_BOUND_CAVEAT,
+        "authorship_signal_caveat": AUTHORSHIP_SIGNAL_CAVEAT,
         "by_repo": by_repo,
     }
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
