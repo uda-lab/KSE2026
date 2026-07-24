@@ -22,9 +22,11 @@ inventory 化する）．
 | 資料 | 所在 | 収集状態 |
 |---|---|---|
 | leray-hopf Git 履歴 | `uda-lab/leray-hopf`（public） | pinned: v0.1.0-rc1 / 7c15710a |
-| leray-hopf Issues / PRs | 同上 | **収集済 2026-07-21**（`evidence/repository-snapshots/leray-hopf/`: issues.json 195 件 = issue+PR，comments.json，commits.json 320 件，tags.json，releases.json，EXPORT.json = 再現手順．PR #13） |
+| leray-hopf Issues / PRs | 同上 | **収集済 2026-07-21，再収集 2026-07-24**（`evidence/repository-snapshots/leray-hopf/`: issues.json 195 件 = issue+PR，comments.json 442 件，commits.json 320 件，tags.json，releases.json，EXPORT.json = 再現手順．issue #60 で `performed_via_github_app`／`author_association` を追加，`fetched_at=2026-07-24T18:28:30+00:00`，`head_sha_at_fetch=8ef11145d5…`．PR #13，#61） |
 | CI / build attestation 記録 | 同上 Actions | releases.json / tags.json に attestation メタ収集済．Actions run log 本体は未収集（必要時に export） |
 | leray-hopf-notes（companion site） | `uda-lab/leray-hopf-notes` | 未収集（論文の一次資料としては不使用．参照時に個別収集） |
+| KSE2026 Issues / PRs（self-snapshot） | `uda-lab/KSE2026`（**private**） | **収集済 2026-07-24**（`evidence/repository-snapshots/KSE2026/`: issues.json 61 件，comments.json 69 件，commits.json 48 件，EXPORT.json = 再現手順．`fetched_at=2026-07-24T18:28:34+00:00`，`head_sha_at_fetch=fc912b92…`．leray-hopf と異なり private repo のため，本 snapshot は read アクセス権を持つアカウントでのみ再現可能（`EXPORT.json` の `private: true` と `note` を参照）．issue #60） |
+| mediation census（派生成果物） | 本リポジトリ | `scripts/compute_mediation_census.py` で上記 2 snapshot から生成．`evidence/metrics/mediation-census.{json,csv}`．方法論と下界注記は `analysis/mediation-census-methodology.md`（issue #60） |
 
 ## 文献
 

@@ -1,0 +1,123 @@
+{
+  "generated_at": "2026-07-24T18:29:33+00:00",
+  "method": "grouped by (user_login, performed_via_github_app slug or null) over issues.json and comments.json from evidence/repository-snapshots/<repo>/; login values ending in '[bot]' are flagged is_bot_account regardless of performed_via_github_app.",
+  "lower_bound_caveat": "This is a LOWER BOUND on mediated authorship, not a complete census. `performed_via_github_app: null` does NOT prove direct human authorship: any PAT-holding process (gh CLI, an orchestrator, a harness) also yields null — e.g. on uda-lab/KSE2026 PR #59, agent-generated comments posted as `t-uda` (\"Final proposal gate for head\\u2026\", \"@codex please review this PR\") all carry null. Conversely, a non-null performed_via_github_app slug proves only the transport channel — not who composed the prose, nor whether the human read it before it was posted. No client, user-agent, IP, session id, model version, or prompt is recoverable from this data. Comment edit history is not retroactively available, and deleted/minimized comments are absent from the export. Do not infer productivity, effectiveness, or causation from these counts.",
+  "by_repo": {
+    "leray-hopf": {
+      "repo": "uda-lab/leray-hopf",
+      "private": false,
+      "head_sha_at_fetch": "8ef11145d56336239cf47664a8bc5e6f2205847a",
+      "fetched_at": "2026-07-24T18:28:30+00:00",
+      "issues_and_prs": {
+        "total": 195,
+        "categories": [
+          {
+            "login": "t-uda",
+            "performed_via_github_app": null,
+            "is_bot_account": false,
+            "count": 31
+          },
+          {
+            "login": "t-uda",
+            "performed_via_github_app": "chatgpt-codex-connector",
+            "is_bot_account": false,
+            "count": 32
+          },
+          {
+            "login": "uda-lab-agent",
+            "performed_via_github_app": null,
+            "is_bot_account": false,
+            "count": 132
+          }
+        ]
+      },
+      "comments": {
+        "total": 442,
+        "categories": [
+          {
+            "login": "chatgpt-codex-connector[bot]",
+            "performed_via_github_app": "chatgpt-codex-connector",
+            "is_bot_account": true,
+            "count": 69
+          },
+          {
+            "login": "t-uda",
+            "performed_via_github_app": null,
+            "is_bot_account": false,
+            "count": 146
+          },
+          {
+            "login": "t-uda",
+            "performed_via_github_app": "chatgpt-codex-connector",
+            "is_bot_account": false,
+            "count": 37
+          },
+          {
+            "login": "uda-lab-agent",
+            "performed_via_github_app": null,
+            "is_bot_account": false,
+            "count": 190
+          }
+        ]
+      }
+    },
+    "KSE2026": {
+      "repo": "uda-lab/KSE2026",
+      "private": true,
+      "head_sha_at_fetch": "fc912b925afc720f20f4dbf4ff6a72449cc76004",
+      "fetched_at": "2026-07-24T18:28:34+00:00",
+      "issues_and_prs": {
+        "total": 61,
+        "categories": [
+          {
+            "login": "t-uda",
+            "performed_via_github_app": null,
+            "is_bot_account": false,
+            "count": 1
+          },
+          {
+            "login": "t-uda",
+            "performed_via_github_app": "chatgpt-codex-connector",
+            "is_bot_account": false,
+            "count": 6
+          },
+          {
+            "login": "uda-lab-agent",
+            "performed_via_github_app": null,
+            "is_bot_account": false,
+            "count": 54
+          }
+        ]
+      },
+      "comments": {
+        "total": 69,
+        "categories": [
+          {
+            "login": "chatgpt-codex-connector[bot]",
+            "performed_via_github_app": "chatgpt-codex-connector",
+            "is_bot_account": true,
+            "count": 6
+          },
+          {
+            "login": "t-uda",
+            "performed_via_github_app": null,
+            "is_bot_account": false,
+            "count": 37
+          },
+          {
+            "login": "t-uda",
+            "performed_via_github_app": "chatgpt-codex-connector",
+            "is_bot_account": false,
+            "count": 5
+          },
+          {
+            "login": "uda-lab-agent",
+            "performed_via_github_app": null,
+            "is_bot_account": false,
+            "count": 21
+          }
+        ]
+      }
+    }
+  }
+}

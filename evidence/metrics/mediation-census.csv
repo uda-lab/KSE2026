@@ -1,0 +1,15 @@
+repo,item_type,login,performed_via_github_app,is_bot_account,count
+uda-lab/leray-hopf,issue_or_pr,t-uda,,False,31
+uda-lab/leray-hopf,issue_or_pr,t-uda,chatgpt-codex-connector,False,32
+uda-lab/leray-hopf,issue_or_pr,uda-lab-agent,,False,132
+uda-lab/leray-hopf,comment,chatgpt-codex-connector[bot],chatgpt-codex-connector,True,69
+uda-lab/leray-hopf,comment,t-uda,,False,146
+uda-lab/leray-hopf,comment,t-uda,chatgpt-codex-connector,False,37
+uda-lab/leray-hopf,comment,uda-lab-agent,,False,190
+uda-lab/KSE2026,issue_or_pr,t-uda,,False,1
+uda-lab/KSE2026,issue_or_pr,t-uda,chatgpt-codex-connector,False,6
+uda-lab/KSE2026,issue_or_pr,uda-lab-agent,,False,54
+uda-lab/KSE2026,comment,chatgpt-codex-connector[bot],chatgpt-codex-connector,True,6
+uda-lab/KSE2026,comment,t-uda,,False,37
+uda-lab/KSE2026,comment,t-uda,chatgpt-codex-connector,False,5
+uda-lab/KSE2026,comment,uda-lab-agent,,False,21

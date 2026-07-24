@@ -1,0 +1,581 @@
+[
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-24T18:22:42Z",
+  "committed_date": "2026-07-24T18:22:42Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "85627c050b17fbb184723219e1b0182c1b1c3496"
+  ],
+  "sha": "fc912b925afc720f20f4dbf4ff6a72449cc76004",
+  "subject": "Reframe paper around harness design and reliability lessons (#59)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T19:09:55Z",
+  "committed_date": "2026-07-22T19:09:55Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "1b2788a209e2eeeedb235c8bb09b0002f213ad23"
+  ],
+  "sha": "85627c050b17fbb184723219e1b0182c1b1c3496",
+  "subject": "Phase 4: sections 01/05/06 + abstract + 書誌配線（front matter 完成） (#56)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T18:03:20Z",
+  "committed_date": "2026-07-22T18:03:20Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "ef978e6eac020273997e654ae3bafb1f69f7959f"
+  ],
+  "sha": "1b2788a209e2eeeedb235c8bb09b0002f213ad23",
+  "subject": "Phase 4: section 04（incidents）draft 投入 (#54)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T17:55:47Z",
+  "committed_date": "2026-07-22T17:55:47Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "752821833f575497086dbb78769b36e26b5ea63f"
+  ],
+  "sha": "ef978e6eac020273997e654ae3bafb1f69f7959f",
+  "subject": "Phase 4: sections 02（formalization）+ 03（workflow）draft 投入 (#52)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T17:40:16Z",
+  "committed_date": "2026-07-22T17:40:16Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "bf35019d675aa8e9c6f12191224279199fa2d38b"
+  ],
+  "sha": "752821833f575497086dbb78769b36e26b5ea63f",
+  "subject": "Phase 3 クローズ: author-decisions 転記 + claim freeze（CLM-001〜006）+ タイトル確定 (#50)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T17:33:39Z",
+  "committed_date": "2026-07-22T17:33:39Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "6f5dec2804f8ed9357632a011e81b253ea14b666"
+  ],
+  "sha": "bf35019d675aa8e9c6f12191224279199fa2d38b",
+  "subject": "issue #42 項目 1: related work baseline（TauCeti 8 軸比較 + 4 領域 + bib 14 件） (#48)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T17:23:01Z",
+  "committed_date": "2026-07-22T17:23:01Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "a065180acb629b916669d22c342029bcdb82827e"
+  ],
+  "sha": "6f5dec2804f8ed9357632a011e81b253ea14b666",
+  "subject": "issue #42 項目 5: repo hygiene (README/AGENTS 同期, inventory 更新, verify 強化, extract_metrics 修正) (#46)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T17:19:33Z",
+  "committed_date": "2026-07-22T17:19:33Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "f00b922fab3838036429dd2bfb1a23e519c65137"
+  ],
+  "sha": "a065180acb629b916669d22c342029bcdb82827e",
+  "subject": "issue #42 項目 2/3/4: campaign end 導入・CLM-002〜005 校正・用語統一 (#44)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T16:40:06Z",
+  "committed_date": "2026-07-22T16:40:06Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "08543a91c8bdcf9aedaf7faca97aa1d12d4edd5b"
+  ],
+  "sha": "f00b922fab3838036429dd2bfb1a23e519c65137",
+  "subject": "analysis: workflow-evolution.md の記入（03 節裏付け文書） (#41)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T16:33:41Z",
+  "committed_date": "2026-07-22T16:33:41Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "e8db3d5ba9764232cce45c3b7e7da44fbceb7060"
+  ],
+  "sha": "08543a91c8bdcf9aedaf7faca97aa1d12d4edd5b",
+  "subject": "fix: formalization-scope の出典を pinned commit 実在の README.md に訂正 (#39)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T16:25:17Z",
+  "committed_date": "2026-07-22T16:25:17Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "6aab80702b42d26729b4a6598582f7deb5ed8ef0"
+  ],
+  "sha": "e8db3d5ba9764232cce45c3b7e7da44fbceb7060",
+  "subject": "claims: CLM-003〜005 を candidate 登録 (issue #35 判断3 の表に基づく) (#37)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T16:19:04Z",
+  "committed_date": "2026-07-22T16:19:04Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "61474e086e25af0fe9498a999f04b69de2a00a0b"
+  ],
+  "sha": "6aab80702b42d26729b4a6598582f7deb5ed8ef0",
+  "subject": "Phase 2 第2陣: 7/18 OOM cascade 符号化 + INC-005 card + ranking v2 (#34)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T15:40:09Z",
+  "committed_date": "2026-07-22T15:40:09Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "06e67086b9fb78b51da0cdcfdde1cd256a028e53"
+  ],
+  "sha": "61474e086e25af0fe9498a999f04b69de2a00a0b",
+  "subject": "Phase 2: incident cards 第1陣 (INC-001..004) + ranking 初版 (#32)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T15:22:48Z",
+  "committed_date": "2026-07-22T15:22:48Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "0f0f2bdc3574dcca5cc3be6d6c59192f9f1ecce2"
+  ],
+  "sha": "06e67086b9fb78b51da0cdcfdde1cd256a028e53",
+  "subject": "issue #23 完了: 研究費 acknowledgment 文言の記録 (#30)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T13:36:50Z",
+  "committed_date": "2026-07-22T13:36:50Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "763947f4e3d31d04f648a8f72893580acec79a87"
+  ],
+  "sha": "0f0f2bdc3574dcca5cc3be6d6c59192f9f1ecce2",
+  "subject": "issue #23 第 2 弾: SKU レベル突合の完全解決（premium 棄却・FX 161.8・leray 単独実請求） (#29)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T12:42:44Z",
+  "committed_date": "2026-07-22T12:42:44Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "d335e0a76c70494b26d1a51a92b0f222fa1cb1f3"
+  ],
+  "sha": "763947f4e3d31d04f648a8f72893580acec79a87",
+  "subject": "issue #23 第 1 弾: Vertex 完成フェーズの billing 突合（成果物 4 点と照合文書） (#27)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T11:53:54Z",
+  "committed_date": "2026-07-22T11:53:54Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "cc23483a7ccd5df7e9c99ce467ac627201bfade3"
+  ],
+  "sha": "d335e0a76c70494b26d1a51a92b0f222fa1cb1f3",
+  "subject": "Phase 2 追補: VertexAI 経由期間の provider 判別と usage メトリクス反映 (issue #24) (#25)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T10:27:09Z",
+  "committed_date": "2026-07-22T10:27:09Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "741e7bde95bab0edf3166946aa1f7a4502fe603c"
+  ],
+  "sha": "cc23483a7ccd5df7e9c99ce467ac627201bfade3",
+  "subject": "Phase 1 追補: vps escrow 補完収集（history/tasks/plans）の manifest 登録 (#22)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T05:41:55Z",
+  "committed_date": "2026-07-22T05:41:55Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "f27a92b7faf91954b6fdabd5fde736080bfca69d"
+  ],
+  "sha": "741e7bde95bab0edf3166946aa1f7a4502fe603c",
+  "subject": "Phase 2: project timeline 構築とセッション符号化の開始 (#20)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T05:30:36Z",
+  "committed_date": "2026-07-22T05:30:36Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "9daef9c8fa9143acba586a5f9e54b963990cb9ec"
+  ],
+  "sha": "f27a92b7faf91954b6fdabd5fde736080bfca69d",
+  "subject": "Phase 2: セッション usage メトリクス抽出（トークン・API換算コスト・所要時間） (#19)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T05:17:04Z",
+  "committed_date": "2026-07-22T05:17:04Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "65e21ba6cd84ec8a916e773da2725fe32a47080f"
+  ],
+  "sha": "9daef9c8fa9143acba586a5f9e54b963990cb9ec",
+  "subject": "Phase 1 追補: vps-snapshot-20260710 バックアップ検証 — 負の結果を確定 (issue #15) (#18)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-22T05:13:04Z",
+  "committed_date": "2026-07-22T05:13:04Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "16296507d980fcc9fd9a4ac0c9ae3c3bf89dcb30"
+  ],
+  "sha": "65e21ba6cd84ec8a916e773da2725fe32a47080f",
+  "subject": "Phase 1: local-secondary セッションログ収集 — manifest 登録 (EV-1681..EV-2126) (#17)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-20T16:19:38Z",
+  "committed_date": "2026-07-20T16:19:38Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "7d2d9d8a797474b3ddc6a5a84f617761e863fd74",
+   "35c18a572418c7d895c339b349da2d6181dd56ca"
+  ],
+  "sha": "16296507d980fcc9fd9a4ac0c9ae3c3bf89dcb30",
+  "subject": "Phase 2: leray-hopf GitHub snapshot (#13)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T16:17:29Z",
+  "committed_date": "2026-07-20T16:17:29Z",
+  "committer_login": null,
+  "parents": [
+   "d5d2d4b9a631cda5a0abec7be752ddd1e1105eb4"
+  ],
+  "sha": "35c18a572418c7d895c339b349da2d6181dd56ca",
+  "subject": "fix: address Copilot review on PR #13"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T16:14:59Z",
+  "committed_date": "2026-07-20T16:14:59Z",
+  "committer_login": null,
+  "parents": [
+   "9669a9115885333c0b3bcb992abdbba5ff1b3ab0"
+  ],
+  "sha": "d5d2d4b9a631cda5a0abec7be752ddd1e1105eb4",
+  "subject": "fix: snapshot as JSON arrays, not JSONL (own CI guard caught it)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T16:06:18Z",
+  "committed_date": "2026-07-20T16:06:18Z",
+  "committer_login": null,
+  "parents": [
+   "7d2d9d8a797474b3ddc6a5a84f617761e863fd74"
+  ],
+  "sha": "9669a9115885333c0b3bcb992abdbba5ff1b3ab0",
+  "subject": "evidence: leray-hopf GitHub snapshot + reproducible export script"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-20T16:02:32Z",
+  "committed_date": "2026-07-20T16:02:32Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "090af4fa7e28f80a87633a1bb3988ff3118b98ef",
+   "81bf562812c87a2a8957b94c7d38bde1fd2e6b50"
+  ],
+  "sha": "7d2d9d8a797474b3ddc6a5a84f617761e863fd74",
+  "subject": "Phase 1: local-main log collection (#11)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T16:00:17Z",
+  "committed_date": "2026-07-20T16:00:17Z",
+  "committer_login": null,
+  "parents": [
+   "6ba7fa77fd7eef1a965e85969e26d43ddc2063bf"
+  ],
+  "sha": "81bf562812c87a2a8957b94c7d38bde1fd2e6b50",
+  "subject": "fix: drop physical hostname from public source inventory (Copilot)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T15:56:54Z",
+  "committed_date": "2026-07-20T15:56:54Z",
+  "committer_login": null,
+  "parents": [
+   "090af4fa7e28f80a87633a1bb3988ff3118b98ef"
+  ],
+  "sha": "6ba7fa77fd7eef1a965e85969e26d43ddc2063bf",
+  "subject": "evidence: register local-main session-log collection (EV-1634..EV-1680)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-20T15:56:06Z",
+  "committed_date": "2026-07-20T15:56:06Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "f9eb59bec5a6091a44ec755d1dfd1462b5605b44",
+   "a9027dd1e63cd66a812c9c50d10d6ae2db455b74"
+  ],
+  "sha": "090af4fa7e28f80a87633a1bb3988ff3118b98ef",
+  "subject": "Escrow relocation to /private/sources (#10)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T15:54:00Z",
+  "committed_date": "2026-07-20T15:54:00Z",
+  "committer_login": null,
+  "parents": [
+   "096a27a21057bc0cb2cd14533ce003391bbf00bb"
+  ],
+  "sha": "a9027dd1e63cd66a812c9c50d10d6ae2db455b74",
+  "subject": "fix: dual containment guard (Copilot review on PR #10)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T15:28:49Z",
+  "committed_date": "2026-07-20T15:28:49Z",
+  "committer_login": null,
+  "parents": [
+   "f9eb59bec5a6091a44ec755d1dfd1462b5605b44"
+  ],
+  "sha": "096a27a21057bc0cb2cd14533ce003391bbf00bb",
+  "subject": "escrow: support host-mounted read-only raw area via symlink"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-20T13:00:22Z",
+  "committed_date": "2026-07-20T13:00:22Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "782b524ab229d21980a533c524eee1f9280fd983",
+   "8dcd89b60e78aaf88ec1a8dd6b19d3cb6fe0f6e4"
+  ],
+  "sha": "f9eb59bec5a6091a44ec755d1dfd1462b5605b44",
+  "subject": "Phase 1: vps log collection (#7)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T12:57:57Z",
+  "committed_date": "2026-07-20T12:57:57Z",
+  "committer_login": null,
+  "parents": [
+   "48641b51aae6bb6dbc2807d67e9b1fe186d282f7"
+  ],
+  "sha": "8dcd89b60e78aaf88ec1a8dd6b19d3cb6fe0f6e4",
+  "subject": "provenance: record Phase 1 collection AI use (Copilot review finding)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T12:35:10Z",
+  "committed_date": "2026-07-20T12:35:10Z",
+  "committer_login": null,
+  "parents": [
+   "782b524ab229d21980a533c524eee1f9280fd983"
+  ],
+  "sha": "48641b51aae6bb6dbc2807d67e9b1fe186d282f7",
+  "subject": "evidence: register vps session-log collection (EV-0001..EV-1633)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-20T12:31:11Z",
+  "committed_date": "2026-07-20T12:31:11Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "c777e7427354fc75cdda33dd3f05f988cc6d68ee",
+   "d337d2fcec640c460caa6636a5be7f402b48a0bf"
+  ],
+  "sha": "782b524ab229d21980a533c524eee1f9280fd983",
+  "subject": "Phase 0 scaffold (#1)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T12:28:47Z",
+  "committed_date": "2026-07-20T12:28:47Z",
+  "committer_login": null,
+  "parents": [
+   "78341cd8c7474c426b8310cb980c641043097c66"
+  ],
+  "sha": "d337d2fcec640c460caa6636a5be7f402b48a0bf",
+  "subject": "fix: address Copilot review findings on PR #1"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T12:17:54Z",
+  "committed_date": "2026-07-20T12:17:54Z",
+  "committer_login": null,
+  "parents": [
+   "a0aa35d9f49931004fa1d0f03d758b49f4b36bea"
+  ],
+  "sha": "78341cd8c7474c426b8310cb980c641043097c66",
+  "subject": "build: make lint informational to match CI"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T12:14:44Z",
+  "committed_date": "2026-07-20T12:14:44Z",
+  "committer_login": null,
+  "parents": [
+   "4705d2cce49be204567e66f51732f37610edcc23"
+  ],
+  "sha": "a0aa35d9f49931004fa1d0f03d758b49f4b36bea",
+  "subject": "fix: address internal review findings (redaction, manifest paths, timeline)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T12:14:44Z",
+  "committed_date": "2026-07-20T12:14:44Z",
+  "committer_login": null,
+  "parents": [
+   "4aaed0998556e48c866d835d273998760d73aea7"
+  ],
+  "sha": "4705d2cce49be204567e66f51732f37610edcc23",
+  "subject": "build: TeX Live pdflatex as primary engine; record KSE 2026 CFP facts"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T12:00:02Z",
+  "committed_date": "2026-07-20T12:00:02Z",
+  "committer_login": null,
+  "parents": [
+   "9e1fb3cdf4c4247af1fcd869b8cb40fa5ae3e4cd"
+  ],
+  "sha": "4aaed0998556e48c866d835d273998760d73aea7",
+  "subject": "ci: build PDF artifact with claim-link, lint, and leakage gates"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T12:00:02Z",
+  "committed_date": "2026-07-20T12:00:02Z",
+  "committer_login": null,
+  "parents": [
+   "34589d5b16328744e015fb750900c819fbf5f55c"
+  ],
+  "sha": "9e1fb3cdf4c4247af1fcd869b8cb40fa5ae3e4cd",
+  "subject": "scripts: evidence tooling (stdlib-only, smoke-tested)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T12:00:02Z",
+  "committed_date": "2026-07-20T12:00:02Z",
+  "committer_login": null,
+  "parents": [
+   "99b2645c9e2c43a7290847425bfb53a37fa440e2"
+  ],
+  "sha": "34589d5b16328744e015fb750900c819fbf5f55c",
+  "subject": "analysis/provenance/notes: working templates for Phases 1-5"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T12:00:02Z",
+  "committed_date": "2026-07-20T12:00:02Z",
+  "committer_login": null,
+  "parents": [
+   "bd6252232ab2130cf73de0b3edd2cab17fe0c243"
+  ],
+  "sha": "99b2645c9e2c43a7290847425bfb53a37fa440e2",
+  "subject": "evidence: manifest schema, incident-card template, private/ isolation"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T12:00:02Z",
+  "committed_date": "2026-07-20T12:00:02Z",
+  "committer_login": null,
+  "parents": [
+   "4bf508d4882bfb3ccfb6087a8286ac34527eb766"
+  ],
+  "sha": "bd6252232ab2130cf73de0b3edd2cab17fe0c243",
+  "subject": "claims: scope ceiling and claim-evidence bookkeeping"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T12:00:02Z",
+  "committed_date": "2026-07-20T12:00:02Z",
+  "committer_login": null,
+  "parents": [
+   "606d7fc7662c867b0d735c54d3f169b050efc732"
+  ],
+  "sha": "4bf508d4882bfb3ccfb6087a8286ac34527eb766",
+  "subject": "paper: IEEEtran skeleton with per-section files and build system"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T12:00:02Z",
+  "committed_date": "2026-07-20T12:00:02Z",
+  "committer_login": null,
+  "parents": [
+   "c777e7427354fc75cdda33dd3f05f988cc6d68ee"
+  ],
+  "sha": "606d7fc7662c867b0d735c54d3f169b050efc732",
+  "subject": "docs: add scaffold plan, repository guide, and agent working rules"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T11:59:32Z",
+  "committed_date": "2026-07-20T11:59:32Z",
+  "committer_login": null,
+  "parents": [],
+  "sha": "c777e7427354fc75cdda33dd3f05f988cc6d68ee",
+  "subject": "chore: initialize repository"
+ }
+]

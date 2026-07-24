@@ -4,19 +4,38 @@
 Writes to evidence/repository-snapshots/<repo-name>/:
   commits.json    — full history: sha, author/committer login+name, dates, subject
   issues.json     — issues AND PRs (state=all): number, kind, title, body, dates,
-                    labels, author login, closed_by-ish fields
-  comments.json   — all issue/PR comments (repo-wide endpoint)
+                    labels, author login, closed_by-ish fields, author_association,
+                    performed_via_github_app (slug or null)
+  comments.json   — all issue/PR comments (repo-wide endpoint): as above, plus
+                    author_association, performed_via_github_app (slug or null)
   releases.json   — releases; tags.json — tags
   EXPORT.json     — fetch metadata (fetched_at, head sha, tool versions)
 
 JSON arrays (not JSONL): the repo-wide rule is that no .jsonl is ever
 committed — the CI leakage guard treats the extension as raw-session-log
-material. Snapshot data is regenerable public JSON, so plain arrays keep the
-guard simple and strict.
+material. Snapshot data is regenerable structured JSON (see the `private`
+note below on who can regenerate it), so plain arrays keep the guard simple
+and strict.
+
+`performed_via_github_app` records the GitHub App slug that authored the item
+(e.g. "chatgpt-codex-connector") when the item was posted through an App
+connector, else null. This is a LOWER BOUND on mediated authorship, not a
+census: any PAT-holding process (gh CLI, an orchestrator, a harness) also
+yields null, so null does not prove direct human authorship. Conversely, a
+non-null slug only proves the transport channel, not who composed the text.
+`html_url` is intentionally omitted — it is trivially reconstructible from
+`repo` + `number`/`id` and was not needed by any downstream consumer; add it
+only if a future consumer needs it and it passes redact_check.py's
+PUBLIC_REPO_ALLOWLIST for the target repo.
 
 Email addresses are deliberately NOT exported (repo redaction gate); authors
 are identified by GitHub login (fallback: display name). Everything here is
-regenerable public data — rerun this script rather than hand-editing.
+regenerable from the source repository via `gh api` — rerun this script
+rather than hand-editing. EXPORT.json records the source repo's `private`
+flag: for a private repo (e.g. this paper repo's own self-snapshot), that
+means the export is reproducible only by an account with read access, unlike
+a public-repo snapshot such as uda-lab/leray-hopf — this asymmetry must be
+stated wherever the snapshot is cited, not glossed.
 
 Usage:
   python3 scripts/export_repo_snapshot.py [--repo uda-lab/leray-hopf]
@@ -69,6 +88,9 @@ def main() -> int:
     out = OUT_ROOT / name
     out.mkdir(parents=True, exist_ok=True)
 
+    repo_meta = gh_api(f"repos/{args.repo}", paginate=False)
+    is_private = bool(repo_meta.get("private"))
+
     head = gh_api(f"repos/{args.repo}/commits/HEAD", paginate=False)["sha"]
 
     commits = [{
@@ -90,6 +112,8 @@ def main() -> int:
         "title": scrub(i["title"]),
         "body": scrub(i.get("body") or ""),
         "user_login": (i.get("user") or {}).get("login"),
+        "author_association": i.get("author_association"),
+        "performed_via_github_app": (i.get("performed_via_github_app") or {}).get("slug"),
         "labels": [lb["name"] for lb in i.get("labels", [])],
         "created_at": i["created_at"],
         "updated_at": i["updated_at"],
@@ -103,6 +127,8 @@ def main() -> int:
         "issue_number": int(c["issue_url"].rsplit("/", 1)[1]),
         "id": c["id"],
         "user_login": (c.get("user") or {}).get("login"),
+        "author_association": c.get("author_association"),
+        "performed_via_github_app": (c.get("performed_via_github_app") or {}).get("slug"),
         "created_at": c["created_at"],
         "updated_at": c["updated_at"],
         "body": scrub(c.get("body") or ""),
@@ -126,15 +152,29 @@ def main() -> int:
                                 text=True).stdout.splitlines()[0]
     meta = {
         "repo": args.repo,
+        "private": is_private,
         "head_sha_at_fetch": head,
         "fetched_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "tool_versions": {"python": sys.version.split()[0], "gh": gh_version},
         "counts": {"commits": len(commits), "issues_and_prs": len(issues),
                    "comments": len(comments), "releases": len(releases),
                    "tags": len(tags)},
-        "note": "regenerable public data; emails intentionally omitted; "
+        "note": "regenerable from the source repository via `gh api` (see "
+                "`private` above for who can reproduce it); emails "
+                "intentionally omitted; "
                 "per-PR review events are fetched separately when an incident "
-                "analysis needs them",
+                "analysis needs them; issues.json and comments.json carry "
+                "performed_via_github_app (slug or null) and author_association "
+                "as of this export — see script docstring for the lower-bound "
+                "caveat on interpreting these fields"
+                + (
+                    ". REPRODUCIBILITY ASYMMETRY: this repository is private "
+                    "at fetch time, so — unlike a public-repo snapshot such as "
+                    "uda-lab/leray-hopf — this export is NOT publicly "
+                    "re-derivable by a third party; only accounts with read "
+                    "access to the repo can reproduce it via `gh api`."
+                    if is_private else ""
+                ),
     }
     (out / "EXPORT.json").write_text(json.dumps(meta, indent=2) + "\n",
                                      encoding="utf-8")
