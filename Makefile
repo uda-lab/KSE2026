@@ -29,7 +29,7 @@ ifdef CHKTEX
 	# ChkTeX warnings 8/9/12/13/17/36 are disabled because they conflate
 	# correct name/range dashes, math delimiters, and IEEE macros with prose
 	# defects. check_prose_style.py owns spaced prose dashes.
-	chktex -q -n8 -n9 -n12 -n13 -n17 -n36 paper/main.tex
+	chktex -q -n8 -n9 -n12 -n13 -n17 -n36 paper/main.tex paper/sections/*.tex
 else
 	@echo "chktex not installed; skipping LaTeX lint"
 endif
