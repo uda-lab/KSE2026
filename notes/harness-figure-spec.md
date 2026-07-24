@@ -33,8 +33,9 @@ Place the owner defined repository skill `github-driven-workflow` around
 stages 2--7 rather than inside the orchestrator box or as a separate agent. Its
 label should say that it enforces the path from Issue to Git worktree to pull
 request, prohibits direct pushes to the main branch, and checks the fixed merge
-conditions. The visual hierarchy must make clear that this workflow predates
-Fable and governs whichever model fills the orchestrator role.
+conditions. The visual hierarchy should show the workflow as a
+model-independent governance layer that remains fixed when the orchestrator
+model changes.
 
 The assurance gateway is labeled `select checks by changed artifact` and
 contains four controls:
@@ -93,8 +94,8 @@ EV-2076, EV-0925, EV-1669, EV-0247, INC-001, INC-003, INC-004, and INC-005.
 
 - Complete: the paper now describes the final harness without
   depending on a rendered figure.
-- Complete: the preexisting `github-driven-workflow`, the model independent
-  orchestrator role, Fable's later use, Git worktrees, pull requests, the
+- Complete: `github-driven-workflow` as a model independent governance layer,
+  the Opus-to-Fable orchestrator change, Git worktrees, pull requests, the
   semantic and technical feedback paths, the VPS container, and the evidence
   path are specified.
 - Owner TODO: draw and approve the final vector artwork.

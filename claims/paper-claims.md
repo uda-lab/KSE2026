@@ -115,7 +115,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   INC-005 の累積カウンタ帰属限界）．2026-07-23 夜間 freeze 分 — 朝の owner 通読での
   追認対象（CLM-006/007 と同扱い）．
 
-## CLM-009: 本 project の最終 harness は，scientific owner の権限下で，Fable 登場以前からの repository-local `github-driven-workflow` が model-independent な orchestrator 役を規律し，GitHub Issue・専用 branch/Git worktree・GitHub PR を接続した．Fable は後期に既存の orchestrator 役を担った．semantic statement review，Lean/kernel verification，public declaration preservation，VPS container の resource/liveness control，evidence capture は別の責務として扱われた
+## CLM-009: 本 project の最終 harness は，scientific owner の権限下で repository-local `github-driven-workflow` が model-independent な orchestrator 役を規律し，GitHub Issue・専用 branch/Git worktree・GitHub PR を接続した．GitHub 運用と独立 PR review は Opus orchestrator 期から確認され，Fable は後期に同じ役を担った．semantic statement review，Lean/kernel verification，public declaration preservation，VPS container の resource/liveness control，evidence capture は別の責務として扱われた
 - Status: frozen
 - Paper location: paper/main.tex, paper/sections/01-introduction.tex, paper/sections/03-agent-workflow.tex, paper/sections/05-discussion.tex, paper/sections/06-conclusion.tex
 - Evidence: EV-2076，EV-0925，EV-1669，EV-0247，INC-001，INC-002，INC-003，INC-004，INC-005，leray-hopf#158
