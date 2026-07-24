@@ -66,7 +66,10 @@ jobs:
             texlive-latex-base texlive-latex-recommended texlive-latex-extra \
             texlive-publishers texlive-fonts-recommended texlive-bibtex-extra \
             latexmk chktex
-          command -v latexmk chktex
+          # One name per call. `command -v a b` returns 0 when ANY name
+          # resolves, so a single call would report success with chktex absent.
+          command -v latexmk
+          command -v chktex
           latexmk --version | head -1
 
       # Repeated from checks.yml so that a manual dispatch of this workflow, or

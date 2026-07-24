@@ -3,9 +3,9 @@
 > **If you are enabling branch protection, read
 > [Contexts that must never be required](#contexts-that-must-never-be-required)
 > first.** The only status context that is safe to require is **`integrity`**.
-> Requiring `checks`, `paper`, `build`, or `pdf` deadlocks every pull request
-> permanently. Three of those four are offered by GitHub's required-checks
-> picker and look entirely legitimate.
+> Requiring `paper` deadlocks every pull request permanently; requiring `pdf`
+> deadlocks every pull request that does not touch the manuscript. Both are
+> offered by GitHub's required-checks picker and both look legitimate.
 
 Two workflows, split by cost. `checks` is cheap and unconditional; `paper` is
 expensive and conditional. This file records why the split exists, why the
@@ -15,8 +15,8 @@ expensive one is constrained, and why the TeX installation was left alone.
 
 | workflow | job / status context | trigger | installs TeX | typical duration |
 | --- | --- | --- | --- | --- |
-| `checks` | `integrity` | every pull request, merge-queue entries, pushes to `main`, manual dispatch | no | ~17 s |
-| `paper` | `pdf` | pull requests and `main` pushes **that touch** `paper/**`, `Makefile` or `.github/workflows/paper.yml`; manual dispatch | yes | ~100 s |
+| `checks` | `integrity` | every pull request, merge-queue entries, pushes to `main`, manual dispatch | no | ~23 s |
+| `paper` | `pdf` | pull requests and `main` pushes **that touch** `paper/**`, `Makefile` or `.github/workflows/paper.yml`; manual dispatch | yes | ~90 s |
 
 For `paper`, `branches` and `paths` are ANDed: a push to `main` touching none of
 those paths does **not** run it. Manual dispatch is unfiltered and always runs.
@@ -34,15 +34,39 @@ and `libtinfo6`; it does not pull in TeX Live. Keeping it in `checks` means the
 `make lint` gate added in #59 still runs on every pull request rather than only
 on manuscript changes.
 
-Because `make lint` skips ChkTeX when the binary is absent, that skip is a way
-for the gate to pass without running. Two things prevent it, and both are
-needed. The install step runs under `shell: bash`, which is
-`bash --noprofile --norc -eo pipefail {0}`; without `pipefail` the default
-`bash -e {0}` would give `chktex --version | head -1` the exit status of `head`,
-which is always 0, and a missing binary would go undetected. CI then invokes
+There are two ways this gate could pass without actually running, and both are
+closed. Neither is hypothetical: the first shipped broken in #61 and was caught
+by review afterwards.
+
+**The binary might be missing.** `make lint` skips ChkTeX when `chktex` is not
+installed. The install step therefore runs under `shell: bash`, which is
+`bash --noprofile --norc -eo pipefail {0}`. Without `pipefail` the default
+`bash -e {0}` gives `chktex --version | head -1` the exit status of `head`,
+always 0, so a missing binary goes undetected — that was the #61 defect. The
+step also calls `command -v chktex`, one name per invocation, because
+`command -v a b` returns 0 when *any* name resolves. CI then invokes
 `make lint REQUIRE_CHKTEX=1`, which turns the skip branch into an error, so the
 Makefile cannot report a pass for a gate that did not run even if the step guard
 is weakened again later.
+
+**The file list might be empty.** `chktex` exits 0 on an input it cannot open,
+so a stale path would lint nothing and still pass:
+
+```
+$ chktex -q 'paper/nosuch/*.tex'; echo $?
+chktex: WARNING -- Unable to open the TeX file `paper/nosuch/*.tex'.
+0
+```
+
+The `Makefile` therefore expands `LINT_TEX` with `$(wildcard)` rather than
+passing a glob to `chktex`, and the recipe refuses to run unless the list has
+more than one entry and every entry is readable. Renaming `paper/sections/`
+fails the lint instead of silently emptying it.
+
+Both mechanisms are covered by `make selftest`, which `checks` runs. It removes
+`chktex` from `PATH` and asserts the gate fails, and drives the leakage guard
+through its uppercase, exemption and fail-closed cases. Asserting a protection
+in prose is what let the previous guard stay broken.
 
 The three TeX-free gates are defined once, in the `integrity` target of the
 `Makefile`, so CI and local runs cannot drift apart.
@@ -54,8 +78,9 @@ The three TeX-free gates are defined once, in the `integrity` target of the
 Not `checks`. The thing a ruleset names is the **job** name, not the workflow
 name, and this repository's workflow names and job names deliberately do not
 match. `checks.yml` contains a job called `integrity`; `paper.yml` contains a job
-called `pdf`. Confirmed empirically rather than assumed — on PR #65 and on commit
-`b797810`, the API reports exactly the contexts `integrity` and `pdf`, never
+called `pdf`. Confirmed empirically rather than assumed: commit `b797810`, which
+touched the manuscript inputs, reports exactly `integrity` and `pdf`, and PR #65,
+which touched only `scripts/`, reports only `integrity`. Neither ever reports
 `checks` or `paper`.
 
 Requiring `checks` would therefore configure a context that is never reported,
@@ -84,8 +109,8 @@ roughly the last week, including ones that will never be reported again.
 | --- | --- | --- | --- |
 | `integrity` | yes | **require this one** | job in `checks.yml`; no path filter, so it always reports |
 | `pdf` | yes | never require | job in `paper.yml`; path-filtered, so it reports nothing at all on pull requests that do not touch the manuscript |
-| `paper` | yes | never require | the **job** name of the deleted `build.yml`. A workflow named `paper` still exists, so this looks current. It will never be reported again |
-| `build` | briefly | never require | the deleted workflow's name |
+| `paper` | yes, for about a week after the last pre-#61 run | never require | the **job** name of the deleted `build.yml`. A workflow named `paper` still exists, so this looks current. It will never be reported again |
+| `build` | no | not a context | the deleted **workflow**'s name. Verified: every pre-#61 commit reports one check-run, `paper`, and none reports `build` |
 | `checks` | no | not a context | a workflow name, not a job name. Nothing ever reports under it |
 
 `paper` is the dangerous one, and it is dangerous specifically because of how
@@ -153,14 +178,17 @@ been superseded. Both workflows now key concurrency on the pull request number,
 falling back to the merge-queue ref and then to `github.ref`, with
 `cancel-in-progress: true`.
 
-Two consequences of that key are deliberate. Cancellation applies to `main` as
+Three consequences of that key are deliberate. Cancellation applies to `main` as
 well, so two merges landing within one run's duration cancel the earlier
 commit's run; that is acceptable because every commit reaching `main` was
-already gated on its own pull request. And `github.run_id` is mixed into the key
-for `workflow_dispatch` only, so that a manual full validation and a push to
-`main` do not share a group — otherwise a merge landing mid-dispatch would
-silently cancel the operator's build, against issue #61's requirement that
-manual full builds remain supported.
+already gated on its own pull request. `github.run_id` is mixed into the key for
+`workflow_dispatch` only, so that a manual full validation and a push to `main`
+do not share a group — otherwise a merge landing mid-dispatch would silently
+cancel the operator's build, against issue #61's requirement that manual full
+builds remain supported. The cost of that third term is that dispatch runs can
+never cancel each other: each gets a unique group, so two rapid manual builds
+both run to completion. That is the intended trade — a manual build is an
+explicit request, and losing one to another is worse than paying for both.
 
 The saving is concentrated in one step. In the old workflow the TeX Live
 installation took 80-90 s while every other step finished in about 4 s total.
@@ -169,8 +197,8 @@ Measured on this repository:
 | job | wall time | of which TeX provisioning |
 | --- | --- | --- |
 | old combined `build` | 95-105 s | 80-90 s |
-| new `checks` | 17-22 s | none (ChkTeX install 12-13 s) |
-| new `paper` | ~100 s | 70-90 s |
+| new `checks` | 23 s median (17-28, n=12) | none (ChkTeX install 12-13 s) |
+| new `paper` | 90 s median (78-142, n=8) | 70-90 s |
 
 Cancellation was verified on run 30117462984: a second push arrived 53 s into
 the TeX installation, and the run was cancelled with the lint, verification,

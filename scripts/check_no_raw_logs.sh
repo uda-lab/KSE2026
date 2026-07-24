@@ -55,8 +55,12 @@ while IFS= read -r -d '' path; do
       continue
       ;;
   esac
-  case ${path,,} in
-    *.jsonl | *.ndjson) leaked+=("$path") ;;
+  # Bracket classes rather than ${path,,}: case folding via parameter expansion
+  # needs Bash 4, and on a Bash 3.2 host (stock macOS /bin/bash) it is a fatal
+  # "bad substitution" exiting 1 — which this script's own contract defines as
+  # "leakage found", turning a tooling failure into a false alarm.
+  case $path in
+    *.[jJ][sS][oO][nN][lL] | *.[nN][dD][jJ][sS][oO][nN]) leaked+=("$path") ;;
   esac
 done <"$tmp"
 

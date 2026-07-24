@@ -31,7 +31,10 @@
   `REQUIRE_CHKTEX=1` を付けると chktex 不在を skip ではなくエラーにする．CI はこの形で呼ぶ）．
 - `make integrity` — claim リンク検査 + raw ログ漏洩ガード + 公開領域の redaction scan．
   TeX を必要としない 3 つの hard gate をまとめたもの．commit 前に **`make integrity` と
-  `make lint` の両方**を通す（CI の `checks` workflow はこの 2 つを実行する）．
+  `make lint` の両方**を通す（CI の `checks` workflow はこの 2 つと `make selftest` を実行する）．
+- `make selftest` — gate 機構自体の回帰テスト（`scripts/test_ci_gates.sh`）．chktex を PATH
+  から外して lint gate が実際に落ちること，leakage guard が大文字拡張子を検出し index 破損時に
+  fail-closed することを検査する．gate の保護を散文で主張するだけにしないための担保．
 - スクリプトは Python 3 標準ライブラリのみで動くこと（依存追加は不可）．
 
 CI は 2 本に分かれる．`checks`（path filter なし，TeX なし，全 PR・merge queue・

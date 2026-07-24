@@ -14,7 +14,13 @@ CHKTEX   := $(shell command -v chktex 2>/dev/null)
 # list from here so the gate cannot drift between them.
 REDACT_DIRS := evidence claims analysis provenance notes paper
 
-.PHONY: pdf lint verify leakcheck redact integrity clean
+# Files ChkTeX must lint. Expanded here rather than passed as a glob because
+# chktex exits 0 when it cannot open an input: an unmatched glob, or a renamed
+# sections/ directory, would otherwise produce a passing lint that read nothing.
+# The recipe asserts the list is plausible before invoking chktex.
+LINT_TEX := paper/main.tex $(wildcard paper/sections/*.tex)
+
+.PHONY: pdf lint verify leakcheck redact integrity selftest clean
 
 pdf:
 ifdef LATEXMK
@@ -33,10 +39,20 @@ lint:
 	python3 -m unittest scripts.test_check_prose_style
 	python3 scripts/check_prose_style.py
 ifdef CHKTEX
+	# chktex exits 0 on an input it cannot open, so an empty or stale file list
+	# would lint nothing and still pass. Assert the list before trusting it.
+	@if [ $(words $(LINT_TEX)) -lt 2 ]; then \
+		echo "error: LINT_TEX matched only '$(LINT_TEX)';" >&2; \
+		echo "paper/sections/*.tex found no files — has the layout moved?" >&2; \
+		exit 1; \
+	fi
+	@for f in $(LINT_TEX); do \
+		[ -r "$$f" ] || { echo "error: $$f is not readable" >&2; exit 1; }; \
+	done
 	# ChkTeX warnings 8/9/12/13/17/36 are disabled because they conflate
 	# correct name/range dashes, math delimiters, and IEEE macros with prose
 	# defects. check_prose_style.py owns spaced prose dashes.
-	chktex -q -n8 -n9 -n12 -n13 -n17 -n36 paper/main.tex paper/sections/*.tex
+	chktex -q -n8 -n9 -n12 -n13 -n17 -n36 $(LINT_TEX)
 else
 	@if [ -n "$(REQUIRE_CHKTEX)" ]; then \
 		echo "error: REQUIRE_CHKTEX is set but chktex is not installed;" >&2; \
@@ -58,6 +74,13 @@ redact:
 # The three content gates that need no TeX. Kept as one target so the
 # lightweight CI workflow and a manual full build run an identical set.
 integrity: verify leakcheck redact
+
+# Regression tests for the gate mechanisms themselves: that the ChkTeX gate
+# fails when chktex is absent, and that the leakage guard catches uppercase
+# extensions and fails closed. Separate from `lint` because it shells out to
+# scratch git repositories.
+selftest:
+	bash scripts/test_ci_gates.sh
 
 clean:
 	rm -rf build
