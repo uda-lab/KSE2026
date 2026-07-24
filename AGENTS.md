@@ -33,10 +33,12 @@
   同一の内容を実行する．commit 前にこれを通す．
 - スクリプトは Python 3 標準ライブラリのみで動くこと（依存追加は不可）．
 
-CI は 2 本に分かれる．`checks`（path filter なし，TeX なし，全 PR で実行）が required
-check であり，`paper`（`paper/**` 等の変更時のみ実行）が PDF をビルドする．path filter の
-付いた workflow を required check にすると，該当パスを触らない PR で status が永久に
-pending となり merge を塞ぐため，`paper` は required にしない．詳細は
+CI は 2 本に分かれる．`checks`（path filter なし，TeX なし，全 PR で実行．status
+context は job 名の `integrity`）が required check の対象であり，`paper`
+（`paper/**`・`Makefile` 変更時のみ実行）が PDF をビルドする．path filter の付いた
+workflow を required check にすると，該当パスを触らない PR で status が永久に pending
+となり merge を塞ぐため，`paper` は required にしない．なお branch protection は現状
+未設定であり，設定の可否は owner の判断．詳細は
 [.github/workflows/README.md](.github/workflows/README.md)．
 
 ## 原稿の規約

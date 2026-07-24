@@ -29,26 +29,48 @@ The three TeX-free gates are defined once, in the `integrity` target of the
 
 ## Branch protection: which workflow may be required
 
-**`checks` is the workflow to configure as a required status check. `paper` must
-not be.**
+**The `checks` workflow is the one to require. `paper` must not be required.**
+
+The status context to name in a ruleset is the **job** name, not the workflow
+name. The job in `checks.yml` is `integrity`, so the required check to configure
+is `integrity` — confirmed on PR #65, where `gh pr checks` reported the context
+as `integrity`. Naming `checks` would configure a context that never reports and
+would itself cause the permanent-pending failure described below.
 
 GitHub does not report a neutral or passing status for a path-filtered workflow
 whose filter does not match — it reports nothing at all. A required check that
-is never reported stays pending forever, so making `paper` required would block
-every pull request that does not touch the manuscript. This was confirmed on
-PR #65, a scripts-only pull request opened against the issue-61 branch: the only
-status reported was `integrity` from `checks`, and no `paper` status existed to
-satisfy.
+is never reported stays pending forever, so making `paper`'s `pdf` job required
+would block every pull request that does not touch the manuscript. PR #65, a
+scripts-only pull request opened against the issue-61 branch, showed exactly
+this: the only status reported was `integrity`, and no `paper` status existed
+that a rule could ever have satisfied.
 
 `checks` has no path filter precisely so that it always reports, which is what
-makes it safe to require. The repository currently has no branch protection
-configured; this section states the intended policy for when it is.
+makes it safe to require.
 
-The corresponding trade-off is that `paper` cannot be enforced by branch
-protection. A manuscript-changing pull request still cannot merge without a
-green PDF build, because the merge gate used in this repository requires every
-reported check to have succeeded, and `paper` does report on exactly those pull
-requests.
+### Residual gap, stated rather than papered over
+
+The repository has **no branch protection configured at all**, before or after
+this change, so nothing here is enforced by GitHub today. This section states
+the intended policy for when protection is added, and enabling it is the
+repository owner's decision.
+
+The unavoidable consequence of the split is that `paper` cannot be enforced by
+branch protection. If a ruleset later requires only `integrity`, a manuscript
+pull request whose PDF build failed would not be blocked by GitHub alone.
+
+What does block it today is the merge procedure this repository actually uses:
+the `github-driven-workflow` gate refuses to merge unless every *reported* check
+on the pull request has succeeded, and `paper` does report on exactly the pull
+requests that change the manuscript. That is a procedural gate, not a
+server-side one, and it is worth knowing which is which.
+
+Closing the gap properly would mean an always-reported job that inspects the
+cumulative pull request diff and demands the PDF result only when manuscript
+inputs changed. That was deliberately not built here: issue #61 asks for an
+always-running lightweight required workflow plus a separate conditional PDF
+workflow, and adding branch-protection plumbing for protection that does not yet
+exist is outside its scope.
 
 ## Why execution frequency is constrained
 
