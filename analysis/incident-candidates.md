@@ -14,7 +14,7 @@
 | # | 仮題 | 日時 | Event codes | 一次資料の有無 | card 化 |
 |---|---|---|---|---|---|
 | 1 | PR #20 `W1pTime.ofHValuedDeriv` の過強 statement（`p,q<1` で証明不能）を独立アジュディケータがマージ前検出，`hp,hq` 追加で修正 | 2026-06-20 | STMT-MISMATCH / RECOVERY | **primary**（EV-0925 = session `90fa24bb`，leray-hopf#20） | 未 |
-| 2 | PR #27 T³ antisymm の `ALLOW_SORRY` が偽命題上に置かれる（無制約 `v,w` で反例，先行 2 revision は unsound）．`Vₙ` 制限に修正 | 2026-06-21 | WEAKEN / RECOVERY | **primary**（EV-0925，leray-hopf#27） | INC-002 |
+| 2 | PR #27 T³ antisymm の `ALLOW_SORRY` signature が projection closure 仮定を欠く（構造的審査 + corroborative な数値診断，先行 2 revision は unsound）．`Vₙ` 制限に修正し Lean で証明 | 2026-06-21 | WEAKEN / RECOVERY | **primary**（EV-0925，leray-hopf#27） | INC-002 |
 | 3 | `convFormH1_eq_convFormSchwartz`（B5）の符号誤りで偽命題化，定義側の負号除去で修正 | 2026-06-26 | MATH-ERR / RECOVERY | **primary**（EV-0925） | 未 |
 | 4 | **`w1pTime_continuous_in_H` の偽な一般化**（release 前 soundness postmortem）．6/28 の直接攻撃キャンペーンでも宣言の型は独立精査されず（consumer verdict は「未使用」判定のみ），7/16 の release レビューで発覚し statement-gate 政策が導入された | 2026-06-28〜07-16 | STMT-MISMATCH / WEAKEN / RECOVERY | **primary**（EV-0925 に 6/28 の傍証）+ reconstructed（leray-hopf#158/#170，postmortem） | INC-001 |
 | 5 | PR #120 で main 上の公開定理 `edge_inf_eq_schwartz_tensor` の無断削除を byte-diff 悉皆レビューがマージ前検出，wrapper 復元 | 2026-07-10 | WEAKEN / RECOVERY | **primary**（EV-1669 = session `7e6156bf`，leray-hopf#120） | INC-004 |

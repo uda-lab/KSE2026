@@ -1,92 +1,74 @@
 \section{Introduction}\label{sec:introduction}
 
-Large language model agents can now sustain mathematical formalization
-efforts spanning weeks and more than a hundred pull requests, rather
-than single proof-search episodes, shifting the central reliability
-question. A proof assistant's kernel guarantees that a \emph{proved}
-declaration is correct given its stated type, but kernel checking is
-silent on whether that type is the theorem the author actually
-intended; whether a previously proved declaration silently disappeared
-during a refactor; whether a build genuinely succeeded, versus being
-reported successful over a stale disk state; and whether the project's
-own development record is itself accurate. These statement-, process-,
-and record-level failure modes are the load-bearing risk that remains
-once proof-checking is presumed reliable.
+Large language model agents increasingly work on formalizations that span
+weeks rather than a single proof search. A project divided among many
+GitHub Issues, branches, agents, and reviews must preserve mathematical
+intent as well as proofs accepted by the kernel. The kernel checks a
+declaration against its type. The project must also decide which type
+should be proved, preserve the intended public declarations during
+refactoring, and verify the operating state behind progress reports.
 
-We report on a formalization campaign that ran under exactly this
-regime. Over roughly six weeks (2026-06-10 through the 2026-07-20
-release day), the project consumed, on evidence collected so far, at
-least 15.1M output tokens, an API-equivalent cost of \$6{,}972.83, and
-199.1\,h of active engagement time under a five-minute inter-event gap
-cap -- documented lower bounds, since coverage gaps in the session-log
-record remain. % CLAIM: CLM-002
-The campaign's central artifact is a kernel-only Lean~4~\cite{moura2021lean4}
-formalization, built on mathlib~\cite{mathlib2020}, of existence of
-Leray--Hopf weak solutions~\cite{leray1934,hopf1951} to the homogeneous,
-incompressible Navier--Stokes equations, comprising two capstone existence
-theorems -- one on the periodic 3-torus $\mathbb{T}^3$, one on
-$\mathbb{R}^3$ -- whose \texttt{\#print axioms} output is exactly the
-three standard Lean kernel axioms, with zero project-declared axioms and
-no \texttt{sorryAx} on either theorem~\cite{lerayhopf2026repo}.
-% CLAIM: CLM-001
-To our knowledge, based on a literature and repository survey conducted in
-July 2026 and summarized in the related-work discussion below, no
-machine-checked existence theory for a nonlinear fluid PDE has previously
-been reported in Lean, Coq, or Isabelle/HOL; we state this as a bound on
-what our survey found, not as a proof of non-existence.\footnote{Search
-terms, dates, and the nearest adjacent results are recorded in the
-project's related-work notes and re-checked immediately before
-submission.}
-% CLAIM: CLM-006
+This paper studies those obligations through six weeks of work on
+Leray--Hopf weak solution existence for the unforced incompressible
+Navier--Stokes equations. The central artifact is a
+Lean~4~\cite{moura2021lean4} development on
+mathlib~\cite{mathlib2020}, with capstone existence theorems on the
+three dimensional torus and on $\mathbb{R}^3$~\cite{leray1934,hopf1951,
+lerayhopf2026repo}. Both theorem statements are given precisely in
+Section~\ref{sec:formalization}. % CLAIM: CLM-001
+To our knowledge, no prior machine-checked formalization establishes
+Leray--Hopf weak solution existence for the three-dimensional
+Navier--Stokes equations. % CLAIM: CLM-006
 
-Three literatures bound this work. Among AI-authored Lean projects,
-TauCeti~\cite{tauceti2026}, incubated by the Lean FRO and the Mathlib
-Initiative, pursues breadth over a thirteen-area roadmap under human
-governance, but reports no accompanying paper, incident-level account,
-or session-level evidence trail; we instead pursue depth against a
-single frozen scope, with a named-incident case study as a central
-artifact. Among formalized analysis adjacent to fluid PDE, mathlib's
-Gagliardo--Nirenberg--Sobolev inequality~\cite{vandoorn2024gns} and a
+The nearest results in formalized analysis address adjacent problems.
+They include the
+Gagliardo--Nirenberg--Sobolev inequality in
+mathlib~\cite{vandoorn2024gns}, a Lean formalization of
 De Giorgi--Nash--Moser elliptic regularity
-formalization~\cite{armstrong2026degiorginashmoser} establish a
-building-block inequality and a regularity theory respectively, neither
-an existence theorem for a nonlinear PDE; the nearest precedent, an
-AI-assisted formalization of well-posedness for the linear, kinetic
-Vlasov equation~\cite{miller2026vlasov}, is single-author and
-single-agent, with no multi-agent governance or incident structure.
-Large-scale human-team formalizations such as the Odd Order
-Theorem~\cite{gonthier2013oddorder} and the Liquid Tensor
-Experiment~\cite{commelin2023abstraction} manage complexity through a
-human team and a specification-driven blueprint; our setting substitutes
-a single scientific owner governing agent-authored implementation, with
-a frozen scope document as blueprint. Finally, the agentic and LLM
-theorem-proving
-literature~\cite{xin2025deepseekproverv2,yang2023leandojo,deepmind2025alphaproof,zhou2026leanatlas}
-reports session- or benchmark-scale results, not a project-scale
-process with recorded incidents; rising autonomous task
-horizons~\cite{metr2025longtasks} and a study of agentic pull
-requests~\cite{agenticprs2026security} motivate the reliability question
-from outside formalization but do not instrument a single campaign to
-this depth.
+theory~\cite{armstrong2026degiorginashmoser}, and a formalization of
+well-posedness and the mean-field derivation for the nonlinear Vlasov
+equation, conducted with AI assistance~\cite{miller2026vlasov}.
+
+Large collaborative formalization projects provide a second comparison.
+Human teams coordinated through blueprints in the Odd Order Theorem and
+the Liquid Tensor Experiment~\cite{gonthier2013oddorder,
+commelin2023abstraction}.
+TauCeti uses human governance and a standing review rubric for
+a Lean library written by AI~\cite{tauceti2026}. % CLAIM: CLM-010
+The present study instead
+examines one deep formalization under a single scientific owner and
+retains evidence about its incidents and agent sessions.
+
+Agentic theorem proving systems are commonly evaluated through proof
+search, benchmarks, or interactive assistance~\cite{xin2025deepseekproverv2,
+yang2023leandojo,
+deepmind2025alphaproof,zhou2026leanatlas}. Studies of autonomous task
+horizons and pull requests written by agents motivate reliability
+questions~\cite{metr2025longtasks,agenticprs2026security}.
+Our unit of analysis is different: a complete mathematical project whose
+implementation, reviews, incidents, and resource use can be traced to
+preserved artifacts.
 
 This paper makes three contributions:
 \begin{enumerate}
-\item A completed, kernel-only Lean~4 and mathlib formalization of
-  Leray--Hopf weak-solution existence on $\mathbb{T}^3$ and $\mathbb{R}^3$,
-  under an agent-orchestrated regime over roughly six weeks.
-\item A workflow design -- statement-first development, independent
-  adversarial review, and machine-checked verification gates -- with an
-  evidence-backed account of what it caught and missed, drawn from named
-  incidents rather than impressions.
-\item An evidence methodology for AI-assisted research: session-log
-  escrow with a manifest, machine-checked claim-to-evidence verification,
-  and cost accounting reconciled against billing records.
+\item A completed Lean~4 and mathlib formalization, with no project
+  axioms, of Leray--Hopf weak solution existence on $\mathbb{T}^3$ and
+  $\mathbb{R}^3$. The formal result and its exact scope are independently
+  inspectable.
+\item A harness defined by the owner that connects GitHub Issues, Git worktrees,
+  pull requests, specialist agents, and the constrained runtime
+  environment. Issue scope, review decisions, and merge authority are
+  recorded outside agent sessions. Checks are selected according to the
+  artifact at risk, and documented incidents show their observed reach
+  and limits.
+  % CLAIM: CLM-005, CLM-007, CLM-008, CLM-009
+\item An evidence method for research assisted by agents that combines
+  session log escrow, claim-to-evidence verification, and cost
+  reconciliation. It supports auditable statements about the project
+  while making coverage gaps explicit. % CLAIM: CLM-002, CLM-003
 \end{enumerate}
 
 Section~\ref{sec:formalization} states the two capstone theorems.
-Section~\ref{sec:workflow} describes the agent-orchestrated workflow.
-Section~\ref{sec:incidents} presents four incidents where a build or
-axiom check alone was insufficient to guarantee soundness, and what
-closed the gap. Section~\ref{sec:discussion} discusses the resulting
-governance picture and limitations; Section~\ref{sec:conclusion}
-concludes.
+Section~\ref{sec:workflow} presents the harness, and
+Section~\ref{sec:incidents} examines four incidents at its boundaries.
+Section~\ref{sec:discussion} gives recommendations and limitations.

@@ -5,7 +5,7 @@ Phase 4–5 で本文（sections/05-discussion.tex）へ反映する．追加を
 
 ## 形式化の限界（claims/formalization-scope.md「主張してはならないこと」と同期）
 
-- homogeneous NSE のみ（外力なし），有限 time horizon，separated-variable 弱形式．
+- 外力なしの NSE のみ，有限 time horizon，separated-variable 弱形式．
 - regularity・uniqueness は扱わない．
 
 ## 方法論・ケーススタディの限界（PLAN.md §7.6）

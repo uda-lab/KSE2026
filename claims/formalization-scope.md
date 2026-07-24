@@ -36,13 +36,15 @@ README.md・`paper/references.bib` を同時に更新する．
 
 - smoothness / energy-class を超える higher regularity
 - 解の uniqueness / non-uniqueness
-- 外力付き方程式（homogeneous のみ）
+- 外力付き方程式（形式化対象は外力なし）
 - `[0, ∞)` 上で一様に有効な単一の解（有限 time horizon `[0, T]`，`T` は任意だが固定）
 - 一般の space-time test function に対する弱形式（separated-variable 形式
   `ψ(t)·w(x)` のみ）
 - `LerayHopf.Experimental` 配下の内容（release surface から到達不能，capstone に不要）
 
-## 未確定事項
+## Pinned metrics
 
-- 形式化の規模（行数，宣言数，開発期間）は Phase 2 で pinned commit から機械的に
-  抽出する（`scripts/extract_metrics.py` → `evidence/metrics/`）．記憶で書かない．
+- pinned commit で `scripts/extract_metrics.py` により 96 files，42,012 lines，
+  theorem 1,000 + lemma 58 を実測済み．生成物は
+  `evidence/metrics/formalization-metrics.json`．本文ではこの実測値を上限とし，
+  記憶や moving branch の値を用いない．

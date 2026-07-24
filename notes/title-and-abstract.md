@@ -1,18 +1,17 @@
-# Title and abstract（Phase 3 で確定）
+# Title and abstract（content-first 改稿案）
 
-## Title（確定 2026-07-23，owner．issue #35 / #49）
+## Title（改稿案 2026-07-24，issue #57）
 
-**Formalizing Leray–Hopf in Lean 4 with AI Agents: Workflow, Incidents, and Recovery**
+**Formalizing Leray–Hopf in Lean 4 with AI Agents: Harness Design and Reliability Lessons**
 
-（owner は issue #35 コメントで案 2 preferred・合体形 OK と回答し，チャットで
-合体形を確定．旧 working title "…with Agent-Orchestrated Development" は破棄）
+method/harness を主，incident を evidence とする content-first 改稿に合わせた提案．
+最終判断は issue #57 の PR review で owner が行う．
 
 ## Abstract 草稿
 
-（claim freeze（CLM-001〜006，2026-07-23）済み．Phase 4 の front-matter PR で
-150–200 語を起草する．構成: 3 contribution + scope 限定 + 実証根拠．
-主張は全て frozen claim に対応させ，数値は CLM の校正済み値
-（$6,972.83 / 199.1h / ¥54,868 ほか）のみを使う）
+abstract は問題，capstone，harness，case-study evidence，限定された含意を各一度だけ
+述べる．数値の詳細は本文へ置き，abstract は campaign の規模感に必要な最小限にする．
+主張は frozen claim に対応させる．
 
 ## 制約
 

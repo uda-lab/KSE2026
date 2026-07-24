@@ -15,7 +15,9 @@
    email，未公開 repo URL，個人名が対象．
 4. **主張には証拠識別子を付ける．** `claims/paper-claims.md` の各 claim には
    `EV-NNNN` / `INC-NNN` / `leray-hopf@<sha>` / `decl:<name>` のいずれかを付ける．
-   `make verify` を通らない参照を残さない．
+   外部文献に関する歴史的主張は，`provenance/source-inventory.md` で照合済みの
+   BibTeX key を `cite:<key>` として用いてよい．`make verify` を通らない参照を
+   残さない．
 5. **再構成情報と一次ログを混同しない．** ログ欠損期間の再構成には evidence type
    （primary / reconstructed）と confidence を明記する（PLAN.md §4）．
 6. **AI 利用を記録する．** 原稿・分析への AI の関与（モデル，範囲，日付）は作業の
@@ -30,13 +32,24 @@
 
 ## 原稿の規約
 
-- 書式は IEEE conference（IEEEtran），**6ページ制限**（references 含むかは CFP 確認後に
-  `notes/paper-outline.md` へ記載）．
+- 書式は IEEE conference（IEEEtran），最終投稿は **6ページ以内**とする．ただし，
+  内容・論旨・文章品質を確定する改稿ではページ数を合否条件にせず，圧縮は独立した
+  後続段階で行う．ページ制約を理由に説明を反復したり，内容を先回りして削らない．
 - セクションは `paper/sections/NN-*.tex` に分割し，`main.tex` は構成のみを持つ．
 - 技術的・歴史的主張を書くときは，対応する claim を `claims/paper-claims.md` に先に
   起こし，本文には `% CLAIM: CLM-NNN` コメントを付ける．
 - leray-hopf の成果を記述する際は `claims/formalization-scope.md` の範囲を超える表現を
   しない（過剰主張の禁止．PLAN.md §9 Phase 5 のレビュー観点）．
+- abstract は問題・成果・方法・含意の要約，introduction は位置づけと contribution，
+  本文は定義・設計・証拠，discussion は推奨と限界を担う．同じ技術的説明や列挙を
+  同じ粒度で複数箇所に置かない．
+- repo 固有の識別子より先に，数学的または工学的な概念を平易な語で説明する．Lean
+  declaration，event code，issue/PR 番号，session ID は論旨に必要な場合だけ残す．
+- incident は「守るべき不変条件／事象／検出／対策／転用可能な教訓／証拠強度」の
+  順で記述し，incident の事実と一般化した推奨を同じ段落で混同しない．
+- 原稿を変更した PR は，実装者と別の reviewer が全文を読み，過剰列挙，防御的否定，
+  口語，比喩，擬似専門語，散文中の ` -- `，主張と証拠強度の不一致を確認する．
+  `deslop-prose` 等の文脈依存レビューを機械 lint の代用にせず，両方を通す．
 
 ## 役割分離（PLAN.md §8）
 

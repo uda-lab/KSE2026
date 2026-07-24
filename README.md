@@ -34,7 +34,7 @@ push ごとに PDF artifact を生成する．
 
 ## ディレクトリ
 
-- `paper/` — LaTeX 原稿（IEEE conference 書式，6ページ制限）
+- `paper/` — LaTeX 原稿（IEEE conference 書式．内容レビュー後に最終6ページへ圧縮）
 - `claims/` — 論文で主張する内容と，その根拠への対応表
 - `evidence/` — manifest，編集済み抜粋，incident card，メトリクス（**公開可能なもののみ**）
 - `analysis/` — timeline，セッション符号化，incident 候補の分析
@@ -59,9 +59,9 @@ push ごとに PDF artifact を生成する．
 - [x] Phase 1: Evidence preservation（3 host 収集済: EV-0001〜EV-2145）
 - [x] Phase 2: Timeline and incident reconstruction（session index 6 本，INC-001〜005，
   usage/billing 照合）
-- [x] Phase 3: Contribution freeze（主題 B+C 統合・contribution 3 点・incident 採否・
-  タイトル・abstract 確定 + CLM-001〜008 freeze．issue #35 / #42 / #49 / #55，
-  2026-07-23．CLM-006/007/008 は夜間 freeze 分で owner 追認対象）
-- [ ] Phase 4: Drafting（進行中）
-- [ ] Phase 5: Adversarial review
+- [x] Phase 3: Contribution freeze（CLM-001〜009．2026-07-24 に harness-led hierarchy
+  へ再 freeze）
+- [ ] Phase 4: Content-first drafting（issue #57 で全面改稿中）
+- [ ] Phase 5: Independent prose / claim / audience review
+- [ ] Phase 5.5: 6-page compression and layout
 - [ ] Phase 6: Submission snapshot

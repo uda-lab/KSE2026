@@ -28,46 +28,35 @@
   columns=fullflexible,
 }
 
-% Draft helpers --- remove before submission
-\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
-% Evidence cross-reference (draft-only; renders as a marginal tag, disabled for submission)
-\newcommand{\evref}[1]{\textcolor{blue}{\footnotesize[#1]}}
-
 \begin{document}
 
 \title{Formalizing Leray--Hopf in Lean~4 with AI Agents:\\
-Workflow, Incidents, and Recovery}
+Harness Design and Reliability Lessons}
 
-\author{\IEEEauthorblockN{Anonymous Author(s)}
-\IEEEauthorblockA{\todo{Affiliation --- check KSE 2026 double-blind policy before filling}}}
+\author{\IEEEauthorblockN{Anonymous Author(s)}}
 
 \maketitle
 
 \begin{abstract}
-Large language model agents can now sustain formalization efforts
-spanning weeks and more than a hundred pull requests, which shifts the central
-reliability question from proof search to process governance: a kernel
-check verifies that a proved declaration is correct given its stated type,
-but not that the type is what was intended, that it is still present
-after a later refactor, or that a reported build success reflects genuine
-on-disk state. We report a completed, kernel-only Lean~4 and mathlib
-formalization of Leray--Hopf weak-solution existence for the homogeneous
-Navier--Stokes equations on the 3-torus and on $\mathbb{R}^3$, developed
-over roughly six weeks under an agent-orchestrated regime that consumed,
-on evidence collected so far, at least 15.1M output tokens and 199.1
-active hours. To our knowledge, no machine-checked existence theory for a
-nonlinear fluid PDE has previously been reported in Lean, Coq, or
-Isabelle/HOL. We present the workflow that produced this result --
-statement-first development, independent adversarial review, and
-machine-checked verification gates -- an evidence-backed account of four
-incidents where build success and axiom checking alone were insufficient
-to guarantee sound progress, and an evidence methodology combining
-session-log escrow, machine-checked claim-to-evidence verification, and
-cost accounting reconciled against actual billing records.
+Formalization projects that run for weeks require safeguards beyond the
+proof kernel. The kernel checks a theorem against its stated type, but it
+does not choose the intended statement, preserve a public interface during
+refactoring, or manage the agents and computing resources used to produce
+the proof. We report a Lean~4 and mathlib formalization, with no project
+axioms, of Leray--Hopf weak solution existence for the unforced
+Navier--Stokes equations on $\mathbb{T}^3$ and $\mathbb{R}^3$. To our
+knowledge, no prior machine-checked formalization establishes this
+three-dimensional weak existence theorem. During six weeks of development,
+a workflow defined by the owner routed GitHub Issues through isolated Git
+worktrees and pull requests. The harness routes
+mathematical, Lean, interface, and resource checks according to the
+artifact being changed. Four incidents show where
+these checks detected defects and where they did not. The evidence method
+links manuscript claims to redacted session records, repository history,
+verification results, cost estimates, and billing records.
 \end{abstract}
-% Abstract claims map: CLM-001 (result), CLM-002 (scale, lower bounds),
-% CLM-006 (survey-conditioned novelty), CLM-004/005 (incidents account),
-% CLM-003 (billing reconciliation).
+% Abstract claims map: CLM-001 (result), CLM-006 (prior-work comparison),
+% CLM-007, CLM-009 (workflow and harness), CLM-008 (incident account).
 
 \begin{IEEEkeywords}
 formal verification, Lean 4, Navier--Stokes equations, Leray--Hopf weak solutions,
