@@ -35,12 +35,11 @@ checks relevant to its changed artifacts had passed, an independent
 reviewer had left an attributable result, and all review threads were
 resolved.
 
-The workflow made the orchestrator role independent of the model that
-filled it. The project began using GitHub on June~19, and the first
-documented independent PR review occurred on June~20 under an Opus
-orchestrator. When Fable~5 became available again in early July, it assumed
-the same role under the existing authority and merge contract.
-% CLAIM: CLM-007, CLM-009, EV-2076, EV-0925
+Issue scope, review decisions, and merge authority were recorded in
+repository and GitHub artifacts rather than retained only in an agent
+session. When Fable~5 resumed orchestration through Google Cloud's Vertex
+AI on July~2--3, it continued the existing workflow from those artifacts.
+% CLAIM: CLM-003, CLM-007, CLM-009, EV-1681
 
 This workflow also separated the destinations of review findings.
 Questions about mathematical meaning returned to the owner and statement

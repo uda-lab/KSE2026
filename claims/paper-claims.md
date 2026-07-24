@@ -115,14 +115,16 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   INC-005 の累積カウンタ帰属限界）．2026-07-23 夜間 freeze 分 — 朝の owner 通読での
   追認対象（CLM-006/007 と同扱い）．
 
-## CLM-009: 本 project の最終 harness は，scientific owner の権限下で repository-local `github-driven-workflow` が model-independent な orchestrator 役を規律し，GitHub Issue・専用 branch/Git worktree・GitHub PR を接続した．GitHub 運用と独立 PR review は Opus orchestrator 期から確認され，Fable は後期に同じ役を担った．semantic statement review，Lean/kernel verification，public declaration preservation，VPS container の resource/liveness control，evidence capture は別の責務として扱われた
+## CLM-009: 本 project の最終 harness は，scientific owner の権限下で repository-local `github-driven-workflow` が GitHub Issue・専用 branch/Git worktree・GitHub PR を接続した．Issue scope，review decisions，merge authority は agent session 内だけでなく repository と GitHub の artifact に記録された．Fable は 7 月 2〜3 日に Vertex AI 経由で，これらの artifact から既存 workflow の orchestration を再開した．semantic statement review，Lean/kernel verification，public declaration preservation，VPS container の resource/liveness control，evidence capture は別の責務として扱われた
 - Status: frozen
 - Paper location: paper/main.tex, paper/sections/01-introduction.tex, paper/sections/03-agent-workflow.tex, paper/sections/05-discussion.tex, paper/sections/06-conclusion.tex
-- Evidence: EV-2076，EV-0925，EV-1669，EV-0247，INC-001，INC-002，INC-003，INC-004，INC-005，leray-hopf#158
+- Evidence: EV-2076，EV-0925，EV-1669，EV-0247，EV-1681〜EV-2126，INC-001，INC-002，INC-003，INC-004，INC-005，leray-hopf#158
 - Notes: 個々の責務と導入時期は CLM-007/008 の一次・再構成証拠に従う．これは campaign
   終了時点の構成を合成した記述であり，全期間に同じ harness が存在したという主張では
   ない．各 control が特定の defect を観測・検出した事例は述べてよいが，生産性向上，
-  一般的有効性，因果効果は主張しない．第三者向け記述は candidate recommendation とする．
+  一般的有効性，因果効果は主張しない．Fable の再開は session 外へ project state を
+  記録した設計の観測例であり，model independence 自体を contribution としない．
+  第三者向け記述は candidate recommendation とする．
 
 ## CLM-010: TauCeti は，人間が統制する roadmap と常設 review rubric の下で AI が Lean 4 数学ライブラリを著述する project として公開されている
 - Status: frozen
