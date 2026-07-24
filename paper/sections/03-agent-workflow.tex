@@ -28,17 +28,19 @@ contract to review. % CLAIM: CLM-009
 The main orchestrator assigned agents and checked their returned artifacts
 without editing Lean files itself. The repository skill
 \texttt{github-driven-workflow} required every change to begin with an
-Issue and pass through a PR. This workflow predated Fable. The project
-began using GitHub on June~19, and the first documented independent PR
-review occurred on June~20. Earlier orchestrators used Opus. When Fable~5 became
-available again in early July, it assumed the existing orchestrator role
-without changing the workflow's authority or merge contract. An
-implementing agent received its own branch
-and Git worktree, then returned a committed candidate through a GitHub pull
-request (PR). Direct pushes to the main branch were prohibited. A PR could
-merge only after the checks relevant to its changed artifacts had passed,
-an independent reviewer had left an attributable result, and all review
-threads were resolved. % CLAIM: CLM-007, CLM-009, EV-2076, EV-0925
+Issue. An implementing agent received its own branch and Git worktree, then
+returned a committed candidate through a GitHub pull request (PR). Direct
+pushes to the main branch were prohibited. A PR could merge only after the
+checks relevant to its changed artifacts had passed, an independent
+reviewer had left an attributable result, and all review threads were
+resolved.
+
+This workflow predated Fable. The project began using GitHub on June~19,
+and the first documented independent PR review occurred on June~20.
+Earlier orchestrators used Opus. When Fable~5 became available again in
+early July, it assumed the existing orchestrator role without changing the
+workflow's authority or merge contract.
+% CLAIM: CLM-007, CLM-009, EV-2076, EV-0925
 
 This workflow also separated the destinations of review findings.
 Questions about mathematical meaning returned to the owner and statement
