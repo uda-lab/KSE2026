@@ -1,4 +1,4 @@
-# Title and abstract（Phase 3 で確定）
+# Title and abstract（content-first 改稿案）
 
 ## Title（改稿案 2026-07-24，issue #57）
 
