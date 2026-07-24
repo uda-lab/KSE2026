@@ -6,23 +6,36 @@ expensive one is constrained, and why the TeX installation was left alone.
 
 ## The two workflows
 
-| workflow | trigger | installs TeX | typical duration |
-| --- | --- | --- | --- |
-| `checks` | every pull request, pushes to `main`, manual dispatch | no | ~22 s |
-| `paper` | pull requests and `main` pushes touching `paper/**`, `Makefile` or `.github/workflows/paper.yml`; manual dispatch | yes | ~100 s |
+| workflow | job / status context | trigger | installs TeX | typical duration |
+| --- | --- | --- | --- | --- |
+| `checks` | `integrity` | every pull request, merge-queue entries, pushes to `main`, manual dispatch | no | ~17 s |
+| `paper` | `pdf` | pull requests and `main` pushes **that touch** `paper/**`, `Makefile` or `.github/workflows/paper.yml`; manual dispatch | yes | ~100 s |
+
+For `paper`, `branches` and `paths` are ANDed: a push to `main` touching none of
+those paths does **not** run it. Manual dispatch is unfiltered and always runs.
+Tag pushes trigger neither workflow.
 
 `checks` runs claim-link verification, the raw-log leakage guard, the redaction
 scan, the prose scanner and its unit tests, and ChkTeX. `paper` runs all of
-those again plus the PDF build, so that a manual dispatch or a `main` push is a
-complete validation on its own rather than half of one.
+those again plus the PDF build, so that a manual dispatch, or a `main` push that
+does touch the manuscript, is a complete validation on its own rather than half
+of one.
 
 ChkTeX lives in the TeX-free workflow because the Debian `chktex` package is a
 standalone 240 kB binary whose only dependencies are `libc6`, `libpcre2-posix3`
 and `libtinfo6`; it does not pull in TeX Live. Keeping it in `checks` means the
 `make lint` gate added in #59 still runs on every pull request rather than only
-on manuscript changes. The install step calls `chktex --version` so that a
-silently failed install fails the job instead of letting `make lint` take its
-"chktex not installed; skipping" branch and pass a weaker gate.
+on manuscript changes.
+
+Because `make lint` skips ChkTeX when the binary is absent, that skip is a way
+for the gate to pass without running. Two things prevent it, and both are
+needed. The install step runs under `shell: bash`, which is
+`bash --noprofile --norc -eo pipefail {0}`; without `pipefail` the default
+`bash -e {0}` would give `chktex --version | head -1` the exit status of `head`,
+which is always 0, and a missing binary would go undetected. CI then invokes
+`make lint REQUIRE_CHKTEX=1`, which turns the skip branch into an error, so the
+Makefile cannot report a pass for a gate that did not run even if the step guard
+is weakened again later.
 
 The three TeX-free gates are defined once, in the `integrity` target of the
 `Makefile`, so CI and local runs cannot drift apart.
@@ -47,6 +60,30 @@ that a rule could ever have satisfied.
 
 `checks` has no path filter precisely so that it always reports, which is what
 makes it safe to require.
+
+### Contexts that must never be required
+
+Naming the wrong context is the easiest way to deadlock this repository, and the
+required-checks picker actively invites it: GitHub offers any context reported in
+roughly the last week, including ones that will never be reported again.
+
+| context | status | why |
+| --- | --- | --- |
+| `integrity` | **require this one** | job in `checks.yml`; always reports |
+| `pdf` | never require | job in `paper.yml`; path-filtered, reports nothing on unrelated pull requests |
+| `paper` | never require | the **job** name of the deleted `build.yml`. The current workflow is *also* named `paper`, so this looks legitimate in the picker. It will never be reported again |
+| `build` | never require | the deleted workflow's name |
+
+`paper` is the dangerous one. It is a genuine historical context, it matches the
+name of a workflow that still exists, and selecting it blocks every pull request
+forever.
+
+Merge queues are the other way to hit the same failure. `checks.yml` triggers on
+`merge_group` so that `integrity` reports for the `refs/gh-readonly-queue/...`
+ref. Without that trigger, enabling "Require merge queue" beside "Require status
+checks to pass" — adjacent options in the Rulesets UI — would time out every
+queue entry. Any workflow later added as a required check needs the same
+trigger.
 
 ### Residual gap, stated rather than papered over
 
@@ -84,7 +121,17 @@ branch produces one run.
 
 It also had no `concurrency` group, so a run kept going after its commit had
 been superseded. Both workflows now key concurrency on the pull request number,
-falling back to the ref, with `cancel-in-progress: true`.
+falling back to the merge-queue ref and then to `github.ref`, with
+`cancel-in-progress: true`.
+
+Two consequences of that key are deliberate. Cancellation applies to `main` as
+well, so two merges landing within one run's duration cancel the earlier
+commit's run; that is acceptable because every commit reaching `main` was
+already gated on its own pull request. And `github.run_id` is mixed into the key
+for `workflow_dispatch` only, so that a manual full validation and a push to
+`main` do not share a group — otherwise a merge landing mid-dispatch would
+silently cancel the operator's build, against issue #61's requirement that
+manual full builds remain supported.
 
 The saving is concentrated in one step. In the old workflow the TeX Live
 installation took 80-90 s while every other step finished in about 4 s total.
@@ -93,12 +140,23 @@ Measured on this repository:
 | job | wall time | of which TeX provisioning |
 | --- | --- | --- |
 | old combined `build` | 95-105 s | 80-90 s |
-| new `checks` | 22 s | none (ChkTeX install 12 s) |
+| new `checks` | 17-22 s | none (ChkTeX install 12-13 s) |
 | new `paper` | ~100 s | 70-90 s |
 
 Cancellation was verified on run 30117462984: a second push arrived 53 s into
 the TeX installation, and the run was cancelled with the lint, verification,
 redaction, PDF and upload steps all skipped.
+
+### An invariant nothing enforces
+
+`paper`'s path list must cover every input the PDF build reads. That holds today
+only because `paper/main.tex` `\input{}`s nothing outside `paper/`, the
+bibliography lives in `paper/references.bib`, the document class comes from TeX
+Live, and no `.latexmkrc` exists. Adding a root `.latexmkrc`, a shared `.sty` or
+`.bst`, or a figures directory outside `paper/` would silently break it: the PDF
+build would stop running on changes that alter the PDF, and no check would fail.
+If you move build inputs, update the path list in `paper.yml` in the same
+commit.
 
 Note that `pull_request` path filters are evaluated against the pull request's
 cumulative diff against its base, not against the newest commit alone. A pull

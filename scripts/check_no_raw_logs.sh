@@ -41,11 +41,21 @@ if ! git ls-files -z >"$tmp"; then
   exit 2
 fi
 
+# The private/ test stays case-sensitive because it mirrors the .gitignore rule,
+# which is itself case-sensitive. The extension test is case-folded: a log named
+# SESSION.JSONL is exactly as much of a leak as session.jsonl, and neither this
+# guard's first version nor the inline YAML it replaced caught the uppercase
+# form.
 leaked=()
 while IFS= read -r -d '' path; do
   case $path in
-    private/README.md) ;;
-    private/*) leaked+=("$path") ;;
+    private/README.md) continue ;;
+    private/*)
+      leaked+=("$path")
+      continue
+      ;;
+  esac
+  case ${path,,} in
     *.jsonl | *.ndjson) leaked+=("$path") ;;
   esac
 done <"$tmp"

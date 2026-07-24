@@ -4,6 +4,8 @@
 # Fallback: tectonic (single binary, XeTeX-based) for environments without
 # TeX Live; fine for drafts, NOT for camera-ready.
 
+# Set REQUIRE_CHKTEX=1 to turn the "chktex not installed" skip into an error.
+# CI sets it, so `make lint` cannot report a pass for a gate that never ran.
 LATEXMK  := $(shell command -v latexmk 2>/dev/null)
 TECTONIC := $(shell command -v tectonic 2>/dev/null)
 CHKTEX   := $(shell command -v chktex 2>/dev/null)
@@ -36,6 +38,11 @@ ifdef CHKTEX
 	# defects. check_prose_style.py owns spaced prose dashes.
 	chktex -q -n8 -n9 -n12 -n13 -n17 -n36 paper/main.tex paper/sections/*.tex
 else
+	@if [ -n "$(REQUIRE_CHKTEX)" ]; then \
+		echo "error: REQUIRE_CHKTEX is set but chktex is not installed;" >&2; \
+		echo "refusing to report a pass for a lint gate that did not run" >&2; \
+		exit 1; \
+	fi
 	@echo "chktex not installed; skipping LaTeX lint"
 endif
 

@@ -27,18 +27,22 @@
 
 - `make pdf` — LaTeX ビルド（latexmk/pdflatex 優先，tectonic fallback）．原稿を触ったら必ずビルドが通ることを確認．
 - `make verify` — claim ↔ evidence リンク検査．claims/ か paper/ を触ったら実行．
-- `make lint` — prose scanner の unittest + `check_prose_style.py` + chktex（存在する場合のみ）．
+- `make lint` — prose scanner の unittest + `check_prose_style.py` + chktex（存在する場合のみ．
+  `REQUIRE_CHKTEX=1` を付けると chktex 不在を skip ではなくエラーにする．CI はこの形で呼ぶ）．
 - `make integrity` — claim リンク検査 + raw ログ漏洩ガード + 公開領域の redaction scan．
-  TeX を必要としない 3 つの hard gate をまとめたもので，CI の `checks` workflow と
-  同一の内容を実行する．commit 前にこれを通す．
+  TeX を必要としない 3 つの hard gate をまとめたもの．commit 前に **`make integrity` と
+  `make lint` の両方**を通す（CI の `checks` workflow はこの 2 つを実行する）．
 - スクリプトは Python 3 標準ライブラリのみで動くこと（依存追加は不可）．
 
-CI は 2 本に分かれる．`checks`（path filter なし，TeX なし，全 PR で実行．status
-context は job 名の `integrity`）が required check の対象であり，`paper`
-（`paper/**`・`Makefile` 変更時のみ実行）が PDF をビルドする．path filter の付いた
-workflow を required check にすると，該当パスを触らない PR で status が永久に pending
-となり merge を塞ぐため，`paper` は required にしない．なお branch protection は現状
-未設定であり，設定の可否は owner の判断．詳細は
+CI は 2 本に分かれる．`checks`（path filter なし，TeX なし，全 PR・merge queue・
+`main` への push・手動 dispatch で実行．status context は job 名の `integrity`）が
+required check の対象．`paper`（`paper/**`・`Makefile`・`.github/workflows/paper.yml`
+を**変更した** PR と `main` push，および手動 dispatch）が PDF をビルドする．
+path filter の付いた workflow を required check にすると，該当パスを触らない PR で
+status が永久に pending となり merge を塞ぐため，`paper` の `pdf` は required に
+しない．削除済み workflow 由来の `paper`・`build` という context 名も picker に
+残るが，これらは二度と報告されないので required にしてはならない．なお branch
+protection は現状未設定であり，設定の可否は owner の判断．詳細は
 [.github/workflows/README.md](.github/workflows/README.md)．
 
 ## 原稿の規約

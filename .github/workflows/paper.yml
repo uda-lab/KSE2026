@@ -1,16 +1,25 @@
-# TeX provisioning and PDF build. Runs only when manuscript inputs change, on
-# pushes to main, or on manual dispatch.
+# TeX provisioning and PDF build.
+#
+# Triggers: a pull request whose cumulative diff touches the paths below; a push
+# to main that touches those same paths (branches and paths are ANDed, so a push
+# to main touching nothing else does not run this); and manual dispatch, which
+# is unfiltered and always runs.
 #
 # Measured on this repository: installing the TeX Live subset costs 80-90 s per
 # run, while every other step in the old combined workflow finished in about
 # 4 s total. Constraining when this workflow runs is therefore where the saving
 # is, which is why the trigger set below is narrow.
 #
-# This workflow is path-filtered and MUST NOT be configured as a required
-# status check: GitHub reports no status at all for a workflow whose path
-# filter does not match, so a required path-filtered check leaves unrelated
-# pull requests pending forever. checks.yml is the always-running required
-# gate. See .github/workflows/README.md.
+# This workflow is path-filtered and its `pdf` job MUST NOT be configured as a
+# required status check: GitHub reports no status at all for a workflow whose
+# path filter does not match, so a required path-filtered check leaves unrelated
+# pull requests pending forever. checks.yml is the always-running required gate.
+#
+# The path list below must cover every input the PDF build reads. Today that is
+# satisfied because main.tex only \input{}s files under paper/ and bibliography
+# and class files live there too. Adding a root .latexmkrc, a shared .sty, or a
+# figures directory outside paper/ would silently break that invariant, and
+# nothing enforces it automatically. See .github/workflows/README.md.
 name: paper
 
 on:
@@ -27,8 +36,14 @@ on:
       - '.github/workflows/paper.yml'
   workflow_dispatch:
 
+# See checks.yml for the rationale. github.run_id is mixed in for
+# workflow_dispatch only, so a manual full build is not cancelled by a merge
+# landing on main while it runs.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: >-
+    ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref
+    }}-${{ github.event_name == 'workflow_dispatch' && github.run_id || 'shared'
+    }}
   cancel-in-progress: true
 
 permissions:
@@ -40,13 +55,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # shell: bash for pipefail — see the equivalent step in checks.yml. Without
+      # it `latexmk --version | head -1` exits with head's status and cannot
+      # detect a missing binary.
       - name: Install TeX Live (pdflatex — matches IEEE submission pipeline)
+        shell: bash
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq --no-install-recommends \
             texlive-latex-base texlive-latex-recommended texlive-latex-extra \
             texlive-publishers texlive-fonts-recommended texlive-bibtex-extra \
             latexmk chktex
+          command -v latexmk chktex
           latexmk --version | head -1
 
       # Repeated from checks.yml so that a manual dispatch of this workflow, or
@@ -56,14 +76,16 @@ jobs:
         run: make integrity
 
       - name: Lint prose and LaTeX
-        run: make lint
+        run: make lint REQUIRE_CHKTEX=1
 
       - name: Build PDF
         run: make pdf
 
-      # Pull request PDFs are review aids and expire quickly. Durable
-      # publication artifacts belong in a release, not in every intermediate
-      # run; main and dispatch builds keep a month for convenience only.
+      # Pull request PDFs are review aids and expire quickly; main and dispatch
+      # builds keep a month for convenience only. Durable publication artifacts
+      # are intended to live in a release rather than in an Actions run, but no
+      # release or tag workflow exists yet — tag pushes currently trigger
+      # nothing. Building one is a separate archival decision.
       - uses: actions/upload-artifact@v4
         with:
           name: paper-pdf

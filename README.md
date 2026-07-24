@@ -31,8 +31,10 @@ TeX 環境が無い場合は，単一バイナリの
 [tectonic](https://tectonic-typesetting.github.io/)（`~/.local/bin` へ配置）で
 draft ビルドできる（camera-ready は pdflatex）．CI は 2 本に分かれており，
 `checks`（TeX 不要，全 PR で実行）が claim リンク・raw ログ漏洩・redaction・lint を
-検査し，`paper`（`paper/**`・`Makefile` の変更時，`main` への push，手動 dispatch）が
-PDF artifact を生成する（PR の artifact は 7 日保持）．詳細は
+検査し，`paper` が PDF artifact を生成する（PR の artifact は 7 日保持）．`paper` が
+走るのは `paper/**`・`Makefile`・`.github/workflows/paper.yml` を**変更した** PR と
+`main` への push，および手動 dispatch であり，これらのパスを触らない `main` への
+push では走らない．詳細は
 [.github/workflows/README.md](.github/workflows/README.md)．
 
 ## ディレクトリ
