@@ -6,7 +6,7 @@
 % leray-hopf v0.1.0-rc1, commit 7c15710a). No claim beyond that file.
 
 The target is the classical existence theorem for
-Leray--Hopf weak solutions of the homogeneous, incompressible
+Leray--Hopf weak solutions of the unforced, incompressible
 Navier--Stokes equations~\cite{leray1934,hopf1951}: given a
 divergence-free initial datum $u_0 \in L^2$, a viscosity $\nu > 0$, and a
 time horizon $T > 0$, a weak solution on $[0,T]$ exists. We report a
@@ -75,7 +75,7 @@ witness scheme $\mathfrak{G}$ (a concrete Galerkin scheme built from a
 Schwartz divergence-free basis) is itself produced by the proof, not
 assumed.
 
-The result concerns the homogeneous equation on an arbitrary
+The result concerns the unforced equation on an arbitrary
 fixed finite horizon, using the separated weak formulation and
 the stated energy class. It establishes existence and does not address
 uniqueness, nonuniqueness, or higher regularity. Developments outside this scope are
@@ -112,8 +112,8 @@ $L^2\times L^2\times L^2$.
 
 \subsection{Kernel axioms and public imports}\label{sec:release-surface}
 
-For both capstones, \texttt{\#print axioms} returns
-exactly the three standard Lean kernel axioms \texttt{propext},
+For both capstones, \texttt{\#print axioms} reports exactly
+\texttt{propext},
 \texttt{Classical.choice}, and \texttt{Quot.sound}. There are no
 axioms declared by the project or occurrences of \texttt{sorryAx} in either
 capstone. Continuous integration checks this list and rejects

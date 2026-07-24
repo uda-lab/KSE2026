@@ -31,7 +31,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   `#print axioms` exact-pin を含む九つの検査結果．恒久 release 記録は上記
   `releases.json` snapshot から参照できる．
 
-## CLM-002: 形式化キャンペーン（2026-06-10〜07-20，release 日終端）では，収集済みセッションログ上で確認できるだけでも output 15.1M tokens・API 換算 $6,972.83・アクティブ時間 199.1h（5 分 gap cap）の AI 計算が投入された（いずれも下界）
+## CLM-002: 形式化キャンペーン（2026-06-10〜07-20，release 日終端）では，収集済みセッションログ上で確認できるだけでも output 15.1M tokens・公表 API 単価による推定コスト $6,972.83・active session time 199.1h（5 分 gap cap）の AI 計算が投入された（いずれも下界）
 - Status: frozen
 - Paper location: paper/sections/03-agent-workflow.tex
 - Evidence: EV-0001〜EV-2126（escrow 一次記録），`evidence/metrics/usage-metrics.json`（`scripts/extract_usage.py` により再現可能）
@@ -85,16 +85,16 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   期間の記録が一次資料
   （EV-0925 の consumer verdict 過程）にある点が対比の根拠．
 
-## CLM-006: 2026-07-23 時点の調査（notes/related-work.md 記載の探索条件）では，非線形流体 PDE（Navier–Stokes を含む）の存在理論の機械検証済み形式化は Lean・Coq・Isabelle/HOL のいずれにも確認できなかった（否定的・調査条件付きの主張）
+## CLM-006: 2026-07-23 時点の先行研究調査では，3 次元 Navier–Stokes 方程式に対する Leray–Hopf 弱解存在定理の先行する machine-checked formalization を確認できなかった（否定的・調査条件付きの主張）
 - Status: frozen
 - Paper location: paper/main.tex, paper/sections/01-introduction.tex
 - Evidence: cite:armstrong2026degiorginashmoser, cite:miller2026vlasov,
   cite:boldo2010wave, cite:immler2012ode, cite:vandoorn2024gns;
   `notes/related-work.md`（探索語・照合した近接先行例の記録）
-- Notes: **非存在の証明ではなく「調査で確認できなかった」という下界的主張**として
-  書く．本文表現は "to our knowledge, no machine-checked existence theory for a
-  nonlinear fluid PDE has been reported in Lean, Coq, or Isabelle/HOL" の水準に
-  限定し，調査日と探索方法への脚注参照を付す．投稿直前に再検索して時点を更新する．
+- Notes: 本文は "To our knowledge, no prior machine-checked formalization
+  establishes Leray--Hopf weak solution existence for the three-dimensional
+  Navier--Stokes equations." の水準に限定する．調査手順や非存在証明ではないという
+  防御的説明は本文に置かない．投稿直前に再検索して時点を更新する．
 
 ## CLM-007: 03 節（workflow）で述べる個別の歴史的事実（役割構成，dispatch 件数，規律・ゲートの導入時期と契機，モデル選択の推移）は，`analysis/workflow-evolution.md` の時系列表と `evidence/session-index/` の符号化 6 セッションに裏付けられた範囲に限る
 - Status: frozen

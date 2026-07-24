@@ -9,17 +9,16 @@ should be proved, preserve the intended public declarations during
 refactoring, and verify the operating state behind progress reports.
 
 This paper studies those obligations through six weeks of work on
-Leray--Hopf weak solution existence for the homogeneous incompressible
+Leray--Hopf weak solution existence for the unforced incompressible
 Navier--Stokes equations. The central artifact is a
 Lean~4~\cite{moura2021lean4} development on
 mathlib~\cite{mathlib2020}, with capstone existence theorems on the
 three dimensional torus and on $\mathbb{R}^3$~\cite{leray1934,hopf1951,
 lerayhopf2026repo}. Both theorem statements are given precisely in
 Section~\ref{sec:formalization}. % CLAIM: CLM-001
-A July 2026 literature and repository survey found no earlier existence
-theory for a nonlinear fluid PDE that had been machine checked in Lean,
-Coq, or Isabelle/HOL.\footnote{The search terms, dates, and nearest results
-are recorded in the related work notes.} % CLAIM: CLM-006
+To our knowledge, no prior machine-checked formalization establishes
+Leray--Hopf weak solution existence for the three-dimensional
+Navier--Stokes equations. % CLAIM: CLM-006
 
 The nearest results in formalized analysis address adjacent problems.
 They include the
@@ -27,10 +26,10 @@ Gagliardo--Nirenberg--Sobolev inequality in
 mathlib~\cite{vandoorn2024gns}, a Lean formalization of
 De Giorgi--Nash--Moser elliptic regularity
 theory~\cite{armstrong2026degiorginashmoser}, and a formalization of
-well-posedness for the linear kinetic Vlasov equation conducted with AI
-agents~\cite{miller2026vlasov}.
+well-posedness and the mean-field derivation for the nonlinear Vlasov
+equation, conducted with AI assistance~\cite{miller2026vlasov}.
 
-Projects at comparable organizational scale provide a second comparison.
+Large collaborative formalization projects provide a second comparison.
 Human teams coordinated through blueprints in the Odd Order Theorem and
 the Liquid Tensor Experiment
 ~\cite{gonthier2013oddorder,commelin2023abstraction}.

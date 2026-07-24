@@ -46,21 +46,20 @@ proof kernel. The kernel checks a theorem against its stated type, but it
 does not choose the intended statement, preserve a public interface during
 refactoring, or manage the agents and computing resources used to produce
 the proof. We report a Lean~4 and mathlib formalization, with no project
-axioms, of Leray--Hopf weak solution existence for the homogeneous
+axioms, of Leray--Hopf weak solution existence for the unforced
 Navier--Stokes equations on $\mathbb{T}^3$ and $\mathbb{R}^3$. To our
-knowledge, a July 2026 survey found no earlier existence theory for a
-nonlinear fluid PDE that had been machine checked in Lean, Coq, or
-Isabelle/HOL. During six weeks of development, a workflow defined by the
-owner routed GitHub Issues through isolated Git worktrees and pull requests.
-The harness routes
+knowledge, no prior machine-checked formalization establishes this
+three-dimensional weak existence theorem. During six weeks of development,
+a workflow defined by the owner routed GitHub Issues through isolated Git
+worktrees and pull requests. The harness routes
 mathematical, Lean, interface, and resource checks according to the
 artifact being changed. Four incidents show where
 these checks detected defects and where they did not. The evidence method
 links manuscript claims to redacted session records, repository history,
-verification results, and measured costs.
+verification results, cost estimates, and billing records.
 \end{abstract}
 % Abstract claims map: CLM-001 (result), CLM-002 (scale, lower bounds),
-% CLM-006 (survey novelty), CLM-004/005 (incidents account),
+% CLM-006 (prior-work comparison), CLM-004/005 (incidents account),
 % CLM-003 (billing reconciliation), CLM-007/009 (harness and orchestration).
 
 \begin{IEEEkeywords}

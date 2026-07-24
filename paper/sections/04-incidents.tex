@@ -14,6 +14,9 @@ for their reconstruction value. The sample is neither random nor
 exhaustive, so the cases document observed failures and recoveries without
 estimating failure rates or causal effects. % CLAIM: CLM-004, CLM-008
 
+All PR numbers in this section refer to the leray-hopf
+repository~\cite{lerayhopf2026repo}.
+
 \subsection{Statement correctness}\label{sec:inc001}
 
 \emph{Case A. A false generalization detected before release.}
@@ -70,7 +73,7 @@ The pair is informative but is not a controlled comparison.
 PR~\#120 replaced duplicate proofs in two files with instances of a shared
 module. The refactored code built successfully, but one unreferenced
 public theorem had disappeared. No downstream dependency failed, so the
-Lean build and an earlier review of module structure could not reveal the
+Lean build and an earlier review of module structure did not reveal the
 omission. % CLAIM: CLM-008, INC-004
 
 \emph{Detection and response.}
@@ -90,11 +93,11 @@ preservation. % CLAIM: CLM-008, INC-004
 The VPS container had an effective memory limit of 3.42\,GiB and no swap.
 Review jobs from the previous night left fourteen helper process chains
 running after their Git worktrees were inactive, consuming about
-1--1.5\,GiB. At the same time, Fable treated a slow agent as dead and
-assigned a replacement to the same Git worktree. The replacement did not
-receive the shared cache rule and started a full mathlib build. Under the
-combined load, Lean builds repeatedly ended with exit code 137 and no
-compiler diagnostic. % CLAIM: CLM-008, INC-005
+1--1.5\,GiB. At the same time, the orchestrator misclassified a slow agent
+as inactive and assigned a replacement to the same Git worktree. The
+replacement did not receive the shared cache rule and started a full
+mathlib build. Under the combined load, Lean builds repeatedly ended with
+exit code 137 and no compiler diagnostic. % CLAIM: CLM-008, INC-005
 
 \emph{Detection and response.}
 Monitoring had covered the visible Lean process rather than memory

@@ -41,17 +41,18 @@ blocking）を統制する．論文・preprint・CITATION.cff は無い（検索
   - `armstrong2026degiorginashmoser` — De Giorgi–Nash–Moser 理論の Lean 形式化
     （楕円型の正則性理論．existence/発展型ではない．AI 著述とは書かれていない）．
   - `miller2026vlasov` — **最も近い先行例**．Vlasov 方程式の平均場導出の
-    AI 支援 Lean 形式化（well-posedness/存在/一意性/安定性）．ただし線形・
-    運動論的方程式で，単一著者が単一 AI を指揮する形態．multi-agent 統治・
-    証跡・incident 報告は無い．
-- **Coq/Isabelle**: 非線形流体 PDE の存在理論は見当たらない．最近接は
+    AI 支援 Lean 形式化（well-posedness/存在/一意性/安定性）．対象は非線形
+    Vlasov 方程式であり，流体方程式ではない．単一著者が単一 AI を指揮する形態で，
+    multi-agent 統治・証跡・incident 報告は無い．
+- **Coq/Isabelle**: 3 次元 Navier–Stokes の Leray–Hopf 弱解存在定理に
+  対応する先行形式化は見当たらない．近接例は
   `boldo2010wave`（1-D 線形波動方程式の数値スキーム収束，Coq）と
   `immler2012ode`（ODE の Picard–Lindelöf，Isabelle/HOL）．
   LeanMillenniumPrizeProblems repo は Navier–Stokes の**問題文**のみ
   （検索スニペットで確認．直接引用するなら要 WebFetch）．
 
-**差分**: 3 次元 Navier–Stokes の Leray–Hopf 弱解存在は，3 大 proof assistant の
-いずれにも先行例が見つからないクラスの結果．
+**差分**: 3 次元 Navier–Stokes の Leray–Hopf 弱解存在定理に対象を限定すると，
+調査範囲では先行する machine-checked formalization を確認できなかった．
 
 ## 3. 大規模形式化の工程管理
 

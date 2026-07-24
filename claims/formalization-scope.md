@@ -36,7 +36,7 @@ README.md・`paper/references.bib` を同時に更新する．
 
 - smoothness / energy-class を超える higher regularity
 - 解の uniqueness / non-uniqueness
-- 外力付き方程式（homogeneous のみ）
+- 外力付き方程式（形式化対象は外力なし）
 - `[0, ∞)` 上で一様に有効な単一の解（有限 time horizon `[0, T]`，`T` は任意だが固定）
 - 一般の space-time test function に対する弱形式（separated-variable 形式
   `ψ(t)·w(x)` のみ）
