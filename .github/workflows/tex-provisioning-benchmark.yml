@@ -1,0 +1,67 @@
+# TEMPORARY — measurement scaffold for issue #61, deleted before that PR merges.
+#
+# Issue #61 forbids swapping the apt-get TeX installation for a generic TeX
+# image without measurement. This workflow runs the candidate provisioning
+# routes as sibling jobs on identical cold ubuntu-latest runners so their step
+# timings can be read off the Actions API and recorded in
+# .github/workflows/README.md.
+#
+# Triggered by touching this file on a pull request, so it runs exactly once
+# when it is added and never again.
+name: tex-provisioning-benchmark
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/tex-provisioning-benchmark.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # Route (a): the routine in use today.
+  apt-no-install-recommends:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install TeX Live subset via apt-get
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends \
+            texlive-latex-base texlive-latex-recommended texlive-latex-extra \
+            texlive-publishers texlive-fonts-recommended texlive-bibtex-extra \
+            latexmk chktex
+          latexmk --version | head -1
+      - name: Report installed size
+        run: du -sh /usr/share/texlive /usr/share/texmf 2>/dev/null || true
+      - name: Build PDF
+        run: make pdf
+
+  # Route (b1): maintained TeX action. It provisions a TeX Live container, so
+  # its cost is dominated by the image pull on an ephemeral runner.
+  latex-action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build PDF via xu-cheng/latex-action
+        uses: xu-cheng/latex-action@v4
+        with:
+          working_directory: paper
+          root_file: main.tex
+          latexmk_use_xelatex: false
+
+  # Route (b2): pulling a maintained TeX container directly, separating pull
+  # cost from compile cost.
+  texlive-container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pull texlive/texlive:latest
+        run: docker pull texlive/texlive:latest
+      - name: Report image size
+        run: docker image inspect texlive/texlive:latest --format '{{.Size}} bytes'
+      - name: Build PDF inside the container
+        run: |
+          docker run --rm -v "$PWD:/w" -w /w texlive/texlive:latest \
+            make pdf

@@ -27,8 +27,17 @@
 
 - `make pdf` — LaTeX ビルド（latexmk/pdflatex 優先，tectonic fallback）．原稿を触ったら必ずビルドが通ることを確認．
 - `make verify` — claim ↔ evidence リンク検査．claims/ か paper/ を触ったら実行．
-- `make lint` — chktex（存在する場合のみ）．
+- `make lint` — prose scanner の unittest + `check_prose_style.py` + chktex（存在する場合のみ）．
+- `make integrity` — claim リンク検査 + raw ログ漏洩ガード + 公開領域の redaction scan．
+  TeX を必要としない 3 つの hard gate をまとめたもので，CI の `checks` workflow と
+  同一の内容を実行する．commit 前にこれを通す．
 - スクリプトは Python 3 標準ライブラリのみで動くこと（依存追加は不可）．
+
+CI は 2 本に分かれる．`checks`（path filter なし，TeX なし，全 PR で実行）が required
+check であり，`paper`（`paper/**` 等の変更時のみ実行）が PDF をビルドする．path filter の
+付いた workflow を required check にすると，該当パスを触らない PR で status が永久に
+pending となり merge を塞ぐため，`paper` は required にしない．詳細は
+[.github/workflows/README.md](.github/workflows/README.md)．
 
 ## 原稿の規約
 

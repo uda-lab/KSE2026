@@ -1,0 +1,49 @@
+# Lightweight integrity gate. Runs on every pull request and on every push to
+# main, installs no TeX Live, and finishes in roughly ten seconds.
+#
+# This workflow is deliberately unfiltered by path: it is the one intended to be
+# configured as a required status check. A path-filtered workflow never reports
+# a status on pull requests that do not touch its paths, so requiring one would
+# leave those pull requests permanently pending. The PDF build lives in
+# paper.yml, which is path-filtered and must not be made a required check.
+# See .github/workflows/README.md.
+name: checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# One live run per pull request (or per ref outside a pull request). An agent
+# pushing a follow-up commit cancels its own superseded run instead of queuing
+# a second one.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # ChkTeX is a standalone C program (240 kB installed; depends only on
+      # libc6, libpcre2-posix3, libtinfo6) and does not pull in TeX Live, so the
+      # full `make lint` gate stays in the lightweight workflow. The version
+      # call fails the step if the install silently did not take effect, which
+      # would otherwise let `make lint` skip ChkTeX and pass a weaker gate.
+      - name: Install ChkTeX (standalone; no TeX Live)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends chktex
+          chktex --version | head -1
+
+      - name: Claim links, raw-log leakage guard, redaction scan
+        run: make integrity
+
+      - name: Lint prose and LaTeX
+        run: make lint

@@ -1,0 +1,72 @@
+# TeX provisioning and PDF build. Runs only when manuscript inputs change, on
+# pushes to main, or on manual dispatch.
+#
+# Measured on this repository: installing the TeX Live subset costs 80-90 s per
+# run, while every other step in the old combined workflow finished in about
+# 4 s total. Constraining when this workflow runs is therefore where the saving
+# is, which is why the trigger set below is narrow.
+#
+# This workflow is path-filtered and MUST NOT be configured as a required
+# status check: GitHub reports no status at all for a workflow whose path
+# filter does not match, so a required path-filtered check leaves unrelated
+# pull requests pending forever. checks.yml is the always-running required
+# gate. See .github/workflows/README.md.
+name: paper
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'paper/**'
+      - 'Makefile'
+      - '.github/workflows/paper.yml'
+  pull_request:
+    paths:
+      - 'paper/**'
+      - 'Makefile'
+      - '.github/workflows/paper.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install TeX Live (pdflatex — matches IEEE submission pipeline)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends \
+            texlive-latex-base texlive-latex-recommended texlive-latex-extra \
+            texlive-publishers texlive-fonts-recommended texlive-bibtex-extra \
+            latexmk chktex
+          latexmk --version | head -1
+
+      # Repeated from checks.yml so that a manual dispatch of this workflow, or
+      # a push to main, is a complete validation on its own rather than half of
+      # one. The three gates need no TeX and add about 2 s.
+      - name: Claim links, raw-log leakage guard, redaction scan
+        run: make integrity
+
+      - name: Lint prose and LaTeX
+        run: make lint
+
+      - name: Build PDF
+        run: make pdf
+
+      # Pull request PDFs are review aids and expire quickly. Durable
+      # publication artifacts belong in a release, not in every intermediate
+      # run; main and dispatch builds keep a month for convenience only.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paper-pdf
+          path: build/main.pdf
+          if-no-files-found: error
+          retention-days: ${{ github.event_name == 'pull_request' && 7 || 30 }}
