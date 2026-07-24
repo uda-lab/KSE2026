@@ -28,11 +28,15 @@ Writes:
   evidence/metrics/mediation-census.csv  — flat rows: repo,item_type,login,
                                             performed_via_github_app,
                                             is_bot_account,
-                                            count_lower_bound,caveat_ref
+                                            count_exact,caveat_ref
 
-THIS IS A LOWER BOUND, NOT A CENSUS. See LOWER_BOUND_CAVEAT below and
-analysis/mediation-census-methodology.md — do not quote counts from here
-without also quoting the caveat.
+Every count is an EXACT tally of the raw (login, performed_via_github_app)
+combination, but the counts are an ASYMMETRIC and INCOMPLETE signal about
+authorship, not a census: non-null performed_via_github_app rows are a
+LOWER BOUND on mediated (connector-transmitted) authorship; null rows are
+NOT proof of direct human authorship either way. See LOWER_BOUND_CAVEAT
+below and analysis/mediation-census-methodology.md — do not quote counts
+from here without also quoting the caveat.
 
 Usage:
   python3 scripts/compute_mediation_census.py [--repo uda-lab/leray-hopf ...]
@@ -50,13 +54,20 @@ OUT_JSON = ROOT / "evidence" / "metrics" / "mediation-census.json"
 OUT_CSV = ROOT / "evidence" / "metrics" / "mediation-census.csv"
 
 LOWER_BOUND_CAVEAT = (
-    "This is a LOWER BOUND on mediated authorship, not a complete census. "
-    "`performed_via_github_app: null` does NOT prove direct human "
-    "authorship: any PAT-holding process (gh CLI, an orchestrator, a "
-    "harness) also yields null — e.g. on uda-lab/KSE2026 PR #59, "
-    "agent-generated comments posted as `t-uda` (\"Final proposal gate for "
-    "head\\u2026\", \"@codex please review this PR\") all carry null. "
-    "Conversely, a non-null performed_via_github_app slug proves only the "
+    "These counts are an exact tally of a raw API field combination, but as "
+    "a signal about who authored an item they are asymmetric, not a "
+    "complete census. `performed_via_github_app: null` does NOT prove "
+    "direct human authorship: any PAT-holding process (gh CLI, an "
+    "orchestrator, a harness) also yields null. Verifiable primary evidence: "
+    "`gh api repos/uda-lab/KSE2026/issues/59/comments` shows comment ids "
+    "5071442579 (\"Final proposal gate for head \\u2026\") and 5065764557 / "
+    "5066112755 / 5071134565 / 5071234655 / 5071326489 / 5071415951 "
+    "(\"@codex please review this PR\") all posted under login `t-uda` with "
+    "performed_via_github_app null — i.e. null spans both possibly-direct "
+    "and demonstrably-process-generated comments, so a null count is "
+    "neither a lower nor an upper bound on direct human authorship. "
+    "Conversely, a non-null performed_via_github_app slug IS a LOWER BOUND "
+    "on mediated (connector-transmitted) authorship, but proves only the "
     "transport channel — not who composed the prose, nor whether the human "
     "read it before it was posted. No client, user-agent, IP, session id, "
     "model version, or prompt is recoverable from this data. Comment edit "
@@ -66,8 +77,11 @@ LOWER_BOUND_CAVEAT = (
 )
 
 CAVEAT_REF = (
-    "LOWER BOUND, not a census — see lower_bound_caveat in "
-    "mediation-census.json / analysis/mediation-census-methodology.md"
+    "count_exact is an exact tally, not itself a bound; as an authorship "
+    "signal it is asymmetric (non-null performed_via_github_app is a LOWER "
+    "BOUND on mediation; null is NOT proof of direct human authorship) — "
+    "see lower_bound_caveat in mediation-census.json / "
+    "analysis/mediation-census-methodology.md"
 )
 
 
@@ -99,7 +113,7 @@ def tally(rows):
             "login": login,
             "performed_via_github_app": via_app_slug,
             "is_bot_account": is_bot,
-            "count": count,
+            "count_exact": count,
         })
     return out
 
@@ -136,7 +150,7 @@ def main() -> int:
                     "login": row["login"],
                     "performed_via_github_app": row["performed_via_github_app"] or "",
                     "is_bot_account": row["is_bot_account"],
-                    "count_lower_bound": row["count"],
+                    "count_exact": row["count_exact"],
                     "caveat_ref": CAVEAT_REF,
                 })
 
@@ -157,7 +171,7 @@ def main() -> int:
     with OUT_CSV.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=[
             "repo", "item_type", "login", "performed_via_github_app",
-            "is_bot_account", "count_lower_bound", "caveat_ref",
+            "is_bot_account", "count_exact", "caveat_ref",
         ])
         writer.writeheader()
         for row in csv_rows:

@@ -5,9 +5,11 @@
 `performed_via_github_app` と `author_association` を追加）から，投稿チャネルの
 機械集計を行う．出力は `evidence/metrics/mediation-census.json` と `.csv`．
 
-**本ページの数値はすべて下界（LOWER BOUND）であり，census（悉皆調査）ではない．**
-理由は「下界であることの注記」節に述べる．以下の各表もその注記を前提として読むこと
-（表の直前に短い再掲を置く）．
+**本ページの数値は API フィールドの正確な件数（`count_exact`）だが，著者性の
+signal としては非対称であり，census（悉皆調査）ではない．** non-null な
+`performed_via_github_app` は仲介の下界（LOWER BOUND）だが，null は人間直接執筆
+の証明にならない．理由は「下界であることの注記」節に述べる．以下の各表もその
+注記を前提として読むこと（表の直前に短い再掲を置く）．
 
 ## 集計方法
 
@@ -32,11 +34,12 @@
 
 ## 主要結果（`fetched_at` は各 snapshot の EXPORT.json 参照; leray-hopf
 2026-07-24T18:28:30Z, KSE2026 2026-07-24T18:41:10Z — KSE2026 は独立レビュー中の
-再検証実行により本 PR 内で 2 度再取得されている．いずれの再取得も
-`evidence/repository-snapshots/KSE2026/EXPORT.json` の値が正）
+検証実行により本 PR 内で最初の取得から追加で 1 度再取得されている（計 2 回
+fetch）．`evidence/repository-snapshots/KSE2026/EXPORT.json` の値が最終的に正）
 
-**以下はすべて下界．`performed_via_github_app: null` は人間による直接執筆を証明
-せず，non-null は伝送チャネルの証明に過ぎない（詳細は次節）．**
+**以下は正確な件数だが，著者性の signal としては非対称．`performed_via_github_app:
+null` は人間による直接執筆を証明せず，non-null は仲介の下界だが伝送チャネルの
+証明に過ぎない（詳細は次節）．**
 
 コメント，`performed_via_github_app` 別:
 
@@ -65,11 +68,17 @@ KSE2026 の connector 経由 issue 番号は `#23 #42 #58 #59 #60` に加え，�
 
 `performed_via_github_app: null` は，直接的な人間による執筆・投稿を証明しない．
 gh CLI，オーケストレータ，harness など PAT を保持する任意のプロセスも null を
-返す．実例: KSE2026 PR #59 で `t-uda` 名義で投稿されたコメント（「Final proposal
-gate for head…」「@codex please review this PR」）は，いずれも
-`performed_via_github_app: null` である（これらのコメントがオーケストレータ由来
-であることは `provenance/ai-use.md` の当該日付の行に別途記録されている一次資料で
-あり，本 census 自体からの推論ではない）．
+返す．検証可能な一次資料: `gh api repos/uda-lab/KSE2026/issues/59/comments` を
+実行すると，comment id `5071442579`（「Final proposal gate for head…」）および
+`5065764557` / `5066112755` / `5071134565` / `5071234655` / `5071326489` /
+`5071415951`（いずれも「@codex please review this PR」）が，すべて
+`user.login = t-uda`，`performed_via_github_app = null` で投稿されていることを
+確認できる（本 PR 作成時に著者自身が上記コマンドで直接確認した一次資料であり，
+`provenance/ai-use.md` の記載に依拠したものではない）．これらの文面は定型的な
+ワークフロー通知（review 依頼・gate 報告）であり，`null` が「人間の手打ち」と
+「プロセス生成」の両方にまたがることを示す．したがって **`null` の件数は，直接
+人間執筆の下界にも上界にもならない**（人間執筆分とプロセス生成分の内訳は本データ
+から分離できない）．
 
 逆に，`performed_via_github_app` が non-null（connector 経由）であることは，
 **伝送チャネル** の証明に過ぎない．文面を誰が作成したか，人間が投稿前に読んだかは
@@ -79,9 +88,11 @@ gate for head…」「@codex please review this PR」）は，いずれも
 
 以上より，本集計から生産性・有効性・因果関係を推論しない（PLAN.md §9 Phase 5）．
 
-`evidence/metrics/mediation-census.csv` の各行は `count_lower_bound` 列（値の
-性質を列名自体に明記）と `caveat_ref` 列（本節への固定ポインタ文字列）を持つ．
-JSON 側は `lower_bound_caveat` フィールドに本節と同内容を格納する．
+`evidence/metrics/mediation-census.csv` の各行は `count_exact` 列（この API
+フィールドの組についての正確な件数であり，それ自体は下界でも上界でもないことを
+列名で明示）と `caveat_ref` 列（上記の非対称性を要約し本節への固定ポインタと
+する文字列）を持つ．JSON 側は `lower_bound_caveat` フィールドに本節と同内容を
+格納する．
 
 ## 公開性の非対称性
 

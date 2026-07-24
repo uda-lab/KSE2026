@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-24T18:45:04+00:00",
+  "generated_at": "2026-07-24T18:52:23+00:00",
   "method": "grouped by (user_login, performed_via_github_app slug or null) over issues.json and comments.json from evidence/repository-snapshots/<repo>/; login values ending in '[bot]' are flagged is_bot_account regardless of performed_via_github_app.",
-  "lower_bound_caveat": "This is a LOWER BOUND on mediated authorship, not a complete census. `performed_via_github_app: null` does NOT prove direct human authorship: any PAT-holding process (gh CLI, an orchestrator, a harness) also yields null — e.g. on uda-lab/KSE2026 PR #59, agent-generated comments posted as `t-uda` (\"Final proposal gate for head\\u2026\", \"@codex please review this PR\") all carry null. Conversely, a non-null performed_via_github_app slug proves only the transport channel — not who composed the prose, nor whether the human read it before it was posted. No client, user-agent, IP, session id, model version, or prompt is recoverable from this data. Comment edit history is not retroactively available, and deleted/minimized comments are absent from the export. Do not infer productivity, effectiveness, or causation from these counts.",
+  "lower_bound_caveat": "These counts are an exact tally of a raw API field combination, but as a signal about who authored an item they are asymmetric, not a complete census. `performed_via_github_app: null` does NOT prove direct human authorship: any PAT-holding process (gh CLI, an orchestrator, a harness) also yields null. Verifiable primary evidence: `gh api repos/uda-lab/KSE2026/issues/59/comments` shows comment ids 5071442579 (\"Final proposal gate for head \\u2026\") and 5065764557 / 5066112755 / 5071134565 / 5071234655 / 5071326489 / 5071415951 (\"@codex please review this PR\") all posted under login `t-uda` with performed_via_github_app null — i.e. null spans both possibly-direct and demonstrably-process-generated comments, so a null count is neither a lower nor an upper bound on direct human authorship. Conversely, a non-null performed_via_github_app slug IS a LOWER BOUND on mediated (connector-transmitted) authorship, but proves only the transport channel — not who composed the prose, nor whether the human read it before it was posted. No client, user-agent, IP, session id, model version, or prompt is recoverable from this data. Comment edit history is not retroactively available, and deleted/minimized comments are absent from the export. Do not infer productivity, effectiveness, or causation from these counts.",
   "by_repo": {
     "leray-hopf": {
       "repo": "uda-lab/leray-hopf",
@@ -15,19 +15,19 @@
             "login": "t-uda",
             "performed_via_github_app": null,
             "is_bot_account": false,
-            "count": 31
+            "count_exact": 31
           },
           {
             "login": "t-uda",
             "performed_via_github_app": "chatgpt-codex-connector",
             "is_bot_account": false,
-            "count": 32
+            "count_exact": 32
           },
           {
             "login": "uda-lab-agent",
             "performed_via_github_app": null,
             "is_bot_account": false,
-            "count": 132
+            "count_exact": 132
           }
         ]
       },
@@ -38,25 +38,25 @@
             "login": "chatgpt-codex-connector[bot]",
             "performed_via_github_app": "chatgpt-codex-connector",
             "is_bot_account": true,
-            "count": 69
+            "count_exact": 69
           },
           {
             "login": "t-uda",
             "performed_via_github_app": null,
             "is_bot_account": false,
-            "count": 146
+            "count_exact": 146
           },
           {
             "login": "t-uda",
             "performed_via_github_app": "chatgpt-codex-connector",
             "is_bot_account": false,
-            "count": 37
+            "count_exact": 37
           },
           {
             "login": "uda-lab-agent",
             "performed_via_github_app": null,
             "is_bot_account": false,
-            "count": 190
+            "count_exact": 190
           }
         ]
       }
@@ -73,19 +73,19 @@
             "login": "t-uda",
             "performed_via_github_app": null,
             "is_bot_account": false,
-            "count": 1
+            "count_exact": 1
           },
           {
             "login": "t-uda",
             "performed_via_github_app": "chatgpt-codex-connector",
             "is_bot_account": false,
-            "count": 6
+            "count_exact": 6
           },
           {
             "login": "uda-lab-agent",
             "performed_via_github_app": null,
             "is_bot_account": false,
-            "count": 58
+            "count_exact": 58
           }
         ]
       },
@@ -96,25 +96,25 @@
             "login": "chatgpt-codex-connector[bot]",
             "performed_via_github_app": "chatgpt-codex-connector",
             "is_bot_account": true,
-            "count": 7
+            "count_exact": 7
           },
           {
             "login": "t-uda",
             "performed_via_github_app": null,
             "is_bot_account": false,
-            "count": 38
+            "count_exact": 38
           },
           {
             "login": "t-uda",
             "performed_via_github_app": "chatgpt-codex-connector",
             "is_bot_account": false,
-            "count": 5
+            "count_exact": 5
           },
           {
             "login": "uda-lab-agent",
             "performed_via_github_app": null,
             "is_bot_account": false,
-            "count": 22
+            "count_exact": 22
           }
         ]
       }
