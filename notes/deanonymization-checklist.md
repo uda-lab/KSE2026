@@ -61,7 +61,7 @@ Author(s)}}` であり，**byline は既に匿名**である（最初の LaTeX s
 #1・#2a・#2b が指す `paper/main.tex` の箇所は本 PR 自身が書き換えた領域であり，行番号は
 本 PR の途中で実際に一度移動した．そのためこの 3 件は行番号ではなく **LaTeX 構文**を主
 anchor とし，行番号は補助として括弧に添える．`\thanks{` は `main.tex` 内で一意である．
-`\ifanonymous` は 2 箇所に出る（24 行目の宣言 `\newif\ifanonymous` と，51 行目の条件分岐）
+`\ifanonymous` は 2 箇所に出る（25 行目の宣言 `\newif\ifanonymous` と，52 行目の条件分岐）
 ので，anchor として引く際は**分岐のほう**，すなわち行頭が `\ifanonymous%` で `\else` /
 `\fi` と対になる箇所を指す．#3 以降が指すファイルは本 PR で変更しておらず，行番号を
 そのまま anchor として用いる．
@@ -73,8 +73,8 @@ anchor とし，行番号は補助として括弧に添える．`\thanks{` は `
 
 | # | 位置（anchor） | 漏洩する文字列 | 種別 | PDF に出るか | 匿名化時の対応 | スイッチで解決するか |
 |---|---|---|---|---|---|---|
-| 1 | `paper/main.tex` の `\ifanonymous` … `\fi` 分岐全体（現 51-62 行．実名 byline は `\else` 分岐の `\author{...}`，現 59 行） | byline | identity | 既定では出ない（`\anonymousfalse` のときのみ出る） | `\anonymoustrue` が `Anonymous Author(s)` を出す．実名 byline は非匿名分岐にしか現れない | **する** |
-| 2a | `paper/main.tex` の `\thanks{` の引数（`\else` 分岐内，現 60-61 行） | `This work was supported by JST-Mirai Program Grant Number JPMJMI22G1, Japan.` | funder | 既定では出ない（`\anonymousfalse` のとき第 1 ページ脚注として出る） | 全体を抑止．grant number は公開検索により PI と国を特定しうる | **する** |
+| 1 | `paper/main.tex` の `\ifanonymous` … `\fi` 分岐全体（現 52-63 行．実名 byline は `\else` 分岐の `\author{...}`，現 60 行） | byline | identity | 既定では出ない（`\anonymousfalse` のときのみ出る） | `\anonymoustrue` が `Anonymous Author(s)` を出す．実名 byline は非匿名分岐にしか現れない | **する** |
+| 2a | `paper/main.tex` の `\thanks{` の引数（`\else` 分岐内，現 61-62 行） | `This work was supported by JST-Mirai Program Grant Number JPMJMI22G1, Japan.` | funder | 既定では出ない（`\anonymousfalse` のとき第 1 ページ脚注として出る） | 全体を抑止．grant number は公開検索により PI と国を特定しうる | **する** |
 | 2b | 同上の文字列が `paper/main.tex` の**ソースに常駐**すること | 同上 | funder | 出ない — *source-only* | **本 PR が新たに作った露出面である**（`fe8fbeb` の `paper/` に `JPMJMI22G1` は 0 件．`git grep JPMJMI22G1 fe8fbeb -- paper/` で確認できる）．LaTeX ソースを PDF と併せて提出する場合，スイッチでは消えないため #9–#12 と同様に提出前の除去が要る | **しない** — スイッチは PDF 側しか制御しない |
 | 3 | `paper/references.bib:6` | `author = {{uda-lab}}` | identity / repo | 出る（参考文献欄に表示） | 匿名化した組織名に置換するか，entry を落としてタグのみで参照する | しない — 個別対応 |
 | 4 | `paper/references.bib:10` | `\url{https://github.com/uda-lab/leray-hopf}` | repo / identity | 出る（URL がそのまま） | URL を除去し，省略するか匿名アーカイブのリンクに置換する | しない — 個別対応 |
@@ -83,7 +83,7 @@ anchor とし，行番号は補助として括弧に添える．`\thanks{` は `
 | 7 | `paper/sections/02-formalization.tex:16-17` | `commit \texttt{7c15710a}, tagged \texttt{v0.1.0-rc1}~\cite{lerayhopf2026repo}` | repo / self-citation | 出る | #5 と同じ | しない — 個別対応 |
 | 8 | `paper/sections/02-formalization.tex:123` | `\texttt{7c15710a} under tag \texttt{v0.1.0-rc1}` | repo | 出る | #5 と同じ | しない — 個別対応 |
 | 9 | `paper/sections/02-formalization.tex:6` | `% leray-hopf v0.1.0-rc1, commit 7c15710a` | repo | 出ない — *source-only* | ソース提出時に除去 | しない — 個別対応 |
-| 10 | `paper/sections/02-formalization.tex:18` | `% CLAIM: CLM-001 (leray-hopf@7c15710a…)` — 40 桁 SHA | repo | 出ない — *source-only* | ソース提出時に除去．`paper/` 内で唯一の完全長 SHA | しない — 個別対応 |
+| 10 | `paper/sections/02-formalization.tex:18` | `% CLAIM: CLM-001 (leray-hopf@7c15710a…)` — 40 桁 SHA | repo | 出ない — *source-only* | ソース提出時に除去．`paper/` 内の 40 桁 SHA は本行と `references.bib:172`（TauCeti の固定 commit）の 2 件のみで，identity に関わるのは本行だけである | しない — 個別対応 |
 | 11 | `paper/sections/02-formalization.tex:89` | `% CLAIM: CLM-001 (… measured at leray-hopf@7c15710a)` | repo | 出ない — *source-only* | 同上 | しない — 個別対応 |
 | 12 | `paper/sections/02-formalization.tex:91` | `% source: leray-hopf@7c15710a docs/architecture.md` | repo | 出ない — *source-only* | 同上 | しない — 個別対応 |
 | 13 | `paper/sections/04-incidents.tex:17-18` | "All PR numbers in this paper refer to the leray-hopf repository~\cite{lerayhopf2026repo}." | repo / self-citation | 出る | この一文が #14–#20 を解決可能にしている．除去するか参照先を匿名にする | しない — 個別対応 |
@@ -139,7 +139,8 @@ PDF メタデータの `/Author` `/Title` `/Subject` `/Keywords` はすべて空
 - `paper/references.bib` の entry 19 件のうち，論文リポジトリに対応するものは **なし**．
   ビルド済み `.bbl` の引用キー 17 件にも該当なし．
 - `paper/` 内の URL は 2 件のみで，KSE2026 の URL は存在しない．
-- リポジトリ全体に `zenodo` / `doi.org` / archival の文字列は **0 件**．DOI は存在しない．
+- `zenodo` と `doi.org` はリポジトリ全体で **0 件**（`archival` は snapshot JSON 内に
+  出現するが DOI 文脈ではない）．**DOI は存在しない．**
 - 相互確認: `provenance/source-inventory.md` は既に `uda-lab/KSE2026` を private と
   記録し，snapshot の再現には read 権限が要ると注記している．
 - `uda-lab/leray-hopf` は public であり，Lean ソース，タグ，Sections IV–V が引用する
