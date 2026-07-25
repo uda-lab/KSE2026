@@ -39,7 +39,7 @@
   しないこと，leakage guard が大文字拡張子・`Private/` 等の大小差・圧縮ログ
   （`.jsonl.gz`）を検出しつつ `*.jsonl.md` のような文書を誤検出せず，index 破損時に
   fail-closed することを検査する．gate の保護を散文で主張するだけにしないための担保．
-  到達できない assertion は `ok` ではなく `skip` と報告する（chktex 不在時は 68 pass + skip 6 ブロック）．
+  到達できない assertion は `ok` ではなく `skip` と報告する（chktex 不在時は 73 pass + skip 6 ブロック）．
 - スクリプトは Python 3 標準ライブラリのみで動くこと（依存追加は不可）．
 
 CI は 2 本に分かれる．`checks`（path filter なし，TeX なし，全 PR・merge queue・
