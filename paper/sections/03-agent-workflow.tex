@@ -1,17 +1,27 @@
 \section{Harness Design for Formalization with Agents}\label{sec:workflow}
 
-% The proposed architecture figure is tracked in a separate figure Issue.
-% Do not add a rendered figure or a figure reference until the author supplies
-% the artwork.
-%
-% Historical facts in this section are bound by CLM-007 to
-% analysis/workflow-evolution.md and the six coded session indices in
-% evidence/session-index/. The architecture in CLM-009 describes the final
-% arrangement assembled from controls introduced at different times.
+\begin{figure*}[t]
+% ALT: A synthesized three-layer agent harness reconstructed from controls
+% introduced over the Leray-Hopf campaign. The scientific owner defines and
+% adjudicates an issue contract. A model-independent orchestrator delegates
+% bounded work and selects applicable assurance. Implementation occurs in
+% an isolated worktree and undergoes semantic or mechanical review as
+% required by the changed artifact. Semantic findings return to both the
+% scientific owner and issue contract; technical findings return to
+% implementation. Runtime controls support orchestration and execution.
+\centering
+\includegraphics[width=\textwidth]{figures/leray-hopf-agent-harness.pdf}
+\caption{Synthesized end-state architecture of the agent harness. Under the scientific owner's authority, an orchestrator routes each GitHub Issue through an implementing Git worktree and pull request. Semantic feedback returns to the owner and issue contract, while technical rework returns to the worktree. Mechanical and semantic checks are selected conditionally according to the changed artifact. Runtime governance supports execution beneath orchestration. Individual controls entered the project at different stages across the campaign.}\label{fig:agent-harness}
+\end{figure*}
 
-This section describes the harness at the end of the project. Its controls
-were introduced incrementally, including changes made in response to the
-incidents in Section~\ref{sec:incidents}. % CLAIM: CLM-007, CLM-009
+% Mapping: CLM-007, CLM-009 ← analysis/workflow-evolution.md,
+% session indices 74aab39b 90fa24bb 7e6156bf cd98f32a 7dbee3de 8aed0316.
+Figure~\ref{fig:agent-harness} illustrates the synthesized end-state
+architecture of the harness. Its individual controls were introduced
+incrementally over the course of the campaign, including changes made
+in response to the incidents in Section~\ref{sec:incidents}; the
+diagram reconstructs this final configuration rather than an
+unvarying structure. % CLAIM: CLM-007, CLM-009
 
 The work ran across two local computers and an isolated development
 container on a virtual private server (VPS). Many parallel orchestration
