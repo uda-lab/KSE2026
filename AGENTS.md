@@ -32,12 +32,14 @@
 - `make integrity` — claim リンク検査 + raw ログ漏洩ガード + 公開領域の redaction scan．
   TeX を必要としない 3 つの hard gate をまとめたもの．commit 前に **`make integrity` と
   `make lint` の両方**を通す（CI の `checks` workflow はこの 2 つと `make selftest` を実行する）．
-- `make selftest` — gate 機構自体の回帰テスト（`scripts/test_ci_gates.sh`，28 ケース）．
-  chktex を PATH から外して lint gate が実際に落ちること，file list が空になった lint・
-  prose scanner・redaction scan が「何も読まずに pass」しないこと，leakage guard が
-  大文字拡張子・`Private/` 等の大小差・圧縮ログ（`.jsonl.gz`）を検出し index 破損時に
+- `make selftest` — gate 機構自体の回帰テスト（`scripts/test_ci_gates.sh`，40 ケース）．
+  chktex を PATH から外して lint gate が実際に落ちること，既知欠陥を含む fixture を
+  lint させて chktex が「何も検査していない」状態を検出できること，file list や scan
+  scope が空・不完全になった lint・prose scanner・redaction scan が「何も読まずに pass」
+  しないこと，leakage guard が大文字拡張子・`Private/` 等の大小差・圧縮ログ
+  （`.jsonl.gz`）を検出しつつ `*.jsonl.md` のような文書を誤検出せず，index 破損時に
   fail-closed することを検査する．gate の保護を散文で主張するだけにしないための担保．
-  到達できない assertion は `ok` ではなく `skip` と報告する（chktex 不在時の lint 分岐など）．
+  到達できない assertion は `ok` ではなく `skip` と報告する（chktex 不在時は 38 + skip 2）．
 - スクリプトは Python 3 標準ライブラリのみで動くこと（依存追加は不可）．
 
 CI は 2 本に分かれる．`checks`（path filter なし，TeX なし，全 PR・merge queue・
@@ -46,9 +48,11 @@ required check の対象．`paper`（`paper/**`・`Makefile`・`.github/workflow
 を**変更した** PR と `main` push，および手動 dispatch）が PDF をビルドする．
 path filter の付いた workflow を required check にすると，該当パスを触らない PR で
 status が永久に pending となり merge を塞ぐため，`paper` の `pdf` は required に
-しない．削除済み `build.yml` の **job 名**であった `paper` は過去の context として
-picker に残るが，二度と報告されないので required にしてはならない（`build`・
-`checks` は workflow 名であって context ではなく，picker にも現れない）．なお branch
+しない．削除済み workflow の **job 名**（`paper`，および TeX 供給ベンチマークの
+`apt-no-install-recommends`・`latex-action`・`texlive-container`）は最後の実行から
+1 週間ほど picker に残るが，二度と報告されないので required にしてはならない．
+`build`・`checks` は workflow 名であって context ではなく，picker にも現れない．
+required にしてよい context は必ず直近の PR が実際に報告したものから選ぶこと．なお branch
 protection は現状未設定であり，設定の可否は owner の判断．詳細は
 [.github/workflows/README.md](.github/workflows/README.md)．
 

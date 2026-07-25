@@ -101,8 +101,15 @@ def main() -> int:
         if not d.is_dir():
             ap.error(f"scan scope '{d}' is not a directory; "
                      "refusing to report a pass for a narrower scan than configured")
-        targets += [p for p in sorted(d.rglob("*"))
-                    if p.is_file() and p.name != ".gitkeep"]
+        found = [p for p in sorted(d.rglob("*"))
+                 if p.is_file() and p.name != ".gitkeep"]
+        # A directory that still exists but has been emptied is the same
+        # failure one step later: the scan reports success having read nothing
+        # from a scope it was told to cover.
+        if not found:
+            ap.error(f"scan scope '{d}' contains no files; "
+                     "refusing to report a pass for a scope that was not read")
+        targets += found
     if not targets:
         ap.error("nothing to scan")
 

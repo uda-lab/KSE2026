@@ -106,6 +106,47 @@ else
   echo "  skip  LINT_TEX assertion (needs chktex on PATH to reach the branch)"
 fi
 
+echo "== ChkTeX gate: chktex must actually be checking something =="
+# Every other ChkTeX assertion establishes that the binary is present,
+# executable and reading a plausible file list. None of them establishes that
+# it reports defects: a stub on PATH that exits 0 satisfies command -v,
+# --version, REQUIRE_CHKTEX and the file-list checks at once. Lint a fixture
+# with a known Warning 26 and require the failure.
+if command -v chktex >/dev/null 2>&1; then
+  fixture="$tmp/known-defect.tex"
+  printf '\\documentclass{article}\\begin{document}\nfoo ,bar\n\\end{document}\n' >"$fixture"
+  chk_out=$(chktex -q -n8 -n9 -n12 -n13 -n17 -n36 "$fixture" 2>&1)
+  chk_rc=$?
+  if [ "$chk_rc" -eq 0 ]; then
+    bad "chktex reports a known defect (rc=0 — chktex is not checking anything)"
+  else
+    ok "chktex reports a known defect (rc=$chk_rc)"
+  fi
+  case $chk_out in
+    *"Warning 26"*) ok "chktex names the expected warning" ;;
+    *) bad "chktex failed but not with Warning 26: $chk_out" ;;
+  esac
+else
+  echo "  skip  chktex content assertion (chktex not installed here)"
+fi
+
+echo "== ChkTeX gate: the file list must be regular files and complete =="
+if command -v chktex >/dev/null 2>&1; then
+  # A directory is readable, and chktex exits 0 after failing to open it. This
+  # is why the recipe tests -f rather than -r.
+  mkdir -p "$tmp/decoy.tex"
+  out=$( (cd -- "$repo" && make lint LINT_TEX="paper/main.tex $tmp/decoy.tex" 2>&1) )
+  check_msg "a directory in LINT_TEX is rejected" 2 "$?" "not a regular file" "$out"
+
+  # A tracked section absent from the lint list would go unlinted. Counting
+  # cannot see this, so the recipe compares the sets.
+  out=$( (cd -- "$repo" && make lint LINT_TEX='paper/main.tex paper/sections/01-introduction.tex' 2>&1) )
+  check_msg "a tracked section missing from LINT_TEX is rejected" 2 "$?" \
+    "tracked by git but absent" "$out"
+else
+  echo "  skip  LINT_TEX file-list assertions (need chktex to reach the branch)"
+fi
+
 echo "== prose scanner: an empty sections/ must not shrink the gate =="
 # The other half of `make lint` discovers its own file list from a glob, so it
 # had the identical "passed having read almost nothing" hole: with
@@ -118,12 +159,45 @@ prose_out=$( (cd -- "$pw" && python3 scripts/check_prose_style.py 2>&1) )
 check_msg "prose scanner rejects an empty sections/" 2 "$?" \
   "matched nothing" "$prose_out"
 
+# The glob can also match something that is not a readable regular file. The
+# count assertion passes in that case, so the readability check is separate.
+pw2="$tmp/prose2"
+mkdir -p "$pw2/scripts" "$pw2/paper/sections"
+cp -- "$repo/scripts/check_prose_style.py" "$pw2/scripts/"
+cp -- "$repo/paper/main.tex" "$pw2/paper/"
+mkdir -p "$pw2/paper/sections/a.tex"
+ln -sf /nonexistent/dangling "$pw2/paper/sections/b.tex"
+prose_out=$( (cd -- "$pw2" && python3 scripts/check_prose_style.py 2>&1) )
+check_msg "prose scanner rejects a non-file in the glob" 2 "$?" \
+  "not a readable file" "$prose_out"
+
 echo "== redaction gate: a missing scan directory must not shrink the scan =="
 # Same class as the empty LINT_TEX list: redact_check.py used to treat a
 # missing --dir as zero files, so renaming a public directory narrowed one of
 # the three hard gates while it still reported success.
 red=$(cd -- "$repo" && python3 scripts/redact_check.py --dir paper --dir nosuchdir 2>&1)
 check_msg "redact_check rejects a missing --dir" 2 "$?" "is not a directory" "$red"
+
+# is_dir(), not exists(): a regular file has an empty rglob, so exists() would
+# accept it and contribute zero files while still reporting success.
+red=$(cd -- "$repo" && python3 scripts/redact_check.py --dir paper --dir Makefile 2>&1)
+check_msg "redact_check rejects a --dir that is a regular file" 2 "$?" \
+  "is not a directory" "$red"
+
+# A directory that exists but has been emptied is the same failure one step
+# later: a configured scope contributing nothing, with the gate still green.
+mkdir -p "$tmp/emptyscope"
+red=$(cd -- "$repo" && python3 scripts/redact_check.py --dir paper --dir "$tmp/emptyscope" 2>&1)
+check_msg "redact_check rejects an emptied --dir" 2 "$?" "contains no files" "$red"
+
+# The Makefile names the scope separately from the script, so it needs its own
+# assertion or a missing directory would surface only as an argparse error.
+mkred=$( (cd -- "$tmp" && mkdir -p mk && cd mk && cp -- "$repo/Makefile" . \
+  && mkdir -p scripts claims analysis provenance notes paper \
+  && cp -- "$repo/scripts/redact_check.py" scripts/ \
+  && make redact 2>&1) )
+check_msg "make redact names a missing scope directory" 2 "$?" \
+  "redaction scope 'evidence' is missing" "$mkred"
 
 echo "== leakage guard =="
 
@@ -190,7 +264,17 @@ d=$(mkrepo); check "'privately/' is not private/" 0 "$(guard_rc "$d" "privately/
 d=$(mkrepo); check "gzipped .jsonl.gz" 1 "$(guard_rc "$d" "s.jsonl.gz")"
 d=$(mkrepo); check "backup .jsonl.bak" 1 "$(guard_rc "$d" "s.jsonl.bak")"
 d=$(mkrepo); check "compressed .NDJSON.zst" 1 "$(guard_rc "$d" "s.NDJSON.zst")"
+d=$(mkrepo); check "rotated .jsonl.1" 1 "$(guard_rc "$d" "s.jsonl.1")"
 d=$(mkrepo); check "plain .json is not JSON Lines" 0 "$(guard_rc "$d" "evidence/ok.json")"
+
+# Only a real archive/backup suffix is stripped. Documentation *about* a log is
+# not a log, and there is no exemption mechanism to appeal to if it were flagged.
+d=$(mkrepo); check "notes/transcript.jsonl.md is documentation" 0 "$(guard_rc "$d" "notes/transcript.jsonl.md")"
+d=$(mkrepo); check "schema.ndjson.md is documentation" 0 "$(guard_rc "$d" "evidence/schema.ndjson.md")"
+
+# git ls-files -z exists so that a newline in a path cannot truncate a name and
+# hide the extension. #61 tested this; keep it tested.
+d=$(mkrepo); check "filename containing a newline" 1 "$(guard_rc "$d" "$(printf 'weird\nname.jsonl')")"
 
 # The staging-failure sentinel must itself work, or every rc=0 case above is
 # only as trustworthy as an unchecked `git add`.
@@ -202,7 +286,9 @@ printf 'garbage' >"$d/.git/index"
 (cd -- "$d" && bash "$guard" >/dev/null 2>&1)
 check "corrupt index fails closed" 2 "$?"
 
-(cd -- "$tmp" && bash "$guard" >/dev/null 2>&1)
+# GIT_CEILING_DIRECTORIES stops the walk at $tmp. Without it this case is a
+# false failure whenever TMPDIR happens to sit inside someone's git tree.
+(cd -- "$tmp" && GIT_CEILING_DIRECTORIES="$tmp" bash "$guard" >/dev/null 2>&1)
 check "outside a git tree fails closed" 2 "$?"
 
 echo

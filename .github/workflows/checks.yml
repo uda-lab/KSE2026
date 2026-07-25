@@ -1,7 +1,7 @@
 # Lightweight integrity gate. Runs on every pull request, every merge-queue
 # entry, every push to main, and manual dispatch; installs no TeX Live, and
-# takes about 23 s (17-28 s over the 12 runs following the #61 split; see
-# .github/workflows/README.md).
+# takes about 22 s (median over the 20 successful runs following the #61 split,
+# range 17-28 s; see .github/workflows/README.md).
 #
 # This workflow is deliberately unfiltered by path: its `integrity` job is the
 # status context intended to be configured as a required check. A path-filtered

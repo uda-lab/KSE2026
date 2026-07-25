@@ -69,14 +69,26 @@ while IFS= read -r -d '' path; do
       continue
       ;;
   esac
-  # A gzipped or backed-up session log is still a session log, so a trailing
-  # archive/backup suffix does not exempt it. `.jsonlx` stays clean because the
-  # second pattern requires a literal dot after the extension. A bare `.json`
-  # file is deliberately NOT matched: the repository tracks legitimate JSON
-  # evidence, and JSON Lines is the form this gate is about.
+  # A gzipped or backed-up session log is still a session log, so one trailing
+  # archive/backup suffix is stripped before the extension test. The suffix list
+  # is explicit rather than `.*`: matching any trailing component would flag
+  # documentation such as `notes/transcript.jsonl.md`, which describes a log
+  # rather than being one, and there is no exemption mechanism to appeal to.
+  #
+  # `.jsonlx` stays clean because the test is on a full dot-delimited
+  # component. A bare `.json` file is deliberately NOT matched: the repository
+  # tracks legitimate JSON evidence, and JSON Lines is the form this gate is
+  # about. ${path%.*} is POSIX and works on Bash 3.2.
+  stem=$path
   case $path in
+    *.[gG][zZ] | *.[bB][zZ]2 | *.[xX][zZ] | *.[zZ][sS][tT] | *.[zZ][iI][pP] \
+      | *.[lL][zZ]4 | *.[bB][aA][kK] | *.[oO][lL][dD] | *.[oO][rR][iI][gG] \
+      | *.[0-9] | *.[0-9][0-9])
+      stem=${path%.*}
+      ;;
+  esac
+  case $stem in
     *.[jJ][sS][oO][nN][lL] | *.[nN][dD][jJ][sS][oO][nN]) leaked+=("$path") ;;
-    *.[jJ][sS][oO][nN][lL].* | *.[nN][dD][jJ][sS][oO][nN].*) leaked+=("$path") ;;
   esac
 done <"$tmp"
 

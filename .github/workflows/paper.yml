@@ -91,7 +91,11 @@ jobs:
       # Also repeated from checks.yml, for the same reason: without it a manual
       # dispatch of this workflow would validate the manuscript but not the
       # gate mechanisms, which is the "half a validation" this job exists to
-      # avoid. Adds ~3 s.
+      # avoid. Measured at 1 s.
+      #
+      # Note this widens what a `pdf` failure means: the job can now fail for a
+      # reason unrelated to the PDF. That is acceptable only because `pdf` must
+      # never be a required check — see .github/workflows/README.md.
       - name: Self-test the gate mechanisms
         run: make selftest
 

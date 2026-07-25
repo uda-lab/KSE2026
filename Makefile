@@ -39,34 +39,44 @@ lint:
 	python3 -m unittest scripts.test_check_prose_style
 	python3 scripts/check_prose_style.py
 ifdef CHKTEX
-	# chktex exits 0 on an input it cannot open, so an empty or stale file list
-	# would lint nothing and still pass. Assert the list before trusting it.
+	@# chktex exits 0 on an input it cannot open, so an empty or stale file list
+	@# would lint nothing and still pass. Assert the list before trusting it.
 	@if [ $(words $(LINT_TEX)) -lt 2 ]; then \
 		echo "error: LINT_TEX matched only '$(LINT_TEX)';" >&2; \
 		echo "paper/sections/*.tex found no files — has the layout moved?" >&2; \
 		exit 1; \
 	fi
-	# -f, not -r: a directory and /dev/null are both readable, and chktex exits
-	# 0 after failing to open either of them.
+	@# -f, not -r: a directory and /dev/null are both readable, and chktex exits
+	@# 0 after failing to open either of them.
 	@for f in $(LINT_TEX); do \
 		[ -f "$$f" ] || { echo "error: $$f is not a regular file" >&2; exit 1; }; \
 	done
-	# The count assertion above only proves the list is non-trivial. Cross-check
-	# it against what git actually tracks, so deleting sections without deleting
-	# them from the index cannot shrink the lint silently. Skipped outside a git
-	# tree and when LINT_TEX has been overridden for testing.
-	@if [ "$(origin LINT_TEX)" = file ] && git rev-parse --git-dir >/dev/null 2>&1; then \
-		tracked=$$(git ls-files 'paper/sections/*.tex' | wc -l); \
-		found=$$(echo $(wildcard paper/sections/*.tex) | wc -w); \
-		if [ "$$tracked" -ne "$$found" ]; then \
-			echo "error: paper/sections/*.tex: $$found on disk, $$tracked tracked in git;" >&2; \
-			echo "the lint scope and the repository disagree — resolve before linting" >&2; \
-			exit 1; \
-		fi; \
+	@# The assertions above only prove the list is non-trivial. This one proves it
+	@# is complete: every section file git tracks must actually be in LINT_TEX.
+	@#
+	@# Compare the sets, not the counts. Counting cancels — delete one tracked
+	@# section and add one untracked file and the totals still match while a file
+	@# goes unlinted. Note the direction: a tracked file missing from LINT_TEX is
+	@# an error, but an untracked new file is not, because it is still linted.
+	@# Requiring the reverse would fail every `make lint` run on a section that
+	@# has been written but not yet staged, which is the normal drafting state.
+	@#
+	@# :(glob) stops the pattern crossing / into subdirectories, where git's
+	@# default pathspec would match paper/sections/sub/a.tex and report a file as
+	@# missing that is merely nested.
+	@if git rev-parse --git-dir >/dev/null 2>&1; then \
+		for t in $$(git ls-files -- ':(glob)paper/sections/*.tex' 2>/dev/null); do \
+			case " $(LINT_TEX) " in \
+				*" $$t "*) ;; \
+				*) echo "error: $$t is tracked by git but absent from the lint list;" >&2; \
+					echo "it would go unlinted — has it been deleted from disk?" >&2; \
+					exit 1 ;; \
+			esac; \
+		done; \
 	fi
-	# ChkTeX warnings 8/9/12/13/17/36 are disabled because they conflate
-	# correct name/range dashes, math delimiters, and IEEE macros with prose
-	# defects. check_prose_style.py owns spaced prose dashes.
+	@# ChkTeX warnings 8/9/12/13/17/36 are disabled because they conflate
+	@# correct name/range dashes, math delimiters, and IEEE macros with prose
+	@# defects. check_prose_style.py owns spaced prose dashes.
 	chktex -q -n8 -n9 -n12 -n13 -n17 -n36 $(LINT_TEX)
 else
 	@if [ -n "$(REQUIRE_CHKTEX)" ]; then \

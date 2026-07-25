@@ -3,9 +3,11 @@
 > **If you are enabling branch protection, read
 > [Contexts that must never be required](#contexts-that-must-never-be-required)
 > first.** The only status context that is safe to require is **`integrity`**.
-> Requiring `paper` deadlocks every pull request permanently; requiring `pdf`
-> deadlocks every pull request that does not touch the manuscript. Both are
-> offered by GitHub's required-checks picker and both look legitimate.
+> Requiring `pdf` deadlocks every pull request that does not touch the
+> manuscript. Requiring `paper` — or any other job name left behind by a
+> deleted workflow — deadlocks every pull request permanently. Several such
+> names are offered by GitHub's required-checks picker for about a week after
+> their last run, and they all look legitimate.
 
 Two workflows, split by cost. `checks` is cheap and unconditional; `paper` is
 expensive and conditional. This file records why the split exists, why the
@@ -60,9 +62,16 @@ chktex: WARNING -- Unable to open the TeX file `paper/nosuch/*.tex'.
 
 The `Makefile` therefore expands `LINT_TEX` with `$(wildcard)` rather than
 passing a glob to `chktex`, and the recipe refuses to run unless the list has
-more than one entry, every entry is a regular file, and the number of section
-files on disk matches the number git tracks. Renaming `paper/sections/` fails
-the lint instead of silently emptying it.
+more than one entry, every entry is a regular file, and every section file git
+tracks is present in the list. Renaming `paper/sections/` fails the lint instead
+of silently emptying it.
+
+That last check compares *sets*, not counts, because counts cancel: delete one
+tracked section and add one untracked file and the totals still agree while a
+file goes unlinted. It is deliberately one-directional — a tracked file missing
+from the list is an error, an untracked new file is not, because the untracked
+file is still linted and the alternative would fail every `make lint` run on a
+section that has been drafted but not yet staged.
 
 **The same hole existed in two sibling gates and is closed the same way.**
 "Discovers its own inputs, then reports success having read almost none of
@@ -74,19 +83,30 @@ this section went looking for it elsewhere and found it twice:
   (1 TeX files)` and exited 0. It now requires at least two files.
 - `redact_check.py` treated a missing `--dir` as zero files and only errored
   when *every* directory was absent, so renaming a public directory narrowed
-  one of the three hard gates while it still passed — measured at 66 files
-  scanned before and 27 after, exit 0 both times. A missing scan directory is
-  now an error.
+  one of the three hard gates while it still passed — renaming `evidence/`
+  alone took the scan from 66 files to 32, exit 0 both times. A missing scan
+  directory, a `--dir` that is a regular file, and a directory that exists but
+  is empty are all errors now.
 
-All of these are covered by `make selftest`, which both workflows run. It
-removes `chktex` from `PATH` and asserts the gate fails, drives the leakage
-guard through its uppercase, case-variant `private/`, compressed-log, exemption
-and fail-closed cases, and asserts the two file-list guards above. Each case
-asserts the *reason* for a failure, not just its exit status, because several
-of these gates fail with the same status for unrelated causes; where an
+All of these are covered by `make selftest`, which both workflows run — 40
+cases. It removes `chktex` from `PATH` and asserts the gate fails, lints a
+fixture with a known defect so that a `chktex` which checks nothing is caught,
+drives the leakage guard through its uppercase, case-variant `private/`,
+compressed-log, documentation-lookalike, newline-in-path, exemption and
+fail-closed cases, and asserts each file-list and scan-scope guard above. Each
+case asserts the *reason* for a failure, not just its exit status, because
+several of these gates fail with the same status for unrelated causes; where an
 assertion is unreachable in the current environment the suite prints `skip`
-rather than `ok`. Asserting a protection in prose is what let the previous
-guard stay broken.
+rather than `ok`, so a `chktex`-free host reports 38 + 2 skips rather than a
+misleading 40.
+
+The coverage claim is itself checked by mutation rather than asserted: deleting
+or weakening each guard individually — `-f` to `-e`, `is_dir` to `exists`, the
+word-count bound, the git set comparison, the scan-scope loops, each leakage
+pattern — turns the suite red. That check found three guards this file had
+already described as covered when they were not. Asserting a protection in
+prose is what let the original guard stay broken; asserting that a *test*
+covers something is the same mistake one level up.
 
 The three TeX-free gates are defined once, in the `integrity` target of the
 `Makefile`, so CI and local runs cannot drift apart.
@@ -129,9 +149,15 @@ roughly the last week, including ones that will never be reported again.
 | --- | --- | --- | --- |
 | `integrity` | yes | **require this one** | job in `checks.yml`; no path filter, so it always reports |
 | `pdf` | yes | never require | job in `paper.yml`; path-filtered, so it reports nothing at all on pull requests that do not touch the manuscript |
-| `paper` | yes, for about a week after the last pre-#61 run | never require | the **job** name of the deleted `build.yml`. A workflow named `paper` still exists, so this looks current. It will never be reported again |
-| `build` | no | not a context | the deleted **workflow**'s name. Verified over 16 sampled pre-#61 commits: each reports a check-run named `paper` — several report it twice, from the push/pull_request double-trigger #61 removed, and some also carry `copilot-pull-request-reviewer` — and none reports `build` |
+| `paper` | yes, for about a week after the last pre-#61 run (last reported 2026-07-22) | never require | the **job** name of the deleted `build.yml`. A workflow named `paper` still exists, so this looks current. It will never be reported again |
+| `apt-no-install-recommends` | yes, until ~2026-07-31 | never require | a job in the TeX-provisioning benchmark workflow, deleted once its numbers were recorded. Last reported 2026-07-24 |
+| `latex-action` | yes, until ~2026-07-31 | never require | same benchmark workflow |
+| `texlive-container` | yes, until ~2026-07-31 | never require | same benchmark workflow |
+| `copilot-pull-request-reviewer` | yes, until ~2026-07-27 | never require | an app-supplied context, not one of ours. Copilot was retired as a reviewer, so it will not reappear. Last reported 2026-07-20 |
+| `build` | no | not a context | the deleted **workflow**'s name. Verified over 38 sampled pre-#61 commits: each reports a check-run named `paper` — several report it twice, from the push/pull_request double-trigger #61 removed — and none reports `build` |
 | `checks` | no | not a context | a workflow name, not a job name. Nothing ever reports under it |
+
+The general rule this table is an instance of: **deleting a workflow does not remove its job names from the picker.** They stay selectable for roughly a week after their last run, look exactly like live contexts, and can never be satisfied again. Any workflow deleted in future adds rows here for that week. This is why the reproduction command below, run against a *recent* pull request, is the authority rather than the picker.
 
 `paper` is the dangerous one, and it is dangerous specifically because of how
 this repository changed. Before #61 the workflow was named `build` and its job
@@ -188,19 +214,45 @@ above depends on the merge being performed against the pull request, where
 `paper` has reported. A merge queue merges the queue entry instead, and
 `paper.yml` has no `merge_group` trigger, so the PDF would be validated only on
 the pre-merge head and then again by `push: branches:[main]` after it has
-already landed. If a merge queue is ever enabled, add `merge_group` to
-`paper.yml` at the same time — its path filter still applies, so non-manuscript
-entries stay free.
+already landed. If a merge queue is ever enabled, decide deliberately what to
+do about `paper.yml`, and note that the obvious move does not work:
+**`merge_group` cannot be path-filtered.** It accepts `types` and `branches`
+only, so adding it to `paper.yml` runs the full ~90 s TeX build on *every*
+queue entry, not just manuscript ones. Verified with `actionlint` 1.7.7:
 
-**What no arrangement of these guards can catch.** Every ChkTeX protection here
-establishes that the binary is present, executable, and reading a plausible file
-list. None of them establishes that it is really checking anything: a stub on
-`PATH` that exits 0 satisfies `command -v`, `--version`, `REQUIRE_CHKTEX` and
-the file-list assertion simultaneously. Verified — `printf '#!/bin/sh\nexit 0\n'`
-as `chktex` gives `make lint REQUIRE_CHKTEX=1` exit 0. Closing that would need an
-assertion about content, such as linting a fixture with a known defect and
-requiring the failure. It is recorded here rather than left for someone to
-discover the way the `| head -1` defect was discovered.
+```
+$ actionlint mg.yml     # on: merge_group: paths: ['paper/**']
+mg.yml:4:5: "paths" filter is not available for merge_group event.
+it is only for push, pull_request, pull_request_target events [events]
+```
+
+The trade is therefore a TeX build per queue entry against no PDF validation
+at merge time. Neither is obviously right, which is why this is left as a
+decision rather than a recommendation.
+
+**The gate that was only asserted, and now is not.** Every other ChkTeX
+protection establishes that the binary is present, executable, and reading a
+plausible file list. None of them establishes that it is *checking* anything: a
+stub on `PATH` that exits 0 satisfies `command -v`, `--version`,
+`REQUIRE_CHKTEX` and the file-list assertions simultaneously, and an earlier
+revision of this file recorded that as an unavoidable residual. It was not
+unavoidable. `make selftest` now lints a fixture containing a known Warning 26
+and requires the failure:
+
+```
+$ printf '#!/bin/sh\nexit 0\n' > stub/chktex && chmod +x stub/chktex
+$ PATH=stub:$PATH make selftest | tail -3
+  FAIL  chktex reports a known defect (rc=0 — chktex is not checking anything)
+  FAIL  chktex failed but not with Warning 26:
+38 passed, 2 failed
+```
+
+**What is still not caught.** `redact_check.py` asserts each scan directory
+exists and is non-empty, but cannot tell a legitimately deleted file from a
+silently lost one, so a *partial* shrink still passes. It also does not recurse
+into symlinked directories, so a symlink inside a scanned scope hides its
+contents. Both are stated rather than left to be discovered the way the
+`| head -1` defect was.
 
 ## Why execution frequency is constrained
 
@@ -236,21 +288,26 @@ explicit request, and losing one to another is worse than paying for both.
 
 The saving is concentrated in one step. In the old workflow the TeX Live
 installation took 80-90 s while every other step finished in about 4 s total.
-Measured on this repository over **the first runs after the #61 split, up to
-commit `aeeb465` (2026-07-25)** — the sample is stated because it is a fixed
-window, not a live figure; re-running the command below on a later population
-gives different numbers, and the medians have already moved by a second or two:
+Measured over **every successful run after the #61 split up to and including
+`ba7ac4e` (2026-07-25)** — the whole population in that window, not a prefix of
+it, so the figures are reproducible from the boundary rather than from whatever
+`--limit` happens to return today:
 
 | job | wall time | of which TeX provisioning |
 | --- | --- | --- |
 | old combined `build` | 95-105 s | 80-90 s |
-| new `checks` | 23 s median (17-28, n=12) | none (ChkTeX install 12-13 s) |
-| new `paper` | 90 s median (78-142, n=8) | 70-90 s |
+| new `checks` | 22 s median (17-28, n=20) | none (ChkTeX install 10-18 s) |
+| new `paper` | 89.5 s median (78-142, n=14) | 70-90 s |
 
 ```sh
 gh run list --repo uda-lab/KSE2026 --workflow checks.yml \
-  --status completed --json createdAt,updatedAt --limit 12
+  --status completed --json createdAt,updatedAt,conclusion,headSha --limit 60
 ```
+
+These will drift as runs accumulate. Treat the window, not the number, as the
+claim: an earlier revision of this table quoted `n=12` and a 23 s median, which
+were the first twelve runs only and had already stopped matching the command
+printed beside them.
 
 Cancellation was verified on run 30117462984: a second push arrived 53 s into
 the TeX installation, and the run was cancelled with the lint, verification,
