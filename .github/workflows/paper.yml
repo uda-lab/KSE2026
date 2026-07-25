@@ -5,8 +5,8 @@
 # to main touching nothing else does not run this); and manual dispatch, which
 # is unfiltered and always runs.
 #
-# Measured on this repository: installing the TeX Live subset costs 80-90 s per
-# run, while every other step in the old combined workflow finished in about
+# Measured on this repository: installing the TeX Live subset costs 65-110 s per
+# run (median 77), while every other step in the old combined workflow finished in about
 # 4 s total. Constraining when this workflow runs is therefore where the saving
 # is, which is why the trigger set below is narrow.
 #

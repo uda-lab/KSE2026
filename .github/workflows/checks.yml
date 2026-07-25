@@ -1,7 +1,7 @@
 # Lightweight integrity gate. Runs on every pull request, every merge-queue
 # entry, every push to main, and manual dispatch; installs no TeX Live, and
-# takes about 22 s (median over the 20 successful runs following the #61 split,
-# range 17-28 s; see .github/workflows/README.md).
+# takes about 22 s (17-28 s observed across every successful run as of
+# 2026-07-25; see .github/workflows/README.md).
 #
 # This workflow is deliberately unfiltered by path: its `integrity` job is the
 # status context intended to be configured as a required check. A path-filtered
@@ -17,7 +17,7 @@ on:
     branches: [main]
   pull_request:
   # Required for a merge queue. GitHub evaluates required checks against the
-  # refs/gh-readonly-queue/... ref, and a workflow that does not trigger on
+  # refs/heads/gh-readonly-queue/... ref, and a workflow that does not trigger on
   # merge_group reports nothing there. "Require merge queue" sits beside
   # "Require status checks to pass" in the Rulesets UI, so enabling both without
   # this trigger would time out every queue entry and block all merges — the
@@ -48,7 +48,7 @@ permissions:
 jobs:
   integrity:
     runs-on: ubuntu-latest
-    # This job takes ~23 s. Without a bound, a wedged apt-get holds a runner
+    # This job takes ~22 s. Without a bound, a wedged apt-get holds a runner
     # for the 6-hour default, and on a required check a very long run is
     # indistinguishable from the permanent pending state this split exists to
     # avoid. cancel-in-progress only helps when a newer commit arrives.
@@ -83,10 +83,12 @@ jobs:
       - name: Lint prose and LaTeX
         run: make lint REQUIRE_CHKTEX=1
 
-      # Tests the gate mechanisms themselves: that the ChkTeX gate fails when
-      # the binary is absent or the file list is stale, and that the leakage
-      # guard catches uppercase extensions and fails closed. Without this the
-      # protections are only asserted in prose, which is how the previous
-      # version of that guard stayed broken.
+      # Tests the gate mechanisms themselves, and that the make targets above
+      # still invoke them: that the ChkTeX gate fails when the binary is absent,
+      # the file list is stale, or the binary is a no-op stub; that the leakage
+      # guard catches uppercase and archived extensions and fails closed; and
+      # that a defect planted in a scratch copy still fails `make lint` and
+      # `make integrity`. Without this the protections are only asserted in
+      # prose, which is how the previous version of that guard stayed broken.
       - name: Self-test the gate mechanisms
         run: make selftest

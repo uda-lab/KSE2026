@@ -64,14 +64,35 @@ ifdef CHKTEX
 	@# :(glob) stops the pattern crossing / into subdirectories, where git's
 	@# default pathspec would match paper/sections/sub/a.tex and report a file as
 	@# missing that is merely nested.
-	@if git rev-parse --git-dir >/dev/null 2>&1; then \
-		for t in $$(git ls-files -- ':(glob)paper/sections/*.tex' 2>/dev/null); do \
-			case " $(LINT_TEX) " in \
-				*" $$t "*) ;; \
-				*) echo "error: $$t is tracked by git but absent from the lint list;" >&2; \
-					echo "it would go unlinted — has it been deleted from disk?" >&2; \
-					exit 1 ;; \
-			esac; \
+	@#
+	@# core.quotePath=false: git C-quotes non-ASCII paths by default, which never
+	@# match the raw bytes from $(wildcard). In a repository whose prose is
+	@# Japanese, a section named in Japanese would otherwise be reported missing
+	@# while sitting on disk, and make lint could not be made to pass.
+	@#
+	@# The ls-files status is checked rather than discarded. Sending its stderr
+	@# to /dev/null turned a corrupt or unreadable index into an empty list and
+	@# a silent pass — fail-open, in the one guard whose sibling in
+	@# check_no_raw_logs.sh fails closed on exactly that condition.
+	@# set -f: unquoted expansion in `for t in $$tracked` is subject to pathname
+	@# expansion as well as word splitting, so a tracked name containing ? or *
+	@# would glob against the working tree and silently resolve to a *different*
+	@# file that does exist — hiding its own absence.
+	@set -f; \
+	if git rev-parse --git-dir >/dev/null 2>&1; then \
+		tracked=$$(git -c core.quotePath=false ls-files -- ':(glob)paper/sections/*.tex') \
+			|| { echo "error: git ls-files failed; cannot verify the lint list is complete" >&2; \
+				exit 1; }; \
+		for t in $$tracked; do \
+			hit=0; \
+			for f in $(LINT_TEX); do \
+				if [ "$$f" = "$$t" ]; then hit=1; break; fi; \
+			done; \
+			if [ "$$hit" -eq 0 ]; then \
+				echo "error: $$t is tracked by git but absent from the lint list;" >&2; \
+				echo "it would go unlinted — has it been deleted from disk?" >&2; \
+				exit 1; \
+			fi; \
 		done; \
 	fi
 	@# ChkTeX warnings 8/9/12/13/17/36 are disabled because they conflate
