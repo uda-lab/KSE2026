@@ -181,15 +181,16 @@ passage **282 件**を掲載する（下表の行数を機械計数した値）�
 解消した**が，各ファイル内での passage の取りこぼしが残っている可能性は依然として
 排除できない（§7）．
 
-**ファイル単位の帰属（48 ファイル全件）**: 台帳に行を持たないファイルは以下の **3 件**
-だけであり，残る 45 ファイルはいずれも 1 行以上を持つ．「走査したが該当なし」と「走査
-していない」を読者が区別できるよう，3 件の理由を明示する．
+**ファイル単位の帰属（48 ファイル全件）**: 台帳に行を持たないファイルは以下の **4 件**
+だけであり，残る 44 ファイルはいずれも 1 行以上を持つ．「走査したが該当なし」と「走査
+していない」を読者が区別できるよう，4 件の理由を明示する．
 
 | 台帳に行を持たないファイル | 理由 |
 |---|---|
 | `paper/sections/02-formalization.tex` | 役割・権限・人間行為の passage が実際に 0 件．唯一の候補語 `manual build attestation` は CI の dispatch モード名であって人手ビルドではない（`claims/formalization-scope.md` の同語も同じ理由で不採録だが，同ファイルは別の passage で 1 行を持つ） |
 | `analysis/project-timeline.md` | 唯一の候補語は `author date`（git のコミットメタデータ）であり，著者性とは無関係 |
 | `analysis/unresolved-questions.md` | 候補語の出現が 0 件（走査で確認） |
+| `evidence/README.md` | 候補語の出現が 0 件（走査で確認） |
 
 **行としては採らなかった語（誤検出の列挙）**: `.github/workflows/README.md` の
 `manual dispatch`（＝`workflow_dispatch`）；`notes/related-work.md`・
@@ -304,7 +305,7 @@ passage **282 件**を掲載する（下表の行数を機械計数した値）�
 | 04:82-86 | "A separate reviewer compared the public declaration inventory before and after the refactor." | ACT/ROL | 変更なし | 実行者はエージェント．中立な語 |
 | 04:99-100 | "the orchestrator misclassified a slow agent as inactive and assigned a replacement to the same Git worktree" | ACT | 変更なし | INC-005，primary |
 | 04:106-107 | "Monitoring had covered the visible Lean process rather than memory available to the entire container." | ACT/DSC | 変更なし | INC-005 |
-| 04:107-108 | "An owner requested a status check when only 606\,MiB remained available." | **ACT** | **変更なし（§4.1(b)，Wave C 申し送り）** | raw transcript 2026-07-18T07:40:10.101Z の owner 発話は `status` の 1 語．逐語の主張は**要求**であって**検出**ではなく，証拠が支えるのはまさにその範囲．ただし PR #59 が `incidental` と「オーケストレータの監視によるものではない」の 2 限定を落としたため，監視不備の文の直後にこの文が来ることで**能動的な読みが可能になっている**（§4.1(b)）．本 Wave では `paper/` を変更せず，限定の復元を Wave C／owner へ申し送る |
+| 04:107-108 | "An owner requested a status check when only 606\,MiB remained available." | **ACT** | **変更なし（§4.1(b)，Wave C 申し送り）** | raw transcript 2026-07-18T07:40:10.101Z の owner 発話は `status` の 1 語．逐語の主張は**要求**であって**検出**ではなく，証拠が支えるのはまさにその範囲．ただし PR #59 が `incidental` と「オーケストレータの監視によるものではない」の 2 限定を落としたため，監視不備の文の直後にこの文が来ることで**能動的な読みが可能になっている**（§4.1(b)）．本 PR では `paper/sections/04-incidents.tex` を変更せず，限定の復元を Wave C／owner へ申し送る |
 | 04:108-110 | "Inspection of each process working directory identified the fourteen stale chains, and the Linux control group counter confirmed intervention by the out of memory (OOM) killer." | ACT | 変更なし | エージェント実行．検査への帰属 |
 | 04:111-112 | "Because that counter was cumulative, it identifies the mechanism but not the number of kills in this incident." | DSC | 変更なし | INC-005 の confidence 注記を本文へ持ち込んでいる |
 | 04:113-114 | "Ownership returned to the original agent, the duplicate stopped, and the build completed under a global lock." | **ROL/ACT** | 変更なし | 所有権の移動をエージェント間の事象として述べており，人間の行為に帰属させていない．初稿はこの行を落としていた（独立レビュー指摘．台帳の網羅性のため追加） |
@@ -681,8 +682,9 @@ owner が知りえなかった 606 MiB という数値に索引づけている�
 
 **したがって処置は「変更なし」だが，含意の弱化ではなく強化として記録する．**
 Wave C の候補として，`incidental` に相当する限定（例: "A routine owner status check
-prompted a memory check"）の復元を owner へ申し送る．本 Wave では `paper/` を変更
-しない（§0 の範囲外であり，かつ復元の可否は owner の判断である）．
+prompted a memory check"）の復元を owner へ申し送る．本 PR では
+`paper/sections/04-incidents.tex` を変更せず（§0 の範囲外であり，かつ復元の可否は
+owner の判断である），`paper/main.tex` の匿名化メタデータ分岐だけを変更した．
 
 **成立しないこと**: owner がメモリー状態を検出したという主張は何も支持されず，corpus も
 それを主張していない．
@@ -873,7 +875,8 @@ evidence 手法の claim（contribution 3 が依拠する）を支えない．
 
 ## 6. 新規 claim の候補（登録は行わない）
 
-本監査の成果物はいずれも `paper/` の外にあるため，新規 claim は**必要ない**．
+本監査の新規成果物は `paper/main.tex` の匿名化メタデータ分岐を除き `paper/` の外にあり，
+新規の claim-bearing manuscript prose は導入していないため，新規 claim は**必要ない**．
 台帳から導かれうる候補 3 件は PR 本文で owner へ提示するにとどめ，
 `claims/paper-claims.md` には登録しない（`Status: candidate` の登録も凍結も owner の
 行為であり，`paper/` 側の本文を待たせる副作用がある）．候補の内容と証拠識別子は
