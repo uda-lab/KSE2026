@@ -1,80 +1,67 @@
-# Issue #58 figure draft — design note
+# Issue #58 figure draft - revised design note
 
-Status: **draft for scientific-owner review; not approved artwork**.
+Status: **draft for Author review; not approved artwork**.
 
-Two candidate figures are supplied. The recommended main-paper figure is
-`leray-hopf-agent-harness-draft.svg`, which emphasises the technical harness.
-`author-interface-provenance-draft.svg` is a separate communication/provenance
-figure informed by issues #66 and #70. Keeping them separate avoids making
-authority, transmission, implementation, and evidence arrows look interchangeable.
+The revision deliberately removes the evidence lane, release/attestation sequence,
+and optional ChatGPT-export linkage. Those items are either routine, one-off, or
+too weakly evidenced to justify space in a paper-scale architecture figure.
 
-## Visual hierarchy
+## Technical harness figure
 
-The lifecycle is the upper left-to-right path. The scientific owner sits above it
-as the source of mathematical scope and merge authority. The owner-defined GitHub
-workflow encloses the Issue, orchestrator, implementation worktree, pull-request
-candidate, and assurance gateway. This boundary predates the later Fable phases;
-the orchestrator is model-independent, with Fable shown only as a later-phase
-implementation.
+The main figure compresses the system into three layers:
 
-Colour and headings separate scientific authority, orchestration, implementation,
-semantic review, mechanical verification, runtime governance, and evidence
-capture. Shape and line style preserve the distinctions in grayscale.
+1. **Author authority** - the Author defines and adjudicates the mathematical
+   contract.
+2. **Orchestration** - a model-independent orchestrator decomposes the issue,
+   delegates bounded work, monitors progress, and selects assurance according to
+   the changed artifact.
+3. **Issue-scoped execution** - implementation occurs in an isolated worktree and
+   passes distinct semantic and mechanical assurance.
 
-## Arrow semantics
+Runtime governance is shown as a foundation under orchestration and execution,
+not as a separate evidence-style lane. It retains only the operational controls
+that materially shaped parallel Lean work: exclusive worktrees, a shared cache
+with a global build lock, and liveness/resource cleanup.
 
-Solid dark arrows are forward lifecycle transitions. Red arrows are findings that
-require rework: semantic findings return to both the scientific owner and the
-statement contract, whereas implementation or mechanical findings return to the
-issue-scoped worktree. Dotted teal arrows append records to the evidence rail.
-The release-candidate full build is deliberately separated from pull-request
-assurance.
+Solid arrows show forward delegation. Red arrows show rework. The semantic return
+uses a clear upper lane back to the Author and contract; the technical return is a
+short local loop back to implementation. No arrow crosses a box or label.
 
-## Conditional and mandatory controls
+Read-only scouting and statement refinement are compressed into one dashed,
+conditional control. Individual PR gates and release steps are omitted.
 
-The main lifecycle and artifact-selected assurance gateway are mandatory. Dashed
-boxes are conditional: read-only scouting, statement-contract refinement, and
-public-declaration comparison run only when repository assumptions, mathematical
-scope, or the changed public interface require them. Semantic review,
-Lean/build/axiom/release-surface checks, and the review-completion record remain
-available gateway controls, selected according to the changed artifact.
+## Author-intervention figure
+
+The companion figure uses only three main elements: **Author**, **ChatGPT decision
+support**, and **GitHub-mediated project execution**. It distinguishes two paths
+into the project workflow:
+
+- Author-issued text transmitted through the GitHub Connector;
+- direct Author instruction or correction.
+
+Review findings return to the Author through a separate upper lane. This expresses
+the role model in issue #66 without treating message counts or transmission
+channels as authority. Issue #70's proposed export reconstruction is omitted
+because it is optional, time-bounded, and not itself an operational feature of the
+harness.
 
 ## Paper-scale simplifications
 
-The execution plane is compressed into four groups rather than showing individual
-hosts, processes, locks, or caches. Evidence events are aggregated by record type
-instead of drawing one edge from every lifecycle node. The assurance controls are
-grouped under one gateway, and detailed retry loops are reduced to two feedback
-paths. Repository-specific model names, session identifiers, evidence codes, Issue
-numbers, and Lean declaration names are omitted.
+Model names, session identifiers, issue numbers, evidence codes, individual hosts,
+the release-attestation episode, and record-capture mechanics are absent. Fable's
+later-phase use and the historical introduction order belong in the caption or
+surrounding prose, not in the diagram topology.
 
-## Proposed accessible alternative text
+Proposed alternative text for the technical figure: A synthesized three-layer
+agent harness reconstructed from controls introduced over the Leray-Hopf campaign.
+The Author defines and adjudicates an issue contract. A model-independent
+orchestrator delegates bounded work and selects assurance. Implementation occurs
+in an isolated worktree and undergoes separate semantic and mechanical review.
+Semantic findings return to the Author; technical findings return to
+implementation. Runtime controls support orchestration and execution.
 
-Synthesized end-state architecture reconstructed from controls introduced at
-different stages of the Leray--Hopf campaign, rather than one unchanged campaign
-configuration. The scientific owner scopes a GitHub Issue and, when required, a
-statement contract. A model-independent orchestrator routes work through an
-issue-scoped Git worktree, pull-request candidate, artifact-selected assurance
-gates, merged project state, release candidate, full-build attestation, and
-attested release artifact. Semantic findings return to the owner and contract;
-implementation and mechanical findings return to the worktree. Separate rails
-show runtime governance and the capture of session, Issue, pull-request, review,
-build, and release evidence into a manifest that supports paper claims.
-
-## Companion communication/provenance figure
-
-The companion figure separates the owner's undivided final authority from the
-separable functions of ChatGPT decision support, Connector transmission, direct
-human intervention, orchestration, implementation, and review. It also shows issue
-#70's proposed ChatGPT-export linkage as a dashed, time-bounded conditional path;
-the drawing does not imply that the export exists, that a join will succeed, or
-that Connector attribution identifies who drafted a message.
-
-Proposed alternative text: The human scientific owner holds final authority.
-ChatGPT may investigate, synthesise, recommend, and draft; the GitHub Connector
-may transmit owner-issued text, while the owner can intervene directly. GitHub
-Issues and pull requests route work to orchestrators, implementers, and reviewers,
-whose findings return to the owner. Repository records flow to an evidence
-manifest. A private ChatGPT export may optionally support confidence-graded links
-to GitHub writes, but raw data remain private and channel evidence alone does not
-establish drafting authorship.
+Proposed alternative text for the companion figure: The Author retains final
+authority and may intervene directly. ChatGPT supports investigation, synthesis,
+recommendation, and drafting but has no independent final authority. Author-issued
+instructions reach the GitHub-mediated agent workflow either directly or through
+the GitHub Connector. Review findings and unresolved choices return to the Author.
