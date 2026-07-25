@@ -98,7 +98,7 @@
   <text x="471" y="282" text-anchor="middle" class="small">contract</text>
   <path d="M885 300 L967 300" class="flow"/>
   <text x="926" y="282" text-anchor="middle" class="small">task</text>
-  <text x="1315" y="195" text-anchor="middle" class="small">as applicable</text>
+  <text x="1315" y="176" text-anchor="middle" class="small">as applicable</text>
   <path d="M1185 282 L1198 282 L1198 239 L1207 239" class="flow conditional"/>
   <path d="M1185 282 L1198 282 L1198 334 L1207 334" class="flow conditional"/>
   <path d="M1420 239 L1432 239 L1432 287" class="join"/>
