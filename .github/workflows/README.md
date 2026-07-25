@@ -1,145 +1,130 @@
 # CI workflows
 
-Two workflows, split by cost. `checks` is cheap and unconditional; `paper` is
-expensive and conditional. This file records why the split exists, why the
-expensive one is constrained, and why the TeX installation was left alone.
+This repository uses two workflows with different cost and trigger policies.
+`checks` is the always-running, TeX-free gate. `paper` is the conditional PDF
+build. The current operational contract is recorded here; review history and
+mutation experiments belong in PR #69 and its evidence comments.
 
 ## The two workflows
 
-| workflow | trigger | installs TeX | typical duration |
-| --- | --- | --- | --- |
-| `checks` | every pull request, pushes to `main`, manual dispatch | no | ~22 s |
-| `paper` | pull requests and `main` pushes touching `paper/**`, `Makefile` or `.github/workflows/paper.yml`; manual dispatch | yes | ~100 s |
+| workflow | job / status context | trigger | TeX | timeout |
+| --- | --- | --- | --- | --- |
+| `checks` | `integrity` | every pull request, merge-queue entry, push to `main`, manual dispatch | no | 10 min |
+| `paper` | `pdf` | pull requests and `main` pushes touching the listed manuscript paths; manual dispatch | yes | 20 min |
 
-`checks` runs claim-link verification, the raw-log leakage guard, the redaction
-scan, the prose scanner and its unit tests, and ChkTeX. `paper` runs all of
-those again plus the PDF build, so that a manual dispatch or a `main` push is a
-complete validation on its own rather than half of one.
+`checks` runs:
 
-ChkTeX lives in the TeX-free workflow because the Debian `chktex` package is a
-standalone 240 kB binary whose only dependencies are `libc6`, `libpcre2-posix3`
-and `libtinfo6`; it does not pull in TeX Live. Keeping it in `checks` means the
-`make lint` gate added in #59 still runs on every pull request rather than only
-on manuscript changes. The install step calls `chktex --version` so that a
-silently failed install fails the job instead of letting `make lint` take its
-"chktex not installed; skipping" branch and pass a weaker gate.
+- `make integrity` — claim-link verification, raw-log leakage detection, and
+  the redaction scan;
+- `make lint REQUIRE_CHKTEX=1` — the prose scanner, its unit tests, and ChkTeX;
+- `make selftest` — regression tests for the gate mechanisms themselves.
 
-The three TeX-free gates are defined once, in the `integrity` target of the
-`Makefile`, so CI and local runs cannot drift apart.
+`paper` repeats those checks, then runs `make pdf` and uploads `build/main.pdf`.
+Pull-request artifacts are retained for 7 days; `main` and manual-dispatch
+artifacts for 30 days.
 
-## Branch protection: which workflow may be required
+The `paper` path filter is currently:
 
-**The `checks` workflow is the one to require. `paper` must not be required.**
+```text
+paper/**
+Makefile
+.github/workflows/paper.yml
+```
 
-The status context to name in a ruleset is the **job** name, not the workflow
-name. The job in `checks.yml` is `integrity`, so the required check to configure
-is `integrity` — confirmed on PR #65, where `gh pr checks` reported the context
-as `integrity`. Naming `checks` would configure a context that never reports and
-would itself cause the permanent-pending failure described below.
+For `paper`, a `push` branch filter and the path filter are combined: a push to
+`main` that touches none of those paths does not run the workflow. Manual
+dispatch is unfiltered. Tag pushes trigger neither workflow. The path list must
+cover every input read by the PDF build; adding a root `.latexmkrc`, shared
+`.sty`, bibliography, or figures directory outside `paper/` requires updating
+the workflow and this invariant together.
 
-GitHub does not report a neutral or passing status for a path-filtered workflow
-whose filter does not match — it reports nothing at all. A required check that
-is never reported stays pending forever, so making `paper`'s `pdf` job required
-would block every pull request that does not touch the manuscript. PR #65, a
-scripts-only pull request opened against the issue-61 branch, showed exactly
-this: the only status reported was `integrity`, and no `paper` status existed
-that a rule could ever have satisfied.
+## Gate contract
 
-`checks` has no path filter precisely so that it always reports, which is what
-makes it safe to require.
+ChkTeX is installed in the TeX-free job as a standalone package. Its install
+step uses `shell: bash`, which enables `pipefail`; the two required binaries are
+checked and executed separately. CI passes `REQUIRE_CHKTEX=1`, so an absent
+ChkTeX cannot be silently converted into a successful skip.
 
-### Residual gap, stated rather than papered over
+The Makefile also validates the ChkTeX input list before invoking it: the list
+must contain regular files, and every tracked `paper/sections/*.tex` file must
+be present. The prose scanner and redaction scanner apply analogous checks so a
+missing or empty configured scope cannot narrow a green run.
 
-The repository has **no branch protection configured at all**, before or after
-this change, so nothing here is enforced by GitHub today. This section states
-the intended policy for when protection is added, and enabling it is the
-repository owner's decision.
+`make selftest` exercises both the individual guards and their wiring. It
+checks that ChkTeX reads a known-defect fixture, that `make lint` and
+`make integrity` still invoke their configured checks, that each public
+redaction directory is scanned, that the raw-log guard detects case variants,
+archive/backup/rotation suffixes, and nested `private/` paths, and that broken
+Git metadata fails closed. The current suite reports 81 cases. The claim-link
+verifier is an existing Python program outside this PR's implementation diff;
+the suite verifies that `make integrity` invokes it with a malformed-claim
+fixture, while its internal parser semantics remain a separate follow-up test
+surface.
 
-The unavoidable consequence of the split is that `paper` cannot be enforced by
-branch protection. If a ruleset later requires only `integrity`, a manuscript
-pull request whose PDF build failed would not be blocked by GitHub alone.
+The raw-log guard treats tracked JSON Lines files and their compressed,
+rotated, backed-up, and archive-suffixed forms as leakage. It exempts only the
+tracked `private/README.md` placeholder. Documentation such as
+`transcript.jsonl.md` is not a log. The redaction scan covers exactly the
+directories named by `REDACT_DIRS` in `Makefile`:
 
-What does block it today is the merge procedure this repository actually uses:
-the `github-driven-workflow` gate refuses to merge unless every *reported* check
-on the pull request has succeeded, and `paper` does report on exactly the pull
-requests that change the manuscript. That is a procedural gate, not a
-server-side one, and it is worth knowing which is which.
+```text
+evidence claims analysis provenance notes paper
+```
 
-Closing the gap properly would mean an always-reported job that inspects the
-cumulative pull request diff and demands the PDF result only when manuscript
-inputs changed. That was deliberately not built here: issue #61 asks for an
-always-running lightweight required workflow plus a separate conditional PDF
-workflow, and adding branch-protection plumbing for protection that does not yet
-exist is outside its scope.
+## Branch protection and status contexts
 
-## Why execution frequency is constrained
+If branch protection is enabled, require exactly `integrity`. It is an
+unfiltered job in `checks.yml`, so it reports for every pull request. Do not
+require `pdf`: the path-filtered `paper` workflow reports nothing for unrelated
+pull requests. The repository currently has no branch protection configured;
+enabling it remains an owner decision.
 
-Two properties of the old single `build` workflow made it expensive.
-
-It triggered on both `push` and `pull_request` with no branch restriction, so
-every commit pushed to a pull-request branch ran the same job twice. Over the
-last 165 runs before this change that was 96 `push` runs against 69
-`pull_request` runs. `push` is now restricted to `main`, so a pull-request
-branch produces one run.
-
-It also had no `concurrency` group, so a run kept going after its commit had
-been superseded. Both workflows now key concurrency on the pull request number,
-falling back to the ref, with `cancel-in-progress: true`.
-
-The saving is concentrated in one step. In the old workflow the TeX Live
-installation took 80-90 s while every other step finished in about 4 s total.
-Measured on this repository:
-
-| job | wall time | of which TeX provisioning |
+| name | status | reason |
 | --- | --- | --- |
-| old combined `build` | 95-105 s | 80-90 s |
-| new `checks` | 22 s | none (ChkTeX install 12 s) |
-| new `paper` | ~100 s | 70-90 s |
+| `integrity` | require | live, unfiltered job in `checks.yml` |
+| `pdf` | never require | conditional job in `paper.yml` |
+| `paper` | never require | historical job name from the deleted `build.yml`; a workflow with this name is still present, so the picker is misleading |
+| `apt-no-install-recommends`, `latex-action`, `texlive-container` | never require | historical jobs from the removed TeX provisioning benchmark |
+| `copilot-pull-request-reviewer` | never require | external app context outside this repository's control |
+| `build`, `checks` | not status contexts | workflow names, not job names |
 
-Cancellation was verified on run 30117462984: a second push arrived 53 s into
-the TeX installation, and the run was cancelled with the lint, verification,
-redaction, PDF and upload steps all skipped.
+GitHub can keep historical job names in the required-check picker for a short
+period. Select a required context from a recent pull request's actual check
+run, not from a familiar workflow name:
 
-Note that `pull_request` path filters are evaluated against the pull request's
-cumulative diff against its base, not against the newest commit alone. A pull
-request that touches `paper/**` in any commit therefore rebuilds the PDF on
-every subsequent push. That is the intended behaviour: the artifact must
-correspond to the state that would be merged.
+```sh
+gh pr view <N> --repo uda-lab/KSE2026 --json statusCheckRollup \
+  --jq '.statusCheckRollup | map({name, workflowName})'
+```
 
-## Why a generic TeX image was not adopted
+`checks.yml` also listens for `merge_group`, so `integrity` reports for a merge
+queue entry. `paper.yml` is intentionally not a required check and has no
+`merge_group` trigger: GitHub does not support path filters on `merge_group`,
+so adding that trigger would run the expensive TeX build for every queue entry.
+If a merge queue is enabled, the owner must choose deliberately between that
+cost and accepting that the conditional PDF build is post-merge validation.
 
-Issue #61 requires that the `apt-get --no-install-recommends` installation not
-be replaced by a generic TeX image without measurement. The candidate routes
-were run as sibling jobs on identical cold `ubuntu-latest` runners in a single
-workflow run (30117463405) so that their timings are directly comparable.
+There is no server-side conditional required-check job today. Consequently,
+requiring only `integrity` would not by itself block a manuscript PR whose PDF
+build fails. The repository's current merge procedure checks every status that
+was actually reported, so `paper` failures block manuscript merges when the
+workflow runs. A future always-running aggregator could make that policy
+server-enforced; adding it is outside this CI follow-up.
 
-| route | provisioning | compile | total job |
-| --- | --- | --- | --- |
-| `apt-get --no-install-recommends` (current) | 70 s | 2 s | 74 s |
-| `xu-cheng/latex-action@v4` | 92 s (provision and compile combined) | — | 94 s |
-| `docker pull texlive/texlive:latest` | 107 s | 3 s | 112 s |
+## Concurrency and frequency
 
-The current installation is the fastest of the three. GitHub-hosted runners are
-ephemeral and have no warm image cache, so a generic TeX image pays its full
-pull cost on every run: `texlive/texlive:latest` is 5.53 GB, against 393 MB of
-TeX actually installed by the apt subset (381 MB `/usr/share/texlive`, 12 MB
-`/usr/share/texmf`). Adopting either image route would have made the expensive
-job 27% to 51% slower. Both image routes did produce a PDF — the benchmark ran
-`make pdf` in the container successfully — so this is a cost argument, not a
-correctness one.
+Both workflows cancel an older run when a newer run for the same PR, merge
+queue entry, or ref starts. This applies to pushes to `main`, which is safe
+because a commit reaches `main` only after its pull request checks. Manual
+dispatch includes `github.run_id` in its group, so an operator's full run is
+not cancelled by a push and separate manual runs do not cancel each other.
 
-The third candidate, a small repository-specific GHCR image rebuilt only when
-its Dockerfile changes, **was not measured.** Doing so requires publishing a
-package and wiring a build-on-change workflow, which the issue lists as
-optional and explicitly not required to close it. It is the one route that
-could plausibly beat 70 s, since a layer holding only the packages above would
-compress to well under the generic image. It was not pursued because the
-saving it competes for is now bounded by roughly 70 s on the minority of pull
-requests that touch the manuscript, against the standing cost of maintaining a
-Dockerfile, a registry package and a rebuild workflow. If manuscript-touching
-runs later become frequent enough for that trade to change, this is the
-measurement to take.
+The observed median durations as of 2026-07-25 were approximately 22 seconds
+for `checks` and 89 seconds for `paper`, including about 77 seconds of TeX
+provisioning. The path split keeps that provisioning off unrelated pull
+requests. The jobs have explicit timeouts so a wedged package install cannot
+hold a required check for GitHub's full default timeout.
 
-The measurement scaffold used for the table above lived in
-`tex-provisioning-benchmark.yml` and was removed once the numbers were
-recorded; the run it produced is referenced above and remains inspectable.
+The workflow intentionally does not create release archives. Tag pushes do not
+trigger either workflow; durable publication artifacts require a separate
+archival decision.
