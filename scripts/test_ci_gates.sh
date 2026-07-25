@@ -259,7 +259,7 @@ else
   # produce the failure.
   scanner="$wire/scripts/check_prose_style.py"
   cp -- "$scanner" "$scanner.orig"
-  python3 -c "p='$scanner'; open(p,'w').write(open(p).read().replace('LISTING_END = r\"\\\\end{lstlisting}\"', 'LISTING_END = r\"\\\\end{NEVERMATCHES}\"'))"
+  sed -i 's/^LISTING_END = .*/LISTING_END = r"\\end{NEVERMATCHES}"/' "$scanner"
   out=$( (cd -- "$wire" && make lint 2>&1) )
   check_msg "make lint runs the prose scanner unit tests" 2 "$?" "FAILED" "$out"
   mv -- "$scanner.orig" "$scanner"
@@ -337,7 +337,7 @@ guard_rc() {
     fi
     # Staging can report success and still track nothing (an ignored path
     # without -f, a path git rewrites). Require the file to be in the index.
-    if [ -z "$(git -C "$d" ls-files | grep -i "^$(dirname -- "$f" | sed 's/^[.]//;s|^/||')/$(basename -- "$f")" 2>/dev/null || git -C "$d" ls-files | grep -i "$(basename -- "$f")")" ]; then
+    if [ -z "$(git -C "$d" ls-files -- "$f")" ]; then
       echo 99
       return
     fi
@@ -359,22 +359,10 @@ d=$(mkrepo); check "filename containing a space" 1 "$(guard_rc "$d" "weird name.
 
 # private/ at other cases and depths. These are the ones a plain `git add .`
 # tracks, because .gitignore's `private/*` rule does not cover them either.
-is_cs=true
-_td=$(mkrepo)
-mkdir -p "$_td/case_test"
-if [ -d "$_td/CASE_TEST" ]; then is_cs=false; fi
-rm -rf "$_td"
-
 d=$(mkrepo); check "Private/ (capitalised)" 1 "$(guard_rc "$d" "Private/leak.txt")"
 d=$(mkrepo); check "PRIVATE/ (upper)" 1 "$(guard_rc "$d" "PRIVATE/leak.txt")"
 d=$(mkrepo); check "nested docs/private/" 1 "$(guard_rc "$d" "docs/private/leak.txt")"
-if $is_cs; then
-  d=$(mkrepo); check "Private/README.md is NOT the exemption" 1 "$(guard_rc "$d" "Private/README.md")"
-else
-  # On case-insensitive filesystems (e.g. macOS APFS), Private/ maps to private/ on disk,
-  # matching the exact lowercase exemption path.
-  check "Private/README.md is NOT the exemption" 1 1
-fi
+d=$(mkrepo); check "Private/README.md is NOT the exemption" 1 "$(guard_rc "$d" "Private/README.md")"
 d=$(mkrepo); check "'privately/' is not private/" 0 "$(guard_rc "$d" "privately/ok.md")"
 
 # A compressed or backed-up session log is still a session log.
