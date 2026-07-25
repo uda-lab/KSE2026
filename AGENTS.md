@@ -27,18 +27,35 @@
 
 - `make pdf` — LaTeX ビルド（latexmk/pdflatex 優先，tectonic fallback）．原稿を触ったら必ずビルドが通ることを確認．
 - `make verify` — claim ↔ evidence リンク検査．claims/ か paper/ を触ったら実行．
-- `make lint` — prose scanner の unittest + `check_prose_style.py` + chktex（存在する場合のみ）．
+- `make lint` — prose scanner の unittest + `check_prose_style.py` + chktex（存在する場合のみ．
+  `REQUIRE_CHKTEX=1` を付けると chktex 不在を skip ではなくエラーにする．CI はこの形で呼ぶ）．
 - `make integrity` — claim リンク検査 + raw ログ漏洩ガード + 公開領域の redaction scan．
-  TeX を必要としない 3 つの hard gate をまとめたもので，CI の `checks` workflow と
-  同一の内容を実行する．commit 前にこれを通す．
+  TeX を必要としない 3 つの hard gate をまとめたもの．commit 前に **`make integrity` と
+  `make lint` の両方**を通す（CI の `checks` workflow はこの 2 つと `make selftest` を実行する）．
+- `make selftest` — gate 機構自体の回帰テスト（`scripts/test_ci_gates.sh`，81 ケース）．
+  chktex を PATH から外して lint gate が実際に落ちること，既知欠陥を含む fixture を
+  lint させて chktex が「何も検査していない」状態を検出できること，file list や scan
+  scope が空・不完全になった lint・prose scanner・redaction scan が「何も読まずに pass」
+  しないこと，leakage guard が大文字拡張子・`Private/` 等の大小差・圧縮ログ
+  （`.jsonl.gz`）を検出しつつ `*.jsonl.md` のような文書を誤検出せず，index 破損時に
+  fail-closed することを検査する．gate の保護を散文で主張するだけにしないための担保．
+  到達できない assertion は `ok` ではなく `skip` と報告する（chktex 不在時は 73 pass + skip 6 ブロック）．
 - スクリプトは Python 3 標準ライブラリのみで動くこと（依存追加は不可）．
 
-CI は 2 本に分かれる．`checks`（path filter なし，TeX なし，全 PR で実行．status
-context は job 名の `integrity`）が required check の対象であり，`paper`
-（`paper/**`・`Makefile` 変更時のみ実行）が PDF をビルドする．path filter の付いた
-workflow を required check にすると，該当パスを触らない PR で status が永久に pending
-となり merge を塞ぐため，`paper` は required にしない．なお branch protection は現状
-未設定であり，設定の可否は owner の判断．詳細は
+CI は 2 本に分かれる．`checks`（path filter なし，TeX なし，全 PR・merge queue・
+`main` への push・手動 dispatch で実行．status context は job 名の `integrity`）が
+required check の対象．`paper`（`paper/**`・`Makefile`・`.github/workflows/paper.yml`
+を**変更した** PR と `main` push，および手動 dispatch）が PDF をビルドする．
+path filter の付いた workflow を required check にすると，該当パスを触らない PR で
+status が永久に pending となり merge を塞ぐため，`paper` の `pdf` は required に
+しない．削除済み workflow の **job 名**（`paper`，および TeX 供給ベンチマークの
+`apt-no-install-recommends`・`latex-action`・`texlive-container`）は最後の実行から
+1 週間ほど picker に残るが，二度と報告されないので required にしてはならない．
+外部アプリ由来の `copilot-pull-request-reviewer` も同様に required にしない
+（当リポジトリの制御下に無い）．
+`build`・`checks` は workflow 名であって context ではなく，picker にも現れない．
+required にしてよい context は必ず直近の PR が実際に報告したものから選ぶこと．なお branch
+protection は現状未設定であり，設定の可否は owner の判断．詳細は
 [.github/workflows/README.md](.github/workflows/README.md)．
 
 ## 原稿の規約

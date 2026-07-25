@@ -13,6 +13,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 TARGETS = [ROOT / "paper" / "main.tex", *sorted((ROOT / "paper" / "sections").glob("*.tex"))]
 
+# An unmatched glob yields an empty section list, which would quietly reduce
+# this gate to main.tex alone and still exit 0 — the same "reported a pass
+# without reading anything" failure the ChkTeX half of `make lint` was fixed
+# for. Assert the list is plausible instead of trusting the glob.
+MIN_TARGETS = 2
+
 FORBIDDEN = [
     ("spaced prose dash", re.compile(r" -- ")),
     ("casual scope phrase", re.compile(r"\bno more\b", re.IGNORECASE)),
@@ -81,6 +87,26 @@ def scan_lines(lines: list[str]) -> list[tuple[int, str]]:
 
 
 def main() -> int:
+    if len(TARGETS) < MIN_TARGETS:
+        print(
+            f"prose style check FAILED: only {len(TARGETS)} TeX file(s) found "
+            f"({', '.join(str(p.relative_to(ROOT)) for p in TARGETS)});",
+            file=sys.stderr,
+        )
+        print(
+            "paper/sections/*.tex matched nothing — has the layout moved? "
+            "Refusing to report a pass for a scan that read almost nothing.",
+            file=sys.stderr,
+        )
+        return 2
+
+    missing = [p for p in TARGETS if not p.is_file()]
+    if missing:
+        for path in missing:
+            print(f"prose style check FAILED: {path} is not a readable file",
+                  file=sys.stderr)
+        return 2
+
     findings = []
     for path in TARGETS:
         source = path.read_text(encoding="utf-8").splitlines()
