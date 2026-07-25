@@ -89,8 +89,11 @@ Wave A が確定させた伝送チャネル統計（`analysis/mediation-census-m
 **drift として成立すること**: connector 経由の issue 本文が，未着手作業量を過大に記述し
 （`leray-hopf#10`，`leray-hopf#12`），未コミットの進行中作業と衝突し（`leray-hopf#11`），
 Lean の signature を誤って引用した（`leray-hopf#13`）．6 件中 6 件が派遣前に scope 訂正を
-要した．**同じ trace が有効な仲介も示す**: issue 作成とエージェント派遣の間に，Lean
-ソースに基づく read-only の gate が置かれており，その訂正が issue 上に記録されている．
+要した．**同じ trace は是正機構が働いたことも示す**: issue 作成とエージェント派遣の
+間に，Lean ソースに基づく read-only の gate が置かれており，その訂正が issue 上に
+記録されている．**ただしこの gate は著者インターフェース側ではなく harness 側である**
+（投稿者は `uda-lab-agent`，`performed_via_github_app: null`）．インターフェースの
+有効性の証拠として数えてはならない．
 
 **成立しないこと**: 事前照合層がなければ訂正が見落とされたこと；無駄な作業が発生した
 こと（記録はない）；インターフェースと gate の寄与の比率．
@@ -310,16 +313,24 @@ freeze された claim 本文と Notes まで端から端まで追跡できる�
    `paper/sections/04-incidents.tex:46-49` に復活した一文がある．
 
 **Phase 5 にとっての意味**: draft から除かれていた自己に不利な失敗記録が，
-インターフェースを通じて伝送された指示の後に復活している．**復活が当該指示に
-応答したものであるという結びつけは推定である**（下の *evidence_type* を参照）ため，
-「指示が働いた」と断定はしない．時系列と内容の一致がある，というのが述べうる範囲である．
+インターフェースを通じて伝送された指示の後に復活している．ここは 2 つの主張に分けて
+述べる必要がある．
+
+1. **この指示が採用項目として台帳に記録されていること — primary（高）．**
+   `provenance/author-decisions.md:25` は owner が PR #59 コメントで 8 項目を採用した
+   ことを記録し，そのうちに「PR #177 の再発」が含まれる．`provenance/ai-use.md:46` は
+   その実装を「owner-approved response policy に従い…PR #177 再発…を同期」と記録して
+   いる．すなわち復活が当該指示に対応するものとして**リポジトリ上で採用記録されている**
+   ことは，推定ではなく台帳の記載である．
+2. **指示がなければ結果が違っていたか — 述べない．** 反実仮想であり，
+   PLAN.md §9 の禁止範囲に入る．
 
 **成立しないこと**: 脱落に気づいたのが誰か；他のレビュアーによって復活しなかったで
 あろうこと；レビュー過程の有効性に関する何か．
 
-*primary: 2 件のコメント本文と timestamp，`provenance/author-decisions.md` と
-`paper/sections/04-incidents.tex` の現在の記述 — 高．reconstructed: 文面の起草者，
-および復活が当該指示に応答して行われたこと — 中．*
+*primary: 2 件のコメント本文と timestamp，`provenance/author-decisions.md:25` と
+`provenance/ai-use.md:46` の採用記録，`paper/sections/04-incidents.tex` の現在の記述 —
+高．reconstructed: 指示文面の起草者 — 中．*
 
 ### T9 — インターフェースの能力境界が記録に残っている
 
@@ -413,8 +424,11 @@ merge 可です．修正後に approve します」と述べ，**承認を保留
 - **connector 作成の PR で unmerged のまま close されたものはない．** 両リポジトリに
   connector 作成の PR は `leray-hopf#177` と `KSE2026#59` の 2 件しかなく，どちらも merge
   されている．
-- **独立に数学的な当否を評価できた connector 発の主張は，検討に耐えた．** すなわち
-  `leray-hopf#158` の `p = q = 1` 反例は正しく，INC-001 の是正を駆動している．
+- **リポジトリが当否を確定させている connector 発の主張は，正しいものとして採録されて
+  いる．** `leray-hopf#158` の `p = q = 1` 反例は `evidence/incidents/INC-001.md:10` が
+  statement を偽と確定させた根拠として採録しており，INC-001 の是正を駆動している．
+  本書の著者が数学的当否を独立に評価したという主張ではない（それは `PLAN.md` §8 が
+  別の役割に割り当てている）．
   **これは「connector 発の技術的な誤りが無かった」という意味ではない**: T2 のとおり
   `leray-hopf#13` の issue 本文は Lean の signature を簡略化して誤引用しており，
   `leray-hopf#14` が提案した field は axiom を強めるものであった．いずれも

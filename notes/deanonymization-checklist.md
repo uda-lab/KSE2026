@@ -98,7 +98,7 @@ anchor とし，行番号は補助として括弧に添える．`\thanks{` は `
 | 22 | `paper/sections/03-agent-workflow.tex:34`，`paper/sections/05-discussion.tex:21` | `\texttt{github-driven-workflow}` | repo | 出る | プロジェクト固有の skill 名であり，検索により著者の公開リポジトリと相関しうる．一般名で記述するか残すかは判断事項 | しない — 個別対応 |
 | 23 | `paper/sections/03-agent-workflow.tex:110-124` | 期間・JPY 建て費用・USD 費用・token 数・時間 | affiliation（弱） | 出る | JPY 建ての請求と JST 助成が併存すると著者を日本に局在させる．#2a の抑止で大半は解消するが，期間は public repo の commit 日付と一致する | 部分的（#2a のみ） |
 | 24 | `paper/sections/03-agent-workflow.tex:44,117-119` | モデル名・クラウドベンダー名 | affiliation（極弱） | 出る | ベンダー名であって identity ではない．対応不要．完全性のため記載 | 該当なし |
-| 25 | `paper/sections/03-agent-workflow.tex:17-20,96`，`paper/sections/04-incidents.tex:96`，`paper/sections/06-conclusion.tex:13` | VPS，コンテナのメモリー上限 | affiliation（極弱） | 出る | 環境の指紋であって識別子ではない．対応不要 | 該当なし |
+| 25 | `paper/sections/03-agent-workflow.tex:17,18,20,96`，`paper/sections/04-incidents.tex:96,99,108,113`，`paper/sections/05-discussion.tex:37`，`paper/sections/06-conclusion.tex:13`（`grep -rniE 'VPS\|GiB\|MiB' paper/` の全 10 行） | VPS，コンテナのメモリー上限と各所のメモリー数値 | affiliation（極弱） | 出る | 環境の指紋であって識別子ではない．対応不要 | 該当なし |
 | 26 | ビルド出力の `/CreationDate`，`/ModDate` | `+09'00'` のタイムゾーン offset | affiliation（弱） | 出る（PDF メタデータ） | camera-ready を `SOURCE_DATE_EPOCH` + `FORCE_SOURCE_DATE` 付きでビルドするか `\pdfinfoomitdate=1` を置く | しない — **ビルド側で個別対応** |
 
 ### 検査して不在を確認した項目（対応不要）
@@ -139,8 +139,9 @@ PDF メタデータの `/Author` `/Title` `/Subject` `/Keywords` はすべて空
 - `paper/references.bib` の entry 19 件のうち，論文リポジトリに対応するものは **なし**．
   ビルド済み `.bbl` の引用キー 17 件にも該当なし．
 - `paper/` 内の URL は 2 件のみで，KSE2026 の URL は存在しない．
-- `zenodo` と `doi.org` はリポジトリ全体で **0 件**（`archival` は snapshot JSON 内に
-  出現するが DOI 文脈ではない）．**DOI は存在しない．**
+- `zenodo` と `doi.org` は，本書自身の記述（本節と §3 の選択肢 2）を除けばリポジトリ
+  全体で **0 件**である（`fe8fbeb` 時点では本書を含めて 0 件．`archival` は snapshot JSON
+  内に出現するが DOI 文脈ではない）．**DOI は存在しない．**
 - 相互確認: `provenance/source-inventory.md` は既に `uda-lab/KSE2026` を private と
   記録し，snapshot の再現には read 権限が要ると注記している．
 - `uda-lab/leray-hopf` は public であり，Lean ソース，タグ，Sections IV–V が引用する
