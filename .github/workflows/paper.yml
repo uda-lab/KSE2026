@@ -52,6 +52,8 @@ permissions:
 jobs:
   pdf:
     runs-on: ubuntu-latest
+    # This job takes ~90 s, most of it TeX provisioning. See checks.yml.
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -70,7 +72,12 @@ jobs:
           # resolves, so a single call would report success with chktex absent.
           command -v latexmk
           command -v chktex
+          # Both binaries are actually executed, not merely located: a package
+          # that installs but cannot load its shared libraries satisfies
+          # `command -v` and then exits 127 here. That distinction is only
+          # visible because `shell: bash` supplies pipefail.
           latexmk --version | head -1
+          chktex --version | head -1
 
       # Repeated from checks.yml so that a manual dispatch of this workflow, or
       # a push to main, is a complete validation on its own rather than half of
@@ -80,6 +87,13 @@ jobs:
 
       - name: Lint prose and LaTeX
         run: make lint REQUIRE_CHKTEX=1
+
+      # Also repeated from checks.yml, for the same reason: without it a manual
+      # dispatch of this workflow would validate the manuscript but not the
+      # gate mechanisms, which is the "half a validation" this job exists to
+      # avoid. Adds ~3 s.
+      - name: Self-test the gate mechanisms
+        run: make selftest
 
       - name: Build PDF
         run: make pdf

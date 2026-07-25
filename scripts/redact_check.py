@@ -92,7 +92,15 @@ def main() -> int:
     args = ap.parse_args()
 
     targets = list(args.files)
+    # A missing --dir contributes zero files rather than an error, so a renamed
+    # or deleted directory would silently shrink this gate's scope while it
+    # still reported success. Only an *entirely* empty target list used to be
+    # caught. Fail on each missing directory instead: a scan narrower than the
+    # one configured is not a pass.
     for d in args.dir:
+        if not d.is_dir():
+            ap.error(f"scan scope '{d}' is not a directory; "
+                     "refusing to report a pass for a narrower scan than configured")
         targets += [p for p in sorted(d.rglob("*"))
                     if p.is_file() and p.name != ".gitkeep"]
     if not targets:

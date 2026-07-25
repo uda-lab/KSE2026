@@ -1,6 +1,7 @@
-# Lightweight integrity gate. Runs on every pull request and on every push to
-# main, installs no TeX Live, and takes about 23 s (17-28 s observed over 12
-# runs; see .github/workflows/README.md).
+# Lightweight integrity gate. Runs on every pull request, every merge-queue
+# entry, every push to main, and manual dispatch; installs no TeX Live, and
+# takes about 23 s (17-28 s over the 12 runs following the #61 split; see
+# .github/workflows/README.md).
 #
 # This workflow is deliberately unfiltered by path: its `integrity` job is the
 # status context intended to be configured as a required check. A path-filtered
@@ -47,6 +48,11 @@ permissions:
 jobs:
   integrity:
     runs-on: ubuntu-latest
+    # This job takes ~23 s. Without a bound, a wedged apt-get holds a runner
+    # for the 6-hour default, and on a required check a very long run is
+    # indistinguishable from the permanent pending state this split exists to
+    # avoid. cancel-in-progress only helps when a newer commit arrives.
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 

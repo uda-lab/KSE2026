@@ -41,26 +41,42 @@ if ! git ls-files -z >"$tmp"; then
   exit 2
 fi
 
-# The private/ test stays case-sensitive because it mirrors the .gitignore rule,
-# which is itself case-sensitive. The extension test is case-folded: a log named
-# SESSION.JSONL is exactly as much of a leak as session.jsonl, and neither this
-# guard's first version nor the inline YAML it replaced caught the uppercase
-# form.
+# Both tests are case-folded, and the private/ test matches at any depth.
+#
+# An earlier version matched only a literal lowercase leading "private/",
+# reasoning that it mirrored the .gitignore rule. Mirroring .gitignore exactly
+# is what made it useless: the paths .gitignore covers already need `git add -f`
+# to become tracked, while the paths it misses — `Private/`, `PRIVATE/`,
+# `docs/private/` — are tracked by a plain `git add .` and were missed here too.
+# Verified before the fix: each of those three, containing a raw log line, gave
+# exit 0. Rule 1 is about raw-log content reaching Git, not about .gitignore
+# fidelity, so the guard is now strictly wider than .gitignore.
+#
+# Bracket classes rather than ${path,,}: case folding via parameter expansion
+# needs Bash 4, and on a Bash 3.2 host (stock macOS /bin/bash) it is a fatal
+# "bad substitution" exiting 1 — which this script's own contract defines as
+# "leakage found", turning a tooling failure into a false alarm.
 leaked=()
 while IFS= read -r -d '' path; do
+  # The exemption is the exact placeholder path only; Private/README.md or
+  # private/readme.md are not it.
   case $path in
     private/README.md) continue ;;
-    private/*)
+  esac
+  case $path in
+    [pP][rR][iI][vV][aA][tT][eE]/* | */[pP][rR][iI][vV][aA][tT][eE]/*)
       leaked+=("$path")
       continue
       ;;
   esac
-  # Bracket classes rather than ${path,,}: case folding via parameter expansion
-  # needs Bash 4, and on a Bash 3.2 host (stock macOS /bin/bash) it is a fatal
-  # "bad substitution" exiting 1 — which this script's own contract defines as
-  # "leakage found", turning a tooling failure into a false alarm.
+  # A gzipped or backed-up session log is still a session log, so a trailing
+  # archive/backup suffix does not exempt it. `.jsonlx` stays clean because the
+  # second pattern requires a literal dot after the extension. A bare `.json`
+  # file is deliberately NOT matched: the repository tracks legitimate JSON
+  # evidence, and JSON Lines is the form this gate is about.
   case $path in
     *.[jJ][sS][oO][nN][lL] | *.[nN][dD][jJ][sS][oO][nN]) leaked+=("$path") ;;
+    *.[jJ][sS][oO][nN][lL].* | *.[nN][dD][jJ][sS][oO][nN].*) leaked+=("$path") ;;
   esac
 done <"$tmp"
 

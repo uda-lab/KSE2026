@@ -60,13 +60,33 @@ chktex: WARNING -- Unable to open the TeX file `paper/nosuch/*.tex'.
 
 The `Makefile` therefore expands `LINT_TEX` with `$(wildcard)` rather than
 passing a glob to `chktex`, and the recipe refuses to run unless the list has
-more than one entry and every entry is readable. Renaming `paper/sections/`
-fails the lint instead of silently emptying it.
+more than one entry, every entry is a regular file, and the number of section
+files on disk matches the number git tracks. Renaming `paper/sections/` fails
+the lint instead of silently emptying it.
 
-Both mechanisms are covered by `make selftest`, which `checks` runs. It removes
-`chktex` from `PATH` and asserts the gate fails, and drives the leakage guard
-through its uppercase, exemption and fail-closed cases. Asserting a protection
-in prose is what let the previous guard stay broken.
+**The same hole existed in two sibling gates and is closed the same way.**
+"Discovers its own inputs, then reports success having read almost none of
+them" is a property of the pattern, not of ChkTeX, so the review that produced
+this section went looking for it elsewhere and found it twice:
+
+- `check_prose_style.py` built its file list from the same glob with no
+  assertion. With `paper/sections/` emptied it printed `prose style check OK
+  (1 TeX files)` and exited 0. It now requires at least two files.
+- `redact_check.py` treated a missing `--dir` as zero files and only errored
+  when *every* directory was absent, so renaming a public directory narrowed
+  one of the three hard gates while it still passed — measured at 66 files
+  scanned before and 27 after, exit 0 both times. A missing scan directory is
+  now an error.
+
+All of these are covered by `make selftest`, which both workflows run. It
+removes `chktex` from `PATH` and asserts the gate fails, drives the leakage
+guard through its uppercase, case-variant `private/`, compressed-log, exemption
+and fail-closed cases, and asserts the two file-list guards above. Each case
+asserts the *reason* for a failure, not just its exit status, because several
+of these gates fail with the same status for unrelated causes; where an
+assertion is unreachable in the current environment the suite prints `skip`
+rather than `ok`. Asserting a protection in prose is what let the previous
+guard stay broken.
 
 The three TeX-free gates are defined once, in the `integrity` target of the
 `Makefile`, so CI and local runs cannot drift apart.
@@ -110,7 +130,7 @@ roughly the last week, including ones that will never be reported again.
 | `integrity` | yes | **require this one** | job in `checks.yml`; no path filter, so it always reports |
 | `pdf` | yes | never require | job in `paper.yml`; path-filtered, so it reports nothing at all on pull requests that do not touch the manuscript |
 | `paper` | yes, for about a week after the last pre-#61 run | never require | the **job** name of the deleted `build.yml`. A workflow named `paper` still exists, so this looks current. It will never be reported again |
-| `build` | no | not a context | the deleted **workflow**'s name. Verified: every pre-#61 commit reports one check-run, `paper`, and none reports `build` |
+| `build` | no | not a context | the deleted **workflow**'s name. Verified over 16 sampled pre-#61 commits: each reports a check-run named `paper` — several report it twice, from the push/pull_request double-trigger #61 removed, and some also carry `copilot-pull-request-reviewer` — and none reports `build` |
 | `checks` | no | not a context | a workflow name, not a job name. Nothing ever reports under it |
 
 `paper` is the dangerous one, and it is dangerous specifically because of how
@@ -163,6 +183,25 @@ always-running lightweight required workflow plus a separate conditional PDF
 workflow, and adding branch-protection plumbing for protection that does not yet
 exist is outside its scope.
 
+**Enabling a merge queue would remove that procedural gate too.** The argument
+above depends on the merge being performed against the pull request, where
+`paper` has reported. A merge queue merges the queue entry instead, and
+`paper.yml` has no `merge_group` trigger, so the PDF would be validated only on
+the pre-merge head and then again by `push: branches:[main]` after it has
+already landed. If a merge queue is ever enabled, add `merge_group` to
+`paper.yml` at the same time — its path filter still applies, so non-manuscript
+entries stay free.
+
+**What no arrangement of these guards can catch.** Every ChkTeX protection here
+establishes that the binary is present, executable, and reading a plausible file
+list. None of them establishes that it is really checking anything: a stub on
+`PATH` that exits 0 satisfies `command -v`, `--version`, `REQUIRE_CHKTEX` and
+the file-list assertion simultaneously. Verified — `printf '#!/bin/sh\nexit 0\n'`
+as `chktex` gives `make lint REQUIRE_CHKTEX=1` exit 0. Closing that would need an
+assertion about content, such as linting a fixture with a known defect and
+requiring the failure. It is recorded here rather than left for someone to
+discover the way the `| head -1` defect was discovered.
+
 ## Why execution frequency is constrained
 
 Two properties of the old single `build` workflow made it expensive.
@@ -175,8 +214,13 @@ branch produces one run.
 
 It also had no `concurrency` group, so a run kept going after its commit had
 been superseded. Both workflows now key concurrency on the pull request number,
-falling back to the merge-queue ref and then to `github.ref`, with
-`cancel-in-progress: true`.
+falling back to `github.ref`, with `cancel-in-progress: true`. `checks.yml`
+names `github.event.merge_group.head_ref` before that fallback; this is
+belt-and-braces rather than load-bearing, because for a `merge_group` event
+`github.ref` is already the unique `refs/gh-readonly-queue/...` ref. That is
+also why the term's absence from `paper.yml` is not an inconsistency to
+"fix" — `paper.yml` has no `merge_group` trigger, and `github.ref` would cover
+it if one were added.
 
 Three consequences of that key are deliberate. Cancellation applies to `main` as
 well, so two merges landing within one run's duration cancel the earlier
@@ -192,13 +236,21 @@ explicit request, and losing one to another is worse than paying for both.
 
 The saving is concentrated in one step. In the old workflow the TeX Live
 installation took 80-90 s while every other step finished in about 4 s total.
-Measured on this repository:
+Measured on this repository over **the first runs after the #61 split, up to
+commit `aeeb465` (2026-07-25)** — the sample is stated because it is a fixed
+window, not a live figure; re-running the command below on a later population
+gives different numbers, and the medians have already moved by a second or two:
 
 | job | wall time | of which TeX provisioning |
 | --- | --- | --- |
 | old combined `build` | 95-105 s | 80-90 s |
 | new `checks` | 23 s median (17-28, n=12) | none (ChkTeX install 12-13 s) |
 | new `paper` | 90 s median (78-142, n=8) | 70-90 s |
+
+```sh
+gh run list --repo uda-lab/KSE2026 --workflow checks.yml \
+  --status completed --json createdAt,updatedAt --limit 12
+```
 
 Cancellation was verified on run 30117462984: a second push arrived 53 s into
 the TeX installation, and the run was cancelled with the lint, verification,

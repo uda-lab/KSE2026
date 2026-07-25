@@ -46,9 +46,24 @@ ifdef CHKTEX
 		echo "paper/sections/*.tex found no files — has the layout moved?" >&2; \
 		exit 1; \
 	fi
+	# -f, not -r: a directory and /dev/null are both readable, and chktex exits
+	# 0 after failing to open either of them.
 	@for f in $(LINT_TEX); do \
-		[ -r "$$f" ] || { echo "error: $$f is not readable" >&2; exit 1; }; \
+		[ -f "$$f" ] || { echo "error: $$f is not a regular file" >&2; exit 1; }; \
 	done
+	# The count assertion above only proves the list is non-trivial. Cross-check
+	# it against what git actually tracks, so deleting sections without deleting
+	# them from the index cannot shrink the lint silently. Skipped outside a git
+	# tree and when LINT_TEX has been overridden for testing.
+	@if [ "$(origin LINT_TEX)" = file ] && git rev-parse --git-dir >/dev/null 2>&1; then \
+		tracked=$$(git ls-files 'paper/sections/*.tex' | wc -l); \
+		found=$$(echo $(wildcard paper/sections/*.tex) | wc -w); \
+		if [ "$$tracked" -ne "$$found" ]; then \
+			echo "error: paper/sections/*.tex: $$found on disk, $$tracked tracked in git;" >&2; \
+			echo "the lint scope and the repository disagree — resolve before linting" >&2; \
+			exit 1; \
+		fi; \
+	fi
 	# ChkTeX warnings 8/9/12/13/17/36 are disabled because they conflate
 	# correct name/range dashes, math delimiters, and IEEE macros with prose
 	# defects. check_prose_style.py owns spaced prose dashes.
@@ -68,7 +83,16 @@ verify:
 leakcheck:
 	bash scripts/check_no_raw_logs.sh
 
+# The scope assertion lives in redact_check.py so that a direct invocation is
+# guarded too, but assert it here as well: this recipe is what CI runs, and a
+# missing directory should name itself rather than surface as an argparse error.
 redact:
+	@for d in $(REDACT_DIRS); do \
+		[ -d "$$d" ] || { \
+			echo "error: redaction scope '$$d' is missing;" >&2; \
+			echo "refusing to report a pass for a narrower scan than configured" >&2; \
+			exit 1; }; \
+	done
 	python3 scripts/redact_check.py $(REDACT_DIRS:%=--dir %)
 
 # The three content gates that need no TeX. Kept as one target so the
