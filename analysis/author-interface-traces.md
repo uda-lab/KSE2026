@@ -98,7 +98,7 @@ Lean の signature を誤って引用した（`leray-hopf#13`）．6 件中 6 �
 snapshot に全文があり `gh` で再読可能）／confidence 高．reconstructed かつ低: connector
 経由 issue 本文の起草者，および人間が投稿前に読んだか．*
 
-### T3 — 唯一の自己記述的記録と，それが記録する再演（**drift + 是正**）
+### T3 — 投稿チャネルを明示した唯一の記録と，それが記録する再演（**drift + 是正**）
 
 **anchor**: `leray-hopf#177`，`leray-hopf#178`，INC-001
 
@@ -108,8 +108,11 @@ snapshot に全文があり `gh` で再読可能）／confidence 高．reconstru
    `reviewRequests = []` を `gh` で確認．*primary／高．*
 3. 10:22:56Z — `leray-hopf#178` が connector 経由で作成される（P0，`leray-hopf#177` の
    prose 訂正を完遂し独立に再レビューする）．
-4. 10:24:08Z — `leray-hopf#177` 上に，両リポジトリを通じて**唯一の自己記述的記録**が
-   投稿される．要旨は，当該投稿が owner の明示的な指示により認証済み GitHub connector を
+4. 10:24:08Z — `leray-hopf#177` 上に，両リポジトリを通じて**投稿チャネルを明示した
+   唯一の記録**が投稿される．独立レビュー欠落という事実自体は 72 秒前の
+   `leray-hopf#178` の本文（10:22:56Z）も既に述べており，本コメントに固有なのは
+   **どの経路で投稿されたかの自己開示**である．同コメントの要旨は，当該投稿が owner の
+   明示的な指示により認証済み GitHub connector を
    通じて ChatGPT から投稿されたものであること；commit の著者帰属を争うものではなく
    **レビュー品質のみ**に関わること；当該 PR は requested reviewer 0・submitted review 0 で
    merge されており，その後に続いた ChatGPT による事後監査は**利害関係者によるレビュー**で
@@ -207,7 +210,7 @@ INC-005 の是正と同じ主題であり，同じ午前に別チャネルで到
 *primary: 全コメント本文，timestamp，INC-005 の時系列 — 高．reconstructed: 2 つの
 系列の関係 — 低．*
 
-### T6 — 古いリポジトリ状態に基づくレビューが 28 分後に自己訂正された（**drift**）
+### T6 — 古いリポジトリ状態に基づくレビューが同一チャネルで自己訂正された（**drift**）
 
 **anchor**: `leray-hopf#107`，`leray-hopf#106`
 
@@ -227,7 +230,11 @@ INC-005 の是正と同じ主題であり，同じ午前に別チャネルで到
 
 **インターフェース境界に関する所見（報告事項）**: 訂正されている「先のレビュー」自体は
 **GitHub から復元できない**．`comments.json` になく，当該 PR 上の正式 Review は Copilot の
-1 件のみである．先行するレビュー行為はリポジトリに痕跡を残していない．
+1 件のみである．先行するレビュー行為はリポジトリに痕跡を残していない．**したがって
+「訂正までに何分かかったか」は述べられない** — 訂正の側にしか timestamp がないためで
+あり，初稿が置いていた「28 分後」は復元できない起点を前提にしていたので撤回する．
+GitHub 上で測れる区間は merge gate コメント（15:54:59Z）から訂正（16:22:50Z）までの
+27 分 51 秒だが，起点はレビューではない．
 *evidence_type: 訂正の存在と本文について primary（高）．先行レビューは**復元不能**で
 あり，訂正がその存在を主張していると述べうるにとどまる．*
 
@@ -386,7 +393,7 @@ merge 可です．修正後に approve します」と述べ，**承認を保留
 **T3**（connector 作成の PR がレビュアー 0・レビュー 0 で merge され，後続監査がその訂正
 自体の不備を 3 箇所指摘），
 **T5**（レビュー所見が発され明示的に撤回），
-**T6**（古い README 内容に依拠したレビュー判定が 28 分後に反転），
+**T6**（古い README 内容に依拠したレビュー判定が同日中に反転），
 **T10**（陳腐化した issue 本文への反復的な自己訂正）である．
 
 **drift 側を水増ししないための negative finding:**
@@ -398,8 +405,12 @@ merge 可です．修正後に approve します」と述べ，**承認を保留
 - **connector 作成の PR で unmerged のまま close されたものはない．** 両リポジトリに
   connector 作成の PR は `leray-hopf#177` と `KSE2026#59` の 2 件しかなく，どちらも merge
   されている．
-- **数学的に誤った connector 発の主張は見つからなかった．** とくに `leray-hopf#158` の
-  `p = q = 1` 反例は検討に耐え，INC-001 の是正を駆動している．
+- **独立に数学的な当否を評価できた connector 発の主張は，検討に耐えた．** すなわち
+  `leray-hopf#158` の `p = q = 1` 反例は正しく，INC-001 の是正を駆動している．
+  **これは「connector 発の技術的な誤りが無かった」という意味ではない**: T2 のとおり
+  `leray-hopf#13` の issue 本文は Lean の signature を簡略化して誤引用しており，
+  `leray-hopf#14` が提案した field は axiom を強めるものであった．いずれも
+  事前照合層が派遣前に訂正している．
 
 **drift 探索の範囲（全列挙）:**
 
@@ -430,9 +441,10 @@ merge 可です．修正後に approve します」と述べ，**承認を保留
 |---|---|---|
 | codex bot によるレビューコメント群 | KSE2026 の複数 PR | 投稿者が bot アカウントであり，`t-uda` 名義の著者インターフェースとは別のアクター．別現象 |
 | `chatgpt-codex-connector[bot]` の「Codex アカウントを作成せよ」定型返信 | — | 非認可 mention に対する定型応答．**何の証拠としても引用しない** |
-| 定型の merge 許可コメント 6 件 | `leray-hopf#172` `leray-hopf#175` `leray-hopf#176` `leray-hopf#181` ほか | 1〜3 文の定型承認で，追跡できる推論を含まない．個別 trace ではなく**型**として報告するに留める．**初稿はここに `leray-hopf#190` も入れていたが誤りであり，T11 として採用した．**`leray-hopf#173` も 1〜3 文には収まらないが，先行する指摘の確認に留まるため不採用 |
+| 定型の merge 許可コメント 6 件 | `leray-hopf#172` `leray-hopf#173` `leray-hopf#174` `leray-hopf#175` `leray-hopf#176` `leray-hopf#181`（全列挙） | 判定基準は「本文が『自律的にマージしてください』で終わる承認コメント」であり，snapshot 上ちょうど 6 件（`comments.json` を当該文字列で grep すれば再現できる）．いずれも 1〜3 文の定型承認で追跡できる推論を含まないため，個別 trace ではなく**型**として報告するに留める．`leray-hopf#174` のものは T5 の系列の終端にあたる承認であり，T5 が扱うのは同 PR の**撤回された所見**のほうである．`leray-hopf#173` は 1〜3 文には収まらないが，先行する指摘の確認に留まるため同様に不採用．**初稿はここに `leray-hopf#190` も入れていたが誤りであり，T11 として採用した．** |
 | `leray-hopf#82` `leray-hopf#93` `leray-hopf#115` `leray-hopf#106` | — | 定型的で結果に起伏がなく，追うべき分岐・訂正・係争がない |
 | `leray-hopf#187` `leray-hopf#188` `leray-hopf#189` `leray-hopf#191` | — | 体裁・運用の issue で，記録された不一致なく数時間で close．T1–T11 に比して収量が低い |
+| `leray-hopf#155` `leray-hopf#185` の close 宣言 | — | 「## Owner close decision」「## Close-out」形式で，先行 PR の完了を根拠に issue を `completed` として閉じる事務的宣言．分岐・訂正・係争がなく，T1–T11 に加える情報がない．**本行は網羅性のために置いている**: leray-hopf の `t-uda` 名義・connector 経由コメント 37 件は 28 件の issue／PR に分布するが，そのうち trace にも他の除外行にも現れない番号はこの 2 件だけであった．本行の追加により 28 番号すべてが trace か除外理由のいずれかに帰属する |
 | `leray-hopf#184` `leray-hopf#195` | — | connector 作成だがコメント 0 件で open．追うべき下流がない |
 | `leray-hopf#154` | — | open だが活動は INC-005 のセッションに属し既にそちらで扱われている．インターフェースについて追加情報がない |
 | `leray-hopf#99` — 先の `Reviewed-by` artifact の「所見なし」は誤りであったという自己訂正 | — | 真正の drift だが `performed_via_github_app: null`，投稿者 `uda-lab-agent`．著者インターフェースの trace ではない．自己訂正がインターフェース固有でないことの傍証として 1 行分の価値はある |
@@ -478,7 +490,7 @@ escrow にある符号化済みセッションは 6 件である．connector の
 | KSE2026 の connector 項目すべて（07-22 → 07-24，T7・T8） | KSE2026 の論文作業に対する **session index が存在しない**．`evidence/session-index/` は leray-hopf 期の 6 件のみ |
 
 **要約**: 11 件の trace のうち，符号化済みセッション区間の内側に落ちるのは T10 の一部と
-`leray-hopf#64` の作成のみである．**インターフェースの唯一の自己記述的記録（T3）と
+`leray-hopf#64` の作成のみである．**投稿チャネルを明示した唯一の記録（T3）と
 最大の connector バースト（T4）は，いずれも未被覆の窓にある．** それらについて本書が
 述べたことはすべて GitHub 側の一次証拠であり，セッションログによる裏付けはない．
 起草側について復元できることは何もない．
@@ -487,15 +499,21 @@ escrow にある符号化済みセッションは 6 件である．connector の
 
 `scripts/verify_claim_links.py` が認識するトークンは
 `EV-\d{4}`・`INC-\d{3}`・`CLM-\d{3}`・`leray-hopf@<sha>`・`leray-hopf#<num>`・
-`decl:<name>`・`cite:<key>` である．
+`decl:<name>`・`cite:<key>` である．ただし**「認識される」と「evidence identifier として
+受理される」は別**であり，後者の集合 `EVIDENCE_TOKEN_RE` は
+`EV-\d{4}`・`INC-\d{3}`・`leray-hopf@<sha>`・`leray-hopf#<num>`・`decl:`・`cite:` の 6 種で，
+**`CLM-\d{3}` を含まない**（`CLM_RE` は claim 参照が定義済みかを調べるための別の正規表現
+である）．
 
 1. **`KSE2026#<num>` は認識トークンではない．** `analysis/`・`notes/`・`paper/` では
    単に照合されずに素通りする（エラーにはならないが検証もされない）．
    `claims/paper-claims.md` の `- Evidence:` 行が KSE2026 番号**のみ**からなる場合は
    「認識可能な evidence identifier がない」として **fail する**．T7 と T8 は KSE2026 に
    のみ anchor を持つため，これらを claim 証拠にする場合は受理されるトークン
-   （CLM-003/004/005 そのもの，あるいは `leray-hopf#177` と INC-001）を併記するか，
-   resolver を拡張する必要がある．本書で用いた leray-hopf の番号はすべて snapshot の
+   （たとえば `leray-hopf#177` や `INC-001`）を併記するか，resolver を拡張する必要が
+   ある．**`CLM-003` 等を併記しても解決にはならない** — 上記のとおり `CLM-\d{3}` は
+   `EVIDENCE_TOKEN_RE` に含まれず，`- Evidence:` 行が CLM 番号のみからなる場合は
+   やはり fail する．本書で用いた leray-hopf の番号はすべて snapshot の
    `issues.json`（195 件）に存在することを確認済みであり，解決に失敗するものはない．
 2. **コメント ID は anchor 型ではない．** 自己記述的記録も，解決可能な形は
    `leray-hopf#177` とその timestamp である．本書は connector コメントを

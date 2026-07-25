@@ -20,8 +20,10 @@
 
 ## 1. スイッチの設計と，その既定値がこうなっている理由
 
-本 PR 適用前の `paper/main.tex:36` は PR #59（`fc912b9`）以降 `\author{\IEEEauthorblockN{Anonymous
-Author(s)}}` であり，**byline は既に匿名**である．したがって「スイッチは現状の非匿名
+本 PR 適用前の `paper/main.tex:36` は `\author{\IEEEauthorblockN{Anonymous
+Author(s)}}` であり，**byline は既に匿名**である（最初の LaTeX scaffold `4bf508d` の
+39 行目から一貫して匿名であり，実名だった時期はない．`fc912b9` は後続の
+`\IEEEauthorblockA{\todo{Affiliation …}}` 行を除いただけである）．したがって「スイッチは現状の非匿名
 出力を既定とする」という当初の想定は成立しない．今日の出力はすでに匿名側にある．
 
 本 PR が採った設計:
@@ -41,8 +43,11 @@ Author(s)}}` であり，**byline は既に匿名**である．したがって�
 技術的に落とせない点が 3 つある．
 
 1. **`\IEEEoverridecommandlockouts` が必要．** IEEEtran は conference mode で `\thanks` の
-   引数を沈黙のうちに破棄する（ログに `typeout` が出るだけで警告にはならない）．
-   これを宣言しないと acknowledgment は**警告なしに消える**．preamble に置いてあり，
+   引数を破棄する．ログには `** WARNING: \thanks is locked out when in conference mode`
+   が素の `\typeout` として出るのみで，LaTeX の警告機構（`LaTeX Warning:` /
+   `Package … Warning:`）には乗らず，`latexmk` の警告要約にも現れない．
+   これを宣言しないと acknowledgment は**通常の警告走査に掛からないまま消える**
+   （宣言を外して `\anonymousfalse` でビルドし，ログを実測して確認した）．preamble に置いてあり，
    コマンドを再束縛するだけなので `\anonymoustrue` の下では出力に影響しない．
 2. **`\thanks` は `\author{}` の引数の内側に置く．** IEEEtran は `\thanks` の本文を
    蓄積して `\maketitle` で第 1 段第 1 列の**無標**脚注として出力する．`\maketitle` の後に
@@ -53,19 +58,24 @@ Author(s)}}` であり，**byline は既に匿名**である．したがって�
 
 ## 2. 漏洩箇所の一覧
 
-「PDF に出るか」は，文字列が提出 PDF に到達するか（`.tex` / `.bib` ソースにのみ存在するか）
-の区別である．
+#1・#2a・#2b が指す `paper/main.tex` の箇所は本 PR 自身が書き換えた領域であり，行番号は
+本 PR の途中で実際に一度移動した．そのためこの 3 件は行番号ではなく **LaTeX 構文**を主
+anchor とし，行番号は補助として括弧に添える．`\thanks{` は `main.tex` 内で一意である．
+`\ifanonymous` は 2 箇所に出る（24 行目の宣言 `\newif\ifanonymous` と，51 行目の条件分岐）
+ので，anchor として引く際は**分岐のほう**，すなわち行頭が `\ifanonymous%` で `\else` /
+`\fi` と対になる箇所を指す．#3 以降が指すファイルは本 PR で変更しておらず，行番号を
+そのまま anchor として用いる．
 
-#1・#2 が指す `paper/main.tex` の箇所は本 PR 自身が書き換えた領域であり，行番号は本 PR の
-途中で実際に一度移動した．そのためこの 2 件は行番号ではなく **grep で一意に引ける LaTeX
-構文**を主 anchor とし，行番号は補助として括弧に添える．`\ifanonymous` と `\thanks{` は
-いずれも `main.tex` 内で一意である．#3 以降が指すファイルは本 PR で変更しておらず，
-行番号をそのまま anchor として用いる．
+「PDF に出るか」欄は，文字列が提出 PDF に到達するか，`.tex` / `.bib` ソースにのみ
+存在するか（*source-only*）の区別であり，`\anonymoustrue`（**本 PR が出荷する既定**）で
+ビルドした PDF を基準とする．#1・#2a は既定では到達せず，`\anonymousfalse` に倒した
+場合にのみ到達する．一方 #2b は，スイッチの値にかかわらず `.tex` ソースに常駐する．
 
 | # | 位置（anchor） | 漏洩する文字列 | 種別 | PDF に出るか | 匿名化時の対応 | スイッチで解決するか |
 |---|---|---|---|---|---|---|
-| 1 | `paper/main.tex` の `\ifanonymous` … `\fi` ブロック全体（現 51-62 行．実名 byline は `\else` 分岐の `\author{...}`，現 59 行） | byline | identity | 出る | `\anonymoustrue` が `Anonymous Author(s)` を出す．実名 byline は非匿名分岐にしか現れない | **する** |
-| 2 | `paper/main.tex` の `\thanks{` の引数（`\else` 分岐内，現 60-61 行） | `This work was supported by JST-Mirai Program Grant Number JPMJMI22G1, Japan.` | funder | 出る（第 1 ページ脚注） | 全体を抑止．grant number は公開検索により PI と国を特定しうる | **する** |
+| 1 | `paper/main.tex` の `\ifanonymous` … `\fi` 分岐全体（現 51-62 行．実名 byline は `\else` 分岐の `\author{...}`，現 59 行） | byline | identity | 既定では出ない（`\anonymousfalse` のときのみ出る） | `\anonymoustrue` が `Anonymous Author(s)` を出す．実名 byline は非匿名分岐にしか現れない | **する** |
+| 2a | `paper/main.tex` の `\thanks{` の引数（`\else` 分岐内，現 60-61 行） | `This work was supported by JST-Mirai Program Grant Number JPMJMI22G1, Japan.` | funder | 既定では出ない（`\anonymousfalse` のとき第 1 ページ脚注として出る） | 全体を抑止．grant number は公開検索により PI と国を特定しうる | **する** |
+| 2b | 同上の文字列が `paper/main.tex` の**ソースに常駐**すること | 同上 | funder | 出ない — *source-only* | **本 PR が新たに作った露出面である**（`fe8fbeb` の `paper/` に `JPMJMI22G1` は 0 件．`git grep JPMJMI22G1 fe8fbeb -- paper/` で確認できる）．LaTeX ソースを PDF と併せて提出する場合，スイッチでは消えないため #9–#12 と同様に提出前の除去が要る | **しない** — スイッチは PDF 側しか制御しない |
 | 3 | `paper/references.bib:6` | `author = {{uda-lab}}` | identity / repo | 出る（参考文献欄に表示） | 匿名化した組織名に置換するか，entry を落としてタグのみで参照する | しない — 個別対応 |
 | 4 | `paper/references.bib:10` | `\url{https://github.com/uda-lab/leray-hopf}` | repo / identity | 出る（URL がそのまま） | URL を除去し，省略するか匿名アーカイブのリンクに置換する | しない — 個別対応 |
 | 5 | `paper/references.bib:11` | `Release tag v0.1.0-rc1, commit 7c15710a` | repo | 出る | SHA は public repo に一意であり，検索すれば owner に到達する．#3・#4 を処理しても SHA を残すと漏れる | しない — 個別対応 |
@@ -86,7 +96,7 @@ Author(s)}}` であり，**byline は既に匿名**である．したがって�
 | 20 | `paper/sections/05-discussion.tex:32` | `PR~\#120` | repo | 出る | #14 と同じ．Section IV 以外で唯一の PR 参照 | しない — 個別対応 |
 | 21 | `paper/sections/05-discussion.tex:67-68` | "available in the paper repository" | repo | 出る | 匿名化時にこの語句が `uda-lab/KSE2026` を指してはならない．なお現状は何も指せていない（§3） | しない — **owner 判断** |
 | 22 | `paper/sections/03-agent-workflow.tex:34`，`paper/sections/05-discussion.tex:21` | `\texttt{github-driven-workflow}` | repo | 出る | プロジェクト固有の skill 名であり，検索により著者の公開リポジトリと相関しうる．一般名で記述するか残すかは判断事項 | しない — 個別対応 |
-| 23 | `paper/sections/03-agent-workflow.tex:110-124` | 期間・JPY 建て費用・USD 費用・token 数・時間 | affiliation（弱） | 出る | JPY 建ての請求と JST 助成が併存すると著者を日本に局在させる．#2 の抑止で大半は解消するが，期間は public repo の commit 日付と一致する | 部分的（#2 のみ） |
+| 23 | `paper/sections/03-agent-workflow.tex:110-124` | 期間・JPY 建て費用・USD 費用・token 数・時間 | affiliation（弱） | 出る | JPY 建ての請求と JST 助成が併存すると著者を日本に局在させる．#2a の抑止で大半は解消するが，期間は public repo の commit 日付と一致する | 部分的（#2a のみ） |
 | 24 | `paper/sections/03-agent-workflow.tex:44,117-119` | モデル名・クラウドベンダー名 | affiliation（極弱） | 出る | ベンダー名であって identity ではない．対応不要．完全性のため記載 | 該当なし |
 | 25 | `paper/sections/03-agent-workflow.tex:17-20,96`，`paper/sections/04-incidents.tex:96`，`paper/sections/06-conclusion.tex:13` | VPS，コンテナのメモリー上限 | affiliation（極弱） | 出る | 環境の指紋であって識別子ではない．対応不要 | 該当なし |
 | 26 | ビルド出力の `/CreationDate`，`/ModDate` | `+09'00'` のタイムゾーン offset | affiliation（弱） | 出る（PDF メタデータ） | camera-ready を `SOURCE_DATE_EPOCH` + `FORCE_SOURCE_DATE` 付きでビルドするか `\pdfinfoomitdate=1` を置く | しない — **ビルド側で個別対応** |
@@ -170,6 +180,12 @@ release タグ，Sections IV–V の PR 番号）であり，これは形式化�
 
 何もしない場合，提出 PDF に解決不能な約束が残る．**選択は owner のものであり，
 本 PR では行っていない．`paper/sections/05-discussion.tex:67-69` は未変更である．**
+
+**上表の評価語（「強く不利」「適合度が最も高い」「評価が下がりつつある」等）は，
+本書の著者による評価であって owner の判断ではなく，順位付けとして読まれるべきではない．**
+機構的に検証できるのは「`paper/` と `.bib` に何行の変更が要るか」「対象リポジトリが
+public か private か」だけであり，それ以外は判断材料の提示である
+（`analysis/author-interface-model.md` §4.3 の options 表にも同じ但し書きを置いている）．
 
 ## 4. 併せて気づいた投稿準備上の未了事項（報告のみ，本 PR では対応しない）
 

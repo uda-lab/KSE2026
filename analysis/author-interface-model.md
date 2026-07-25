@@ -44,8 +44,9 @@ owner が採用するまで効力を持たない．
   レビュー方針，merge，公開に関する最終権限．
 - **証拠（primary）**: `provenance/author-decisions.md` の 18 行（各行に日付と根拠）；
   `provenance/review-history.md:14-17`（owner 自身による原稿通読レビュー 3 件と，agent review と owner triage の複合行 1 件）；
-  `evidence/session-index/90fa24bb-...` の分岐点記録（`AskUserQuestion` による
-  方針決定の人間へのエスカレーション 3 件）；`evidence/session-index/74aab39b-...`
+  `evidence/session-index/90fa24bb-...` の分岐点記録（同 index が内容つきで特記する
+  `AskUserQuestion` 方針分岐 3 件．同セッションの `AskUserQuestion` 呼び出し総数は
+  8 件であり，3 件は特記されたものの数であって総数ではない）；`evidence/session-index/74aab39b-...`
   （safety classifier に阻まれた後 owner が端末で `gh repo create` を直接実行，EV-2076）；
   `evidence/session-index/de129390-...`（leray-hopf の PR に対する owner 3 巡レビュー）；
   raw transcript の 2026-07-10T00:37:21Z・2026-07-18T06:30:55Z・07:40:10Z・07:49:42Z
@@ -71,12 +72,23 @@ owner が採用するまで効力を持たない．
 
 ### A3 — GitHub Connector（`chatgpt-codex-connector` GitHub App）
 
-- **機能**: 伝送のみ．owner のアカウント identity の下でテキストをリポジトリへ運ぶ．
+- **機能（本書が扱う範囲）**: `t-uda` 名義の投稿については伝送のみ．owner のアカウント
+  identity の下でテキストをリポジトリへ運ぶ．
 - **証拠（primary）**: `performed_via_github_app` フィールドそのもの；
   `evidence/repository-snapshots/*/EXPORT.json`．
-- **推定**: なし．データによって機能が完全に決まる唯一のアクターである．テキストの
-  生成に一切関与しない点でも他と異なる（`AGENTS.md:24` の通り，AI はいずれも著者と
-  しない．ここで述べているのは生成への関与の有無であって著者性の配分ではない）．
+- **重要な限定**: 同じ App slug は `t-uda` 名義の投稿だけに付くのではない．snapshot 上，
+  `performed_via_github_app = chatgpt-codex-connector` を持つコメントは leray-hopf で
+  106 件，KSE2026 で 12 件あり，そのうち **leray-hopf 69 件・KSE2026 7 件は
+  `user_login = chatgpt-codex-connector[bot]`**，すなわち bot アカウント自身が
+  生成したレビュー文である（`evidence/repository-snapshots/*/comments.json` から
+  `user_login` と `performed_via_github_app` を交差集計すれば再現できる）．したがって
+  「App slug は伝送のみを意味する」は **`t-uda` 名義の行に限った読み**であり，slug
+  単独ではアクターの機能を決めない．A3 の「伝送のみ」は本書が扱う `t-uda` 名義の
+  37+5 件についての限定であって，slug 一般についての主張ではない．
+  *evidence_type: 交差集計は primary（高）．`t-uda` 名義の connector 投稿の文面を
+  ChatGPT が起草したことは A2 と同じく reconstructed／confidence 中．*
+  （`AGENTS.md:24` の通り，AI はいずれも著者としない．ここで述べているのは生成への
+  関与の有無であって著者性の配分ではない．）
 
 ### A4 — Claude / Fable オーケストレータ
 
@@ -124,8 +136,12 @@ owner が採用するまで効力を持たない．
    これも owner 権威であり，本監査の charter 自体が監査対象パターンの一例である．
    読者に発見させるより明示するほうが強い．
 2. **アカウント identity だけでは判断を標識できない．** `KSE2026#59` 上の
-   `t-uda` / `null` コメント 7 件は harness が投稿した定型のワークフロー通知である
-   （`analysis/mediation-census-methodology.md` に一次確認手順つきで記録）．本リポジトリは
+   `t-uda` / `null` コメントは snapshot 上 **13 件**あり，うち
+   `analysis/mediation-census-methodology.md` が comment id を挙げて一次確認手順を
+   記録している 7 件は，**文面が定型のワークフロー通知**（review 依頼・gate 報告）で
+   ある．*evidence_type: 文面の定型性は primary（高）．「harness が投稿した」という
+   投稿主体の帰属は reconstructed／confidence 中 — 同 methodology が明記するとおり，
+   本データ単独では誰または何が投稿したかを証明できない．* 本リポジトリは
    権限を**台帳に記録された判断**（`provenance/author-decisions.md`）に置くことで既に
    これを正しく扱っている．モデルもその通り述べる: 権限は台帳上の判断に付着し，
    アカウントはそれが発される経路である．逆ではない．
@@ -157,7 +173,7 @@ incident card の event code 語彙；`PLAN.md` のディレクトリ一覧と c
 | AGENTS.md:21-22 | 「再構成情報と一次ログを混同しない…evidence type…と confidence を明記」 | DSC | 変更なし | 規則 5．本監査自身がこれに従う |
 | AGENTS.md:23-24 | 「原稿・分析への AI の関与…を `provenance/ai-use.md` に追記する」 | DSC | **owner 判断** | **未解決項目 3**．選択肢は §4.3 |
 | AGENTS.md:24 | 「AI は著者にしない．」 | AUT/ATR | 変更なし | 前提がこれを真として再確認．著者性は人に帰属し，起草支援では移転しない |
-| AGENTS.md:41 | 「branch protection は現状未設定であり，設定の可否は owner の判断」 | AUT | 変更なし | 設定判断の所在が正しい |
+| AGENTS.md:40-41 | 「branch protection は現状未設定であり，設定の可否は owner の判断」 | AUT | 変更なし | 設定判断の所在が正しい |
 | AGENTS.md:53 | 「`claims/formalization-scope.md` の範囲を超える表現をしない」 | DSC | 変更なし | claim 強度規則 |
 | AGENTS.md:61-63 | 「実装者と別の reviewer が全文を読み…両方を通す」 | ROL | 変更なし | レビュアー独立性規則．正確 |
 | AGENTS.md:65 | 「## 役割分離（PLAN.md §8）」 | ROL | 変更なし | 見出し |
@@ -179,7 +195,7 @@ incident card の event code 語彙；`PLAN.md` のディレクトリ一覧と c
 | PLAN.md:201-202 | 「Lean and mathematics reviewer — …独立に確認する．」 | ROL | 変更なし | 機能 |
 | PLAN.md:204-205 | 「Workflow reviewer — …ログで裏付けられているか確認する．」 | ROL | 変更なし | 機能．本監査はその一実施例 |
 | PLAN.md:207-209 | 「Prose and format editor — …」 | ROL | 変更なし | 機能 |
-| PLAN.md:211 | 「AI システムは著者とはせず，使用モデル，使用範囲，原稿生成またはレビューへの関与を…記録する．」 | AUT/DSC | 変更なし | `AGENTS.md:23-24` と対．§4.3 の scope 問題が同様に及ぶ．規則 6 の裁定はここにも反映すべき旨を owner へ申し送る |
+| PLAN.md:211 | 「AI システムは著者とはせず，使用モデル，使用範囲，原稿生成またはレビューへの関与を…記録する．」 | AUT/DSC | **owner 判断** | **未解決項目 3**．`AGENTS.md:23-24` と対であり，§4.3 の scope 問題が同様に及ぶ．§4.3 が述べるとおり 3 passage は同一の裁定で整合させる必要があるため，本行を「変更なし」に置くことはできない |
 | PLAN.md:230 | 「大幅改稿で contribution の階層が変わる場合は scientific owner の指示を記録し」 | AUT | 変更なし | 2026-07-24 に実行済（`provenance/author-decisions.md`） |
 | PLAN.md:256 | 「内容と owner review が収束した後，6ページ上限へ圧縮する」 | AUT | 変更なし | owner review 下の順序付け |
 | PLAN.md:276 | 「AI 利用記録と人間による最終判断の責任範囲が明示されている．」 | AUT/DSC | 変更なし | 完了条件．前提こそがこれを充足可能にする |
@@ -198,7 +214,7 @@ incident card の event code 語彙；`PLAN.md` のディレクトリ一覧と c
 |---|---|---|---|---|
 | main.tex:36 | `\author{\IEEEauthorblockN{Anonymous Author(s)}}` | ATR | **B3 へ回付** | B1 の処置ではないが重要: byline は**既に匿名**である．匿名化スイッチの既定値設計はこの事実に合わせる（§5 と `notes/deanonymization-checklist.md`） |
 | main.tex:50 | "a workflow defined by the owner routed GitHub Issues through isolated Git worktrees and pull requests" | AUT/ATR | 変更なし | `provenance/author-decisions.md`（owner 提供 harness，Fable 以前）と一致 |
-| main.tex:54 | "Four incidents show where these checks detected defects and where they did not." | ACT | 変更なし | 検出を**検査**に帰属させており人間に帰属させていない．意図的に非断定で正確 |
+| main.tex:53-54 | "Four incidents show where these checks detected defects and where they did not." | ACT | 変更なし | 検出を**検査**に帰属させており人間に帰属させていない．意図的に非断定で正確 |
 
 ### `paper/sections/01-introduction.tex`
 
@@ -223,7 +239,7 @@ incident card の event code 語彙；`PLAN.md` のディレクトリ一覧と c
 | 03:36-37 | "Direct pushes to the main branch were prohibited." | ROL | 変更なし | ワークフロー規則 |
 | 03:37-40 | "A PR could merge only after … an independent reviewer had left an attributable result, and all review threads were resolved." | ROL/DSC | 変更なし | merge gate．反例は `04:46-49` で自己開示済 |
 | 03:42-45 | "Issue scope, review decisions, and merge authority were recorded in repository and GitHub artifacts rather than retained only in an agent session." | AUT/DSC | 変更なし | CLM-009 |
-| 03:44-46 | "When Fable~5 resumed orchestration through Google Cloud's Vertex AI on July~2--3, it continued the existing workflow from those artifacts." | ATR | 変更なし | owner 判断により意図的に格下げ済．現状のままで正確 |
+| 03:44-45 | "When Fable~5 resumed orchestration through Google Cloud's Vertex AI on July~2--3, it continued the existing workflow from those artifacts." | ATR | 変更なし | owner 判断により意図的に格下げ済．現状のままで正確 |
 | 03:49-50 | "Questions about mathematical meaning returned to the owner and statement card." | AUT/ROL | 変更なし | feedback split．権限と実行の境界そのもの |
 | 03:51-54 | "the orchestrator first assigned a scout that could inspect repository assumptions but not edit them… Inspection roles had no edit authority." | ROL | 変更なし | primary: session-index の role 割当て |
 | 03:59-62 | "An agent independent of the implementer checked whether the proposition matched the intended mathematics…" | ROL/ACT | 変更なし | 人間ではなく**エージェント**に帰属．INC-002 に照らし正確 |
@@ -242,7 +258,7 @@ incident card の event code 語彙；`PLAN.md` のディレクトリ一覧と c
 | 04:6-10 | "A successful Lean build establishes that the declarations … are well typed. It does not determine whether a theorem states the intended mathematics" | DSC | 変更なし | 枠組み |
 | 04:12-15 | "The sample is neither random nor exhaustive, so the cases document observed failures … without estimating failure rates or causal effects." | DSC | 変更なし | 推論禁止のガード |
 | 04:22 | "\emph{Case A. A false generalization detected before release.}" | ACT | 変更なし | 受動・アクター中立．該当する検出は `leray-hopf#158` によるもので，これは connector 経由である（次行および `analysis/author-interface-traces.md` の T4） |
-| 04:31-32 | "During release preparation, a statement reviewer tested the boundary case \(p=q=1\)." | **ACT** | **変更なし（証拠注記）** | ここでの "statement reviewer" は `leray-hopf#158`，`t-uda` 名義・connector 経由．本文は "a statement reviewer" であり "the owner" とも "a human" とも書いていないため，人間検出を過剰主張していない．Wave C はこれ以上限定しないことを推奨 |
+| 04:32-33 | "During release preparation, a statement reviewer tested the boundary case \(p=q=1\)." | **ACT** | **変更なし（証拠注記）** | ここでの "statement reviewer" は `leray-hopf#158`，`t-uda` 名義・connector 経由．本文は "a statement reviewer" であり "the owner" とも "a human" とも書いていないため，人間検出を過剰主張していない．Wave C はこれ以上限定しないことを推奨 |
 | 04:35-39 | "The problem was therefore the proposition, not a difficult proof… PR~\#162… PR~\#170 added a statement card and regression checks" | ACT | 変更なし | `leray-hopf#162`，`leray-hopf#170` に解決 |
 | 04:46-49 | "Two days after PR~\#170 introduced the independent review rule, PR~\#177 merged a documentation correction with no requested or submitted review. The rule was not yet operationally reliable." | ACT/DSC | 変更なし | 自己に不利な開示であり誠実性を強める．`leray-hopf#177` 自体が connector 作成である点は `analysis/author-interface-traces.md` の T3 |
 | 04:51-56 | "Two proof revisions had attempted this unrestricted statement before an independent reviewer identified the missing closure condition." | ACT | 変更なし | INC-002．adjudicator はエージェントであり本文も "an independent reviewer" と書く |
@@ -252,9 +268,10 @@ incident card の event code 語彙；`PLAN.md` のディレクトリ一覧と c
 | 04:82-86 | "A separate reviewer compared the public declaration inventory before and after the refactor." | ACT/ROL | 変更なし | 実行者はエージェント．中立な語 |
 | 04:99-100 | "the orchestrator misclassified a slow agent as inactive and assigned a replacement to the same Git worktree" | ACT | 変更なし | INC-005，primary |
 | 04:105-107 | "Monitoring had covered the visible Lean process rather than memory available to the entire container." | ACT/DSC | 変更なし | INC-005 |
-| 04:107-108 | "An owner requested a status check when only 606\,MiB remained available." | **ACT** | **変更なし（§4.1(b)）** | raw transcript 2026-07-18T07:40:10.101Z の owner 発話は `status` の 1 語．本文は**要求**を主張しており**検出**を主張していない．証拠が支えるのはまさにその範囲．任意の微修正候補: "An owner" → "The owner"（owner は 1 名） |
-| 04:108-110 | "Inspection of each process working directory identified the fourteen stale chains, and the Linux control group counter confirmed intervention by the OOM killer." | ACT | 変更なし | エージェント実行．検査への帰属 |
+| 04:107-108 | "An owner requested a status check when only 606\,MiB remained available." | **ACT** | **変更なし（§4.1(b)，Wave C 申し送り）** | raw transcript 2026-07-18T07:40:10.101Z の owner 発話は `status` の 1 語．逐語の主張は**要求**であって**検出**ではなく，証拠が支えるのはまさにその範囲．ただし PR #59 が `incidental` と「オーケストレータの監視によるものではない」の 2 限定を落としたため，監視不備の文の直後にこの文が来ることで**能動的な読みが可能になっている**（§4.1(b)）．本 Wave では `paper/` を変更せず，限定の復元を Wave C／owner へ申し送る |
+| 04:108-110 | "Inspection of each process working directory identified the fourteen stale chains, and the Linux control group counter confirmed intervention by the out of memory (OOM) killer." | ACT | 変更なし | エージェント実行．検査への帰属 |
 | 04:110-112 | "Because that counter was cumulative, it identifies the mechanism but not the number of kills in this incident." | DSC | 変更なし | INC-005 の confidence 注記を本文へ持ち込んでいる |
+| 04:113-114 | "Ownership returned to the original agent, the duplicate stopped, and the build completed under a global lock." | **ROL/ACT** | 変更なし | 所有権の移動をエージェント間の事象として述べており，人間の行為に帰属させていない．初稿はこの行を落としていた（独立レビュー指摘．台帳の網羅性のため追加） |
 | 04:117-121 | "An orchestrator must observe the complete process tree and available memory… The standing instructions now require cleanup" | ROL | 変更なし | 推奨 |
 | 04:122-124 | "Monitoring available memory also detected a later peak caused by one legitimate build" | ACT | 変更なし | INC-005 |
 
@@ -416,7 +433,7 @@ incident card の event code 語彙；`PLAN.md` のディレクトリ一覧と c
 
 | file:line | quote（要約） | 分類 | 処置 | 理由 |
 |---|---|---|---|---|
-| ai-use.md:3 | 「本リポジトリの**成果物**への AI システムの関与を継続的に記録する」 | DSC | 変更なし | 項目 3 に直結: `AGENTS.md:23` の「原稿・分析への関与」より広い．**両者の scope は同一ではない**（§4.3） |
+| ai-use.md:3 | 「本リポジトリの**成果物**への AI システムの関与を継続的に記録する」 | DSC | **owner 判断** | **未解決項目 3**: `AGENTS.md:23` の「原稿・分析への関与」より広い．**両者の scope は同一ではない**（§4.3）．3 passage 同時の裁定が要るため「変更なし」には置かない |
 | ai-use.md:4 | 「AI は著者としない．**最終判断は常に scientific owner が行う．**」 | **AUT** | **変更なし** | 権限に関する正典文．前提が逐語で肯定する |
 | ai-use.md:8, 13 | 「人間による確認」（列見出し ×2） | DSC | 変更なし | 確認列 |
 | ai-use.md:15 | 「Phase 0 scaffold…オーナー承認は PR フローの授権による」 | AUT | 変更なし | ワークフローによる授権であることを明示 |
@@ -453,7 +470,7 @@ incident card の event code 語彙；`PLAN.md` のディレクトリ一覧と c
 | ai-use.md:46 | 「**owner がGitHubコメントで採否を指定**．本 PR 対象外の4項目は変更せず」 | AUT | 変更なし | owner がエージェント所見を項目別に採否判定 |
 | ai-use.md:47 | 「Codex からの引き継ぎ差分を **owner の8項目に対して逐一照合**…merge は行わない」 | AUT | 変更なし | 同上 |
 | ai-use.md:48 | 「issue #61 の CI 実行頻度削減…採否を判断」 | ROL | 変更なし | 実装記録 |
-| ai-use.md:49 | 「独立レビュー経路は owner 指示…により…read-only Claude subagent 2 名に切替．**指示の根拠として owner が挙げた…は本 agent が独立検証した事実ではなく，むしろ矛盾する一次証拠がある**」 | **AUT/DSC** | **変更なし — 模範例** | owner 指示とその根拠の証拠状態の両方を記録している．権威には従い，証拠状態は記録するという正しい姿勢．本行は owner 確認待ちの項目を含む |
+| ai-use.md:49 | 「独立レビュー経路は owner 指示…により…read-only Claude subagent 2 名に切替．**指示の根拠として owner が挙げた…は本 agent が独立検証した事実ではなく，むしろ矛盾する一次証拠がある**」 | **AUT/DSC** | 変更なし | owner 指示とその根拠の証拠状態を分けて記録している．**評価上の注記**: 本行は issue #60 の Wave A，すなわち本 Wave と同一の発注系列の記録であり，本書の著者による評価は独立ではない．「変更なし」の判定は書式・帰属の点検にとどめ，質の評価は行わない（`PLAN.md` §8）．本行は owner 確認待ちの項目を含む |
 
 ### `provenance/author-decisions.md`
 
@@ -500,15 +517,19 @@ incident card の event code 語彙；`PLAN.md` のディレクトリ一覧と c
 
 | 処置 | 件数 |
 |---|---|
-| 変更なし | 258（うち 2 件は「変更なし（証拠注記）」．`paper/sections/04-incidents.tex:31-32`，`evidence/incidents/INC-001.md:10`） |
+| 変更なし | 257（うち 2 件は「変更なし（証拠注記）」．`paper/sections/04-incidents.tex:32-33`，`evidence/incidents/INC-001.md:10`） |
 | **変更要** | **1** — `evidence/incidents/INC-005.md` 経緯 step 4（2026-07-18T06:28:39Z / 06:30:55Z の owner 発話を記載していない） |
-| **owner 判断** | **1** — `AGENTS.md:23-24` 規則 6 の開示 scope（項目 3）．`PLAN.md:211` と `provenance/ai-use.md:3` を同時に裁定する必要がある |
+| **owner 判断** | **3** — 規則 6 の開示 scope（項目 3）が及ぶ 3 passage: `AGENTS.md:23-24`，`PLAN.md:211`，`provenance/ai-use.md:3`．§4.3 のとおり同一の裁定で同時に整合させる必要があり，3 件を分離して 1 件だけ未解決とすることはできない |
 | B3 へ回付（B1 の処置ではない） | 2 — `paper/main.tex:36`，`paper/sections/05-discussion.tex:67-69` |
-| 台帳の行数 | **262** |
+| 台帳の行数 | **263** |
 
 **権限に関する記述で弱める必要のあった passage は 1 件もない．** 検査した
 `scientific owner` / owner 権威 / 最終判断に関する passage は，すべて仲介の証拠の下で
-そのまま維持される．
+そのまま維持される．**この null 結果の射程には限界がある**: §0 が既定処置を「変更なし」に
+固定し，唯一利用できた反証材料（伝送チャネルの証拠）を裁定によって射程外に置いている
+以上，「弱める必要があった」と判定されうる経路は最初から狭い．本結果は，*裁定が
+検証可能なまま残した範囲において* 弱めるべき passage がなかったことを述べるにとどまり，
+権威記述一般の健全性を示すものではない（§7 の限界も参照）．
 
 なお初稿はここに「corpus の不正確さは人間行為を過小に記す方向である」と書いていたが，
 独立レビューの指摘を受けて**撤回する**．その一般化は唯一の「変更要」1 件に依拠して
@@ -577,9 +598,23 @@ timestamp を加える任意の増強のみ．**confidence: 高．**
 **成立すること**（primary，高）: owner は**定型的な契機**を与えたのであって検出をした
 のではない．`INC-005.md:10`・`:27`，`analysis/incident-ranking.md:15`，とりわけ
 `evidence/session-index/de129390-...`（「owner からの検出ではなく，owner の一言が契機に
-なった点が特徴」）はいずれも正確である．旧本文の "incidental" も**正しく**，かつより
-情報量が多い．現 `04:107` の "An owner requested a status check" はより弱いが誤りでは
-ない．
+なった点が特徴」）はいずれも正確である．
+
+**現本文の含意についての訂正（独立レビュー指摘）**: 初稿はここで，現 `04:107` の
+"An owner requested a status check" を旧本文より「弱い」表現と述べていた．**これは
+方向を取り違えている．** 削除されたのは PR #59（`fc912b9`）が落とした
+"Detection came from an incidental owner status check, not …" の一文であり，
+`incidental` と「オーケストレータ自身の監視によるものではない」という 2 つの限定が
+同時に消えている（`git show fc912b9 -- paper/sections/04-incidents.tex` で確認できる）．
+残った現本文は，監視の不備を述べる文の**直後**に owner の行為を置き，しかもその行為を
+owner が知りえなかった 606 MiB という数値に索引づけている．逐語の主張としては依然
+誤りではないが，「owner が気づいて確認を求めた」という**能動的な読みが初めて可能に
+なっている**．それを妨げていたのが `incidental` である．
+
+**したがって処置は「変更なし」だが，含意の弱化ではなく強化として記録する．**
+Wave C の候補として，`incidental` に相当する限定（例: "A routine owner status check
+prompted a memory check"）の復元を owner へ申し送る．本 Wave では `paper/` を変更
+しない（§0 の範囲外であり，かつ復元の可否は owner の判断である）．
 
 **成立しないこと**: owner がメモリー状態を検出したという主張は何も支持されず，corpus も
 それを主張していない．
@@ -623,15 +658,20 @@ timestamp を加える任意の増強のみ．**confidence: 高．**
   うち 37 件が connector 経由．この読みの下では，"direct" は監督経路のうち GitHub
   artifact 側について実質的な過大主張になっていた．
 - *読み 2（人間が文面を起草し読んだ）*: census は何も画定しない．逆向きにも，
-  `analysis/mediation-census-methodology.md` は `null` のコメント 7 件が harness 投稿の
-  定型通知であることを一次確認手順つきで記録している．`null` も「人間の手打ち」を
+  `analysis/mediation-census-methodology.md` は `null` のコメント 7 件について，その文面が
+  定型のワークフロー通知であることを一次確認手順つきで記録している（`KSE2026#59` 上の
+  `t-uda`／`null` コメントは全部で 13 件で，うち 7 件が id つきで挙げられている）．投稿
+  主体そのものは同データからは確定しない．いずれにせよ `null` は「人間の手打ち」を
   意味しない．
 - *census が全く測っていない第 3 のチャネル*: 上記のセッション内監督（`AskUserQuestion`
-  による方針エスカレーション 3 点，07-10 と 07-18 の介入，leray-hopf の PR に対する
+  による方針エスカレーション — session index が特記する 3 点，同セッションの呼び出し
+  総数は 8 件 — と，07-10 と 07-18 の介入，leray-hopf の PR に対する
   owner 3 巡レビュー）は**人間の直接入力**であり，GitHub 上に痕跡を残さない．
 
-すなわち監督は実際に混成であった: GitHub 作業単位の作成のおよそ半分は connector 経由，
-セッション内の舵取りと原稿レビューは非仲介である．
+すなわち監督は実際に混成であった: **`t-uda` 名義の** GitHub 作業単位の作成のおよそ半分
+（63 件中 32 件）は connector 経由であり，セッション内の舵取りと原稿レビューは非仲介で
+ある．なお leray-hopf の issue／PR 全 195 件を分母に取れば connector 経由は 16% であって，
+「およそ半分」は `t-uda` 名義に限った比である．
 
 **成立しないこと**: **誰が決めたか**については何も言えない．`leray-hopf#146` が最も
 分かりやすい例で，これは owner に選択を求める connector 経由の issue である．connector は
@@ -711,8 +751,11 @@ timestamp を加える任意の増強のみ．**confidence: 高．**
 ### 5.1 byline は既に匿名である
 
 `paper/main.tex` の byline は本 PR 適用**前**（`fe8fbeb`，当時の 36 行目）から
-`\author{\IEEEauthorblockN{Anonymous Author(s)}}` であり，PR #59（`fc912b9`）で
-導入された．したがって「匿名化スイッチは現状の**非匿名**出力を既定とする」という
+`\author{\IEEEauthorblockN{Anonymous Author(s)}}` である．**初稿は「PR #59
+（`fc912b9`）で導入された」と書いていたが誤りであり，訂正する**: `git show
+4bf508d:paper/main.tex` の 39 行目が既に同じ blind byline であり，byline は
+リポジトリ最初の LaTeX scaffold から一度も実名だったことがない．`fc912b9` が行った
+のは後続の `\IEEEauthorblockA{\todo{Affiliation …}}` 行の除去である．したがって「匿名化スイッチは現状の**非匿名**出力を既定とする」という
 指示の前提は成り立たない．今日の出力は既に匿名側である．本 PR 適用後の当該行は
 `\ifanonymous` 分岐の内側へ移っている（現在位置は
 `notes/deanonymization-checklist.md` §2 の #1 を参照）．
@@ -726,8 +769,11 @@ timestamp を加える任意の増強のみ．**confidence: 高．**
 
 ### 5.2 acknowledgment は IEEEtran conference mode で既定では消える
 
-IEEEtran は conference mode で `\thanks` を沈黙のうちに破棄する．
-`\IEEEoverridecommandlockouts` を宣言しないと，acknowledgment は警告なしに描画されない．
+IEEEtran は conference mode で `\thanks` を破棄する．ログには
+`** WARNING: \thanks is locked out when in conference mode` が素の `\typeout` として
+出るのみで，LaTeX の警告機構にも `latexmk` の警告要約にも乗らない．
+`\IEEEoverridecommandlockouts` を宣言しないと，acknowledgment は**通常の警告走査に
+掛からないまま**描画されない（実測で確認．`notes/deanonymization-checklist.md` §1）．
 本 Wave はこれを preamble に追加した（`\anonymoustrue` の下では出力に影響しない）．
 
 ### 5.3 artifact 可用性の齟齬（owner 判断，本 Wave では決めない）
@@ -752,7 +798,7 @@ evidence 手法の claim（contribution 3 が依拠する）を支えない．
 台帳から導かれうる候補 3 件は PR 本文で owner へ提示するにとどめ，
 `claims/paper-claims.md` には登録しない（`Status: candidate` の登録も凍結も owner の
 行為であり，`paper/` 側の本文を待たせる副作用がある）．候補の内容と証拠識別子は
-issue #66 の PR 本文を参照．
+本 PR（`KSE2026#68`）の本文を参照．
 
 ## 7. 本書の限界
 
@@ -769,3 +815,16 @@ issue #66 の PR 本文を参照．
   される）．KSE2026 側の identifier は本文の主張の荷重を担わせていない．
 - ChatGPT 側の会話は evidence に存在しない．A2 の「起草」機能は再構成であり
   confidence 中である．
+- **§3 の null 結果（弱めるべき権威 passage は 1 件もない）は，前提の射程に依存する．**
+  §0 が既定処置を「変更なし」に固定し，唯一利用できた反証材料（伝送チャネルの証拠）を
+  裁定によって射程外に置いている以上，「弱める必要がある」と判定されうる経路は最初から
+  狭い．本書の null 結果は *裁定が検証可能なまま残した範囲について* 成り立つのであって，
+  権威記述一般の健全性を示さない．
+- **前提となった 2026-07-25 の裁定そのものは，本リポジトリ内に再導出可能な記録を
+  持たない．** `provenance/author-decisions.md` は owner 判断に「日付と根拠」を求めるが
+  （`:3-4`），本裁定は同ファイルに未記載である．本書は owner 未確認の事項を確定判断と
+  して記録しない方針により，同ファイルへの追記を行っていない（§0）．したがって
+  第三者は，裁定の存在自体を本リポジトリだけでは検証できない．
+- **A3 の「伝送のみ」は `t-uda` 名義の投稿に限った読みである．** 同じ App slug は
+  `chatgpt-codex-connector[bot]` 名義の生成テキストにも付く（§1 A3 の交差集計）．
+  slug 単独ではアクターの機能を決めない．

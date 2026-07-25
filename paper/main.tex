@@ -1,7 +1,8 @@
 \documentclass[conference]{IEEEtran}
-% IEEEtran silently discards \thanks in conference mode; restore it so the
-% funding acknowledgment can be typeset as the unmarked first-page footnote.
-% This only re-lets commands and emits nothing on its own.
+% IEEEtran discards \thanks in conference mode, logging only a plain \typeout
+% ("** WARNING: \thanks is locked out...") that no LaTeX warning scan reports.
+% Restore it so the funding acknowledgment can be typeset as the unmarked
+% first-page footnote. This only re-lets commands and emits nothing on its own.
 \IEEEoverridecommandlockouts%
 
 \usepackage[T1]{fontenc}
