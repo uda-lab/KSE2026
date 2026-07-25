@@ -52,6 +52,11 @@ the release-attestation episode, and record-capture mechanics are absent. Fable'
 later-phase use and the historical introduction order belong in the caption or
 surrounding prose, not in the diagram topology.
 
+The smallest informative text is 22 px in the 1600 px-wide SVGs, approximately
+7 pt at IEEE `figure*` width. Long explanatory phrases and in-figure subtitles
+were removed; arrow labels are one or two words. The caption should carry the
+historical end-state qualification and other context.
+
 Proposed alternative text for the technical figure: A synthesized three-layer
 agent harness reconstructed from controls introduced over the Leray-Hopf campaign.
 The Author defines and adjudicates an issue contract. A model-independent
