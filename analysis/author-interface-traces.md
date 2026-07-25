@@ -432,7 +432,7 @@ merge 可です．修正後に approve します」と述べ，**承認を保留
 | `chatgpt-codex-connector[bot]` の「Codex アカウントを作成せよ」定型返信 | — | 非認可 mention に対する定型応答．**何の証拠としても引用しない** |
 | 定型の merge 許可コメント 6 件 | `leray-hopf#172` `leray-hopf#175` `leray-hopf#176` `leray-hopf#181` ほか | 1〜3 文の定型承認で，追跡できる推論を含まない．個別 trace ではなく**型**として報告するに留める．**初稿はここに `leray-hopf#190` も入れていたが誤りであり，T11 として採用した．**`leray-hopf#173` も 1〜3 文には収まらないが，先行する指摘の確認に留まるため不採用 |
 | `leray-hopf#82` `leray-hopf#93` `leray-hopf#115` `leray-hopf#106` | — | 定型的で結果に起伏がなく，追うべき分岐・訂正・係争がない |
-| `leray-hopf#187` `leray-hopf#188` `leray-hopf#189` `leray-hopf#191` | — | 体裁・運用の issue で，記録された不一致なく数時間で close．T1–T10 に比して収量が低い |
+| `leray-hopf#187` `leray-hopf#188` `leray-hopf#189` `leray-hopf#191` | — | 体裁・運用の issue で，記録された不一致なく数時間で close．T1–T11 に比して収量が低い |
 | `leray-hopf#184` `leray-hopf#195` | — | connector 作成だがコメント 0 件で open．追うべき下流がない |
 | `leray-hopf#154` | — | open だが活動は INC-005 のセッションに属し既にそちらで扱われている．インターフェースについて追加情報がない |
 | `leray-hopf#99` — 先の `Reviewed-by` artifact の「所見なし」は誤りであったという自己訂正 | — | 真正の drift だが `performed_via_github_app: null`，投稿者 `uda-lab-agent`．著者インターフェースの trace ではない．自己訂正がインターフェース固有でないことの傍証として 1 行分の価値はある |

@@ -56,10 +56,16 @@ Author(s)}}` であり，**byline は既に匿名**である．したがって�
 「PDF に出るか」は，文字列が提出 PDF に到達するか（`.tex` / `.bib` ソースにのみ存在するか）
 の区別である．
 
-| # | file:line | 漏洩する文字列 | 種別 | PDF に出るか | 匿名化時の対応 | スイッチで解決するか |
+#1・#2 が指す `paper/main.tex` の箇所は本 PR 自身が書き換えた領域であり，行番号は本 PR の
+途中で実際に一度移動した．そのためこの 2 件は行番号ではなく **grep で一意に引ける LaTeX
+構文**を主 anchor とし，行番号は補助として括弧に添える．`\ifanonymous` と `\thanks{` は
+いずれも `main.tex` 内で一意である．#3 以降が指すファイルは本 PR で変更しておらず，
+行番号をそのまま anchor として用いる．
+
+| # | 位置（anchor） | 漏洩する文字列 | 種別 | PDF に出るか | 匿名化時の対応 | スイッチで解決するか |
 |---|---|---|---|---|---|---|
-| 1 | `paper/main.tex:51-59` | byline | identity | 出る | `\anonymoustrue` が `Anonymous Author(s)` を出す．実名 byline は非匿名分岐にしか現れない | **する** |
-| 2 | `paper/main.tex:57-58` | `This work was supported by JST-Mirai Program Grant Number JPMJMI22G1, Japan.` | funder | 出る（第 1 ページ脚注） | 全体を抑止．grant number は公開検索により PI と国を特定しうる | **する** |
+| 1 | `paper/main.tex` の `\ifanonymous` … `\fi` ブロック全体（現 51-62 行．実名 byline は `\else` 分岐の `\author{...}`，現 59 行） | byline | identity | 出る | `\anonymoustrue` が `Anonymous Author(s)` を出す．実名 byline は非匿名分岐にしか現れない | **する** |
+| 2 | `paper/main.tex` の `\thanks{` の引数（`\else` 分岐内，現 60-61 行） | `This work was supported by JST-Mirai Program Grant Number JPMJMI22G1, Japan.` | funder | 出る（第 1 ページ脚注） | 全体を抑止．grant number は公開検索により PI と国を特定しうる | **する** |
 | 3 | `paper/references.bib:6` | `author = {{uda-lab}}` | identity / repo | 出る（参考文献欄に表示） | 匿名化した組織名に置換するか，entry を落としてタグのみで参照する | しない — 個別対応 |
 | 4 | `paper/references.bib:10` | `\url{https://github.com/uda-lab/leray-hopf}` | repo / identity | 出る（URL がそのまま） | URL を除去し，省略するか匿名アーカイブのリンクに置換する | しない — 個別対応 |
 | 5 | `paper/references.bib:11` | `Release tag v0.1.0-rc1, commit 7c15710a` | repo | 出る | SHA は public repo に一意であり，検索すれば owner に到達する．#3・#4 を処理しても SHA を残すと漏れる | しない — 個別対応 |

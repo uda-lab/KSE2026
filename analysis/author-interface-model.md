@@ -710,9 +710,12 @@ timestamp を加える任意の増強のみ．**confidence: 高．**
 
 ### 5.1 byline は既に匿名である
 
-`paper/main.tex:36` は `\author{\IEEEauthorblockN{Anonymous Author(s)}}` であり，
-PR #59（`fc912b9`）で導入された．したがって「匿名化スイッチは現状の**非匿名**出力を
-既定とする」という指示の前提は成り立たない．今日の出力は既に匿名側である．
+`paper/main.tex` の byline は本 PR 適用**前**（`fe8fbeb`，当時の 36 行目）から
+`\author{\IEEEauthorblockN{Anonymous Author(s)}}` であり，PR #59（`fc912b9`）で
+導入された．したがって「匿名化スイッチは現状の**非匿名**出力を既定とする」という
+指示の前提は成り立たない．今日の出力は既に匿名側である．本 PR 適用後の当該行は
+`\ifanonymous` 分岐の内側へ移っている（現在位置は
+`notes/deanonymization-checklist.md` §2 の #1 を参照）．
 
 本 Wave の採った設計: スイッチの既定を `\anonymoustrue` とし，**今日の PDF を保存する**．
 研究費 acknowledgment（`provenance/author-decisions.md:10` で 2026-07-22 に確定，
@@ -754,9 +757,10 @@ issue #66 の PR 本文を参照．
 ## 7. 本書の限界
 
 - 台帳は `fe8fbeb`（本 PR 適用**前**）時点の固定である．したがって `paper/main.tex` の
-  3 行は本 PR の匿名化スイッチによって既に移動している（現在値は
-  `notes/deanonymization-checklist.md` を参照．同ファイルはブランチ時点の行番号を使う）．
-  他のファイルは本 PR で変更していないため一致する．
+  3 行は本 PR の匿名化スイッチによって既に移動している（現在位置は
+  `notes/deanonymization-checklist.md` §2 を参照．同節は `main.tex` については行番号ではなく
+  `\ifanonymous` / `\thanks{` という grep 可能な構文を anchor とし，行番号を補助表示に
+  留めている）．他のファイルは本 PR で変更していないため一致する．
 - 検出チャネルの判定に用いた raw transcript は `private/raw-sessions/`（gitignored）に
   あり，第三者は再現できない．本書が引用したのは timestamp と短い運用上の発話のみで，
   いずれも `scripts/redact_check.py` を通している．
