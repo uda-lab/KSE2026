@@ -15,20 +15,23 @@
 \end{figure*}
 
 \begin{figure*}[t]
-% ALT: The scientific owner retains final authority. ChatGPT is an intermediate
-% decision-support layer for investigation, synthesis, recommendation, and
-% drafting. Through ChatGPT's GitHub Connector, owner-authorized work is
-% prepared and transmitted to GitHub Issues and pull requests, where it is
-% monitored and recorded. Review findings return to the scientific owner;
-% neither ChatGPT nor the Connector has independent authority.
+% ALT: The scientific owner retains final authority. Repository records directly
+% establish the owner-authorized transmission path through ChatGPT's GitHub
+% Connector to GitHub Issues and pull requests, where work is monitored and
+% recorded. The attribution of investigation, synthesis, recommendation, and
+% drafting to ChatGPT is reconstructed from incomplete records with medium
+% confidence. Review findings return to the scientific owner; neither ChatGPT
+% nor the Connector has independent authority.
 \centering
 \includegraphics[width=\textwidth]{figures/author-interface-provenance.pdf}
 \caption{Author-interface and provenance model complementary to the technical
-harness. ChatGPT acts as an intermediate decision-support layer rather than a
-source of authority: through ChatGPT's GitHub Connector it helps prepare and
-transmit owner-authorized work on GitHub Issues and pull requests. The right
-column denotes Issue/PR work and recorded artifacts, not direct control of the
-technical harness; review findings return to the scientific owner.}\label{fig:author-interface}
+harness. Repository records directly establish the owner-authorized transmission
+path through ChatGPT's GitHub Connector to GitHub Issues and pull requests. The
+attribution of investigation, synthesis, recommendation, and drafting to ChatGPT
+is reconstructed from incomplete records with medium confidence; it does not
+establish an independent source of authority. The right column denotes Issue/PR
+work and recorded artifacts, not direct control of the technical harness; review
+findings return to the scientific owner.}\label{fig:author-interface}
 \end{figure*}
 
 % Mapping: CLM-007, CLM-009 ← analysis/workflow-evolution.md,
@@ -42,8 +45,11 @@ unvarying structure. % CLAIM: CLM-007, CLM-009
 
 Figure~\ref{fig:author-interface} complements this technical view with the
 author-facing support and transmission paths recorded in the Issue~\#60 role
-model. The intermediary paths do not change the scientific owner's final
-authority. % Mapping: issue #60, analysis/author-interface-model.md
+model. The repository directly records the owner-authorized transmission path
+through the GitHub Connector. The attribution of investigation, synthesis,
+recommendation, and drafting to ChatGPT is reconstructed with medium confidence
+from incomplete records; neither ChatGPT nor the Connector is treated as an
+independent authority. % CLAIM: CLM-012
 
 The work ran across two local computers and an isolated development
 container on a virtual private server (VPS). Many parallel orchestration

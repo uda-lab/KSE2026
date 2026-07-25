@@ -146,4 +146,15 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   本文では task 粒度と trusted workspace の固定だけを述べ，個別 leaderboard
   成績や repository-scale の完全形式化とは同一視しない．
 
+## CLM-012: 記録された著者向け経路では scientific owner が最終権限を保持し，ChatGPT は中間的な decision-support 層として再構成される（confidence: 中）一方，owner-authorized な項目の GitHub Connector による Issue / PR への伝送は一次記録されており，ChatGPT の起草や独立した意思決定までは証明しない
+- Status: frozen
+- Paper location: paper/sections/03-agent-workflow.tex
+- Evidence: EV-2076, EV-0925, EV-1669, EV-0247, INC-001, leray-hopf#145, leray-hopf#146, leray-hopf#158
+- Notes: `analysis/author-interface-model.md` A2--A3 に基づく．`performed_via_github_app`
+  は伝送チャネルを直接示すが，文面の起草者を示さない．Issue／PR の調査・統合・
+  推奨・起草を ChatGPT に帰属する部分は reconstructed / confidence 中とし，
+  prompt・モデル版・session・編集履歴は復元不能である．owner の最終権限と
+  ChatGPT／Connector の独立権限不在を混同しない．2026-07-25 の PR #78 review
+  follow-up で本文へ binding した．
+
 <!-- 以降の claim は必要に応じて追加する． -->
