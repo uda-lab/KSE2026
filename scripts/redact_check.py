@@ -92,9 +92,33 @@ def main() -> int:
     args = ap.parse_args()
 
     targets = list(args.files)
+    # A missing --dir contributes zero files rather than an error, so a renamed
+    # or deleted directory would silently shrink this gate's scope while it
+    # still reported success. Only an *entirely* empty target list used to be
+    # caught. Fail on each missing directory instead: a scan narrower than the
+    # one configured is not a pass.
     for d in args.dir:
-        targets += [p for p in sorted(d.rglob("*"))
-                    if p.is_file() and p.name != ".gitkeep"]
+        if not d.is_dir():
+            ap.error(f"scan scope '{d}' is not a directory; "
+                     "refusing to report a pass for a narrower scan than configured")
+        present = [p for p in sorted(d.rglob("*")) if p.is_file()]
+        found = [p for p in present if p.name != ".gitkeep"]
+        # A directory that still exists but has been emptied is the same
+        # failure one step later: the scan reports success having read nothing
+        # from a scope it was told to cover.
+        #
+        # A lone .gitkeep is the exception, and is checked against `present`
+        # rather than `found`. It is an affirmative "intentionally empty"
+        # marker that this repository already uses in six places; an accidental
+        # deletion does not create one. Rejecting it would make `make integrity`
+        # unpassable for a scope registered before its content exists, and the
+        # only escapes would be inventing a filler file or removing the
+        # directory from REDACT_DIRS — which is the narrowing this check exists
+        # to prevent.
+        if not present:
+            ap.error(f"scan scope '{d}' contains no files; "
+                     "refusing to report a pass for a scope that was not read")
+        targets += found
     if not targets:
         ap.error("nothing to scan")
 

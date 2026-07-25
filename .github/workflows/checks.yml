@@ -1,25 +1,45 @@
-# Lightweight integrity gate. Runs on every pull request and on every push to
-# main, installs no TeX Live, and finishes in roughly ten seconds.
+# Lightweight integrity gate. Runs on every pull request, every merge-queue
+# entry, every push to main, and manual dispatch; installs no TeX Live, and
+# takes about 22 s (17-28 s observed across every successful run as of
+# 2026-07-25; see .github/workflows/README.md).
 #
-# This workflow is deliberately unfiltered by path: it is the one intended to be
-# configured as a required status check. A path-filtered workflow never reports
-# a status on pull requests that do not touch its paths, so requiring one would
-# leave those pull requests permanently pending. The PDF build lives in
-# paper.yml, which is path-filtered and must not be made a required check.
-# See .github/workflows/README.md.
+# This workflow is deliberately unfiltered by path: its `integrity` job is the
+# status context intended to be configured as a required check. A path-filtered
+# workflow never reports a status on pull requests that do not touch its paths,
+# so requiring one would leave those pull requests permanently pending. The PDF
+# build lives in paper.yml, which is path-filtered and must not be made a
+# required check. See .github/workflows/README.md for the full list of context
+# names that must never be required.
 name: checks
 
 on:
   push:
     branches: [main]
   pull_request:
+  # Required for a merge queue. GitHub evaluates required checks against the
+  # refs/heads/gh-readonly-queue/... ref, and a workflow that does not trigger on
+  # merge_group reports nothing there. "Require merge queue" sits beside
+  # "Require status checks to pass" in the Rulesets UI, so enabling both without
+  # this trigger would time out every queue entry and block all merges — the
+  # same permanent-pending failure a path-filtered required check causes.
+  merge_group:
   workflow_dispatch:
 
-# One live run per pull request (or per ref outside a pull request). An agent
-# pushing a follow-up commit cancels its own superseded run instead of queuing
-# a second one.
+# One live run per pull request, per merge-queue entry, or per ref. An agent
+# pushing a follow-up commit cancels its own superseded run instead of queuing a
+# second one.
+#
+# This applies to main as well: two merges landing within one run's duration
+# cancel the earlier commit's run. That is acceptable because every commit
+# reaching main was already gated on its own pull request.
+#
+# github.run_id is mixed in for workflow_dispatch only, so a manual full
+# validation and a push to main do not share a group and cancel each other.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: >-
+    ${{ github.workflow }}-${{ github.event.pull_request.number
+    || github.event.merge_group.head_ref || github.ref }}-${{
+    github.event_name == 'workflow_dispatch' && github.run_id || 'shared' }}
   cancel-in-progress: true
 
 permissions:
@@ -28,22 +48,47 @@ permissions:
 jobs:
   integrity:
     runs-on: ubuntu-latest
+    # This job takes ~22 s. Without a bound, a wedged apt-get holds a runner
+    # for the 6-hour default, and on a required check a very long run is
+    # indistinguishable from the permanent pending state this split exists to
+    # avoid. cancel-in-progress only helps when a newer commit arrives.
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
       # ChkTeX is a standalone C program (240 kB installed; depends only on
       # libc6, libpcre2-posix3, libtinfo6) and does not pull in TeX Live, so the
-      # full `make lint` gate stays in the lightweight workflow. The version
-      # call fails the step if the install silently did not take effect, which
-      # would otherwise let `make lint` skip ChkTeX and pass a weaker gate.
+      # full `make lint` gate stays in the lightweight workflow.
+      #
+      # `shell: bash` is load-bearing, not decoration. The default step shell is
+      # `bash -e {0}`, without pipefail, so `chktex --version | head -1` would
+      # exit with head's status — always 0 — and an absent binary would sail
+      # through into `make lint`'s "chktex not installed; skipping" branch,
+      # reporting a green gate that never ran. `shell: bash` is
+      # `bash --noprofile --norc -eo pipefail {0}`.
       - name: Install ChkTeX (standalone; no TeX Live)
+        shell: bash
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq --no-install-recommends chktex
+          command -v chktex
           chktex --version | head -1
 
       - name: Claim links, raw-log leakage guard, redaction scan
         run: make integrity
 
+      # REQUIRE_CHKTEX makes the Makefile refuse to report a pass when chktex is
+      # missing, so the gate cannot degrade silently even if the guard above is
+      # ever weakened again.
       - name: Lint prose and LaTeX
-        run: make lint
+        run: make lint REQUIRE_CHKTEX=1
+
+      # Tests the gate mechanisms themselves, and that the make targets above
+      # still invoke them: that the ChkTeX gate fails when the binary is absent,
+      # the file list is stale, or the binary is a no-op stub; that the leakage
+      # guard catches uppercase and archived extensions and fails closed; and
+      # that a defect planted in a scratch copy still fails `make lint` and
+      # `make integrity`. Without this the protections are only asserted in
+      # prose, which is how the previous version of that guard stayed broken.
+      - name: Self-test the gate mechanisms
+        run: make selftest
