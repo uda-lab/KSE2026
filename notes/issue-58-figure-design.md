@@ -23,9 +23,11 @@ not as a separate evidence-style lane. It retains only the operational controls
 that materially shaped parallel Lean work: exclusive worktrees, a shared cache
 with a global build lock, and liveness/resource cleanup.
 
-Solid arrows show forward delegation. Red arrows show rework. The semantic return
-uses a clear upper lane back to the Author and contract; the technical return is a
-short local loop back to implementation. No arrow crosses a box or label.
+Solid arrows show forward delegation. Dashed arrows mark assurance selected
+according to the changed artifact; they are not universal gates. Red arrows show
+rework. The semantic return uses a clear upper and left lane that branches back
+to both the Author and contract; the technical return is a short local loop back
+to implementation. No arrow crosses a box or label.
 
 Read-only scouting and statement refinement are compressed into one dashed,
 conditional control. Individual PR gates and release steps are omitted.
@@ -60,9 +62,10 @@ historical end-state qualification and other context.
 Proposed alternative text for the technical figure: A synthesized three-layer
 agent harness reconstructed from controls introduced over the Leray-Hopf campaign.
 The Author defines and adjudicates an issue contract. A model-independent
-orchestrator delegates bounded work and selects assurance. Implementation occurs
-in an isolated worktree and undergoes separate semantic and mechanical review.
-Semantic findings return to the Author; technical findings return to
+orchestrator delegates bounded work and selects applicable assurance.
+Implementation occurs in an isolated worktree and undergoes semantic or
+mechanical review as required by the changed artifact. Semantic findings return
+to both the Author and issue contract; technical findings return to
 implementation. Runtime controls support orchestration and execution.
 
 Proposed alternative text for the companion figure: The Author retains final

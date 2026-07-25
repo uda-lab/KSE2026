@@ -7,7 +7,8 @@
     A simplified three-part architecture. The Author defines and adjudicates
     the issue contract. A model-independent orchestrator selects agents,
     skills, and checks. Issue-scoped implementation is assessed by separate
-    semantic and mechanical assurance. Semantic findings return to the Author;
+    applicable semantic and mechanical assurance selected for the changed
+    artifact. Semantic findings return to both the Author and issue contract;
     technical findings return to implementation. Runtime controls support
     orchestration and execution.
   </desc>
@@ -27,8 +28,10 @@
       .body { font: 22px Arial, Helvetica, sans-serif; fill: #334653; }
       .small { font: 22px Arial, Helvetica, sans-serif; fill: #4d5d68; }
       .flow { fill: none; stroke: #263746; stroke-width: 3; marker-end: url(#arrow); }
+      .conditional { stroke-dasharray: 8 6; }
       .join { fill: none; stroke: #263746; stroke-width: 3; }
       .return { fill: none; stroke: #9b3535; stroke-width: 2.7; marker-end: url(#feedback); }
+      .return-trunk { fill: none; stroke: #9b3535; stroke-width: 2.7; }
     </style>
   </defs>
 
@@ -95,15 +98,18 @@
   <text x="471" y="282" text-anchor="middle" class="small">contract</text>
   <path d="M885 300 L967 300" class="flow"/>
   <text x="926" y="282" text-anchor="middle" class="small">task</text>
-  <path d="M1185 282 L1198 282 L1198 239 L1207 239" class="flow"/>
-  <path d="M1185 282 L1198 282 L1198 334 L1207 334" class="flow"/>
+  <text x="1315" y="195" text-anchor="middle" class="small">as applicable</text>
+  <path d="M1185 282 L1198 282 L1198 239 L1207 239" class="flow conditional"/>
+  <path d="M1185 282 L1198 282 L1198 334 L1207 334" class="flow conditional"/>
   <path d="M1420 239 L1432 239 L1432 287" class="join"/>
   <path d="M1420 334 L1432 334 L1432 287" class="join"/>
   <path d="M1432 287 L1448 287" class="flow"/>
 
   <!-- Feedback has dedicated lanes, away from labels -->
-  <path d="M1315 203 L1315 112 L245 112 L245 208" class="return"/>
-  <text x="800" y="101" text-anchor="middle" class="small" fill="#8e3030">semantic feedback</text>
+  <path d="M1315 203 L1315 112 L35 112 L35 359" class="return-trunk"/>
+  <path d="M35 251 L93 251" class="return"/>
+  <path d="M35 359 L93 359" class="return"/>
+  <text x="700" y="101" text-anchor="middle" class="small" fill="#8e3030">semantic feedback</text>
   <path d="M1315 370 L1315 404 L1095 404 L1095 337" class="return"/>
   <text x="1218" y="430" text-anchor="middle" class="small" fill="#8e3030">rework</text>
 
