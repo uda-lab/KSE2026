@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="560"
+     viewBox="0 0 1600 560" role="img"
+     aria-labelledby="title desc">
+  <title id="title">Draft Author intervention and agent communication model</title>
+  <desc id="desc">
+    The Author retains final authority. ChatGPT supports investigation,
+    synthesis, recommendation, and drafting, while the Author may also
+    intervene directly. Author-issued instructions reach the GitHub-mediated
+    agent workflow either directly or through the Connector. Review findings
+    return to the Author.
+  </desc>
+  <defs>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="10" refY="5.5"
+            orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L11,5.5 L0,11 Z" fill="#263746"/>
+    </marker>
+    <marker id="feedback" markerWidth="11" markerHeight="11" refX="10" refY="5.5"
+            orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L11,5.5 L0,11 Z" fill="#9b3535"/>
+    </marker>
+    <style>
+      .title { font: 700 32px Arial, Helvetica, sans-serif; fill: #17232d; }
+      .layer { font: 700 20px Arial, Helvetica, sans-serif; letter-spacing: 0.8px; }
+      .head { font: 700 26px Arial, Helvetica, sans-serif; fill: #17232d; }
+      .body { font: 22px Arial, Helvetica, sans-serif; fill: #334653; }
+      .small { font: 22px Arial, Helvetica, sans-serif; fill: #4d5d68; }
+      .flow { fill: none; stroke: #263746; stroke-width: 3; marker-end: url(#arrow); }
+      .return { fill: none; stroke: #9b3535; stroke-width: 2.7; marker-end: url(#feedback); }
+    </style>
+  </defs>
+
+  <rect width="1600" height="560" fill="#ffffff"/>
+  <text x="60" y="54" class="title">Author control and agent workflow</text>
+
+  <!-- Three deliberately sparse elements -->
+  <rect x="70" y="150" width="350" height="245" rx="16"
+        fill="#fbf0f0" stroke="#8e3030" stroke-width="2.6"/>
+  <text x="95" y="183" class="layer" fill="#8e3030">FINAL AUTHORITY</text>
+  <text x="245" y="235" text-anchor="middle" class="head">Author</text>
+  <text x="245" y="283" text-anchor="middle" class="body">scope · claims · acceptance</text>
+  <rect x="120" y="330" width="250" height="42" rx="9"
+        fill="#ffffff" stroke="#b36a6a" stroke-width="1.6"/>
+  <text x="245" y="358" text-anchor="middle" class="small">direct intervention</text>
+
+  <rect x="625" y="150" width="350" height="245" rx="16"
+        fill="#eef4fb" stroke="#325b9b" stroke-width="2.6"/>
+  <text x="650" y="183" class="layer" fill="#325b9b">DECISION SUPPORT</text>
+  <text x="800" y="235" text-anchor="middle" class="head">ChatGPT</text>
+  <text x="800" y="270" text-anchor="middle" class="body">investigate · synthesise</text>
+  <text x="800" y="298" text-anchor="middle" class="body">recommend · draft</text>
+  <rect x="675" y="330" width="250" height="42" rx="9"
+        fill="#ffffff" stroke="#7893b7" stroke-width="1.6"/>
+  <text x="800" y="358" text-anchor="middle" class="small">advisory only</text>
+
+  <rect x="1180" y="150" width="350" height="245" rx="16"
+        fill="#eef7f2" stroke="#326b55" stroke-width="2.6"/>
+  <text x="1205" y="183" class="layer" fill="#326b55">PROJECT EXECUTION</text>
+  <text x="1355" y="226" text-anchor="middle" class="head">GitHub-mediated workflow</text>
+  <text x="1355" y="263" text-anchor="middle" class="body">contract · orchestration</text>
+  <text x="1355" y="293" text-anchor="middle" class="body">implementation · review</text>
+  <rect x="1230" y="330" width="250" height="42" rx="9"
+        fill="#ffffff" stroke="#73a28d" stroke-width="1.6"/>
+  <text x="1355" y="358" text-anchor="middle" class="small">delegated execution</text>
+
+  <!-- Deliberation -->
+  <path d="M420 245 L622 245" class="flow"/>
+  <text x="521" y="225" text-anchor="middle" class="small">context</text>
+  <path d="M625 300 L423 300" class="flow"/>
+  <text x="524" y="326" text-anchor="middle" class="small">proposal</text>
+
+  <!-- Two non-conflicting transmission paths -->
+  <path d="M975 245 L1177 245" class="flow"/>
+  <text x="1076" y="225" text-anchor="middle" class="small">Connector</text>
+  <path d="M245 395 L245 462 L1355 462 L1355 398" class="flow"/>
+  <text x="800" y="452" text-anchor="middle" class="small">intervene</text>
+
+  <!-- Review return has its own upper lane -->
+  <path d="M1355 148 L1355 112 L245 112 L245 148" class="return"/>
+  <text x="800" y="101" text-anchor="middle" class="small" fill="#8e3030">feedback</text>
+
+</svg>
