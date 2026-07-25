@@ -14,6 +14,26 @@
 \caption{Synthesized end-state architecture of the agent harness. Under the scientific owner's authority, an orchestrator routes each GitHub Issue through an implementing Git worktree and pull request. Semantic feedback returns to the owner and issue contract, while technical rework returns to the worktree. Mechanical and semantic checks are selected conditionally according to the changed artifact. Runtime governance supports execution beneath orchestration. Individual controls entered the project at different stages across the campaign.}\label{fig:agent-harness}
 \end{figure*}
 
+\begin{figure*}[t]
+% ALT: The scientific owner retains final authority. Repository records directly
+% establish the owner-authorized transmission path through ChatGPT's GitHub
+% Connector to GitHub Issues and pull requests, where work is monitored and
+% recorded. The attribution of investigation, synthesis, recommendation, and
+% drafting to ChatGPT is reconstructed from incomplete records with medium
+% confidence. Review findings return to the scientific owner; neither ChatGPT
+% nor the Connector has independent authority.
+\centering
+\includegraphics[width=\textwidth]{figures/author-interface-provenance.pdf}
+\caption{Author-interface and provenance model complementary to the technical
+harness. Repository records directly establish the owner-authorized transmission
+path through ChatGPT's GitHub Connector to GitHub Issues and pull requests. The
+attribution of investigation, synthesis, recommendation, and drafting to ChatGPT
+is reconstructed from incomplete records with medium confidence; it does not
+establish an independent source of authority. The right column denotes Issue/PR
+work and recorded artifacts, not direct control of the technical harness; review
+findings return to the scientific owner.}\label{fig:author-interface}
+\end{figure*}
+
 % Mapping: CLM-007, CLM-009 ← analysis/workflow-evolution.md,
 % session indices 74aab39b 90fa24bb 7e6156bf cd98f32a 7dbee3de 8aed0316.
 Figure~\ref{fig:agent-harness} illustrates the synthesized end-state
@@ -22,6 +42,14 @@ incrementally over the course of the campaign, including changes made
 in response to the incidents in Section~\ref{sec:incidents}; the
 diagram reconstructs this final configuration rather than an
 unvarying structure. % CLAIM: CLM-007, CLM-009
+
+Figure~\ref{fig:author-interface} complements this technical view with the
+author-facing support and transmission paths recorded in the Issue~\#60 role
+model. The repository directly records the owner-authorized transmission path
+through the GitHub Connector. The attribution of investigation, synthesis,
+recommendation, and drafting to ChatGPT is reconstructed with medium confidence
+from incomplete records; neither ChatGPT nor the Connector is treated as an
+independent authority. % CLAIM: CLM-012
 
 The work ran across two local computers and an isolated development
 container on a virtual private server (VPS). Many parallel orchestration
