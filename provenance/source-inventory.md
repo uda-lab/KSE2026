@@ -44,6 +44,8 @@ inventory 化する）．
 | deepmind2025alphaproof | ✓（2026-07-23，Nature 書誌 + 著者リストは PubMed 経由で照合） |
 | gonthier2013oddorder | ✓（2026-07-23，ITP 2013 出版情報照合） |
 | immler2012ode | ✓（2026-07-23，ITP 2012 出版情報照合） |
+| leaneval2026repo | ✓（2026-07-25，`leanprover/lean-eval` README 実読） |
+| leaneval2026site | ✓（2026-07-25，`lean-lang.org/eval/problems/` 実読） |
 | metr2025longtasks | ✓（2026-07-23，arXiv 照合） |
 | miller2026vlasov | ✓（2026-07-23，arXiv abstract 照合） |
 | tauceti2026 | ✓（2026-07-23，repo 4 本を実読・pinned commit 3a933bde．論文/CITATION.cff 不在も確認） |

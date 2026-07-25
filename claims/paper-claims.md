@@ -136,4 +136,13 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   `provenance/source-inventory.md` で照合済みとする．本文では governance と
   standing rubric の存在だけを述べ，個別 control の効果は主張しない．
 
+## CLM-011: Lean Eval は，benchmark statement・supplied dependencies・trusted scaffolding を generated workspace 側で固定し，submitted solution が comparator に受理されるかで問題を採点する theorem-completion benchmark として公開されている
+- Status: frozen
+- Paper location: paper/sections/01-introduction.tex
+- Evidence: cite:leaneval2026repo, cite:leaneval2026site
+- Notes: 2026-07-25 に issue #71 対応として `leanprover/lean-eval` README と
+  `https://lean-lang.org/eval/problems/` を実読して照合した．本文では task 粒度と
+  trusted workspace の固定だけを述べ，個別 leaderboard 成績や repository-scale の
+  完全形式化とは同一視しない．
+
 <!-- 以降の claim は必要に応じて追加する． -->
