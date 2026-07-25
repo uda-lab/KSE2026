@@ -12,6 +12,14 @@
 - [ ] KSE 2026 CFP の残項目: references のページ算入・double-blind・artifact 提出
       （主要項目は 2026-07-20 確認済み → `notes/paper-outline.md`．
       **投稿締切 2026-07-31 (extended)** — Phase 1–4 の日程をこれに合わせて圧縮する）
+- [ ] leray-hopf の正式 PR Review の投稿チャネルは connector 経由か直接入力か？
+      `pulls/N/reviews` endpoint は `performed_via_github_app` をキーごと返さないため
+      GitHub API からは判定できない．対象は少なくとも `leray-hopf#162` の
+      review 4718550494（INC-001 の型修正を要求した P0）と `leray-hopf#174` の
+      owner 3 巡レビュー．owner は connector 経由の蓋然性が高いとするが，
+      裏付ける export が未到着（2026-07-25 時点）．到着後に INC-001 と
+      `analysis/author-interface-model.md` §限界を更新する
+
 ## Closed
 
 - [x] **三環境それぞれのログの所在と網羅期間は？** → Phase 1 完了（EV-0001〜EV-2126）．
