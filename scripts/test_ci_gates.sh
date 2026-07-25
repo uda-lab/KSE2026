@@ -3,8 +3,9 @@
 #
 # Issue #67 requires that "the ChkTeX gate cannot pass while ChkTeX did not
 # run" be verified by a test that removes the binary, rather than asserted in
-# prose. It also fixed the leakage guard's uppercase-extension blind spot, and
-# that behaviour needs a test or it will regress.
+# prose. It also fixed the leakage guard's uppercase-extension and
+# archive-suffix blind spots, and those behaviours need tests or they will
+# regress.
 #
 # Run with `make selftest`. Uses only scratch directories under $TMPDIR; the
 # repository is never modified.
@@ -291,6 +292,16 @@ else
     check_msg "make integrity scans $scope" 2 "$?" "finding" "$out"
     rm -f -- "$wire/$scope/planted-secret.md"
   done
+
+  # `make integrity` must invoke the claim-link verifier, not merely the two
+  # sibling gates. A malformed claim is invisible to the leakage and redaction
+  # scans, so dropping `verify` from the target must turn this check red.
+  printf '\n## CLM-999: invalid wiring fixture\n- Status: candidate\n- Paper location: planned\n- Evidence: EV-9999\n' \
+    >>"$wire/claims/paper-claims.md"
+  out=$( (cd -- "$wire" && make integrity 2>&1) )
+  check_msg "make integrity actually runs claim-link verification" 2 "$?" \
+    "EV-9999 not in evidence/manifest.csv" "$out"
+
 fi
 
 echo "== leakage guard =="
@@ -367,9 +378,10 @@ d=$(mkrepo); check "rotated .jsonl.1" 1 "$(guard_rc "$d" "s.jsonl.1")"
 # single alternative left the suite green while that form stopped being
 # detected — the "each leakage pattern is covered by mutation" claim was false
 # for seven of them.
-for sfx in bz2 xz zst zip lz4 lzma br 7z Z tar gz bak old orig save part; do
+for sfx in bz2 xz zst zip lz4 lzma br 7z Z tar gz bak old orig save part tgz tbz2 txz; do
   d=$(mkrepo); check "archive suffix .$sfx" 1 "$(guard_rc "$d" "s.jsonl.$sfx")"
 done
+d=$(mkrepo); check "bare trailing dot suffix" 1 "$(guard_rc "$d" "s.jsonl.")"
 d=$(mkrepo); check "two-digit rotation .jsonl.42" 1 "$(guard_rc "$d" "s.jsonl.42")"
 d=$(mkrepo); check "three-digit rotation .jsonl.007" 1 "$(guard_rc "$d" "s.jsonl.007")"
 

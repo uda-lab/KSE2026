@@ -32,7 +32,7 @@
 - `make integrity` — claim リンク検査 + raw ログ漏洩ガード + 公開領域の redaction scan．
   TeX を必要としない 3 つの hard gate をまとめたもの．commit 前に **`make integrity` と
   `make lint` の両方**を通す（CI の `checks` workflow はこの 2 つと `make selftest` を実行する）．
-- `make selftest` — gate 機構自体の回帰テスト（`scripts/test_ci_gates.sh`，76 ケース）．
+- `make selftest` — gate 機構自体の回帰テスト（`scripts/test_ci_gates.sh`，81 ケース）．
   chktex を PATH から外して lint gate が実際に落ちること，既知欠陥を含む fixture を
   lint させて chktex が「何も検査していない」状態を検出できること，file list や scan
   scope が空・不完全になった lint・prose scanner・redaction scan が「何も読まずに pass」
