@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000"
+     viewBox="0 0 1800 1000" role="img"
+     aria-labelledby="figure-title figure-desc">
+  <title id="figure-title">Draft synthesized Leray--Hopf agent-harness architecture</title>
+  <desc id="figure-desc">
+    A synthesized end-state architecture, reconstructed from controls introduced
+    at different stages rather than one unchanged campaign configuration.
+    The scientific owner scopes a GitHub Issue and conditional statement contract.
+    A model-independent orchestrator routes work to an issue-scoped Git worktree,
+    a pull-request candidate, artifact-selected assurance gates, merged project
+    state, release candidate, full-build attestation, and an attested release
+    artifact. Semantic findings return to the owner and statement contract;
+    implementation and mechanical findings return to the worktree. Runtime
+    governance and evidence capture form separate horizontal rails.
+  </desc>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5"
+            orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#263746"/>
+    </marker>
+    <marker id="feedback-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5"
+            orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a33a3a"/>
+    </marker>
+    <marker id="evidence-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5"
+            orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#23766f"/>
+    </marker>
+    <style>
+      .title { font: 700 28px Arial, Helvetica, sans-serif; fill: #17232d; }
+      .subtitle { font: 600 16px Arial, Helvetica, sans-serif; fill: #495967; }
+      .role { font: 700 14px Arial, Helvetica, sans-serif; letter-spacing: 1px; }
+      .node-title { font: 700 17px Arial, Helvetica, sans-serif; fill: #17232d; }
+      .node-sub { font: 14px Arial, Helvetica, sans-serif; fill: #344652; }
+      .small { font: 13px Arial, Helvetica, sans-serif; fill: #344652; }
+      .tiny { font: 12px Arial, Helvetica, sans-serif; fill: #465864; }
+      .white-title { font: 700 17px Arial, Helvetica, sans-serif; fill: #ffffff; }
+      .white-sub { font: 13px Arial, Helvetica, sans-serif; fill: #ffffff; }
+      .flow { fill: none; stroke: #263746; stroke-width: 3; marker-end: url(#arrow); }
+      .flow-thin { fill: none; stroke: #263746; stroke-width: 2.2; marker-end: url(#arrow); }
+      .feedback { fill: none; stroke: #a33a3a; stroke-width: 2.7;
+                  marker-end: url(#feedback-arrow); }
+      .evidence { fill: none; stroke: #23766f; stroke-width: 2.2;
+                  stroke-dasharray: 4 6; marker-end: url(#evidence-arrow); }
+      .conditional { stroke-dasharray: 9 6; }
+    </style>
+  </defs>
+
+  <rect width="1800" height="1000" fill="#ffffff"/>
+
+  <!-- End-state qualification -->
+  <rect x="28" y="22" width="1744" height="62" rx="10" fill="#eef2f4"
+        stroke="#7e8b93" stroke-width="1.5"/>
+  <text x="50" y="49" class="title">Synthesized Leray--Hopf agent-harness architecture</text>
+  <text x="50" y="72" class="subtitle">
+    Reconstructed from controls introduced at different stages; not one unchanged campaign configuration.
+  </text>
+
+  <!-- Legend -->
+  <g transform="translate(1165,35)">
+    <line x1="0" y1="10" x2="55" y2="10" class="flow-thin"/>
+    <text x="66" y="15" class="tiny">forward lifecycle</text>
+    <line x1="220" y1="10" x2="275" y2="10" class="feedback"/>
+    <text x="286" y="15" class="tiny">finding / rework</text>
+    <rect x="440" y="-1" width="45" height="22" rx="5" fill="#fff"
+          stroke="#66737b" stroke-width="2" stroke-dasharray="7 5"/>
+    <text x="495" y="15" class="tiny">conditional control</text>
+  </g>
+
+  <!-- Scientific authority -->
+  <text x="240" y="115" class="role" fill="#8e3030">SCIENTIFIC AUTHORITY</text>
+  <rect x="235" y="128" width="178" height="75" rx="10" fill="#f8e7e7"
+        stroke="#8e3030" stroke-width="2.6"/>
+  <text x="324" y="158" text-anchor="middle" class="node-title">Scientific owner</text>
+  <text x="324" y="181" text-anchor="middle" class="node-sub">scope and merge authority</text>
+
+  <!-- Owner-defined workflow boundary -->
+  <rect x="208" y="218" width="945" height="358" rx="16" fill="#fbfcfd"
+        stroke="#465864" stroke-width="2.6"/>
+  <rect x="228" y="208" width="508" height="28" rx="7" fill="#465864"/>
+  <text x="242" y="228" class="white-sub">
+    OWNER-DEFINED GITHUB WORKFLOW GOVERNANCE — predates later Fable phases
+  </text>
+
+  <!-- Conditional read-only scout -->
+  <rect x="422" y="128" width="173" height="66" rx="9" fill="#ffffff"
+        stroke="#66737b" stroke-width="2.2" stroke-dasharray="9 6"/>
+  <text x="508" y="155" text-anchor="middle" class="node-title">Read-only scout*</text>
+  <text x="508" y="177" text-anchor="middle" class="node-sub">repository assumptions</text>
+  <path d="M455 194 C430 220, 395 237, 368 249" class="flow-thin"/>
+
+  <!-- Main lifecycle: issue/contract -->
+  <text x="235" y="263" class="role" fill="#355e84">SCOPE CONTRACT</text>
+  <rect x="230" y="275" width="170" height="77" rx="10" fill="#e7f0f7"
+        stroke="#355e84" stroke-width="2.4"/>
+  <text x="315" y="305" text-anchor="middle" class="node-title">GitHub Issue</text>
+  <text x="315" y="328" text-anchor="middle" class="node-sub">bounded contract</text>
+  <rect x="242" y="360" width="146" height="52" rx="8" fill="#ffffff"
+        stroke="#355e84" stroke-width="2.2" stroke-dasharray="9 6"/>
+  <text x="315" y="383" text-anchor="middle" class="small">Statement-contract</text>
+  <text x="315" y="401" text-anchor="middle" class="small">refinement*</text>
+
+  <!-- Orchestration -->
+  <text x="430" y="263" class="role" fill="#325b9b">ORCHESTRATION</text>
+  <rect x="425" y="275" width="155" height="77" rx="10" fill="#dce8f8"
+        stroke="#325b9b" stroke-width="2.4"/>
+  <text x="502" y="305" text-anchor="middle" class="node-title">Orchestrator</text>
+  <text x="502" y="328" text-anchor="middle" class="node-sub">model-independent</text>
+  <text x="502" y="346" text-anchor="middle" class="tiny">skill + policy routing</text>
+  <rect x="438" y="360" width="129" height="42" rx="7" fill="#edf3fb"
+        stroke="#7893b7" stroke-width="1.5"/>
+  <text x="502" y="379" text-anchor="middle" class="tiny">Fable used in</text>
+  <text x="502" y="395" text-anchor="middle" class="tiny">later phases</text>
+
+  <!-- Implementation -->
+  <text x="615" y="263" class="role" fill="#326b55">IMPLEMENTATION</text>
+  <rect x="605" y="275" width="160" height="77" rx="10" fill="#e2f1e9"
+        stroke="#326b55" stroke-width="2.4"/>
+  <text x="685" y="302" text-anchor="middle" class="node-title">Issue-scoped</text>
+  <text x="685" y="324" text-anchor="middle" class="node-title">Git worktree</text>
+  <text x="685" y="344" text-anchor="middle" class="small">exclusive ownership</text>
+
+  <rect x="790" y="275" width="145" height="77" rx="10" fill="#e2f1e9"
+        stroke="#326b55" stroke-width="2.4"/>
+  <text x="862" y="302" text-anchor="middle" class="node-title">Pull-request</text>
+  <text x="862" y="324" text-anchor="middle" class="node-title">candidate</text>
+  <text x="862" y="344" text-anchor="middle" class="small">committed diff</text>
+
+  <!-- Applicable assurance gateway -->
+  <text x="964" y="263" class="role" fill="#6a4a7b">ASSURANCE GATEWAY</text>
+  <rect x="960" y="275" width="175" height="77" rx="10" fill="#eee6f2"
+        stroke="#6a4a7b" stroke-width="2.6"/>
+  <text x="1047" y="302" text-anchor="middle" class="node-title">Applicable gates</text>
+  <text x="1047" y="326" text-anchor="middle" class="node-sub">select by changed artifact</text>
+
+  <rect x="774" y="424" width="176" height="62" rx="8" fill="#eee6f2"
+        stroke="#6a4a7b" stroke-width="2"/>
+  <text x="862" y="448" text-anchor="middle" class="small" font-weight="700">Semantic statement review</text>
+  <text x="862" y="468" text-anchor="middle" class="small">+ counterexample search</text>
+
+  <rect x="966" y="424" width="169" height="62" rx="8" fill="#f9ead9"
+        stroke="#a55e1f" stroke-width="2"/>
+  <text x="1050" y="448" text-anchor="middle" class="small" font-weight="700">Lean build + axiom pin</text>
+  <text x="1050" y="468" text-anchor="middle" class="small">+ release-surface checks</text>
+
+  <rect x="774" y="500" width="176" height="55" rx="8" fill="#ffffff"
+        stroke="#355e84" stroke-width="2" stroke-dasharray="9 6"/>
+  <text x="862" y="524" text-anchor="middle" class="small" font-weight="700">Public-declaration</text>
+  <text x="862" y="544" text-anchor="middle" class="small">comparison*</text>
+
+  <rect x="966" y="500" width="169" height="55" rx="8" fill="#edf1f3"
+        stroke="#596771" stroke-width="2"/>
+  <text x="1050" y="524" text-anchor="middle" class="small" font-weight="700">Review-completion</text>
+  <text x="1050" y="544" text-anchor="middle" class="small">record</text>
+
+  <!-- Lifecycle after PR assurance -->
+  <text x="1172" y="263" class="role" fill="#3f5361">PROJECT STATE</text>
+  <rect x="1168" y="275" width="137" height="77" rx="10" fill="#e8edf0"
+        stroke="#3f5361" stroke-width="2.4"/>
+  <text x="1236" y="302" text-anchor="middle" class="node-title">Merged</text>
+  <text x="1236" y="324" text-anchor="middle" class="node-title">project state</text>
+  <text x="1236" y="344" text-anchor="middle" class="small">PR assurance passed</text>
+
+  <rect x="1330" y="275" width="130" height="77" rx="10" fill="#e8edf0"
+        stroke="#3f5361" stroke-width="2.4"/>
+  <text x="1395" y="305" text-anchor="middle" class="node-title">Release</text>
+  <text x="1395" y="328" text-anchor="middle" class="node-title">candidate</text>
+
+  <text x="1490" y="263" class="role" fill="#a55e1f">MECHANICAL VERIFICATION</text>
+  <rect x="1492" y="275" width="150" height="77" rx="10" fill="#f9ead9"
+        stroke="#a55e1f" stroke-width="2.4"/>
+  <text x="1567" y="302" text-anchor="middle" class="node-title">Full-build</text>
+  <text x="1567" y="324" text-anchor="middle" class="node-title">attestation</text>
+  <text x="1567" y="344" text-anchor="middle" class="small">separate boundary</text>
+
+  <rect x="1660" y="275" width="115" height="77" rx="10" fill="#dff1ef"
+        stroke="#23766f" stroke-width="2.6"/>
+  <text x="1717" y="301" text-anchor="middle" class="node-title">Attested</text>
+  <text x="1717" y="323" text-anchor="middle" class="node-title">release</text>
+  <text x="1717" y="344" text-anchor="middle" class="small">artifact</text>
+
+  <!-- Forward lifecycle arrows -->
+  <path d="M324 203 L324 273" class="flow"/>
+  <text x="336" y="267" class="tiny">scope</text>
+  <path d="M400 313 L423 313" class="flow"/>
+  <path d="M580 313 L603 313" class="flow"/>
+  <path d="M765 313 L788 313" class="flow"/>
+  <path d="M935 313 L958 313" class="flow"/>
+  <path d="M1135 313 L1166 313" class="flow"/>
+  <path d="M1305 313 L1328 313" class="flow"/>
+  <path d="M1460 313 L1490 313" class="flow"/>
+  <path d="M1642 313 L1658 313" class="flow"/>
+  <text x="1650" y="375" text-anchor="middle" class="tiny">attested pass</text>
+  <path d="M1047 352 L1047 405 L955 405 L955 422" class="flow-thin"/>
+  <path d="M1047 405 L1050 422" class="flow-thin"/>
+  <path d="M1047 405 L955 405 L955 527 L952 527" class="flow-thin"/>
+  <path d="M1047 405 L1050 498" class="flow-thin"/>
+
+  <!-- Feedback paths -->
+  <path d="M774 455 C700 455, 663 446, 663 413 L663 395
+           C590 417, 488 431, 390 405" class="feedback"/>
+  <text x="542" y="432" class="tiny" fill="#8e3030">semantic finding</text>
+  <path d="M390 405 C350 445, 312 438, 315 414" class="feedback"/>
+  <path d="M390 405 C246 398, 190 316, 235 178" class="feedback"/>
+
+  <path d="M966 455 C930 455, 920 575, 690 575 L690 354" class="feedback"/>
+  <text x="745" y="570" class="tiny" fill="#8e3030">implementation / mechanical finding</text>
+
+  <!-- Runtime governance rail -->
+  <rect x="44" y="620" width="1712" height="126" rx="14" fill="#eef1f3"
+        stroke="#596771" stroke-width="2"/>
+  <rect x="44" y="620" width="220" height="126" rx="14" fill="#596771"/>
+  <text x="154" y="657" text-anchor="middle" class="role" fill="#ffffff">RUNTIME GOVERNANCE</text>
+  <text x="154" y="683" text-anchor="middle" class="white-title">Execution plane</text>
+  <text x="154" y="707" text-anchor="middle" class="white-sub">applies while work runs</text>
+  <rect x="290" y="646" width="310" height="72" rx="9" fill="#ffffff" stroke="#7c8991"/>
+  <text x="445" y="674" text-anchor="middle" class="node-title">2 local computers + isolated</text>
+  <text x="445" y="699" text-anchor="middle" class="node-sub">container on a virtual private server</text>
+  <rect x="625" y="646" width="235" height="72" rx="9" fill="#ffffff" stroke="#7c8991"/>
+  <text x="742" y="674" text-anchor="middle" class="node-title">Separate Git worktrees</text>
+  <text x="742" y="699" text-anchor="middle" class="node-sub">exclusive issue ownership</text>
+  <rect x="885" y="646" width="255" height="72" rx="9" fill="#ffffff" stroke="#7c8991"/>
+  <text x="1012" y="674" text-anchor="middle" class="node-title">Shared Lean cache</text>
+  <text x="1012" y="699" text-anchor="middle" class="node-sub">+ global build lock</text>
+  <rect x="1165" y="646" width="555" height="72" rx="9" fill="#ffffff" stroke="#7c8991"/>
+  <text x="1442" y="674" text-anchor="middle" class="node-title">Liveness checks + process cleanup</text>
+  <text x="1442" y="699" text-anchor="middle" class="node-sub">available-memory monitoring</text>
+
+  <!-- Evidence capture rail -->
+  <rect x="44" y="790" width="1712" height="132" rx="14" fill="#e5f3f1"
+        stroke="#23766f" stroke-width="2.2"/>
+  <rect x="44" y="790" width="220" height="132" rx="14" fill="#23766f"/>
+  <text x="154" y="828" text-anchor="middle" class="role" fill="#ffffff">EVIDENCE CAPTURE</text>
+  <text x="154" y="856" text-anchor="middle" class="white-title">Evidence rail</text>
+  <text x="154" y="881" text-anchor="middle" class="white-sub">append throughout</text>
+  <rect x="295" y="820" width="550" height="72" rx="9" fill="#ffffff" stroke="#4c918c"/>
+  <text x="570" y="849" text-anchor="middle" class="node-title">Session · Issue · PR · review · build · release records</text>
+  <text x="570" y="874" text-anchor="middle" class="node-sub">append evidence</text>
+  <rect x="915" y="820" width="300" height="72" rx="9" fill="#ffffff" stroke="#4c918c"/>
+  <text x="1065" y="849" text-anchor="middle" class="node-title">Evidence manifest / escrow</text>
+  <text x="1065" y="874" text-anchor="middle" class="node-sub">traceable record set</text>
+  <rect x="1350" y="820" width="250" height="72" rx="9" fill="#ffffff" stroke="#4c918c"/>
+  <text x="1475" y="849" text-anchor="middle" class="node-title">Paper claims</text>
+  <text x="1475" y="874" text-anchor="middle" class="node-sub">owner-approved use</text>
+  <path d="M845 856 L913 856" class="flow-thin"/>
+  <path d="M1215 856 L1348 856" class="flow-thin"/>
+
+  <!-- Evidence append guides -->
+  <path d="M315 412 L315 790" class="evidence"/>
+  <path d="M862 352 L862 770 L570 770 L570 818" class="evidence"/>
+  <path d="M1047 555 L1047 818" class="evidence"/>
+  <path d="M1567 352 L1567 760 L1215 760 L1215 818" class="evidence"/>
+  <path d="M1717 352 L1717 774 L1215 774 L1215 818" class="evidence"/>
+
+  <!-- Footnote -->
+  <text x="50" y="958" class="small">
+    * Conditional: used when repository assumptions, mathematical scope, or the changed public interface require it.
+  </text>
+  <text x="1750" y="958" text-anchor="end" class="small" fill="#8e3030">
+    DRAFT FOR SCIENTIFIC-OWNER REVIEW — not approved artwork
+  </text>
+</svg>

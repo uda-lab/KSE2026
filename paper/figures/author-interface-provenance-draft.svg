@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="930"
+     viewBox="0 0 1800 930" role="img"
+     aria-labelledby="interface-title interface-desc">
+  <title id="interface-title">Draft author-interface and intervention provenance model</title>
+  <desc id="interface-desc">
+    The human scientific owner holds undivided final authority. ChatGPT provides
+    separable decision-support functions such as investigation, synthesis,
+    recommendation, and drafting. A GitHub Connector can transmit owner-issued
+    text under the owner's account, while the owner may also intervene directly.
+    GitHub Issues and pull requests route work to orchestrators, implementing
+    agents, and reviewers. Repository records flow to an evidence manifest. A
+    private ChatGPT data export may conditionally support confidence-graded links
+    between conversations and GitHub writes, but raw exports remain private and
+    the transmission channel alone does not prove who drafted text.
+  </desc>
+
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5"
+            orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#293b48"/>
+    </marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="8" refY="5"
+            orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a33a3a"/>
+    </marker>
+    <marker id="t" markerWidth="10" markerHeight="10" refX="8" refY="5"
+            orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#23766f"/>
+    </marker>
+    <style>
+      .title { font: 700 28px Arial, Helvetica, sans-serif; fill: #17232d; }
+      .subtitle { font: 600 16px Arial, Helvetica, sans-serif; fill: #495967; }
+      .role { font: 700 14px Arial, Helvetica, sans-serif; letter-spacing: 1px; }
+      .h { font: 700 19px Arial, Helvetica, sans-serif; fill: #17232d; }
+      .p { font: 14px Arial, Helvetica, sans-serif; fill: #344652; }
+      .s { font: 13px Arial, Helvetica, sans-serif; fill: #465864; }
+      .w { font: 700 18px Arial, Helvetica, sans-serif; fill: #ffffff; }
+      .flow { fill: none; stroke: #293b48; stroke-width: 3; marker-end: url(#a); }
+      .feedback { fill: none; stroke: #a33a3a; stroke-width: 2.6; marker-end: url(#r); }
+      .evidence { fill: none; stroke: #23766f; stroke-width: 2.5; marker-end: url(#t); }
+      .conditional { stroke-dasharray: 9 6; }
+    </style>
+  </defs>
+
+  <rect width="1800" height="930" fill="#ffffff"/>
+  <rect x="28" y="22" width="1744" height="66" rx="10" fill="#eef2f4"
+        stroke="#7e8b93" stroke-width="1.5"/>
+  <text x="50" y="51" class="title">Author interface, intervention channels, and provenance</text>
+  <text x="50" y="75" class="subtitle">
+    Actor/channel model reconstructed from repository evidence; channel attribution does not establish drafting authorship.
+  </text>
+
+  <!-- Authority -->
+  <text x="690" y="124" class="role" fill="#8e3030">UNDIVIDED FINAL AUTHORITY</text>
+  <rect x="625" y="137" width="550" height="92" rx="14" fill="#f8e7e7"
+        stroke="#8e3030" stroke-width="2.8"/>
+  <text x="900" y="172" text-anchor="middle" class="h">Human scientific owner</text>
+  <text x="900" y="198" text-anchor="middle" class="p">
+    adopts scope, claim strength, review policy, merge, and publication decisions
+  </text>
+  <text x="900" y="218" text-anchor="middle" class="s">
+    owner-issued decisions remain owner authority regardless of who drafted the wording
+  </text>
+
+  <!-- Decision-support and direct intervention -->
+  <text x="195" y="282" class="role" fill="#325b9b">SEPARABLE DECISION SUPPORT</text>
+  <rect x="170" y="295" width="420" height="118" rx="12" fill="#dce8f8"
+        stroke="#325b9b" stroke-width="2.5"/>
+  <text x="380" y="330" text-anchor="middle" class="h">ChatGPT decision support</text>
+  <text x="380" y="357" text-anchor="middle" class="p">investigate · synthesise · recommend · draft</text>
+  <text x="380" y="383" text-anchor="middle" class="p">prepares proposed owner actions</text>
+  <text x="380" y="403" text-anchor="middle" class="s">not an author; no independent final authority</text>
+
+  <text x="1245" y="282" class="role" fill="#8e3030">HUMAN INTERVENTION</text>
+  <rect x="1218" y="295" width="412" height="118" rx="12" fill="#f8e7e7"
+        stroke="#8e3030" stroke-width="2.5"/>
+  <text x="1424" y="330" text-anchor="middle" class="h">Direct owner input</text>
+  <text x="1424" y="357" text-anchor="middle" class="p">status trigger · correction · review · decision</text>
+  <text x="1424" y="383" text-anchor="middle" class="p">terminal, agent session, or GitHub surface</text>
+  <text x="1424" y="403" text-anchor="middle" class="s">record the channel separately from authority</text>
+
+  <!-- Transmission -->
+  <text x="278" y="492" class="role" fill="#596771">TRANSMISSION</text>
+  <rect x="260" y="505" width="300" height="98" rx="12" fill="#edf1f3"
+        stroke="#596771" stroke-width="2.4"/>
+  <text x="410" y="540" text-anchor="middle" class="h">GitHub Connector</text>
+  <text x="410" y="568" text-anchor="middle" class="p">transmits under owner account</text>
+  <text x="410" y="590" text-anchor="middle" class="s">App attribution proves this channel only</text>
+
+  <!-- Repository governance surface -->
+  <text x="708" y="492" class="role" fill="#355e84">OWNER-DEFINED GOVERNANCE SURFACE</text>
+  <rect x="690" y="505" width="420" height="98" rx="12" fill="#e7f0f7"
+        stroke="#355e84" stroke-width="2.5"/>
+  <text x="900" y="540" text-anchor="middle" class="h">GitHub Issues and pull requests</text>
+  <text x="900" y="568" text-anchor="middle" class="p">persist scope, proposals, review, and merge state</text>
+  <text x="900" y="590" text-anchor="middle" class="s">authenticated identity is not a drafting-origin label</text>
+
+  <!-- Execution and review actors -->
+  <text x="1282" y="492" class="role" fill="#326b55">EXECUTION AND REVIEW</text>
+  <rect x="1200" y="505" width="460" height="98" rx="12" fill="#e2f1e9"
+        stroke="#326b55" stroke-width="2.5"/>
+  <text x="1430" y="540" text-anchor="middle" class="h">Orchestrators · implementers · reviewers</text>
+  <text x="1430" y="568" text-anchor="middle" class="p">route · implement · adjudicate · verify</text>
+  <text x="1430" y="590" text-anchor="middle" class="s">functions remain separable from owner authority</text>
+
+  <!-- Main channel arrows -->
+  <path d="M690 229 C610 255, 520 268, 505 293" class="flow"/>
+  <text x="560" y="262" class="s">question / instruction</text>
+  <path d="M590 338 C635 315, 668 286, 725 231" class="feedback"/>
+  <text x="615" y="316" class="s" fill="#8e3030">proposal</text>
+  <path d="M380 413 L410 503" class="flow"/>
+  <text x="402" y="462" class="s">draft action</text>
+  <path d="M560 554 L688 554" class="flow"/>
+  <text x="624" y="542" text-anchor="middle" class="s">transmit</text>
+  <path d="M1218 354 C1125 354, 1045 430, 978 503" class="flow"/>
+  <text x="1102" y="405" class="s">direct intervention</text>
+  <path d="M1110 554 L1198 554" class="flow"/>
+  <text x="1154" y="542" text-anchor="middle" class="s">dispatch / review</text>
+
+  <!-- Findings return to owner -->
+  <path d="M1430 505 C1430 450, 1280 455, 1190 440
+           C1090 424, 1050 310, 1030 231" class="feedback"/>
+  <text x="1198" y="445" class="s" fill="#8e3030">finding / recommendation</text>
+
+  <!-- Evidence and optional export reconstruction -->
+  <rect x="40" y="674" width="1720" height="172" rx="15" fill="#e5f3f1"
+        stroke="#23766f" stroke-width="2.3"/>
+  <rect x="40" y="674" width="210" height="172" rx="15" fill="#23766f"/>
+  <text x="145" y="718" text-anchor="middle" class="role" fill="#ffffff">PROVENANCE</text>
+  <text x="145" y="750" text-anchor="middle" class="w">Evidence layer</text>
+  <text x="145" y="779" text-anchor="middle" class="s" style="fill:#ffffff">keep authority, drafting,</text>
+  <text x="145" y="799" text-anchor="middle" class="s" style="fill:#ffffff">and channel distinct</text>
+
+  <rect x="285" y="704" width="300" height="108" rx="10" fill="#ffffff"
+        stroke="#66737b" stroke-width="2.2" stroke-dasharray="9 6"/>
+  <text x="435" y="736" text-anchor="middle" class="h">Private ChatGPT export*</text>
+  <text x="435" y="763" text-anchor="middle" class="p">raw conversations remain untracked</text>
+  <text x="435" y="789" text-anchor="middle" class="s">time-bounded optional source</text>
+
+  <rect x="650" y="704" width="370" height="108" rx="10" fill="#ffffff"
+        stroke="#66737b" stroke-width="2.2" stroke-dasharray="9 6"/>
+  <text x="835" y="736" text-anchor="middle" class="h">Confidence-graded linkage*</text>
+  <text x="835" y="763" text-anchor="middle" class="p">exact ID/body → time/context → reconstructed</text>
+  <text x="835" y="789" text-anchor="middle" class="s">ambiguous and unmatched cases remain explicit</text>
+
+  <rect x="1100" y="704" width="340" height="108" rx="10" fill="#ffffff"
+        stroke="#4c918c" stroke-width="2.2"/>
+  <text x="1270" y="736" text-anchor="middle" class="h">Repository evidence manifest</text>
+  <text x="1270" y="763" text-anchor="middle" class="p">Issue · PR · review · session records</text>
+  <text x="1270" y="789" text-anchor="middle" class="s">supports calibrated provenance claims</text>
+
+  <path d="M585 758 L648 758" class="evidence conditional"/>
+  <path d="M1020 758 L1098 758" class="evidence conditional"/>
+  <path d="M900 603 L900 652 L1270 652 L1270 702" class="evidence"/>
+  <text x="1070" y="641" text-anchor="middle" class="s" fill="#23766f">append GitHub records</text>
+
+  <text x="50" y="892" class="s">
+    * Conditional follow-up: include only redacted derivatives if the export supports reliable joins and materially changes confidence.
+  </text>
+  <text x="1750" y="892" text-anchor="end" class="s" fill="#8e3030">
+    DRAFT FOR SCIENTIFIC-OWNER REVIEW — not approved artwork
+  </text>
+</svg>
