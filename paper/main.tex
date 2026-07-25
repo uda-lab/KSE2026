@@ -15,13 +15,13 @@
 \usepackage[hidelinks]{hyperref}
 
 % --- Submission anonymity switch --------------------------------------------
-% \anonymoustrue  : blind byline, funding acknowledgment suppressed (current).
-% \anonymousfalse : named byline plus the funding acknowledgment.
-% Anonymity for the KSE 2026 submission is a deferred owner decision, and the
-% byline is already blind, so the default below reproduces today's PDF exactly.
-% Flipping the single line is the only edit this file needs; the named branch
-% still needs the real byline from the owner. Identity leaks the switch does
-% not cover are listed in notes/deanonymization-checklist.md.
+% \anonymoustrue   : temporary default while the real byline is pending.
+% \anonymousfalse : named byline plus the funding acknowledgment (submission target).
+% The KSE 2026 submission will use ordinary author-identifying output per
+% owner decision (2026-07-25, provenance/author-decisions.md). Keep the
+% anonymous default until the TODO(owner) placeholder is replaced, so the
+% default build does not publish an incomplete byline. Identity leaks the
+% switch does not cover are listed in notes/deanonymization-checklist.md.
 \newif\ifanonymous%
 \anonymoustrue%
 

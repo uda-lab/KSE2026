@@ -28,7 +28,7 @@ incident card・GitHub snapshot で裏付けられた変更のみを記載する
 | 2026-06-29 | **レビューデーモンのモデル設定検証**: codex デーモンが未対応モデル固定でレビュー即時エラー → 設定修正・復旧確認の手順が確立 | MODEL-ESC（インフラ設定不備） | EV-0925（06-29T11:00〜12:41） |
 | 2026-07-09〜10 | **5 role 構成へ拡張**: coder×2・scout（read-only 事前調査）・reviewer×2（構造審査 / 宣言単位 byte-diff 審査）．reviewer は検証専用 subagent 8 体を動的スポーン | 大規模リファクタ（12 PR）の悉皆検証需要 | EV-1639〜EV-1669（session `7e6156bf`） |
 | 2026-07-10 | **宣言単位 byte-diff 悉皆レビュー**が公開定理の無断削除をマージ前検出し，以後 12 PR 全件の標準ゲートに | INC-004 | EV-1669，INC-004 |
-| 2026-07-10 | **PR 監視の 3 経路化**（formal Review / bot top-level コメント / `Reviewed-by:` マーカーを全て見る `watch-pr-gates.sh`） | レビュー見落とし 19 分停滞（HANDOFF-FAIL）を user 指摘で発覚 | EV-1669（07-10T00:18〜00:43）／incident 候補 #6 |
+| 2026-07-10 | **PR 監視の 3 経路化**（formal Review / bot top-level コメント / `Reviewed-by:` マーカーを全て見る `watch-pr-gates.sh`） | レビュー見落とし 19 分停滞（HANDOFF-FAIL）を user 指摘で発覚（owner による直接入力: 00:37:21.889Z / 00:43:22.204Z） | EV-1669（session `7e6156bf`，07-10T00:18〜00:43）／incident 候補 #6 |
 | 2026-07-10 | **preflight の軽量化**: 中間 commit は `lake build` green のみ，フル preflight（axiom-live 込み）は最終 commit 後 1 回＋独立検証 1 回 | user の処理時間懸念 → 調査で過剰と判明 | EV-1669（07-10T10:01〜10:02） |
 | 2026-07-17 | **statement card 必須化と回帰 guard の CI 組込み**（`check-statement-cards.sh`，`docs/statement-gates.md` の 3 独立 gate・adversarial substitution 要件） | INC-001（release 前 postmortem，issue #158 / PR #170） | INC-001，`evidence/repository-snapshots/leray-hopf/issues.json` |
 | 2026-07-18 | **コンテナ資源管理の恒常規約**: サイドプロセス sweep・ビルド前 `available` ≥ 2GiB 確認・`.lake` ハードリンク共有・`flock` 直列化・dispatch prompt への明記・`LEAN_NUM_THREADS=1` 縮退．判断基準を `used` から `available` へ変更し閾値報告を義務化 | INC-005（OOM cascade．横展開失敗の診断から recall 非依存の注入層へ） | EV-0247，INC-005 |
