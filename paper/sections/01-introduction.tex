@@ -45,15 +45,17 @@ yang2023leandojo,
 deepmind2025alphaproof,zhou2026leanatlas}. Studies of autonomous task
 horizons and pull requests written by agents motivate reliability
 questions~\cite{metr2025longtasks,agenticprs2026security}.
-Lean Eval fixes the benchmark statement, supplied dependencies, and
-trusted scaffolding in a generated workspace, then scores whether
-comparator accepts the submitted solution~\cite{leaneval2026repo,
+Lean Eval is an isolated theorem-completion benchmark: it fixes the
+benchmark statement, supplied dependencies, and trusted scaffolding in a
+generated workspace, then scores whether the comparator accepts the
+submitted solution~\cite{leaneval2026repo,
 leaneval2026site}. % CLAIM: CLM-011
 Our unit of analysis is different: a repository-level formalization
-campaign in which proof generation is only one component beside
-statement control, issue-scoped decomposition and orchestration,
-semantic review, mechanical verification, worktree and runtime
-governance, evidence preservation, and incident recovery.
+campaign in which proof generation is only one part of statement
+control, issue-scoped implementation and orchestration, semantic review
+and mechanical verification, worktree/runtime governance, and incident
+handling, with implementation, reviews, incidents, and resource use
+traced to preserved artifacts.
 
 This paper makes three contributions:
 \begin{enumerate}

@@ -141,8 +141,9 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 - Paper location: paper/sections/01-introduction.tex
 - Evidence: cite:leaneval2026repo, cite:leaneval2026site
 - Notes: 2026-07-25 に issue #71 対応として `leanprover/lean-eval` README と
-  `https://lean-lang.org/eval/problems/` を実読して照合した．本文では task 粒度と
-  trusted workspace の固定だけを述べ，個別 leaderboard 成績や repository-scale の
-  完全形式化とは同一視しない．
+  `https://lean-lang.org/eval/problems/` を実読して照合した．2026-07-25 の
+  review follow-up chat で owner (`t-uda`) が本 claim を freeze するよう指示した．
+  本文では task 粒度と trusted workspace の固定だけを述べ，個別 leaderboard
+  成績や repository-scale の完全形式化とは同一視しない．
 
 <!-- 以降の claim は必要に応じて追加する． -->
