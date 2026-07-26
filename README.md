@@ -14,7 +14,7 @@ Leray–Hopf 弱解存在の Lean 4 + mathlib 形式化）に関する KSE 2026 
 | Commit | `7c15710a7b9068a2aa105fc7c11b432e7685b7b5` |
 
 正確な形式化 scope は [claims/formalization-scope.md](claims/formalization-scope.md)
-に記載する．参照 commit の更新は Scientific owner の判断で行い，
+に記載する．参照 commit の更新は著者の判断で行い，
 `provenance/author-decisions.md` に記録する．
 
 ## ビルド

@@ -5,7 +5,7 @@
 bib エントリは `paper/references.bib`．確定した比較は
 `claims/contribution-map.md` の baseline 列に転記済み．
 
-## 1. TauCeti（owner 指定の比較対象）
+## 1. TauCeti（著者指定の比較対象）
 
 **実体**（一次資料: TauCetiProject の 4 repo を 2026-07-22/23 に実読）:
 論文でも単一結果でもなく，Lean FRO と Mathlib Initiative が incubate する
@@ -24,7 +24,7 @@ blocking）を統制する．論文・preprint・CITATION.cff は無い（検索
 | 軸 | TauCeti | 本プロジェクト | 差分 |
 |---|---|---|---|
 | 1 project-scale | 広さ優先（13 roadmap 並行） | 深さ優先（capstone 2 定理・凍結 scope） | 最適化目標が直交．PDE 領域の重複は一次資料から不明 |
-| 2 human steering | roadmap レベル（reviewer チームが「何をやるか」を統制） | claim レベル（単一 owner が「何を主張してよいか」を統制，非主張リスト付き） | 統制対象が組織 vs 編集 |
+| 2 human steering | roadmap レベル（reviewer チームが「何をやるか」を統制） | claim レベル（単一著者が「何を主張してよいか」を統制，非主張リスト付き） | 統制対象が組織 vs 編集 |
 | 3 役割分離 | 常設の named rubric pipeline（10 観点・4 blocking，実装と審査は別 AI） | 実装 agent と独立 adversarial reviewer の分離を incident 対（INC-001/002）で事後実証 | 事前仕様化された pipeline vs 事例で実証された分離 |
 | 4 PA feedback | kernel 検証 + mathlib linter 全套 + axiom allowlist を rubric 前に機械実行 | `#print axioms` + `check-release-cone.sh`（release surface 限定 guard） | ライブラリ横断 lint vs 単一結果の release cone |
 | 5 artifact governance | ライセンス/公開性 + PR 状態機械 | claim↔evidence の機械検査（EV/INC/CLM + `make verify`） | 統治対象が「プロセス状態」vs「主張の出所」 |
@@ -60,7 +60,7 @@ blocking）を統制する．論文・preprint・CITATION.cff は無い（検索
 - `commelin2023abstraction` — Liquid Tensor Experiment の方法論論文
   （spec 駆動 blueprint，人間十数人）．
 
-**差分**: いずれも人間チーム + blueprint．本プロジェクトは単一 owner が
+**差分**: いずれも人間チーム + blueprint．本プロジェクトは単一著者が
 agent 著述の実装と独立 agent 審査を統治し，blueprint の役割は
 formalization-scope.md（凍結 scope）が担う．
 

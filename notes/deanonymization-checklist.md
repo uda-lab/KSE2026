@@ -1,13 +1,10 @@
-# De-anonymization checklist — KSE 2026 投稿 artifact（issue #60 Wave B / #66）
+# De-anonymization checklist — KSE 2026 投稿 artifact
 
-投稿の匿名化は **owner の判断として保留**されている（`provenance/author-decisions.md`
+投稿の匿名化は **著者の判断として保留**されている（`provenance/author-decisions.md`
 には未記載．保留自体は決定済みであり，本書は再質問しない）．本書は，匿名化を採る場合に
 **何を変える必要があるか**を列挙するだけであり，匿名化が採用されたことを前提としない．
 
-参照するスイッチは `paper/main.tex` の `\ifanonymous`（§1）．行番号は `issue-66-author-interface`
-ブランチ（`fe8fbeb` + 本 PR）時点のもの．`analysis/author-interface-model.md` の台帳は
-`fe8fbeb`（本 PR 適用**前**）を基準としているため，`paper/main.tex` については両者の
-行番号が一致しない．一致しないのは同ファイルのみである．
+参照するスイッチは `paper/main.tex` の `\ifanonymous`（§1）．
 
 **「投稿 artifact」の範囲**: `paper/main.tex`，`paper/sections/*.tex`，
 `paper/references.bib`，およびそれらから生成される `build/main.pdf`．*source-only* と
@@ -35,7 +32,7 @@ Author(s)}}` であり，**byline は既に匿名**である（最初の LaTeX s
   公開検索可能であり著者を特定しうるため，匿名分岐で抑止するのが正しい．
 - `\anonymoustrue` → `\anonymousfalse` の **1 行変更**で byline と acknowledgment が
   同時に現れる．
-- 非匿名分岐の実名 byline は owner が供給する必要がある．未供給のまま flip すると
+- 非匿名分岐の実名 byline は著者が供給する必要がある．未供給のまま flip すると
   `TODO: REAL BYLINE NOT YET SUPPLIED` が誌面に出る．これは意図的で，匿名の
   placeholder のまま acknowledgment（検索可能な助成番号）だけが出るという最悪の
   組合せを黙って通さないためである．flip と byline 記入は同時に行うこと．
@@ -78,7 +75,7 @@ anchor とし，行番号は補助として括弧に添える．`\thanks{` は `
 | 2b | 同上の文字列が `paper/main.tex` の**ソースに常駐**すること | 同上 | funder | 出ない — *source-only* | **本 PR が新たに作った露出面である**（`fe8fbeb` の `paper/` に `JPMJMI22G1` は 0 件．`git grep JPMJMI22G1 fe8fbeb -- paper/` で確認できる）．LaTeX ソースを PDF と併せて提出する場合，スイッチでは消えないため #9–#12 と同様に提出前の除去が要る | **しない** — スイッチは PDF 側しか制御しない |
 | 3 | `paper/references.bib:6` | `author = {{uda-lab}}` | identity / repo | 出る（参考文献欄に表示） | 匿名化した組織名に置換するか，entry を落としてタグのみで参照する | しない — 個別対応 |
 | 4 | `paper/references.bib:10` | `\url{https://github.com/uda-lab/leray-hopf}` | repo / identity | 出る（URL がそのまま） | URL を除去し，省略するか匿名アーカイブのリンクに置換する | しない — 個別対応 |
-| 5 | `paper/references.bib:11` | `Release tag v0.1.0-rc1, commit 7c15710a` | repo | 出る | SHA は public repo に一意であり，検索すれば owner に到達する．#3・#4 を処理しても SHA を残すと漏れる | しない — 個別対応 |
+| 5 | `paper/references.bib:11` | `Release tag v0.1.0-rc1, commit 7c15710a` | repo | 出る | SHA は public repo に一意であり，検索すれば著者に到達する．#3・#4 を処理しても SHA を残すと漏れる | しない — 個別対応 |
 | 6 | `paper/sections/01-introduction.tex:16-17` | `\cite{...,lerayhopf2026repo}` | self-citation | 出る | #3–#5 の解決後に参照先を差し替えるか落とす | しない — 個別対応 |
 | 7 | `paper/sections/02-formalization.tex:16-17` | `commit \texttt{7c15710a}, tagged \texttt{v0.1.0-rc1}~\cite{lerayhopf2026repo}` | repo / self-citation | 出る | #5 と同じ | しない — 個別対応 |
 | 8 | `paper/sections/02-formalization.tex:123` | `\texttt{7c15710a} under tag \texttt{v0.1.0-rc1}` | repo | 出る | #5 と同じ | しない — 個別対応 |
@@ -87,14 +84,14 @@ anchor とし，行番号は補助として括弧に添える．`\thanks{` は `
 | 11 | `paper/sections/02-formalization.tex:89` | `% CLAIM: CLM-001 (… measured at leray-hopf@7c15710a)` | repo | 出ない — *source-only* | 同上 | しない — 個別対応 |
 | 12 | `paper/sections/02-formalization.tex:91` | `% source: leray-hopf@7c15710a docs/architecture.md` | repo | 出ない — *source-only* | 同上 | しない — 個別対応 |
 | 13 | `paper/sections/04-incidents.tex:17-18` | "All PR numbers in this paper refer to the leray-hopf repository~\cite{lerayhopf2026repo}." | repo / self-citation | 出る | この一文が #14–#20 を解決可能にしている．除去するか参照先を匿名にする | しない — 個別対応 |
-| 14 | `paper/sections/04-incidents.tex:38` | `PR~\#162`，`PR~\#170` | repo | 出る | 番号は public な `uda-lab/leray-hopf` で解決し owner に到達する | しない — 個別対応 |
+| 14 | `paper/sections/04-incidents.tex:38` | `PR~\#162`，`PR~\#170` | repo | 出る | 番号は public な `uda-lab/leray-hopf` で解決し著者に到達する | しない — 個別対応 |
 | 15 | `paper/sections/04-incidents.tex:46` | `PR~\#170` | repo | 出る | #14 と同じ | しない — 個別対応 |
 | 16 | `paper/sections/04-incidents.tex:47` | `PR~\#177` | repo | 出る | #14 と同じ | しない — 個別対応 |
 | 17 | `paper/sections/04-incidents.tex:63` | `PR~\#27` | repo | 出る | #14 と同じ | しない — 個別対応 |
 | 18 | `paper/sections/04-incidents.tex:76` | `PR~\#120` | repo | 出る | #14 と同じ | しない — 個別対応 |
 | 19 | `paper/sections/04-incidents.tex:115` | `PRs~\#174, \#175, and \#176` | repo | 出る | #14 と同じ | しない — 個別対応 |
 | 20 | `paper/sections/05-discussion.tex:32` | `PR~\#120` | repo | 出る | #14 と同じ．Section IV 以外で唯一の PR 参照 | しない — 個別対応 |
-| 21 | `paper/sections/05-discussion.tex:67-68` | "available in the paper repository" | repo | 出る | 匿名化時にこの語句が `uda-lab/KSE2026` を指してはならない．なお現状は何も指せていない（§3） | しない — **owner 判断** |
+| 21 | `paper/sections/05-discussion.tex:67-68` | "available in the paper repository" | repo | 出る | 匿名化時にこの語句が `uda-lab/KSE2026` を指してはならない．なお現状は何も指せていない（§3） | しない — **著者判断** |
 | 22 | `paper/sections/03-agent-workflow.tex:34`，`paper/sections/05-discussion.tex:21` | `\texttt{github-driven-workflow}` | repo | 出る | プロジェクト固有の skill 名であり，検索により著者の公開リポジトリと相関しうる．一般名で記述するか残すかは判断事項 | しない — 個別対応 |
 | 23 | `paper/sections/03-agent-workflow.tex:110-124` | 期間・JPY 建て費用・USD 費用・token 数・時間 | affiliation（弱） | 出る | JPY 建ての請求と JST 助成が併存すると著者を日本に局在させる．#2a の抑止で大半は解消するが，期間は public repo の commit 日付と一致する | 部分的（#2a のみ） |
 | 24 | `paper/sections/03-agent-workflow.tex:44,117-119` | モデル名・クラウドベンダー名 | affiliation（極弱） | 出る | ベンダー名であって identity ではない．対応不要．完全性のため記載 | 該当なし |
@@ -121,7 +118,7 @@ PDF メタデータの `/Author` `/Title` `/Subject` `/Keywords` はすべて空
 著者名を登録している場合，実名 byline は同じ gate で落ちる．flip と同時に gate の
 扱いを決めること．
 
-## 3. artifact 可用性の齟齬（owner 判断．本 PR では決めない）
+## 3. artifact 可用性の齟齬（著者判断．本 PR では決めない）
 
 ### 該当箇所
 
@@ -171,23 +168,23 @@ release タグ，Sections IV–V の PR 番号）であり，これは形式化�
 
 ### 選択肢の対比（**本 PR は選択しない．当該文にも触れていない**）
 
-| | 費用 | owner が負う継続的責務 | 匿名レビューとの関係 | `paper/` の変更 | bib の変更 |
+| | 費用 | 著者が負う継続的責務 | 匿名レビューとの関係 | `paper/` の変更 | bib の変更 |
 |---|---|---|---|---|---|
-| **1. `uda-lab/KSE2026` を public にする** | 機構的には小．公開対象には `analysis/author-interface-model.md` が引用する owner の生発話（`private/raw-sessions/` 由来）も含まれる点に注意．内容レビューは大 — snapshot（issue/コメント本文），`analysis/`，`provenance/`，`PLAN.md`，`AGENTS.md` 等の内部統治記録すべてに公開前点検が要る（`make redact` だけでは足りない）．`private/` は gitignored なので raw ログは既に除外 | 内部統治記録の恒久的な公開；タグを固定しない限り `main` が投稿後も動き続けること；以後の全 commit での redaction 規律 | **強く不利**．`uda-lab` 所有の public repo は即座に匿名性を破る．履歴の commit メタデータに著者名が残り，履歴を書き換えない限り除去できない．匿名化を採るなら別途 anonymized mirror が要る（保守対象が 2 つになる） | `05-discussion.tex:67-68` でリポジトリを名指しし引用する | `@misc` entry を追加し，タグを固定．加えて `provenance/source-inventory.md` に行を足す（`cite:<key>` は bib への存在と inventory の ✓ の両方を要求する） |
+| **1. `uda-lab/KSE2026` を public にする** | 機構的には小．内容レビューは大 — snapshot（issue/コメント本文），`analysis/`，`provenance/`，`PLAN.md`，`AGENTS.md` 等の内部統治記録すべてに公開前点検が要る（`make redact` だけでは足りない）．`private/` は gitignored なので raw ログは既に除外 | 内部統治記録の恒久的な公開；タグを固定しない限り `main` が投稿後も動き続けること；以後の全 commit での redaction 規律 | **強く不利**．`uda-lab` 所有の public repo は即座に匿名性を破る．履歴の commit メタデータに著者名が残り，履歴を書き換えない限り除去できない．匿名化を採るなら別途 anonymized mirror が要る（保守対象が 2 つになる） | `05-discussion.tex:67-68` でリポジトリを名指しし引用する | `@misc` entry を追加し，タグを固定．加えて `provenance/source-inventory.md` に行を足す（`cite:<key>` は bib への存在と inventory の ✓ の両方を要求する） |
 | **2. snapshot に archival DOI を発行する** | 中．選択肢 1 と同じ内容レビューに加え deposit 作業．Zenodo の GitHub 連携は public repo を要求するため，private のままなら curated tarball の手動アップロードになる | 不変で恒久的な引用可能 snapshot．誤りは撤回できず新バージョンで上書きするのみ．選択肢 1 の「`main` が動き続ける」問題は解決する | **注意すれば両立可能**．deposit のメタデータ（著者・所属）は投稿者の統制下にあり，レビュー時点で匿名のレコードにしうる．匿名化を後に採る場合の適合度が最も高い | 選択肢 1 と同じ一文の修正．host ではなく DOI を引用する | `doi` フィールド付きの entry と inventory 行．DOI は `\url` より安定し IEEEtran での見栄えもよい |
-| **3. 読者が実際に到達できる範囲だけを述べるよう一文を弱める** | 最小．`05-discussion.tex` の 1 文のみ．リポジトリ側の作業ゼロ | なし | 中立．リポジトリ側の追加作業なしに匿名化と両立し，匿名化の判断が下りた後にどちらへも戻せる | `05-discussion.tex:67-68` の書き換え．**本 PR では実施していない**．`01-introduction.tex` の contribution 3 の記述も併せて調整が要る可能性があり，その場合は Wave C の範囲 | なし |
+| **3. 読者が実際に到達できる範囲だけを述べるよう一文を弱める** | 最小．`05-discussion.tex` の 1 文のみ．リポジトリ側の作業ゼロ | なし | 中立．リポジトリ側の追加作業なしに匿名化と両立し，匿名化の判断が下りた後にどちらへも戻せる | `05-discussion.tex:67-68` の書き換え．**本 PR では実施していない**．`01-introduction.tex` の contribution 3 の記述も併せて調整が要る可能性があり，その場合は別途対応が要る | なし |
 | **4. 請求に応じて提供する** | 最小 | 期限のない個人的義務．IEEE のデータ可用性方針でも評価が下がりつつあり，レビュー時点では誰も検証できない | 請求時点で匿名性が破れる（chair 経由でなければ）．二重盲検の期間中は実質使えない | 同じ一文の修正 | なし |
 | **5. artifact を分割する** — evidence を含まない `scripts/` のみ公開し，抜粋と manifest の節を書き換える | 小〜中．`scripts/` は標準ライブラリのみの Python/shell でセッション内容を含まないため，公開前点検は軽い | 小さな恒久的公開面．evidence corpus を露出せずに metric 計算の再現性は提供できる | GitHub URL については選択肢 1 と同じ問題．ただし規模が小さくレビュー時の匿名 supplementary bundle として配布しうる | 一文を分割する．スクリプトには実在するポインタを与え，抜粋と manifest は選択肢 1–4 のいずれかに従う | スクリプト bundle の entry 1 件 |
 | **6. 何もしない** | ゼロ | — | — | — | — |
 
-何もしない場合，提出 PDF に解決不能な約束が残る．**選択は owner のものであり，
+何もしない場合，提出 PDF に解決不能な約束が残る．**選択は著者のものであり，
 本 PR では行っていない．`paper/sections/05-discussion.tex:67-69` は未変更である．**
 
 **上表の評価語（「強く不利」「適合度が最も高い」「評価が下がりつつある」等）は，
-本書の著者による評価であって owner の判断ではなく，順位付けとして読まれるべきではない．**
+本書の著者による評価であって著者の判断ではなく，順位付けとして読まれるべきではない．**
 機構的に検証できるのは「`paper/` と `.bib` に何行の変更が要るか」「対象リポジトリが
 public か private か」だけであり，それ以外は判断材料の提示である
-（`analysis/author-interface-model.md` §4.3 の options 表にも同じ但し書きを置いている）．
+．
 
 ## 4. 併せて気づいた投稿準備上の未了事項（報告のみ，本 PR では対応しない）
 
@@ -207,7 +204,7 @@ public か private か」だけであり，それ以外は判断材料の提示�
    camera-ready は pdflatex 指定なので致命的ではないが，TeX Live のない環境では
    `make pdf` が `$(error)` で止まる．
 5. **主図が未挿入．** `paper/figures/` は `.gitkeep` のみで，論文に `\includegraphics` は
-   1 つもない．owner が別 issue で清書する扱い（`provenance/author-decisions.md`）．
+   1 つもない．著者が別 issue で清書する扱い（`provenance/author-decisions.md`）．
 6. **PDF のビルド時刻が再現的でない**（`/CreationDate` に実時刻と `+09'00'`）．
    一覧の #26．匿名化の判断とは独立に `Makefile` 側で直す価値がある
    （`make pdf` の出力が非決定的である点も同時に解消する）．

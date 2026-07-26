@@ -1,6 +1,6 @@
 # Vertex 完成フェーズ — billing 照合（issue #23 / #26 / #28）
 
-owner 提供の Google Cloud 側記録と escrow セッションログの照合結果．第 1 弾（#26）
+著者提供の Google Cloud 側記録と escrow セッションログの照合結果．第 1 弾（#26）
 のサービスレベル照合を，第 2 弾（#28）の **SKU レベル請求 + モデル別 Cloud
 Monitoring 実測**で拡張した（FX 下界と leray 帰属は下記のとおり metric 解釈への
 条件付き．issue #42 項目 3）．raw export は Git 外
@@ -45,7 +45,7 @@ Monitoring 実測**で拡張した（FX 下界と leray 帰属は下記のとお
    （2026-07-23 確認，issue #42 項目 3）．よって FX ∈ [160.4, 161.8] のうち下界側，
    およびそれに依存する leray 帰属区間の下限は「当該 metric 解釈の下での導出」と
    して扱う．Metrics Explorer で Group by `type` + `explicit_caching` を付けた
-   再 export が得られれば，この条件は実測で解消できる（owner 向け導線）．
+   再 export が得られれば，この条件は実測で解消できる（著者向け導線）．
    点推定として上界 161.8 を採るのは，(a) カテゴリ・モデルの異なる 3 セル
    （fable cache write hi / opus cache write hi / opus input hi）が 0.2% 以内で
    収束しており，3 セル同時に比例的な escrow 外利用を持つことは考えにくい，
@@ -75,7 +75,7 @@ Monitoring 実測**で拡張した（FX 下界と leray 帰属は下記のとお
 
 - 実効レート区間 [160.4, 161.8] は請求からの同定値であり，reseller の公称レート・
   手数料率の内訳（Google 月次レート + 手数料等）はこの資料からは分解できない
-  （必要なら reseller へ照会，issue #23 owner 判断）．公称レートが判明すれば
+  （必要なら reseller へ照会，issue #23 著者判断）．公称レートが判明すれば
   点推定は不要になる．
 - escrow 外利用のセッションログは leray-hopf の証跡ではないため取得しない
   （トークン量は上記のとおり残差と monitoring で十分に拘束されている）．

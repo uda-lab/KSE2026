@@ -1,7 +1,7 @@
 # Connector linkage —方法論と限界（issue #70）
 
 `scripts/extract_chatgpt_export.py` と `scripts/join_connector_linkage.py` により，
-owner の ChatGPT データエクスポート（`/private/sources/KSE2026/OpenAI-ChatGPT-export.20270726.zip`，
+著者の ChatGPT データエクスポート（`/private/sources/KSE2026/OpenAI-ChatGPT-export.20270726.zip`，
 409 会話，2026-07-25 エクスポート）と `evidence/repository-snapshots/{leray-hopf,
 leray-hopf-notes,KSE2026}/` の GitHub snapshot を突き合わせ，GitHub Connector 経由の
 書き込み（認証済み `t-uda` アカウントから `chatgpt-codex-connector` に帰属する投稿）
@@ -232,7 +232,7 @@ universe から除外されている（後述）にもかかわらず，131 の�
    「repo 名＋指示動詞が同一会話のどこかに，時系列で先行して存在する」という
    条件は，**その指示が当該 artifact を具体的に指していたことを要求しない**．
    `yes` 判定は「関連する先行指示が存在した」ことの証拠であって，
-   「その特定の書き込みを owner が個別に事前承認した」ことの証拠ではない．
+   「その特定の書き込みを著者が個別に事前承認した」ことの証拠ではない．
    後者を機械的に判定する手段は本データにはない．
 3. 祖先チェーン探索に時間的な上限（window）がない．遠い過去の一度きりの
    standing instruction が，何十件もの後続 artifact の `yes` を生み出し得る
@@ -247,11 +247,10 @@ universe から除外されている（後述）にもかかわらず，131 の�
    されている）77 行の `yes` を含むため，Q3 の分母としては使えない．
    下記の連携先ドキュメントを引用する際は必ず **54／174（31.0%）** の方を使う．
    これは開発時の初版（3 件から 134 件への増加時点）で見誤り，`131／174` と
-   誤記した数値であり，本節・`analysis/author-interface-model.md` §8・
-   `provenance/ai-use.md` の該当行を訂正した（issue #83／PR #84）．
+   誤記した数値であり，本節と `provenance/ai-use.md` の該当行を訂正した．
    31.0% は当初の 3 件 (1.7%) よりは大きいが，誤って報告していた 75.3% ほど
-   大きくはない．owner の役割モデル・mediation census・本文の既存記述へ
-   反映するかどうかは，別途 owner レビューを要する（issue #70 の non-goals:
+   大きくはない．著者の役割モデル・mediation census・本文の既存記述へ
+   反映するかどうかは，別途著者レビューを要する（issue #70 の non-goals:
    「Broad manuscript rewriting」）．本ドキュメントは所見の記録に留める．
 
 **したがって: 本パイプラインが将来再実行されるたびに，未収載の `yes` 行は
@@ -260,8 +259,7 @@ universe から除外されている（後述）にもかかわらず，131 の�
 
 ## セッションログ被覆窓（gate criterion 2）への寄与
 
-`analysis/author-interface-traces.md` §4 が「セッションログの裏付けが皆無」と
-記録していた 3 つの窓（T2: 2026-06-20T04:24–12:49Z，T4: 2026-07-16T15:09–16:17Z，
+セッションログの裏付けが皆無であった 3 つの窓（T2: 2026-06-20T04:24–12:49Z，T4: 2026-07-16T15:09–16:17Z，
 T3: 2026-07-19 終日）のいずれについても，本エクスポートの候補会話メッセージが
 時刻的に窓の内側に落ちる．具体例（`evidence/metrics/connector-linkage.csv` の該当行，
 tier: time-and-context，confidence: medium）:
@@ -277,8 +275,7 @@ tier: time-and-context，confidence: medium）:
 
 これらは `evidence_type: reconstructed`（GitHub 側一次証拠と ChatGPT 側テキストの
 時刻的付合であり，起草行為そのものの一次証拠ではない），confidence は該当行の
-tier（time-and-context = medium）に従う．`analysis/author-interface-traces.md` §4
-への追補（件数のみ，本文の書き換えなし）として記録する．
+tier（time-and-context = medium）に従う．
 
 ## 生産性・因果推論の禁止
 

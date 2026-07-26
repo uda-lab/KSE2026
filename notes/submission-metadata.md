@@ -20,4 +20,4 @@ The final text must be pasted into CMT and checked against CMT's own character c
 
 ## Synchronization note
 
-The title and the formal-scope sentence must be synchronized if the owner changes the manuscript title or the frozen claim/scope records. The draft intentionally makes no Related Work-specific novelty claim, so PR #74 and the remaining Issue #42 baseline work do not require a wording change here; the status remains pending their final stabilization. PR #76 changes submission anonymity and provenance, not this metadata text.
+The title and the formal-scope sentence must be synchronized if the author changes the manuscript title or the frozen claim/scope records. The draft intentionally makes no Related Work-specific novelty claim, so PR #74 and the remaining Issue #42 baseline work do not require a wording change here; the status remains pending their final stabilization. PR #76 changes submission anonymity and provenance, not this metadata text.

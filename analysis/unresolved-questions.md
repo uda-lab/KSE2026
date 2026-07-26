@@ -16,9 +16,9 @@
       `pulls/N/reviews` endpoint は `performed_via_github_app` をキーごと返さないため
       GitHub API からは判定できない．対象は少なくとも `leray-hopf#162` の
       review 4718550494（INC-001 の型修正を要求した P0）と `leray-hopf#174` の
-      owner 3 巡レビュー．owner は connector 経由の蓋然性が高いとするが，
+      著者による 3 巡のレビュー．著者は connector 経由の蓋然性が高いとするが，
       裏付ける export が未到着（2026-07-25 時点）．到着後に INC-001 と
-      `analysis/author-interface-model.md` §限界を更新する
+      `analysis/author-interface-model.md` を更新する
 
 ## Closed
 

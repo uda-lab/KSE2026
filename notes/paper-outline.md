@@ -1,14 +1,14 @@
 # Paper outline — content-first revision
 
 現在の改稿ではページ配分を固定しない．各 section は次の機能を担い，内容・論旨・
-owner review が収束した後に Phase 5.5 で6ページへ圧縮する．
+著者レビューが収束した後に Phase 5.5 で6ページへ圧縮する．
 
 | Section | Reader-facing function |
 |---|---|
 | Abstract | 問題，形式化成果，harness 方法，限定された含意を各一度だけ要約 |
 | 1. Introduction | AI-for-Math 上の問題設定，先行研究，3 contribution，paper map |
 | 2. Formalization | capstone，正確な scope，解析的構成，pinned build と公理検査 |
-| 3. Harness Design | owner 権限，session 外に project state を残す `github-driven-workflow`，Git worktree，VPS コンテナ，artifact 別検査，証跡．Fable の再開は補助的な観測例として一度だけ記す |
+| 3. Harness Design | 著者の権限，session 外に project state を残す `github-driven-workflow`，Git worktree，VPS コンテナ，artifact 別検査，証跡．Fable の再開は補助的な観測例として一度だけ記す |
 | 4. Incidents | 事象→検出・対策→教訓を明示し，PR 番号へ接続する事例分析 |
 | 5. Engineering Implications and Limitations | AI for Math に固有の設計知見と，因果・一般化・再現性の限界 |
 | 6. Conclusion | 数学的成果と工程上の含意を一段抽象化して結ぶ |
@@ -28,7 +28,7 @@ owner review が収束した後に Phase 5.5 で6ページへ圧縮する．
 - [ ] double-blind か **明記なし**（≥3 reviewers とのみ記載．CMT 投稿画面で確認）
 - [ ] artifact / supplementary の提出可否 明記なし
 
-### ビルド環境の方針（owner 指示 2026-07-20）
+### ビルド環境の方針（著者指示 2026-07-20）
 
 主系は TeX Live の **pdflatex + latexmk**（IEEE 投稿パイプラインと一致）．tectonic は
 TeX Live の無い環境での draft 用 fallback．camera-ready は必ず pdflatex で生成する．
