@@ -17,8 +17,3 @@ Phase 4–5 で本文（sections/05-discussion.tex）へ反映する．追加を
 - proprietary tool（Claude Code 等）固有の操作と，一般化可能な方法論の区別が必要．
 - AI エージェントの効果は因果として測定されておらず，対照群がない．
 - 人間（scientific owner）の監督・介入が結果に不可分に寄与している．
-- connector 経由の Issue／PR 書き込みが owner 権威を持つ根拠はアカウント水準の記録済み
-  方針であり，書き込みごとの事前承認の記録ではない．export の可視テキストから先行指示を
-  確認できたのは universe 174 件中 54 件（31.0%）にとどまり，evidence_type: reconstructed・
-  confidence 中である（CLM-013．`analysis/connector-linkage-methodology.md`，
-  `analysis/author-interface-model.md` §8）．

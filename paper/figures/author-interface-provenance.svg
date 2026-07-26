@@ -7,8 +7,9 @@
     The scientific owner retains final authority. ChatGPT supports
     investigation, synthesis, recommendation, and drafting, while the owner
     may also issue a correction directly. ChatGPT helps prepare and transmit
-    owner-authorized work on GitHub Issues and pull requests through its
-    GitHub Connector. Review findings return to the scientific owner.
+    work on GitHub Issues and pull requests through its GitHub Connector,
+    using the owner's authenticated account under the project's recorded
+    governance policy. Review findings return to the scientific owner.
   </desc>
   <defs>
     <marker id="arrow" markerWidth="11" markerHeight="11" refX="10" refY="5.5"
