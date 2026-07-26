@@ -55,7 +55,16 @@ jobs:
     # This job takes ~90 s, most of it TeX provisioning. See checks.yml.
     timeout-minutes: 20
     steps:
+      # Full history plus an explicit base fetch: `make integrity` includes the
+      # freeze gate, which diffs against origin/main and fails closed when it
+      # cannot resolve it. A depth-1 checkout would therefore break this job.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch base ref for the freeze gate
+        shell: bash
+        run: git fetch --no-tags --quiet origin main
 
       # shell: bash for pipefail — see the equivalent step in checks.yml. Without
       # it `latexmk --version | head -1` exits with head's status and cannot
