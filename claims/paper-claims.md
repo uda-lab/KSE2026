@@ -155,6 +155,28 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   推奨・起草を ChatGPT に帰属する部分は reconstructed / confidence 中とし，
   prompt・モデル版・session・編集履歴は復元不能である．owner の最終権限と
   ChatGPT／Connector の独立権限不在を混同しない．2026-07-25 の PR #78 review
-  follow-up で本文へ binding した．
+  follow-up で本文へ binding した．本 claim が述べる owner 権威は伝送チャネルと
+  アカウント水準の方針に関するものであり，個別の書き込みへの事前承認の証拠強度は
+  CLM-013 が別に扱う（claim 文は変更しない．issue #85）．
+
+## CLM-013: connector 経由の Issue／PR 書き込みが owner 権威を持つのはアカウント水準の記録済み方針によるのであって，書き込みごとの事前承認の記録によるのではない．export の可視テキストから先行する repo 特定の指示を確認できたのは connector-routed universe 174 件中 54 件（31.0%）にとどまる
+- Status: frozen
+- Paper location: paper/sections/05-discussion.tex
+- Evidence: `analysis/author-interface-model.md` §0・§8，`analysis/connector-linkage-methodology.md`（`authorization_present` の演算子的定義と実証された限界），`evidence/metrics/connector-linkage.csv`（`scripts/join_connector_linkage.py` により再現可能．内訳: `yes` 54／`yes-rejected` 4／`not-found` 27／`n/a` 89＝174），leray-hopf#178（spot-check が機械判定を反証した `yes-rejected` 行の一例），EV-2076，EV-0925，EV-1669，EV-0247
+- Notes: evidence_type: reconstructed，confidence: 中．**権威と個別事前承認を分離する**
+  ための claim であり，前者（authenticated `t-uda` アカウントからの書き込みは記録済み
+  owner policy の下で owner 権威）は settled として再オープンしない（issue #70，
+  `analysis/author-interface-model.md` §0）．本 claim が限定するのは後者だけである．
+  母集団は connector 経由と判定できる 174 行であり，経路を判定できない `pr_review`
+  444 行は universe から除外する．全 618 行に対する `yes` 131 件を 174 で割った
+  「75.3%」は issue #83／PR #84 で訂正済みの誤記であり，本 claim では用いない．
+  signal 自体の限界: 指示動詞語彙は否定文を検出できず（手動 spot-check が 4 件を
+  universe 内で反証した），祖先チェーン探索に時間的上限がないため，遠い過去の
+  standing instruction 一つが後続の多数の artifact を `yes` にし得る（全 618 行の
+  生存 `yes` 131 件は 10 通りの起点メッセージに収斂した）．したがって「先行指示の
+  存在 ≠ 個別事前承認」であり，本文もこの強度で書く．universe サイズ 174 は
+  `evidence/repository-snapshots/` 取得時点の値で，再実行すれば増加し得る．
+  freeze の根拠は 2026-07-26 の owner 決定（issue #85「Owner 決定」節）．
+  `provenance/author-decisions.md` への対応行は PR body で提案し，適用は owner に委ねる．
 
 <!-- 以降の claim は必要に応じて追加する． -->
