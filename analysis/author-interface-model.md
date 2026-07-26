@@ -932,17 +932,27 @@ PR #82 でマージ）は，本書執筆時には存在しなかった証拠源�
 
 ### 所見（`evidence_type: reconstructed`，confidence: 中）
 
-`scripts/join_connector_linkage.py` の `authorization_present` 判定（§ の定義は
+`scripts/join_connector_linkage.py` の `authorization_present` 判定（定義は
 `analysis/connector-linkage-methodology.md`）により，connector-routed universe
-174 件中 **131 件（75.3%）** で，`created_at` より早い時点に，repo に言及し
+174 件中 **54 件（31.0%）** で，`created_at` より早い時点に，repo に言及し
 指示動詞語彙にヒットする user メッセージが会話の祖先チェーン上に存在した．
-機械判定された `yes` 候補は延べ 137 件（131 生存 + 6 反証）で，そのうち **6 件を
-`--with-text-preview` による手動確認で反証**した（`authorization_present =
-yes-rejected`，`scripts/join_connector_linkage.py` の
-`AUTHORIZATION_SPOT_CHECK_OVERRIDES`）: 3 件は投稿の保留を明示的に指示する
-メッセージへ，残る 3 件は issue 化の保留（「まず報告してください」）を明示的に
-指示するメッセージへ遡り，かつ一致した artifact がまさに issue 作成であった．
-数値の再現手順・window 感度・語彙の限界は
+**（母集団の取り違えに関する訂正．PR #84 独立レビュー指摘）** 初版はここで
+「131 件（75.3%）」と書いていたが，131 は connector-routed universe（174 行）
+ではなく `pr_review`（444 行，connector 経由か否かを判定できず universe から
+除外）を含む全 618 行に対する `yes` 総数であり，誤って 174 行を分母に用いていた．
+connector-routed universe に限った正しい内訳は 54 `yes`／4 `yes-rejected`／
+27 `not-found`／89 `n/a`（計 174）である．
+
+機械判定された `yes` 候補は全 618 行に対して延べ 137 件（131 生存 + 6 反証．
+うち connector-routed universe 内は 58 件＝54 生存 + 4 反証）で，そのうち
+**6 件を `--with-text-preview` による手動確認で反証**した（`authorization_present
+= yes-rejected`，`scripts/join_connector_linkage.py` の
+`AUTHORIZATION_SPOT_CHECK_OVERRIDES`，うち 4 件が connector-routed universe
+内）: 3 件は投稿の保留を明示的に指示するメッセージへ，残る 3 件は issue 化の
+保留（「まず報告してください」）を明示的に指示するメッセージへ遡り，かつ一致
+した artifact がまさに issue 作成であった（この 3 件はいずれも
+connector-routed universe 内の issue_creation）．数値の再現手順・window 感度・
+語彙の限界・母集団取り違えの訂正の全文は
 `analysis/connector-linkage-methodology.md` の `authorization_present` 節，
 生データは `evidence/metrics/connector-linkage.{json,csv}`（`--emit-public`
 により committed snapshot から機械的に再生成可能）を参照．
@@ -953,9 +963,10 @@ yes-rejected`，`scripts/join_connector_linkage.py` の
 「その特定の書き込みを owner が個別に事前承認した」ことの証拠ではない**．
 語彙は否定文を検出できず（6 件の反証がこれを実証する），祖先チェーン探索に
 時間的上限がないため，遠い過去の一度きりの standing instruction が後続の
-何十件もの artifact の `yes` を生み得る（実際に生じている．10 通りの起点
-メッセージが 131 件の生存 `yes` すべてを説明する）．**先行指示の存在 ≠
-個別事前承認**．
+何十件もの artifact の `yes` を生み得る（実際に生じている．全 618 行を対象に
+遡った際，10 通りの起点メッセージが 131 件の生存 `yes` すべてを説明した．
+connector-routed universe 内の 54 件はこの 131 件の部分集合である）．
+**先行指示の存在 ≠ 個別事前承認**．
 
 ### 既存台帳（§2）への適用: 変更なし
 
@@ -1002,7 +1013,7 @@ yes-rejected`，`scripts/join_connector_linkage.py` の
 （Figure~\ref{fig:author-interface} の caption/ALT text および本文，
 `% CLAIM: CLM-012`）は，`t-uda` アカウントの投稿は owner 権威であるという
 **アカウント水準の前提**（§0）に基づく記述であり，個別 artifact への事前承認
-証拠には依拠していない．本所見はこの記述と**矛盾しない**（75.3% という高い
-比率は前提と整合的でさえある）が，6 件の反証事例が示す「先行指示との緊張」を
+証拠には依拠していない．本所見はこの記述と**矛盾しない**（31.0% という比率は
+前提と整合的である）が，6 件の反証事例が示す「先行指示との緊張」を
 限界節等で言及するかどうかは owner 判断に委ねる（issue #83 の PR 本文で
 選択肢として提示する）．CLM-012 は frozen であり本 PR では変更しない．
