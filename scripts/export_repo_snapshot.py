@@ -86,6 +86,25 @@ def scrub(text: str) -> str:
     return text
 
 
+def scrub_tree(obj):
+    """Apply scrub() to every string value (not keys) in a JSON tree.
+
+    write_json() runs this over each exported structure so the masking covers
+    *all* string-valued fields — commit author display names, milestone
+    titles, label and tag names, and any field a future exporter change adds
+    — not only the free-text bodies that call scrub() explicitly. Without
+    this, a denylisted name appearing in e.g. a commit author_name would
+    reach the committed snapshot verbatim and fail the redaction gate
+    (PR #80 review finding)."""
+    if isinstance(obj, str):
+        return scrub(obj)
+    if isinstance(obj, list):
+        return [scrub_tree(v) for v in obj]
+    if isinstance(obj, dict):
+        return {k: scrub_tree(v) for k, v in obj.items()}
+    return obj
+
+
 def gh_api(path: str, paginate: bool = True):
     cmd = ["gh", "api", path, "-H", "X-GitHub-Api-Version: 2022-11-28"]
     if paginate:
@@ -101,6 +120,7 @@ def gh_api(path: str, paginate: bool = True):
 
 
 def write_json(path: Path, rows):
+    rows = scrub_tree(rows)
     with path.open("w", encoding="utf-8") as f:
         json.dump(rows, f, ensure_ascii=False, sort_keys=True, indent=1)
         f.write("\n")
