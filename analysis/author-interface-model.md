@@ -1061,6 +1061,13 @@ ChatGPT／Codex の全経路を代表するものでもない．引用する場�
 `performed_via_github_app = chatgpt-codex-connector` の形で，API フィールド値
 であることが分かるように書く．
 
+**フィールド単独では類 1 と類 2 を分離できない**（issue #88 の独立レビューで確認）．
+現行 snapshot の `issues.json`／`comments.json` で `performed_via_github_app` が
+non-null の行は 287 行あり，値はすべて `chatgpt-codex-connector` の 1 種である．
+その内訳は `user_login = t-uda` が 174 行，`user_login = chatgpt-codex-connector[bot]`
+が 113 行であって，**同じ App 属性が著者アカウントの書き込みと bot 自身のレビューの
+両方に付く**．類の判定は `performed_via_github_app` と `user_login` の組で行う．
+
 本書および `analysis/author-interface-traces.md` の小文字 `connector` 用法は
 analysis 層の略語として維持する（§4 以降の集計は経路判定の可否で universe を
 切っており，上表の類 1 と類 3 の区別と整合的である）．issue #88 §D のとおり，

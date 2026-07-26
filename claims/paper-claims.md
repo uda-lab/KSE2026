@@ -155,7 +155,11 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   prompt・モデル版・session・編集履歴は復元不能）．
   **経路の 4 類は証拠が支持する区別だけを述べる**（issue #88）．`performed_via_github_app`
   は伝送チャネルを直接示すが文面の起草者を示さない API フィールドであり，これを根拠に
-  起草・意思決定を推論しない．non-null 値 `chatgpt-codex-connector` は API 上の識別子で
+  起草・意思決定を推論しない．**このフィールド単独では類 1 と類 2 を分離できない**:
+  snapshot 上の non-null 値は 287 行すべてが `chatgpt-codex-connector` であり，その内訳は
+  著者アカウント `t-uda` 174 行と bot アカウント `chatgpt-codex-connector[bot]` 113 行
+  である．したがって類の判定には `user_login` を併用する（issue #88 の独立レビューで
+  確認）．non-null 値 `chatgpt-codex-connector` は API 上の識別子で
   あって製品名ではなく，全 ChatGPT／Codex 経路を表すものでもない．null の場合に
   ChatGPT App・`gh`・Web UI・PAT・他 agent のいずれかを login や文体から推論しない
   （類 3 は「不明」のまま保持する）．類 2 の bot レビューを類 1 の著者アカウント伝送に
