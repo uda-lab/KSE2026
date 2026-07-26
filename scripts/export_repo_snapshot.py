@@ -29,7 +29,10 @@ only if a future consumer needs it and it passes redact_check.py's
 PUBLIC_REPO_ALLOWLIST for the target repo.
 
 Email addresses are deliberately NOT exported (repo redaction gate); authors
-are identified by GitHub login (fallback: display name). Everything here is
+are identified by GitHub login (fallback: display name). Personal names
+listed in private/redact-names.txt (untracked; same file redact_check.py
+reads) are masked as <name-redacted> when that file is present at export
+time. Everything here is
 regenerable from the source repository via `gh api` — rerun this script
 rather than hand-editing. EXPORT.json records the source repo's `private`
 flag: for a private repo (e.g. this paper repo's own self-snapshot), that
@@ -52,11 +55,35 @@ OUT_ROOT = Path(__file__).resolve().parent.parent / "evidence" / "repository-sna
 
 EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 
+# Mirrors redact_check.py's NAME_DENYLIST loader: one name per line, kept out
+# of git in private/redact-names.txt. When the file is absent (e.g. CI, or a
+# third party reproducing a public-repo snapshot), no names are masked — the
+# same names then also cannot be flagged by redact_check.py, so the gate and
+# the scrub degrade together rather than diverging.
+NAME_DENYLIST_FILE = Path(__file__).resolve().parent.parent / "private" / "redact-names.txt"
+
+
+def load_name_patterns():
+    if NAME_DENYLIST_FILE.is_file():
+        names = [ln.strip()
+                 for ln in NAME_DENYLIST_FILE.read_text(encoding="utf-8").splitlines()
+                 if ln.strip() and not ln.startswith("#")]
+        return [re.compile(re.escape(n)) for n in names]
+    return []
+
+
+NAME_PATTERNS = load_name_patterns()
+
 
 def scrub(text: str) -> str:
-    """Mask email addresses so the snapshot passes the repo redaction gate.
-    (They appear e.g. in Co-Authored-By trailers quoted in PR bodies.)"""
-    return EMAIL_RE.sub("<email-redacted>", text)
+    """Mask email addresses and denylisted personal names so the snapshot
+    passes the repo redaction gate (redact_check.py). Emails appear e.g. in
+    Co-Authored-By trailers quoted in PR bodies; denylisted names appear e.g.
+    in host-identification handles quoted in issue comments."""
+    text = EMAIL_RE.sub("<email-redacted>", text)
+    for rx in NAME_PATTERNS:
+        text = rx.sub("<name-redacted>", text)
+    return text
 
 
 def gh_api(path: str, paginate: bool = True):
@@ -161,7 +188,9 @@ def main() -> int:
                    "tags": len(tags)},
         "note": "regenerable from the source repository via `gh api` (see "
                 "`private` above for who can reproduce it); emails "
-                "intentionally omitted; "
+                "intentionally omitted; denylisted personal names masked as "
+                "<name-redacted> when private/redact-names.txt was present "
+                "at export time; "
                 "per-PR review events are fetched separately when an incident "
                 "analysis needs them; issues.json and comments.json carry "
                 "performed_via_github_app (slug or null) and author_association "
