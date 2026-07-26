@@ -29,9 +29,14 @@ only if a future consumer needs it and it passes redact_check.py's
 PUBLIC_REPO_ALLOWLIST for the target repo.
 
 Email addresses are deliberately NOT exported (repo redaction gate); authors
-are identified by GitHub login (fallback: display name). Everything here is
+are identified by GitHub login (fallback: display name). Personal names
+listed in private/redact-names.txt (untracked; same file redact_check.py
+reads) are masked as <name-redacted> when that file is present at export
+time. Everything here is
 regenerable from the source repository via `gh api` — rerun this script
-rather than hand-editing. EXPORT.json records the source repo's `private`
+rather than hand-editing. Byte-identical regeneration of a snapshot exported
+with masking active additionally requires the same private/redact-names.txt
+(EXPORT.json's name_masking_active records whether masking ran). EXPORT.json records the source repo's `private`
 flag: for a private repo (e.g. this paper repo's own self-snapshot), that
 means the export is reproducible only by an account with read access, unlike
 a public-repo snapshot such as uda-lab/leray-hopf — this asymmetry must be
@@ -52,11 +57,89 @@ OUT_ROOT = Path(__file__).resolve().parent.parent / "evidence" / "repository-sna
 
 EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 
+# Mirrors redact_check.py's NAME_DENYLIST loader: one name per line, kept out
+# of git in private/redact-names.txt. When the file is absent (e.g. CI, or a
+# third party reproducing a public-repo snapshot), no names are masked — in
+# that same environment redact_check.py cannot flag those names either, so
+# gate and scrub degrade together *within one environment*. Across
+# environments they can still diverge: an export made without the denylist
+# passes CI and that contributor's local gate, then blocks the next
+# environment that does hold the denylist (exactly the issue #79 sequence).
+# EXPORT.json records name_masking_active so a reader can tell which case a
+# committed snapshot is. Byte-identical regeneration of a masked snapshot
+# therefore requires the same denylist file in addition to `gh api` access.
+NAME_DENYLIST_FILE = Path(__file__).resolve().parent.parent / "private" / "redact-names.txt"
+
+
+def load_name_patterns():
+    if NAME_DENYLIST_FILE.is_file():
+        names = {ln.strip()
+                 for ln in NAME_DENYLIST_FILE.read_text(encoding="utf-8").splitlines()
+                 if ln.strip() and not ln.startswith("#")}
+        # Longest-first, then lexicographic: masking must not depend on the
+        # private file's line order. If a shorter entry ("Alice") were applied
+        # before a containing longer one ("Alice Smith"), the longer name
+        # would be only partially masked ("<name-redacted> Smith") and
+        # redact_check.py — which matches against the already-scrubbed text —
+        # would no longer see either denylisted string, passing the gate on
+        # an incomplete redaction (PR #80 owner review). Detection order in
+        # redact_check.py itself is immaterial (each pattern scans the
+        # original line independently), so only this scrub side sorts.
+        return [re.compile(re.escape(n))
+                for n in sorted(names, key=lambda n: (-len(n), n))]
+    return []
+
+
+NAME_PATTERNS = load_name_patterns()
+
 
 def scrub(text: str) -> str:
-    """Mask email addresses so the snapshot passes the repo redaction gate.
-    (They appear e.g. in Co-Authored-By trailers quoted in PR bodies.)"""
-    return EMAIL_RE.sub("<email-redacted>", text)
+    """Mask email addresses and denylisted personal names so the snapshot
+    passes the repo redaction gate (redact_check.py). Emails appear e.g. in
+    Co-Authored-By trailers quoted in PR bodies; denylisted names appear e.g.
+    in host-identification handles quoted in issue comments."""
+    text = EMAIL_RE.sub("<email-redacted>", text)
+    for rx in NAME_PATTERNS:
+        text = rx.sub("<name-redacted>", text)
+    return text
+
+
+# Machine identifiers that downstream consumers group or join on (e.g.
+# compute_mediation_census.py groups by user_login × performed_via_github_app,
+# and shas identify commits). These are excluded from scrub_tree: silently
+# masking a grouping key would split/merge downstream categories instead of
+# failing loudly. If a denylisted name ever appears in one of these fields,
+# redact_check.py still flags the committed file and a human decides —
+# fail-closed at the gate rather than silent data mutation (PR #80 review).
+IDENTIFIER_KEYS = frozenset({
+    "sha", "parents", "commit_sha", "head_sha_at_fetch",
+    "user_login", "author_login", "committer_login",
+    "performed_via_github_app",
+})
+
+
+def scrub_tree(obj, key=None):
+    """Apply scrub() to every string value (not keys) in a JSON tree, except
+    values of IDENTIFIER_KEYS.
+
+    write_json() runs this over each exported structure, so the masking is
+    authoritatively applied here for *all* string-valued fields — commit
+    author display names, milestone titles, label and tag names, and any
+    field a future exporter change adds — not only the free-text bodies.
+    (The explicit scrub() calls in the per-field comprehensions below are
+    redundant but harmless — scrub() is idempotent on its own output — and
+    are kept to minimize diff churn.) Without this, a denylisted name
+    appearing in e.g. a commit author_name would reach the committed
+    snapshot verbatim and fail the redaction gate (PR #80 review finding)."""
+    if key in IDENTIFIER_KEYS:
+        return obj
+    if isinstance(obj, str):
+        return scrub(obj)
+    if isinstance(obj, list):
+        return [scrub_tree(v) for v in obj]
+    if isinstance(obj, dict):
+        return {k: scrub_tree(v, k) for k, v in obj.items()}
+    return obj
 
 
 def gh_api(path: str, paginate: bool = True):
@@ -74,6 +157,7 @@ def gh_api(path: str, paginate: bool = True):
 
 
 def write_json(path: Path, rows):
+    rows = scrub_tree(rows)
     with path.open("w", encoding="utf-8") as f:
         json.dump(rows, f, ensure_ascii=False, sort_keys=True, indent=1)
         f.write("\n")
@@ -153,6 +237,7 @@ def main() -> int:
     meta = {
         "repo": args.repo,
         "private": is_private,
+        "name_masking_active": bool(NAME_PATTERNS),
         "head_sha_at_fetch": head,
         "fetched_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "tool_versions": {"python": sys.version.split()[0], "gh": gh_version},
@@ -161,7 +246,9 @@ def main() -> int:
                    "tags": len(tags)},
         "note": "regenerable from the source repository via `gh api` (see "
                 "`private` above for who can reproduce it); emails "
-                "intentionally omitted; "
+                "intentionally omitted; denylisted personal names masked as "
+                "<name-redacted> when private/redact-names.txt was present "
+                "at export time; "
                 "per-PR review events are fetched separately when an incident "
                 "analysis needs them; issues.json and comments.json carry "
                 "performed_via_github_app (slug or null) and author_association "

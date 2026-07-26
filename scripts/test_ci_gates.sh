@@ -208,6 +208,88 @@ mkred=$( (cd -- "$tmp" && mkdir -p mk && cd mk && cp -- "$repo/Makefile" . \
 check_msg "make redact names a missing scope directory" 2 "$?" \
   "redaction scope 'evidence' is missing" "$mkred"
 
+echo "== snapshot exporter: name-denylist scrub =="
+# The exporter's scrub is gate-adjacent: a name it fails to mask lands in a
+# committed snapshot and trips redact_check.py in every environment that
+# holds the denylist (issue #79). Three branches need pinning: the
+# denylist-absent branch (the one CI always takes) must be inert, the
+# denylist-present branch must mask with literal (regex-escaped) matching,
+# and scrub_tree must spare identifier fields that downstream consumers
+# group on. Tests override the module's file path; the repo's own
+# private/redact-names.txt (if any) is never read or required.
+
+python3 - "$repo" "$tmp" <<'PYEOF' >/dev/null 2>&1
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(sys.argv[1]) / "scripts"))
+import export_repo_snapshot as m
+m.NAME_DENYLIST_FILE = Path(sys.argv[2]) / "no-such-denylist.txt"
+m.NAME_PATTERNS = m.load_name_patterns()
+assert m.NAME_PATTERNS == []
+assert m.scrub("written by Test Testname today") == "written by Test Testname today"
+PYEOF
+check "exporter scrub is inert when the denylist file is absent" 0 "$?"
+
+python3 - "$repo" "$tmp" <<'PYEOF' >/dev/null 2>&1
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(sys.argv[1]) / "scripts"))
+import export_repo_snapshot as m
+deny = Path(sys.argv[2]) / "deny.txt"
+deny.write_text("# comment line\n\nTest Testname\nA.B (Test)\n", encoding="utf-8")
+m.NAME_DENYLIST_FILE = deny
+m.NAME_PATTERNS = m.load_name_patterns()
+assert len(m.NAME_PATTERNS) == 2  # comment and blank lines ignored
+assert m.scrub("by Test Testname.") == "by <name-redacted>."
+assert m.scrub("A.B (Test)!") == "<name-redacted>!"
+assert m.scrub("AxB (Test)") == "AxB (Test)"  # '.' is escaped, not a wildcard
+assert m.scrub(m.scrub("by Test Testname.")) == "by <name-redacted>."  # idempotent
+PYEOF
+check "exporter scrub masks denylisted names literally when the file exists" 0 "$?"
+
+python3 - "$repo" "$tmp" <<'PYEOF' >/dev/null 2>&1
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(sys.argv[1]) / "scripts"))
+import export_repo_snapshot as m
+deny = Path(sys.argv[2]) / "deny.txt"
+deny.write_text("Test Testname\n", encoding="utf-8")
+m.NAME_DENYLIST_FILE = deny
+m.NAME_PATTERNS = m.load_name_patterns()
+row = {"author_name": "Test Testname", "user_login": "Test Testname",
+       "sha": "Test Testname", "parents": ["Test Testname"],
+       "labels": ["Test Testname"], "body": "x Test Testname y", "n": 3}
+out = m.scrub_tree(row)
+assert out["author_name"] == "<name-redacted>"   # content field: masked
+assert out["labels"] == ["<name-redacted>"]      # nested content: masked
+assert out["body"] == "x <name-redacted> y"
+assert out["user_login"] == "Test Testname"      # identifier: untouched,
+assert out["sha"] == "Test Testname"             # redact_check flags it loudly
+assert out["parents"] == ["Test Testname"]
+assert out["n"] == 3
+PYEOF
+check "exporter scrub_tree masks content fields but spares identifiers" 0 "$?"
+
+python3 - "$repo" "$tmp" <<'PYEOF' >/dev/null 2>&1
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(sys.argv[1]) / "scripts"))
+import export_repo_snapshot as m
+# Shorter entry deliberately listed BEFORE the containing longer entry: in
+# file order, "Alice" would fire first and leave "<name-redacted> Smith",
+# which neither pattern (nor redact_check.py) matches afterwards — an
+# incomplete redaction that passes the gate. The loader must therefore
+# normalize to longest-first regardless of line order.
+deny = Path(sys.argv[2]) / "deny.txt"
+deny.write_text("Alice\nAlice Smith\n", encoding="utf-8")
+m.NAME_DENYLIST_FILE = deny
+m.NAME_PATTERNS = m.load_name_patterns()
+assert m.scrub("met Alice Smith and Alice") == "met <name-redacted> and <name-redacted>"
+assert m.scrub("Alice Smith") == "<name-redacted>"  # no partial "<name-redacted> Smith"
+assert "Smith" not in m.scrub("Alice Smith")
+PYEOF
+check "exporter scrub masks a containing longer entry regardless of file order" 0 "$?"
+
 echo "== wiring: the make targets must still invoke the guards =="
 # Everything above invokes a guard directly, which proves the guard works and
 # nothing about whether `make` still calls it. Deleting the chktex line from

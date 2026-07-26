@@ -32,10 +32,14 @@ signal としては非対称であり，census（悉皆調査）ではない．*
   「PAT 認証」「owner 名義」等の解釈語をここでは使わない．null が直接的な人間執筆を
   意味しないことは下記の通り．
 
-## 主要結果（`fetched_at` は各 snapshot の EXPORT.json 参照; leray-hopf
-2026-07-24T18:28:30Z, KSE2026 2026-07-24T18:41:10Z — KSE2026 は独立レビュー中の
-検証実行により本 PR 内で最初の取得から追加で 1 度再取得されている（計 2 回
-fetch）．`evidence/repository-snapshots/KSE2026/EXPORT.json` の値が最終的に正）
+## 主要結果（`fetched_at` は本 census JSON（`evidence/metrics/mediation-census.json`）
+が入力として自己記述する値が正: leray-hopf 2026-07-24T18:28:30Z, KSE2026
+2026-07-24T18:41:10Z（`head_sha_at_fetch: fc912b92…`）．KSE2026 は census 作成 PR 内で
+最初の取得から追加で 1 度再取得されている（計 2 回 fetch）．さらにその後，KSE2026
+snapshot は issue #79 の再収集（2026-07-26）で前進したため，**現行 tree の
+`evidence/repository-snapshots/KSE2026/EXPORT.json` は census の入力を指さない** —
+census 入力の snapshot は git 履歴 `git show e65b872:evidence/repository-snapshots/KSE2026/EXPORT.json`
+で参照できる．census は再計算していない）
 
 **以下は正確な件数だが，著者性の signal としては非対称．`performed_via_github_app:
 null` は人間による直接執筆を証明せず，non-null は仲介の下界だが伝送チャネルの

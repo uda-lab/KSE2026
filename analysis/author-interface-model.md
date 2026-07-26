@@ -74,7 +74,12 @@ owner が採用するまで効力を持たない．
   文面の起草．owner が発する判断のための準備を担う．
 - **証拠（primary，artifact の存在について）**: leray-hopf の connector 経由
   issue／PR 32 件と KSE2026 の 6 件（`analysis/mediation-census-methodology.md`，
-  `evidence/repository-snapshots/*/issues.json` から再導出可能）．単なる伝送では
+  各 snapshot の `issues.json` から再導出可能．**本書の KSE2026 件数はすべて census
+  と同じ 2026-07-24 時点の snapshot（`head_sha_at_fetch: fc912b92…`）を基準とする**．
+  KSE2026 snapshot は issue #79 の再収集（2026-07-26）で前進しており，現行 tree の
+  `issues.json` からの再集計はより大きい値を返す．当時の snapshot は git 履歴から
+  `git show e65b872:evidence/repository-snapshots/KSE2026/issues.json` で参照できる．
+  leray-hopf snapshot は再収集されておらず現行 tree のまま一致する）．単なる伝送では
   なく調査・統合を伴うことの内容証拠: `leray-hopf#145`（優先度階層付きのリリース
   umbrella），`leray-hopf#146`（owner へ "Required decision" を提示する P0 blocker），
   `leray-hopf#158`（INC-001 の検出 artifact となった `p = q = 1` の陽な反例構成）．
@@ -93,7 +98,7 @@ owner が採用するまで効力を持たない．
   `evidence/repository-snapshots/*/EXPORT.json`．
 - **重要な限定**: 同じ App slug は `t-uda` 名義の投稿だけに付くのではない．snapshot 上，
   `performed_via_github_app = chatgpt-codex-connector` を持つコメントは leray-hopf で
-  106 件，KSE2026 で 12 件あり，そのうち **leray-hopf 69 件・KSE2026 7 件は
+  106 件，KSE2026 で 12 件（2026-07-24 時点 snapshot 基準，A2 の注記参照）あり，そのうち **leray-hopf 69 件・KSE2026 7 件は
   `user_login = chatgpt-codex-connector[bot]`**，すなわち bot アカウント自身が
   生成したレビュー文である（`evidence/repository-snapshots/*/comments.json` から
   `user_login` と `performed_via_github_app` を交差集計すれば再現できる）．したがって
@@ -798,7 +803,7 @@ issue／PR 全 195 件を分母に取れば connector 経由は 16% であって
 
 **B — 規則 6 は判断の文面に及ぶ．`provenance/ai-use.md` に記録する．**
 - *帰結*: 透明性を 1 箇所に最大化する．connector 経由の判断（KSE2026 の 6 件，leray-hopf の
-  32 件，計 38 件の issue／PR 作成と 42 件のコメント）について遡及行が必要になる．
+  32 件，計 38 件の issue／PR 作成と 42 件のコメント．2026-07-24 時点 snapshot 基準，A2 の注記参照）について遡及行が必要になる．
 - *費用*: 遡及的再構成は**大部分が導出不能**である．`performed_via_github_app` は伝送を
   証明し起草を証明しない（census 自身の注記）．大半の行は「チャネル: connector，起草:
   不明」となり，知識を増やさずに分量だけを増やす．さらに，伝送メタデータを著者性の主張と
