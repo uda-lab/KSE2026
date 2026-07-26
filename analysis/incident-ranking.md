@@ -4,7 +4,7 @@ card 化されたインシデントを重要度で順位付けし，論文（sec
 載せる代表例を選ぶ．選定は「都合の良い失敗例の選択」にならないよう，除外した card と
 除外理由も残す（PLAN.md Phase 5）．順位は 6 軸（影響範囲 / 検出困難性 / 回復費用 /
 再発可能性 / 一般化可能性 / 一次資料の完全性）の総合による agent 提案であり，
-**採否の確定は Phase 3 で owner が行う**．
+**採否の確定は Phase 3 で著者が行う**．
 
 ## Ranking（2026-07-23 v2，INC-001〜005．v1 は 07-22，INC-005 追加により改訂）
 
@@ -12,7 +12,7 @@ card 化されたインシデントを重要度で順位付けし，論文（sec
 |---|---|---|---|---|
 | 1 | INC-001（`w1pTime_continuous_in_H` 偽一般化） | 影響範囲=公開 API の soundness そのもの．検出困難性=高（sorry 上の型は build では検査されず，直接攻撃キャンペーン中ですら型の独立精査が起きなかった過程が一次ログで追える）．release 前 review で検出→statement-gate 政策という再発防止まで完結．一般化可能性=「プレースホルダの上の主張は検証対象から漏れる」という agentic 形式化の構造的盲点 | **採用（主例）** | — |
 | 2 | INC-002（projection 仮定を欠く `ALLOW_SORRY` signature） | INC-001 と同型の盲点だが**マージ前に検出成功**した対照例．独立アジュディケータによる構造的審査 + corroborative な数値診断という検出機構が具体的で，成功例と失敗例の対（PLAN.md §6 の「失敗事例 + 再発防止策の対」）を INC-001 と構成できる | **採用（対照例）** | — |
-| 3 | INC-005（codex サイドプロセス残留 OOM cascade） | resource 系の主例（PLAN.md §5 の resource-aware orchestration 論点を単独で担う）．「別プロジェクトで既知の教訓が memory 局所化により横展開されず再発」→「対策直後に構造的に別の経路（正当ビルドの RSS ピーク）で同症状が再発し，原因別対策でなく症状ベース計測規約が捕捉」という二重の再発構造を持ち，owner も重要例と判断（issue #33）．検出契機が owner の一言だった点は監視設計の教訓として一級 | **採用（resource 節主例）** | — |
+| 3 | INC-005（codex サイドプロセス残留 OOM cascade） | resource 系の主例（PLAN.md §5 の resource-aware orchestration 論点を単独で担う）．「別プロジェクトで既知の教訓が memory 局所化により横展開されず再発」→「対策直後に構造的に別の経路（正当ビルドの RSS ピーク）で同症状が再発し，原因別対策でなく症状ベース計測規約が捕捉」という二重の再発構造を持ち，著者も重要例と判断（issue #33）．検出契機が著者の一言だった点は監視設計の教訓として一級 | **採用（resource 節主例）** | — |
 | 4 | INC-004（公開定理の無断削除を byte-diff 検出） | 「build green は定理の存在を保証しない」という教訓が明快で，宣言単位 byte-diff レビューという移植可能な対策を持つ．ただし混入から検出まで数分・単一 PR 内で完結し，影響の実現前に止まったため事例の重みは上位に劣る | 採用（短例 or 表内 1 行） | 紙幅次第で表内言及に格下げ可 |
 | 5 | INC-003（ログローテーション喪失） | 証明でなく research-record のメタ・インシデント．evidence 完全性の議論（欠損期間の明示）とセットで方法論節に置くのが適切で，incident case study の主戦場からは外す | 方法論節で言及 | incident 節の主題（形式化の失敗様態）と位相が異なる |
 
@@ -33,7 +33,7 @@ card 化されたインシデントを重要度で順位付けし，論文（sec
   workflow 節（sections/03）に集約するのが適切．
 
 （候補 #8 は 7/18 vps セッション 3 本の符号化完了により **INC-005 として card 化済み**．
-issue #33，owner 判断 2026-07-23）
+issue #33，著者判断 2026-07-23）
 
 ## 論文主題 A/B/C 判断への入力（PLAN.md §6）
 
@@ -47,4 +47,4 @@ issue #33，owner 判断 2026-07-23）
 - 統計的裏付け: 符号化 6 セッションで WEAKEN/STMT-MISMATCH 系 4 件・RECOVERY 19 件・
   RESOURCE 12 件・WT-CONFLICT 5 件，FALSE-SUCCESS 0 件（74aab39b の commit 前 disk
   再検証の規律による）．
-- 判断は Phase 3 で owner が `provenance/author-decisions.md` に記録する．
+- 判断は Phase 3 で著者が `provenance/author-decisions.md` に記録する．

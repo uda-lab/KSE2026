@@ -34,6 +34,6 @@
    `aubin_lions` 公理除去 = T³ capstone 無条件化）は `analysis/project-timeline.md`
    と issue #23 コメントの対応表を典拠とする．
 4. 費用の出所（研究費・支援制度）は acknowledgment に記載し，resource profile とは
-   分離する（文言は owner が `provenance/author-decisions.md` に確定させる）．
+   分離する（文言は著者が `provenance/author-decisions.md` に確定させる）．
 5. CLM の扱い: CLM-002（層 1）は現行のまま．層 2 を独立 claim とするかは Phase 3
-   の contribution freeze で owner が判断する（それまで claim 化しない）．
+   の contribution freeze で著者が判断する（それまで claim 化しない）．

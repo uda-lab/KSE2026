@@ -29,7 +29,7 @@ signal としては非対称であり，census（悉皆調査）ではない．*
      `performed_via_github_app = chatgpt-codex-connector`
 
   上記のラベルは GitHub API が返す値をそのまま転記したものであり，「直接投稿」
-  「PAT 認証」「owner 名義」等の解釈語をここでは使わない．null が直接的な人間執筆を
+  「PAT 認証」「著者名義」等の解釈語をここでは使わない．null が直接的な人間執筆を
   意味しないことは下記の通り．
 
 ## 主要結果（`fetched_at` は本 census JSON（`evidence/metrics/mediation-census.json`）
@@ -119,10 +119,10 @@ KSE2026 の connector 経由 issue 番号は `#23 #42 #58 #59 #60` に加え，�
 ## 権威に関する立場（issue #60 Wave A dispatch の前提）
 
 issue #60 の Wave A 作業指示は，「`t-uda` アカウントから発せられた判断は，文面を
-ChatGPT が起草したか否かに関わらず owner 権威である」という前提の下で本 census を
+ChatGPT が起草したか否かに関わらず著者権威である」という前提の下で本 census を
 作成するよう求めている．この前提そのものの正式な記録化（`provenance/author-
-decisions.md` への転記や owner による確定）は本 PR の範囲外であり，未実施である
-（記録化の要否は owner 判断待ち）．本 census が示すのは伝送チャネルの下界統計のみ
-であり，上記前提の真偽を証明も反証もしない．「最終判断は常に scientific owner が
+decisions.md` への転記や著者による確定）は本 PR の範囲外であり，未実施である
+（記録化の要否は著者判断待ち）．本 census が示すのは伝送チャネルの下界統計のみ
+であり，上記前提の真偽を証明も反証もしない．「最終判断は常に著者が
 行う」（`provenance/ai-use.md`）および「AI は著者にしない」（`AGENTS.md`）は本集計
 と矛盾しない．

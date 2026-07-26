@@ -13,4 +13,4 @@ contribution-list discipline に従う）．baseline の出典・照合状態は
 | 3 | 研究記録としてのセッションログ escrow・claim↔evidence 機械検査・コスト実測照合の方法論 | CLM-002, CLM-003 | 人間チームの工程管理 `gonthier2013oddorder`・`commelin2023abstraction`（証跡・コスト報告なし）／外形的 agentic PR 研究 `agenticprs2026security`・能力トレンド `metr2025longtasks`（内側の一次証跡なし）／TauCeti の cost 報告は review 推論のみ | 3 host escrow（EV 2,145 件）+ 再現スクリプト + 実請求 SKU 照合という，収集済み証跡の全量に基づく campaign 下界報告．下界性・欠損（INC-003）・条件付き数値を明示 | AI 支援研究の evidence practice として分野非依存に再利用可能 |
 
 論文主題は method/harness を主とし，incident を検出範囲と限界の証拠として用いる
-（owner 指示 2026-07-24，issue #57）．contribution は3点を維持する．
+（著者指示 2026-07-24，issue #57）．contribution は3点を維持する．

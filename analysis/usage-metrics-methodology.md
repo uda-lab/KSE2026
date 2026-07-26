@@ -45,7 +45,7 @@ wall/active 時間の両方に適用されるため，後日の論文作業ロ�
 モデル別・日次の内訳は `evidence/metrics/usage-metrics.json` の
 `by_model` / `by_model_date_host` を参照．
 
-## PoC 集計（2026-07-21 owner 報告）との差異
+## PoC 集計（2026-07-21 著者報告）との差異
 
 PoC（600 sessions, output 67.6M, ≈$19,157, active(5m) 389.7h）と本集計は
 **対象範囲と計数方法が異なる**:
@@ -60,7 +60,7 @@ PoC（600 sessions, output 67.6M, ≈$19,157, active(5m) 389.7h）と本集計�
 
 ## Provider 区分 — VertexAI 経由期間（2026-07-02〜07-04）
 
-owner 報告（2026-07-22）により，Fable 5 再公開直後の一時期，local-secondary の
+著者報告（2026-07-22）により，Fable 5 再公開直後の一時期，local-secondary の
 作業の一部が subscription ではなく Google Compute 上の **VertexAI 経由**で実施
 されていたことが判明した．Vertex 経由の API レスポンスは message / tool-use ID
 に `_vrtx_` プレフィックス（`msg_vrtx_…` / `toolu_vrtx_…`）を持つため，

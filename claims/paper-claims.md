@@ -53,7 +53,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   input+output+cache_read+cache_write 合算と同一母数であるという metric 解釈に
   依存する．現行 raw export にはラベル内訳（`type`／`explicit_caching`）が残って
   おらず，この解釈は既存データからは検証できないため，本文・脚注では
-  「当該 metric 解釈の下での導出」と明示する（issue #42 項目 3，owner 判断
+  「当該 metric 解釈の下での導出」と明示する（issue #42 項目 3，著者判断
   2026-07-23）．上界 161.8（残差非負性のみに依存）と ¥54,868・$258.28 は
   この条件に依存しない．方法・限界は `analysis/billing-reconciliation.md`．
   raw export は Git 外（sha256 記録済み）．
@@ -102,7 +102,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 - Evidence: `analysis/workflow-evolution.md`（全行 Evidence 付き時系列表），`evidence/session-index/` 6 index（EV-2076・EV-0925・EV-1669・EV-0247 ほか）
 - Notes: 03 節の各主張は本 claim を経由して workflow-evolution.md / session-index の
   該当行へ解決する（本文中の `% EV-NNNN` コメントが対応行を指す）．未符号化期間の
-  事実は述べない（下界主義）．2026-07-23 夜間 freeze 分 — 朝の owner 通読での
+  事実は述べない（下界主義）．2026-07-23 夜間 freeze 分 — 朝の著者通読での
   追認対象（CLM-006 と同扱い）．
 
 ## CLM-008: 04 節（incidents）で述べる個別の incident 経緯・時刻・件数・機構の記述は，incident card INC-001〜INC-005（各 card が evidence_type と confidence を明記）に裏付けられた範囲に限る
@@ -112,7 +112,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 - Notes: 04 節の各段落は本 claim を経由して該当 card へ解決する（本文中の
   `% CLAIM: CLM-008, INC-00N` タグが対応 card を指す）．card 側で reconstructed /
   medium とされた事項は本文でも同じ強度で書く（例: INC-001 の導入セッション未特定，
-  INC-005 の累積カウンタ帰属限界）．2026-07-23 夜間 freeze 分 — 朝の owner 通読での
+  INC-005 の累積カウンタ帰属限界）．2026-07-23 夜間 freeze 分 — 朝の著者通読での
   追認対象（CLM-006/007 と同扱い）．
 
 ## CLM-009: 本 project の最終 harness は，著者の権限下で repository-local `github-driven-workflow` が GitHub Issue・専用 branch/Git worktree・GitHub PR を接続した．Issue scope，review decisions，merge authority は agent session 内だけでなく repository と GitHub の artifact に記録された．Fable は 7 月 2〜3 日に Vertex AI 経由で，これらの artifact から既存 workflow の orchestration を再開した．semantic statement review，Lean/kernel verification，public declaration preservation，VPS container の resource/liveness control，evidence capture は別の責務として扱われた
@@ -142,15 +142,15 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 - Evidence: cite:leaneval2026repo, cite:leaneval2026site
 - Notes: 2026-07-25 に issue #71 対応として `leanprover/lean-eval` README と
   `https://lean-lang.org/eval/problems/` を実読して照合した．2026-07-25 の
-  review follow-up chat で owner (`t-uda`) が本 claim を freeze するよう指示した．
+  review follow-up chat で著者（`t-uda`）が本 claim を freeze するよう指示した．
   本文では task 粒度と trusted workspace の固定だけを述べ，個別 leaderboard
   成績や repository-scale の完全形式化とは同一視しない．
 
 ## CLM-012: 記録された著者向け経路では著者が判断の権限と責任を保持し，ChatGPT は中間的な decision-support 層として再構成される（confidence: 中）．GitHub 上の記録は経路について次の 4 類のみを支持する: (1) 著者アカウントの Issue／comment 書き込みのうち `performed_via_github_app` が non-null のものは GitHub App 経由と特定できる，(2) `chatgpt-codex-connector[bot]` アカウントの Codex レビューは別主体として識別できる，(3) 著者アカウントの残る書き込みと formal review は経路を特定できない，(4) `uda-lab-agent` 等の agent アカウントの書き込みは別に扱う．いずれの類も ChatGPT の起草や独立した意思決定を証明しない
 - Status: frozen
 - Paper location: paper/sections/03-agent-workflow.tex
-- Evidence: EV-2076, EV-0925, EV-1669, EV-0247, INC-001, leray-hopf#145, leray-hopf#146, leray-hopf#158，`provenance/ai-use.md:4`（「AI は著者としない．最終判断は常に scientific owner が行う」），`AGENTS.md:24`（「AI は著者にしない」）
-- Notes: `analysis/author-interface-model.md` A2--A3 に基づく．evidence_type:
+- Evidence: EV-2076, EV-0925, EV-1669, EV-0247, INC-001, leray-hopf#145, leray-hopf#146, leray-hopf#158，`provenance/ai-use.md:4`（「AI は著者としない．最終判断は常に著者が行う」），`AGENTS.md:24`（「AI は著者にしない」）
+- Notes: `analysis/author-interface-model.md` に基づく．evidence_type:
   reconstructed，confidence: 中（ChatGPT への調査・統合・推奨・起草の帰属について．
   prompt・モデル版・session・編集履歴は復元不能）．
   **経路の 4 類は証拠が支持する区別だけを述べる**（issue #88）．`performed_via_github_app`
@@ -164,20 +164,11 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   ChatGPT App・`gh`・Web UI・PAT・他 agent のいずれかを login や文体から推論しない
   （類 3 は「不明」のまま保持する）．類 2 の bot レビューを類 1 の著者アカウント伝送に
   畳み込まない．**単一の「Connector」経路として書かない**．
-  著者の権限・責任は本リポジトリ内で検証可能な `provenance/ai-use.md:4` と
-  `AGENTS.md:24` に依る．両者は同一の役割を旧来の語 `scientific owner` で書いているが，
-  指示対象は本 claim の「著者」と同一である（issue #88 の用語正規化は append-only の
-  provenance ログを遡って書き換えない方針．PR 本文に例外として記録）．
-  `analysis/author-interface-model.md` §0 の 2026-07-25 裁定は本リポジトリ内に再導出
-  可能な記録を持たず（同 §7），`provenance/author-decisions.md` への転記可否は著者の
-  判断として保留されている．本 claim はその裁定に依拠しない．
+  著者の権限と責任は `provenance/ai-use.md:4` と `AGENTS.md:24` に依る．
   本 claim が述べるのは判断の権限と責任の所在であって，個別の書き込みに対する
   事前承認ではない．**「事前承認」は本 project で定義された概念ではなく，論文では
-  これを定義・推定・議論しない**（著者判断 2026-07-26）．connector 経路の provenance
-  解析（`analysis/connector-linkage-methodology.md`，`analysis/author-interface-model.md`
-  §8）は内部の解析結果として analysis/ と evidence/ に留め，本文には持ち込まない．
-  改訂履歴: 2026-07-25 PR #78 で本文へ binding，2026-07-26 PR #87 で
-  "owner-authorized" 表現を除去，2026-07-27 PR（issue #88）で用語を「著者」へ正規化し
-  経路 4 類へ分割．
+  これを定義・推定・議論しない**．connector 経路の linkage 解析
+  （`analysis/connector-linkage-methodology.md`）は内部の解析結果として analysis/ と
+  evidence/ に留め，本文には持ち込まない．
 
 <!-- 以降の claim は必要に応じて追加する． -->

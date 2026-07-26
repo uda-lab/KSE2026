@@ -25,7 +25,7 @@
 | 10 | release-attestation の check-axioms-live が Experimental モジュール未ビルドで失敗（P0 release-blocker）→ 翌ビルド修正で v0.1.0-rc1 発行 | 2026-07-20 | RESOURCE / RECOVERY | reconstructed（leray-hopf#185/#186）．primary は 7/20 終端セッションに含まれる可能性 | 未 |
 | 11 | lean-prover が P2（Aubin–Lions 簡約）を「数学的に unsound」と誤主張して TODO に記載 → Codex adversarial review が overstated/false と指摘 → 修正担当 prover が socket error で死亡し虚偽記述＋非コンパイル状態が残置 → orchestrator が disk 検証のうえ honest-partial へ復元 | 2026-06-16 | MATH-ERR / HANDOFF-FAIL / RECOVERY | **primary**（EV-2076 = session `74aab39b`） | 未 |
 | 12 | 長時間 lean-prover がのべ 8 回 SSL/socket/idle-timeout（13 分〜3.5h）で死亡（深夜帯ローカル回線の反復パターン）．全件 commit 前に disk 再検証で検出・隔離され FALSE-SUCCESS は 0 件 | 2026-06-16〜06-19 | RESOURCE / RECOVERY | **primary**（EV-2076） | 未 |
-| 13 | owner がチャット内で明示承認した `uda-lab` への `git push`/`gh repo create` を auto-mode safety classifier が hard-block．owner が端末で直接実行して回避（GitHub 移行 = local-only 運用の終了点での摩擦） | 2026-06-19 | MODEL-ESC / RECOVERY | **primary**（EV-2076） | 未 |
+| 13 | 著者がチャット内で明示承認した `uda-lab` への `git push`/`gh repo create` を auto-mode safety classifier が hard-block．著者が端末で直接実行して回避（GitHub 移行 = local-only 運用の終了点での摩擦） | 2026-06-19 | MODEL-ESC / RECOVERY | **primary**（EV-2076） | 未 |
 
 ### 対象外へ整理
 

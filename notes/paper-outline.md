@@ -1,7 +1,7 @@
 # Paper outline — content-first revision
 
 現在の改稿ではページ配分を固定しない．各 section は次の機能を担い，内容・論旨・
-owner review が収束した後に Phase 5.5 で6ページへ圧縮する．
+著者レビューが収束した後に Phase 5.5 で6ページへ圧縮する．
 
 | Section | Reader-facing function |
 |---|---|
@@ -28,7 +28,7 @@ owner review が収束した後に Phase 5.5 で6ページへ圧縮する．
 - [ ] double-blind か **明記なし**（≥3 reviewers とのみ記載．CMT 投稿画面で確認）
 - [ ] artifact / supplementary の提出可否 明記なし
 
-### ビルド環境の方針（owner 指示 2026-07-20）
+### ビルド環境の方針（著者指示 2026-07-20）
 
 主系は TeX Live の **pdflatex + latexmk**（IEEE 投稿パイプラインと一致）．tectonic は
 TeX Live の無い環境での draft 用 fallback．camera-ready は必ず pdflatex で生成する．

@@ -5,7 +5,7 @@
 **Formalizing Leray–Hopf in Lean 4 with AI Agents: Harness Design and Reliability Lessons**
 
 method/harness を主，incident を evidence とする content-first 改稿に合わせた提案．
-最終判断は issue #57 の PR review で owner が行う．
+最終判断は issue #57 の PR review で著者が行う．
 
 ## Abstract 草稿
 
