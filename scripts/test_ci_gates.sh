@@ -502,6 +502,78 @@ mkdir -p "$tmp/outside"
 (cd -- "$tmp/outside" && GIT_CEILING_DIRECTORIES="$tmp" bash "$guard" >/dev/null 2>&1)
 check "outside a git tree fails closed" 2 "$?"
 
+
+# --- freeze gate (issue #90) -------------------------------------------------
+# Only paper/ is editable. The gate must fail on any other tracked path, must
+# fail closed when it cannot compare, and must exempt only the bootstrap change
+# that introduces it. Without these the freeze is prose, not a gate.
+freeze="$repo/scripts/check_frozen_paths.sh"
+
+mkfreezerepo() {
+  d=$(mktemp -d) || return 2
+  git init -q -b main -- "$d" || return 2
+  mkdir -p "$d/scripts" "$d/paper" || return 2
+  printf 'x\n' >"$d/paper/main.tex"
+  printf 'y\n' >"$d/AGENTS.md"
+  ( cd -- "$d" && git add -A \
+      && git -c user.email=t@example.invalid -c user.name=t commit -qm base ) || return 2
+  printf '%s' "$d"
+}
+
+freeze_rc() {
+  ( cd -- "$1" && bash "$freeze" "${2:-main}" >/dev/null 2>&1 )
+  printf '%d' "$?"
+}
+
+# Bootstrap: the script is absent from the base, so the introducing change is
+# exempt. This must hold exactly once, never as a general escape hatch.
+d=$(mkfreezerepo)
+( cd -- "$d" && git checkout -q -b work && cp "$freeze" scripts/ \
+  && printf 'z\n' >>AGENTS.md && git add -A \
+  && git -c user.email=t@example.invalid -c user.name=t commit -qm boot ) >/dev/null 2>&1
+check "freeze gate exempts the bootstrap change" 0 "$(freeze_rc "$d")"
+
+# With the script already in the base, a frozen path must fail.
+d=$(mkfreezerepo)
+( cd -- "$d" && cp "$freeze" scripts/ && git add -A \
+  && git -c user.email=t@example.invalid -c user.name=t commit -qm install \
+  && git checkout -q -b work && printf 'z\n' >>AGENTS.md && git add -A \
+  && git -c user.email=t@example.invalid -c user.name=t commit -qm edit ) >/dev/null 2>&1
+check "freeze gate rejects a frozen path" 1 "$(freeze_rc "$d")"
+
+# A deletion outside paper/ is a change too; --diff-filter must include D.
+d=$(mkfreezerepo)
+( cd -- "$d" && cp "$freeze" scripts/ && git add -A \
+  && git -c user.email=t@example.invalid -c user.name=t commit -qm install \
+  && git checkout -q -b work && git rm -q AGENTS.md \
+  && git -c user.email=t@example.invalid -c user.name=t commit -qm del ) >/dev/null 2>&1
+check "freeze gate rejects a frozen-path deletion" 1 "$(freeze_rc "$d")"
+
+# paper/ alone must pass, or the gate blocks the only work still permitted.
+d=$(mkfreezerepo)
+( cd -- "$d" && cp "$freeze" scripts/ && git add -A \
+  && git -c user.email=t@example.invalid -c user.name=t commit -qm install \
+  && git checkout -q -b work && printf 'q\n' >>paper/main.tex && git add -A \
+  && git -c user.email=t@example.invalid -c user.name=t commit -qm paper ) >/dev/null 2>&1
+check "freeze gate admits a paper-only change" 0 "$(freeze_rc "$d")"
+
+# Fail closed: an unresolvable base must report "cannot check", not "clean".
+d=$(mkfreezerepo)
+( cd -- "$d" && cp "$freeze" scripts/ && git add -A \
+  && git -c user.email=t@example.invalid -c user.name=t commit -qm install ) >/dev/null 2>&1
+check "freeze gate fails closed on an unresolvable base" 2 "$(freeze_rc "$d" no-such-ref)"
+
+# Fail closed outside a git tree, for the same reason as the leakage guard.
+mkdir -p "$tmp/freeze-outside"
+( cd -- "$tmp/freeze-outside" && GIT_CEILING_DIRECTORIES="$tmp" bash "$freeze" >/dev/null 2>&1 )
+check "freeze gate fails closed outside a git tree" 2 "$?"
+
+# The Makefile must actually invoke it: `make integrity` has to depend on the
+# freeze target, or the gate exists but never runs in CI.
+grep -q '^integrity: .*frozen' "$repo/Makefile" \
+  && check "make integrity depends on the freeze gate" 0 0 \
+  || check "make integrity depends on the freeze gate" 0 1
+
 echo
 printf '%d passed, %d failed\n' "$pass" "$fail"
 [ "$fail" -eq 0 ]
