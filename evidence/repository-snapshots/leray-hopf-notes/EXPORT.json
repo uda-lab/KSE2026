@@ -1,20 +1,20 @@
 {
-  "repo": "uda-lab/leray-hopf",
+  "repo": "uda-lab/leray-hopf-notes",
   "private": false,
   "name_masking_active": true,
-  "head_sha_at_fetch": "8ef11145d56336239cf47664a8bc5e6f2205847a",
-  "fetched_at": "2026-07-26T09:34:18+00:00",
+  "head_sha_at_fetch": "9dc9c230b9c188d9ebc3b4721f0272dbbc6f8371",
+  "fetched_at": "2026-07-26T09:33:00+00:00",
   "tool_versions": {
     "python": "3.11.2",
     "gh": "gh version 2.92.0 (2026-04-28)"
   },
   "counts": {
-    "commits": 320,
-    "issues_and_prs": 195,
-    "comments": 442,
-    "releases": 1,
-    "tags": 1,
-    "reviews": 152
+    "commits": 170,
+    "issues_and_prs": 115,
+    "comments": 311,
+    "releases": 0,
+    "tags": 0,
+    "reviews": 183
   },
   "note": "regenerable from the source repository via `gh api` (see `private` above for who can reproduce it); emails intentionally omitted; denylisted personal names masked as <name-redacted> when private/redact-names.txt was present at export time; issues.json and comments.json carry performed_via_github_app (slug or null) and author_association as of this export \u2014 see script docstring for the lower-bound caveat on interpreting these fields. reviews.json fetched via --include-reviews: the Reviews API does NOT return performed_via_github_app, so review rows cannot be attributed to a GitHub App connector one way or the other (absence of the field is not evidence of non-connector authorship)"
 }

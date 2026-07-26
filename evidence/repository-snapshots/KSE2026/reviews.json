@@ -1,0 +1,874 @@
+[
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `0a271ca0bf`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4781275319,
+  "pr_number": 80,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-26T08:23:47Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4781277927,
+  "pr_number": 80,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-26T08:25:45Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "最新 head `b9030c8` を確認しました．Codex P1，snapshot 基準の pin，identifier field の非マスク，`name_masking_active`，selftest 追加はいずれも整合しており，CI も green です．原稿・claim への scope creep もありません．\n\n残る blocking finding は denylist の包含関係に対する置換順序です．privacy scrub が private file の並び順に依存し，部分的な個人識別情報を残したまま redaction gate が green になり得ます．下記を修正し，包含する2項目の回帰テストを追加してください．それ以外に merge blocker は見つかりませんでした．",
+  "id": 4781349580,
+  "pr_number": 80,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-26T09:12:24Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4781353144,
+  "pr_number": 80,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-26T09:14:59Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `30874af505`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4779229321,
+  "pr_number": 78,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-25T12:06:07Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `30874af505`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4779238299,
+  "pr_number": 78,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-25T12:14:58Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "Current-head review at `edb52fa`.\n\nThe metadata file is useful and technically well checked. The 1,882-character count is documented with two methods, the text is plain ASCII without LaTeX dependencies, the formalization scope is appropriately qualified, and the abstract avoids prevalence and causal-effectiveness claims. The `checks` workflow is green; no `paper` run is expected because manuscript files are untouched.\n\nOne blocking issue remains: the PR says `Closes #73`, while both the file and PR body explicitly describe the text as a draft pending final claim/Related Work stabilization, CMT-side character-counter verification, and recording of the actually submitted metadata. Those are deliverables in #73, so merge must not auto-close the issue.\n\nPlease change `Closes #73` to `Refs #73` and state that #73 remains open until the owner performs the final CMT paste/count check and the submitted title/abstract are recorded. After that metadata-only correction, this is suitable to merge as the working draft.\n\nBecause all four current PRs append to `provenance/ai-use.md`, rebase after the preceding PRs merge and rerun `make integrity`/`make lint` on the final head.",
+  "id": 4779114365,
+  "pr_number": 77,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-25T10:33:23Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "Re-reviewed at the current head. The requested PR-record correction is complete: the PR now uses `Refs #73`, explicitly leaves Issue #73 open pending the final CMT paste and CMT-side character-count verification, and no longer claims completion prematurely. The abstract remains within the 2000-character limit, is consistent with the formalization scope and current claim discipline, and avoids prevalence or causal-effectiveness overclaims. The current `checks` workflow is green. Approved for merge, subject to rebasing after earlier provenance-touching PRs and rerunning current-head CI.",
+  "id": 4779125714,
+  "pr_number": 77,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-25T10:43:52Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Independent review — PR #76 (issue #60 Wave C)\n\nHead `3225397` is byte-identical to the branch state I reviewed before this PR existed, so [the review on #60](https://github.com/uda-lab/KSE2026/issues/60#issuecomment-5077989722) applies unchanged and is restated here for PR readers, with two additional PR-level findings. This satisfies the \"independent current-head review\" the PR body defers to a follow-up comment.\n\nRe-verified in the worktree: `make verify` OK, `make lint` OK (chktex present), `make integrity` OK (76 files, 0 findings), `build/main.pdf` 6 pages at the current `\\anonymousfalse` default. `make selftest` reports `77 passed, 4 failed`, identical to `main` on this macOS checkout — pre-existing and unrelated to this branch.\n\n### PR-level\n\n**A. `Closes #60` should be removed.** The owner's 2026-07-25T08:44Z comment states the umbrella \"remains open only for residual decisions and Wave C integration\" and lists six remaining items. This PR resolves items 1 and 3 of that list; the PR body itself then enumerates six owner-only items as deferred, including the repository-citation and reproducibility decision that the issue names as a deliverable. Merging with `Closes #60` would auto-close an issue the owner scoped to stay open. Use `Refs #60`.\n\n**B. The scope statement overstates completion.** \"All required and optional items from PR #68 Wave C specification\" appears in the PR body and the commit message. Deliverables from the issue body remain undone. State the delivered subset instead; the deferred list further down already contradicts the headline.\n\n### Blocking\n\n**1. `paper/sections/04-incidents.tex` contradicts its own evidence card.** The manuscript now says \"PR~\\#170 (via ChatGPT GitHub Connector pre-review) added a statement card…\", while `evidence/incidents/INC-001.md` records the same event as \"PR #170（07:09–11:12Z，codex pre-review 経由）\", unchanged by this PR. CLM-008 binds the manuscript's incident statements to the card. Determine which channel the evidence supports and correct the other.\n\n**2. `provenance/ai-use.md` is not updated.** This is AI-produced work touching the manuscript, two incident cards, and `author-decisions.md`. AGENTS.md rule 6 requires a row recording model, scope, and date per working session.\n\n**3. Copy error in the anonymity-switch documentation.** Both comment lines now read `\\anonymousfalse`:\n\n```\n% \\anonymousfalse  : blind byline, funding acknowledgment suppressed.\n% \\anonymousfalse : named byline plus the funding acknowledgment (current).\n```\n\nThe first should be `\\anonymoustrue`.\n\n**4. Flipping the default ahead of the byline makes `main`'s PDF undistributable.** Page 1 now renders `TODO: REAL BYLINE NOT YET SUPPLIED` next to the grant number. The owner's 08:52Z decision asks that the real byline and affiliation be restored before submission; it does not ask for the default to flip first. Recording the decision in `author-decisions.md` is well supported and can land now — recommend flipping the switch in the change that supplies the byline. If the flip stays in this PR, say so explicitly in the body: `main` no longer produces a distributable PDF.\n\n### Evidence strength\n\n**5. The new INC-005 step 4 adds a causal claim the card's evidence does not carry.** \"この観察と不行使の判断は OOM 顕在化の約 70 分前であり，trigger 原因 (b) が持続した一因となった\" attributes partial causation to a decision not to act. The transcript supports the timing and content of the exchange; that the non-intervention caused the persistence is inference, and the cold build had been running since 04:00Z independently of it. The required Wave C item was to record the event as an observation followed by a decision not to act rather than as human detection — the first two clauses do that, the causal clause exceeds it, and standing constraints bar causal-effectiveness language. Drop it, or mark it reconstructed with a confidence, as the card already does for the `oom_kill=7` attribution.\n\n**6. Verbatim quotation and millisecond timestamps.** 「まぁ良いですよ．時間はあるので．」 quotes an owner utterance directly from a raw session log, and `06:28:39.808Z` / `06:30:55.545Z` are log-level precision the rest of the card does not use (it writes `07:40Z` elsewhere). `redact_check.py` passes and quoting the owner's \"status\" is precedented, but verbatim personal speech in the public area is the owner's call. Paraphrase carries the same evidential weight.\n\n**7. The INC-001 addition \"issue #158，connector 経由で作成\" has no evidence identifier.** The PR #68 review already established that the connector cannot be distinguished from direct posting on several endpoints. Attach a resolvable identifier or an explicit confidence marker.\n\n### Minor\n\n**8.** With step 4 now recording an owner status request at 06:28Z, the manuscript's \"The owner requested a status check when only 606\\,MiB remained available\" describes the second of two requests without saying so; a short qualifier prevents the reader from merging the events.\n\n**9.** The `author-decisions.md` row is faithful to the owner's 08:52Z comment, including retention of the switch. No objection to that row.\n\n### Summary\n\nA–B and 1–4 should be resolved before merge; 5 changes what the incident record asserts; 6–7 need owner confirmation rather than an edit. The substance of the Wave C corrections — the INC-005 amendment, the 07-10 timestamps, and the recorded anonymity decision — is well grounded in the owner instructions on #60.\n\nReviewed-by: independent review session, not fed the implementer's justification beyond the PR body; findings verified against the working tree, the built PDF, the evidence cards, and the issue history.",
+  "id": 4779050740,
+  "pr_number": 76,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-25T09:31:31Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4779092831,
+  "pr_number": 76,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-25T10:11:59Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Takeover review\n\nReviewed current head after the Wave C handoff. The INC-001 wording now distinguishes the formal `chatgpt-codex-connector[bot]` Review actor from the `t-uda` relay, and `paper/main.tex` keeps the anonymous default until the real byline replaces the TODO placeholder while preserving the owner's non-anonymous submission decision. The branch passed `make verify`, `make lint REQUIRE_CHKTEX=1`, `make integrity`, and `make pdf` (6 pages). `make selftest` reports 77 passed and the same 4 pre-existing macOS/APFS fixture failures as `main`. No new blocking finding; Issue #60 remains open for its deferred owner-only items.",
+  "id": 4779117109,
+  "pr_number": 76,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-25T10:36:13Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Independent review — PR #75 (issue #58 figure integration)\n\nReviewed at head `785002c` against `origin/main` (`0d1d57c`), issue #58 including the owner comments of 2026-07-24T15:56Z and 2026-07-25T08:43Z, and AGENTS.md. Local re-verification was run in the worktree: `make integrity` OK (76 files, 0 findings), `make lint` OK (chktex present), `make verify` OK, `make selftest` 81/0, `build/main.pdf` 6 pages. The gate results reproduce; the findings below are not gate failures.\n\n### Blocking\n\n**1. `provenance/ai-use.md` loses an existing record.** The diff does not append a row — it replaces the last one. The row `2026-07-25 | OpenAI Codex (GPT-5 coordinator + GPT-5.5 read-only subagents) | ... PR #69 引き継ぎ ...` is present at the merge base and absent on this branch. AGENTS.md rule 6 makes that ledger append-only in practice. Restore the deleted row and append the new one. This also collides with PR #74, which appends at the same position; whichever merges second will conflict.\n\n**2. The PR decides an open owner question.** Issue #58 comment 2026-07-25T08:43Z states that the PR #72 files \"remain draft artwork and should not be treated as final approval\", and lists as open: (1) owner selects, revises, or rejects the draft composition; (2) decide whether one or both figures enter the paper; (3) finalize caption and alternative text. This PR performs (1)–(4), renames `*-draft.{pdf,png,svg}` to paper-facing names, and says \"Closes #58\". The mechanical integration work is fine; the approval it encodes is not the PR author's to make. Recommend: keep the PR open as a candidate integration, do not close #58, and obtain explicit owner selection first.\n\n**3. The only artwork edit in this PR introduces a text collision.** `leray-hopf-agent-harness.svg` moves `as applicable` from `y=\"195\"` to `y=\"176\"`. The layer label `ISSUE-SCOPED EXECUTION` sits at `y=\"182\"` in the same band, so the two overlap. Rendering page 3 of the built PDF shows `ISSUE-SCOPED EXECUTIONapplicable`. This directly contradicts the PR body's \"no text clipping\" inspection report, and it was not present in the merged draft. Revert to `y=\"195\"` or move the label clear of the band.\n\n**4. `scripts/test_ci_gates.sh` is modified out of scope, and the modification weakens the selftest.** Issue #58 is figure integration; this file is a gate artifact, and #67/#69 already established that gate-policy changes are split out rather than carried along. Independent of scope, the change is not safe:\n\n- `check \"Private/README.md is NOT the exemption\" 1 1` asserts nothing but reports `ok`. AGENTS.md is explicit that an unreachable assertion must be reported as `skip`, not `ok`, precisely so that the pass count cannot be padded.\n- `guard_rc`'s exact index check `git ls-files -- \"$f\"` is replaced with `git ls-files | grep -i \"^<dir>/<base>\"` plus a basename-only fallback. On a case-insensitive filesystem `Private/leak.txt` is folded to `private/leak.txt` on disk, so after this change the `Private/` and `PRIVATE/` cases report `ok` while actually exercising the lowercase path that is already covered elsewhere. Three assertions stop testing case-insensitivity and still count as passes.\n- The basename-only fallback matches any tracked path with that basename, so the staging precondition the helper exists to enforce is no longer exact. Fixture names are also passed to `grep` as regexes.\n- I confirmed the underlying problem is real: on this macOS (APFS) checkout, `main` and the `issue-71` branch both report `77 passed, 4 failed`, and this branch reports `81 passed, 0 failed`. So there is a genuine portability gap — but the correct fix is to detect the case-insensitive filesystem and report those cases as `skip` with a stated reason, leaving the pass count honest, in a separate issue and PR.\n- `sed -i` → `python3 -c` interpolates `$scanner` into a single-quoted Python literal; a path containing a quote breaks it. Pass the path via `sys.argv`.\n\n**5. The PR body's conflict check is factually wrong.** It states that issue #60 \"touches only `evidence/incidents/INC-005.md` with zero TeX or manuscript file collision\". Branch `issue-60-wave-c-finalization` (`3225397`) changes `paper/main.tex`, `paper/sections/04-incidents.tex`, `analysis/workflow-evolution.md`, `evidence/incidents/INC-001.md`, `INC-005.md`, and `provenance/author-decisions.md`. There is in fact no overlap with `03-agent-workflow.tex`, so the conclusion happens to hold, but the stated basis does not. Correct the body.\n\n### Non-blocking\n\n**6. The new six-role paragraph repeats §III-A at the same granularity.** Owner authority, the Issue as unit of work, the statement card, the orchestrator, isolated worktrees, PR gating, and conditional checks are already stated in \"Owner authority and the GitHub workflow\" and \"Checks selected by artifact\", and again in the caption and the ALT comment. AGENTS.md prohibits placing the same technical enumeration at the same granularity in several places. One short sentence pointing at the figure, plus the existing subsections, is enough.\n\n**7. The artwork does not yet satisfy the figure contract in #58.** The owner comment of 2026-07-24T15:56Z asks for: `github-driven-workflow` drawn as the owner-defined governance boundary; the execution plane (two local computers plus the VPS container, shared Lean cache, global build lock, process cleanup, available-memory monitoring); and session/Issue/PR/review/build/release records flowing into the evidence manifest. The issue body additionally specifies a ten-stage lifecycle, the conditional scout and statement contract, the PR-assurance versus release-attestation boundary, and two horizontal rails. The current drawing has five boxes, one runtime rail with three items, no evidence rail, no release-attestation boundary, and no execution plane. Either revise the artwork or have the owner amend the spec before #58 is closed.\n\n**8. Terminology drift.** The drawing and the ALT text say \"Author\"; the caption, the manuscript, and the claim ledger say \"scientific owner\". Issue #60 is auditing exactly this vocabulary, so the figure should not introduce a third variant.\n\n**9. Residual draft markers.** The SVG's accessible `<title>` still reads \"Draft synthesized agent-harness architecture\" although the filename and caption now present the figure as final. The companion `author-interface-provenance-draft.*` files keep the `-draft` suffix, so the naming convention is now inconsistent within the directory.\n\n**10. Label sizes.** The SVG viewBox is `0 0 1600 650` drawn at `\\textwidth`, i.e. a scale of about 0.32. Layer labels (`20px`) land at roughly 6.5 pt and body labels (`22px`) at roughly 7.1 pt, below the 8 pt caption. The PR body's \"~7.5 pt\" is optimistic for the smallest class. Consider enlarging the layer labels.\n\n**11. Grayscale.** Semantic-feedback arrows are distinguished from flow arrows by colour (red versus dark blue) alone; the issue asks for grayscale legibility. Add a dash pattern or a differing arrowhead.\n\n**12. Redundant in-figure title.** \"Agent-harness architecture\" is drawn inside the figure and repeated by the LaTeX caption. IEEE figures normally carry no internal title.\n\n**13. Formatting and language.** The two new paragraphs are single long lines while the rest of `03-agent-workflow.tex` is hard-wrapped near 72 columns, and the new `ai-use.md` row is written in English while every other row is in Japanese. Also, the removed comment block at the top of the section recorded the CLM-007/CLM-009 binding to `analysis/workflow-evolution.md` and the session indices; that note is worth keeping.\n\n### Summary\n\nItems 1–5 should be resolved before merge, and item 2 needs an owner decision rather than an edit. The integration mechanics (float type, placement, caption, build result) are otherwise sound and the page budget holds at six pages.\n\nReviewed-by: independent review session, no access to the implementer's justification beyond the PR body; findings verified against the working tree, the rendered PDF, and the issue history.",
+  "id": 4779048742,
+  "pr_number": 75,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-25T09:28:57Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "Owner decision: accept the technical harness figure in this PR as the paper figure, with the current caption and alternative-text direction. The companion author-interface figure remains excluded. The earlier \"owner selection required\" condition is therefore resolved.\n\nThe PR may be taken out of draft and included in the conflict-resolution merge campaign. Before merge, rebase onto the latest `main`, preserve all `provenance/ai-use.md` rows, resolve any conflicts without dropping records, rerun the full repository checks and PDF build, and confirm the figure remains legible at paper scale and the manuscript remains at six pages. Subject to those integration checks, this PR is approved for merge.",
+  "id": 4779127457,
+  "pr_number": 75,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-25T10:45:41Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Independent review — PR #74 (issue #71 Lean Eval positioning)\n\nReviewed at head `ae53217` against `origin/main` (`0d1d57c`), issue #71, AGENTS.md, and the standing constraints recorded on issue #60. Local re-verification in the worktree: `make verify` OK, `make lint` OK (chktex present), `make integrity` OK (76 files, 0 findings), `build/main.pdf` 6 pages. `make selftest` reports `77 passed, 4 failed`, identical to `main` on this macOS checkout, so those failures are pre-existing and unrelated to this branch. The change is small, correctly bookkept across bib, claim ledger, and source inventory, and stays inside the requested scope. Findings below.\n\n### Should be resolved before merge\n\n**1. CLM-011 is registered with `Status: frozen` by the implementer.** The orchestration handoff on issue #60 states plainly: \"No claim has been frozen. Freezing is an owner act; new claims remain `candidate`, and `make verify` bars non-frozen claims from `paper/`.\" Because the gate rejects non-frozen claims cited from `paper/`, self-freezing is the one edit that turns that gate off for this claim. Either obtain an explicit owner freeze and cite it in the Notes field, or register the claim as `candidate` and let `make verify` hold the manuscript sentence until the owner acts. This is the most consequential item in the PR.\n\n**2. Grammar.** \"then scores whether comparator accepts the submitted solution\" is missing an article — \"whether the comparator accepts\". ChkTeX does not catch this.\n\n**3. The prose never says what Lean Eval is.** Issue #71's acceptance criteria ask the manuscript to distinguish isolated theorem-completion benchmarks from repository-level campaigns. The added sentence describes the mechanism (fixed statement, supplied dependencies, generated workspace, comparator acceptance) but never names the category, while CLM-011 does: \"theorem-completion benchmark として公開されている\". A reader meeting the name for the first time gets the machinery without the contrast the paragraph exists to draw. Naming it as a theorem-completion benchmark, in the issue's own preferred vocabulary, would close the gap at no cost in length.\n\n### Non-blocking\n\n**4. Deleted content.** The replaced sentence carried \"whose implementation, reviews, incidents, and resource use can be traced to preserved artifacts\". Traceability to preserved artifacts is a distinguishing property of this work and is only partly recovered by the earlier paragraph's \"retains evidence about its incidents and agent sessions\". Consider keeping it.\n\n**5. Over-enumeration.** The replacement lists eight components (statement control, issue-scoped decomposition, orchestration, semantic review, mechanical verification, worktree governance, runtime governance, evidence preservation, incident recovery). Contribution 2, about ten lines later, enumerates nearly the same set, and PR #75 proposes a six-role list in Section III. AGENTS.md prohibits repeating the same enumeration at the same granularity. Two or three items chosen to carry the contrast would read better and reduce the later compression burden.\n\n**6. Bibliographic attribution.** `author = {{Lean community}}` is an inference, not what the sources state: the repository lives under the `leanprover` organisation with the description \"Comparator-based Lean formal mathematics eval\", and the site is `lean-lang.org`. Since `provenance/source-inventory.md` now records both entries as verified by direct reading, the author field should record what the source actually shows rather than a generic attribution; otherwise the inventory tick asserts more than was checked.\n\n**7. The `ai-use.md` row is written in the future tense** — \"結果を PR に添える予定\" — while the PR body reports the checks as already run. The ledger should record what was done.\n\n**8. Merge-order conflict.** PR #75 rewrites the last row of `provenance/ai-use.md` at the same position where this PR appends. Whichever merges second will conflict; note also that PR #75 currently deletes an existing row there.\n\n### Summary\n\nScope discipline, citation bookkeeping, and gate results are all in order. Item 1 is a governance question rather than a technical defect, and items 2–3 are one-line edits that would satisfy the issue's acceptance criteria more directly.\n\nReviewed-by: independent review session; findings verified against the working tree, the built PDF, the issue text, and the standing constraints on #60.",
+  "id": 4779049158,
+  "pr_number": 74,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-25T09:29:24Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Takeover review\n\nReviewed current head `0763c45` against Issue #71 and the Lean Eval source and claim records. The benchmark-versus-repository campaign distinction, attribution, and owner freeze note are present. Local `make verify`, `make lint REQUIRE_CHKTEX=1`, `make integrity`, and `make pdf` (6 pages) passed; `make selftest` has 77 passed and the same 4 pre-existing macOS/APFS fixture failures as `main`. No new blocking finding.",
+  "id": 4779117747,
+  "pr_number": 74,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-25T10:36:49Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `86a3849a10`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4778715298,
+  "pr_number": 72,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-25T06:51:06Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4778724107,
+  "pr_number": 72,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-25T06:57:25Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4778724148,
+  "pr_number": 72,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-25T06:57:27Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "The latest head fixes the earlier body/diff mismatch by actually adding the prose-scanner and redaction-scope guards, and both CI workflows are green. No manuscript prose is changed. Two classes of work still need resolution before merge.\n\n### 1. Synchronize the PR record with the current head\n\nThe PR body and the only `Reviewed-by:` comment stop at `aeeb465` and describe a 16-case suite. The current head is `02af03f`, has six commits, eleven changed files, and describes a substantially larger 76-case/wiring-level suite. Update the PR body to the current implementation and record independent review evidence for the current head rather than an earlier intermediate state.\n\n### 2. Resolve the scope expansion explicitly\n\nIssue #67 is principally about the inoperative ChkTeX guard, required-check deadlocks, `merge_group`, trigger documentation, and the uppercase JSONL blind spot. The current PR additionally changes:\n\n- prose-scanner input completeness;\n- redaction-directory semantics;\n- archive, backup, and rotation suffix policy for raw logs;\n- case-insensitive and nested `private/` detection;\n- Makefile wiring mutation tests across every configured scope;\n- a large historical/postmortem expansion of `.github/workflows/README.md`.\n\nThese may be useful, but they are no longer merely repairs required by #67. Either split the additional hardening into a separately scoped follow-up issue/PR, or amend #67 explicitly and obtain owner approval for the expanded policy before merging. In particular, treating `docs/private/`, `Private/`, `.jsonl.bak`, and multi-suffix archives as forbidden is a repository-policy expansion, not just an implementation correction.\n\nThe permanent workflow README should primarily state the current operational contract. Detailed defect history, reviewer rounds, mutation experiments, and successive false claims are better retained in #67 / this PR. Please reduce the durable document accordingly, while preserving the actionable trigger, context, concurrency, retention, provisioning, and residual-gap guidance.\n\nThe owner-authorized overnight progression is not at issue here. This review is limited to current-head traceability, scope control, and maintainable documentation.",
+  "id": 4778122478,
+  "pr_number": 69,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-25T02:49:48Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "The current head is technically much cleaner: the workflow README has been reduced to the operational contract, the recovered claim-link-verifier blind spot and suffix fixtures are covered, both workflows pass, and I found no new mechanical defect in the latest changes.\n\nTwo blocking items from the previous review remain:\n\n1. Issue #67 has not been amended and no owner decision records acceptance of the expanded policy. The branch still widens the repository contract beyond #67 by rejecting case-insensitive or nested `private/` paths, backup/archive/rotation forms of JSONL, empty redaction scopes, and incomplete prose-scan inputs. Either split that hardening or obtain an explicit owner decision accepting it as part of #67.\n2. There is still no completed independent review of the current head. The salvage record explicitly says the final reviewers were killed before a verdict; the Codex bot reply is not a review, and `ad6f189` is newer than the reviewed intermediate heads.\n\nPlease keep this unmerged until the scope decision is recorded and the final head has independent review evidence.",
+  "id": 4778745165,
+  "pr_number": 69,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-25T07:04:47Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "Re-reviewed the current head and accept the scope expansion as part of #67. The additional changes are coherent fail-closed hardening of the repository's existing validation policy: scanner/redaction input completeness, nested and case-insensitive private-path detection, backup/archive raw-log suffix coverage, and mutation tests for Makefile wiring. The durable workflow documentation has been reduced to the operational contract, the PR description now matches the current 81-case implementation, current-head independent-review evidence is recorded, and both `checks` and `paper` workflows are green. No manuscript prose or research claims are changed, and no existing hard gate is weakened. Approved for merge.",
+  "id": 4778945866,
+  "pr_number": 69,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-25T08:15:30Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "The latest head materially improves the audit and both CI workflows are green. I do not see a rollback of PR #59's manuscript prose. Before merge, however, the PR record must be synchronized with the actual branch:\n\n1. The PR body still describes a 168-row ledger and 10 traces, while the current branch reports 282 ledger rows and 11 traces. It also says “Ten traces” immediately before “Eleven traces.” Update all summary counts to the current head.\n2. The owner-decision list is numbered `1, 2, 3, 6, 4, 5`. Renumber it normally.\n3. The Wave C handoff still calls the 2026-07-18 06:30:55Z event an owner “detection.” The branch's own corrected analysis explicitly says this was an observation paired with a decision not to act, and must not be recorded as human detection. Use that wording consistently.\n4. “Nothing in this PR enters `paper/`” is factually false because `paper/main.tex` changes. The intended claim appears to be that no new claim-bearing manuscript prose is introduced; state that precisely.\n5. The body says the independent-review findings are recorded in a `Reviewed-by:` PR comment, but this PR currently has no comments or formal reviews. Record the latest-head review evidence on the PR before merge.\n\nThe overnight autonomous progression and the substitute review route were owner-authorized; that confirmation is now recorded on #60. These requested changes concern only document truthfulness, current-head review evidence, and claim-strength consistency.",
+  "id": 4778121194,
+  "pr_number": 68,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-25T02:49:29Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "CI is green and the latest commit repairs the file-level accounting gap, but the previous review is not yet resolved.\n\nThe PR body still contains mutually inconsistent current-state claims: 168 versus 282 ledger rows, 10 versus 11 traces, the `1, 2, 3, 6, 4, 5` decision numbering, the Wave C description of the 06:30:55Z event as a detection, and the statement that nothing enters `paper/` despite the `paper/main.tex` change. Please synchronize the body with the actual branch.\n\nMore importantly, the branch now records a completed latest-head independent review in `provenance/ai-use.md`, while the PR salvage record states that every final-head reviewer was killed before returning a verdict. The current head is newer again. That provenance claim must be corrected, and an actual latest-head independent review must be completed and recorded before merge.",
+  "id": 4778744776,
+  "pr_number": 68,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-25T07:04:36Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4778900310,
+  "pr_number": 68,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-25T08:02:05Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "Re-reviewed the current PR state. The previously requested corrections are now reflected consistently: the ledger and trace counts match the branch, the INC-005 event is correctly described as an observation followed by a decision not to act rather than a human detection, the paper/ scope statement is precise, and current-head independent-review evidence is recorded. The anonymous/non-anonymous metadata switch preserves the current anonymous output and does not introduce claim-bearing manuscript prose. CI and documented validation are green. Approved for merge; the explicitly listed owner-decision items remain follow-up decisions and are not implicitly resolved by this approval.",
+  "id": 4778945510,
+  "pr_number": 68,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-25T08:15:18Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `7ad372c1c1`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4775911174,
+  "pr_number": 63,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T18:48:23Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4775916180,
+  "pr_number": 63,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T18:49:08Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "## Pull request overview\n\nThis PR reframes the manuscript as a harness-design case study (with incidents as evidence), and synchronizes the surrounding governance/provenance/claims tooling and CI so the new argument structure is enforceable and internally consistent.\n\n**Changes:**\n- Rewrites the paper’s front matter and Sections 1–6 to separate: formal result, harness design contract, incident analyses, and qualified recommendations/limits.\n- Updates claims/contribution mapping, planning/provenance records, and incident/session evidence text to match the new harness-led hierarchy and calibrated incident language (esp. INC-002).\n- Adds a prose-style lint script and wires it into `make lint` and the GitHub Actions build workflow.\n\n### Reviewed changes\n\nCopilot reviewed 27 out of 27 changed files in this pull request and generated 2 comments.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| scripts/check_prose_style.py | Adds a deterministic prose-style gate for a small set of objective manuscript defects. |\r\n| README.md | Updates repository overview to reflect content-first drafting followed by later 6-page compression. |\r\n| provenance/review-history.md | Records the independent prose/claim/audience review rounds and updated Phase 5 checklist. |\r\n| provenance/author-decisions.md | Logs owner decisions for the content-first rewrite, staged page constraint, and figure ownership. |\r\n| provenance/ai-use.md | Records the 2026-07-24 multi-agent drafting/review work item for provenance. |\r\n| PLAN.md | Updates the plan to a harness-led narrative, revises section outline, and adds Phase 5.5 compression stage. |\r\n| paper/sections/06-conclusion.tex | Rewrites conclusion to separate formal result from harness/incident implications and limits. |\r\n| paper/sections/05-discussion.tex | Recasts discussion into “Recommendations and Limitations” with artifact-scoped practices + evidence limits. |\r\n| paper/sections/04-incidents.tex | Rewrites incident section into invariant→incident→detection→response→lesson→evidence-strength units. |\r\n| paper/sections/03-agent-workflow.tex | Recasts workflow as an end-state harness design with artifact-conditioned assurance gates and evidence capture. |\r\n| paper/sections/02-formalization.tex | Tightens scope exposition and release-attestation framing; improves reader-facing structure/tables. |\r\n| paper/sections/01-introduction.tex | Rewrites introduction to foreground governance obligations and a 3-part contribution hierarchy. |\r\n| paper/main.tex | Updates title/abstract framing and removes drafting-only helpers to match the revised argument. |\r\n| notes/title-and-abstract.md | Updates title note and revises abstract drafting constraints consistent with content-first revision. |\r\n| notes/paper-outline.md | Updates outline from fixed page allocation to function-first structure + later compression stage. |\r\n| notes/harness-figure-spec.md | Adds the owner-drawn harness-architecture figure specification (tracked by issue #58). |\r\n| Makefile | Wires prose-style lint into `make lint` and adjusts ChkTeX invocation. |\r\n| evidence/session-index/90fa24bb-c5e4-43ff-8d27-1799177561a0.md | Updates INC-002-related wording to structural-review + diagnostic framing. |\r\n| evidence/incidents/INC-002.md | Corrects computation-honesty language and re-centers detection on structural review (numeric values diagnostic). |\r\n| claims/paper-claims.md | Updates frozen-claims set to include CLM-009 harness synthesis and refreshes paper locations/evidence notes. |\r\n| claims/formalization-scope.md | Records pinned formalization metrics and reinforces “use measured pinned values only” discipline. |\r\n| claims/contribution-map.md | Updates contribution #2 to reflect harness design separation and observed detection boundary framing. |\r\n| analysis/workflow-evolution.md | Updates workflow evolution record to match INC-002 structural-review framing. |\r\n| analysis/incident-ranking.md | Updates INC-002 description to “projection assumption missing” and diagnostic numeric corroboration wording. |\r\n| analysis/incident-candidates.md | Updates incident candidate #2 description to match INC-002 corrected framing. |\r\n| AGENTS.md | Updates manuscript rules (staged page constraint, section roles, repetition avoidance, prose lint + independent review expectations). |\r\n| .github/workflows/build.yml | Switches LaTeX lint CI step to `make lint` (bringing in prose-style gate and scoped ChkTeX). |\n</details>\n\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/KSE2026/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4769847170,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T03:12:20Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `bed2c84013`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4769851674,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T03:13:53Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4770025406,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T04:07:03Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4770025471,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T04:07:04Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4770025534,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T04:07:05Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nCopilot reviewed 27 out of 27 changed files in this pull request and generated 2 comments.\n\n\n\n\n\n",
+  "id": 4770047808,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T04:13:16Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `bd02cbf2c6`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4770081219,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T04:23:20Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4774186340,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T14:41:05Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4774186440,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T14:41:06Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4774186514,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T14:41:07Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `b4b29bdd30`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4774251797,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T14:48:50Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "## Pull request overview\n\nCopilot reviewed 27 out of 27 changed files in this pull request and generated 1 comment.\n\n\n\n\n\n",
+  "id": 4774260193,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T14:49:52Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4774324471,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T14:56:36Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4774324641,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T14:56:37Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `8e2e00a40c`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4774353952,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T14:59:27Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4774406380,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T15:05:46Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `0b35338aca`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4774434015,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T15:09:13Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4774462731,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T15:13:02Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nCopilot reviewed 29 out of 29 changed files in this pull request and generated 2 comments.\n\n\n\n\n\n",
+  "id": 4774501605,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T15:18:15Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4774568926,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T15:27:05Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4774569028,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T15:27:06Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "Independent review of the current manuscript head. The owner rewrite has substantially improved the paper's argument, structure, and prose. The following points should be addressed before approval.\n\n1. **Correct the Vlasov comparison.** The cited Miller work concerns the nonlinear Vlasov equation, not a linear kinetic Vlasov equation. Please correct the Introduction and the corresponding related-work and claim records. This also affects how the novelty comparison is framed.\n\n2. **Narrow the novelty claim.** The present claim about all machine-checked existence theory for nonlinear fluid PDEs is broader than necessary and difficult to support through a finite survey. State the novelty in terms of the specific result, preferably a prior machine-checked Leray--Hopf weak-existence theorem for the three-dimensional Navier--Stokes equations, or another comparably precise class. Ordinary `To our knowledge` wording is sufficient; do not add procedural survey-provenance prose to the manuscript.\n\n3. **Mark Section III as an end-state synthesis.** The section currently reads too easily as if the complete harness had governed the whole six-week campaign. In fact, several controls were introduced incrementally, often after the incidents discussed in Section IV. One compact sentence near the opening of Section III should state this. There is no need to repeat the qualification throughout the paper.\n\n4. **Correct the cost and time terminology.** `a cost of $6,973 at published API rates` is not an actual billed cost. Use ordinary wording such as `an estimated cost of $6,973 at published API prices`. Likewise, `199.1 h of active engagement` can be read as human labour; use `active session time` or another accurate term and retain the five-minute gap rule.\n\n5. **Make the following local terminology and prose corrections.**\n   - Prefer `unforced Navier--Stokes equations` to `homogeneous Navier--Stokes equations` unless the latter is explicitly defined.\n   - Replace `the three standard Lean kernel axioms` with wording tied directly to the reported result, for example `the three axioms reported by #print axioms`.\n   - Replace `Projects at comparable organizational scale` with a claim that does not assert an unmeasured scale comparison, such as `Large collaborative formalization projects provide another comparison`.\n   - In the refactoring incident, use `did not reveal the omission`, not `could not reveal the omission`, unless impossibility is intended.\n   - Replace `Fable treated a slow agent as dead` with neutral technical wording such as `the orchestrator misclassified a slow agent as inactive`.\n\n6. **Make repository PR references resolvable without repeating the repository name.** Cite the leray-hopf repository once, then concise forms such as `PR #27 [n]` are sufficient. The current bare PR numbers should be connected to that reference.\n\n7. **Update the PR description.** It still names `e5116e6` as the current head, whereas this review is anchored to `a4d3350`.\n\nThe separated-test-function scope is already stated clearly in Section II; I am not requesting that limitation be repeated in every summary section. Questions concerning `scientific owner`, ChatGPT and GitHub Connector mediation, the final paper-repository reference, and submission anonymity require a broader audit and have been separated into follow-up issue #60.",
+  "id": 4775200029,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T17:03:54Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "The seven substantive points from the previous review are addressed at the current head, and CI is green. Two minor residual edits remain before owner approval.",
+  "id": 4775335214,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T17:24:32Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Review summary\n\nVerified locally in a clean worktree at `fe6a94c`:\n\n- `make verify` — pass (10/10 frozen claims, 14 verified citations, 2,145 EV ids)\n- `make lint` python stages — pass (5 regression tests + prose gate)\n- All eight PR numbers cited in prose (`#27 #120 #158 #162 #170 #174 #175 #176`) resolve against `evidence/repository-snapshots/leray-hopf/issues.json` and match their incident cards\n- INC-005 figures in §IV (3.42 GiB ceiling, 606 MiB → 2.2 GiB, 14 chains, ~1–1.5 GB) match the card exactly\n\nThis is high-quality work. The `cite:<bibkey>` verifier (resolution against `references.bib` *and* the verified mark in `source-inventory.md`), the fail-closed evidence-token check, ChkTeX promoted from `|| true` to a hard gate, and the mathematical corrections (Vlasov reclassified as nonlinear; novelty narrowed to Leray–Hopf weak existence for 3D Navier–Stokes) are all the right calls. Findings below, ordered by severity.\n\n---\n\n## Should fix\n\n### 1. `scan_lines` fails open — the listing state machine can desync and silently disable the gate for the rest of the file\n\n`scripts/check_prose_style.py:56` — `strip_comment()` runs *before* listing segmentation, but inside `lstlisting` a `%` is a literal character, not a comment. A listing body line containing `%` before an inline `\\end{lstlisting}` loses its end delimiter, so the scanner never leaves listing mode:\n\n```python\nscan_lines([r'\\begin{lstlisting}',\n            r'let r := n % 2 \\end{lstlisting}',\n            'This has no more supporting detail.'])\n# -> []          (expected: [(3, 'casual scope phrase')])\n```\n\n`%` is Lean's modulo operator and the paper embeds Lean listings, so this is reachable. Note that the segmentation machinery was added precisely because an earlier review found a comment-based bypass — this reintroduces the same class of defect.\n\nFix: detect the listing delimiters on the raw line and comment-strip only the prose segments (i.e. do not `strip_comment` while `in_listing`).\n\n### 2. §II.C now attributes the axiom check to continuous integration\n\n`paper/sections/02-formalization.tex:118`:\n\n> Continuous integration checks this list and rejects `sorry` or project axioms reachable through the public root import.\n\nThe previous draft deliberately separated (a) the buildless import-closure guardrail that runs on every PR from (b) the full `lake build` with the *live* axiom pin, run manually and recorded as a release-candidate attestation for one SHA — and stated explicitly that kernel-only status is \"not inferred from a continuously green push-triggered build.\" CLM-001's own Notes pin the evidence to release-attestation run `29714844283` against exact SHA `7c15710a`.\n\nCollapsing both into a single \"continuous integration\" sentence is a claim-precision regression against the AGENTS.md over-claiming rule. Recommend restoring one clause that distinguishes the per-PR guardrail from the release attestation.\n\n### 3. Removing the PR #177 recurrence removes the manuscript's only recorded guardrail failure-to-stick\n\nBoth §IV and §V previously reported that a documentation-only PR was merged with no independent review **two days after** the postmortem that mandated it. INC-001's card records this explicitly as a demonstrated loophole (`再発可能性 … 実証済みの抜け穴あり`) and carries it in its own generalisable lesson. It now appears nowhere in the manuscript (`grep -rn 177 paper/` → no hits), while `provenance/review-history.md` ticks `[x] 失敗例を都合よく選択していないか`.\n\nThis is not a blanket compression decision — the structurally analogous same-afternoon second OOM episode was kept in §V. Recommend either restoring one sentence in the Case A lesson, or recording the omission as an explicit scientific-owner decision in `provenance/author-decisions.md`.\n\n---\n\n## Consider\n\n### 4. Claim-ledger `Paper location` drift on 7 of 10 claims\n\n`verify_claim_links.py` does not check this field, and it is now stale:\n\n| Claim | In text but not in ledger |\n|---|---|\n| CLM-002, CLM-003 | `main.tex`, `01-introduction.tex` |\n| CLM-004 | `main.tex` |\n| CLM-005 | `03-agent-workflow.tex` |\n| CLM-007 | `05-discussion.tex` |\n| CLM-008 | `01-introduction.tex`, `05-discussion.tex` |\n| CLM-009 | ledger lists `main.tex`, but no resolvable reference exists there |\n\nThe CLM-009 row is the notable one: `main.tex:63` writes the shorthand `CLM-007/009`, and the verifier's `CLM-\\d{3}` matches only `CLM-007`. Same for `CLM-004/005` on line 62. So two abstract-map claims silently bypass the frozen-claim gate. Recommend writing them out (`CLM-007, CLM-009`), and adding a cheap ledger-location check to `verify_claim_links.py` to prevent recurrence.\n\n### 5. Abstract claims map is stale\n\n`main.tex:61` still lists `CLM-002 (scale, lower bounds)`, but the abstract no longer carries any scale figure — the 15.1M-token / 199.1 h numbers moved to §III, leaving only \"six weeks of development.\"\n\n### 6. The introduction's paper map drops Section VI\n\n`01-introduction.tex:71-74` walks §II–§V and stops; `\\label{sec:conclusion}` is now unreferenced. AGENTS.md assigns the paper map to the introduction.\n\n### 7. Two `~\\cite` at line start render a double space\n\n`01-introduction.tex:35` and `:44`. The preceding newline already produces a space, so `Experiment~\\cite{…}` renders as `Experiment  [4]`. Join to the previous line.\n\n### 8. `make lint` silently skips ChkTeX when chktex is absent\n\nCI installs `chktex`, so the gate holds there. But `ifdef CHKTEX … @echo \"chktex not installed; skipping\"` means a local `make lint` prints success with the LaTeX lint never run — I hit exactly this in a clean container. Consider a `STRICT=1` / `CI` variable that turns the skip into an error, so \"lint passed\" means the same thing everywhere.\n\n### 9. The prose blacklist has no escape hatch\n\n`\\btrajectory\\b`, `\\bno more\\b`, and `\\bevidence strength\\b` are banned globally and case-insensitively. \"Trajectory\" is standard terminology for a Galerkin ODE solution and \"no more than\" is ordinary English; both are plausible future false positives with no per-line opt-out. Suggest a `% prose-style: allow` line suppression, plus a header note that these are owner-mandated word bans rather than general style rules.\n\n### 10. The evidence-token check only inspects the first physical line\n\n`scripts/verify_claim_links.py:151` — `^- Evidence:\\s*(\\S.*)$`. A claim whose only identifiers sit on a continuation line would fail spuriously. CLM-006 passes only because `cite:armstrong…` happens to land on the first line. Fail-closed, so harmless today, but the error message would be misleading.\n\n### 11. Dead macro\n\n`\\todo` was removed, but `\\evref` (`main.tex:32`) is now defined and used nowhere.\n\n---\n\n## Checked and clear\n\n- The `cite:<verified-bibkey>` template line in `paper-claims.md` does not trip `CITE_RE` (the `<` terminates the character class) — no false positive.\n- `VERIFIED_BIB_RE` matches only the bibliography table in `source-inventory.md`; the host and GitHub-evidence tables do not match the single-token-first-cell pattern.\n- `python3 -m unittest scripts.test_check_prose_style` works without `scripts/__init__.py` via namespace packages, given `make` runs from the repository root.\n- Disabling ChkTeX 8/9/12/13/17/36 is justified in-comment and reasonable for an IEEE mathematics paper; the loss of dash-length checking is partially covered by the new prose gate.\n- No security or performance concerns. The redaction and raw-log CI steps are unchanged.\n\n---\n\n## Merge posture\n\nThe PR body correctly states this remains a proposal awaiting scientific-owner approval. I would treat items 1–3 as blocking that approval: (1) is a genuine fail-open in a gate added specifically to close a bypass, and (2)–(3) are claim-strength regressions in a project whose AGENTS.md rule 4 and PLAN.md Phase 5 checklist exist to catch exactly those.\n\n<sub>Reviewed with Claude Code (Opus 5) at the repository owner's request. Findings 1, 4, and the PR-number/incident-card cross-checks were verified by execution in a clean worktree at `fe6a94c`.</sub>\n",
+  "id": 4775405553,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T17:35:14Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "## Owner approval\n\nFinal owner review completed at head `a81d3ed`. The remaining Section II scope correction is implemented, the two residual inline threads are resolved, and the owner-approved review scope has no remaining findings.\n\n**Owner-approved for merge.**\n\nGitHub does not permit the PR author to submit a formal `APPROVE` review on their own pull request; this review records the equivalent owner decision.",
+  "id": 4775689428,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-24T18:15:34Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `520696d8da`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4757369253,
+  "pr_number": 56,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T18:11:41Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4757853553,
+  "pr_number": 56,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T19:08:02Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4757853834,
+  "pr_number": 56,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T19:08:03Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `88ef554c8d`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4757256200,
+  "pr_number": 54,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T18:00:26Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4757265442,
+  "pr_number": 54,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T18:01:35Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `4dfd0c96ad`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4757158050,
+  "pr_number": 52,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T17:50:27Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4757182496,
+  "pr_number": 52,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T17:52:44Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4757182850,
+  "pr_number": 52,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T17:52:46Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `62f41babb6`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4757060138,
+  "pr_number": 50,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T17:37:39Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4757066960,
+  "pr_number": 50,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T17:38:30Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4757067150,
+  "pr_number": 50,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T17:38:32Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `13518cd5b5`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4756993107,
+  "pr_number": 48,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T17:29:15Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4757014493,
+  "pr_number": 48,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T17:31:52Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4757014752,
+  "pr_number": 48,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T17:31:54Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `903292e01c`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4756864414,
+  "pr_number": 44,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T17:12:05Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4756897921,
+  "pr_number": 44,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T17:16:43Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4756898100,
+  "pr_number": 44,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T17:16:45Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4756900019,
+  "pr_number": 44,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T17:17:01Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `58c13b7a67`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4756588398,
+  "pr_number": 41,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T16:37:00Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4756594286,
+  "pr_number": 41,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T16:37:51Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `d8b4c17249`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4756079125,
+  "pr_number": 32,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T15:36:28Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4756087621,
+  "pr_number": 32,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T15:37:31Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `68fbbe2618`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4755948921,
+  "pr_number": 30,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T15:21:07Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `bfb692a438`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4754864851,
+  "pr_number": 29,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T13:32:33Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4754892467,
+  "pr_number": 29,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T13:35:18Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `f32a020d5b`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4754368592,
+  "pr_number": 27,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T12:39:24Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `8656915137`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4753399189,
+  "pr_number": 22,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T10:23:48Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "## Pull request overview\n\nPhase 2 の成果物として、GitHub 証跡（commits / issues / PRs）と escrow 済みセッションログを統合した開発タイムラインを作成し、優先 3 セッションの符号化と incident 候補一覧の更新を行う PR です。\n\n**Changes:**\n- `analysis/project-timeline.md` にキャンペーン区分（C0〜C4）と日次集計（commit/issue/PR/sessions 終端 proxy）を追加\n- `evidence/session-index/` に 3 セッション（`74aab39b` / `90fa24bb` / `7e6156bf`）の符号化記録を新規追加\n- `analysis/incident-candidates.md` と `analysis/unresolved-questions.md` を Phase 2 の調査状況に合わせて更新し、`provenance/ai-use.md` に作業記録を追記\n\n### Reviewed changes\n\nCopilot reviewed 7 out of 7 changed files in this pull request and generated 3 comments.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| provenance/ai-use.md | Phase 2 timeline 構築・セッション符号化・incident 整理に関する AI 関与ログを追記 |\r\n| evidence/session-index/90fa24bb-c5e4-43ff-8d27-1799177561a0.md | vps セッション（6/20〜6/29）のイベント列・根拠・成果を符号化として新規追加 |\r\n| evidence/session-index/7e6156bf-4a4b-40e2-aa46-95822f4d9aa7.md | local-main セッション（7/9〜7/10）のイベント列・成果（リファクタ PR 群）を符号化として新規追加 |\r\n| evidence/session-index/74aab39b-4afe-44f7-a15c-72653b46a1b8.md | local-secondary 初期セッション（6/15〜6/20）のイベント列・成果・evidence 範囲を符号化として新規追加 |\r\n| analysis/unresolved-questions.md | 三環境ログ所在の質問を closed に移動し、欠損期間など未解決項目を更新 |\r\n| analysis/project-timeline.md | キャンペーン区分と日次集計を含む統合タイムラインを新規拡充 |\r\n| analysis/incident-candidates.md | incident 候補を表形式で整理し、各候補の一次資料有無（primary/reconstructed）を明示 |\n</details>\n\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/KSE2026/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4751308767,
+  "pr_number": 20,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T05:39:13Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "## Pull request overview\n\nManifest 登録済みの escrow Claude Code JSONL から `message.usage` を集計し、モデル別・日次・host 別のトークン消費／API 換算コストと、セッションの wall-clock／active 時間（gap 閾値感度分析）を再現可能に出力するための一式を追加する PR です。\n\n**Changes:**\n- `scripts/extract_usage.py` を追加し、`message.id`（fallback `requestId`）での全域 dedup + 集計 + 価格表内蔵の API 換算 + gap 閾値（1/5/15 分）での active 時間算出を実装\n- 集計結果 JSON（`evidence/metrics/usage-metrics.json`）と方法論ノート（`analysis/usage-metrics-methodology.md`）を追加\n- paper claim（CLM-002）と AI 利用ログ（`provenance/ai-use.md`）を追記\n\n### Reviewed changes\n\nCopilot reviewed 5 out of 5 changed files in this pull request and generated 2 comments.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| scripts/extract_usage.py | escrow JSONL を走査して usage/cost/time を集計し JSON 出力する集計スクリプトを追加 |\r\n| evidence/metrics/usage-metrics.json | 集計スクリプトの実行結果（usage/cost/time の集計値）を追加 |\r\n| analysis/usage-metrics-methodology.md | 集計定義・PoC 差分・既知のカバレッジ欠損（下界）などの方法論を文書化 |\r\n| claims/paper-claims.md | usage メトリクスに基づく CLM-002（candidate）を追加 |\r\n| provenance/ai-use.md | 本作業（usage 集計・文書・claim 追記）の AI 関与を追記 |\n</details>\n\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/KSE2026/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4751250162,
+  "pr_number": 19,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T05:24:51Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "## Pull request overview\n\nThis PR documents verification of the 2026-07-10 VPS snapshot backup against the existing VPS escrow, concluding there was no recoverable missing session data for the targeted early period (negative result), and updates Phase 1 analysis tracking accordingly.\n\n**Changes:**\n- Added a new verification report (`analysis/vps-snapshot-20260710-verification.md`) detailing the comparison method, evidence (sha256/mtime/history), and resulting coverage conclusions.\n- Updated `analysis/unresolved-questions.md` to narrow the true session-log gap to 2026-06-10〜06-14 and to close related questions with a pointer to the verification report.\n- Registered the meta-incident candidate and recorded AI involvement for this work item.\n\n### Reviewed changes\n\nCopilot reviewed 4 out of 4 changed files in this pull request and generated no comments.\n\n| File | Description |\n| ---- | ----------- |\n| analysis/vps-snapshot-20260710-verification.md | New write-up of VPS snapshot backup verification and the resulting “no recovery target” conclusion. |\n| analysis/unresolved-questions.md | Updates open/closed questions to reflect the verified gap window and links to the verification report. |\n| analysis/incident-candidates.md | Adds a LOSS/RECOVERY meta-incident candidate for cleanup/rotation-related record loss and partial recovery attempts. |\n| provenance/ai-use.md | Appends an entry recording AI involvement for this verification work item. |\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/KSE2026/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4751214855,
+  "pr_number": 18,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T05:16:20Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "## Pull request overview\n\nPhase 1 の最終ホスト `local-secondary` の escrow を `evidence/manifest.csv` に登録し、収集状況・AI 関与の証跡を provenance に反映する PR です（EV-1681〜EV-2126 を追加して三環境の直列登録を完了）。\n\n**Changes:**\n- `local-secondary` 分 446 件を `evidence/manifest.csv` に EV-1681〜EV-2126 として追記\n- `provenance/source-inventory.md` の `local-secondary` 行を収集済/登録済に更新\n- `provenance/ai-use.md` に本作業の AI 関与記録を追記\n\n### Reviewed changes\n\nCopilot reviewed 2 out of 3 changed files in this pull request and generated 1 comment.\n\n| File | Description |\n| ---- | ----------- |\n| provenance/source-inventory.md | local-secondary の収集/登録状況と概要を台帳に反映 |\n| provenance/ai-use.md | AI 関与ログに local-secondary 登録作業を追記 |\n| evidence/manifest.csv | EV-1681〜EV-2126（local-secondary）を追加して証拠 manifest を拡張 |\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/KSE2026/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4751181576,
+  "pr_number": 17,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-22T05:09:10Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "## Pull request overview\n\nThis PR implements Phase 2 evidence collection by adding a reproducible GitHub export script for `uda-lab/leray-hopf`, storing the resulting snapshot under `evidence/repository-snapshots/`, and extending the timeline builder to consume commit snapshots without a local checkout.\n\n**Changes:**\n- Add `scripts/export_repo_snapshot.py` to export commits/issues/comments/releases/tags + `EXPORT.json` metadata.\n- Extend `scripts/build_timeline.py` to optionally read commits from a snapshot JSONL (`--commits-jsonl`).\n- Update `scripts/redact_check.py` allowlist to include the former public repo names (`lean-pde*`) that redirect to `leray-hopf*`.\n\n### Reviewed changes\n\nCopilot reviewed 6 out of 9 changed files in this pull request and generated 6 comments.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| scripts/redact_check.py | Expands the public GitHub repo allowlist to include former public repo names with redirects. |\r\n| scripts/export_repo_snapshot.py | New stdlib+`gh` CLI exporter producing reproducible repository snapshot artifacts and metadata. |\r\n| scripts/build_timeline.py | Adds snapshot-backed commit ingestion option for timeline generation without local repo checkout. |\r\n| evidence/repository-snapshots/leray-hopf/tags.jsonl | Captured tag snapshot output. |\r\n| evidence/repository-snapshots/leray-hopf/releases.jsonl | Captured release snapshot output. |\r\n| evidence/repository-snapshots/leray-hopf/EXPORT.json | Captured export metadata (counts, fetch time, HEAD). |\r\n| evidence/repository-snapshots/leray-hopf/commits.jsonl | Captured commit history snapshot output. |\n</details>\n\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/KSE2026/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4736707751,
+  "pr_number": 13,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T16:10:13Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4736768137,
+  "pr_number": 13,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T16:17:49Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4736768404,
+  "pr_number": 13,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T16:17:51Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4736768581,
+  "pr_number": 13,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T16:17:52Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4736768764,
+  "pr_number": 13,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T16:17:53Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4736768948,
+  "pr_number": 13,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T16:17:55Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4736769094,
+  "pr_number": 13,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T16:17:56Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "## Pull request overview\n\nPhase 1（evidence preservation）の一環として、host `local-main` のセッションログ escrow から抽出したファイル群を `EV-1634..EV-1680` として manifest 登録し、収集状況の台帳と AI 利用ログを更新する PR です（#4 をクローズ）。\n\n**Changes:**\n- `evidence/manifest.csv` に `local-main` 分（EV-1634〜EV-1680）を追記\n- `provenance/source-inventory.md` で host 割当て変更と `local-main` の収集完了を反映\n- `provenance/ai-use.md` に今回の作業に関する AI 関与記録を追記\n\n### Reviewed changes\n\nCopilot reviewed 3 out of 3 changed files in this pull request and generated 1 comment.\n\n| File | Description |\n| ---- | ----------- |\n| provenance/source-inventory.md | local-main の収集状況と host 割当て注記を更新 |\n| provenance/ai-use.md | Phase 1 作業に関する AI 利用記録を追記 |\n| evidence/manifest.csv | local-main 由来の evidence 行（EV-1634..EV-1680）を追加 |\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/KSE2026/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4736629879,
+  "pr_number": 11,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T15:59:50Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4736634893,
+  "pr_number": 11,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T16:00:26Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "## Pull request overview\n\nraw escrow の実体を host bind-mount `/private/sources/KSE2026/raw-sessions/`（コンテナ内 read-only）へ移設しつつ、リポジトリ側の `private/raw-sessions` を symlink として運用できるようにするための変更です。`inventory_sessions.py` のパスガードを「symlink を保持した論理パス基準」に寄せ、公開 manifest の relpath がホスト依存パスにならない運用を補強します。\n\n**Changes:**\n- `scripts/inventory_sessions.py` の fail-closed ガードを resolve ベースから論理パス比較（`abspath`）へ変更\n- `private/README.md` に新しい物理レイアウト（sources=ro / derived=rw）と転送方針を追記\n\n### Reviewed changes\n\nCopilot reviewed 2 out of 2 changed files in this pull request and generated 2 comments.\n\n| File | Description |\n| ---- | ----------- |\n| scripts/inventory_sessions.py | raw-sessions の symlink 運用を前提に、インベントリ対象ディレクトリの許可/拒否ロジックを更新 |\n| private/README.md | `/private/sources` と `/private/derived` を使う新レイアウトと運用手順を文書化 |\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/KSE2026/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4736573113,
+  "pr_number": 10,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T15:52:39Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4736584116,
+  "pr_number": 10,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T15:54:10Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4736584267,
+  "pr_number": 10,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T15:54:12Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "## Pull request overview\n\nPhase 1 の local-main（自宅ノートPC）由来の Claude Code 関連ログを、公開領域には raw を入れずに **manifest（EV-1634〜EV-1679）と inventory 記述のみ**で登録し、収集状況の台帳を更新する PR。\n\n**Changes:**\n- `evidence/manifest.csv` に local-main 分の 46 ファイル（EV-1634〜EV-1679）を追記\n- `provenance/source-inventory.md` の local-main を収集済みに更新し、host 割当て入替え注記を追加\n\n### Reviewed changes\n\nCopilot reviewed 2 out of 2 changed files in this pull request and generated 2 comments.\n\n| File | Description |\n| ---- | ----------- |\n| evidence/manifest.csv | local-main の収集ファイルを EV 連番で登録（EV-1634〜EV-1679） |\n| provenance/source-inventory.md | local-main を収集済みにし、想定所在と備考（欠損含む）・host 入替え注記を更新 |\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/KSE2026/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4736351352,
+  "pr_number": 8,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T15:24:50Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4736372362,
+  "pr_number": 8,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T15:27:19Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4736372572,
+  "pr_number": 8,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T15:27:21Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nVPS devcontainer 上で収集したセッションログ群を Phase 1 として inventory 化し、evidence manifest に EV-0001〜EV-1633 を登録したことを台帳へ反映するPRです（vps → local-main → local-secondary の直列登録ルールの先頭ステップ）。\n\n**Changes:**\n- `provenance/source-inventory.md` の「vps」行を収集済（EV-0001〜EV-1633）として更新\n- （PR説明の通り）`evidence/manifest.csv` に vps ホスト分の EV-0001〜EV-1633 を登録\n\n### Reviewed changes\n\nCopilot reviewed 1 out of 2 changed files in this pull request and generated 1 comment.\n\n| File | Description |\n| ---- | ----------- |\n| provenance/source-inventory.md | vps の収集状況・EV 範囲・概要を inventory 台帳へ反映 |\n| evidence/manifest.csv | vps セッションログ等を EV-0001〜EV-1633 として manifest 登録 |\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/KSE2026/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4735103632,
+  "pr_number": 7,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T12:57:13Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4735109898,
+  "pr_number": 7,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T12:58:06Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "## Pull request overview\n\nPhase 0 の scaffold として、論文作業リポジトリの基本構造（原稿・claims・evidence・analysis・provenance・private 分離）と、検証/ビルド/ガードレール用の最小ツール群・CI を導入する PR。\n\n**Changes:**\n- LaTeX（IEEEtran conference）骨格とセクション分割、Makefile による `make pdf/lint/verify` を追加\n- claims/evidence/provenance/analysis/notes のテンプレート・台帳を追加し、参照 commit の pinned を明文化\n- Python 標準ライブラリのみの証跡ツール（inventory/normalize/dedup/redact-check/timeline/metrics/claim-link verify）と CI ワークフローを追加\n\n### Reviewed changes\n\nCopilot reviewed 42 out of 48 changed files in this pull request and generated 8 comments.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| scripts/verify_claim_links.py | claims/analysis/paper/notes の EV/INC/CLM 参照解決を検査するスクリプトを追加 |\r\n| scripts/redact_check.py | 公開領域に置けない情報（secret/email/非許可 repo URL/個人名）検出スクリプトを追加 |\r\n| scripts/normalize_sessions.py | raw セッション JSONL を分析向けに正規化するスクリプトを追加 |\r\n| scripts/inventory_sessions.py | raw ファイルを evidence/manifest.csv に登録（hash/メタデータ）するスクリプトを追加 |\r\n| scripts/extract_metrics.py | pinned commit の leray-hopf から規模メトリクスを抽出して evidence/metrics に出力 |\r\n| scripts/deduplicate_sessions.py | manifest から重複/分割セッションを検出するレポートスクリプトを追加 |\r\n| scripts/build_timeline.py | manifest + leray-hopf git log を統合した timeline を生成するスクリプトを追加 |\r\n| .github/workflows/build.yml | claim-link 検査、chktex（informational）、raw ログ混入ガード、PDF artifact 生成を追加 |\r\n| Makefile | `make pdf/lint/verify/clean` を追加（tectonic 優先・latexmk fallback） |\r\n| README.md | pinned reference、ビルド手順、ディレクトリ説明、証拠識別子規約、Phase 状況を追記 |\r\n| PLAN.md | Phase 0–6 の計画・規約・役割・完了条件を文書化 |\r\n| AGENTS.md | raw ログ非追跡、redaction、evidence 紐付け等の作業規約を追加 |\r\n| paper/main.tex | IEEEtran ベースの main、section 分割、draft helper を追加 |\r\n| paper/sections/01-introduction.tex | Introduction セクション雛形を追加 |\r\n| paper/sections/02-formalization.tex | Formalization セクション雛形を追加 |\r\n| paper/sections/03-agent-workflow.tex | Workflow セクション雛形を追加 |\r\n| paper/sections/04-incidents.tex | Incidents セクション雛形を追加 |\r\n| paper/sections/05-discussion.tex | Discussion/Limits セクション雛形を追加 |\r\n| paper/sections/06-conclusion.tex | Conclusion セクション雛形を追加 |\r\n| paper/references.bib | 参考文献の初期エントリを追加 |\r\n| paper/figures/.gitkeep | figures ディレクトリ保持 |\r\n| paper/tables/.gitkeep | tables ディレクトリ保持 |\r\n| claims/paper-claims.md | CLM 台帳（CLM-001 追加）と Evidence 記入フォーマットを追加 |\r\n| claims/formalization-scope.md | pinned commit に基づく「主張してよい範囲/してはならない範囲」を追加 |\r\n| claims/contribution-map.md | contribution（3点以内）整理テンプレートを追加 |\r\n| claims/limitations.md | limitations 事前登録テンプレートを追加 |\r\n| evidence/README.md | evidence/ 配下の目的・運用（redaction/再生成可能性）を明文化 |\r\n| evidence/manifest.csv | manifest ヘッダ行を追加 |\r\n| evidence/incidents/TEMPLATE.md | incident card テンプレートを追加 |\r\n| evidence/metrics/.gitkeep | metrics ディレクトリ保持 |\r\n| evidence/redacted-excerpts/.gitkeep | redacted-excerpts ディレクトリ保持 |\r\n| evidence/repository-snapshots/.gitkeep | repository-snapshots ディレクトリ保持 |\r\n| evidence/session-index/.gitkeep | session-index ディレクトリ保持 |\r\n| analysis/project-timeline.md | timeline 記入テンプレートを追加 |\r\n| analysis/session-coding-schema.md | session 符号化スキーマを追加 |\r\n| analysis/incident-candidates.md | incident 候補の受け皿テンプレートを追加 |\r\n| analysis/incident-ranking.md | incident ranking テンプレートを追加 |\r\n| analysis/workflow-evolution.md | workflow 変遷記録テンプレートを追加 |\r\n| analysis/unresolved-questions.md | 未解決事項テンプレートを追加 |\r\n| provenance/ai-use.md | AI 利用記録テンプレート + Phase 0 記録を追加 |\r\n| provenance/source-inventory.md | 資料台帳テンプレートを追加 |\r\n| provenance/author-decisions.md | scientific owner 判断の記録テンプレートを追加 |\r\n| provenance/review-history.md | 内部レビュー履歴テンプレートを追加 |\r\n| notes/title-and-abstract.md | タイトル/abstract 作業メモテンプレートを追加 |\r\n| notes/paper-outline.md | ページ配分/CFP 確認事項テンプレートを追加 |\r\n| notes/related-work.md | 関連研究調査メモテンプレートを追加 |\r\n| notes/reviewer-questions.md | 想定質問の整理テンプレートを追加 |\r\n| private/README.md | private/ の運用規約（raw 保存/正規化/redaction/禁止事項）を追加 |\n</details>\n\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/KSE2026/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4734795305,
+  "pr_number": 1,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T12:13:57Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4734896473,
+  "pr_number": 1,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T12:29:10Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4734896662,
+  "pr_number": 1,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T12:29:12Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4734896816,
+  "pr_number": 1,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T12:29:13Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4734896980,
+  "pr_number": 1,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T12:29:15Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4734897212,
+  "pr_number": 1,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T12:29:16Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4734897383,
+  "pr_number": 1,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T12:29:18Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4734897569,
+  "pr_number": 1,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T12:29:19Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4734897738,
+  "pr_number": 1,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T12:29:20Z",
+  "user_login": "uda-lab-agent"
+ }
+]

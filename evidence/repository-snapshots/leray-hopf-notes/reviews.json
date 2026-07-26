@@ -1,0 +1,1466 @@
+[
+ {
+  "body": "全体の設計は概ね妥当で，現在の CI artifact も PIN 一致・1339/1339 source・サイズ予算内まで確認できました．ただし，公開用の fail-closed gate としては以下を修正してください．\n\n## 1. `sources.json` 検証が fail-open\n\n`check_source_coverage()` は，`sources = sources.get('sources')` が辞書の場合にだけ実エントリ数を検査しています．そのため，`sources` フィールドが欠落している場合や非辞書の場合でも，宣言された `source_count` だけが一致すれば成功します．実際，現在の正常系テストも `sources` フィールドを含まない JSON を成功例にしています．\n\n少なくとも次を必須条件として fail closed にしてください．\n\n- `sources.json[\"sources\"]` が辞書であること\n- `len(sources) == sources.json.source_count == nodes.json.source_count == nodes.json.decl_count`\n- `nodes.json[\"nodes\"]` が配列であり，その実数が `decl_count` と一致すること\n- `has_source: true` の node slug 集合と `sources` の key 集合が完全一致すること\n\nこれらの欠落・型不正・集合不一致について regression test も追加してください．\n\n## 2. #32 の公開ゲート未完了のまま deployment が有効\n\n#32 は frontend PIN mismatch，checksums / machine-readable provenance，artifact scanning，source-side attestation linkage 等も Pages 公開前の必須条件として列挙しています．一方，本 PR は 11 項目中 5 項目のみ実装したと明記しながら，merge 後の `main` push で `deploy-pages` を実行します．Pages が未設定なら失敗する，という外部状態は明示的な公開ゲートの代用にはなりません．\n\n残項目を本 PR で完了しない方針なら，owner-controlled repository variable 等を用いて deploy job を既定で明示的に無効化し，残ゲート確認後に owner が有効化する形にしてください．\n\n## 軽微な点\n\n- PR 本文と `site/README.md` の「unauthenticated checkout」は実装と一致しません．実際には既定の `github.token` が渡されています．表現を修正してください．\n- Pages deployment には `concurrency` を設定し，同一 environment への競合 deploy を避けることを推奨します．\n\n上記二点，特に fail-open と公開ゲートの扱いが解消されれば再確認します．",
+  "id": 4731977006,
+  "pr_number": 114,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-20T03:18:32Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nImplements notes#32 Phase B by making CI perform a source-enabled build (using `uda-lab/leray-hopf` checked out at `extracted/PIN`), adding a fail-closed provenance gate, and enabling GitHub Pages deployment from `main` (with PRs building/validating but not deploying).\n\n**Changes:**\n- Add `scripts/verify_source_provenance.py` to hard-fail builds if the source checkout and generated payloads don’t match the expected pinned provenance.\n- Extend CI (`.github/workflows/ci.yml`) to checkout `uda-lab/leray-hopf` at `extracted/PIN`, run a source-enabled build, run the provenance gate, and deploy to Pages on `main`.\n- Add regression tests for the provenance gate and update `site/README.md` to document the Phase B workflow and gate.\n\n### Reviewed changes\n\nCopilot reviewed 4 out of 4 changed files in this pull request and generated 6 comments.\n\n| File | Description |\n| ---- | ----------- |\n| `test/verify_source_provenance.test.py` | Adds regression coverage for the new provenance gate script. |\n| `site/README.md` | Updates documentation for Phase B CI + Pages deployment and the provenance gate. |\n| `scripts/verify_source_provenance.py` | Introduces a provenance verification script intended to fail closed before deployment. |\n| `.github/workflows/ci.yml` | Updates CI to do source-enabled builds, run the provenance gate, upload Pages artifact, and deploy on `main`. |\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/leray-hopf-notes/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4731979886,
+  "pr_number": 114,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T03:19:58Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4732009499,
+  "pr_number": 114,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T03:34:01Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4732009539,
+  "pr_number": 114,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T03:34:03Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4732009570,
+  "pr_number": 114,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T03:34:04Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4732009602,
+  "pr_number": 114,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T03:34:05Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4732009636,
+  "pr_number": 114,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T03:34:06Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4732009679,
+  "pr_number": 114,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T03:34:07Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "再確認しました．前回の変更要求は解消されています．\n\n- provenance gate は `sources` / `nodes` の欠落・型不正・件数不一致・slug 集合不一致を fail closed に検査し，対応する回帰テストも追加されています．\n- Pages deployment は `vars.PAGES_DEPLOY_ENABLED == 'true'` による owner-controlled opt-in gate が追加され，#32 の残ゲート完了前に暗黙に公開されません．\n- checkout の認証表現と `persist-credentials`，README 記述，Pages concurrency も修正済みです．\n- head `73e36d2` の CI は全ジョブ成功し，PR run では Pages artifact upload / deploy が意図どおり skipped です．\n\nこの PR の scope として承認します．残る #32 の provenance / publication 項目は，owner variable を有効化する前に別途完了・確認してください．",
+  "id": 4732035075,
+  "pr_number": 114,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-20T03:43:45Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4731814320,
+  "pr_number": 113,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-20T01:51:50Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "27件を抽出型・固定 PIN のソースと突き合わせました．大部分の手書き化は妥当ですが，定理の明示的な `MeasurableSet s` 仮定が2件の `statement_ja` から落ちています．両方を「有限測度の可測集合」に直してください．\n\nまた，PR 本文の adversarial checks にある「固有名詞化された不等式の引用が現状皆無」は事実と異なります．既存コーパスには `Cauchy–Schwarz`，`Hölder`，`Young` を明記する多数の項目があります．固有名詞を今回の gloss に入れない判断自体は問題ありませんが，house style や review-separation gate を回避する根拠として事実でない説明を残さず，単に今回の簡潔な role summary では不要だった，という正確な説明へ直してください．\n\nhead の CI 成功と `git diff --check` 成功は確認済みです．",
+  "id": 4731612224,
+  "pr_number": 112,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-19T22:48:34Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4731616679,
+  "pr_number": 112,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T22:52:08Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4731616701,
+  "pr_number": 112,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T22:52:09Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4731703648,
+  "pr_number": 112,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-19T23:51:58Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "PIN `7c15710a` の Lean 型・使用箇所，24 YAML の全差分，方針文書，head CI 成功を確認しました．19 件の demotion と，`dom_tsum_le`・`convSummandW_norm_summable`・`convValW_bound`・`convBLTw` の full 維持は妥当です．ただし，`convBLTw_apply` の full 維持には方針上の根拠がありません（inline 参照）．これを gloss に変更し，集計を 20 gloss / 4 full に直してください．\n\n併せて PR 本文の事実関係も訂正してください．`gap.note` は gloss で schema 上「inapplicable」ではなく任意です（禁止されるのは `proof_ja` ではなく，それも schema 上は「omit」と説明されているだけです）．また変更前の gloss は 553 件で，`private-helper` 付きは 535 件，付いていない非公開 gloss が 18 件あるため，「corpus-wide, exceptionless convention」「all 535 pre-existing gloss entries」という説明も正しくありません．追加自体を維持するなら，今回対象の非公開補助宣言に付す方針だと正確に説明してください．`convSummandW.yaml` の追加行 2 箇所に残る trailing whitespace も除去してください．",
+  "id": 4731533895,
+  "pr_number": 111,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-19T21:50:31Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `44c62b0bec`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4731478732,
+  "pr_number": 110,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T21:04:24Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4731482501,
+  "pr_number": 110,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T21:07:22Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "owner 裁定との内容照合と head CI 成功は確認しました．ただし，現状の `CONTRIBUTING.md` 内で正典の所在が矛盾しています．§3 は statement 対訳・数学レビュー等のチェックリストを `.github/pull_request_template.md` に置き，「本書では複製せず，このテンプレートを唯一の正とする」と規定しています．一方，この PR は §9 に adversarial checklist を置きますが，PR template にはその項目も §9 への参照もありません．このままでは contributor が template だけを満たしても新方針を見落とし，「唯一の正」という説明も事実でなくなります．\n\n§3 と §9 の責務を明確に整合させてください．例えば，§3 を「PR ごとの記入欄は template，運用方針と adversarial checks は §9」と訂正し，template 側にも §9 の該当チェックを実施したことが分かる参照または項目を追加する構成が自然です．修正後，PR 本文の「transcribed verbatim」「1 file only」という説明と検証記録も実際の差分に合わせて更新してください．",
+  "id": 4731293693,
+  "pr_number": 109,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-19T18:53:45Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `8f4e4f7cd8`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4731307281,
+  "pr_number": 109,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T18:59:59Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4731378467,
+  "pr_number": 109,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T19:48:24Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4731381831,
+  "pr_number": 109,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-19T19:51:08Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `fbc9ec2056`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4731256807,
+  "pr_number": 108,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T18:25:13Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4731286585,
+  "pr_number": 108,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T18:47:45Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "PIN・CITATION.cff の一致，`decl_diff.py` の分類（1,339→1,339，public→private 24 件，signature 13 件），および head CI 成功は確認しました．\n\nただし，issue #32 の owner 裁定で Phase B の step 2 は「repin 後の source-enabled inspection」と明記され，`build_site_data.py --lean-root` による source coverage・payload・PIN 整合等の確認を要求しています．本 PR は `--lean-root` を実行せず，`sources.json` も生成していないため，PR 本文の「Phase B, steps 1-2」「Step 2 inspection」は裁定された step 2 を満たしていません．exact PIN の checkout に対して source-enabled build と所定の payload 検査を実施して結果を記録するか，本 PR を step 1 の repin のみに明確に縮小し，step 2 を追跡する具体的な後続 issue/PR をリンクしてください．\n\n併せて，キャッシュ 3,187 件を再利用した増分 build を「フレッシュビルド」と呼ぶ記述は訂正してください．",
+  "id": 4731206864,
+  "pr_number": 106,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-19T17:47:43Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4731754778,
+  "pr_number": 106,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T00:52:51Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "1973年版への引用訂正，Lemma III.1.2 と Lean 宣言の射程の区別，CI 成功は確認しました．ただし，参考文献一覧に repository の作業履歴と未確認の書誌的関係を混入させないよう，下記を整理してください．",
+  "id": 4730691736,
+  "pr_number": 104,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-19T11:50:13Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4730697376,
+  "pr_number": 104,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T11:54:39Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4730777392,
+  "pr_number": 104,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-19T12:53:03Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "L² ノルム継承という数学的訂正は妥当です．ただし，読者向け gloss に raw Lean 識別子を露出させる改稿が複数入り，今回の学術 prose 整理が未完です．下記を同種の3項目（`eH1_norm`，`innerLin_bound`，`norm_eq_vfOf`）で同期してください．",
+  "id": 4730615915,
+  "pr_number": 103,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-19T10:51:02Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4730625638,
+  "pr_number": 103,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T10:58:41Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4730691680,
+  "pr_number": 103,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-19T11:50:10Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4730615743,
+  "pr_number": 102,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-19T10:50:54Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "40 件を pinned source の宣言型と照合しました．大半は正確ですが，以下の2箇所は数学的対象を誤って説明しています．用語を修正し，head の通常 CI を再実行してください．",
+  "id": 4730615782,
+  "pr_number": 99,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-19T10:50:56Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4730627111,
+  "pr_number": 99,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T10:59:53Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4730627142,
+  "pr_number": 99,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T10:59:54Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4730691624,
+  "pr_number": 99,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-19T11:50:08Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `d29da84efe`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4730499059,
+  "pr_number": 95,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T09:18:09Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4730530025,
+  "pr_number": 95,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-19T09:41:40Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4730532838,
+  "pr_number": 95,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T09:43:51Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `366ceef2cd`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4729973468,
+  "pr_number": 94,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T04:17:05Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "57件の手書き化と provenance 修正を Lean 本文と照合しました．大半は宣言・証明方針と整合していますが，未解消のインライン指摘2件は数学的説明として実質的です．`clampedAvg` は窓が `[0,T]` 内に収まるための適用条件を定義そのものの性質のように述べず，`viscousLintegrand_j` は mathlib の Bochner 積分が非可積分時にも全関数として `0` を返す点を正確に説明してください．この2点を修正後に再確認します．",
+  "id": 4730078201,
+  "pr_number": 94,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-19T04:48:11Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "前回の2指摘は解消され，該当スレッドを resolve しました．ただし，端点を含む窓について「`[0,T]` の内部」とする数学的な齟齬が1点残っています．下記を直せば承認可能です．",
+  "id": 4730195754,
+  "pr_number": 94,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-19T05:50:05Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4730410515,
+  "pr_number": 94,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T08:26:25Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4730434093,
+  "pr_number": 94,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-19T08:44:04Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "検索実装の方向性は妥当で，CI も成功しています．ただし，新設した検索経路の回帰試験が複数の分岐を同時に満たす fixture になっており，分岐単独の退行を検出できません．各フィールドをほかの検索対象から分離した fixture/query にして，少なくとも glossary の `japanese`・`note` と bibliography の citation text を独立に固定してください．",
+  "id": 4730078041,
+  "pr_number": 93,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-19T04:48:10Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4730090625,
+  "pr_number": 93,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T04:51:58Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4730090670,
+  "pr_number": 93,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T04:52:00Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4730195718,
+  "pr_number": 93,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-19T05:50:02Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "README の依存導入手順が，CI と同じ固定バージョンの `requirements.txt` を参照するようになり，再現性の不整合は解消されています．変更範囲は適切で，CI 成功も確認しました．",
+  "id": 4727577326,
+  "pr_number": 92,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-18T03:49:36Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `33e7ab3e5b`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4727276733,
+  "pr_number": 91,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-18T01:16:39Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "CI は green で，貢献手順と履歴文書の整理方針も妥当です．ただし，この文書を「issue 履歴なしで再現できる唯一の入口」とするには，repin 手順に実行不能・検証失敗につながる欠落があります．既存の Codex インライン指摘（抽出先が `leray-hopf` checkout 相対になっている）に加え，`CITATION.cff` の PIN 同期と，削除時の `retire` の意味を明確にしてください．\n\n文体も全体として理解可能ですが，「一次入口」「warm な checkout」「source-reviewed」「全行検証」など，新規 contributor 向け日本語として不自然または実態が曖昧な箇所があります．少なくとも新設する正典文書では，「最初に参照する文書」「ビルド済みの checkout」「内容をレビュー済み」「全エントリを検証」のように，意味の確定した自然な表現へ整えてください．",
+  "id": 4727333157,
+  "pr_number": 91,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-18T01:46:21Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4727363918,
+  "pr_number": 91,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-18T02:01:47Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4727364053,
+  "pr_number": 91,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-18T02:01:52Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4727364184,
+  "pr_number": 91,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-18T02:01:57Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4727364308,
+  "pr_number": 91,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-18T02:02:02Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "指摘した repin 手順を再検証しました．抽出先は notes リポジトリへの絶対パスになり，`extracted/PIN` と `CITATION.cff` の同期も明記されています．抽出 universe から消えた宣言の YAML 削除と，universe に残る `proof_status: retired` の区別も正確です．二つの手順書は整合し，文体上の指摘も解消され，CI も成功しています．blocking な問題は残っていません．",
+  "id": 4727449129,
+  "pr_number": 91,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-18T02:47:05Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `6e0d661b61`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4726562967,
+  "pr_number": 90,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T22:29:21Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "CI は green で，機械生成された同一文面を個別の数学的内容へ置き換える方向も適切です．しかし，現状の 43 件は公開される数学本文としてまだ受け入れられません．\n\n既存の Codex インライン指摘どおり，多数の `statement_ja` が `cutoff`，`wInv`，`smulLeftCLM`，`Domain3`，`gns_L6_of_memH1_R3` などの Lean 識別子をそのまま含み，`corpus/README.md` D3 に反しています．さらに `A3/A4`，`Brick-1`，`gap note`，「公開定理の証明本体」といった実装工程・開発資料の語も数学的主張ではありません．これらは `provenance` または必要なら `gap.note` に移し，`statement_ja` は通常の数学用語と記号だけで，各宣言の型が実際に述べる内容を記してください．「下ごしらえ」「中心対象」などの口語的／不自然な表現も，数学書として自然な表現へ直してください．\n\nまた，個別の形式化齟齬をインラインで 2 点示しました．全 43 件を同じ基準で見直し，Lean の型より強い主張をしていないか再確認してください．",
+  "id": 4726711134,
+  "pr_number": 90,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-17T22:53:10Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4726800805,
+  "pr_number": 90,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T23:07:50Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4726801772,
+  "pr_number": 90,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T23:08:02Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4726802746,
+  "pr_number": 90,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T23:08:12Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "D3 違反，口語表現，既出の 2 件の過剰主張は適切に修正され，CI も green です．ただし，「残る 41 件を signature と再照合した」という報告に反して，型の仮定と `statement_ja` の対応にはまだ substantive な齟齬があります．\n\n- `fourier_ae_eq_wInv_smul` の Lean 定理は `f : L2C_R3`，`f' : L2C_R3` と重み付き Fourier 像の等式だけを仮定し，`MemSobolev` を仮定していません．本文が「`f` が Sobolev 空間に属し」と余分な仮定を加えています．\n- `eLpNorm_fderiv_truncated_le`，`norm_fderiv_cutoff_le`，`norm_fderiv_truncated_le` はいずれも `R > 0` と，「`K` がバンプ関数の勾配ノルムを各点で抑える」という仮定を必要とします．現行本文は条件を落としたまま `K/R` の評価を無条件に述べています．特に `R ≤ 0` ではその表示は正しい命題ではありません．\n\nインライン指摘に従い，隠れた仮定を本文へ明示してください．あわせて全 43 件について，変数の型だけでなく命題の仮定も再照合してください．",
+  "id": 4727002502,
+  "pr_number": 90,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-17T23:49:41Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4727039610,
+  "pr_number": 90,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-18T00:04:35Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4727040003,
+  "pr_number": 90,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-18T00:04:46Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4727040380,
+  "pr_number": 90,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-18T00:04:57Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4727040655,
+  "pr_number": 90,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-18T00:05:06Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "追加コミットを元の Lean signature と再照合しました．`fourier_ae_eq_wInv_smul` の余分な Sobolev 仮定は除かれ，3件の勾配評価には `R>0` と勾配の一様上界条件（必要な箇所では `K≥0`）が明記されています．自主修正された重み付き勾配評価と Schwartz 近似補題も，量化と結論が型に整合しています．CI 成功も確認済みで，blocking な問題は残っていません．",
+  "id": 4727130992,
+  "pr_number": 90,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-18T00:45:33Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `1d2e9adc31`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4725481544,
+  "pr_number": 89,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T19:20:07Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "CI は green ですが，現時点では次の 2 点が blocking です．\n\n1. 既存のインライン指摘どおり，`decodeURIComponent` が失敗する malformed hash では catch 節がページ metadata を更新せず，直前の title／description／canonical／OG 情報が残ります．エラー経路でも一貫した metadata を設定し，回帰試験を追加してください．\n2. 拡張した全文検索で，name／tags／doc は大文字小文字を無視する一方，`statement_ja`／`proof_ja` は大文字小文字を区別します．日本語本文に含まれる英語用語で検索結果がフィールド依存になるため，検索規則を統一し，各追加フィールド（statement，proof，tags，doc）を独立に検証する試験を追加してください．\n\nこれらを修正後，再レビューします．",
+  "id": 4725638351,
+  "pr_number": 89,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-17T19:46:05Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4725725598,
+  "pr_number": 89,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T20:01:54Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4725725922,
+  "pr_number": 89,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T20:01:57Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "実装修正は妥当で，malformed hash 時の metadata 更新，`statement_ja`／`proof_ja` の case-insensitive 化，および CI green を確認しました．\n\nただし，前回明示した「各追加フィールド（statement，proof，tags，doc）を独立に検証する試験」のうち，`doc` 専用の回帰試験がまだありません．既存の `(r) search matches tags/proof_ja/doc ...` は `existence-uniqueness` を検索しているため，実際に通っている分岐は `tagHit` だけで，`docHit` は検証していません（試験名と検証内容も一致していません）．name／statement／proof／tags に検索語が含まれず，raw docstring のみに含まれる fixture と大小文字を変えた query を追加し，`docHit` を単独で検証してください．あわせて既存試験名を実態に合わせてください．\n\nこの一点が解消されれば承認可能です．",
+  "id": 4725987595,
+  "pr_number": 89,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-17T20:49:43Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4726334183,
+  "pr_number": 89,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-17T21:50:23Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nThis PR closes the remaining work in notes#29 by making the generated site-data size report capable of enforcing an opt-in hard ceiling in CI (while keeping local runs warn-only), and by updating documentation to reflect the Phase A “no committed generated JSON” contract.\n\n**Changes:**\n- Add optional `--fail-raw-mib` / `--fail-gzip-mib` hard-ceiling flags to `scripts/site_data_size_report.py` and exit non-zero when breached.\n- Wire the hard ceiling into `.github/workflows/ci.yml` with `pipefail` so failures propagate through `tee`, and ensure artifacts upload on failures (unless cancelled).\n- Fix `site/README.md` wording that still implied committed generated data / `--lean-root` behavior.\n\n### Reviewed changes\n\nCopilot reviewed 3 out of 3 changed files in this pull request and generated 3 comments.\n\n| File | Description |\n| ---- | ----------- |\n| `scripts/site_data_size_report.py` | Adds opt-in hard-ceiling flags and CI-failing behavior when thresholds are exceeded. |\n| `.github/workflows/ci.yml` | Uses the new flags in CI with `pipefail`, and uploads artifacts even when the size-report step fails. |\n| `site/README.md` | Updates docs to reflect the current source-enabled vs source-less build contract post-Phase A. |\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/leray-hopf-notes/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4724181998,
+  "pr_number": 88,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T15:55:38Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "The CI wiring and documentation correction are sound, and the workflow is green. Before merge, please close the remaining correctness gaps in the new CLI contract:\n\n1. Validate each supplied ceiling as finite and strictly positive at argument-parsing time. A negative or zero value currently produces a misleading size breach, while `NaN` silently disables the hard ceiling because every comparison with it is false. This extends the existing positivity review thread.\n2. Make the displayed units consistent. `format_bytes` scales by 1024 but labels the result `KB/MB`, while the new threshold is labelled `MiB`. Prefer `KiB/MiB` throughout, or format both measured sizes and thresholds through one consistent convention.\n3. Add a small automated regression test for default warn-only behaviour, below/equal/above-ceiling boundaries, invalid values (including NaN), and the non-zero exit path. The manually reported tests are useful, but a CI backstop should retain executable coverage of its own failure semantics.\n\nThe captured pipeline status and post-failure artifact upload look correct. Please push the fixes and request re-review.",
+  "id": 4724563356,
+  "pr_number": 88,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-17T16:53:26Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4724641994,
+  "pr_number": 88,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T17:06:21Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4724642134,
+  "pr_number": 88,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T17:06:23Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4724642279,
+  "pr_number": 88,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T17:06:24Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4725119724,
+  "pr_number": 88,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-17T18:22:53Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nThis PR updates the Leray–Hopf notes corpus to ensure claims about the Navier–Stokes convection-form “pins” (e.g., `b_galerkin`, `convIntegralSchwartz`) match the actually formalized evidence: the corpus now consistently states that the formal guarantee is an identification with the intended/canonical formula, while explicitly *not* asserting a separately formalized nontriviality witness (`b ≠ 0`).\n\n**Changes:**\n- Reworded multiple `statement_ja` / `proof_ja` / `gap.note` blocks to remove “nonvacuity / excludes `b=0` / non-degeneracy proven” framing where no witness theorem exists.\n- Added/standardized explicit scope notes clarifying that nontriviality (`b ≠ 0`) is not independently formalized in this repository (referencing issue #153).\n- Improved one dependency reference by linking the pin derivation to `LerayHopf.convIntegralSchwartz` as an actual hover link.\n\n### Reviewed changes\n\nCopilot reviewed 10 out of 10 changed files in this pull request and generated no comments.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| corpus/LerayHopf/Torus3NSForms.yaml | Removes “excludes `b=0`” overclaim from the definitional pin; moves nontriviality caveat into `gap.note`. |\r\n| corpus/LerayHopf/Torus3NSForms.core.yaml | Clarifies the projection preserves the standard-form identification but does not prove `b ≠ 0`. |\r\n| corpus/LerayHopf/torus3_NSForms_exists.yaml | Rephrases existence proof narrative to state “standard-form identification” and adds nontriviality scope note. |\r\n| corpus/LerayHopf/R3NSForms.yaml | Replaces “nonvacuity pin excludes `b=0`” with “standard-form identification only,” plus explicit scope note. |\r\n| corpus/LerayHopf/R3NSForms.core.yaml | Same clarification as Torus core: identification lives in the source data; no independent `b ≠ 0` formalization. |\r\n| corpus/LerayHopf/R3NSForms_of_gap.yaml | Adds a live link to `convIntegralSchwartz` as the equality used for the pin; adds nontriviality caveat. |\r\n| corpus/LerayHopf/galerkinConvection.yaml | Removes “generally nonzero” assertion and replaces it with the standardized issue #153 scope disclaimer. |\r\n| corpus/LerayHopf/Galerkin.NSFormCore.yaml | Rewords the abstract core’s explanation to separate standard-form identification from any nontriviality claim. |\r\n| corpus/LerayHopf/convIntegralSchwartz.yaml | Removes “pin excludes `b=0`” phrasing; reframes as avoiding overclaim by pinning to the intended integral, with scope note. |\r\n| corpus/LerayHopf/convFormL2_galerkin_pin.yaml | Updates the `b_galerkin` note to “identification only,” explicitly disclaiming independent `b ≠ 0` formalization. |\n</details>\n\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/leray-hopf-notes/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4722469994,
+  "pr_number": 87,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T12:05:13Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `664620cac7`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4720499916,
+  "pr_number": 85,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T07:50:47Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4722088932,
+  "pr_number": 85,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T11:09:26Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `358b85b10c`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4720386017,
+  "pr_number": 84,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T07:34:28Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4720418554,
+  "pr_number": 84,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T07:39:10Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `5275828643`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4720265822,
+  "pr_number": 83,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T07:19:56Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4722090097,
+  "pr_number": 83,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T11:09:38Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `7fcd904e03`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4720081174,
+  "pr_number": 81,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T06:54:47Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4720110583,
+  "pr_number": 81,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T06:58:41Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4720110721,
+  "pr_number": 81,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T06:58:42Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `d0b77c23e6`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4720015092,
+  "pr_number": 80,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T06:45:50Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4720162862,
+  "pr_number": 80,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T07:05:52Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "## Pull request overview\n\nlean-pde の抽出 universe を最新 PIN（`0afd65f…`）へ追随させ、宣言の移動・public 昇格・新設 private・署名一般化に合わせて corpus 側の注釈を機械的に更新する repin です（migration 記録も追記）。\n\n**Changes:**\n- `extracted/PIN` を `a33de86…` → `0afd65f…` に更新し、`extracted/decls.json` を新 universe に再抽出。\n- private→public 昇格した 2 宣言（`re_compLpL_projComponentC`, `sum_inject_projComponent`）を 2 層ポリシーに従い gloss→full へ格上げ。\n- 新設 private 2 宣言の gloss 追加、および issue #135 restate による Galerkin 解束の一般化を gap.note に反映。\n\n### Reviewed changes\n\nCopilot reviewed 9 out of 9 changed files in this pull request and generated no comments.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| extracted/PIN | lean-pde 側の抽出元コミットを新 PIN に更新 |\r\n| extracted/decls.json | 新 PIN での宣言 universe を再抽出し、移動/新設/署名変更を反映 |\r\n| docs/migration-2026-07-refactor.md | 今回の小規模 repin の手順・差分分類・対応方針を追記 |\r\n| corpus/LerayHopf/sum_inject_projComponent.yaml | public 昇格に伴い full 注釈へ格上げし本文/ギャップを更新 |\r\n| corpus/LerayHopf/re_compLpL_projComponentC.yaml | public 昇格に伴い full 注釈へ格上げし本文/ギャップを更新 |\r\n| corpus/LerayHopf/perTest_lipschitz_R3.yaml | issue #135 restate による汎用束化と補助補題利用を gap.note に追記 |\r\n| corpus/LerayHopf/injectComponent_projComponent_ae.yaml | 新設 private 宣言の gloss エントリを追加 |\r\n| corpus/LerayHopf/galerkin_weakLimit_R3.yaml | 汎用束化（主張不変）を gap.note に追記 |\r\n| corpus/LerayHopf/galerkin_norm_le_u0_generic.yaml | 新設 private 宣言の gloss エントリを追加 |\n</details>\n\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/lean-pde-notes/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4714669717,
+  "pr_number": 61,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T14:21:31Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "## Pull request overview\n\nThis PR completes issue #56’s terminology migration by removing the ambiguous Japanese term 「尾部」 from the remaining corpus entries and standardizing physical-space “tail/exterior” wording to explicit 「球外部分」 terminology, with glossary/lint support to prevent reintroduction.\n\n**Changes:**\n- Add glossary entries for Fourier truncation residual / out-of-box Fourier coefficient square sum / spatial exterior part, and forbid 「尾部」.\n- Replace remaining Fourier-context 「尾部」 occurrences with 「打ち切り残差」/「直交残差」 phrasing.\n- Audit/replace several physical-space 「裾」 usages in definitions/lemmas with 「球外部分」 and aligned decomposition naming.\n\n### Reviewed changes\n\nCopilot reviewed 10 out of 10 changed files in this pull request and generated 1 comment.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| docs/GLOSSARY.md | Adds canonical glossary entries for the migrated terms and forbids 「尾部」 to support lint enforcement. |\r\n| corpus/LerayHopf/velocityProjection_n_pythagoras.yaml | Rewords orthogonal decomposition from 「尾部」 to 「直交残差」 and updates the associated gap note. |\r\n| corpus/LerayHopf/tendsto_norm_tailVF_zero.yaml | Renames “tail vanishing” phrasing to 「球外部分の消滅」 and updates proof wording accordingly. |\r\n| corpus/LerayHopf/tailVF.yaml | Updates the definition/proof prose from 「裾」 to 「球外部分」. |\r\n| corpus/LerayHopf/restrictToBall.yaml | Updates the Rellich-argument description to use 「球外部分」 terminology. |\r\n| corpus/LerayHopf/norm_tailVF_le.yaml | Renames 「裾制限」 to 「球外制限」 in the lemma statement title line. |\r\n| corpus/LerayHopf/L2VF_norm_sub_velocityProjection_sq.yaml | Updates “tail identity” phrasing to “truncation residual identity” and aligns wikilink display text. |\r\n| corpus/LerayHopf/inner_tendsto_of_perball.yaml | Updates the ε/3 split prose from ball/tail to ball/exterior-part terminology. |\r\n| corpus/LerayHopf/inner_eq_ball_add_tail.yaml | Updates the statement title and proof prose to 「球内・球外分解」 wording. |\r\n| corpus/LerayHopf/fb_tendsto_of_perball.yaml | Updates part of the convergence proof prose to use 「球外部分」 terminology while keeping descriptive Schwartz-decay “裾” usage. |\n</details>\n\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/lean-pde-notes/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4710323039,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T03:53:56Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4710342978,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T03:58:34Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "The Fourier/physical-space distinction, glossary additions, lint guard, and retained descriptive uses of `裾` are sound. Two small but blocking wording inconsistencies remain in the newly canonical physical-space terminology: the interior term is still called `球部分` rather than `球内部分`, and the `tailVF` definition grammatically treats `球外部分` as a domain to which the field is restricted rather than as the resulting restricted field. Please align these before merge.",
+  "id": 4710382219,
+  "pr_number": 59,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-16T04:08:35Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4710402128,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T04:13:28Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4710402181,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T04:13:29Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "The remaining terminology inconsistencies are resolved at `bde300c`: the interior/exterior pair now consistently uses `球内部分` / `球外部分`, and the `tailVF` definition cleanly separates the restriction operation from the resulting exterior part. The Fourier-residual terminology, retained descriptive uses of `裾`, glossary entries, and lint guard are coherent. All review threads are resolved and the current CI runs pass.",
+  "id": 4710577646,
+  "pr_number": 59,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-16T05:03:04Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nIssue #51（日本語校正キャンペーン）P4（limit-passage 章）として、corpus 内の比喩表現・Lean 実装語彙・不自然な訳語（例: スロット/機構/押し出し等）を整理し、owner 裁定（保護語・用語方針）に沿って表現層のみを整えるPRです。監査台帳（ledger）も更新し、該当所見を fixed / rejected として収束させています。\n\n**Changes:**\n- limit-passage 章中心に、比喩・実装語・造語を自然な数学日本語へ置換（例: スロット→因子、相殺機構→相殺の構造、結合連続性→同時連続性）\n- 「押し出し」等の用語を裁定に沿う表現へ修正（連続線形写像との合成として明示）\n- 台帳 `docs/audit-2026-07-14-ledger.md` を更新し、所見の処理状況と却下理由を記録\n\n### Reviewed changes\n\nCopilot reviewed 51 out of 51 changed files in this pull request and generated 3 comments.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| docs/audit-2026-07-14-ledger.md | limit-passage（P4）所見の fixed/rejected を反映し、処理結果を台帳化 |\r\n| corpus/LerayHopf/viscous_pointwise_lsc.yaml | 「押し出し」表現を合成の説明に変更し、用語裁定に追従 |\r\n| corpus/LerayHopf/TorusConvectionExtension.edgeSlot3.yaml | 「第三スロット辺」等の実装語彙を「第3因子…部分加群」に具体化 |\r\n| corpus/LerayHopf/TorusConvectionExtension.edgeSlot2.yaml | 同上（第2因子側）+ gap.note の説明を数学寄りに |\r\n| corpus/LerayHopf/TorusConvectionExtension.detExtend.yaml | 「糊/心臓部」比喩を除去し、貼り合わせ条件を明示 |\r\n| corpus/LerayHopf/TorusConvectionExtension.convFormL2_multilinear.yaml | 「カリー化」等のFP語彙を除去し、三重線形性の説明を整理 |\r\n| corpus/LerayHopf/TorusConvectionExtension.convFormL2_cont_fixedTest.yaml | 「結合連続性」→「同時連続性」へ統一、gap.note も自然化 |\r\n| corpus/LerayHopf/TorusConvectionExtension.convFormL2_antisymm.yaml | 「配当」→「利点」へ置換し比喩を解消 |\r\n| corpus/LerayHopf/TorusConvectionExtension.antisymmetrizer.yaml | 「反対称化子」→「反対称化作用素」へ統一 |\r\n| corpus/LerayHopf/torus_weakFormNS_of_strongConvergence.yaml | Aubin–Lions 周辺の説明を自然化し、Lean語彙（フィールド等）を回避 |\r\n| corpus/LerayHopf/toLp_schwartzC_eq.yaml | 「点別」表現を「各点」へ調整 |\r\n| corpus/LerayHopf/schwartzC_apply.yaml | 「点別値」→「各点値」へ調整 |\r\n| corpus/LerayHopf/reLp.yaml | 「点別」→「各点」へ調整 |\r\n| corpus/LerayHopf/reLp_coeFn.yaml | 「点別表示」→「各点表示」へ調整（※表現の冗長さ指摘あり） |\r\n| corpus/LerayHopf/norm_reLp_le.yaml | 「点別に」→「各点で」へ調整 |\r\n| corpus/LerayHopf/mulRBdd.yaml | 「点別」→「各点」へ調整（※語法の不自然さ指摘あり） |\r\n| corpus/LerayHopf/mulRBdd_sub.yaml | 「点別分配則」→「各点での分配則」へ調整 |\r\n| corpus/LerayHopf/mulRBdd_coeFn.yaml | 「点別表示」→「各点表示」へ調整（※表現の冗長さ指摘あり） |\r\n| corpus/LerayHopf/memLp_two_componentRe.yaml | 「点別」→「各点」へ調整 |\r\n| corpus/LerayHopf/mem_galerkinTestSpan_isTest.yaml | 「span」直書きを避け、生成された部分加群として説明 |\r\n| corpus/LerayHopf/lineDerivOp_schwartzC.yaml | 「点別」→「各点」へ調整 |\r\n| corpus/LerayHopf/lineDerivOp_cxify.yaml | 「点別」→「各点」へ調整 |\r\n| corpus/LerayHopf/L2VF_projComponent.yaml | 「点別」→「各点」へ調整（gap.note） |\r\n| corpus/LerayHopf/isGalerkinTest_zero.yaml | 「部品」比喩を除去し補題の役割を明示 |\r\n| corpus/LerayHopf/integral_mul_mul_eq_inner.yaml | 「点別表示」→「各点表示」へ調整 |\r\n| corpus/LerayHopf/inner_L2VF_eq_sum_component.yaml | 「点別」→「各点」へ調整 |\r\n| corpus/LerayHopf/galerkinSpan_fourier_ae.yaml | 見出しを「a.e. 表示」に寄せて明確化 |\r\n| corpus/LerayHopf/galerkinConvection_level_step.yaml | 「水準安定性」→「打ち切り次数によらないこと」へ |\r\n| corpus/LerayHopf/galerkinConvection_level_stable.yaml | 同上（対称形）+ リンク表示語を更新 |\r\n| corpus/LerayHopf/galerkinConvection_antisymm.yaml | 「相殺機構」比喩を除去し理由の説明へ |\r\n| corpus/LerayHopf/Galerkin.FieldForms.inner_self_vectorField.yaml | 「点別形」→「各点版」へ調整 |\r\n| corpus/LerayHopf/Galerkin.FieldForms.inner_self_vectorField_nonpos.yaml | 参照表示語を「各点…」へ揃え |\r\n| corpus/LerayHopf/Galerkin.FieldForms.energy_hasDerivAt.yaml | 参照表示語を「各点…」へ揃え |\r\n| corpus/LerayHopf/Galerkin.coe_hasDerivAt.yaml | 「押し出した曲線」→「包含写像と合成した曲線」へ修正 |\r\n| corpus/LerayHopf/fourier_schwartzC_lineDeriv_apply.yaml | 「点別に」→「各点で」へ調整 |\r\n| corpus/LerayHopf/edge_inf_eq_galerkin_tensor.yaml | 「辺」比喩を避け、テンソル積部分加群の共通部分として明示 |\r\n| corpus/LerayHopf/dom_tsum_le.yaml | 「優関数族」造語を避け、具体的記述へ |\r\n| corpus/LerayHopf/dom_summable.yaml | 同上（見出し語の具体化） |\r\n| corpus/LerayHopf/cxify_apply.yaml | 「点別値」→「各点値」へ調整 |\r\n| corpus/LerayHopf/convValW_eq_convFormFourier.yaml | 「相殺機構」→「相殺の構造」へ |\r\n| corpus/LerayHopf/convValW_bound.yaml | 「優関数族」造語を避け、比喩（心臓部）も除去 |\r\n| corpus/LerayHopf/convSummandW_norm_summable.yaml | 「帯域水準」→「打ち切り次数」等へ統一、造語を具体化 |\r\n| corpus/LerayHopf/convFormL2_galerkin_pin.yaml | リンク表示語（比喩）を具体的表現へ |\r\n| corpus/LerayHopf/convFormL2_def_eq_convValW.yaml | 「第三スロット辺」等を部分加群の具体表現へ |\r\n| corpus/LerayHopf/convFormFourier_eq_galerkin.yaml | 「潰れる」比喩を避け「等しくなる」へ |\r\n| corpus/LerayHopf/convBLTw.yaml | 「定数を添えて連続化」比喩を避け、評価から構成する旨を明確化 |\r\n| corpus/LerayHopf/convBilL2Sigma.yaml | 「フィールドごとに充てる」実装語彙を除去 |\r\n| corpus/LerayHopf/complexInner_compLpL_ofReal.yaml | 「点別」→「各点」へ調整 |\r\n| corpus/LerayHopf/coeff_zero_outside_box.yaml | 「支持補題」→「基本補題」へ（直訳造語を回避） |\r\n| corpus/LerayHopf/bForm_galerkin_crude_dominator_bound.yaml | 「点別」→「各点」へ調整しつつ、過剰強化でない説明を維持 |\r\n| corpus/LerayHopf/ae_zero_of_hermitianTest.yaml | 「点別の結論」誤解を避け「ほとんど至る所での結論」へ明確化 |\n</details>\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/lean-pde-notes/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4709999777,
+  "pr_number": 58,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T02:36:35Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4710012072,
+  "pr_number": 58,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T02:40:18Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4710012122,
+  "pr_number": 58,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T02:40:19Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4710012183,
+  "pr_number": 58,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T02:40:20Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "The final cleanup is extensive and the current CI runs pass, but several blocking regressions remain. The `edgeSlot2`/`edgeSlot3` rewrites confuse the argument number of the original trilinear form with the factor number of the two-factor tensor product; the mechanical `点別` sweep introduces new unnatural or referentless expressions; and the audit ledger marks one flagged term as fixed even though it remains verbatim, while another row records wording that is not present in the corpus. Please correct these points and rerun the claimed repository-wide residual audit before closing #51.",
+  "id": 4710105146,
+  "pr_number": 58,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-16T03:02:59Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4710135372,
+  "pr_number": 58,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T03:11:13Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4710135426,
+  "pr_number": 58,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T03:11:14Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4710135516,
+  "pr_number": 58,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T03:11:15Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4710135616,
+  "pr_number": 58,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T03:11:16Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4710135674,
+  "pr_number": 58,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T03:11:17Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4710135746,
+  "pr_number": 58,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T03:11:19Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4710135821,
+  "pr_number": 58,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T03:11:20Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "The previous review findings are resolved, and the current CI runs pass. Two prose regressions remain in the additional repository-wide `capstone` cleanup: one sentence contains an accidental space and an unnatural file description, and another makes a theorem the grammatical agent of `見る`. Please rewrite these two sentences directly rather than mechanically substituting `総仕上げの定理` for `capstone`.",
+  "id": 4710164455,
+  "pr_number": 58,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-16T03:18:16Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4710177241,
+  "pr_number": 58,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T03:20:32Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4710177350,
+  "pr_number": 58,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T03:20:33Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "All blocking findings are resolved at `b838f99`. The tensor-argument numbering is now mathematically accurate; the mechanical `点別` replacements and ledger inconsistencies have been corrected; and the two prose regressions introduced by the later `capstone` sweep are repaired. All review threads are resolved, and both Harness and Build Site Data pass on the current head.",
+  "id": 4710230775,
+  "pr_number": 58,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-16T03:30:03Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nBochner 章（Bochner 積分・弱時間微分・時間軟化）に対する日本語校正キャンペーン（Issue #51 の P3）として、比喩・未訳英語・Lean 実装語彙・造語などを中心に、表現層のみの文章調整を行う PR です（数学的内容は不変という前提）。\n\n**Changes:**\n- JP-13 方針に沿って機械/建築/航海等の比喩を除去し、数学文体へ言い換え\n- 未訳英語（primal / no-smuggle / side condition / months/days 級 等）を和文化\n- 「並進モジュラス」等の用語を「平行移動差のノルム」へ統一し、関連参照も同期\n\n### Reviewed changes\n\nCopilot reviewed 50 out of 50 changed files in this pull request and generated 4 comments.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| docs/audit-2026-07-14-ledger.md | bochner パケットで fixed/rejected の台帳更新（PR #57 処理内容の記録） |\r\n| corpus/LerayHopf/weakTimeDerivℝ_even_reflection.yaml | ALLOW_SORRY 周辺の表現自然化（比喩・months 級等の和文化） |\r\n| corpus/LerayHopf/W1pTime.yaml | Lean 実装語（フィールド等）を避けた定義説明へ調整 |\r\n| corpus/LerayHopf/w1pTime_lineExtension.yaml | 比喩除去＋「押し出し」語彙への同期 |\r\n| corpus/LerayHopf/w1pTime_continuous_in_Vprime.yaml | 「要石」比喩の除去、未訳英語削除等 |\r\n| corpus/LerayHopf/w1pTime_continuous_in_H.yaml | months 級の和文化、比喩置換（柱→基幹定理） |\r\n| corpus/LerayHopf/translationModulus_zero.yaml | 「並進モジュラス」→「平行移動差のノルム」へ統一、比喩除去 |\r\n| corpus/LerayHopf/totallyBounded_of_uniform_approx'.yaml | 「ε/2 ネット」→「ε/2-網」等の表記統一 |\r\n| corpus/LerayHopf/timeTranslateL2_norm.yaml | 用語統一（並進モジュラス→平行移動差のノルム） |\r\n| corpus/LerayHopf/TimeMollification.yaml | Lean 実装語彙（フィールド等）を避けた記述に調整 |\r\n| corpus/LerayHopf/timeMollification_of_w1pTime.yaml | 「構成子」等の実装語彙を避けた表現に調整 |\r\n| corpus/LerayHopf/timeMollification_exists.yaml | 比喩除去（壁等）＋ days/weeks 級の和文化 |\r\n| corpus/LerayHopf/timeConvL2.yaml | 「点別」→「各点ごと」等、pointwise 直訳回避 |\r\n| corpus/LerayHopf/timeConvL2_weakDeriv_comm.yaml | 「点別」系表現の置換、signature→型 などの和文化 |\r\n| corpus/LerayHopf/timeConvL2_tendsto_self.yaml | 用語統一（平行移動差のノルム）＋口語表現の自然化 |\r\n| corpus/LerayHopf/timeConvL2_sub_le_translation_modulus.yaml | 欠損→近似誤差、直移植→同様、等の自然化 |\r\n| corpus/LerayHopf/timeConvL2_sub_eq_integral.yaml | 口語（合流）を避け、線形性ベースの説明へ |\r\n| corpus/LerayHopf/timeConvL2_norm_le.yaml | 口語動詞の除去、論理の明示化 |\r\n| corpus/LerayHopf/stepCurve.yaml | 計算機語彙（セル/値リスト等）を自然な数学語彙へ |\r\n| corpus/LerayHopf/primitive_baseA_props.yaml | 「平均零のスカラー」等の不自然さを補正 |\r\n| corpus/LerayHopf/ofHValuedDeriv.yaml | 「輸送」→「押し出し」、primal→基本 等の和文化 |\r\n| corpus/LerayHopf/ofDissipativeEvolution.yaml | 「契約」比喩の除去（整合条件へ） |\r\n| corpus/LerayHopf/IsWeakTimeDerivℝ.yaml | 「Fubini 障害」等の造語を説明的表現へ |\r\n| corpus/LerayHopf/isWeakTimeDerivℝ_smul_cutoff.yaml | 口語/比喩除去、gap.note の自然化 |\r\n| corpus/LerayHopf/isWeakTimeDerivℝ_comp_clm.yaml | 「移植」比喩の除去 |\r\n| corpus/LerayHopf/IsWeakTimeDeriv.yaml | 「全導関数込みで」等の不自然語彙の除去 |\r\n| corpus/LerayHopf/isWeakTimeDeriv_zero_ae_const.yaml | 「要石」→「中心的補題」等の比喩除去 |\r\n| corpus/LerayHopf/isWeakTimeDeriv_unique.yaml | body コメント→定理本体のコメント（和文化） |\r\n| corpus/LerayHopf/isWeakTimeDeriv_primitive.yaml | 「分布的 FTC」等の略語を説明的表現へ |\r\n| corpus/LerayHopf/isWeakTimeDeriv_comp_clm.yaml | 「輸送」→「押し出し」へ統一 |\r\n| corpus/LerayHopf/IsOfDissipativeEvolution.yaml | 「忠実性契約」→「忠実性条件」へ統一、表現自然化 |\r\n| corpus/LerayHopf/isCompact_stepCurve_toLp.yaml | 計算機語彙（値リスト等）を数学語彙へ |\r\n| corpus/LerayHopf/intervalIntegrable_smul_of_integrableOn_Icc.yaml | 「点別」→「各点での」へ自然化 |\r\n| corpus/LerayHopf/integrable_timeMollifier_smul_translate.yaml | side condition の和文化 |\r\n| corpus/LerayHopf/hToVprimeCLM.yaml | 「正直な」等の比喩除去、pointwise 表現の調整 |\r\n| corpus/LerayHopf/hToVprimeCLM_apply.yaml | 「裸」比喩の除去、記述明確化 |\r\n| corpus/LerayHopf/GelfandTriple.yaml | primal の和文化、Lean 実装語彙の除去 |\r\n| corpus/LerayHopf/exists_unitMass_weight.yaml | 比喩除去（汲み出す等） |\r\n| corpus/LerayHopf/exists_uniform_subseq_of_lipschitz_family.yaml | 「エンジン」比喩除去＋尾部禁止語の置換 |\r\n| corpus/LerayHopf/exists_subseq_tendsto_eLpNorm_of_totallyBounded.yaml | 「点別差」等の不自然語彙の整理 |\r\n| corpus/LerayHopf/exists_Icc_of_compact_subset_Ioo.yaml | 「分離」→「包含」へ内容整合（表現層） |\r\n| corpus/LerayHopf/dist_toLp_stepCurve.yaml | 「点別」系表現の置換（※要調整コメントあり） |\r\n| corpus/LerayHopf/continuousOn_primitive_of_integrableOn.yaml | 助詞脱落の補正 |\r\n| corpus/LerayHopf/continuous_translationModulus.yaml | 用語統一＋自然化（モジュラス→平行移動差のノルム） |\r\n| corpus/LerayHopf/Bochner.WeakLimitToolkit.exists_weak_limit_in_submodule.yaml | 「球有界/M 有界性」等の未確立語彙を式ベースに整理 |\r\n| corpus/LerayHopf/Bochner.WeakLimitToolkit.exists_mem_of_ae_full.yaml | a.e. 表現の係り受け自然化 |\r\n| corpus/LerayHopf/Bochner.WeakLimitToolkit.cauchySeq_inner_extend.yaml | 「一様球有界」等の未確立語彙を明示的仮定へ |\r\n| corpus/LerayHopf/Bochner.IsTimeMollifier.yaml | 定義説明の Lean 実装語彙を避ける方向に調整 |\r\n| corpus/LerayHopf/Bochner.ContDiffBump.isTimeMollifier.yaml | 「フィールド」語彙の除去＋表現自然化 |\r\n| corpus/LerayHopf/aeStronglyMeasurable_of_spaceTimeL2.yaml | 比喩/未訳英語の除去（直列→順に、no-smuggle 和文化 等） |\n</details>\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/lean-pde-notes/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4706195986,
+  "pr_number": 57,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T16:34:15Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4706427066,
+  "pr_number": 57,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T17:01:25Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4706427241,
+  "pr_number": 57,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T17:01:27Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4706427420,
+  "pr_number": 57,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T17:01:28Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4706427553,
+  "pr_number": 57,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T17:01:29Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "The broad cleanup is careful, and the earlier Copilot findings are resolved. Four blocking prose issues remain: one definition sentence is grammatically incomplete; `押し出し` is not an appropriate or consistently applied term for postcomposition with a continuous linear map; the pointwise-convolution parenthetical still describes the operation incorrectly; and `欠損` remains in the mollification-convergence proof despite the neighbouring entries adopting `近似誤差`. Please repair these before merge.",
+  "id": 4709728382,
+  "pr_number": 57,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-16T01:47:54Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4709761093,
+  "pr_number": 57,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T01:53:05Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4709761195,
+  "pr_number": 57,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T01:53:06Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4709761425,
+  "pr_number": 57,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T01:53:08Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4709761553,
+  "pr_number": 57,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T01:53:09Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "The four blocking prose issues are resolved at `7cec037`: the `W1pTime` definition is grammatically complete; the interval and whole-line weak-derivative lemmas now consistently describe preservation under composition with a continuous linear map; the convolution parenthetical correctly explains its timewise integral definition; and the mollification chain consistently uses `近似誤差`. All review threads are resolved and the current CI runs pass.",
+  "id": 4709860951,
+  "pr_number": 57,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-16T02:09:49Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `c6e0ce816f`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4704987964,
+  "pr_number": 55,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T14:18:47Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4705009431,
+  "pr_number": 55,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T14:21:05Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "The P2 cleanup is broadly careful, and the earlier Codex finding has been repaired. Two blocking semantic regressions remain: (1) the `点別` → `各点` sweep strengthens an essential-bound argument from an a.e. statement to an everywhere statement; please audit analogous measure-theoretic replacements and preserve `a.e.` where required, and (2) two capstone descriptions now misattribute the viscosity form and test family to the forms bundle, although `torusDomain` supplies those data and `Torus3NSForms` supplies the convection form. Please correct the data provenance before merge.",
+  "id": 4705069779,
+  "pr_number": 55,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-15T14:27:49Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4705105767,
+  "pr_number": 55,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T14:31:46Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4705106151,
+  "pr_number": 55,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T14:31:48Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4705106514,
+  "pr_number": 55,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T14:31:51Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "The previously blocking findings are resolved at `d1bb468`: the essential-bound argument now preserves the almost-everywhere qualification, and the torus capstone descriptions correctly separate domain-supplied viscosity/test data from the forms-bundle convection form. All review threads are resolved and the current CI runs pass. The repository-wide replacement of `尾部` is correctly separated into issue #56 and is not a blocker for this PR.",
+  "id": 4705995294,
+  "pr_number": 55,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-15T16:10:15Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "Merge authorised. The blocking review findings have been addressed, all current review threads are resolved, and CI passes at `d1bb468`. Issue #56 tracks the broader terminology migration separately and does not block this PR.",
+  "id": 4705998441,
+  "pr_number": 55,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T16:10:37Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "The bulk terminology migration is consistent with the owner decisions, and the validation workflows are green. I found two blocking regressions, however: (1) several exact fixed-point statements were weakened to unindexed “band-limited” statements, and (2) adding `系列` to the glossary forbidden column makes the current linter reject every legitimate mathematical use of that standard word. Please repair these before merge and audit the remaining `固定される` → `帯域制限` replacements for the same loss of an explicit cutoff index.",
+  "id": 4704268932,
+  "pr_number": 54,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-15T12:59:09Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4704295273,
+  "pr_number": 54,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T13:02:34Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4704295602,
+  "pr_number": 54,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T13:02:37Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4704295897,
+  "pr_number": 54,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T13:02:39Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "## Pull request overview\n\nIssue #51 の owner 裁定に合わせて、コーパス全域の用語を一括で統一し、以降のパケット（P2〜）に入る前提となる語彙の揺れを解消する PR です。\n\n**Changes:**\n- 「截断」を文脈に応じて「打ち切り」または「帯域制限（されている）」へ統一\n- lane の訳語を「系列」から「系統」へ統一\n- `docs/GLOSSARY.md` の該当エントリ更新（forbidden 登録を含む）と監査台帳のステータス更新\n\n### Reviewed changes\n\nCopilot reviewed 133 out of 133 changed files in this pull request and generated 3 comments.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| docs/GLOSSARY.md | 用語裁定（Fourier truncation / band-limited / lane）を反映し forbidden を更新 |\r\n| docs/audit-2026-07-14-ledger.md | 所見台帳の F035/F211 を fixed に更新 |\r\n| corpus/LerayHopf/weakTimeDerivℝ_even_reflection.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/w1pTime_lineExtension.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/w1pTime_continuous_in_H.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/viscousEnn_eq_ofReal_of_bandlimited.yaml | 帯域制限の説明を「打ち切り/帯域制限」裁定に整合させて更新 |\r\n| corpus/LerayHopf/viscous_pointwise_lsc.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/velocitySpanToSigma.yaml | 「ℝ³ 系列」→「ℝ³ 系統」へ統一 |\r\n| corpus/LerayHopf/velocitySpan.yaml | 「截断」→「打ち切り」および「系列」→「系統」へ統一 |\r\n| corpus/LerayHopf/velocitySpan_le_sigma.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/velocityProjection_n_tendsto.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/velocityProjection_n_pythagoras.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/velocityProjection_n_preserves_L2Sigma.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/velocityProjection_n_norm_le.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/velocityProjection_n_inner_symm.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/velocityProjection_n_inner_sub_self.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/velocityProjection_n_inner_of_fixed.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/velocityProjection_n_idem.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/velocityProjection_n_eq_of_le.yaml | 「截断」→「打ち切り」へ統一（※別コメントで「帯域水準」残存を指摘） |\r\n| corpus/LerayHopf/velocityProjection_n_component_comm.yaml | 「Fourier 截断」→「Fourier 打ち切り」へ統一 |\r\n| corpus/LerayHopf/velocityProjection_n_comp_of_le.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/velocityP_fixes_span.yaml | 「截断」→「打ち切り」へ統一（表現を明確化） |\r\n| corpus/LerayHopf/totallyBounded_of_uniform_approx'.yaml | 「ℝ³ 系列」→「ℝ³ 系統」へ統一 |\r\n| corpus/LerayHopf/torusDomain.yaml | 「Fourier 截断射影」→「Fourier 打ち切り射影」へ統一 |\r\n| corpus/LerayHopf/TorusConvectionGap.yaml | 「箱截断」→「箱打ち切り」へ統一 |\r\n| corpus/LerayHopf/TorusConvectionExtension.convFormL2_def.yaml | 「トーラス系列」→「トーラス系統」へ統一 |\r\n| corpus/LerayHopf/Torus3NSForms.yaml | 「箱截断」→「箱打ち切り」へ統一 |\r\n| corpus/LerayHopf/Torus3NSForms_of_gap.yaml | 「箱截断」→「箱打ち切り」へ統一 |\r\n| corpus/LerayHopf/torus3Evolution.yaml | 「本系列」→「本系統」へ統一 |\r\n| corpus/LerayHopf/Torus.galerkinODE_vectorField_contDiff.yaml | 「系列ごと」→「系統ごと」へ統一 |\r\n| corpus/LerayHopf/Torus.galerkinCurve_reg_mem.yaml | 帯域制限の言い回しを「帯域制限されている」に統一 |\r\n| corpus/LerayHopf/torus_weakFormNS_of_strongConvergence.yaml | 「本系列」→「本系統」へ統一（※別コメントで「帯域水準」残存を指摘） |\r\n| corpus/LerayHopf/torus_galerkin_norm_le_u0.yaml | 「ℝ³ 系列」→「ℝ³ 系統」へ統一 |\r\n| corpus/LerayHopf/torus_galerkin_energy_le.yaml | 「Fourier 截断」→「Fourier 打ち切り」へ統一 |\r\n| corpus/LerayHopf/timeTranslateL2.yaml | 「ℝ³ 系列」→「ℝ³ 系統」へ統一 |\r\n| corpus/LerayHopf/timeMollification_exists.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/timeConvL2.yaml | 「ℝ³ 系列」→「ℝ³ 系統」へ統一 |\r\n| corpus/LerayHopf/timeConvL2_sub_le_translation_modulus.yaml | 「ℝ³ 系列」→「ℝ³ 系統」へ統一 |\r\n| corpus/LerayHopf/TensorEdgeGluing.edgeSlot3.yaml | 「両系列/系列側」→「両系統/系統側」へ統一 |\r\n| corpus/LerayHopf/TensorEdgeGluing.edgeSlot2.yaml | 「両系列/系列側」→「両系統/系統側」へ統一 |\r\n| corpus/LerayHopf/TensorEdgeGluing.detExtend.yaml | 「両系列/系列側」→「両系統/系統側」へ統一 |\r\n| corpus/LerayHopf/TensorEdgeGluing.detExtend_edge3_eq.yaml | 「両系列/系列側」→「両系統/系統側」へ統一 |\r\n| corpus/LerayHopf/TensorEdgeGluing.detDomain.yaml | 「両系列/系列側」→「両系統/系統側」へ統一 |\r\n| corpus/LerayHopf/TensorEdgeGluing.convFormL2_multilinear.yaml | 「両系列/系列側」→「両系統/系統側」へ統一 |\r\n| corpus/LerayHopf/TensorEdgeGluing.convFormL2_def.yaml | 「両系列/系列側」→「両系統/系統側」へ統一 |\r\n| corpus/LerayHopf/TensorEdgeGluing.convFormL2_def_eq.yaml | 「両系列/系列側」→「両系統/系統側」へ統一 |\r\n| corpus/LerayHopf/TensorEdgeGluing.convFormL2_antisymm.yaml | 「両系列/系列側」→「両系統/系統側」へ統一 |\r\n| corpus/LerayHopf/TensorEdgeGluing.antisymmetrizer.yaml | 「両系列/系列側」→「両系統/系統側」へ統一 |\r\n| corpus/LerayHopf/tendsto_sqrtViscousWeightTrunc.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/stokesTestPairing_add_left.yaml | 帯域制限の前提を「帯域制限されている」に統一 |\r\n| corpus/LerayHopf/sqrtViscousWeightTrunc.yaml | 「截断乗数」→「打ち切り乗数」へ統一 |\r\n| corpus/LerayHopf/sqrtViscousWeightTrunc_nonneg.yaml | 「截断乗数」→「打ち切り乗数」へ統一 |\r\n| corpus/LerayHopf/sqrtViscousWeightTrunc_abs_le.yaml | 「截断乗数」→「打ち切り乗数」へ統一 |\r\n| corpus/LerayHopf/rellich_seq_compact.yaml | 「截断残差」→「打ち切り残差」等へ統一 |\r\n| corpus/LerayHopf/r3Domain_regIntegrand.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/mulBdd_intervalIntegral_comm.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/memLp_top_sqrtViscousWeightTrunc.yaml | 「截断乗数」→「打ち切り乗数」へ統一 |\r\n| corpus/LerayHopf/mem_velocitySpan_iff.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/L2VF_norm_sub_velocityProjection_sq.yaml | 「截断次数」→「打ち切り次数」等へ統一 |\r\n| corpus/LerayHopf/L2VF_inner_eq_sum_componentC.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/L2C_norm_sub_fourierProjection_sq.yaml | 「截断次数」→「打ち切り次数」等へ統一 |\r\n| corpus/LerayHopf/L2C_norm_sq_eq_tsum_coeff_sq.yaml | 「截断残差」→「打ち切り残差」へ統一 |\r\n| corpus/LerayHopf/isWeakTimeDeriv_primitive.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/IsGalerkinTest.yaml | 帯域制限の定義説明を裁定表現に合わせて更新 |\r\n| corpus/LerayHopf/isGalerkinTest_zero.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/isGalerkinTest_smul.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/isGalerkinTest_add.yaml | 「截断」→「打ち切り」へ統一（※別コメントで「帯域水準」残存を指摘） |\r\n| corpus/LerayHopf/integral_sq_proj_tendsto_zero_of_weak.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/H1SigmaTorus.yaml | 「ℝ³ 系列」→「ℝ³ 系統」へ統一 |\r\n| corpus/LerayHopf/h1EnergySq_eq_L2_add_viscous.yaml | 帯域制限の前提を「帯域制限されている」に統一 |\r\n| corpus/LerayHopf/H1_ball_uniform_L2_approx.yaml | 「截断残差」→「打ち切り残差」へ統一 |\r\n| corpus/LerayHopf/gns_L6_schwartz.yaml | 「動径截断」→「動径打ち切り」へ統一 |\r\n| corpus/LerayHopf/gns_L6_of_memH1_R3.yaml | 「動径截断」→「動径打ち切り」へ統一 |\r\n| corpus/LerayHopf/galerkinTestSpan_subset_H1Sigma.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/galerkinConvection_level_step.yaml | 帯域制限の前提を「帯域制限され」に統一 |\r\n| corpus/LerayHopf/galerkinConvection_antisymm.yaml | 「箱截断」→「箱打ち切り」へ統一 |\r\n| corpus/LerayHopf/Galerkin.NSFormCore.yaml | 「各系列」→「各系統」へ統一 |\r\n| corpus/LerayHopf/Galerkin.LerayHopfSolution.yaml | 「各系列」→「各系統」へ統一 |\r\n| corpus/LerayHopf/Galerkin.forwardGlobalSolution_exists.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/Galerkin.FieldForms.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/Galerkin.FieldForms.vectorField.yaml | 「各系列」→「各系統」へ統一 |\r\n| corpus/LerayHopf/Galerkin.FieldForms.vectorField_contDiff.yaml | 「旧系列」→「旧系統」へ統一 |\r\n| corpus/LerayHopf/Galerkin.FieldForms.forwardGlobalSolution_exists.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/Galerkin.exists_lerayHopf_from_package.yaml | 「旧系列」→「旧系統」へ統一 |\r\n| corpus/LerayHopf/Galerkin.Domain.yaml | 「Fourier 截断」→「Fourier 打ち切り」＋「旧系列」→「旧系統」へ統一 |\r\n| corpus/LerayHopf/Galerkin.Domain.evolution.yaml | 「旧系列」→「旧系統」へ統一 |\r\n| corpus/LerayHopf/Galerkin.CompactnessPackage.yaml | 「旧系列」→「旧系統」へ統一 |\r\n| corpus/LerayHopf/Galerkin.coe_hasDerivAt.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/galerkin_u_norm_le.yaml | 「Fourier 截断」→「Fourier 打ち切り」へ統一 |\r\n| corpus/LerayHopf/fourierSpan_monotone.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/fourierSpan_iSup_dense.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/fourierSpan_hasOrthogonalProjection.yaml | 「スカラー截断」→「スカラー打ち切り」へ統一 |\r\n| corpus/LerayHopf/fourierSpan_finiteDimensional.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/fourierProjection_n.yaml | 「Fourier 截断」→「Fourier 打ち切り」へ統一 |\r\n| corpus/LerayHopf/fourierProjection_n_tendsto.yaml | 「スカラー截断」→「スカラー打ち切り」へ統一 |\r\n| corpus/LerayHopf/fourierProjection_n_mFourierCoeff.yaml | 「Fourier 截断射影」→「Fourier 打ち切り射影」へ統一 |\r\n| corpus/LerayHopf/fourierProjection_n_isCompactOperator.yaml | 「Fourier 截断」→「Fourier 打ち切り」へ統一 |\r\n| corpus/LerayHopf/fourierProjection_n_inner_symm.yaml | 「スカラー截断」→「スカラー打ち切り」へ統一 |\r\n| corpus/LerayHopf/fourierBox.yaml | 「Galerkin 截断」→「Galerkin 打ち切り」へ統一 |\r\n| corpus/LerayHopf/fourierBox_monotone.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/exists_weak_limit_curve.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/exists_limit_curve_of_galSeq.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/edge_inf_eq_galerkin_tensor.yaml | 「ℝ³ 系列」→「ℝ³ 系統」へ統一 |\r\n| corpus/LerayHopf/DivFreeL2.yaml | 「トーラス系列/ℝ³ 系列」→「トーラス系統/ℝ³ 系統」へ統一 |\r\n| corpus/LerayHopf/DissipativeEvolution.convForm_self_zero_right.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/convFormL2_galerkinTest_dense.yaml | 「Fourier 截断」→「Fourier 打ち切り」へ統一 |\r\n| corpus/LerayHopf/convFormL2_galerkin_pin.yaml | 帯域制限/箱打ち切りの言い回しへ統一 |\r\n| corpus/LerayHopf/convFormFourier_eq_galerkin.yaml | 帯域制限の前提を「帯域制限され」に統一 |\r\n| corpus/LerayHopf/continuous_sqrtViscousWeightTrunc.yaml | 「截断乗数」→「打ち切り乗数」へ統一 |\r\n| corpus/LerayHopf/conjL2C_fourierProjection.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/componentC_mem_fourierSpan.yaml | 「截断」→「打ち切り」へ統一 |\r\n| corpus/LerayHopf/coeff_zero_outside_box.yaml | 帯域制限の前提を「帯域制限され」に統一＋「截断」→「打ち切り」 |\r\n| corpus/LerayHopf/BilinearExtension.outerLM.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.outerCLM.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.outerCLM_apply.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.isUniformInducing_eDL.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.innerCLM.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.innerCLM_smul.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.innerCLM_bound.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.innerCLM_apply_eD.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.innerCLM_add.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.extendOfNorm_eD_smul.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.extendOfNorm_eD_add.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.extendBoundedBilinearOfDense.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.extendBoundedBilinearOfDense_apply.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.eq_of_agree_dense.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.eDL.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.eD.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.eD_norm.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.denseRange_eDL.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.denseRange_eD.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/BilinearExtension.beta_bound.yaml | 「両系列」→「両系統」へ統一 |\r\n| corpus/LerayHopf/allDirections_cauchySeq_of_galerkinTest.yaml | 「Fourier 截断射影」→「Fourier 打ち切り射影」へ統一 |\n</details>\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/lean-pde-notes/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4704644173,
+  "pr_number": 54,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T13:41:17Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4704670824,
+  "pr_number": 54,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T13:44:20Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4704671180,
+  "pr_number": 54,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T13:44:23Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4704671536,
+  "pr_number": 54,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T13:44:25Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "前回の blocking 指摘は解消されています．\n\n- 特定次数の Fourier 打ち切りに関する不変性が，添字を保持した明示的な主張へ復元された\n- `系列` の全域禁止を撤回し，lane 固有句のみを lint 対象とした\n- 類似箇所の固定点／帯域制限表現も監査され，必要な次数情報が保持された\n- Copilot の追加指摘も反映済みで，未解決スレッドはない\n- 最新 head `affb782` の CI は成功している\n\nNo blocking issues remain. Approved for merge.",
+  "id": 4704795857,
+  "pr_number": 54,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-15T13:57:45Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `d097a7a04f`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4703115166,
+  "pr_number": 53,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T10:15:36Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4703125560,
+  "pr_number": 53,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T10:17:13Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "以下の 2 点は blocking です．\n\n1. `AbstractGalerkinData.statement_ja` で「データ束」を削除していますが，issue #51 の G2 では「束／データ束」は裁定済みの変更不要語です．statement は原文へ戻し，Lean 用語を含む `proof_ja` の修正のみ維持してください．台帳 F071 も `fixed` ではなく，owner 裁定による `rejected` とするのが妥当です．\n\n2. 台帳の `superseded-by-#52` 判定に誤りがあります．F040／F249 は処理済み扱いですが，対象文には未訳の `eventually` が残っています．同じ引用範囲に別の修正が入ったことをもって所見全体を完了扱いした可能性があるため，F040／F249 を `open` に戻し，72 件の `superseded-by-#52` を再検証してください．この台帳を P2–P4 の SSoT とする以上，状態判定の正確性は必須です．\n\nMinor: fixed note に識別子・英文が途中で切れている行があります（例: F005, F009, F020）．意図的な文字数制限なら省略記号を付けるか，fixed note は切らない方がよいです．\n\nCI は green，既存の Markdown 表エスケープ指摘は修正済みです．",
+  "id": 4703382650,
+  "pr_number": 53,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-15T10:52:45Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "追加の日本語表現レビューです．P1 の修正だけでなく，後続パケットの処理方針にも反映してください．\n\n1. **「截断」**\n   - コーパス中の表記は「裁断」ではなく「截断」です．truncation の数学用語として「Fourier 截断」「截断次数」は許容でき，維持して構いません．\n   - 念のため `grep -rn '裁断' corpus/` で誤字がないことだけ確認してください．\n\n2. **「帯域」**\n   - 「帯域」「帯域制限」は Fourier 解析の文脈で自然です．\n   - 一方，**「帯域水準」**は不自然な造語なので，原則として **「截断次数」**へ置換してください．現状では `galerkin_test_pairing_lipschitz` や `exists_uniform_subseq_of_lipschitz_family` に残っています．台帳 F018/F139/F370 等の処理でも同じ方針を用いてください．\n\n3. **「載荷点」**\n   - この文脈では力学用語を流用した不自然な表現です．**「要点」**，必要なら **「技術上の要点」**へ置換してください．F041/F252 はこの方針で処理してください．\n\n4. **「点別」**\n   - pointwise の機械的な直訳に見え，自然な数学日本語としては避けたいです．コーパス全域で検索し，文脈別に次のように書き換えてください．\n     - 点別収束 → 各点収束／各点で収束する\n     - 点別評価 → 各点での評価\n     - 点別不等式 → 各点で成り立つ不等式\n     - 点別ノルム → 各点でのノルム\n     - 点別成分 → 各点での成分，または単に各成分\n   - 本 PR では `L2VF_norm_sq_eq_sum_componentC` に「点別成分」が残っています．ここは例えば「埋め込み成分の代表関数が元の関数の各成分とほとんど至る所一致する」が自然です．\n   - `Torus.norm_le_of_forwardSolution` の表示語「Galerkin 場の点別散逸性」も，「Galerkin 場が各点で満たす散逸性」等へ変更してください．\n\n機械的一括置換ではなく，各文の述語関係が明確になるよう文脈別に直してください．",
+  "id": 4703629150,
+  "pr_number": 53,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T11:30:05Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "先ほどの追加レビューの 1 点目を訂正します．\n\n- 「截断」は数学的には通じますが，本コーパスの自然な日本語としては **「打ち切り」**を優先してください．\n- 操作そのものは「Fourier 打ち切り」「打ち切り次数」とするのが自然です．\n- 結果の性質を述べる場合は「帯域制限されている」を用いてください．\n\nしたがって，先ほどの「Fourier 截断／截断次数は維持してよい」という指摘は撤回します．文脈に応じて「打ち切り」または「帯域制限」へ置換してください．\n\n例:\n- Fourier 截断 → Fourier 打ち切り\n- 截断次数 → 打ち切り次数\n- 截断で固定される → 打ち切っても変わらない\n- 截断前の原像 → 打ち切る前の場",
+  "id": 4703658374,
+  "pr_number": 53,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T11:34:45Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\n日本語コーパス全体の表現ゆれ・借用語の是正（issue #51 の監査所見 P1）として、用語「証人」除去と equi-Lipschitz 訳語の owner 裁定反映、ならびに energy/ode/spaces 章周辺の監査所見修正と台帳新設を行う PR です。\n\n**Changes:**\n- GLOSSARY の equi-Lipschitz 訳語を「同程度 Lipschitz 連続 / 同程度 Lipschitz 連続性」に更新し、corpus 側の用例もそれに合わせて統一\n- corpus 全域で借用語「証人」を除去し、energy/ode/spaces 章の監査所見に基づく表現修正を適用\n- 監査所見台帳 `docs/audit-2026-07-14-ledger.md` を新設し、所見の状態管理（open/fixed/rejected/superseded）を導入\n\n### Reviewed changes\n\nCopilot reviewed 47 out of 47 changed files in this pull request and generated 3 comments.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| docs/GLOSSARY.md | equi-Lipschitz の訳語裁定（「連続/連続性」まで付与）を SoT に反映 |\r\n| docs/audit-2026-07-14-ledger.md | 監査所見 371 件の台帳を新設（ID・状態・ノート管理） |\r\n| corpus/LerayHopf/young_convolution_memLp_L2.yaml | 「証人」除去（MemLp の説明を言い換え） |\r\n| corpus/LerayHopf/volume_torus3_eq_haarTorus3.yaml | 証明文の自然さ改善（積測度の一致の言い回し） |\r\n| corpus/LerayHopf/viscousEnn.yaml | 「正直な和」等の表現を具体化して説明 |\r\n| corpus/LerayHopf/VelocityValue.yaml | 「Euclid 内積とノルムを込めて」を自然な定義文に整理 |\r\n| corpus/LerayHopf/velocityP_initial_mem.yaml | 「証人」除去（所属の特徴づけの書き方を明示化） |\r\n| corpus/LerayHopf/Torus3.yaml | 「三つ組の直積」→「3 重直積」へ表現整理 |\r\n| corpus/LerayHopf/torus3_mFourierBasis.yaml | mathlib 依存の説明を gap.note へ寄せ、本文を数学寄りに調整 |\r\n| corpus/LerayHopf/Torus.norm_le_of_forwardSolution.yaml | 「委譲」→「帰着」等、証明文の自然さ改善 |\r\n| corpus/LerayHopf/Torus.galerkinODE_vectorField_contDiff.yaml | 「汎用側の内実」等の表現整理＋gap.note の造語是正 |\r\n| corpus/LerayHopf/Torus.galerkinField_uniform_local_time.yaml | 継ぎ足し比喩の是正（貼り合わせ等）と説明の明確化 |\r\n| corpus/LerayHopf/Torus.galerkinField_solution_agree.yaml | 「継ぎ足し」→「貼り合わせ/接続」へ統一、委譲表現を是正 |\r\n| corpus/LerayHopf/Torus.galerkinField_inner_self_nonpos.yaml | 「委譲」→「帰着」＋「内実」言い換えで読みやすさ改善 |\r\n| corpus/LerayHopf/Torus.energy_hasDerivAt_of_localSolution.yaml | 「委譲」→「帰着」＋説明の補強（微分の読み替え） |\r\n| corpus/LerayHopf/torus_galerkin_norm_le_u0.yaml | Lean 実装語感の薄い言い回しへ調整（有界“フィールド”→有界性） |\r\n| corpus/LerayHopf/Time.yaml | 「型面」→「型によって」へ表現修正 |\r\n| corpus/LerayHopf/summable_norm_mFourierCoeff3_sq.yaml | 「ODE 機構」など比喩を避けた言い換え |\r\n| corpus/LerayHopf/stokesTestPairing_smul_right.yaml | mathlib 依存の言及を削り、数学的説明に寄せる |\r\n| corpus/LerayHopf/stokesTestPairing_diag.yaml | 「落ちる」比喩を避けた説明へ修正 |\r\n| corpus/LerayHopf/stokesTestPairing_add_right.yaml | 文章の自然さ改善（総和のまとめ方の表現整理） |\r\n| corpus/LerayHopf/SpatialField.yaml | 「場所取り」比喩と Lean 実装語を避けた説明へ置換 |\r\n| corpus/LerayHopf/perTest_lipschitz_R3.yaml | 「同程度 Lipschitz 連続性」表現へ統一 |\r\n| corpus/LerayHopf/ofReal_viscousFormSq_le.yaml | 「ジャンク値規約」説明の言い回しを具体化 |\r\n| corpus/LerayHopf/memH1VF_zero.yaml | 接続詞・文法の微修正 |\r\n| corpus/LerayHopf/memH1Torus.yaml | 「足場」比喩の是正（定義として採用した旨へ） |\r\n| corpus/LerayHopf/mem_velocitySpan_of_fixed.yaml | 「証人」除去（所属の特徴づけの表現を明確化） |\r\n| corpus/LerayHopf/L2VF.yaml | 「主舞台」比喩を避けた表現へ修正 |\r\n| corpus/LerayHopf/L2VF_norm_sq_eq_sum_componentC.yaml | a.e. の和文化等、証明文・gap.note の表現統一 |\r\n| corpus/LerayHopf/kernelL2R.yaml | 「証人」除去（MemLp の扱いを言い換え） |\r\n| corpus/LerayHopf/kernelL1R.yaml | 「証人」除去（MemLp の扱いを言い換え） |\r\n| corpus/LerayHopf/instIsProbabilityMeasureUnitAddCircleVolume_lerayHopf.yaml | mathlib 実装寄り表現を避けて数学的説明へ |\r\n| corpus/LerayHopf/galerkinTest_cauchySeq_of_aeStrong.yaml | 「同程度 Lipschitz 連続性」表現へ統一 |\r\n| corpus/LerayHopf/galerkin_test_pairing_lipschitz.yaml | 「同程度 Lipschitz 連続性」表現へ統一 |\r\n| corpus/LerayHopf/exists_weak_representative_R3.yaml | 「同程度 Lipschitz 連続性」表現へ統一 |\r\n| corpus/LerayHopf/exists_uniform_subseq_of_lipschitz_family.yaml | 「同程度 Lipschitz 連続」表現へ更新（対角線論法の記述） |\r\n| corpus/LerayHopf/exists_galerkin_test_family.yaml | Lean 実装語感の薄い説明へ言い換え |\r\n| corpus/LerayHopf/exists_galerkin_modewise_extraction.yaml | 「証人」除去＋「共通の Lipschitz 定数」等、裁定語への更新 |\r\n| corpus/LerayHopf/EnergySkeleton.EnergyInequality.yaml | 「抽象層」等の表現をより説明的に修正 |\r\n| corpus/LerayHopf/EnergyData.yaml | 「フィールドとして束ねる」等の Lean 実装語感を除去 |\r\n| corpus/LerayHopf/DivFreeL2.yaml | 「発散ゼロ性」→「発散がゼロであること」へ自然さ改善 |\r\n| corpus/LerayHopf/convSummand.yaml | 文法の微修正（「足し実部」→「足して実部」） |\r\n| corpus/LerayHopf/convFormFourier.yaml | 「真正な値」表現をより平明に修正 |\r\n| corpus/LerayHopf/convFormFourier_antisymm_galerkinTest.yaml | 比喩を避けた言い回しへ整理（合流→まとめる等） |\r\n| corpus/LerayHopf/convBLTgalerkin.yaml | 「証人」除去（適用の言い方を平明に） |\r\n| corpus/LerayHopf/Bochner.WeakLimitToolkit.cauchySeq_of_equiLipschitz_of_dense.yaml | equi-Lipschitz 訳語裁定（連続/連続性）を反映 |\r\n| corpus/LerayHopf/AbstractGalerkinData.yaml | Lean 実装語感（インスタンス/フィールド）を避けた説明へ調整 |\n</details>\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/lean-pde-notes/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4703659155,
+  "pr_number": 53,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T11:34:53Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4703681534,
+  "pr_number": 53,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T11:38:28Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4703681695,
+  "pr_number": 53,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T11:38:30Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4703681801,
+  "pr_number": 53,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-15T11:38:31Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "最終確認ではまだ green ではありません．CI とレビュースレッドは green ですが，以下が残っています．\n\n1. **「截断」が現行 corpus に残存**\n   先の owner 訂正どおり，操作は「打ち切り」，結果の性質は「帯域制限」としてください．少なくとも次が未修正です．\n   - `exists_galerkin_test_family`: 「自分の次数の Fourier 截断で固定される」\n   - `mem_velocitySpan_of_fixed`: statement／proof／gap.note の「截断」\n   - `velocityP_initial_mem`: statement／proof の「截断」\n   - `stokesTestPairing_smul_right`: 「Fourier 截断で固定される（帯域制限）」\n\n   例として，「Fourier 打ち切りで不変である」「打ち切る前の場」「初期値を打ち切ったもの」等，文脈に応じて自然な文へ書き換えてください．PR の変更対象内にある「截断」を再検索してください．\n\n2. **未訳の `eventually` が別箇所に残存**\n   `galerkin_test_pairing_lipschitz.gap.note` の「eventually-$n_0$ 入力」は，「ある番号以降という入力条件」等へ和文化してください．\n\n3. **台帳 F139 の状態が本文と不一致**\n   `galerkin_test_pairing_lipschitz.statement_ja` は既に「帯域水準」から「打ち切り次数」へ修正されていますが，F139 はなお `open` です．F018 と同様に `fixed` とし，統合適用を note に記録してください．台帳を後続 P2–P4 の SSoT とするため，この不整合は解消が必要です．\n\n上記以外では，前回の blocking 指摘（データ束の復元，F040/F249 と superseded 再検証，載荷点，点別成分）は適切に修正され，CI 2 本も success，未解決スレッドは 0 です．",
+  "id": 4703758419,
+  "pr_number": 53,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-15T11:50:04Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `349f9bd33e`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4692574011,
+  "pr_number": 52,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-14T09:06:08Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4692589681,
+  "pr_number": 52,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-14T09:08:01Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `486cbdb277`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4690185518,
+  "pr_number": 48,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-14T01:26:09Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4690195313,
+  "pr_number": 48,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-14T01:29:18Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nThis PR upgrades the `projections-galerkin` chapter’s `tier: full` + `generated` corpus entries to handwritten Japanese annotations faithful to the Lean development, removing the `generated` tag and replacing boilerplate with concrete statements, proof sketches, and design notes around Fourier/Galerkin projections on the 3-torus.\n\n**Changes:**\n- Replaced placeholder `statement_ja` / `proof_ja` with declaration-specific mathematical descriptions across 50 corpus entries.\n- Updated `gap.level` (mostly to `none`) and rewrote `gap.note` to capture intent/usage (e.g., why `velocitySpan` is defined as an image inside the divergence-free space).\n- Retagged entries from `[wave3-public, generated]` to content-based tag sets.\n\n### Reviewed changes\n\nCopilot reviewed 50 out of 50 changed files in this pull request and generated 2 comments.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| corpus/LerayHopf/velocitySpanToSigma.yaml | Handwritten description of the embedding `V_n → L²_σ` and its role as a typing bridge |\r\n| corpus/LerayHopf/velocitySpanToSigma_smul.yaml | Handwritten description for scalar-homogeneity lemma of the embedding |\r\n| corpus/LerayHopf/velocitySpanToSigma_coe.yaml | Handwritten `simp`-style coercion/value-preservation lemma for the embedding |\r\n| corpus/LerayHopf/velocitySpanToSigma_add.yaml | Handwritten additivity lemma for the embedding |\r\n| corpus/LerayHopf/velocitySpan.yaml | Handwritten definition note for `V_n` as image of truncation on divergence-free inputs |\r\n| corpus/LerayHopf/velocitySpan_le_sigma.yaml | Handwritten lemma that `V_n ⊆ L²_σ` using truncation preserving divergence-free |\r\n| corpus/LerayHopf/velocitySpan_hasOrthogonalProjection.yaml | Handwritten instance note: existence of orthogonal projection onto `V_n` |\r\n| corpus/LerayHopf/velocitySpan_finiteDimensional.yaml | Handwritten proof sketch of finite-dimensionality via component map into Fourier spans |\r\n| corpus/LerayHopf/velocitySpan_completeSpace.yaml | Handwritten note: completeness of `V_n` from finite-dimensionality |\r\n| corpus/LerayHopf/velocityProjection_n_tendsto.yaml | Handwritten proof sketch of strong convergence of vector truncations via scalar components |\r\n| corpus/LerayHopf/velocityProjection_n_pythagoras.yaml | Handwritten Pythagoras decomposition for truncation + tail |\r\n| corpus/LerayHopf/velocityProjection_n_preserves_L2Sigma.yaml | Handwritten explanation of divergence-free preservation via Fourier-symbol characterization |\r\n| corpus/LerayHopf/velocityProjection_n_inner_symm.yaml | Handwritten self-adjointness argument lifted componentwise from scalar truncation |\r\n| corpus/LerayHopf/velocityProjection_n_inner_sub_self.yaml | Handwritten orthogonality of truncation and tail using self-adjoint + idempotent |\r\n| corpus/LerayHopf/velocityProjection_n_inner_of_fixed.yaml | Handwritten lemma: pairing with fixed (band-limited) test passes truncation through |\r\n| corpus/LerayHopf/velocityProjection_n_idem.yaml | Handwritten idempotence proof sketch via coefficient/extensionality |\r\n| corpus/LerayHopf/velocityProjection_n_comp_of_le.yaml | Handwritten nesting lemma `P_n(P_m u)=P_n u` for `n≤m` via box monotonicity |\r\n| corpus/LerayHopf/velocityP_initial_mem.yaml | Handwritten lemma: truncated initial data lies in `V_n` |\r\n| corpus/LerayHopf/velocityP_fixes_span.yaml | Handwritten lemma: truncation fixes elements of `V_n` (one bridge direction) |\r\n| corpus/LerayHopf/mem_velocitySpan_of_fixed.yaml | Handwritten lemma: fixed points belong to `V_n` (reverse bridge direction) |\r\n| corpus/LerayHopf/mem_velocitySpan_iff.yaml | Handwritten membership characterization of `V_n` as an image |\r\n| corpus/LerayHopf/mem_sigma_of_mem_velocitySpan.yaml | Handwritten lemma: elements of `V_n` are divergence-free (subtype rephrasing) |\r\n| corpus/LerayHopf/mem_L2Sigma_iff.yaml | Handwritten equivalence between subspace membership and the divergence-free predicate |\r\n| corpus/LerayHopf/lerayProjection_range.yaml | Handwritten statement of Leray projection range + cited mathlib lemma |\r\n| corpus/LerayHopf/lerayProjection_norm_le.yaml | Handwritten operator norm bound for Leray projection + cited mathlib lemma |\r\n| corpus/LerayHopf/lerayProjection_isSymmetric.yaml | Handwritten self-adjointness statement for Leray projection |\r\n| corpus/LerayHopf/lerayProjection_idempotent.yaml | Handwritten idempotence statement for Leray projection + cited mathlib lemma |\r\n| corpus/LerayHopf/lerayProjection_fixes_divFree.yaml | Handwritten lemma: Leray projection fixes divergence-free fields + cited mathlib lemma |\r\n| corpus/LerayHopf/L2VF_inner_eq_sum_componentC.yaml | Handwritten inner-product decomposition into sum of real parts of complex component inners |\r\n| corpus/LerayHopf/L2VF_injectComponent.yaml | Handwritten definition note for injecting scalar `L²` into the `j`th vector component |\r\n| corpus/LerayHopf/L2VF_ext_componentC_mFourierCoeff.yaml | Handwritten extensionality-by-(all component) Fourier coefficients proof sketch |\r\n| corpus/LerayHopf/isClosed_L2Sigma.yaml | Handwritten closedness of divergence-free subspace as intersection of kernels |\r\n| corpus/LerayHopf/instHasOrthogonalProjectionRealSubtypeAEEqFunTorus3VelocityValueHaarTorus3MemAddSubgroupL2VFL2Sigma.yaml | Handwritten instance note: orthogonal projection onto `L²_σ` (Leray projection) |\r\n| corpus/LerayHopf/instCompleteSpaceSubtypeAEEqFunTorus3VelocityValueHaarTorus3MemAddSubgroupL2VFSubmoduleRealL2Sigma.yaml | Handwritten instance note: completeness of `L²_σ` via closedness |\r\n| corpus/LerayHopf/fourierSpan.yaml | Handwritten definition of scalar Fourier span subspace for a frequency box |\r\n| corpus/LerayHopf/fourierSpan_monotone.yaml | Handwritten monotonicity of Fourier spans via box monotonicity |\r\n| corpus/LerayHopf/fourierSpan_iSup_dense.yaml | Handwritten density of supremum of spans via Hilbert basis + box exhaustiveness |\r\n| corpus/LerayHopf/fourierSpan_hasOrthogonalProjection.yaml | Handwritten instance note: orthogonal projection onto Fourier span (scalar truncation) |\r\n| corpus/LerayHopf/fourierSpan_finiteDimensional.yaml | Handwritten finite-dimensionality note: span of a finite set |\r\n| corpus/LerayHopf/fourierSpan_completeSpace.yaml | Handwritten completeness note: finite-dimensional subspace is complete |\r\n| corpus/LerayHopf/fourierProjection_n_tendsto.yaml | Handwritten convergence of scalar truncations to identity using monotone+dense theorem |\r\n| corpus/LerayHopf/fourierProjection_n_inner_symm.yaml | Handwritten self-adjointness statement for scalar truncation + cited mathlib lemma |\r\n| corpus/LerayHopf/fourierCoeffCLM.yaml | Handwritten definition: Fourier coefficient as continuous linear functional via innerSL |\r\n| corpus/LerayHopf/fourierCoeffCLM_apply.yaml | Handwritten lemma: functional value equals Fourier coefficient |\r\n| corpus/LerayHopf/fourierBox.yaml | Handwritten definition of the frequency box `[-n,n]^3 ⊂ ℤ^3` as a finite set |\r\n| corpus/LerayHopf/fourierBox_monotone.yaml | Handwritten monotonicity of boxes via coordinate interval inclusion |\r\n| corpus/LerayHopf/fourierBox_exhausts.yaml | Handwritten exhaustiveness: any `k` lies in some box |\r\n| corpus/LerayHopf/divSymbol_apply.yaml | Handwritten expansion rule for the divergence symbol as a Fourier-side divergence sum |\r\n| corpus/LerayHopf/divFreeL2_iff_divSymbol.yaml | Handwritten equivalence: divergence-free predicate ↔ all divergence symbols vanish |\r\n| corpus/LerayHopf/componentC_mem_fourierSpan.yaml | Handwritten lemma: components of `v ∈ V_n` lie in the scalar Fourier span |\n</details>\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/lean-pde-notes/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4677874387,
+  "pr_number": 47,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T13:26:26Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4677876255,
+  "pr_number": 47,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T13:27:55Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4677876279,
+  "pr_number": 47,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T13:27:56Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `7240729e6f`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4677832479,
+  "pr_number": 46,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T13:07:40Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4677835175,
+  "pr_number": 46,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T13:08:55Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `9b814b0b51`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4677817098,
+  "pr_number": 45,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T12:58:42Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4677818884,
+  "pr_number": 45,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T12:59:49Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4677818903,
+  "pr_number": 45,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T12:59:50Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `b104228362`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4677804280,
+  "pr_number": 44,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T12:49:18Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4677805769,
+  "pr_number": 44,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T12:50:39Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `d0961f919f`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4677791071,
+  "pr_number": 43,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T12:41:20Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4677792268,
+  "pr_number": 43,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T12:42:24Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4677792292,
+  "pr_number": 43,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T12:42:26Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `dc4a587e92`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4677770352,
+  "pr_number": 42,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T12:25:37Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4677772705,
+  "pr_number": 42,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T12:27:02Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `a517293d30`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4677561328,
+  "pr_number": 41,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T10:52:03Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `5a8efa2c6f`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4677092139,
+  "pr_number": 40,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T08:11:50Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4677095143,
+  "pr_number": 40,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T08:13:02Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `2e2fe14c66`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4677050287,
+  "pr_number": 39,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T07:57:15Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `8e4b895a12`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4677002375,
+  "pr_number": 38,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T07:33:58Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4677005656,
+  "pr_number": 38,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T07:35:21Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nhttps://github.com/uda-lab/lean-pde-notes/blob/15a73872ec93fd2208dd6db456396574b437538a/corpus/LerayHopf/exists_lerayHopf_r3.yaml#L28\n**<sub><sub>![P3 Badge](https://img.shields.io/badge/P3-lightgrey?style=flat)</sub></sub>  Reword the stale `axiomatic` theorem-name note**\n\nThis entry was renamed to `LerayHopf.exists_lerayHopf_r3`, so the rendered note now says the current theorem name has an `axiomatic` suffix even though this PR removes that suffix; the same stale wording appears in the torus capstone. Readers will see contradictory migration information, so please phrase this as old-name history or remove it.\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4676984618,
+  "pr_number": 37,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T07:25:01Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "## Pull request overview\n\nThis PR introduces explicit split-licensing and citation metadata to clarify how software vs. prose/annotation content in the repository should be licensed and cited, aligning with the public-readiness requirements in issue #34.\n\n**Changes:**\n- Add a root `LICENSE.md` describing split licensing (Apache-2.0 for software components; CC-BY-4.0 for explanatory/prose content) and clarifying that `site/data/` JSON is derived data.\n- Add `LICENSES/Apache-2.0.txt` and `LICENSES/CC-BY-4.0.txt` with SPDX identifiers and canonical links.\n- Add `CITATION.cff` and document citation + license scope in `README.md` and `site/README.md`.\n\n### Reviewed changes\n\nCopilot reviewed 6 out of 6 changed files in this pull request and generated no comments.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| `site/README.md` | Documents license scope for viewer code vs. rendered content and clarifies derived status of generated `site/data/*.json`. |\r\n| `README.md` | Adds a “ライセンスと引用” section pointing to `LICENSE.md` and `CITATION.cff` and describing scope. |\r\n| `LICENSES/CC-BY-4.0.txt` | Adds CC-BY-4.0 identifier file with canonical legalcode link and scope pointer. |\r\n| `LICENSES/Apache-2.0.txt` | Adds Apache-2.0 identifier file with canonical text link and scope pointer. |\r\n| `LICENSE.md` | Adds the authoritative split-license summary at repo root, including derived-data note. |\n</details>\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/lean-pde-notes/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4646882874,
+  "pr_number": 35,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-07T16:04:14Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "Reviewed PR #31.\n\nOverall this implements the intended Phase A boundary well: generated JSON is removed from source review, the new workflow builds source-less site data, uploads `site/` as an artifact, and does not enable Pages deployment. The PR description also correctly calls out that source-enabled inspection remains a Phase B precondition.\n\nA few small issues / follow-ups before merge:\n\n1. `site/data/.gitkeep` references `.github/workflows/build.yml`, but the actual workflow is `.github/workflows/build-site-artifact.yml`. Please update that comment.\n\n2. The workflow currently sets `node-version: \"20\"`, while the Actions log emits a Node 20 deprecation warning. Since this repo only runs a small jsdom harness, consider switching to Node 24 now unless there is a specific reason to pin 20.\n\n3. In `scripts/site_data_size_report.py`, bucket estimates use `json.dumps(...)` with default `ensure_ascii=True`, while `build_site_data.py` writes generated JSON with `ensure_ascii=False`. This can distort Japanese-heavy corpus bucket sizes. Please consider using `ensure_ascii=False` in the estimator so the bucket report better tracks actual UTF-8 payload size.\n\n4. The source bucket currently iterates over top-level values of `sources.json` rather than explicitly over `payload[\"sources\"].values()`. The current approximation is probably harmless, but it would be clearer and less fragile to measure only the actual source map entries.\n\nNone of these look like conceptual blockers. After the `.gitkeep` typo and size-report precision cleanup, I would be comfortable merging this Phase A PR.",
+  "id": 4645899440,
+  "pr_number": 31,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-07T14:05:10Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nThis PR documents a low-risk strategy for managing the large generated `site/data/nodes.json` artifact, aiming to preserve the current pure-static site UX while reducing review/diff noise and agent/token cost.\n\n**Changes:**\n- Add a written proposal evaluating options for handling `site/data/nodes.json` (keep committed vs CI/Pages generation vs sharding vs source separation) and recommending a staged approach.\n- Mark `site/data/nodes.json` as `linguist-generated` via `.gitattributes` to reduce GitHub diff/language noise for the generated artifact.\n\n### Reviewed changes\n\nCopilot reviewed 2 out of 2 changed files in this pull request and generated no comments.\n\n| File | Description |\n| ---- | ----------- |\n| docs/site-data-artifact-proposal.md | Adds the proposal, measurements, option analysis, and a two-step recommendation for mitigating artifact churn. |\n| .gitattributes | Marks `site/data/nodes.json` as `linguist-generated` for GitHub Linguist/diff handling. |\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/lean-pde-notes/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4644454963,
+  "pr_number": 26,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-07T11:13:18Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "## Pull request overview\n\nCopilot reviewed 5 out of 7 changed files in this pull request and generated 1 comment.\n\n\n\n\n",
+  "id": 4644621127,
+  "pr_number": 26,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-07T11:34:38Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4644642031,
+  "pr_number": 26,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-07T11:37:32Z",
+  "user_login": "uda-lab-agent"
+ }
+]

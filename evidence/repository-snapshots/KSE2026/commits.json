@@ -1,5 +1,78 @@
 [
  {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-26T09:26:25Z",
+  "committed_date": "2026-07-26T09:26:25Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "e65b872e77abec6a61d673721565a5d8d6ba0461",
+   "015709e8dd48006074f25576a91b014010cd490e"
+  ],
+  "sha": "9e4289905c599799bdc37dbea7ceff7076475034",
+  "subject": "Merge pull request #80 from uda-lab/issue-79-snapshot-name-redaction"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-26T09:14:43Z",
+  "committed_date": "2026-07-26T09:14:43Z",
+  "committer_login": null,
+  "parents": [
+   "b9030c8aae509daf3acd653e8f93b8a25cecf48d"
+  ],
+  "sha": "015709e8dd48006074f25576a91b014010cd490e",
+  "subject": "PR #80 owner review P1: order-independent masking for containing entries"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-26T08:38:48Z",
+  "committed_date": "2026-07-26T08:38:48Z",
+  "committer_login": null,
+  "parents": [
+   "8cfaca33437c37df7a0d70b5d159055d58794fde"
+  ],
+  "sha": "b9030c8aae509daf3acd653e8f93b8a25cecf48d",
+  "subject": "PR #80 review round 2: pin analysis counts, harden scrub, add selftests"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-26T08:29:01Z",
+  "committed_date": "2026-07-26T08:29:01Z",
+  "committer_login": null,
+  "parents": [
+   "b093f984b37a27616d12246ed2993c02ab7dda9f"
+  ],
+  "sha": "8cfaca33437c37df7a0d70b5d159055d58794fde",
+  "subject": "PR #80 review fixup: correct overclaim in ai-use.md row"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-26T08:25:35Z",
+  "committed_date": "2026-07-26T08:25:35Z",
+  "committer_login": null,
+  "parents": [
+   "0a271ca0bf9ed1c4ab84e33dc9bc9ca5434be990"
+  ],
+  "sha": "b093f984b37a27616d12246ed2993c02ab7dda9f",
+  "subject": "PR #80 review fixup: scrub every exported string field"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-26T08:20:12Z",
+  "committed_date": "2026-07-26T08:20:12Z",
+  "committer_login": null,
+  "parents": [
+   "e65b872e77abec6a61d673721565a5d8d6ba0461"
+  ],
+  "sha": "0a271ca0bf9ed1c4ab84e33dc9bc9ca5434be990",
+  "subject": "Issue #79: mask denylisted names in repo-snapshot exports"
+ },
+ {
   "author_login": "t-uda",
   "author_name": "Tomoki UDA",
   "authored_date": "2026-07-25T12:58:07Z",

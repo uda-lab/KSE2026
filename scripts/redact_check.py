@@ -40,10 +40,18 @@ PATTERNS = [
 # lean-pde(-notes) are the former names of leray-hopf(-notes) — public redirects.
 # TauCetiProject: related-work comparison target, owner-designated (issue #42/#47);
 # only the four verified-public repos, not the whole org.
+# citation-file-format/citation-file-format and KaTeX/KaTeX: third-party
+# dependency/license-attribution references that surfaced in
+# evidence/repository-snapshots/leray-hopf-notes/issues.json (issue #70,
+# leray-hopf-notes#66/#77 — CITATION.cff schema compliance and vendored
+# KaTeX MIT notice). Both are well-known, unambiguously-public upstream OSS
+# projects with no privacy implication; added rather than masked so the
+# snapshot keeps the real citation/attribution context.
 PUBLIC_REPO_ALLOWLIST = re.compile(
     r"github\.com/(uda-lab/(leray-hopf|leray-hopf-notes|lean-pde|lean-pde-notes"
     r"|KSE2026)|leanprover|leanprover-community"
-    r"|TauCetiProject/(TauCeti|TauCetiRoadmap|TauCetiReview|TauCetiData))"
+    r"|TauCetiProject/(TauCeti|TauCetiRoadmap|TauCetiReview|TauCetiData)"
+    r"|citation-file-format/citation-file-format|KaTeX/KaTeX)"
     r"([/#?].*)?$"
 )
 GITHUB_URL = re.compile(r"https?://github\.com/[A-Za-z0-9._-]+/[A-Za-z0-9._-]+")
