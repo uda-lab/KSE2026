@@ -37,6 +37,7 @@ endif
 
 lint:
 	python3 -m unittest scripts.test_check_prose_style
+	python3 -m unittest scripts.test_connector_linkage
 	python3 scripts/check_prose_style.py
 ifdef CHKTEX
 	@# chktex exits 0 on an input it cannot open, so an empty or stale file list

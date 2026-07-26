@@ -1,0 +1,1218 @@
+[
+ {
+  "body": "## Pull request overview\n\nThis PR strengthens the long-term verifiability story by adding durable documentation links to permanently retained release-attestation evidence (GitHub Release assets), complementing the existing Actions badge whose artifacts/logs are retention-limited.\n\n**Changes:**\n- Add a new README “Verification status” bullet pointing readers to durable Release assets (example: `v0.1.0-rc1`) and to the “Durability caveat” explanation.\n- Expand `docs/build-and-checks.md` “Durability caveat” with a concrete `v0.1.0-rc1` example (tag, attested SHA, run link, and asset list) plus a note describing the current manual/owner-authorized publishing process.\n\n### Reviewed changes\n\nCopilot reviewed 2 out of 2 changed files in this pull request and generated 1 comment.\n\n| File | Description |\n| ---- | ----------- |\n| README.md | Adds a durable pointer to GitHub Release assets for long-lived attestation evidence, distinct from the expiring badge/artifacts. |\n| docs/build-and-checks.md | Adds a concrete Release example and clarifies the (currently manual) process for publishing attestation evidence durably. |\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/leray-hopf/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4733441314,
+  "pr_number": 194,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:55:10Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4733451234,
+  "pr_number": 194,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:56:35Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "証跡への恒久導線を追加する方針は適切です．ただし，retention semantics の表現だけ修正してください．GitHub Actions の badge 自体は失効しません．期限があるのは workflow run の artifact と log です．また Release asset は Actions の retention deadline では自動失効しませんが，Release/asset が削除されれば失われるため，「permanently retained」「do not expire」より「not subject to the Actions retention deadline」程度が正確です．",
+  "id": 4733538446,
+  "pr_number": 194,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-20T09:09:12Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4733596801,
+  "pr_number": 194,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T09:16:25Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "LGTM",
+  "id": 4733677080,
+  "pr_number": 194,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-20T09:26:03Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nAdds a deterministic, standalone “repository map” visualization of Lean source **code LOC** as a static SVG treemap, along with an isolated Node-based generator tool and documentation updates to embed and explain the figure.\n\n**Changes:**\n- Add `tools/code-treemap/` (isolated Node tool) to measure per-file LOC via `cloc` and generate a deterministic D3 treemap SVG/JSON.\n- Add generated artifacts `docs/assets/code-loc-treemap.svg` and `docs/assets/code-loc-treemap.json`.\n- Feature the treemap in `README.md` and document methodology/regeneration in `docs/architecture.md`.\n\n### Reviewed changes\n\nCopilot reviewed 6 out of 8 changed files in this pull request and generated 5 comments.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| tools/code-treemap/package.json | Defines isolated scripts to measure LOC (cloc) and generate the treemap. |\r\n| tools/code-treemap/package-lock.json | Pins the tool’s Node dependencies for reproducibility. |\r\n| tools/code-treemap/generate-code-loc-treemap.mjs | Implements deterministic parsing, grouping, layout, and SVG/JSON emission. |\r\n| tools/code-treemap/.gitignore | Ignores tool-local build artifacts and node_modules. |\r\n| docs/assets/code-loc-treemap.svg | Generated standalone SVG treemap embedded in docs/README. |\r\n| docs/assets/code-loc-treemap.json | Generated per-file LOC breakdown + summary metadata. |\r\n| README.md | Adds a “Repository map” section linking/rendering the SVG. |\r\n| docs/architecture.md | Adds a “Visual overview” section with full-size figure + regeneration notes. |\n</details>\n\n\n<details>\n<summary>Files not reviewed (1)</summary>\n\n* **tools/code-treemap/package-lock.json**: Generated file\n</details>\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/leray-hopf/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4733153193,
+  "pr_number": 193,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:12:39Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4733200674,
+  "pr_number": 193,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:19:58Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4733200785,
+  "pr_number": 193,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:19:59Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4733200889,
+  "pr_number": 193,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:20:01Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4733201019,
+  "pr_number": 193,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:20:02Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4733201155,
+  "pr_number": 193,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:20:03Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "## Pull request overview\n\nCopilot reviewed 6 out of 8 changed files in this pull request and generated 2 comments.\n\n<details>\n<summary>Files not reviewed (1)</summary>\n\n* **tools/code-treemap/package-lock.json**: Generated file\n</details>\n\n\n\n\n",
+  "id": 4733220401,
+  "pr_number": 193,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:23:13Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "treemap の計測方法，D3 layout，静的 SVG，tooling isolation，README / architecture への配置は良好です．ただし，現在の `generatingCommit` の自動埋め込みは reproducibility claim と両立していません．committed SVG/JSON は `4d2e8c7…` を記録していますが PR head は `45823e3…` であり，documented command を head または merge 後 commit で再実行すると，Lean source が同一でも commit 文字列だけで生成物が変化します．生成物を commit する行為自身が HEAD を進めるため，この方式では committed artifact が自分を含む commit と byte-identical になることはありません．\n\n`generatingCommit` の自動埋め込みを除去するか，測定対象の Lean files だけから安定な content digest / source-tree identifier を計算する方式へ変更し，docs の「同じ source tree から byte-identical」を実際に再現可能にしてください．その他の部分は問題ありません．",
+  "id": 4733241009,
+  "pr_number": 193,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-20T08:26:24Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "再確認しましたが，前回の REQUEST_CHANGES はまだ解消されていません．\n\n- current head は `87be0554c1e8adc6c69a0b16518224cb726d3722`\n- generator は依然として，引数がなければ `git rev-parse HEAD` を `generatingCommit` として SVG/JSON へ埋め込みます\n- committed artifacts は `78662328f74fad049b3a795a17c257af3850c3e7` を記録していますが，この SHA は現在 GitHub 上で commit として解決できません\n\nしたがって，current head で documented `npm run build` を実行すれば `generatingCommit` が `87be055…` に変わり，committed artifact と byte-identical にはなりません．「同じ Lean source tree から byte-identical に再生成できる」という本文・PR body の説明とも矛盾します．\n\ncommit SHA を生成物から除去するか，測定対象 `.lean` files の内容だけから計算した安定 digest に置き換えてください．そのうえで SVG/JSON を再生成し，README / `docs/architecture.md` / PR body の provenance・determinism 説明を同期すれば approve できます．\n\nCopilot の `perFileDataFile` hard-code 指摘は，任意 `outputJsonPath` を正式にサポートするなら併せて直すのが自然ですが，こちらは blocker ではありません．",
+  "id": 4733303558,
+  "pr_number": 193,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:35:45Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4733308950,
+  "pr_number": 193,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-20T08:36:34Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4733318655,
+  "pr_number": 193,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:38:01Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4733318776,
+  "pr_number": 193,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:38:02Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4733318949,
+  "pr_number": 193,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:38:04Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4733329758,
+  "pr_number": 193,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:39:43Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "再確認しました．前回 blocker だった `git rev-parse HEAD` の自己参照は除去され，生成物は file-by-file の `{path, code, comment, blank}` から計算した安定した `sourceDigest` を記録する方式へ変更されています．SVG と companion JSON の digest，file count，total LOC も同期しており，documented regeneration contract と整合しています．\n\n既存の review threads はすべて解決済みです．docs/tooling-only change として merge 可と判断します．",
+  "id": 4733354173,
+  "pr_number": 193,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-20T08:43:00Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "LGTM",
+  "id": 4733359404,
+  "pr_number": 193,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-20T08:43:36Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nThis PR adds a Star History chart embed to the README as a “Community interest” signal (explicitly not a correctness/quality metric) and documents maintainer procedures for rotating the associated Star History `sealed_token` embed value.\n\n**Changes:**\n- Added a new “Community interest” section in `README.md` with a Star History chart embed and a short disclaimer about what stars do/do not represent.\n- Updated the README’s documentation list to point maintainers to the Star History token-rotation runbook.\n- Added a maintainer runbook section to `docs/build-and-checks.md` describing how to regenerate/rotate the Star History authenticated embed.\n\n### Reviewed changes\n\nCopilot reviewed 2 out of 2 changed files in this pull request and generated 1 comment.\n\n| File | Description |\n| ---- | ----------- |\n| README.md | Adds the Community interest + Star History embed section and links to the maintainer runbook. |\n| docs/build-and-checks.md | Documents what the Star History `sealed_token` embed is and how to rotate/regenerate it if it breaks. |\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/leray-hopf/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4733095906,
+  "pr_number": 192,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:03:54Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "Community interest セクションの縮小を検討してください．",
+  "id": 4733110412,
+  "pr_number": 192,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-20T08:06:35Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4733132544,
+  "pr_number": 192,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:09:09Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4733132650,
+  "pr_number": 192,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:09:10Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "## Pull request overview\n\nCopilot reviewed 2 out of 2 changed files in this pull request and generated 2 comments.\n\n\n\n\n\n",
+  "id": 4733146529,
+  "pr_number": 192,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:11:26Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4733176168,
+  "pr_number": 192,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:15:51Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4733186866,
+  "pr_number": 192,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:17:42Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4733187708,
+  "pr_number": 192,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:17:52Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "## Pull request overview\n\nCopilot reviewed 2 out of 2 changed files in this pull request and generated 3 comments.\n\n\n\n\n\n",
+  "id": 4733210354,
+  "pr_number": 192,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:21:27Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4733233881,
+  "pr_number": 192,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:25:20Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4733234016,
+  "pr_number": 192,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:25:22Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4733234130,
+  "pr_number": 192,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T08:25:23Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "Star History の配置，dark/light 対応，匿名表示確認，raw PAT を含めない構成，保守用 runbook を確認しました．残っている URL encoding・alt text・`safe to commit` の表現に関する指摘はいずれも非 blocking と判断します．特に sealed token の扱いは Star History 公式の authenticated README embed の説明と整合しています．この PR はマージ可能です．",
+  "id": 4733239054,
+  "pr_number": 192,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-20T08:26:08Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "LGTM",
+  "id": 4733251199,
+  "pr_number": 192,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-20T08:27:53Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nRestructures the repository’s top-level documentation so `README.md` becomes a concise, general-reader entry point, while moving detailed claim-by-claim and hygiene/ledger details into focused documents under `docs/`.\n\n**Changes:**\n- Rewrites `README.md` into an 8-section, first-time-reader flow with prominent links to the interactive notes site and to specialized documentation.\n- Adds a new `docs/claims-and-scope.md` to hold the precise, field-by-field claims table plus an import guide (including the `LerayHopf` vs `LerayHopf.Experimental` split).\n- Updates `docs/STATUS.md` and `docs/architecture.md` to absorb “hygiene” and “history/provenance” material that previously lived in the README.\n\n### Reviewed changes\n\nCopilot reviewed 4 out of 4 changed files in this pull request and generated 2 comments.\n\n| File | Description |\n| ---- | ----------- |\n| README.md | Restructures the README into a general-reader entry point and routes technical detail to specialized docs. |\n| docs/STATUS.md | Adds a “Repository hygiene” section summarizing remaining `sorry`s and related guardrails. |\n| docs/claims-and-scope.md | New document: exact claims/scope table and import guide to prevent overclaiming beyond Lean types. |\n| docs/architecture.md | Adds links to the new claims/scope doc and a short “History and provenance” section. |\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/leray-hopf/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4732952643,
+  "pr_number": 190,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T07:39:40Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "README の再構成方針は良く，日本語ノートへの導線と専門文書への情報分離も適切です．ただし，現在の文言には数学的 scope の矛盾があるため，以下の2点を修正してください．\n\n1. `regularity` を一切主張しない，という表現は，energy-class の a.e. H¹ regularity と viscous dissipation integrability を実際に保証していることと衝突します．`smoothness or higher regularity beyond the stated energy-class properties` など，主張していない範囲を限定してください．README 冒頭・scope bullet・`docs/claims-and-scope.md` を同期して直す必要があります．\n2. `Everything else in the Galerkin construction ... is proved sorry-free` は Experimental 層の residual `sorry` と並べると広すぎます．二つの capstone の transitive dependency cones に限定してください．\n\n非 blocking 提案として，README の表題 `# leray-hopf` は `# Leray–Hopf weak existence in Lean` のように成果が直接伝わる名称の方が一般読者向けです．",
+  "id": 4732958391,
+  "pr_number": 190,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-20T07:40:47Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4732976060,
+  "pr_number": 190,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T07:44:09Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4732976182,
+  "pr_number": 190,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T07:44:10Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4732976319,
+  "pr_number": 190,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T07:44:12Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4732976432,
+  "pr_number": 190,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T07:44:13Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4732976540,
+  "pr_number": 190,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T07:44:14Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "## Pull request overview\n\nCopilot reviewed 4 out of 4 changed files in this pull request and generated 1 comment.\n\n\n\n\n\n",
+  "id": 4732995311,
+  "pr_number": 190,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T07:47:32Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "LGTM",
+  "id": 4733052787,
+  "pr_number": 190,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-20T07:56:28Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nThis PR fixes a release-attestation workflow gap where `scripts/print_axioms.lean` imports `LerayHopf.Experimental`, but the workflow’s default `lake build` does not produce `LerayHopf.Experimental.olean`, causing `check-axioms-live.sh` to fail (and previously fail silently).\n\n**Changes:**\n- Add an explicit `lake build LerayHopf.Experimental` step to `release-attestation.yml`, log it, and include its outcome in the attestation summary and failure aggregation.\n- Harden `scripts/check-axioms-live.sh` so `lake env lean scripts/print_axioms.lean` failures always print captured output and a targeted diagnostic instead of being swallowed by `set -e`.\n\n### Reviewed changes\n\nCopilot reviewed 2 out of 2 changed files in this pull request and generated 1 comment.\n\n| File | Description |\n| ---- | ----------- |\n| scripts/check-axioms-live.sh | Captures/echoes Lean output even on failure and emits a clearer diagnostic for missing `Experimental` build artifacts. |\n| .github/workflows/release-attestation.yml | Builds `LerayHopf.Experimental` explicitly, logs it, and wires the result into the attestation record + fail-if-any-failed gate. |\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/leray-hopf/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4731976061,
+  "pr_number": 186,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T03:18:02Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "確認しました．修正方針・実装とも妥当です．\n\n- `LerayHopf.Experimental` の明示的 build が，attestation record と最終成否判定の双方へ正しく組み込まれています．\n- `check-axioms-live.sh` の無言終了も，`errexit` を一時的に外して終了コードと出力を確実に捕捉する形で適切に修正されています．\n- 変更範囲は attestation harness に限定されており，release candidate SHA を動かさないという方針とも整合しています．\n\nマージ後は，本文記載どおり `7c15710a7b9068a2aa105fc7c11b432e7685b7b5` を指定して `release-attestation` を再実行してください．",
+  "id": 4731976279,
+  "pr_number": 186,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-20T03:18:09Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4731997071,
+  "pr_number": 186,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-20T03:27:45Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "20 ファイル・55 宣言の docstring を宣言型と周辺実装に照合し，CI 成功も確認しました．コード差分自体に新たな数学的・形式化上の問題は見当たりません．\n\nただし，PR 本文の検証記録が自己矛盾しています．`lake build` を target なしで実行し「whole library plus Experimental」が成功したと記載した直後に，`No full lake build was run` と記載されています．実際に実行したコマンドと対象範囲に合わせてどちらかを訂正し，第三者が検証範囲を一意に判断できる記録にしてください．一般コントリビューター向けの方針と，エージェント／CI の資源制約に基づく運用説明も混同しないでください．",
+  "id": 4730777451,
+  "pr_number": 181,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-19T12:53:05Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4730868501,
+  "pr_number": 181,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-19T13:57:42Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4728535670,
+  "pr_number": 176,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-18T12:52:30Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "visibility 変更，外部参照，public theorem の型，targeted downstream builds，notes extractor への影響を確認しました．実装上の回帰は見つかりませんが，公開 docstring に数学的に逆向きの用語が1点あります．修正後に承認できます．",
+  "id": 4728535642,
+  "pr_number": 175,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-18T12:52:29Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4729768220,
+  "pr_number": 175,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-19T03:15:43Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4729786055,
+  "pr_number": 175,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-19T03:25:14Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "方針文書として公開するには，次の二点を修正してください．\n\n1. PR 本文の「`.lean` 等を触っていないので build/guard scripts は適用外」という検証報告は，この PR が追加する方針および既存の canonical rule と矛盾します．`AGENTS.md` は編集前後の `agent-preflight` と `lake build` 成功報告を全 PR に要求し，`CONTRIBUTING.md` と PR template も preflight を “every time” の mandatory gate としています．また，実際にこの PR では `guards` CI が走って成功しています．現行方針を維持するなら preflight を実行して build 成功を報告し，本文の誤記を直してください．文書のみの変更を例外にしたいなら，`AGENTS.md`・`docs/build-and-checks.md`・新規文書・template を一貫して改訂し，何を実行するかを明示してください．\n\n2. `SECURITY.md` は非公開で先に知らせたい場合に「repository owner's GitHub profile の contact address」を使うよう案内していますが，現在の owner profile には公開メールアドレスがなく，この経路は利用できません．実在して継続運用できる連絡経路（GitHub private vulnerability reporting など）を指定するか，非公開経路を設けない方針ならその案内自体を削除してください．形だけでない運用方針という #156 の受け入れ条件に関わります．\n\nCI の `guards` job は green です．上記以外の template 構成，既存文書への参照，文体には blocking な問題を見つけませんでした．",
+  "id": 4728166679,
+  "pr_number": 174,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-18T08:45:40Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `e4af17b70c`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4728167254,
+  "pr_number": 174,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-18T08:46:09Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4728229351,
+  "pr_number": 174,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-18T09:24:12Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4728229374,
+  "pr_number": 174,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-18T09:24:13Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "ae369c3 を再レビューしました．full build の禁止撤回，pre-push の実態に合わせた説明，YAML front matter，存在しない private contact の修正は確認できました．最新 CI も green です．ただし，方針の分離がまだ canonical rule まで貫徹していません．\n\n1. `CONTRIBUTING.md` は `agent-preflight.sh` を内部 AI-agent-team 専用としていますが，冒頭で外部 contributor に `AGENTS.md` を「hard rules」として最初に読むよう要求しています．その `AGENTS.md` 自身は「canonical, audience-neutral source of truth」と明記し，hard rule 1 で編集前後の preflight と green `lake build` を無条件に要求しています．さらに SoT 順序では `AGENTS.md` が docs より上位なので，下位の `CONTRIBUTING.md` からこの義務を解除できません．外部 contributor を agent rule の対象外にするなら，`AGENTS.md` の対象範囲と hard rule を明示的に agent-only に直すか，外部 contributor に `AGENTS.md` 全体を hard rules として課さず，共通規則だけを別の上位文書へ切り出してください．現状は同じ contributor が preflight 必須／不要の両方を指示されます．\n\n2. PR 本文は未編集のままで，Summary には今も「Contributors run `agent-preflight.sh`」，Validation には「no build/guard scripts apply」と書かれています．コメントで訂正するだけでは，PR の説明・受け入れ条件・実際の差分が食い違ったまま残ります．本文自体を ae369c3 の方針と実際の green `guards` job に合わせて更新してください．\n\n3. PR template の「Docs / templates / other non-Lean change — no build applicable」は `other non-Lean` が広すぎます．guard script，workflow，hook などは `.lean` でなくても個別の回帰試験や構文検査が必要です．「docs/templates only」のように限定するか，非 Lean 変更にも変更対象に応じた検証結果を記入させてください．\n\nこれらは contributor-facing policy の整合性に関わるため，解消まで approval は保留します．",
+  "id": 4728253533,
+  "pr_number": 174,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-18T09:43:34Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "2765bee で前回の3点が差分・PR本文に反映されたことと，CI green を確認しました．ただし，外部 contributor 向け規則の SoT 矛盾が一段下の文書に残っています．\n\n1. `CONTRIBUTING.md` は `docs/guardrails.md` を「the rule set that applies to you」として外部 contributor に課す一方，同文書の Build-first rule は依然として「`lake build` must pass before and after a change」「Run `scripts/agent-preflight.sh`」と全変更に要求しています．したがって docs/templates-only は build 不要，`agent-preflight.sh` は agent-only という新方針と正面から矛盾します．`docs/guardrails.md` の Build-first rule を変更種別に応じた contributor-neutral な規則へ直し，agent 固有の preflight 義務は `AGENTS.md` だけに置いてください．`docs/build-and-checks.md` にある “Mandatory build gate” 等の記述も同じ境界と矛盾しないか併せて確認してください．\n\n2. docs/templates-only について「CI `guards` job が relevant evidence」としていますが，workflow は `!**/*.md` で通常の Markdown-only PR を除外します．また，`guards` は issue-template YAML や Markdown link を検証せず，実際この PR の壊れた YAML も通過しました．「何も build しない」ことと「検証不要」を混同せず，リンク確認，YAML 構文検査など変更対象に応じた非 build 検証を求め，`guards` は trigger された場合に限ると正確に記述してください．PR template の docs/templates checkbox も同様です．\n\nそれ以外の前回指摘（AGENTS の対象範囲，PR 本文，non-Lean bucket，security contact）は解消済みです．",
+  "id": 4728535624,
+  "pr_number": 174,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-18T12:52:28Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4728616764,
+  "pr_number": 174,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-18T13:52:51Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "変更した 3 ファイルについては，option の局所化／有限化，docstring との配置，対象 module の build，CI green を確認しました．定理文・証明本体への影響もありません．\n\nただし，この PR は `Closes #152` としていますが，#152 の受け入れ条件をまだ満たしていません．blocking points は次のとおりです．\n\n1. 「全 heartbeat override の file / declaration / 理由を一覧化」に対し，PR 本文は残りを `~34 declarations` と概数で示し，多くはファイル名と件数だけです．全宣言名・option 種別・値・残す理由の対応表になっていません．\n2. 「残すものには測定値と理由をコメント」に対し，本文自身が大半を未注釈・未測定のまま残したと明記しています．時間のかかる二分探索まで行う必要はありませんが，未実施の受け入れ条件を完了扱いにはできません．\n3. 「release host で wall-clock / memory の概算を記録」は次回 RC attestation に延期されています．延期自体は issue の方針に沿いますが，その検証前に issue を自動 close すると残作業の追跡先が失われます．\n\nしたがって，どちらかに整理してください．(a) #152 の全受け入れ条件をこの PR で完了し，正確な全件 inventory・必要な注釈・測定記録を追加する，または (b) この PR を有限化／局所化の第一段階として `Closes #152` を `Refs #152` に変更し，未完のチェック項目と次回 RC attestation が済むまで #152 を open のまま残す．現状では (b) が scope と検証方針に最も整合的です．",
+  "id": 4726335417,
+  "pr_number": 173,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-17T21:50:43Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4726710938,
+  "pr_number": 173,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-17T22:53:07Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `77c71ab685`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4724223664,
+  "pr_number": 172,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T16:01:52Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "The direction is appropriate, and the guard job is green, but the new structural guarantee is not yet enforced as documented.\n\nBlocking items:\n\n1. Please fix the already-reported qualified-namespace bypass: `namespace LerayHopf.Scaffold` and similar forms currently pass. The check should reject a reserved component anywhere in a qualified namespace, and it should also cover declarations written directly with a qualified reserved name if the policy is truly “no declaration under such a namespace”.\n2. Please make the axiom and namespace scans comment-aware. As written, code-like lines inside block comments can fail the guard even though the documentation explicitly says comments do not trip it.\n3. Add committed negative regression cases for at least unqualified namespace, qualified namespace, directly qualified declaration (if supported by Lean syntax), marked project axiom, and block-comment non-violations. The current manual probes missed the qualified-name bypass, which is precisely why executable regression coverage matters here.\n\nOnce these are corrected and the guard remains green, I will re-review.",
+  "id": 4724563243,
+  "pr_number": 172,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-17T16:53:25Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4724655578,
+  "pr_number": 172,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T17:08:43Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4724656502,
+  "pr_number": 172,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T17:08:53Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "The previous three findings are fixed, the new regression harness is useful, and CI is green. One material coverage gap remains in the strengthened claim: the direct-qualified-name branch recognises only a subset of Lean declaration commands. Please cover the omitted declaration forms that can introduce a name under a reserved namespace (at minimum `inductive`, and any other declaration forms accepted by the repository's policy), and add a corresponding regression case. Alternatively, narrow the documentation from “any declaration under a reserved namespace” to the precisely enforced subset, though complete coverage is preferable for this guardrail.",
+  "id": 4725119975,
+  "pr_number": 172,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-17T18:22:55Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4725396158,
+  "pr_number": 172,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T19:05:46Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4725637240,
+  "pr_number": 172,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-17T19:45:52Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `14e795e4f0`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4720229111,
+  "pr_number": 170,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T07:14:50Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4722098345,
+  "pr_number": 170,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T11:10:54Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4722098493,
+  "pr_number": 170,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T11:10:55Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `3185c2a51c`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4718649150,
+  "pr_number": 164,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T01:09:37Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4718659547,
+  "pr_number": 164,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T01:12:36Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "The release-cone split and new lightweight guard are useful, but this head is not merge-ready: it reproduces the P0-invalid theorem tracked in #158 and repeatedly labels the statement as genuine/intact. Quarantining a false proposition behind `Experimental` prevents it from contaminating `import LerayHopf`, but it does not make the scholarly/API claim correct. Resolve #158 in this PR (or stack its correction before this PR): delete/retire the declaration, restrict it to the verified `p=q=2` case, or encode an exact justified exponent condition, and synchronize every new description in `TimeSobolevExperimental.lean`, `Experimental.lean`, `TimeSobolev.lean`, README/STATUS/architecture/staging docs. GitHub guards are green, but they only detect `sorry` reachability and cannot establish statement truth.",
+  "id": 4718550494,
+  "pr_number": 162,
+  "state": "CHANGES_REQUESTED",
+  "submitted_at": "2026-07-17T00:42:06Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `e4fd76842a`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4716282929,
+  "pr_number": 161,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-16T17:43:38Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4718419685,
+  "pr_number": 161,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T00:09:35Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4718452741,
+  "pr_number": 161,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-17T00:18:48Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "Reviewed the incremental comment/docstring-only change at exact head `e4fd76842a`. The revised wording correctly says that the fields pin values to canonical formulas without claiming a separately formalized non-triviality witness. The prior stacked-diff thread is resolved with explicit owner authorization, and GitHub guards are green. No blocking findings. Merge after #160.",
+  "id": 4718550333,
+  "pr_number": 161,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-17T00:42:05Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "Reviewed the incremental change at exact head `f884009a09`. I cross-checked the claims table and edited prose against `Galerkin.LerayHopfSolution`, `WeakFormNS`, and both capstone signatures. The revised text accurately distinguishes a.e. H¹ membership from literal H¹-valued Bochner membership, the one-sided initial trace from weak continuity, and separated-variable tests from general space-time tests. Guards are green; no blocking findings. Merge after #159.",
+  "id": 4718550281,
+  "pr_number": 160,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-17T00:42:04Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "Reviewed the exact head `2bdd82e3ac`. The deletions match the owner-authorized P0 scope in #144, remove the vacuous/colliding scaffold surface, and do not leave live Lean references to the retired declarations. GitHub guards are green; the PR also records a successful 3194-job targeted build. No blocking findings.",
+  "id": 4718550225,
+  "pr_number": 159,
+  "state": "APPROVED",
+  "submitted_at": "2026-07-17T00:42:03Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `9cc6897a24`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4677013850,
+  "pr_number": 139,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T07:39:36Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4677018623,
+  "pr_number": 139,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T07:41:47Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `e5878681fd`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4676442212,
+  "pr_number": 137,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T04:08:54Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `a801d7f3b5`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4676359608,
+  "pr_number": 136,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-11T03:33:31Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `54ca3deece`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4669699517,
+  "pr_number": 127,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-10T08:13:29Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4669731385,
+  "pr_number": 127,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-10T08:17:46Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `7998ab0499`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4668498026,
+  "pr_number": 124,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-10T04:26:44Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4668516338,
+  "pr_number": 124,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-10T04:32:44Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `b1d10b1757`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4665764746,
+  "pr_number": 119,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-09T18:37:39Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4665790928,
+  "pr_number": 119,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-09T18:41:36Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4665791121,
+  "pr_number": 119,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-09T18:41:37Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "",
+  "id": 4665791284,
+  "pr_number": 119,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-09T18:41:39Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nThis PR refactors the public-facing API vocabulary and module layout by removing the stale `_axiomatic` suffix from the two headline capstone theorems, renaming/repointing the capstone and interface modules, and updating scripts/docs to track the new release names (plus disambiguating the scaffold statement under a dedicated namespace).\n\n**Changes:**\n- Renamed the public capstones to `exists_lerayHopf_torus3` / `exists_lerayHopf_r3` and swept references/imports accordingly.\n- Renamed/repointed the capstone re-export modules (`LerayHopf.Torus.Capstone`, `LerayHopf.R3Capstone`) and the solution-interface modules (`*/SolutionInterfaces`), updating scripts and documentation.\n- Moved the scaffold statement theorem under `LerayHopf.Scaffold` to reduce confusion with the real capstone.\n\n### Reviewed changes\n\nCopilot reviewed 84 out of 84 changed files in this pull request and generated 13 comments.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| scripts/print_axioms.lean | Updates axiom-print script to import new capstone modules and print new theorem names. |\r\n| scripts/check-axioms.sh | Renames “axiomatic” gates to “capstone/interface” terminology and updates module/file lists and name checks. |\r\n| scripts/check-axioms-live.sh | Updates live axiom pin checks to use the new capstone theorem names. |\r\n| README.md | Updates public theorem signatures and wording to reference the new capstone names. |\r\n| LerayHopf/Torus/ViscousLimit.lean | Switches import from old Torus closure module to `Torus.SolutionInterfaces`. |\r\n| LerayHopf/Torus/TestFamily.lean | Updates comments to reference `SolutionInterfaces` terminology. |\r\n| LerayHopf/Torus/SolutionInterfaces.lean | Renames module docstring vocabulary and updates internal references to renamed capstone. |\r\n| LerayHopf/Torus/LimitPassage.lean | Switches import to `Torus.SolutionInterfaces`. |\r\n| LerayHopf/Torus/GalerkinScheme.lean | Switches import to `Torus.SolutionInterfaces`. |\r\n| LerayHopf/Torus/GalerkinODESolve.lean | Updates documentation references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| LerayHopf/Torus/GalerkinODECapstone.lean | Renames the exported capstone theorem and updates docstrings accordingly. |\r\n| LerayHopf/Torus/EnergyConvection.lean | Switches import and justification comment to `SolutionInterfaces`. |\r\n| LerayHopf/Torus/ConvectionForm.lean | Switches import and updates doc references to the renamed capstone + capstone module. |\r\n| LerayHopf/Torus/Capstone.lean | Introduces/updates the Torus capstone re-export module and references the new theorem name. |\r\n| LerayHopf/Torus/AubinLionsAssembly.lean | Updates documentation references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| LerayHopf/Statement.lean | Wraps scaffold theorem under `namespace Scaffold` to disambiguate it from the real capstone. |\r\n| LerayHopf/R3Capstone.lean | Renames the ℝ³ capstone re-export module and updates doc references to new theorem name. |\r\n| LerayHopf/R3/TrilinearEstimate.lean | Updates documentation references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| LerayHopf/R3/SpatialCompactness.lean | Updates documentation references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| LerayHopf/R3/SpacetimePrecompact.lean | Updates inline import comment to reference `SolutionInterfaces` transitively. |\r\n| LerayHopf/R3/SolutionInterfaces.lean | Renames module vocabulary, updates doc references and printed theorem name. |\r\n| LerayHopf/R3/SchwartzDivFreeBasis.lean | Updates documentation references to `SolutionInterfaces` and new capstone name. |\r\n| LerayHopf/R3/RellichBall.lean | Updates documentation references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| LerayHopf/R3/LimitPassage.lean | Updates documentation references to new capstone name. |\r\n| LerayHopf/R3/GoodRepresentative.lean | Updates documentation reference to `SolutionInterfaces`. |\r\n| LerayHopf/R3/GalerkinScheme.lean | Switches import to `R3.SolutionInterfaces` and updates architecture notes. |\r\n| LerayHopf/R3/GalerkinODESolve.lean | Updates DAG comment to reference `SolutionInterfaces`. |\r\n| LerayHopf/R3/GalerkinODEExistence.lean | Updates docs to reference `SolutionInterfaces` and import DAG notes. |\r\n| LerayHopf/R3/GalerkinODECapstone.lean | Renames the exported ℝ³ capstone theorem and updates docstrings accordingly. |\r\n| LerayHopf/R3/GalerkinODE.lean | Switches import to `R3.SolutionInterfaces` and updates module documentation. |\r\n| LerayHopf/R3/GalerkinCurveBounds.lean | Switches import to `R3.SolutionInterfaces` and updates comment. |\r\n| LerayHopf/R3/GalerkinBasisH1.lean | Updates comment to reference `R3Capstone` rather than the retired module name. |\r\n| LerayHopf/R3/FrechetKolmogorov.lean | Updates documentation references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| LerayHopf/R3/FourierL2.lean | Updates documentation reference to avoid importing `SolutionInterfaces`. |\r\n| LerayHopf/R3/CurlDensityCapstone.lean | Updates references to new capstone theorem name. |\r\n| LerayHopf/R3/CurlDensity.lean | Updates references to new capstone theorem name. |\r\n| LerayHopf/R3/ConvectionOperator.lean | Updates documentation references to `SolutionInterfaces`. |\r\n| LerayHopf/R3/ConvectionForm.lean | Switches import to `R3.SolutionInterfaces` and updates documentation references. |\r\n| LerayHopf/R3/AubinLionsLimitPassage.lean | Switches heavy import from `AxiomaticClosure` to `SolutionInterfaces` and updates docs. |\r\n| LerayHopf/R3/AubinLionsAssembly.lean | Updates documentation references for relocated builder origin and capstone name. |\r\n| LerayHopf/R3/ArzelaAscoliTime.lean | Switches import to `R3.SolutionInterfaces` and updates architecture notes. |\r\n| LerayHopf/EvolutionTriple.lean | Updates documentation reference to `SolutionInterfaces` as the assembly location. |\r\n| LerayHopf/Core.lean | Updates documentation references from “axiomatic closure” to capstone/support modules. |\r\n| LerayHopf/Bochner/WeakLimitToolkit.lean | Updates doc reference to new Torus capstone theorem name. |\r\n| LerayHopf/Bochner/TimeSobolev.lean | Updates docs to reference `SolutionInterfaces` (no import) instead of `AxiomaticClosure`. |\r\n| LerayHopf.lean | Switches root imports to `Torus.Capstone` and `R3Capstone` and updates module documentation. |\r\n| HANDOFF.md | Updates theorem names, axiom-frontier narrative, and references to scaffold theorem namespace. |\r\n| docs/scratch/wkernel-route.md | Updates file references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/torus53-mirror-plan.md | Updates references to new capstone theorem name and interface filename. |\r\n| docs/scratch/torus-aubinlions-modewise-plan.md | Updates references to new capstone theorem name and (attempted) interface filename. |\r\n| docs/scratch/stream-d-bochner-time.md | Updates scratch-plan references to `SolutionInterfaces` filenames. |\r\n| docs/scratch/stream-c-convgap-topology.md | Updates scratch-plan “do not edit” references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/stream-c-convection-operator.md | Updates scratch-plan references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/rellich-balls.md | Updates scratch-plan references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/r56-determined-construction.md | Updates scratch-plan “no edit” reference to `SolutionInterfaces`. |\r\n| docs/scratch/r56-convection-construction-plan.md | Updates scratch-plan references to new capstone theorem name. |\r\n| docs/scratch/r48-removal-plan.md | Updates scratch-plan references to new capstone theorem name and `R3Capstone`. |\r\n| docs/scratch/r46-precompact-plan.md | Updates scratch-plan reference to `SolutionInterfaces`. |\r\n| docs/scratch/r3d-trilinear-estimate.md | Updates scratch-plan references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/r3c-axiomatic-closure.md | Updates scratch-plan references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/r3-48-nsforms-plan.md | Updates scratch-plan references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/r1-imports-plan.md | Updates scratch-plan references to new capstone modules and interface filenames. |\r\n| docs/scratch/r1-arch-plan.md | Updates scratch-plan references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/p5-galerkin-scheme.md | Updates scratch-plan references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/p3-spatial-compactness.md | Updates scratch-plan references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/p2-aubin-lions.md | Updates scratch-plan references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/ode-galerkin-r3.md | Updates scratch-plan references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/ode-continuation.md | Updates scratch-plan references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/m6-axiomatic-closure.md | Updates scratch-plan references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/issue46-spacetime-precompact-plan.md | Updates scratch-plan reference from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/helmholtz-density.md | Updates scratch-plan reference from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/fourier-foundation-bd.md | Updates scratch-plan reference from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/findim-global-ode.md | Updates scratch-plan reference from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/convection-frontier-gate.md | Updates scratch-plan evidence references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/bochner-foundation-metaplan.md | Updates scratch-plan table references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/scratch/bc-feasibility.md | Updates scratch-plan table references from `AxiomaticClosure` to `SolutionInterfaces`. |\r\n| docs/ROADMAP.md | Updates public theorem-name references in roadmap header. |\r\n| docs/REPORT.md | Updates report reference from `AxiomaticClosure.lean` to `SolutionInterfaces.lean`. |\r\n| docs/references/terminology-ja.md | Updates example identifier list to use new capstone name. |\r\n| docs/references/mathlib-api-survey.md | Updates `#print axioms` references and file path references to `SolutionInterfaces`. |\r\n| docs/references/literature.md | Updates references to new capstone theorem names. |\r\n| docs/phase-torus-nsforms-removal.md | Updates references to new capstone theorem name and interface filename. |\r\n| docs/formalization-review-ja.md | Updates Japanese review references to new file/module naming. |\n</details>\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/lean-pde/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4662891233,
+  "pr_number": 117,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-09T12:18:15Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `2558b65de0`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4662901323,
+  "pr_number": 117,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-09T12:19:34Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4662936677,
+  "pr_number": 117,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-09T12:24:36Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nThis PR refactors the Lean module layout by moving the 𝕋³ (“Torus”) lane under `LerayHopf/Torus/` (mirroring the existing `LerayHopf/R3/` structure) and mechanically rewriting `import` paths and documentation references accordingly, without changing declaration names or proof bodies.\n\n**Changes:**\n- Moved torus-specific modules into `LerayHopf/Torus/` and updated all affected `import LerayHopf.…` paths to `import LerayHopf.Torus.…`.\n- Updated axiom-audit scripts and the root aggregators to reference the new module paths.\n- Updated README / scratch docs to reflect the new file/module locations.\n\n### Reviewed changes\n\nCopilot reviewed 42 out of 43 changed files in this pull request and generated 1 comment.\n\n<details>\n<summary>Show a summary per file</summary>\n\n| File | Description |\r\n| ---- | ----------- |\r\n| scripts/print_axioms.lean | Updates torus axiomatic import to the new `LerayHopf.Torus.Axiomatic` module path. |\r\n| scripts/check-axioms.sh | Updates module/file allowlists to the new torus directory/module layout. |\r\n| README.md | Updates the documented torus capstone file path. |\r\n| LerayHopf/Torus/ViscousLimit.lean | Rewrites imports and module references to `LerayHopf.Torus.*`. |\r\n| LerayHopf/Torus/VelocityGalerkin.lean | Updates dependency import to `LerayHopf.Torus.GalerkinProjection`. |\r\n| LerayHopf/Torus/TraceEnergy.lean | Updates module header text and imports to the new torus namespace path. |\r\n| LerayHopf/Torus/TestFamily.lean | Updates import to `LerayHopf.Torus.GalerkinScheme`. |\r\n| LerayHopf/Torus/SobolevTorus.lean | Updates import to `LerayHopf.Torus.FunctionSpaces`. |\r\n| LerayHopf/Torus/RellichEmbedding.lean | Rewrites imports and in-file references to the new torus module paths. |\r\n| LerayHopf/Torus/ProjectionAdjoint.lean | Updates import to `LerayHopf.Torus.GalerkinODESolve` and module header text. |\r\n| LerayHopf/Torus/ModeTail.lean | Updates import to `LerayHopf.Torus.ModeCompactness` and module header text. |\r\n| LerayHopf/Torus/ModeCompactness.lean | Rewrites multiple imports to the new `LerayHopf.Torus.*` module paths. |\r\n| LerayHopf/Torus/LimitPassage.lean | Updates imports from old torus flat modules to `LerayHopf.Torus.*`. |\r\n| LerayHopf/Torus/Leray.lean | Updates import to `LerayHopf.Torus.DivergenceFree`. |\r\n| LerayHopf/Torus/H1Sigma.lean | Updates imports to the new torus module paths. |\r\n| LerayHopf/Torus/GalerkinScheme.lean | Updates import to `LerayHopf.Torus.AxiomaticClosure`. |\r\n| LerayHopf/Torus/GalerkinProjection.lean | Updates import to `LerayHopf.Torus.Leray`. |\r\n| LerayHopf/Torus/GalerkinODESolve.lean | Updates import to `LerayHopf.Torus.GalerkinScheme`. |\r\n| LerayHopf/Torus/GalerkinODECapstone.lean | Rewrites imports and internal path references to the new torus file locations. |\r\n| LerayHopf/Torus/FunctionSpaces.lean | Updates import to `LerayHopf.Torus.Domain`. |\r\n| LerayHopf/Torus/EnergyConvection.lean | Updates import to `LerayHopf.Torus.AxiomaticClosure`. |\r\n| LerayHopf/Torus/Domain.lean | Updates import to `LerayHopf.Torus.Basic`. |\r\n| LerayHopf/Torus/DivergenceFree.lean | Updates import to `LerayHopf.Torus.FunctionSpaces`. |\r\n| LerayHopf/Torus/ConvectionForm.lean | Updates import and in-file path references to the new torus module layout. |\r\n| LerayHopf/Torus/ConvectionExtension.lean | Rewrites imports and updates the documented file path to `LerayHopf/Torus/…`. |\r\n| LerayHopf/Torus/Basic.lean | Torus lane “Basic” scaffold now lives under `LerayHopf/Torus/`. |\r\n| LerayHopf/Torus/AxiomaticClosure.lean | Updates imports and many documentation references to new torus file/module paths. |\r\n| LerayHopf/Torus/Axiomatic.lean | Updates imports and module header text to `LerayHopf.Torus.Axiomatic`. |\r\n| LerayHopf/Torus/AubinLionsAssembly.lean | Updates imports and module header text for the new torus module paths. |\r\n| LerayHopf/Statement.lean | Updates import to `LerayHopf.Torus.Basic` after the move. |\r\n| LerayHopf/R3/Domain.lean | Updates documentation references to torus modules now under `LerayHopf.Torus.*`. |\r\n| LerayHopf/R3/AxiomaticClosure.lean | Updates doc reference to the torus axiomatic closure’s new path. |\r\n| LerayHopf/NonuniquenessStatement.lean | Updates import to `LerayHopf.Torus.Basic` after the move. |\r\n| LerayHopf/GalerkinPackage.lean | Updates import to `LerayHopf.Torus.Basic` after the move. |\r\n| LerayHopf/EvolutionTriple.lean | Updates import path to reflect torus lane move (see review comment re: import minimality). |\r\n| LerayHopf/Core.lean | Updates the “Core” import surface to use the new torus module paths and updates docs/comments accordingly. |\r\n| LerayHopf/Bochner/WeakLimitToolkit.lean | Updates documentation reference to `LerayHopf.Torus.TraceEnergy`. |\r\n| LerayHopf.lean | Updates the root aggregator’s imports to the new `LerayHopf.Torus.*` module layout. |\r\n| docs/scratch/r1-imports-plan.md | Updates planned import paths and examples to `LerayHopf.Torus.*`. |\r\n| docs/scratch/r1-arch-plan.md | Updates documented import surface to `LerayHopf.Torus.Axiomatic`. |\r\n| docs/scratch/m6-axiomatic-closure.md | Updates documented import paths for torus lane modules. |\r\n| docs/scratch/m5-rellich.md | Updates documented imports to the new torus module paths. |\r\n| docs/scratch/m2-real-domain.md | Updates a referenced planned module name to `LerayHopf.Torus.*`. |\n</details>\n\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/lean-pde/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4662545136,
+  "pr_number": 116,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-09T11:24:38Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "",
+  "id": 4662637148,
+  "pr_number": 116,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-09T11:40:05Z",
+  "user_login": "t-uda"
+ },
+ {
+  "body": "## Pull request overview\n\nAdds repository licensing and citation metadata in preparation for public release, aligning the project with the Lean/mathlib ecosystem’s standard Apache-2.0 licensing and enabling GitHub-native citation flows.\n\n**Changes:**\n- Add an Apache-2.0 `LICENSE` file.\n- Add `CITATION.cff` with citation metadata for the repository.\n- Update `README.md` to document the license and how to cite the project.\n\n### Reviewed changes\n\nCopilot reviewed 3 out of 3 changed files in this pull request and generated 1 comment.\n\n| File | Description |\n| ---- | ----------- |\n| README.md | Adds a “License and citation” section linking to `LICENSE` and `CITATION.cff`. |\n| LICENSE | Introduces Apache-2.0 license text (but currently missing the appendix section referenced in the text). |\n| CITATION.cff | Adds CFF metadata (title/authors/repo/license/keywords/abstract) for GitHub “Cite this repository”. |\n\n\n\n\n\n\n---\n\n💡 <a href=\"/uda-lab/lean-pde/new/main?filename=.github/instructions/*.instructions.md\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Add Copilot custom instructions</a> for smarter, more guided reviews. <a href=\"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot\" class=\"Link--inTextBlock\" target=\"_blank\" rel=\"noopener noreferrer\">Learn how to get started</a>.",
+  "id": 4646884521,
+  "pr_number": 107,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-07T16:04:29Z",
+  "user_login": "copilot-pull-request-reviewer[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `edbf6ba0eb`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4631107214,
+  "pr_number": 101,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-05T10:02:29Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4631124811,
+  "pr_number": 101,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-05T10:18:46Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4631124964,
+  "pr_number": 101,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-05T10:18:55Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4631125159,
+  "pr_number": 101,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-05T10:19:05Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `b6dce4291d`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4630994406,
+  "pr_number": 100,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-05T08:23:05Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4630997658,
+  "pr_number": 100,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-05T08:26:24Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `4154bdb903`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4630810944,
+  "pr_number": 99,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-05T05:34:03Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4630824785,
+  "pr_number": 99,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-05T05:50:23Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `7f8a49250c`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4630534784,
+  "pr_number": 97,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-05T01:29:18Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4630552269,
+  "pr_number": 97,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-05T01:41:24Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `99099fa447`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4628827407,
+  "pr_number": 89,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-04T03:51:39Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4628848865,
+  "pr_number": 89,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-04T04:02:29Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `4d60517417`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4628681707,
+  "pr_number": 88,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-04T02:11:19Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4628688381,
+  "pr_number": 88,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-04T02:18:34Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `eeac6c49d9`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4625288075,
+  "pr_number": 80,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-03T11:05:17Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4625328246,
+  "pr_number": 80,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-03T11:11:30Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `ecc7c6cad5`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4622106154,
+  "pr_number": 77,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-03T01:29:57Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `1c3999a044`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4620273278,
+  "pr_number": 76,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-02T18:34:22Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `301224b9cb`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4613857002,
+  "pr_number": 72,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-02T01:34:37Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `f12ac7e2e3`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4610158772,
+  "pr_number": 70,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-01T14:48:38Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `cb693ed75a`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4606349717,
+  "pr_number": 69,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-01T06:30:42Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `f8ae35d5ae`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4608514208,
+  "pr_number": 69,
+  "state": "COMMENTED",
+  "submitted_at": "2026-07-01T11:37:07Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `14ed935d9e`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4587052317,
+  "pr_number": 63,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-28T04:53:43Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `c9e08b1065`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4587124189,
+  "pr_number": 63,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-28T06:08:49Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `7bb9b276e6`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4587238046,
+  "pr_number": 63,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-28T08:06:04Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `6d906948fc`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4587657950,
+  "pr_number": 63,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-28T14:20:15Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `b8a3399492`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4591164716,
+  "pr_number": 63,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-29T10:55:43Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `8d897a6fd8`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4581305281,
+  "pr_number": 60,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-26T17:11:21Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4581330509,
+  "pr_number": 60,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-26T17:14:59Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `9c7fc1b65d`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4582010871,
+  "pr_number": 60,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-26T19:01:17Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `b8f0a1019e`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4585311506,
+  "pr_number": 60,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-27T13:27:58Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `84eda4867a`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4580448324,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-26T15:01:32Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `74147d5e59`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4580556198,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-26T15:16:55Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4580582808,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-26T15:20:11Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "",
+  "id": 4580583061,
+  "pr_number": 59,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-26T15:20:12Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `164b19410e`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4577499653,
+  "pr_number": 58,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-26T07:22:54Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `eb30f0a842`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4572499906,
+  "pr_number": 55,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-25T15:36:08Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `4e3232f550`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4572630077,
+  "pr_number": 55,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-25T15:49:55Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `abbb2191d1`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4572869332,
+  "pr_number": 55,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-25T16:17:55Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4572936477,
+  "pr_number": 55,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-25T16:27:29Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `fd442e5cdf`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4573117001,
+  "pr_number": 55,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-25T16:51:19Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4573153913,
+  "pr_number": 55,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-25T16:56:32Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `de64dff541`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4548847475,
+  "pr_number": 52,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-22T23:29:06Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4548852334,
+  "pr_number": 52,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-22T23:30:33Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `de0e47cd19`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4547735305,
+  "pr_number": 51,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-22T20:08:08Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4547745229,
+  "pr_number": 51,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-22T20:09:43Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `f3f0121a04`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4548119308,
+  "pr_number": 51,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-22T21:09:51Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4548557005,
+  "pr_number": 51,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-22T22:28:29Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `798d4080ad`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4543549021,
+  "pr_number": 45,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-22T11:21:53Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `3f64aae4cd`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4544225237,
+  "pr_number": 45,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-22T12:56:19Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "",
+  "id": 4545218701,
+  "pr_number": 45,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-22T14:48:58Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `589c630647`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4541705340,
+  "pr_number": 43,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-22T06:49:41Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ },
+ {
+  "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `ac5439b141`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+  "id": 4542078507,
+  "pr_number": 43,
+  "state": "COMMENTED",
+  "submitted_at": "2026-06-22T07:48:42Z",
+  "user_login": "chatgpt-codex-connector[bot]"
+ }
+]

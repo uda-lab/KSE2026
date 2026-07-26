@@ -1268,5 +1268,25 @@
   "performed_via_github_app": null,
   "updated_at": "2026-07-26T08:21:03Z",
   "user_login": "t-uda"
+ },
+ {
+  "author_association": "MEMBER",
+  "body": "Reviewed-by: claude-opus-subagent-lens-A (redaction-gate integrity / evidence discipline)\nReviewed-by: claude-sonnet-subagent-lens-B (implementation correctness)\n\n独立レビュー証跡（read-only local Claude subagent 2 lens．実装者の正当化は渡さず，diff・issue #79・AGENTS.md・PLAN.md・関連スクリプトのみを与え「refute, do not bless」で依頼）．codex broker 経由の正式 Review（`chatgpt-codex-connector[bot]`, state=COMMENTED, reviewed commit 0a271ca）と inline P1 は別途本 PR 上に存在する．\n\n**Lens B（Sonnet，実装正確性．HEAD b093f98 で検証）**\n- 検証済み: 全 gate green（redact_check 77 files / 0 findings，integrity/lint/selftest），`scrub_tree()` がコミット済み snapshot 全ファイルに byte-identical no-op，EXPORT.json の counts と整形が機械生成と一致，denylist ファイルが一度も track されていないこと．\n- 指摘しようとした P1/P2（`author_name` 等の未 scrub フィールド）は codex P1 と同一で，b093f98 で解消済みと独立確認．\n- P3（documentation accuracy，merge 前修正指示）: 「issue body 側の残存 1 件も追加でマスク（計 2 箇所）」という PR body / ai-use.md の記載を 2 経路（committed issues.json の唯一の `<name-redacted>` 出現が issue #79 本文の字義通りの引用であること；全 80 issue/PR body+title の生データに NAME_PATTERNS を直接適用して 0 hit）で反証．→ **8cfaca3 で ai-use.md と PR body を「comment body 1 箇所のみ」へ訂正**（唯一の実 scrub 産物 = issue #5 上の comment id 5029472961）．\n- 処置後 disposition: 全件解消．\n\n**Lens A（Opus，redaction gate / evidence 規律．HEAD 8cfaca3 で検証）**\n- P1（blocking）: snapshot 置換により analysis 散文の「committed snapshot から再導出可能」な件数（author-interface-model.md の 6 件・12 件・6/32/38 件，traces.md の 6 件）が現行 tree に対して不成立（再集計は 6→10 等）．methodology.md の「現行 EXPORT.json の値が最終的に正」も census 入力を指さなくなった．→ **b9030c8 で 4+1 箇所を census と同じ 2026-07-24 時点 snapshot（fc912b92…，`git show e65b872:…`）へ pin**．件数更新ではなく基準固定を選択（point-in-time 監査であるため．#70 は build 時に自前再計算するため非衝突）．PR body の「paper/claims は件数を引用していない」という当初の grep 確認が scope 過小だった点も PR body に明記して訂正．\n- P2: `scrub_tree` が `user_login`/sha 等の identifier まで scrub し，denylist 名が login に一致した場合に census カテゴリを silent に分裂させ得る．→ **b9030c8 で identifier フィールドを除外**（該当時は redact_check が loud に fail する設計へ）．\n- P2: EXPORT.json からマスク実施の有無が判別不能．→ **`name_masking_active` を記録し，最終 re-export（fetched_at 2026-07-26T08:37:06Z）で committed 側にも反映**．\n- P2: 「gate と scrub は同時に degrade する」docstring が環境横断では偽（denylist 不在環境の export が denylist 保有環境を塞ぐ = issue #79 の系列そのもの）．→ **docstring を環境内/環境間で正確化**．「regenerable via gh api」に denylist 必要条件を追記．\n- P2: gate 隣接挙動の回帰テスト欠如．→ **selftest に 3 ケース追加**（denylist 不在の不活性分岐・literal マスク・identifier 非マスク），AGENTS.md 件数更新．\n- P3 ×2（git 履歴の旧 blob 受容判断，build_timeline.py の scrub 未適用）: → **issue #81 で追跡**（owner disposition 待ち）．double-scrub の所有権は scrub_tree docstring に明記．\n- 検証済み（genuine と確認）: b093f98 の no-op 性，8cfaca3 の訂正の正確性（唯一の実 scrub 産物の特定），snapshot 内部整合，残存 denylist hit 0，private/ 封じ込め，規則 6 準拠．\n- 処置後 disposition: P1/P2 全件を b9030c8 で解消，P3 は issue #81 に記録の上 merge 非ブロック．\n\n対応 commit: b093f98（codex P1），8cfaca3（lens B P3 訂正），b9030c8（lens A P1/P2 一式）．",
+  "created_at": "2026-07-26T08:40:07Z",
+  "id": 5082754338,
+  "issue_number": 80,
+  "performed_via_github_app": null,
+  "updated_at": "2026-07-26T08:40:07Z",
+  "user_login": "uda-lab-agent"
+ },
+ {
+  "author_association": "MEMBER",
+  "body": "@t-uda review 指摘の P1 を 015709e で修正しました（loader を dedupe + longest-first に正規化，包含 2 項目の回帰テスト追加，selftest 85 ケース）．詳細は inline thread の返信を参照してください．CI green を確認後，「それ以外に merge blocker は見つかりませんでした」の判断に基づき merge へ進みます — 追加の懸念があればお知らせください．",
+  "created_at": "2026-07-26T09:15:30Z",
+  "id": 5082862955,
+  "issue_number": 80,
+  "performed_via_github_app": null,
+  "updated_at": "2026-07-26T09:15:30Z",
+  "user_login": "uda-lab-agent"
  }
 ]

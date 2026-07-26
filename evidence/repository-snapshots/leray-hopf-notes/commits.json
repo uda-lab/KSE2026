@@ -1,0 +1,2079 @@
+[
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-20T03:50:11Z",
+  "committed_date": "2026-07-20T03:50:11Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "a92fd0aa08ca1aedf16c2bccec712bd38c92923d"
+  ],
+  "sha": "9dc9c230b9c188d9ebc3b4721f0272dbbc6f8371",
+  "subject": "notes#32 Phase B: source-enabled Pages deployment with fail-closed provenance gate (#114)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-20T02:22:12Z",
+  "committed_date": "2026-07-20T02:22:12Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "991ca174c8d3956076457cdff2f43bc7b3ce1ee1",
+   "ca61066e92a71546cec67c319e34935b02cc299e"
+  ],
+  "sha": "a92fd0aa08ca1aedf16c2bccec712bd38c92923d",
+  "subject": "Merge pull request #113 from uda-lab/fix-106-build-wording"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-20T00:50:20Z",
+  "committed_date": "2026-07-20T00:50:20Z",
+  "committer_login": null,
+  "parents": [
+   "991ca174c8d3956076457cdff2f43bc7b3ce1ee1"
+  ],
+  "sha": "ca61066e92a71546cec67c319e34935b02cc299e",
+  "subject": "docs: describe PR #106 verification build accurately as incremental, not fresh"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-20T00:46:56Z",
+  "committed_date": "2026-07-20T00:46:56Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "344ea0888bed16ea5ec75e2fd7e1bcc4063ced4c",
+   "e307311e4a6956813dcf45325ce738deb4865208"
+  ],
+  "sha": "991ca174c8d3956076457cdff2f43bc7b3ce1ee1",
+  "subject": "Merge pull request #112 from uda-lab/issue-74-wave6"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T22:51:35Z",
+  "committed_date": "2026-07-19T22:51:35Z",
+  "committer_login": null,
+  "parents": [
+   "6a1de2f68f4a7fec96cbc9fd9403a8228ff1189c"
+  ],
+  "sha": "e307311e4a6956813dcf45325ce738deb4865208",
+  "subject": "fix(review): restore MeasurableSet s in 2 statement_ja (owner CHANGES_REQUESTED)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T22:01:52Z",
+  "committed_date": "2026-07-19T22:01:52Z",
+  "committer_login": null,
+  "parents": [
+   "344ea0888bed16ea5ec75e2fd7e1bcc4063ced4c"
+  ],
+  "sha": "6a1de2f68f4a7fec96cbc9fd9403a8228ff1189c",
+  "subject": "corpus: hand-write FrechetKolmogorov/RellichBall private-helper glosses (issue #74 wave 6)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T21:47:21Z",
+  "committed_date": "2026-07-19T21:47:21Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "c43428bd615f96eb051b86461229c32ffc1a6a06",
+   "3ac9840934e62ec5c9e955b2b9674df613d12435"
+  ],
+  "sha": "344ea0888bed16ea5ec75e2fd7e1bcc4063ced4c",
+  "subject": "Merge pull request #111 from uda-lab/issue-107-tier-demotion"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T21:24:10Z",
+  "committed_date": "2026-07-19T21:24:10Z",
+  "committer_login": null,
+  "parents": [
+   "c43428bd615f96eb051b86461229c32ffc1a6a06"
+  ],
+  "sha": "3ac9840934e62ec5c9e955b2b9674df613d12435",
+  "subject": "tier demotion: 24 declarations privatized by lh#155 triage (Refs #107)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T21:09:34Z",
+  "committed_date": "2026-07-19T21:09:34Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "c7f0b4851dc349d0d6feedc1be6430641a2b24b4",
+   "773d09d9245fd071b6b32c9ef2a66a8d30b5de51"
+  ],
+  "sha": "c43428bd615f96eb051b86461229c32ffc1a6a06",
+  "subject": "Merge pull request #110 from uda-lab/issue-74-wave5"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T21:06:34Z",
+  "committed_date": "2026-07-19T21:06:34Z",
+  "committer_login": null,
+  "parents": [
+   "44c62b0bec1401ac8fb141046269d74182889c30"
+  ],
+  "sha": "773d09d9245fd071b6b32c9ef2a66a8d30b5de51",
+  "subject": "fix: antisymmIntegral gloss over-narrows to divergence-free test fields (codex P2)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T21:00:50Z",
+  "committed_date": "2026-07-19T21:00:50Z",
+  "committer_login": null,
+  "parents": [
+   "c7f0b4851dc349d0d6feedc1be6430641a2b24b4"
+  ],
+  "sha": "44c62b0bec1401ac8fb141046269d74182889c30",
+  "subject": "notes#74 wave 5: hand-write ConvectionForm.lean private helper glosses (25)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T20:46:45Z",
+  "committed_date": "2026-07-19T20:46:45Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "7afb4dfcf0be0c79fed21c0dd094916a297d144c",
+   "7fca44abe8150ade3a85074ede6c8ffa1fc5a05e"
+  ],
+  "sha": "c7f0b4851dc349d0d6feedc1be6430641a2b24b4",
+  "subject": "Merge pull request #109 from uda-lab/issue-75-contributing-policy"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T19:47:22Z",
+  "committed_date": "2026-07-19T19:47:22Z",
+  "committer_login": null,
+  "parents": [
+   "8f4e4f7cd8c1dbfee610cbd93e6b7330e0187503"
+  ],
+  "sha": "7fca44abe8150ade3a85074ede6c8ffa1fc5a05e",
+  "subject": "Dedupe §9 policy text out of PR template (codex round-2, PR #109)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T18:55:26Z",
+  "committed_date": "2026-07-19T18:55:26Z",
+  "committer_login": null,
+  "parents": [
+   "69028aa99d6cc21eb2f325d0c00b146658cc5c3e"
+  ],
+  "sha": "8f4e4f7cd8c1dbfee610cbd93e6b7330e0187503",
+  "subject": "Reconcile §3/§9 canonical-source claim; wire adversarial checks into PR template"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T18:51:58Z",
+  "committed_date": "2026-07-19T18:51:58Z",
+  "committer_login": null,
+  "parents": [
+   "7afb4dfcf0be0c79fed21c0dd094916a297d144c"
+  ],
+  "sha": "69028aa99d6cc21eb2f325d0c00b146658cc5c3e",
+  "subject": "docs: reflect owner decision on batch size / review separation / adversarial checks (CONTRIBUTING §9)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T18:48:55Z",
+  "committed_date": "2026-07-19T18:48:55Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "60d7b9f9d89532aacccd397f96db3390e7ede489",
+   "39efa66ffbcab7fe002c1065392eacdd9b351655"
+  ],
+  "sha": "7afb4dfcf0be0c79fed21c0dd094916a297d144c",
+  "subject": "Merge pull request #108 from uda-lab/issue-105-corpus-reproofread"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T18:47:03Z",
+  "committed_date": "2026-07-19T18:47:03Z",
+  "committer_login": null,
+  "parents": [
+   "62dd83d83ea3dfdc08eef800c0e1bad1700ad4ed"
+  ],
+  "sha": "39efa66ffbcab7fe002c1065392eacdd9b351655",
+  "subject": "lint: resolve corpus_root before rglob to fix relative --corpus path (codex P2)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T18:39:47Z",
+  "committed_date": "2026-07-19T18:39:47Z",
+  "committer_login": null,
+  "parents": [
+   "e608f6d25cf21ddd13e7d8bca726701b935a3d01"
+  ],
+  "sha": "62dd83d83ea3dfdc08eef800c0e1bad1700ad4ed",
+  "subject": "lint: catch raw \"witness\" fused onto Japanese text (rev-108 P1 follow-up)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T18:39:31Z",
+  "committed_date": "2026-07-19T18:39:31Z",
+  "committer_login": null,
+  "parents": [
+   "fbc9ec2056220c79895d671efb114896e20967a5"
+  ],
+  "sha": "e608f6d25cf21ddd13e7d8bca726701b935a3d01",
+  "subject": "corpus: fix raw English \"witness\" fused onto Japanese nouns (rev-108 P1)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T18:20:07Z",
+  "committed_date": "2026-07-19T18:20:07Z",
+  "committer_login": null,
+  "parents": [
+   "57503d40ff52524794086c3202397875d4f17087"
+  ],
+  "sha": "fbc9ec2056220c79895d671efb114896e20967a5",
+  "subject": "glossary+lint: add witness entry and make forbidden-term lint a hard CI gate"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T18:19:49Z",
+  "committed_date": "2026-07-19T18:19:49Z",
+  "committer_login": null,
+  "parents": [
+   "60d7b9f9d89532aacccd397f96db3390e7ede489"
+  ],
+  "sha": "57503d40ff52524794086c3202397875d4f17087",
+  "subject": "corpus: fix unnatural direct-translation register across full corpus (issue #105)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T17:47:43Z",
+  "committed_date": "2026-07-19T17:47:43Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "102f5ca19fad3cb20ccf5f4080d9dc9d50a6726e",
+   "526d25868173d37a2de9bbbff46cb72f55642e81"
+  ],
+  "sha": "60d7b9f9d89532aacccd397f96db3390e7ede489",
+  "subject": "Merge pull request #106 from uda-lab/issue-32-phaseB-repin"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T16:55:47Z",
+  "committed_date": "2026-07-19T16:55:47Z",
+  "committer_login": null,
+  "parents": [
+   "102f5ca19fad3cb20ccf5f4080d9dc9d50a6726e"
+  ],
+  "sha": "526d25868173d37a2de9bbbff46cb72f55642e81",
+  "subject": "repin: PIN d5f91f7 → 7c15710a（issue #32 Phase B release-candidate freeze への追随）"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T12:58:25Z",
+  "committed_date": "2026-07-19T12:58:25Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "1f81672502b86acfb52d76c3c1708b61428771a2",
+   "c7532fc7337ca0c6a2eaff5a08b68a6f6121336d"
+  ],
+  "sha": "102f5ca19fad3cb20ccf5f4080d9dc9d50a6726e",
+  "subject": "Merge pull request #104 from uda-lab/fix-100-temam-sync"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T11:58:52Z",
+  "committed_date": "2026-07-19T11:58:52Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "bf513c01903bec65e135435c1f982eb16834386a"
+  ],
+  "sha": "1f81672502b86acfb52d76c3c1708b61428771a2",
+  "subject": "corpus: apply rev-n95 PR#95 findings (H1Sigma' L² norm, D3 register) (#103)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T11:58:48Z",
+  "committed_date": "2026-07-19T11:58:48Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "02be4592063863d68519cf1eb35ad85541508cc6"
+  ],
+  "sha": "bf513c01903bec65e135435c1f982eb16834386a",
+  "subject": "corpus: hand-write CurlDensity/CurlDensityH1 private-helper glosses (issue #74 wave 4) (#99)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T11:54:08Z",
+  "committed_date": "2026-07-19T11:54:08Z",
+  "committer_login": null,
+  "parents": [
+   "3d9fa6277f50ac765766b494cd4a258f028dc141"
+  ],
+  "sha": "c7532fc7337ca0c6a2eaff5a08b68a6f6121336d",
+  "subject": "fixup(bibliography): trim temam1973 entry to the verified bibliographic fact"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T11:50:26Z",
+  "committed_date": "2026-07-19T11:50:26Z",
+  "committer_login": null,
+  "parents": [
+   "a3dda9f9c042651a7a968444100830ac2b6ef086"
+  ],
+  "sha": "3d9fa6277f50ac765766b494cd4a258f028dc141",
+  "subject": "fixup(w1pTime_continuous_in_H): drop raw declaration name from proof_ja prose"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-19T11:43:40Z",
+  "committed_date": "2026-07-19T11:43:40Z",
+  "committer_login": null,
+  "parents": [
+   "02be4592063863d68519cf1eb35ad85541508cc6"
+  ],
+  "sha": "a3dda9f9c042651a7a968444100830ac2b6ef086",
+  "subject": "docs(w1pTime_continuous_in_H): sync Temam citation to owner-verified 1973 edition"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T10:52:28Z",
+  "committed_date": "2026-07-19T10:52:28Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "308a6f0aac1f073519d98452aa095a7c8bfe2586"
+  ],
+  "sha": "02be4592063863d68519cf1eb35ad85541508cc6",
+  "subject": "license: expand CC-BY-4.0.txt to full legal text, add LICENSE.md pointer to CITATION.cff message (#102)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T10:44:29Z",
+  "committed_date": "2026-07-19T10:44:29Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "3c0ce8f9effd7f6a5496200033c0e27dd966839b"
+  ],
+  "sha": "308a6f0aac1f073519d98452aa095a7c8bfe2586",
+  "subject": "corpus: repo-name fix in w1pTime gap.note + neutral rewrite of two PR#98 phrases (#101)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T09:41:42Z",
+  "committed_date": "2026-07-19T09:41:42Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "9372d0279d47e4490e5aa74a1d5e2013bdca3177"
+  ],
+  "sha": "3c0ce8f9effd7f6a5496200033c0e27dd966839b",
+  "subject": "corpus: hand-write ConvectionExtension private-helper glosses (#95)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-19T09:34:22Z",
+  "committed_date": "2026-07-19T09:34:22Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "29d946c890183cc2bfed9b455e05e20c1f7b0ce4"
+  ],
+  "sha": "9372d0279d47e4490e5aa74a1d5e2013bdca3177",
+  "subject": "corpus: restore scholarly prose and provenance boundary (#98)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-19T09:34:19Z",
+  "committed_date": "2026-07-19T09:34:19Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "52df2df24e703d5192c4af413067ca16e545f0f4"
+  ],
+  "sha": "29d946c890183cc2bfed9b455e05e20c1f7b0ce4",
+  "subject": "corpus: correct Temam locator for w1pTime continuity (#97)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-19T09:34:17Z",
+  "committed_date": "2026-07-19T09:34:17Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "4883865fb7d376bb7cbae1db23b4836879cd812a"
+  ],
+  "sha": "52df2df24e703d5192c4af413067ca16e545f0f4",
+  "subject": "license: fix split-license CFF semantics and include Apache-2.0 text (#96)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T08:59:37Z",
+  "committed_date": "2026-07-19T08:59:37Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "059762dcedddd59ab04ab55635605fd226bda086"
+  ],
+  "sha": "4883865fb7d376bb7cbae1db23b4836879cd812a",
+  "subject": "corpus: hand-write AubinLionsLimitPassage.lean private-helper glosses (issue #74 wave 2) (#94)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-19T06:36:22Z",
+  "committed_date": "2026-07-19T06:36:22Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "fa293a211fffc8e452afbe43d1fc3beb033aa56e"
+  ],
+  "sha": "059762dcedddd59ab04ab55635605fd226bda086",
+  "subject": "notes#73 slice 2: search glossary terms and bibliography citations (#93)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-18T03:59:29Z",
+  "committed_date": "2026-07-18T03:59:29Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "06d54179949b817d5a92403c28fadeab198e80f0"
+  ],
+  "sha": "fa293a211fffc8e452afbe43d1fc3beb033aa56e",
+  "subject": "docs(readme): クイックスタートの pip install を requirements.txt 参照に統一 (#92)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-18T03:00:25Z",
+  "committed_date": "2026-07-18T03:00:25Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "d1b8cf7a5be766300699bc052e5601f67e9b4c73"
+  ],
+  "sha": "06d54179949b817d5a92403c28fadeab198e80f0",
+  "subject": "[P3][maintenance] contributor workflow と historical migration archive を整理する (#91)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-18T00:59:52Z",
+  "committed_date": "2026-07-18T00:59:52Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "8a89bd5579c024cadb165e029184ebdbbda3aa0a"
+  ],
+  "sha": "d1b8cf7a5be766300699bc052e5601f67e9b4c73",
+  "subject": "corpus: hand-write SobolevEmbedding.lean private-helper glosses (issue #74 wave 1) (#90)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T22:00:31Z",
+  "committed_date": "2026-07-17T22:00:31Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "499a75bb4e282e16d755605ae11719a5ed410ba5"
+  ],
+  "sha": "8a89bd5579c024cadb165e029184ebdbbda3aa0a",
+  "subject": "notes#73: route-aware page metadata + widened search (first slice) (#89)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T18:59:38Z",
+  "committed_date": "2026-07-17T18:59:38Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "6be3e56ba81ad084fd0143c60d469b53410d897c"
+  ],
+  "sha": "499a75bb4e282e16d755605ae11719a5ed410ba5",
+  "subject": "notes#29: hard-ceiling backstop for generated-data growth budgeting (#88)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T12:07:39Z",
+  "committed_date": "2026-07-17T12:07:39Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "9d501c23785fafa7e64e1ed84583851fabc5f8af"
+  ],
+  "sha": "6be3e56ba81ad084fd0143c60d469b53410d897c",
+  "subject": "notes#70: align nonvacuity/non-degeneracy claims with formal evidence (#87)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T11:47:27Z",
+  "committed_date": "2026-07-17T11:47:27Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "5f6febd14e40b6c34bfdec7e713d304358bf621b"
+  ],
+  "sha": "9d501c23785fafa7e64e1ed84583851fabc5f8af",
+  "subject": "w1pTime_continuous_in_H に文献 citation を配線する (#86)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T11:19:06Z",
+  "committed_date": "2026-07-17T11:19:06Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "8b36431a8d1094a7c5515573d7f8d61d9bbdc974"
+  ],
+  "sha": "5f6febd14e40b6c34bfdec7e713d304358bf621b",
+  "subject": "notes#71: fix stale counts/pipeline docs, rename graph terminology, add doc-staleness guard (#83)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T11:10:24Z",
+  "committed_date": "2026-07-17T11:10:24Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "cda41c1ebf47272d0c6490a42e7e4c24ef66921c"
+  ],
+  "sha": "8b36431a8d1094a7c5515573d7f8d61d9bbdc974",
+  "subject": "default scholarly prose から issue/PR/Codex/campaign 履歴を分離する (issue #69) (#85)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T08:11:04Z",
+  "committed_date": "2026-07-17T08:11:04Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "eb13eee8a3fab42104cdba369f00b3e06dfc98df"
+  ],
+  "sha": "cda41c1ebf47272d0c6490a42e7e4c24ef66921c",
+  "subject": "sync self- and cross-repo references to the leray-hopf(-notes) rename (issue #62) (#82)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T07:41:50Z",
+  "committed_date": "2026-07-17T07:41:50Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "3b0b28a8719629abfcc0d4ffa2a2c4cd0e4eec81"
+  ],
+  "sha": "eb13eee8a3fab42104cdba369f00b3e06dfc98df",
+  "subject": "fix(#72): accessibility, workflow security, dependency reproducibility (#84)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T07:06:46Z",
+  "committed_date": "2026-07-17T07:06:46Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "47fcee31c816d8978d611917ba54bd7c6f42d4e5",
+   "6654e4320c05dfa3975904c99014afd94cfe478a"
+  ],
+  "sha": "3b0b28a8719629abfcc0d4ffa2a2c4cd0e4eec81",
+  "subject": "Merge pull request #80 from uda-lab/issue-67-glossary"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T07:04:50Z",
+  "committed_date": "2026-07-17T07:04:50Z",
+  "committer_login": null,
+  "parents": [
+   "d0b77c23e651af9b4926569be27134bbad0607a7"
+  ],
+  "sha": "6654e4320c05dfa3975904c99014afd94cfe478a",
+  "subject": "codex review 対応: viscous form 行の抽象/具体の区別を明確化"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T06:59:50Z",
+  "committed_date": "2026-07-17T06:59:50Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "becbfd0bd9dbe7a4286c835d99810f5ccb29e5a0",
+   "c2a10cad920c0e4aa21b8d920021b1b42ae7ce99"
+  ],
+  "sha": "47fcee31c816d8978d611917ba54bd7c6f42d4e5",
+  "subject": "Merge pull request #81 from uda-lab/issue-68-bibliography"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T06:57:56Z",
+  "committed_date": "2026-07-17T06:57:56Z",
+  "committer_login": null,
+  "parents": [
+   "7fcd904e03fea2945021237d1816a2f297e841f5"
+  ],
+  "sha": "c2a10cad920c0e4aa21b8d920021b1b42ae7ce99",
+  "subject": "fixup(#68): address codex review — missed leray1934 shorthand, CI leniency gap"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T06:41:09Z",
+  "committed_date": "2026-07-17T06:51:28Z",
+  "committer_login": null,
+  "parents": [
+   "becbfd0bd9dbe7a4286c835d99810f5ccb29e5a0"
+  ],
+  "sha": "7fcd904e03fea2945021237d1816a2f297e841f5",
+  "subject": "feat(#68): canonical bibliography, per-entry corpus citations, release metadata"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T06:42:03Z",
+  "committed_date": "2026-07-17T06:42:03Z",
+  "committer_login": null,
+  "parents": [
+   "becbfd0bd9dbe7a4286c835d99810f5ccb29e5a0"
+  ],
+  "sha": "d0b77c23e651af9b4926569be27134bbad0607a7",
+  "subject": "glossary と数理用語の誤り・不一致を修正する (issue #67)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T05:52:02Z",
+  "committed_date": "2026-07-17T05:52:02Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "5e4c82a19ec6533599fcd5ae3f6d4d83c7785e98",
+   "fd2128ea1dca298acc02109175175703ea4c6b04"
+  ],
+  "sha": "becbfd0bd9dbe7a4286c835d99810f5ccb29e5a0",
+  "subject": "Merge pull request #76 from uda-lab/issue-65-proof-status"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T05:49:46Z",
+  "committed_date": "2026-07-17T05:49:46Z",
+  "committer_login": null,
+  "parents": [
+   "ce602555d192cefde4bb684e48ca73079028c15d",
+   "5e4c82a19ec6533599fcd5ae3f6d4d83c7785e98"
+  ],
+  "sha": "fd2128ea1dca298acc02109175175703ea4c6b04",
+  "subject": "Merge remote-tracking branch 'origin/main' into issue-65-proof-status"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T05:47:08Z",
+  "committed_date": "2026-07-17T05:47:08Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "86113a10b3a4312f492680f5f9a1ffb51263e77b",
+   "9edcf7b3219965eefc5b2dfc6138f7abdfa5e390"
+  ],
+  "sha": "5e4c82a19ec6533599fcd5ae3f6d4d83c7785e98",
+  "subject": "Merge pull request #79 from uda-lab/issue-64-solution-claims"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T05:47:05Z",
+  "committed_date": "2026-07-17T05:47:05Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "8c41da1fc6683f18a5816be23b535189fe9aa730",
+   "e97d3727b5b6e9c4064f5148c619ae36531e2263"
+  ],
+  "sha": "86113a10b3a4312f492680f5f9a1ffb51263e77b",
+  "subject": "Merge pull request #77 from uda-lab/issue-66-citation-license"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-17T05:44:30Z",
+  "committed_date": "2026-07-17T05:44:30Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "d1f48dc0dd3e8276ecd04742e76a255f2f4745e8",
+   "6fa57c865e3330c901d36217c6ac6b922a143989"
+  ],
+  "sha": "8c41da1fc6683f18a5816be23b535189fe9aa730",
+  "subject": "Merge pull request #78 from uda-lab/issue-60-followup-repin"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T05:41:00Z",
+  "committed_date": "2026-07-17T05:41:00Z",
+  "committer_login": null,
+  "parents": [
+   "d1f48dc0dd3e8276ecd04742e76a255f2f4745e8"
+  ],
+  "sha": "9edcf7b3219965eefc5b2dfc6138f7abdfa5e390",
+  "subject": "solution/capstone 注釈を Lean public API の exact claim に合わせる (issue #64)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T05:37:32Z",
+  "committed_date": "2026-07-17T05:37:32Z",
+  "committer_login": null,
+  "parents": [
+   "d1f48dc0dd3e8276ecd04742e76a255f2f4745e8"
+  ],
+  "sha": "6fa57c865e3330c901d36217c6ac6b922a143989",
+  "subject": "repin: PIN 0afd65f → d5f91f7（lean-pde#145 release-blocker 波への追随）"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T05:18:28Z",
+  "committed_date": "2026-07-17T05:34:00Z",
+  "committer_login": null,
+  "parents": [
+   "d1f48dc0dd3e8276ecd04742e76a255f2f4745e8"
+  ],
+  "sha": "e97d3727b5b6e9c4064f5148c619ae36531e2263",
+  "subject": "fix(#66): schema-valid CITATION.cff, vendored KaTeX MIT notice, footer attribution"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T05:29:09Z",
+  "committed_date": "2026-07-17T05:29:09Z",
+  "committer_login": null,
+  "parents": [
+   "52259bca233718873486c85f9aea2a17a3cbaf75"
+  ],
+  "sha": "ce602555d192cefde4bb684e48ca73079028c15d",
+  "subject": "notes#65: address codex pre-review — home badge, corpus prose, drift safety net"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-17T05:21:44Z",
+  "committed_date": "2026-07-17T05:21:44Z",
+  "committer_login": null,
+  "parents": [
+   "d1f48dc0dd3e8276ecd04742e76a255f2f4745e8"
+  ],
+  "sha": "52259bca233718873486c85f9aea2a17a3cbaf75",
+  "subject": "notes#65: proof_status (sorry/scaffold/retired/invalid-statement) schema + UI"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-16T15:07:17Z",
+  "committed_date": "2026-07-16T15:07:17Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "8b5ebc98e0088721c50deedeaac0fc6cefd0a08a",
+   "e196216e0d3ef1621943bbfca1ba37bf006b3142"
+  ],
+  "sha": "d1f48dc0dd3e8276ecd04742e76a255f2f4745e8",
+  "subject": "Merge pull request #61 from uda-lab/issue-60-repin"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T14:12:57Z",
+  "committed_date": "2026-07-16T14:12:57Z",
+  "committer_login": null,
+  "parents": [
+   "8b5ebc98e0088721c50deedeaac0fc6cefd0a08a"
+  ],
+  "sha": "e196216e0d3ef1621943bbfca1ba37bf006b3142",
+  "subject": "repin: PIN a33de86 → 0afd65f（lean-pde #135 restate・#1 finding-6 共有化への追随）"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-16T05:08:26Z",
+  "committed_date": "2026-07-16T05:08:26Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "34a2ab371f65ff492643008b04790bd67061a2de",
+   "bde300cb0e80e81a28dfe13b85330d0fb6aef6dc"
+  ],
+  "sha": "8b5ebc98e0088721c50deedeaac0fc6cefd0a08a",
+  "subject": "Merge pull request #59 from uda-lab/issue-56-obu-terminology"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T04:13:02Z",
+  "committed_date": "2026-07-16T04:13:02Z",
+  "committer_login": null,
+  "parents": [
+   "81b0942f6f2c241332311c43838f75214c04b627"
+  ],
+  "sha": "bde300cb0e80e81a28dfe13b85330d0fb6aef6dc",
+  "subject": "owner レビュー対応: 球部分→球内部分（正準対の一貫適用）・tailVF の操作と結果の分離（球外制限／球外部分）"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T03:58:09Z",
+  "committed_date": "2026-07-16T03:58:09Z",
+  "committer_login": null,
+  "parents": [
+   "f7b05a2e897813de868b7aad757b8ea2b4665a05"
+  ],
+  "sha": "81b0942f6f2c241332311c43838f75214c04b627",
+  "subject": "Copilot 指摘対応: 被積分関数の一致は a.e. に弱め、各点での内積は対象の名称として保持"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T03:51:32Z",
+  "committed_date": "2026-07-16T03:51:32Z",
+  "committer_login": null,
+  "parents": [
+   "f11a6456ba6d27b1f69f82e1c52b99e2e5ff848c"
+  ],
+  "sha": "f7b05a2e897813de868b7aad757b8ea2b4665a05",
+  "subject": "codex 事前レビュー対応: 直交分解文脈は直交残差・fb_tendsto の形式事実参照を球外部分へ・GLOSSARY 識別子例を正確な対応先に"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T03:45:15Z",
+  "committed_date": "2026-07-16T03:45:15Z",
+  "committer_login": null,
+  "parents": [
+   "34a2ab371f65ff492643008b04790bd67061a2de"
+  ],
+  "sha": "f11a6456ba6d27b1f69f82e1c52b99e2e5ff848c",
+  "subject": "corpus+GLOSSARY: 尾部の全域撤去と球外部分系の明示用語への移行 (issue #56)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-16T03:34:59Z",
+  "committed_date": "2026-07-16T03:34:59Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "807f06f1bba2ae96b3aecf3e9db7ce3bc7acc7fd",
+   "b838f99f8d6b13873563a7ab2fae1aae38e86aa9"
+  ],
+  "sha": "34a2ab371f65ff492643008b04790bd67061a2de",
+  "subject": "Merge pull request #58 from uda-lab/issue-51-p4-limit-passage"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T03:20:10Z",
+  "committed_date": "2026-07-16T03:20:10Z",
+  "committer_login": null,
+  "parents": [
+   "1ef8a73a865b82c37ad061121becd202f62e91fa"
+  ],
+  "sha": "b838f99f8d6b13873563a7ab2fae1aae38e86aa9",
+  "subject": "owner レビュー対応: capstone 置換 2 文をご提案の自然な文に修正（余分な空白・擬人化の解消）"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T03:10:40Z",
+  "committed_date": "2026-07-16T03:10:40Z",
+  "committer_login": null,
+  "parents": [
+   "24260c4b97cb36676740ea417399502191df7bd1"
+  ],
+  "sha": "1ef8a73a865b82c37ad061121becd202f62e91fa",
+  "subject": "owner レビュー対応: 引数／テンソル因子番号の訂正・点別 sweep の不自然表現修正・単調ステップ除去・台帳記録の実文言一致・全域残渣監査の再実行（発火/capstone prose の残存も処理）"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T02:39:54Z",
+  "committed_date": "2026-07-16T02:39:54Z",
+  "committer_login": null,
+  "parents": [
+   "a52e83ac26272480a2e78714fe9542208d90fc30"
+  ],
+  "sha": "24260c4b97cb36676740ea417399502191df7bd1",
+  "subject": "Copilot 指摘対応: 「a.e. で各点の…」の冗長を解消（a.e. 表示に統一、代表関数どうしの積と明示）"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T02:33:38Z",
+  "committed_date": "2026-07-16T02:33:38Z",
+  "committer_login": null,
+  "parents": [
+   "f15e52ff23d97517a59c84a0e46a3c8a1a0ee0a8"
+  ],
+  "sha": "a52e83ac26272480a2e78714fe9542208d90fc30",
+  "subject": "台帳: P4 (PR #58) 反映 — 全 371 件 close (fixed 297 / rejected 14 / superseded-by-#52 60 / open 0)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T01:55:01Z",
+  "committed_date": "2026-07-16T02:32:49Z",
+  "committer_login": null,
+  "parents": [
+   "6cb38a8cb16d0a6d0b5833b2dcdd16501d57d186"
+  ],
+  "sha": "f15e52ff23d97517a59c84a0e46a3c8a1a0ee0a8",
+  "subject": "owner 裁定 (PR #57) の P4 側適用: 押し出し の残存 2 件を合成表現へ"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-15T16:58:57Z",
+  "committed_date": "2026-07-16T02:32:49Z",
+  "committer_login": null,
+  "parents": [
+   "a93e09b8c00db92b5981f20614897cddbc8ca959"
+  ],
+  "sha": "6cb38a8cb16d0a6d0b5833b2dcdd16501d57d186",
+  "subject": "codex 事前レビュー対応: 辺→部分加群の同一ファイル内整合・優関数族の訳語統一・パッケージ／真の の復元（F365 表現調整・F307 却下）"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-15T16:47:38Z",
+  "committed_date": "2026-07-16T02:32:49Z",
+  "committer_login": null,
+  "parents": [
+   "807f06f1bba2ae96b3aecf3e9db7ce3bc7acc7fd"
+  ],
+  "sha": "a93e09b8c00db92b5981f20614897cddbc8ca959",
+  "subject": "corpus: limit-passage 章 日本語校正 + corpus 全域の点別・帯域水準残渣一掃 — 台帳所見 48 件を処理"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-16T02:32:41Z",
+  "committed_date": "2026-07-16T02:32:41Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "de09e5fd3331b5eeba7ab81cde871d729b3b7b7b",
+   "7cec037279464a73ed8eb3ef476864efb8bbc3e2"
+  ],
+  "sha": "807f06f1bba2ae96b3aecf3e9db7ce3bc7acc7fd",
+  "subject": "Merge pull request #57 from uda-lab/issue-51-p3-bochner"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-16T01:52:39Z",
+  "committed_date": "2026-07-16T01:52:39Z",
+  "committer_login": null,
+  "parents": [
+   "5a4dbeaf04dd2bd9f7c1891a3c3a14eda9777eec"
+  ],
+  "sha": "7cec037279464a73ed8eb3ef476864efb8bbc3e2",
+  "subject": "owner レビュー対応: W1pTime 定義文の述部補完・押し出し→連続線形写像との合成による保存（PR 内 4 ファイル統一）・畳み込み注釈の訂正・欠損→近似誤差の統一"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-15T17:00:58Z",
+  "committed_date": "2026-07-15T17:00:58Z",
+  "committer_login": null,
+  "parents": [
+   "56dba5ff3e101b648a3ef5cad5bfb4178e18ed2a"
+  ],
+  "sha": "5a4dbeaf04dd2bd9f7c1891a3c3a14eda9777eec",
+  "subject": "Copilot 指摘対応: 各点差→代表関数の差・畳み込み形の係り受け明確化・rfl/集合表示の Lean 実装語除去"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-15T16:30:46Z",
+  "committed_date": "2026-07-15T16:30:46Z",
+  "committer_login": null,
+  "parents": [
+   "025e332bdaa0e15bfadb575bf7a2b0284f0820ac"
+  ],
+  "sha": "56dba5ff3e101b648a3ef5cad5bfb4178e18ed2a",
+  "subject": "台帳: P3 (PR #57) 反映 — bochner 91 件 (90 fixed / 1 rejected)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-15T16:29:46Z",
+  "committed_date": "2026-07-15T16:29:46Z",
+  "committer_login": null,
+  "parents": [
+   "2b4c5a35697f741fed3b27a073655e4fb5b5eda9"
+  ],
+  "sha": "025e332bdaa0e15bfadb575bf7a2b0284f0820ac",
+  "subject": "codex 事前レビュー対応: 束ねられた の復元（F254 却下）・IsTimeMollifier の実装詳細を gap.note へ・モジュラス残存の同期"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-15T16:18:43Z",
+  "committed_date": "2026-07-15T16:18:48Z",
+  "committer_login": null,
+  "parents": [
+   "de09e5fd3331b5eeba7ab81cde871d729b3b7b7b"
+  ],
+  "sha": "2b4c5a35697f741fed3b27a073655e4fb5b5eda9",
+  "subject": "corpus: bochner 章 日本語校正 — 台帳所見 91 件を修正"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-15T16:10:45Z",
+  "committed_date": "2026-07-15T16:10:45Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "dbdc1f038df24ef9aa8b1b8b887ec12ff0baf154",
+   "6bb92dfa3068ebacc8c05fe92bf5e216ca1b2365"
+  ],
+  "sha": "de09e5fd3331b5eeba7ab81cde871d729b3b7b7b",
+  "subject": "Merge pull request #55 from uda-lab/issue-51-p2-compactness-projections"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-15T15:03:11Z",
+  "committed_date": "2026-07-15T15:03:11Z",
+  "committer_login": null,
+  "parents": [
+   "d1bb46800d9496e74569abb66ce84cb4b5eb8835"
+  ],
+  "sha": "6bb92dfa3068ebacc8c05fe92bf5e216ca1b2365",
+  "subject": "owner 追加裁定: PR 編集対象内の尾部→打ち切り残差ほか対象を名指す表現へ"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-15T14:31:17Z",
+  "committed_date": "2026-07-15T14:31:17Z",
+  "committer_login": null,
+  "parents": [
+   "f21cb45ea8001803ac15b27988b4c5c45eba957b"
+  ],
+  "sha": "d1bb46800d9496e74569abb66ce84cb4b5eb8835",
+  "subject": "owner レビュー対応: a.e. 主張の全点化を復元・capstone のデータ供給元を訂正"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-15T14:20:38Z",
+  "committed_date": "2026-07-15T14:20:38Z",
+  "committer_login": null,
+  "parents": [
+   "c6e0ce816fbda2a9d65a9b0103d5a311726f13a7"
+  ],
+  "sha": "f21cb45ea8001803ac15b27988b4c5c45eba957b",
+  "subject": "codex 指摘対応: integral_sq_proj_tendsto_zero_of_weak の仮定列を完全に明示"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-15T14:15:08Z",
+  "committed_date": "2026-07-15T14:15:08Z",
+  "committer_login": null,
+  "parents": [
+   "dbdc1f038df24ef9aa8b1b8b887ec12ff0baf154"
+  ],
+  "sha": "c6e0ce816fbda2a9d65a9b0103d5a311726f13a7",
+  "subject": "corpus 日本語校正 P2: compactness/misc/projections-galerkin/capstone-torus 章所見修正 + 点別掃討"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-15T13:59:23Z",
+  "committed_date": "2026-07-15T13:59:23Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "6a3e61c7566023aa220f4dc3739daf53f6fe0af3",
+   "affb7823a7fc690e3089acbbe8b51e4af7fee6f9"
+  ],
+  "sha": "dbdc1f038df24ef9aa8b1b8b887ec12ff0baf154",
+  "subject": "Merge pull request #54 from uda-lab/issue-51-p15-terminology"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-15T13:43:51Z",
+  "committed_date": "2026-07-15T13:43:51Z",
+  "committer_login": null,
+  "parents": [
+   "355c1a2c1a9a1bc6326b343363804fc1e9ceeee6"
+  ],
+  "sha": "affb7823a7fc690e3089acbbe8b51e4af7fee6f9",
+  "subject": "Copilot 指摘対応: PR 変更対象内の帯域水準/水準を打ち切り次数/次数に統一"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-15T13:02:06Z",
+  "committed_date": "2026-07-15T13:02:06Z",
+  "committer_login": null,
+  "parents": [
+   "d02cc761963dc9adfd8d1d29459d123fd5112736"
+  ],
+  "sha": "355c1a2c1a9a1bc6326b343363804fc1e9ceeee6",
+  "subject": "owner レビュー対応: 添字付き不動点主張の復元・GLOSSARY forbidden の系列を lane 固有句に限定"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-15T12:14:06Z",
+  "committed_date": "2026-07-15T12:14:06Z",
+  "committer_login": null,
+  "parents": [
+   "6a3e61c7566023aa220f4dc3739daf53f6fe0af3"
+  ],
+  "sha": "d02cc761963dc9adfd8d1d29459d123fd5112736",
+  "subject": "用語一括改名: 截断→打ち切り/帯域制限・lane 系列→系統 (issue #51 owner 裁定)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-15T11:55:04Z",
+  "committed_date": "2026-07-15T11:55:04Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "08fddfe7e44f20b3b7c9ca0e0ef07c124f02c60b"
+  ],
+  "sha": "6a3e61c7566023aa220f4dc3739daf53f6fe0af3",
+  "subject": "corpus 日本語校正 P1: 証人の全域掃討・equi-Lipschitz 裁定・energy/ode/spaces 章所見修正 (issue #51) (#53)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-14T09:09:09Z",
+  "committed_date": "2026-07-14T09:09:09Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "b27b7385d793355502f3f76bdff491d0de06b975",
+   "d3fc8419e246cb9d1de39974c075778b36481943"
+  ],
+  "sha": "08fddfe7e44f20b3b7c9ca0e0ef07c124f02c60b",
+  "subject": "Merge pull request #52 from uda-lab/issue-50-terminology-rulings"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-14T09:08:00Z",
+  "committed_date": "2026-07-14T09:08:00Z",
+  "committer_login": null,
+  "parents": [
+   "349f9bd33e866019f71e91760b17bc7c37eec5e3"
+  ],
+  "sha": "d3fc8419e246cb9d1de39974c075778b36481943",
+  "subject": "GLOSSARY: forbidden 列の複数語を「、」区切りに修正（codex 指摘）"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-14T09:02:15Z",
+  "committed_date": "2026-07-14T09:02:15Z",
+  "committer_login": null,
+  "parents": [
+   "b27b7385d793355502f3f76bdff491d0de06b975"
+  ],
+  "sha": "349f9bd33e866019f71e91760b17bc7c37eec5e3",
+  "subject": "用語裁定と概念改名: 移項形式→部分積分形、Stokes テスト対→Stokes 双線形形式ほか"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-14T01:54:30Z",
+  "committed_date": "2026-07-14T01:54:30Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "65c808bd37445d1b92e5f55a0eeb7e2f95d0eb58",
+   "37de025f4f22665345e476a3e3f13db38f2e8dbd"
+  ],
+  "sha": "b27b7385d793355502f3f76bdff491d0de06b975",
+  "subject": "Merge pull request #49 from uda-lab/issue-33-limit-passage"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-14T01:32:24Z",
+  "committed_date": "2026-07-14T01:32:24Z",
+  "committer_login": null,
+  "parents": [
+   "65c808bd37445d1b92e5f55a0eeb7e2f95d0eb58"
+  ],
+  "sha": "37de025f4f22665345e476a3e3f13db38f2e8dbd",
+  "subject": "corpus: limit-passage chapter quality pass — 66 generated placeholders to handwritten annotations"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-14T01:30:23Z",
+  "committed_date": "2026-07-14T01:30:23Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "14a2368bffba2ac81d4c9a8f4aa4164c3c4c9d76",
+   "029eed84790b504416473428d08d6af6f95e0db9"
+  ],
+  "sha": "65c808bd37445d1b92e5f55a0eeb7e2f95d0eb58",
+  "subject": "Merge pull request #48 from uda-lab/issue-33-bochner"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-14T01:28:59Z",
+  "committed_date": "2026-07-14T01:28:59Z",
+  "committer_login": null,
+  "parents": [
+   "486cbdb2775a73dbf26334c2356015bf568cd866"
+  ],
+  "sha": "029eed84790b504416473428d08d6af6f95e0db9",
+  "subject": "corpus: state the Lions-Magenes domain as L^p(V) with V'-valued weak derivative, not W^{1,p}(V) (codex P2)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-14T01:21:39Z",
+  "committed_date": "2026-07-14T01:21:39Z",
+  "committer_login": null,
+  "parents": [
+   "14a2368bffba2ac81d4c9a8f4aa4164c3c4c9d76"
+  ],
+  "sha": "486cbdb2775a73dbf26334c2356015bf568cd866",
+  "subject": "corpus: bochner chapter quality pass — 61 generated placeholders to handwritten annotations"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-11T13:29:00Z",
+  "committed_date": "2026-07-11T13:29:00Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "1a462c8da0d938443cdb84dc4b3ba9dcd5e228fc",
+   "d6d28785e14e081453c02688c81471f87d05efd2"
+  ],
+  "sha": "14a2368bffba2ac81d4c9a8f4aa4164c3c4c9d76",
+  "subject": "Merge pull request #47 from uda-lab/issue-33-projections"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T13:27:34Z",
+  "committed_date": "2026-07-11T13:27:34Z",
+  "committer_login": null,
+  "parents": [
+   "dc3634a587db66e1561c157ded566108df828f19"
+  ],
+  "sha": "d6d28785e14e081453c02688c81471f87d05efd2",
+  "subject": "corpus: self-contained gap note for velocitySpanToSigma_smul; truncation convergence is L2-norm (strong) convergence (codex review)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T13:14:18Z",
+  "committed_date": "2026-07-11T13:14:18Z",
+  "committer_login": null,
+  "parents": [
+   "1a462c8da0d938443cdb84dc4b3ba9dcd5e228fc"
+  ],
+  "sha": "dc3634a587db66e1561c157ded566108df828f19",
+  "subject": "corpus: projections-galerkin chapter quality pass — 50 generated placeholders to handwritten annotations"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-11T13:10:15Z",
+  "committed_date": "2026-07-11T13:10:15Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "31a41e04d92094dd58f80fc46bbd295b4ca3999d",
+   "0c38a9da3784b5d6584eb4b79bf7c63f01d3942a"
+  ],
+  "sha": "1a462c8da0d938443cdb84dc4b3ba9dcd5e228fc",
+  "subject": "Merge pull request #46 from uda-lab/issue-33-capstone-misc"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T13:08:40Z",
+  "committed_date": "2026-07-11T13:08:40Z",
+  "committer_login": null,
+  "parents": [
+   "7240729e6fe4db12e63145278b89292bb6f1f18a"
+  ],
+  "sha": "0c38a9da3784b5d6584eb4b79bf7c63f01d3942a",
+  "subject": "corpus: STATUS.md reference is in the lean-pde source repo — say so (codex P3)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T13:02:51Z",
+  "committed_date": "2026-07-11T13:02:51Z",
+  "committer_login": null,
+  "parents": [
+   "31a41e04d92094dd58f80fc46bbd295b4ca3999d"
+  ],
+  "sha": "7240729e6fe4db12e63145278b89292bb6f1f18a",
+  "subject": "corpus: capstone-torus + misc quality pass — 12 generated placeholders to handwritten annotations"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-11T13:00:52Z",
+  "committed_date": "2026-07-11T13:00:52Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "d2a1d5248b7736ae02318c56fd5dcd499a7eb414",
+   "898400de66eb7dd2acc25cdf4622d21d1aecffa1"
+  ],
+  "sha": "31a41e04d92094dd58f80fc46bbd295b4ca3999d",
+  "subject": "Merge pull request #45 from uda-lab/issue-33-compactness"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T12:59:34Z",
+  "committed_date": "2026-07-11T12:59:34Z",
+  "committer_login": null,
+  "parents": [
+   "9b814b0b512ec63b66127c05a0d99e9c1d7997e5"
+  ],
+  "sha": "898400de66eb7dd2acc25cdf4622d21d1aecffa1",
+  "subject": "corpus: state the positivity hypotheses in the tail integral bounds (codex P2/P3)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T12:53:00Z",
+  "committed_date": "2026-07-11T12:53:00Z",
+  "committer_login": null,
+  "parents": [
+   "d2a1d5248b7736ae02318c56fd5dcd499a7eb414"
+  ],
+  "sha": "9b814b0b512ec63b66127c05a0d99e9c1d7997e5",
+  "subject": "corpus: compactness chapter quality pass — 17 generated placeholders to handwritten annotations"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-11T12:51:39Z",
+  "committed_date": "2026-07-11T12:51:39Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "3209b2176e23314f9e710f7d9b048bc39aeb21bc",
+   "67d6fda85a7a7919c44a98620b81a6a962764247"
+  ],
+  "sha": "d2a1d5248b7736ae02318c56fd5dcd499a7eb414",
+  "subject": "Merge pull request #44 from uda-lab/issue-33-spaces"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T12:50:22Z",
+  "committed_date": "2026-07-11T12:50:22Z",
+  "committer_login": null,
+  "parents": [
+   "b1042283628357a17e481c00aafa7278b896a473"
+  ],
+  "sha": "67d6fda85a7a7919c44a98620b81a6a962764247",
+  "subject": "corpus: DivFreeL2 — cite the actual torus bridges, not an unformalized weak-divergence equivalence (codex P2)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T12:44:39Z",
+  "committed_date": "2026-07-11T12:44:39Z",
+  "committer_login": null,
+  "parents": [
+   "3209b2176e23314f9e710f7d9b048bc39aeb21bc"
+  ],
+  "sha": "b1042283628357a17e481c00aafa7278b896a473",
+  "subject": "corpus: spaces chapter quality pass — 22 generated placeholders to handwritten annotations"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-11T12:43:25Z",
+  "committed_date": "2026-07-11T12:43:25Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "5b3c8159439a82fc64b38852ab87a43940f25faa",
+   "21b8946794e8968818c708736925a66c67e31d21"
+  ],
+  "sha": "3209b2176e23314f9e710f7d9b048bc39aeb21bc",
+  "subject": "Merge pull request #43 from uda-lab/issue-33-ode"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T12:42:07Z",
+  "committed_date": "2026-07-11T12:42:07Z",
+  "committer_login": null,
+  "parents": [
+   "d0961f919f955bb160996204c03cfa3f337bc581"
+  ],
+  "sha": "21b8946794e8968818c708736925a66c67e31d21",
+  "subject": "corpus: two precision fixes from codex review (ν-sign qualification, band-limit hypothesis in statement)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T12:35:34Z",
+  "committed_date": "2026-07-11T12:35:34Z",
+  "committer_login": null,
+  "parents": [
+   "5b3c8159439a82fc64b38852ab87a43940f25faa"
+  ],
+  "sha": "d0961f919f955bb160996204c03cfa3f337bc581",
+  "subject": "corpus: ode chapter quality pass — 21 generated placeholders to handwritten annotations"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-11T12:34:04Z",
+  "committed_date": "2026-07-11T12:34:04Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "e021258425a7f17c7550ec0810fa32d7beff13fc",
+   "d5c78d9371b9cda8f55bb61490ba0155a43d5373"
+  ],
+  "sha": "5b3c8159439a82fc64b38852ab87a43940f25faa",
+  "subject": "Merge pull request #42 from uda-lab/issue-33-energy"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T12:26:43Z",
+  "committed_date": "2026-07-11T12:26:43Z",
+  "committer_login": null,
+  "parents": [
+   "8aaf0937808d2da14812066560f8c6956f083663"
+  ],
+  "sha": "d5c78d9371b9cda8f55bb61490ba0155a43d5373",
+  "subject": "corpus: viscousEnn is defined for arbitrary ν — nonnegativity caveat (codex P2)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T12:22:55Z",
+  "committed_date": "2026-07-11T12:22:55Z",
+  "committer_login": null,
+  "parents": [
+   "dc4a587e92b0fec27cb6f009549c222acf75af97"
+  ],
+  "sha": "8aaf0937808d2da14812066560f8c6956f083663",
+  "subject": "corpus: div-freeness comes from membership in the div-free space, not the test predicate"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T12:20:42Z",
+  "committed_date": "2026-07-11T12:20:42Z",
+  "committer_login": null,
+  "parents": [
+   "e021258425a7f17c7550ec0810fa32d7beff13fc"
+  ],
+  "sha": "dc4a587e92b0fec27cb6f009549c222acf75af97",
+  "subject": "corpus: energy chapter quality pass — 22 generated placeholders to handwritten annotations"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-11T10:54:51Z",
+  "committed_date": "2026-07-11T10:54:51Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "b4305d38370eb871148a623a4641be22015a8ea4",
+   "f6bb21d9e14c27dce02f5867071257ff6ed5924e"
+  ],
+  "sha": "e021258425a7f17c7550ec0810fa32d7beff13fc",
+  "subject": "Merge pull request #41 from uda-lab/corpus/packet-promotions"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T10:54:13Z",
+  "committed_date": "2026-07-11T10:54:13Z",
+  "committer_login": null,
+  "parents": [
+   "a517293d30dc6401582c2b316fabe3971845c8df"
+  ],
+  "sha": "f6bb21d9e14c27dce02f5867071257ff6ed5924e",
+  "subject": "corpus: precise statements for three promotion entries (codex P2/P3)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T10:48:54Z",
+  "committed_date": "2026-07-11T10:48:54Z",
+  "committer_login": null,
+  "parents": [
+   "b4305d38370eb871148a623a4641be22015a8ea4"
+  ],
+  "sha": "a517293d30dc6401582c2b316fabe3971845c8df",
+  "subject": "corpus: promotions packet — 58 gloss→full upgrades for the private→public wave"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-11T08:13:38Z",
+  "committed_date": "2026-07-11T08:13:38Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "efa2e62458ff75b544f9cadab3261a10baeb4563",
+   "a0f4c3f0ae5ce2bc5f7fd29b668e805da5452712"
+  ],
+  "sha": "b4305d38370eb871148a623a4641be22015a8ea4",
+  "subject": "Merge pull request #40 from uda-lab/corpus/packet-analysis-shared"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T08:12:59Z",
+  "committed_date": "2026-07-11T08:12:59Z",
+  "committer_login": null,
+  "parents": [
+   "88a46608fccb9cf0e318c10c85bda9a199083753"
+  ],
+  "sha": "a0f4c3f0ae5ce2bc5f7fd29b668e805da5452712",
+  "subject": "corpus: state the fixed-on-detDomain property precisely in the gInv gloss trio (codex P3)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T08:09:17Z",
+  "committed_date": "2026-07-11T08:09:17Z",
+  "committer_login": null,
+  "parents": [
+   "a9bd1d6ce6194a76817db3798c064d0d7473083f"
+  ],
+  "sha": "88a46608fccb9cf0e318c10c85bda9a199083753",
+  "subject": "prose: replace code+code conjunction with と (D5 list-detection false trigger)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T08:08:48Z",
+  "committed_date": "2026-07-11T08:08:48Z",
+  "committer_login": null,
+  "parents": [
+   "62ba24824a1c6e75899849bffc3425f8a4b4bd10"
+  ],
+  "sha": "a9bd1d6ce6194a76817db3798c064d0d7473083f",
+  "subject": "prose: promote remaining long inline math to display blocks (lint clean, 0 warnings)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T08:07:23Z",
+  "committed_date": "2026-07-11T08:07:40Z",
+  "committer_login": null,
+  "parents": [
+   "5a8efa2c6f2e8e05fa1428b971ab86fad56912a4"
+  ],
+  "sha": "62ba24824a1c6e75899849bffc3425f8a4b4bd10",
+  "subject": "prose: display-math for the L3-interpolation squared-norm identity (lint warning)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T08:06:50Z",
+  "committed_date": "2026-07-11T08:06:50Z",
+  "committer_login": null,
+  "parents": [
+   "efa2e62458ff75b544f9cadab3261a10baeb4563"
+  ],
+  "sha": "5a8efa2c6f2e8e05fa1428b971ab86fad56912a4",
+  "subject": "corpus: analysis-shared packet — coverage restored to 100% (117 entries)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-11T07:59:41Z",
+  "committed_date": "2026-07-11T07:59:41Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "e99c9cb566d6097a5cd114cf230584dadb0a8d61",
+   "b01f76bd61d0cf9180352a842655a4d25101bbd0"
+  ],
+  "sha": "efa2e62458ff75b544f9cadab3261a10baeb4563",
+  "subject": "Merge pull request #39 from uda-lab/corpus/packet-lane-bridges"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T07:58:44Z",
+  "committed_date": "2026-07-11T07:58:44Z",
+  "committer_login": null,
+  "parents": [
+   "2e2fe14c6619bdbdc94a59e7dff1f6526ac5d966"
+  ],
+  "sha": "b01f76bd61d0cf9180352a842655a4d25101bbd0",
+  "subject": "review fixes: workpacket endLine off-by-one; two step-lemma glosses (codex P2/P3)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T07:52:11Z",
+  "committed_date": "2026-07-11T07:52:11Z",
+  "committer_login": null,
+  "parents": [
+   "e99c9cb566d6097a5cd114cf230584dadb0a8d61"
+  ],
+  "sha": "2e2fe14c6619bdbdc94a59e7dff1f6526ac5d966",
+  "subject": "corpus: lane-bridges + step-lemmas packet (50 entries) + workpacket decls.json line-key fix"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-11T07:35:51Z",
+  "committed_date": "2026-07-11T07:35:51Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "8d9913e54abda46d9982b8aed9b07ed5e6e4c02c",
+   "8e4b895a1209f7f53986892fb8aa9205f59653d7"
+  ],
+  "sha": "e99c9cb566d6097a5cd114cf230584dadb0a8d61",
+  "subject": "Merge pull request #38 from uda-lab/corpus/packet-galerkin-generic"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T07:29:09Z",
+  "committed_date": "2026-07-11T07:29:09Z",
+  "committer_login": null,
+  "parents": [
+   "21239e8a2a2229896f5827434c2cc30fb26fe8bf",
+   "8d9913e54abda46d9982b8aed9b07ed5e6e4c02c"
+  ],
+  "sha": "8e4b895a1209f7f53986892fb8aa9205f59653d7",
+  "subject": "Merge main (post-#37: codex-review tooling fixes) into galerkin-generic packet"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-11T07:27:48Z",
+  "committed_date": "2026-07-11T07:27:48Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "7a0d8f784cc52103afd84b4f3867f5c36d886017",
+   "07e98c089e4d6246cde32589edc573652f03acf2"
+  ],
+  "sha": "8d9913e54abda46d9982b8aed9b07ed5e6e4c02c",
+  "subject": "Merge pull request #37 from uda-lab/repin/refactor-wave-2026-07"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T07:26:21Z",
+  "committed_date": "2026-07-11T07:26:21Z",
+  "committer_login": null,
+  "parents": [
+   "15a73872ec93fd2208dd6db456396574b437538a"
+  ],
+  "sha": "07e98c089e4d6246cde32589edc573652f03acf2",
+  "subject": "corpus: reword stale 'axiomatic suffix' notes in the renamed capstone entries (codex P3)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T07:18:06Z",
+  "committed_date": "2026-07-11T07:18:06Z",
+  "committer_login": null,
+  "parents": [
+   "ba74f5a6da9723f158af80522f53b2c8ca1a4f24"
+  ],
+  "sha": "15a73872ec93fd2208dd6db456396574b437538a",
+  "subject": "scripts: wire renamed capstones + galerkin-generic chapter into site/coverage/workpacket tooling (codex review)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T06:28:55Z",
+  "committed_date": "2026-07-11T06:28:55Z",
+  "committer_login": null,
+  "parents": [
+   "ba74f5a6da9723f158af80522f53b2c8ca1a4f24"
+  ],
+  "sha": "21239e8a2a2229896f5827434c2cc30fb26fe8bf",
+  "subject": "corpus: galerkin-generic packet — handwritten annotations for the new Galerkin layer (43 entries)"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T06:16:53Z",
+  "committed_date": "2026-07-11T06:16:53Z",
+  "committer_login": null,
+  "parents": [
+   "0ee3de8c75e7238da3bc82605950ba3fbd2105be"
+  ],
+  "sha": "ba74f5a6da9723f158af80522f53b2c8ca1a4f24",
+  "subject": "docs: migration record for the 2026-07 refactor-wave re-pin"
+ },
+ {
+  "author_login": null,
+  "author_name": "Tomoki Uda",
+  "authored_date": "2026-07-11T06:12:24Z",
+  "committed_date": "2026-07-11T06:12:24Z",
+  "committer_login": null,
+  "parents": [
+   "7a0d8f784cc52103afd84b4f3867f5c36d886017"
+  ],
+  "sha": "0ee3de8c75e7238da3bc82605950ba3fbd2105be",
+  "subject": "repin: follow the lean-pde refactor wave — universe a33de86, corpus surgery"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-09T11:51:05Z",
+  "committed_date": "2026-07-09T11:51:05Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "1c54a199fe85f0f42a55c8e2792116276be1784b"
+  ],
+  "sha": "7a0d8f784cc52103afd84b4f3867f5c36d886017",
+  "subject": "Add split licensing and citation metadata (#35)"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-07T14:16:00Z",
+  "committed_date": "2026-07-07T14:16:00Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "b45282dac8c045fc663ebf33a03889123ed1049c"
+  ],
+  "sha": "1c54a199fe85f0f42a55c8e2792116276be1784b",
+  "subject": "Implement Phase A: pre-publication generated-data workflow (#31)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-07T11:40:32Z",
+  "committed_date": "2026-07-07T11:40:32Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "eaea46920689a55c342166996d5b78a9ae1fc142",
+   "85d5b4f44fd44af748dd78da06621f085b6509c2"
+  ],
+  "sha": "b45282dac8c045fc663ebf33a03889123ed1049c",
+  "subject": "Merge pull request #28 from uda-lab/issue-7-corpus-file-disambiguation"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-07T11:39:36Z",
+  "committed_date": "2026-07-07T11:39:36Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "c1c6416634ae2a884f348cb304a61ca7022b85ff",
+   "1db861201e5bd8c7204728c9b93d2afcff3d0084"
+  ],
+  "sha": "eaea46920689a55c342166996d5b78a9ae1fc142",
+  "subject": "Merge pull request #26 from uda-lab/issue-25-node-json-proposal"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-07T11:36:27Z",
+  "committed_date": "2026-07-07T11:36:27Z",
+  "committer_login": null,
+  "parents": [
+   "30f2891c7bf7c6d65cdf7c01e23807be6d9edcc7"
+  ],
+  "sha": "1db861201e5bd8c7204728c9b93d2afcff3d0084",
+  "subject": "Allow source payload retry after load failure"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-07T11:22:35Z",
+  "committed_date": "2026-07-07T11:22:35Z",
+  "committer_login": null,
+  "parents": [
+   "ac4acaa887e3821f22be98326868ddd4e4ffafc3"
+  ],
+  "sha": "30f2891c7bf7c6d65cdf7c01e23807be6d9edcc7",
+  "subject": "Split Lean source payload from site nodes"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-07T11:17:33Z",
+  "committed_date": "2026-07-07T11:17:33Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "cb25342ee26e0289d476f01d89bf3778e21e130a",
+   "18734c228cd5f74a1d95bb2da5a06b1a387f932c"
+  ],
+  "sha": "c1c6416634ae2a884f348cb304a61ca7022b85ff",
+  "subject": "Merge pull request #27 from uda-lab/issue-9-scope-count-decls"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-07T11:07:23Z",
+  "committed_date": "2026-07-07T11:07:55Z",
+  "committer_login": null,
+  "parents": [
+   "cb25342ee26e0289d476f01d89bf3778e21e130a"
+  ],
+  "sha": "85d5b4f44fd44af748dd78da06621f085b6509c2",
+  "subject": "Implement corpus file disambiguation"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-07T11:07:42Z",
+  "committed_date": "2026-07-07T11:07:42Z",
+  "committer_login": null,
+  "parents": [
+   "cb25342ee26e0289d476f01d89bf3778e21e130a"
+  ],
+  "sha": "18734c228cd5f74a1d95bb2da5a06b1a387f932c",
+  "subject": "Scope fallback declaration scan to LerayHopf"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-07T11:06:47Z",
+  "committed_date": "2026-07-07T11:06:47Z",
+  "committer_login": null,
+  "parents": [
+   "cb25342ee26e0289d476f01d89bf3778e21e130a"
+  ],
+  "sha": "ac4acaa887e3821f22be98326868ddd4e4ffafc3",
+  "subject": "Document site data artifact strategy"
+ },
+ {
+  "author_login": "t-uda",
+  "author_name": "Tomoki UDA",
+  "authored_date": "2026-07-07T10:50:04Z",
+  "committed_date": "2026-07-07T10:50:04Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "b51ccb1a06a33bec156f0f24e2f2d73157174e57"
+  ],
+  "sha": "cb25342ee26e0289d476f01d89bf3778e21e130a",
+  "subject": "Complete Wave 3 and 4 corpus coverage (#24)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-07T08:54:39Z",
+  "committed_date": "2026-07-07T08:54:39Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "7fb6eecd194bb1009dd52ef12c0a01a2fa58b9f0"
+  ],
+  "sha": "b51ccb1a06a33bec156f0f24e2f2d73157174e57",
+  "subject": "feat(W2): R3 コンパクト性パケット (~60 entries) (#21)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-07T08:51:59Z",
+  "committed_date": "2026-07-07T08:51:59Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "83f636d32703ae14ca075ed1ec2ec4a24d1d16b3"
+  ],
+  "sha": "7fb6eecd194bb1009dd52ef12c0a01a2fa58b9f0",
+  "subject": "feat(W2): R3 Fourier/解析基盤パケット (84 entries) (#20)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-07T08:47:04Z",
+  "committed_date": "2026-07-07T08:47:04Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "7ba10d5be476b4254ae3a908e15b62bc9f62531e"
+  ],
+  "sha": "83f636d32703ae14ca075ed1ec2ec4a24d1d16b3",
+  "subject": "feat(W2): R3 移流形式・対流作用素パケット (~79 entries) (#19)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-07T08:41:13Z",
+  "committed_date": "2026-07-07T08:41:13Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "339645e1925e302a7a4d1edb58b7513af5e778bb"
+  ],
+  "sha": "7ba10d5be476b4254ae3a908e15b62bc9f62531e",
+  "subject": "feat(W2): R3 Galerkin/ODE パケット (~76 entries) (#18)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-06T16:26:52Z",
+  "committed_date": "2026-07-06T16:26:52Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "6126fbc865aa3c50c87ba7c56fef4b5489afd3e7"
+  ],
+  "sha": "339645e1925e302a7a4d1edb58b7513af5e778bb",
+  "subject": "feat(W1): R3 Galerkin スキーム/ODE スパイン注釈 (22 entries) (#16)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-06T16:22:40Z",
+  "committed_date": "2026-07-06T16:22:40Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "4a7c359191d0a9bb724d9e40de2fd33829f7cf6a"
+  ],
+  "sha": "6126fbc865aa3c50c87ba7c56fef4b5489afd3e7",
+  "subject": "feat(W1): R3 コンパクト性/極限移行スパイン注釈 (15 entries) (#15)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-06T14:48:56Z",
+  "committed_date": "2026-07-06T14:48:56Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "1511bd7c4ca23354d754faf07f61b65b7d08e52e"
+  ],
+  "sha": "4a7c359191d0a9bb724d9e40de2fd33829f7cf6a",
+  "subject": "fix(W1): rename forwardGlobalSolution_exists.yaml → Torus.forwardGlobalSolution_exists.yaml (#17)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-06T14:45:59Z",
+  "committed_date": "2026-07-06T14:45:59Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "089029cb64795015c5aca4a11c5750c1c9d0c0c3"
+  ],
+  "sha": "1511bd7c4ca23354d754faf07f61b65b7d08e52e",
+  "subject": "feat(W1): 𝕋³ レーン+抽象エネルギー則スパイン注釈 (21 entries) (#14)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-06T13:45:17Z",
+  "committed_date": "2026-07-06T13:45:17Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "b12ad4f70e7a8337b4e72e18213c0f6825f17577"
+  ],
+  "sha": "089029cb64795015c5aca4a11c5750c1c9d0c0c3",
+  "subject": "feat(S3.5): v1.1 組版・レジスタ改訂 — prose 段落化 + 意訳ホバー参照 (Closes #12) (#13)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-06T12:26:48Z",
+  "committed_date": "2026-07-06T12:26:48Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "7318b95a2e18d8399de227bbef114d05ebbf3fe1"
+  ],
+  "sha": "b12ad4f70e7a8337b4e72e18213c0f6825f17577",
+  "subject": "feat(S3): シード移植 — formalization-review-ja → コーパス 37 entry (#11)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-06T08:05:29Z",
+  "committed_date": "2026-07-06T08:05:29Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "47accd18d2d2990ee55dd80ea5281486c7dc9d6c"
+  ],
+  "sha": "7318b95a2e18d8399de227bbef114d05ebbf3fe1",
+  "subject": "feat(S2): 静的ビューア骨格 — build_site_data + vanilla SPA (#4) (#10)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-06T06:31:21Z",
+  "committed_date": "2026-07-06T06:31:21Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "1baca47e52f3a6b2b7b5c031cbb0d07903fe831f"
+  ],
+  "sha": "47accd18d2d2990ee55dd80ea5281486c7dc9d6c",
+  "subject": "feat(S0): land extracted/decls.json + PIN from lean-pde#105 (#8)"
+ },
+ {
+  "author_login": "uda-lab-agent",
+  "author_name": "Uda Lab Agent",
+  "authored_date": "2026-07-06T04:22:33Z",
+  "committed_date": "2026-07-06T04:22:33Z",
+  "committer_login": "web-flow",
+  "parents": [
+   "21173136601cd4156bbe8ffbd6cd8f4183222721"
+  ],
+  "sha": "1baca47e52f3a6b2b7b5c031cbb0d07903fe831f",
+  "subject": "feat(S1): scaffold + harness — schema/glossary/scripts/hooks/CI (#3) (#6)"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-06T03:55:14Z",
+  "committed_date": "2026-07-06T03:55:14Z",
+  "committer_login": null,
+  "parents": [
+   "270028ebecf9761ac87a57b7260453b882a45b73"
+  ],
+  "sha": "21173136601cd4156bbe8ffbd6cd8f4183222721",
+  "subject": "docs: issue #1 起票済みにつき原稿ファイルを撤去（canonical は issue #1）"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-06T03:32:21Z",
+  "committed_date": "2026-07-06T03:32:21Z",
+  "committer_login": null,
+  "parents": [
+   "846b6676bb9dbee210d5506eee8ba6798ada8612"
+  ],
+  "sha": "270028ebecf9761ac87a57b7260453b882a45b73",
+  "subject": "docs: 依存辺抽出に LeanArchitect 評価を追加（自作 exe は補完のみに縮小し得る）"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-06T03:30:59Z",
+  "committed_date": "2026-07-06T03:30:59Z",
+  "committer_login": null,
+  "parents": [
+   "8dd286b546359b5e359eb79c86fd1e803d4de1db"
+  ],
+  "sha": "846b6676bb9dbee210d5506eee8ba6798ada8612",
+  "subject": "docs: issue #1 原稿 — 全宣言対訳キャンペーン設計（1,413 宣言・SubVerso 抽出・2 層注釈ポリシー）"
+ },
+ {
+  "author_login": null,
+  "author_name": "uda-lab-agent",
+  "authored_date": "2026-07-06T03:23:57Z",
+  "committed_date": "2026-07-06T03:23:57Z",
+  "committer_login": null,
+  "parents": [],
+  "sha": "8dd286b546359b5e359eb79c86fd1e803d4de1db",
+  "subject": "init: README — 全宣言対訳インタラクティブノートの作業リポジトリ"
+ }
+]

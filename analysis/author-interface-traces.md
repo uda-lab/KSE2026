@@ -519,6 +519,31 @@ escrow にある符号化済みセッションは 6 件である．connector の
 述べたことはすべて GitHub 側の一次証拠であり，セッションログによる裏付けはない．
 起草側について復元できることは何もない．
 
+### 追補（issue #70，2026-07-26）: ChatGPT export による部分的な窓補完
+
+owner の ChatGPT データエクスポートを対象に `scripts/extract_chatgpt_export.py` /
+`scripts/join_connector_linkage.py` で機械的な突合を行った結果（方法論全体は
+`analysis/connector-linkage-methodology.md`），上表で「完全な欠落」「未符号化」
+「ゼロ」とされた T2・T4・T3 の 3 窓すべてに，ChatGPT 会話側のタイムスタンプ付き
+メッセージが存在することを確認した．`evidence/metrics/connector-linkage.csv` の
+該当行（tier: time-and-context，confidence: medium，`evidence_type: reconstructed`
+— セッションログではなく ChatGPT エクスポートによる時刻的付合であり，起草行為
+そのものの一次証拠ではない）:
+
+- **T2**（06-20T04:24–12:49Z の欠落窓）: `leray-hopf` issue_creation/issue_comment
+  #10/#11/#12（2026-06-20T11:21:41Z）・#14/#15（11:29:37Z）— 上表が記す
+  06-20T11:20–11:43Z の副窓に収まる．
+- **T4**（07-16T15:09–16:17Z のバースト，未符号化）: `leray-hopf` issue_creation
+  #149–#156（2026-07-16T15:13:43Z）— バースト窓の内側．
+- **T3**（07-19 終日，ゼロ）: `leray-hopf` issue_comment／pr_review #175
+  （07-19T03:25:06Z），`leray-hopf-notes` pr_review #93/#94（07-19T04:48:21Z）—
+  07-19 の内側．
+
+セッションログそのものが新たに得られたわけではなく，上記の「未符号化」判定自体は
+変わらない．得られたのは ChatGPT 会話側の独立した時刻的証拠であり，起草側の行為を
+直接証明するものではない（同方法論の限界節参照，特に `authorization_present` の
+否定文誤検出）．
+
 ## 5. 識別子の解決可能性
 
 `scripts/verify_claim_links.py` が認識するトークンは

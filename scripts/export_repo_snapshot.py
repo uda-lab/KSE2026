@@ -8,6 +8,7 @@ Writes to evidence/repository-snapshots/<repo-name>/:
                     performed_via_github_app (slug or null)
   comments.json   — all issue/PR comments (repo-wide endpoint): as above, plus
                     author_association, performed_via_github_app (slug or null)
+  reviews.json    — (only with --include-reviews) per-PR review events: see below
   releases.json   — releases; tags.json — tags
   EXPORT.json     — fetch metadata (fetched_at, head sha, tool versions)
 
@@ -32,18 +33,35 @@ Email addresses are deliberately NOT exported (repo redaction gate); authors
 are identified by GitHub login (fallback: display name). Personal names
 listed in private/redact-names.txt (untracked; same file redact_check.py
 reads) are masked as <name-redacted> when that file is present at export
-time. Everything here is
-regenerable from the source repository via `gh api` — rerun this script
-rather than hand-editing. Byte-identical regeneration of a snapshot exported
-with masking active additionally requires the same private/redact-names.txt
-(EXPORT.json's name_masking_active records whether masking ran). EXPORT.json records the source repo's `private`
-flag: for a private repo (e.g. this paper repo's own self-snapshot), that
-means the export is reproducible only by an account with read access, unlike
-a public-repo snapshot such as uda-lab/leray-hopf — this asymmetry must be
-stated wherever the snapshot is cited, not glossed.
+time. Everything here is regenerable from the source repository via `gh
+api` — rerun this script rather than hand-editing. Byte-identical
+regeneration of a snapshot exported with masking active additionally
+requires the same private/redact-names.txt (EXPORT.json's
+name_masking_active records whether masking ran). EXPORT.json records the
+source repo's `private` flag: for a private repo (e.g. this paper repo's own
+self-snapshot), that means the export is reproducible only by an account
+with read access, unlike a public-repo snapshot such as uda-lab/leray-hopf —
+this asymmetry must be stated wherever the snapshot is cited, not glossed.
+
+`--out-root` redirects the whole `<repo-name>/` output tree (default:
+`evidence/repository-snapshots`, unchanged) — used to fetch a snapshot into
+a private scratch location before deciding whether to commit it (issue #70
+Phase P), without disturbing the committed evidence tree.
+
+`--include-reviews` additionally writes `reviews.json`: for every `kind ==
+"pr"` row already fetched into `issues.json`, it calls `pulls/<n>/reviews`
+and records `pr_number, id, user_login, state, submitted_at, body` (body
+passes through the same scrub_tree() masking pipeline as everything else
+written by write_json(), so review bodies get both email and denylisted-name
+redaction). CAVEAT: the Reviews API does not return
+`performed_via_github_app`, so — unlike issues.json/comments.json — review
+rows cannot be attributed to a GitHub App connector one way or the other;
+downstream consumers (e.g. scripts/join_connector_linkage.py) must not treat
+a null/absent field here as evidence of non-connector authorship.
 
 Usage:
   python3 scripts/export_repo_snapshot.py [--repo uda-lab/leray-hopf]
+    [--out-root DIR] [--include-reviews]
 """
 import argparse
 import json
@@ -124,13 +142,14 @@ def scrub_tree(obj, key=None):
 
     write_json() runs this over each exported structure, so the masking is
     authoritatively applied here for *all* string-valued fields — commit
-    author display names, milestone titles, label and tag names, and any
-    field a future exporter change adds — not only the free-text bodies.
-    (The explicit scrub() calls in the per-field comprehensions below are
-    redundant but harmless — scrub() is idempotent on its own output — and
-    are kept to minimize diff churn.) Without this, a denylisted name
-    appearing in e.g. a commit author_name would reach the committed
-    snapshot verbatim and fail the redaction gate (PR #80 review finding)."""
+    author display names, milestone titles, label and tag names, review
+    bodies, and any field a future exporter change adds — not only the
+    free-text bodies. (The explicit scrub() calls in the per-field
+    comprehensions below are redundant but harmless — scrub() is idempotent
+    on its own output — and are kept to minimize diff churn.) Without this, a
+    denylisted name appearing in e.g. a commit author_name would reach the
+    committed snapshot verbatim and fail the redaction gate (PR #80 review
+    finding)."""
     if key in IDENTIFIER_KEYS:
         return obj
     if isinstance(obj, str):
@@ -167,9 +186,15 @@ def write_json(path: Path, rows):
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--repo", default="uda-lab/leray-hopf")
+    ap.add_argument("--out-root", type=Path, default=OUT_ROOT,
+                     help="root directory to write <repo-name>/ under "
+                          "(default: evidence/repository-snapshots)")
+    ap.add_argument("--include-reviews", action="store_true",
+                     help="also fetch pulls/<n>/reviews into reviews.json "
+                          "(see docstring for the performed_via_github_app caveat)")
     args = ap.parse_args()
     name = args.repo.split("/")[1]
-    out = OUT_ROOT / name
+    out = args.out_root / name
     out.mkdir(parents=True, exist_ok=True)
 
     repo_meta = gh_api(f"repos/{args.repo}", paginate=False)
@@ -219,6 +244,23 @@ def main() -> int:
     } for c in gh_api(f"repos/{args.repo}/issues/comments?per_page=100")]
     write_json(out / "comments.json", comments)
 
+    reviews = None
+    if args.include_reviews:
+        reviews = []
+        for i in issues:
+            if i["kind"] != "pr":
+                continue
+            for r in gh_api(f"repos/{args.repo}/pulls/{i['number']}/reviews?per_page=100"):
+                reviews.append({
+                    "pr_number": i["number"],
+                    "id": r["id"],
+                    "user_login": (r.get("user") or {}).get("login"),
+                    "state": r.get("state"),
+                    "submitted_at": r.get("submitted_at"),
+                    "body": scrub(r.get("body") or ""),
+                })
+        write_json(out / "reviews.json", reviews)
+
     releases = [{
         "tag_name": r["tag_name"],
         "name": scrub(r.get("name") or "") or None,
@@ -243,17 +285,28 @@ def main() -> int:
         "tool_versions": {"python": sys.version.split()[0], "gh": gh_version},
         "counts": {"commits": len(commits), "issues_and_prs": len(issues),
                    "comments": len(comments), "releases": len(releases),
-                   "tags": len(tags)},
+                   "tags": len(tags),
+                   **({"reviews": len(reviews)} if reviews is not None else {})},
         "note": "regenerable from the source repository via `gh api` (see "
                 "`private` above for who can reproduce it); emails "
                 "intentionally omitted; denylisted personal names masked as "
                 "<name-redacted> when private/redact-names.txt was present "
                 "at export time; "
-                "per-PR review events are fetched separately when an incident "
-                "analysis needs them; issues.json and comments.json carry "
+                "issues.json and comments.json carry "
                 "performed_via_github_app (slug or null) and author_association "
                 "as of this export — see script docstring for the lower-bound "
                 "caveat on interpreting these fields"
+                + (
+                    ". reviews.json fetched via --include-reviews: the Reviews "
+                    "API does NOT return performed_via_github_app, so review "
+                    "rows cannot be attributed to a GitHub App connector one "
+                    "way or the other (absence of the field is not evidence "
+                    "of non-connector authorship)"
+                    if reviews is not None else
+                    ". reviews.json not fetched this run (pass --include-reviews); "
+                    "per-PR review events can also be fetched separately when "
+                    "an incident analysis needs them"
+                )
                 + (
                     ". REPRODUCIBILITY ASYMMETRY: this repository is private "
                     "at fetch time, so — unlike a public-repo snapshot such as "
