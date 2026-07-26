@@ -921,3 +921,99 @@ evidence 手法の claim（contribution 3 が依拠する）を支えない．
 - **A3 の「伝送のみ」は `t-uda` 名義の投稿に限った読みである．** 同じ App slug は
   `chatgpt-codex-connector[bot]` 名義の生成テキストにも付く（§1 A3 の交差集計）．
   slug 単独ではアクターの機能を決めない．
+
+## 8. issue #70 追補: `authorization_present` 所見の反映（2026-07-26）
+
+issue #70（owner の ChatGPT データエクスポートと GitHub Connector 書き込みの突合，
+PR #82 でマージ）は，本書執筆時には存在しなかった証拠源を追加した: ChatGPT 会話
+本文とタイムスタンプである．本節はその所見を台帳（§2）に対して**評価**し，結果を
+記録する．**先に結論を示す: 台帳 282 行のいずれの `処置` も変更しない．** 理由は
+以下の通り．
+
+### 所見（`evidence_type: reconstructed`，confidence: 中）
+
+`scripts/join_connector_linkage.py` の `authorization_present` 判定（定義は
+`analysis/connector-linkage-methodology.md`）により，connector-routed universe
+174 件中 **54 件（31.0%）** で，`created_at` より早い時点に，repo に言及し
+指示動詞語彙にヒットする user メッセージが会話の祖先チェーン上に存在した．
+**（母集団の取り違えに関する訂正．PR #84 独立レビュー指摘）** 初版はここで
+「131 件（75.3%）」と書いていたが，131 は connector-routed universe（174 行）
+ではなく `pr_review`（444 行，connector 経由か否かを判定できず universe から
+除外）を含む全 618 行に対する `yes` 総数であり，誤って 174 行を分母に用いていた．
+connector-routed universe に限った正しい内訳は 54 `yes`／4 `yes-rejected`／
+27 `not-found`／89 `n/a`（計 174）である．
+
+機械判定された `yes` 候補は全 618 行に対して延べ 137 件（131 生存 + 6 反証．
+うち connector-routed universe 内は 58 件＝54 生存 + 4 反証）で，そのうち
+**6 件を `--with-text-preview` による手動確認で反証**した（`authorization_present
+= yes-rejected`，`scripts/join_connector_linkage.py` の
+`AUTHORIZATION_SPOT_CHECK_OVERRIDES`，うち 4 件が connector-routed universe
+内）: 3 件は投稿の保留を明示的に指示するメッセージへ，残る 3 件は issue 化の
+保留（「まず報告してください」）を明示的に指示するメッセージへ遡り，かつ一致
+した artifact がまさに issue 作成であった（この 3 件はいずれも
+connector-routed universe 内の issue_creation）．数値の再現手順・window 感度・
+語彙の限界・母集団取り違えの訂正の全文は
+`analysis/connector-linkage-methodology.md` の `authorization_present` 節，
+生データは `evidence/metrics/connector-linkage.{json,csv}`（`--emit-public`
+により committed snapshot から機械的に再生成可能）を参照．
+
+### 精度に関する限定（本節の評価が既存台帳を動かさない理由の核）
+
+上記の signal は**「関連する先行指示が会話中のどこかに存在した」ことの証拠であり，
+「その特定の書き込みを owner が個別に事前承認した」ことの証拠ではない**．
+語彙は否定文を検出できず（6 件の反証がこれを実証する），祖先チェーン探索に
+時間的上限がないため，遠い過去の一度きりの standing instruction が後続の
+何十件もの artifact の `yes` を生み得る（実際に生じている．全 618 行を対象に
+遡った際，10 通りの起点メッセージが 131 件の生存 `yes` すべてを説明した．
+connector-routed universe 内の 54 件はこの 131 件の部分集合である）．
+**先行指示の存在 ≠ 個別事前承認**．
+
+### 既存台帳（§2）への適用: 変更なし
+
+本書の既存の主張のうち，本所見が対象としうる候補を検討した．
+
+- **A2「推定に依存する部分」（§1 A2，74–89 行目）**: 「これらの**文面を ChatGPT が
+  起草したこと**」の confidence（reconstructed／中）についての主張である．本所見は
+  **起草の主体ではなく，書き込みに先行する指示の有無**という別の問いに答えており，
+  A2 の主張を強めも弱めもしない．**変更なし**．
+- **A2「明示的に成立しないこと」**: 「ChatGPT が何かを決定したこと」．本所見は
+  「先行する指示が存在した」ことのみを示し，**誰がその指示の内容を決めたか**には
+  何も答えない（`leray-hopf#146` が owner に選択を求める形式を取っている，という
+  既存の積極証拠の性格は変わらない）．**変更なし**．
+- **§4.2「成立しないこと」**（722–771 行目）: 「誰が決めたか については何も言えない」．
+  本所見は先行指示の**存在**を示すが，その指示の**内容の決定者**（owner か
+  ChatGPT か）には答えない．上記の精度限定（先行指示の存在 ≠ 個別事前承認）が
+  まさにこの区別を保つための注記である．§4.2 の結論は**本所見の後でも成立する**．
+  **変更なし**．
+- **`analysis/mediation-census-methodology.md`**: 「直接」の二読解枠組み
+  （69–79 行目）は文面の**起草者**についての整理であり，本所見（書き込みに
+  **先行する指示の有無**）とは別の軸である．同ファイルには本所見が強化・訂正
+  しうる既存の主張が見当たらなかった．**変更なし**（同ファイル自体は本 PR で
+  変更していない）．
+- 上記以外の 278 行についても，該当し得る語彙（「指示」「承認」「authorization」
+  「事前」）で走査したが，いずれも owner の判断・裁定・承認の**記録**（§2 の対象は
+  権限主張それ自体）であって，「connector 経由の書き込みに先行する指示が会話記録
+  から見出せるか」という本所見と同じ問いを扱う行は見当たらなかった．**変更なし**．
+
+### 「変更要」に至らなかった観察 — drift との構造的類似（記録のみ，新規 trace は作らない）
+
+反証された 6 件のうち 3 件（issue 作成が，issue 化の保留を明示的に指示する
+メッセージの直後に生じた）は，構造として `analysis/author-interface-traces.md`
+の drift trace（T2・T3・T5・T6）と同型である: インターフェースの出力が，直前に
+示された意図から外れている．**ただし本 PR は `author-interface-traces.md` へ
+新規 trace を追加しない**（issue #83 の scope 外，PLAN.md §8 の役割分離により
+別 issue の判断とする）．該当する 3 件の artifact 識別子（`leray-hopf#178`，
+`leray-hopf-notes#100`，`leray-hopf-notes#63`）と反証の理由は
+`scripts/join_connector_linkage.py` の `AUTHORIZATION_SPOT_CHECK_OVERRIDES`
+に記録されている．
+
+### 原稿（`paper/`）への適用: 本 PR では行わない
+
+`paper/sections/03-agent-workflow.tex` の "owner-authorized transmission path"
+（Figure~\ref{fig:author-interface} の caption/ALT text および本文，
+`% CLAIM: CLM-012`）は，`t-uda` アカウントの投稿は owner 権威であるという
+**アカウント水準の前提**（§0）に基づく記述であり，個別 artifact への事前承認
+証拠には依拠していない．本所見はこの記述と**矛盾しない**（31.0% という比率は
+前提と整合的である）が，6 件の反証事例が示す「先行指示との緊張」を
+限界節等で言及するかどうかは owner 判断に委ねる（issue #83 の PR 本文で
+選択肢として提示する）．CLM-012 は frozen であり本 PR では変更しない．

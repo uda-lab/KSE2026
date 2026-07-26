@@ -179,7 +179,15 @@ authorization の repo 言及判定に用いていたため，「KSE2026 に iss
 のような URL も番号も伴わない自然文の指示を体系的に見落としていた（独立レビュー
 指摘）．`bare_repo_mentions`（メッセージごとの，候補選定と同じベア部分文字列
 一致）を authorization にも persist・使用するよう修正した結果，`yes` は
-**3 行から 131 行（反証後）** へ増加した．内訳は次の通り．
+**全 618 行中 3 行から 131 行（反証後）** へ増加した．**注意: 131 は
+connector-routed universe（174 行）ではなく全 618 行（`pr_review` 444 行を
+含む）に対する数である．** `pr_review` は connector 経由か否かを判定できず
+universe から除外されている（後述）にもかかわらず，131 のうち **77 行は
+`pr_review`** であり，authorization の判定自体は universe 外の行にも等しく
+行われる（`compute_authorization` はどの artifact_kind にも同じ規則を適用
+する）ため，このような集計が生じる．**connector-routed universe（174 行）
+だけに絞ると，`yes` は 54 行（31.0%），`yes-rejected` は 4 行（内訳は下記）．**
+内訳は次の通り．
 
 - 修正直後（反証前）の `yes` は 134 行．うち 3 行は既存の overrides（前述，
   `KSE2026 issue_creation #61` と `pr_review #59` の 2 件）でそのまま
@@ -218,25 +226,33 @@ authorization の repo 言及判定に用いていたため，「KSE2026 に iss
 
 **残る限界**:
 1. 本語彙は否定を検出できない（実証済み: 本ラン（`bare_repo_mentions` 反映後）
-   で機械的に `yes` と判定された候補は `yes` 131 ＋ `yes-rejected` 6 の
+   で機械的に `yes` と判定された候補は全 618 行中 `yes` 131 ＋ `yes-rejected` 6 の
    計 137 件．うち 6 件（4.4%）が人手確認で明確な反証を要した）．
 2. `bare_repo_mentions` を含めたことで recall は改善したが precision は低下した:
    「repo 名＋指示動詞が同一会話のどこかに，時系列で先行して存在する」という
    条件は，**その指示が当該 artifact を具体的に指していたことを要求しない**．
-   131 件の `yes` は「関連する先行指示が存在した」ことの証拠であって，
+   `yes` 判定は「関連する先行指示が存在した」ことの証拠であって，
    「その特定の書き込みを owner が個別に事前承認した」ことの証拠ではない．
    後者を機械的に判定する手段は本データにはない．
 3. 祖先チェーン探索に時間的な上限（window）がない．遠い過去の一度きりの
    standing instruction が，何十件もの後続 artifact の `yes` を生み出し得る
    （上表の通り，実際に生じている）．
-4. 上記の理由により，**本ランで確認された `authorization_present = yes` の
-   規模（131／174 connector-routed universe，比較参考として全 618 universe
-   行中では 131／618）は，issue #70 の Q3（明示的な事前指示に遡れる `t-uda`
-   投稿の割合）に対して，当初想定していたよりはるかに大きい肯定的シグナルを
-   与える．** ただし上記 2 の理由により，これを owner の役割モデル・
-   mediation census・本文の既存記述へ反映するかどうかは，本 PR の scope 外の
-   判断であり，別途 owner レビューを要する（issue #70 の non-goals: 「Broad
-   manuscript rewriting」）．本 PR は所見の記録に留める．
+4. **母集団の取り違えに注意（PR #84 独立レビュー指摘，本節で訂正済み）**:
+   `authorization_present` は connector-routed universe（174 行）に限らず
+   全 618 行（`pr_review` 444 行を含む）に対して等しく計算される．issue #70 の
+   Q3（「明示的な事前指示に遡れる `t-uda` 投稿の割合」）が問うのは
+   **connector-routed universe** の分母であり，これは **54／174（31.0%，
+   加えて `yes-rejected` 4／174）** である．全 618 行に対する 131／618 という
+   数値は，`pr_review`（connector 経由か否かを判定できず universe から除外
+   されている）77 行の `yes` を含むため，Q3 の分母としては使えない．
+   下記の連携先ドキュメントを引用する際は必ず **54／174（31.0%）** の方を使う．
+   これは開発時の初版（3 件から 134 件への増加時点）で見誤り，`131／174` と
+   誤記した数値であり，本節・`analysis/author-interface-model.md` §8・
+   `provenance/ai-use.md` の該当行を訂正した（issue #83／PR #84）．
+   31.0% は当初の 3 件 (1.7%) よりは大きいが，誤って報告していた 75.3% ほど
+   大きくはない．owner の役割モデル・mediation census・本文の既存記述へ
+   反映するかどうかは，別途 owner レビューを要する（issue #70 の non-goals:
+   「Broad manuscript rewriting」）．本ドキュメントは所見の記録に留める．
 
 **したがって: 本パイプラインが将来再実行されるたびに，未収載の `yes` 行は
 必ず人手で再確認しなければならない．** `AUTHORIZATION_SPOT_CHECK_OVERRIDES`
