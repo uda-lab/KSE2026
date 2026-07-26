@@ -38,7 +38,8 @@ The companion figure uses only three main elements: **Author**, **ChatGPT decisi
 support**, and **GitHub-mediated project execution**. It distinguishes two paths
 into the project workflow:
 
-- Author-issued text transmitted through the GitHub Connector;
+- Author-issued text whose write carries a GitHub App attribution in the
+  repository record;
 - direct Author instruction or correction.
 
 Review findings return to the Author through a separate upper lane. This expresses
@@ -71,5 +72,7 @@ implementation. Runtime controls support orchestration and execution.
 Proposed alternative text for the companion figure: The Author retains final
 authority and may intervene directly. ChatGPT supports investigation, synthesis,
 recommendation, and drafting but has no independent final authority. Author-issued
-instructions reach the GitHub-mediated agent workflow either directly or through
-the GitHub Connector. Review findings and unresolved choices return to the Author.
+instructions reach the GitHub-mediated agent workflow either directly or through a
+write that carries a GitHub App attribution. Other Author-account writes and formal
+reviews carry no route attribution, and Codex reviews come from a separate bot
+account. Review findings and unresolved choices return to the Author.

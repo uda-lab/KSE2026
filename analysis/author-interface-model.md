@@ -1017,3 +1017,51 @@ connector-routed universe 内の 54 件はこの 131 件の部分集合である
 前提と整合的である）が，6 件の反証事例が示す「先行指示との緊張」を
 限界節等で言及するかどうかは owner 判断に委ねる（issue #83 の PR 本文で
 選択肢として提示する）．CLM-012 は frozen であり本 PR では変更しない．
+
+---
+
+## 9. 追補（issue #88，2026-07-27）: §0 の前提と用語の上書き
+
+**本節は §0〜§8 を書き換えない．** それらは各 Wave が当時の前提の下で下した判定の
+記録であり，遡って改稿すれば監査記録として無価値になる．本節は，著者の裁定
+（issue #88，`t-uda` 起票）が以降の作業に対して何を上書きしたかだけを記す．
+
+### 9.1 用語: `scientific owner` → 著者（author）
+
+§0 は「`scientific owner` の語の書き換えは検討対象外とする」と定め，
+`provenance/ai-use.md:51` も「`scientific owner` の書き換えは検討していない」と
+記録している．**issue #88 はこの前提を明示的に覆した．** 原稿に面する語彙は
+「著者（author）」へ正規化する．例外として据え置くもの:
+
+- GitHub リポジトリの所有そのものを literal に指す箇所．
+- append-only の履歴記録（`provenance/author-decisions.md` の各行，
+  `provenance/ai-use.md` の日付行，本書 §0〜§8）．当時の語をそのまま残す．
+- `provenance/ai-use.md:4`（標準方針文）．CLM-012 の Evidence が逐語引用しており，
+  本書 §0 も同じ文を引用している．書き換えると両者の引用が偽になるため据え置き，
+  CLM-012 の Notes に「旧来の語で同一の役割を指す」と明記した．
+- 技術的役割としての worktree ownership。原稿側は「assignment／assigned agent」へ
+  置き換えたが，`analysis/session-coding-schema.md` の event code 定義
+  （`WT-CONFLICT` = worktree / branch / file ownership の衝突）は evidence 側の
+  用語として変更しない．
+
+### 9.2 経路: 単一の「Connector」から証拠が支持する 4 類へ
+
+§8 までは connector-routed universe を一つの経路として扱ってきた．issue #88 は，
+GitHub の記録が実際に区別できるのは次の 4 類だけであると定めた．
+
+| 類 | 判定根拠 | 原稿での扱い |
+|---|---|---|
+| 1. GitHub App 経由の著者アカウント書き込み | 当該 Issue／comment の `performed_via_github_app` が non-null | 「著者アカウントの書き込みの一部は GitHub App 属性を持つ」 |
+| 2. Codex レビュー bot | 投稿者が `chatgpt-codex-connector[bot]` | 類 1 に畳み込まない．別主体として書く |
+| 3. 経路不明の著者アカウント書き込み・formal review | 当該フィールドが null，または formal review に同等フィールドが露出しない | 「経路は特定できない」と書く．login や文体から ChatGPT App／`gh`／UI／PAT／他 agent を推論しない |
+| 4. agent アカウントの書き込み | 投稿者が `uda-lab-agent` 等 | 別枠として保持 |
+
+`chatgpt-codex-connector` は **API レベルの識別子**であって製品名ではなく，
+ChatGPT／Codex の全経路を代表するものでもない．引用する場合は
+`performed_via_github_app = chatgpt-codex-connector` の形で，API フィールド値
+であることが分かるように書く．
+
+本書および `analysis/author-interface-traces.md` の小文字 `connector` 用法は
+analysis 層の略語として維持する（§4 以降の集計は経路判定の可否で universe を
+切っており，上表の類 1 と類 3 の区別と整合的である）．issue #88 §D のとおり，
+census と linkage の数値は analysis/ と evidence/ に留め，本文へは持ち込まない．

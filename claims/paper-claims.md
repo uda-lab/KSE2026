@@ -115,7 +115,7 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   INC-005 の累積カウンタ帰属限界）．2026-07-23 夜間 freeze 分 — 朝の owner 通読での
   追認対象（CLM-006/007 と同扱い）．
 
-## CLM-009: 本 project の最終 harness は，scientific owner の権限下で repository-local `github-driven-workflow` が GitHub Issue・専用 branch/Git worktree・GitHub PR を接続した．Issue scope，review decisions，merge authority は agent session 内だけでなく repository と GitHub の artifact に記録された．Fable は 7 月 2〜3 日に Vertex AI 経由で，これらの artifact から既存 workflow の orchestration を再開した．semantic statement review，Lean/kernel verification，public declaration preservation，VPS container の resource/liveness control，evidence capture は別の責務として扱われた
+## CLM-009: 本 project の最終 harness は，著者の権限下で repository-local `github-driven-workflow` が GitHub Issue・専用 branch/Git worktree・GitHub PR を接続した．Issue scope，review decisions，merge authority は agent session 内だけでなく repository と GitHub の artifact に記録された．Fable は 7 月 2〜3 日に Vertex AI 経由で，これらの artifact から既存 workflow の orchestration を再開した．semantic statement review，Lean/kernel verification，public declaration preservation，VPS container の resource/liveness control，evidence capture は別の責務として扱われた
 - Status: frozen
 - Paper location: paper/main.tex, paper/sections/01-introduction.tex, paper/sections/03-agent-workflow.tex, paper/sections/05-discussion.tex, paper/sections/06-conclusion.tex
 - Evidence: EV-2076，EV-0925，EV-1669，EV-0247，EV-1681〜EV-2126，INC-001，INC-002，INC-003，INC-004，INC-005，leray-hopf#158
@@ -146,31 +146,34 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
   本文では task 粒度と trusted workspace の固定だけを述べ，個別 leaderboard
   成績や repository-scale の完全形式化とは同一視しない．
 
-## CLM-012: 記録された著者向け経路では scientific owner が判断の権限と責任を保持し，ChatGPT は中間的な decision-support 層として再構成される（confidence: 中）一方，GitHub Connector による Issue / PR への伝送が owner の authenticated account を経由し記録済み governance policy の下にあったことは一次記録されており，ChatGPT の起草や独立した意思決定までは証明しない
+## CLM-012: 記録された著者向け経路では著者が判断の権限と責任を保持し，ChatGPT は中間的な decision-support 層として再構成される（confidence: 中）．GitHub 上の記録は経路について次の 4 類のみを支持する: (1) 著者アカウントの Issue／comment 書き込みのうち `performed_via_github_app` が non-null のものは GitHub App 経由と特定できる，(2) `chatgpt-codex-connector[bot]` アカウントの Codex レビューは別主体として識別できる，(3) 著者アカウントの残る書き込みと formal review は経路を特定できない，(4) `uda-lab-agent` 等の agent アカウントの書き込みは別に扱う．いずれの類も ChatGPT の起草や独立した意思決定を証明しない
 - Status: frozen
 - Paper location: paper/sections/03-agent-workflow.tex
 - Evidence: EV-2076, EV-0925, EV-1669, EV-0247, INC-001, leray-hopf#145, leray-hopf#146, leray-hopf#158，`provenance/ai-use.md:4`（「AI は著者としない．最終判断は常に scientific owner が行う」），`AGENTS.md:24`（「AI は著者にしない」）
-- Notes: `analysis/author-interface-model.md` A2--A3 に基づく．`performed_via_github_app`
-  は伝送チャネルを直接示すが，文面の起草者を示さない．Issue／PR の調査・統合・
-  推奨・起草を ChatGPT に帰属する部分は reconstructed / confidence 中とし，
-  prompt・モデル版・session・編集履歴は復元不能である．owner の最終権限と
-  ChatGPT／Connector の独立権限不在を混同しない．2026-07-25 の PR #78 review
-  follow-up で本文へ binding した．2026-07-26 の owner review（PR #87）により
-  claim 文を 2 点改めた．(1) "owner-authorized な項目" を「owner の authenticated
-  account を経由し記録済み governance policy の下にある伝送」へ．前者は artifact
-  ごとの承認と誤読され得るためである．(2) "最終権限を保持し" を「判断の権限と責任を
-  保持し」へ．同 review が「判断の権限・責任」を一体の対象として指定したことに従う．
-  claim 文の「記録済み governance policy」が指すのは本リポジトリ内で検証可能な
-  `provenance/ai-use.md:4` と `AGENTS.md:24` であり，責任の帰属もこの 2 点に依る
-  （どちらも最終判断の所在と AI を著者としないことを定める）．
-  `analysis/author-interface-model.md` §0 の 2026-07-25 裁定（`t-uda` アカウント発の
-  判断は起草者を問わず owner 権威）は本リポジトリ内に再導出可能な記録を持たず（同 §7），
-  `provenance/author-decisions.md` への転記可否は owner の判断として保留されている．
-  本 claim はその裁定には依拠せず，上記の記録済み policy のみに依拠する．本 claim が述べるのは判断の権限と責任の所在であって，
-  個別の書き込みに対する事前承認ではない．**「事前承認」は本 project で定義された
-  概念ではなく，論文ではこれを定義・推定・議論しない**（owner 判断 2026-07-26）．
-  connector 経路の provenance 解析（`analysis/connector-linkage-methodology.md`，
-  `analysis/author-interface-model.md` §8）は内部の解析結果として analysis/ と
-  evidence/ に留め，本文には持ち込まない．
+- Notes: `analysis/author-interface-model.md` A2--A3 に基づく．evidence_type:
+  reconstructed，confidence: 中（ChatGPT への調査・統合・推奨・起草の帰属について．
+  prompt・モデル版・session・編集履歴は復元不能）．
+  **経路の 4 類は証拠が支持する区別だけを述べる**（issue #88）．`performed_via_github_app`
+  は伝送チャネルを直接示すが文面の起草者を示さない API フィールドであり，これを根拠に
+  起草・意思決定を推論しない．non-null 値 `chatgpt-codex-connector` は API 上の識別子で
+  あって製品名ではなく，全 ChatGPT／Codex 経路を表すものでもない．null の場合に
+  ChatGPT App・`gh`・Web UI・PAT・他 agent のいずれかを login や文体から推論しない
+  （類 3 は「不明」のまま保持する）．類 2 の bot レビューを類 1 の著者アカウント伝送に
+  畳み込まない．**単一の「Connector」経路として書かない**．
+  著者の権限・責任は本リポジトリ内で検証可能な `provenance/ai-use.md:4` と
+  `AGENTS.md:24` に依る．両者は同一の役割を旧来の語 `scientific owner` で書いているが，
+  指示対象は本 claim の「著者」と同一である（issue #88 の用語正規化は append-only の
+  provenance ログを遡って書き換えない方針．PR 本文に例外として記録）．
+  `analysis/author-interface-model.md` §0 の 2026-07-25 裁定は本リポジトリ内に再導出
+  可能な記録を持たず（同 §7），`provenance/author-decisions.md` への転記可否は著者の
+  判断として保留されている．本 claim はその裁定に依拠しない．
+  本 claim が述べるのは判断の権限と責任の所在であって，個別の書き込みに対する
+  事前承認ではない．**「事前承認」は本 project で定義された概念ではなく，論文では
+  これを定義・推定・議論しない**（著者判断 2026-07-26）．connector 経路の provenance
+  解析（`analysis/connector-linkage-methodology.md`，`analysis/author-interface-model.md`
+  §8）は内部の解析結果として analysis/ と evidence/ に留め，本文には持ち込まない．
+  改訂履歴: 2026-07-25 PR #78 で本文へ binding，2026-07-26 PR #87 で
+  "owner-authorized" 表現を除去，2026-07-27 PR（issue #88）で用語を「著者」へ正規化し
+  経路 4 類へ分割．
 
 <!-- 以降の claim は必要に応じて追加する． -->

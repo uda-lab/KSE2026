@@ -105,13 +105,13 @@ exit code 137 and no compiler diagnostic. % CLAIM: CLM-008, INC-005
 \emph{Detection and response.}
 Monitoring had covered the visible Lean process rather than memory
 available to the entire container. Roughly seventy minutes after an earlier
-status check had produced that misreading, the owner requested another when
+status check had produced that misreading, the author requested another when
 only 606\,MiB remained available. Inspection of each process working
 directory identified the fourteen stale chains, and the Linux control
 group counter confirmed intervention by the out of memory (OOM) killer.
 Because that counter was cumulative, it identifies the mechanism but not
 the number of kills in this incident. Removing the stale processes raised
-available memory to 2.2\,GiB. Ownership returned to the original agent,
+available memory to 2.2\,GiB. The worktree returned to the original agent,
 the duplicate stopped, and the build completed under a global lock.
 PRs~\#174, \#175, and \#176 merged later that day. % CLAIM: CLM-008, INC-005
 
