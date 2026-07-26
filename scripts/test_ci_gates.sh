@@ -270,6 +270,26 @@ assert out["n"] == 3
 PYEOF
 check "exporter scrub_tree masks content fields but spares identifiers" 0 "$?"
 
+python3 - "$repo" "$tmp" <<'PYEOF' >/dev/null 2>&1
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(sys.argv[1]) / "scripts"))
+import export_repo_snapshot as m
+# Shorter entry deliberately listed BEFORE the containing longer entry: in
+# file order, "Alice" would fire first and leave "<name-redacted> Smith",
+# which neither pattern (nor redact_check.py) matches afterwards — an
+# incomplete redaction that passes the gate. The loader must therefore
+# normalize to longest-first regardless of line order.
+deny = Path(sys.argv[2]) / "deny.txt"
+deny.write_text("Alice\nAlice Smith\n", encoding="utf-8")
+m.NAME_DENYLIST_FILE = deny
+m.NAME_PATTERNS = m.load_name_patterns()
+assert m.scrub("met Alice Smith and Alice") == "met <name-redacted> and <name-redacted>"
+assert m.scrub("Alice Smith") == "<name-redacted>"  # no partial "<name-redacted> Smith"
+assert "Smith" not in m.scrub("Alice Smith")
+PYEOF
+check "exporter scrub masks a containing longer entry regardless of file order" 0 "$?"
+
 echo "== wiring: the make targets must still invoke the guards =="
 # Everything above invokes a guard directly, which proves the guard works and
 # nothing about whether `make` still calls it. Deleting the chktex line from

@@ -73,10 +73,20 @@ NAME_DENYLIST_FILE = Path(__file__).resolve().parent.parent / "private" / "redac
 
 def load_name_patterns():
     if NAME_DENYLIST_FILE.is_file():
-        names = [ln.strip()
+        names = {ln.strip()
                  for ln in NAME_DENYLIST_FILE.read_text(encoding="utf-8").splitlines()
-                 if ln.strip() and not ln.startswith("#")]
-        return [re.compile(re.escape(n)) for n in names]
+                 if ln.strip() and not ln.startswith("#")}
+        # Longest-first, then lexicographic: masking must not depend on the
+        # private file's line order. If a shorter entry ("Alice") were applied
+        # before a containing longer one ("Alice Smith"), the longer name
+        # would be only partially masked ("<name-redacted> Smith") and
+        # redact_check.py — which matches against the already-scrubbed text —
+        # would no longer see either denylisted string, passing the gate on
+        # an incomplete redaction (PR #80 owner review). Detection order in
+        # redact_check.py itself is immaterial (each pattern scans the
+        # original line independently), so only this scrub side sorts.
+        return [re.compile(re.escape(n))
+                for n in sorted(names, key=lambda n: (-len(n), n))]
     return []
 
 
