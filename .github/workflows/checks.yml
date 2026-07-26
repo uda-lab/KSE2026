@@ -54,7 +54,17 @@ jobs:
     # avoid. cancel-in-progress only helps when a newer commit arrives.
     timeout-minutes: 10
     steps:
+      # Full history: the freeze gate diffs against the base ref, and a
+      # depth-1 checkout cannot resolve a merge base. The gate fails closed
+      # rather than reporting a green pass over an empty diff, so a shallow
+      # clone would break the job rather than weaken it silently.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch base ref for the freeze gate
+        shell: bash
+        run: git fetch --no-tags --quiet origin main
 
       # ChkTeX is a standalone C program (240 kB installed; depends only on
       # libc6, libpcre2-posix3, libtinfo6) and does not pull in TeX Live, so the
@@ -74,7 +84,13 @@ jobs:
           command -v chktex
           chktex --version | head -1
 
-      - name: Claim links, raw-log leakage guard, redaction scan
+      - name: Claim links, leakage guard, redaction scan, freeze gate
+        env:
+          # On a push to main, origin/main already points at the commit just
+          # pushed, so diffing against it compares nothing and a direct push
+          # touching frozen paths would report green. Use the pre-push revision
+          # there. Pull requests and merge-queue entries keep origin/main.
+          FREEZE_BASE: ${{ github.event_name == 'push' && github.event.before || 'origin/main' }}
         run: make integrity
 
       # REQUIRE_CHKTEX makes the Makefile refuse to report a pass when chktex is

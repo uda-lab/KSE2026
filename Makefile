@@ -20,7 +20,7 @@ REDACT_DIRS := evidence claims analysis provenance notes paper
 # The recipe asserts the list is plausible before invoking chktex.
 LINT_TEX := paper/main.tex $(wildcard paper/sections/*.tex)
 
-.PHONY: pdf lint verify leakcheck redact integrity selftest clean
+.PHONY: pdf lint verify leakcheck redact frozen integrity selftest clean
 
 pdf:
 ifdef LATEXMK
@@ -127,9 +127,15 @@ redact:
 	done
 	python3 scripts/redact_check.py $(REDACT_DIRS:%=--dir %)
 
-# The three content gates that need no TeX. Kept as one target so the
-# lightweight CI workflow and a manual full build run an identical set.
-integrity: verify leakcheck redact
+# Freeze gate (issue #90): only paper/ is editable. FREEZE_BASE overrides the
+# base ref for a local check against something other than origin/main.
+FREEZE_BASE ?= origin/main
+frozen:
+	bash scripts/check_frozen_paths.sh $(FREEZE_BASE)
+
+# The content gates that need no TeX. Kept as one target so the lightweight CI
+# workflow and a manual full build run an identical set.
+integrity: verify leakcheck redact frozen
 
 # Regression tests for the gate mechanisms themselves: that the ChkTeX gate
 # fails when chktex is absent, and that the leakage guard catches uppercase
