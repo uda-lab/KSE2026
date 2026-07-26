@@ -149,16 +149,24 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 ## CLM-012: 記録された著者向け経路では scientific owner が判断の権限と責任を保持し，ChatGPT は中間的な decision-support 層として再構成される（confidence: 中）一方，GitHub Connector による Issue / PR への伝送が owner の authenticated account を経由し記録済み governance policy の下にあったことは一次記録されており，ChatGPT の起草や独立した意思決定までは証明しない
 - Status: frozen
 - Paper location: paper/sections/03-agent-workflow.tex
-- Evidence: EV-2076, EV-0925, EV-1669, EV-0247, INC-001, leray-hopf#145, leray-hopf#146, leray-hopf#158
+- Evidence: EV-2076, EV-0925, EV-1669, EV-0247, INC-001, leray-hopf#145, leray-hopf#146, leray-hopf#158，`provenance/ai-use.md:4`（「AI は著者としない．最終判断は常に scientific owner が行う」），`AGENTS.md:24`（「AI は著者にしない」）
 - Notes: `analysis/author-interface-model.md` A2--A3 に基づく．`performed_via_github_app`
   は伝送チャネルを直接示すが，文面の起草者を示さない．Issue／PR の調査・統合・
   推奨・起草を ChatGPT に帰属する部分は reconstructed / confidence 中とし，
   prompt・モデル版・session・編集履歴は復元不能である．owner の最終権限と
   ChatGPT／Connector の独立権限不在を混同しない．2026-07-25 の PR #78 review
   follow-up で本文へ binding した．2026-07-26 の owner review（PR #87）により
-  claim 文の "owner-authorized な項目" を「owner の authenticated account を経由し
-  記録済み governance policy の下にある伝送」へ改めた．前者は artifact ごとの承認と
-  誤読され得るためである．本 claim が述べるのは判断の権限と責任の所在であって，
+  claim 文を 2 点改めた．(1) "owner-authorized な項目" を「owner の authenticated
+  account を経由し記録済み governance policy の下にある伝送」へ．前者は artifact
+  ごとの承認と誤読され得るためである．(2) "最終権限を保持し" を「判断の権限と責任を
+  保持し」へ．同 review が「判断の権限・責任」を一体の対象として指定したことに従う．
+  claim 文の「記録済み governance policy」が指すのは本リポジトリ内で検証可能な
+  `provenance/ai-use.md:4` と `AGENTS.md:24` であり，責任の帰属もこの 2 点に依る
+  （どちらも最終判断の所在と AI を著者としないことを定める）．
+  `analysis/author-interface-model.md` §0 の 2026-07-25 裁定（`t-uda` アカウント発の
+  判断は起草者を問わず owner 権威）は本リポジトリ内に再導出可能な記録を持たず（同 §7），
+  `provenance/author-decisions.md` への転記可否は owner の判断として保留されている．
+  本 claim はその裁定には依拠せず，上記の記録済み policy のみに依拠する．本 claim が述べるのは判断の権限と責任の所在であって，
   個別の書き込みに対する事前承認ではない．**「事前承認」は本 project で定義された
   概念ではなく，論文ではこれを定義・推定・議論しない**（owner 判断 2026-07-26）．
   connector 経路の provenance 解析（`analysis/connector-linkage-methodology.md`，
