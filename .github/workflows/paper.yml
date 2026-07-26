@@ -92,6 +92,12 @@ jobs:
       # a push to main, is a complete validation on its own rather than half of
       # one. The three gates need no TeX and add about 2 s.
       - name: Claim links, raw-log leakage guard, redaction scan
+        env:
+          # On a push to main, origin/main already points at the commit just
+          # pushed, so diffing against it compares nothing and a direct push
+          # touching frozen paths would report green. Use the pre-push revision
+          # there. Pull requests and merge-queue entries keep origin/main.
+          FREEZE_BASE: ${{ github.event_name == 'push' && github.event.before || 'origin/main' }}
         run: make integrity
 
       - name: Lint prose and LaTeX

@@ -574,6 +574,50 @@ grep -q '^integrity: .*frozen' "$repo/Makefile" \
   && check "make integrity depends on the freeze gate" 0 0 \
   || check "make integrity depends on the freeze gate" 0 1
 
+# A branch that forked BEFORE the script landed has a merge base without it.
+# Keying the bootstrap exemption off the merge base would hand every such
+# branch a permanent bypass with a green required check, so the exemption must
+# be decided from the base ref.
+d=$(mkfreezerepo)
+( cd -- "$d" && git checkout -q -b work && printf 'z\n' >>AGENTS.md && git add -A \
+    && git -c user.email=t@example.invalid -c user.name=t commit -qm "edit before freeze" \
+  && git checkout -q main && cp "$freeze" scripts/ && git add -A \
+    && git -c user.email=t@example.invalid -c user.name=t commit -qm install \
+  && git checkout -q work ) >/dev/null 2>&1
+check "freeze gate enforces on a branch forked before it landed" 1 "$(freeze_rc "$d")"
+
+# git diff reports only the destination of a rename, so moving a frozen file
+# under paper/ would look like a paper/ change while deleting a frozen file.
+d=$(mkfreezerepo)
+( cd -- "$d" && cp "$freeze" scripts/ && git add -A \
+    && git -c user.email=t@example.invalid -c user.name=t commit -qm install \
+  && git checkout -q -b work && git mv AGENTS.md paper/AGENTS.md \
+    && git -c user.email=t@example.invalid -c user.name=t commit -qm move ) >/dev/null 2>&1
+check "freeze gate rejects escaping a frozen file by rename" 1 "$(freeze_rc "$d")"
+
+# A local `make integrity` runs before the edit is committed, so a
+# committed-only diff would report clean on a working tree that edits a frozen
+# document.
+d=$(mkfreezerepo)
+( cd -- "$d" && cp "$freeze" scripts/ && git add -A \
+    && git -c user.email=t@example.invalid -c user.name=t commit -qm install \
+  && git checkout -q -b work && printf 'z\n' >>AGENTS.md ) >/dev/null 2>&1
+check "freeze gate rejects an uncommitted frozen edit" 1 "$(freeze_rc "$d")"
+
+# An uncommitted paper/ edit must still pass, or the gate blocks ordinary work.
+d=$(mkfreezerepo)
+( cd -- "$d" && cp "$freeze" scripts/ && git add -A \
+    && git -c user.email=t@example.invalid -c user.name=t commit -qm install \
+  && git checkout -q -b work && printf 'q\n' >>paper/main.tex ) >/dev/null 2>&1
+check "freeze gate admits an uncommitted paper edit" 0 "$(freeze_rc "$d")"
+
+# Untracked scratch files are not a repository change until they are added.
+d=$(mkfreezerepo)
+( cd -- "$d" && cp "$freeze" scripts/ && git add -A \
+    && git -c user.email=t@example.invalid -c user.name=t commit -qm install \
+  && git checkout -q -b work && mkdir -p .scratch && printf 'x\n' >.scratch/note.md ) >/dev/null 2>&1
+check "freeze gate ignores untracked files" 0 "$(freeze_rc "$d")"
+
 echo
 printf '%d passed, %d failed\n' "$pass" "$fail"
 [ "$fail" -eq 0 ]

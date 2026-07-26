@@ -85,6 +85,12 @@ jobs:
           chktex --version | head -1
 
       - name: Claim links, leakage guard, redaction scan, freeze gate
+        env:
+          # On a push to main, origin/main already points at the commit just
+          # pushed, so diffing against it compares nothing and a direct push
+          # touching frozen paths would report green. Use the pre-push revision
+          # there. Pull requests and merge-queue entries keep origin/main.
+          FREEZE_BASE: ${{ github.event_name == 'push' && github.event.before || 'origin/main' }}
         run: make integrity
 
       # REQUIRE_CHKTEX makes the Makefile refuse to report a pass when chktex is
