@@ -1,4 +1,4 @@
-# Mediation/direct census — 方法論と限界（issue #60 Wave A）
+# Mediation/direct census — 方法論と限界
 
 `scripts/compute_mediation_census.py` により，`evidence/repository-snapshots/{leray-hopf,KSE2026}/`
 の `issues.json` / `comments.json`（`scripts/export_repo_snapshot.py`，issue #60 で
@@ -116,13 +116,8 @@ KSE2026 の connector 経由 issue 番号は `#23 #42 #58 #59 #60` に加え，�
 ある．この非対称性は，`evidence/repository-snapshots/KSE2026/EXPORT.json` の
 `note` フィールドにも明記されている．
 
-## 権威に関する立場（issue #60 Wave A dispatch の前提）
+## 権威に関する立場
 
-issue #60 の Wave A 作業指示は，「`t-uda` アカウントから発せられた判断は，文面を
-ChatGPT が起草したか否かに関わらず著者権威である」という前提の下で本 census を
-作成するよう求めている．この前提そのものの正式な記録化（`provenance/author-
-decisions.md` への転記や著者による確定）は本 PR の範囲外であり，未実施である
-（記録化の要否は著者判断待ち）．本 census が示すのは伝送チャネルの下界統計のみ
-であり，上記前提の真偽を証明も反証もしない．「最終判断は常に著者が
-行う」（`provenance/ai-use.md`）および「AI は著者にしない」（`AGENTS.md`）は本集計
-と矛盾しない．
+本 census が示すのは伝送チャネルの下界統計のみであり，判断の権限の所在について
+何も示さない．「最終判断は常に著者が行う」（`provenance/ai-use.md`）および
+「AI は著者にしない」（`AGENTS.md`）は本集計と矛盾しない．

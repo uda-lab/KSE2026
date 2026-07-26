@@ -189,7 +189,7 @@ B を主題とし，C の incident は harness design の検出範囲と限界�
 
 ## 8. 執筆体制
 
-* Scientific owner / final editor
+* 著者 / final editor
   数学的主張，形式化範囲，論文上の最終判断を担当する．
 
 * Evidence curator
@@ -227,7 +227,7 @@ Git commit，Issue，PR，ログを統合した project timeline を作成し，
 ### Phase 3: Contribution freeze
 
 論文で主張する contribution を3点以内に絞り，各主張を一次資料へ対応付ける．
-大幅改稿で contribution の階層が変わる場合は scientific owner の指示を記録し，
+大幅改稿で contribution の階層が変わる場合は著者の指示を記録し，
 claim と contribution map を本文より先に再 freeze する．
 
 ### Phase 4: Drafting

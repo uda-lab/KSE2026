@@ -1,13 +1,10 @@
-# De-anonymization checklist — KSE 2026 投稿 artifact（issue #60 Wave B / #66）
+# De-anonymization checklist — KSE 2026 投稿 artifact
 
 投稿の匿名化は **著者の判断として保留**されている（`provenance/author-decisions.md`
 には未記載．保留自体は決定済みであり，本書は再質問しない）．本書は，匿名化を採る場合に
 **何を変える必要があるか**を列挙するだけであり，匿名化が採用されたことを前提としない．
 
-参照するスイッチは `paper/main.tex` の `\ifanonymous`（§1）．行番号は `issue-66-author-interface`
-ブランチ（`fe8fbeb` + 本 PR）時点のもの．`analysis/author-interface-model.md` の台帳は
-`fe8fbeb`（本 PR 適用**前**）を基準としているため，`paper/main.tex` については両者の
-行番号が一致しない．一致しないのは同ファイルのみである．
+参照するスイッチは `paper/main.tex` の `\ifanonymous`（§1）．
 
 **「投稿 artifact」の範囲**: `paper/main.tex`，`paper/sections/*.tex`，
 `paper/references.bib`，およびそれらから生成される `build/main.pdf`．*source-only* と
@@ -175,7 +172,7 @@ release タグ，Sections IV–V の PR 番号）であり，これは形式化�
 |---|---|---|---|---|---|
 | **1. `uda-lab/KSE2026` を public にする** | 機構的には小．内容レビューは大 — snapshot（issue/コメント本文），`analysis/`，`provenance/`，`PLAN.md`，`AGENTS.md` 等の内部統治記録すべてに公開前点検が要る（`make redact` だけでは足りない）．`private/` は gitignored なので raw ログは既に除外 | 内部統治記録の恒久的な公開；タグを固定しない限り `main` が投稿後も動き続けること；以後の全 commit での redaction 規律 | **強く不利**．`uda-lab` 所有の public repo は即座に匿名性を破る．履歴の commit メタデータに著者名が残り，履歴を書き換えない限り除去できない．匿名化を採るなら別途 anonymized mirror が要る（保守対象が 2 つになる） | `05-discussion.tex:67-68` でリポジトリを名指しし引用する | `@misc` entry を追加し，タグを固定．加えて `provenance/source-inventory.md` に行を足す（`cite:<key>` は bib への存在と inventory の ✓ の両方を要求する） |
 | **2. snapshot に archival DOI を発行する** | 中．選択肢 1 と同じ内容レビューに加え deposit 作業．Zenodo の GitHub 連携は public repo を要求するため，private のままなら curated tarball の手動アップロードになる | 不変で恒久的な引用可能 snapshot．誤りは撤回できず新バージョンで上書きするのみ．選択肢 1 の「`main` が動き続ける」問題は解決する | **注意すれば両立可能**．deposit のメタデータ（著者・所属）は投稿者の統制下にあり，レビュー時点で匿名のレコードにしうる．匿名化を後に採る場合の適合度が最も高い | 選択肢 1 と同じ一文の修正．host ではなく DOI を引用する | `doi` フィールド付きの entry と inventory 行．DOI は `\url` より安定し IEEEtran での見栄えもよい |
-| **3. 読者が実際に到達できる範囲だけを述べるよう一文を弱める** | 最小．`05-discussion.tex` の 1 文のみ．リポジトリ側の作業ゼロ | なし | 中立．リポジトリ側の追加作業なしに匿名化と両立し，匿名化の判断が下りた後にどちらへも戻せる | `05-discussion.tex:67-68` の書き換え．**本 PR では実施していない**．`01-introduction.tex` の contribution 3 の記述も併せて調整が要る可能性があり，その場合は Wave C の範囲 | なし |
+| **3. 読者が実際に到達できる範囲だけを述べるよう一文を弱める** | 最小．`05-discussion.tex` の 1 文のみ．リポジトリ側の作業ゼロ | なし | 中立．リポジトリ側の追加作業なしに匿名化と両立し，匿名化の判断が下りた後にどちらへも戻せる | `05-discussion.tex:67-68` の書き換え．**本 PR では実施していない**．`01-introduction.tex` の contribution 3 の記述も併せて調整が要る可能性があり，その場合は別途対応が要る | なし |
 | **4. 請求に応じて提供する** | 最小 | 期限のない個人的義務．IEEE のデータ可用性方針でも評価が下がりつつあり，レビュー時点では誰も検証できない | 請求時点で匿名性が破れる（chair 経由でなければ）．二重盲検の期間中は実質使えない | 同じ一文の修正 | なし |
 | **5. artifact を分割する** — evidence を含まない `scripts/` のみ公開し，抜粋と manifest の節を書き換える | 小〜中．`scripts/` は標準ライブラリのみの Python/shell でセッション内容を含まないため，公開前点検は軽い | 小さな恒久的公開面．evidence corpus を露出せずに metric 計算の再現性は提供できる | GitHub URL については選択肢 1 と同じ問題．ただし規模が小さくレビュー時の匿名 supplementary bundle として配布しうる | 一文を分割する．スクリプトには実在するポインタを与え，抜粋と manifest は選択肢 1–4 のいずれかに従う | スクリプト bundle の entry 1 件 |
 | **6. 何もしない** | ゼロ | — | — | — | — |
