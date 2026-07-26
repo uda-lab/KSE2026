@@ -21,8 +21,10 @@ from scripts.extract_chatgpt_export import (
     process_conversation,
 )
 from scripts.join_connector_linkage import (
+    AUTHORIZATION_SPOT_CHECK_OVERRIDES,
     PUBLIC_CSV_HEADER,
     PUBLIC_ROW_FIELDS,
+    apply_authorization_override,
     artifact_hashes,
     artifact_key,
     build_anchor_index,
@@ -31,6 +33,7 @@ from scripts.join_connector_linkage import (
     build_conversation_spans,
     build_message_hash_index,
     build_mention_index,
+    build_rows,
     compute_authorization,
     emit_public,
     normalize,
@@ -73,7 +76,8 @@ def synthetic_conversation(conv_id, nodes, current_node, create_time=1000.0, upd
 
 
 def mk_msg(msg_id, parent_id, role, create_time, url_refs=None, text_mentions=None,
-           body_hashes=None, instruction_signals=None, content_type="text"):
+           body_hashes=None, instruction_signals=None, content_type="text",
+           bare_repo_mentions=None):
     return {
         "conversation_id": "conv",
         "msg_id": msg_id,
@@ -85,6 +89,7 @@ def mk_msg(msg_id, parent_id, role, create_time, url_refs=None, text_mentions=No
         "text_len": 100,
         "url_refs": url_refs or [],
         "text_mentions": text_mentions or [],
+        "bare_repo_mentions": bare_repo_mentions or [],
         **({"body_hashes": body_hashes} if body_hashes else {}),
         **({"instruction_signals": instruction_signals} if instruction_signals else {}),
     }
@@ -95,6 +100,7 @@ def mk_conv_record(conversation_id, messages, current_node=None):
     for m in messages:
         matched_repos.update(r["repo_canonical"] for r in m.get("url_refs", []))
         matched_repos.update(r["repo_canonical"] for r in m.get("text_mentions", []))
+        matched_repos.update(m.get("bare_repo_mentions", []))
     for m in messages:
         m["conversation_id"] = conversation_id
     return {
@@ -191,6 +197,17 @@ class AliasCanonicalizationTest(unittest.TestCase):
         self.assertEqual(canonical_repo("lean-pde-notes"), "leray-hopf-notes")
         self.assertEqual(canonical_repo("leray-hopf"), "leray-hopf")
         self.assertEqual(canonical_repo("KSE2026"), "KSE2026")
+
+    def test_canonical_repo_normalizes_casing_of_non_alias_tokens(self):
+        # Regression (PR #82 review): only the two renamed aliases were
+        # casing-normalized; a same-repo mention like "kse2026" or
+        # "LERAY-HOPF" used to keep its as-matched casing and silently fail
+        # to join against the snapshot's canonically-cased key.
+        self.assertEqual(canonical_repo("kse2026"), "KSE2026")
+        self.assertEqual(canonical_repo("Kse2026"), "KSE2026")
+        self.assertEqual(canonical_repo("LERAY-HOPF"), "leray-hopf")
+        self.assertEqual(canonical_repo("Leray-Hopf-Notes"), "leray-hopf-notes")
+        self.assertEqual(canonical_repo("LEAN-PDE"), "leray-hopf")
 
     def test_text_mention_alias_canonicalized(self):
         mentions = find_text_mentions("please see lean-pde#42 for context")
@@ -316,6 +333,36 @@ class TierResolutionTest(unittest.TestCase):
                                 conv_spans, 60)
         self.assertEqual(res["tier"], "ambiguous")
         self.assertEqual(res["notes"], "hash-collision")
+
+    def test_exact_body_collision_without_message_evidence_falls_through(self):
+        # Regression (PR #82 review): a snapshot-side hash collision alone
+        # (two artifacts sharing a body, e.g. repeated boilerplate review
+        # text) is not evidence of anything if no candidate message ever
+        # produced that hash -- there is no linkage candidate to be
+        # ambiguous ABOUT. Must fall through to a weaker tier, not stay
+        # "ambiguous" forever.
+        art = mk_artifact("leray-hopf", "issue_comment", 14, 2001,
+                           "2026-06-21T07:05:00+00:00", body=LONG_BODY_A)
+        other = mk_artifact("leray-hopf", "issue_comment", 15, 2002,
+                             "2026-06-21T09:00:00+00:00", body=LONG_BODY_A)
+        # A message exists but mentions a completely different (repo, number)
+        # -- it will not hash-match either artifact's body.
+        msg = mk_msg("m1", None, "user", "2026-06-21T06:50:00+00:00",
+                      text_mentions=[{"repo_canonical": "leray-hopf", "repo_raw": "leray-hopf",
+                                       "number": 14}])
+        conv = mk_conv_record("conv-nohit", [msg])
+        anchor_idx = build_anchor_index([conv])
+        msg_hash_idx = build_message_hash_index([conv])  # empty: msg has no body_hashes
+        mention_idx = build_mention_index([conv])
+        conv_spans = build_conversation_spans([conv])
+        snap_hash_index = defaultdict(list)
+        for a in (art, other):
+            for h in artifact_hashes(a):
+                snap_hash_index[h].append(artifact_key(a))
+        res = resolve_artifact(art, anchor_idx, snap_hash_index, msg_hash_idx, mention_idx,
+                                conv_spans, 60)
+        # Falls through past exact-body to time-and-context (mention in window).
+        self.assertEqual(res["tier"], "time-and-context")
 
     def test_short_body_never_reaches_exact_body(self):
         # Identical short text on both sides must NOT hash-match (below the
@@ -459,6 +506,77 @@ class AuthorizationTest(unittest.TestCase):
         result = compute_authorization(conv_index["conv-auth-4"], None,
                                         current_node_of["conv-auth-4"], created_at, "leray-hopf")
         self.assertEqual(result, "n/a")
+
+    def test_yes_via_bare_repo_mention_without_url_or_number(self):
+        # Regression (PR #82 review): a natural-language instruction like
+        # "KSE2026 に issue を作成して" names the repo but has no URL and no
+        # #number, so it only shows up in bare_repo_mentions -- url_refs and
+        # text_mentions are both empty for it. Authorization must still see it.
+        msgs = [
+            mk_msg("u1", None, "user", "2026-06-21T06:00:00+00:00",
+                   bare_repo_mentions=["KSE2026"], instruction_signals=["作成"]),
+            mk_msg("a1", "u1", "assistant", "2026-06-21T06:05:00+00:00"),
+        ]
+        conv = mk_conv_record("conv-auth-5", msgs, current_node="a1")
+        conv_index, current_node_of = build_conversation_index([conv])
+        created_at = parse_iso("2026-06-21T07:00:00+00:00")
+        result = compute_authorization(conv_index["conv-auth-5"], "a1",
+                                        current_node_of["conv-auth-5"], created_at, "KSE2026")
+        self.assertEqual(result, "yes")
+
+
+class AuthorizationOverrideTest(unittest.TestCase):
+    def test_override_downgrades_yes_to_yes_rejected(self):
+        repo, kind, number, aid = next(iter(AUTHORIZATION_SPOT_CHECK_OVERRIDES))
+        art = {"repo": repo, "artifact_kind": kind, "artifact_number": number,
+               "artifact_id": aid}
+        auth, note = apply_authorization_override(art, "yes")
+        self.assertEqual(auth, "yes-rejected")
+        self.assertTrue(note.startswith("spot-check:"))
+
+    def test_override_is_a_no_op_for_not_found_and_n_a(self):
+        art = {"repo": "leray-hopf", "artifact_kind": "issue_creation",
+               "artifact_number": 999999, "artifact_id": None}
+        for auth in ("not-found", "n/a"):
+            got, note = apply_authorization_override(art, auth)
+            self.assertEqual(got, auth)
+            self.assertIsNone(note)
+
+    def test_override_is_a_no_op_for_unlisted_yes(self):
+        # A "yes" on an artifact NOT in the override table is an unreviewed
+        # candidate and must be passed through unchanged (never silently
+        # rejected by a table that hasn't actually reviewed it).
+        art = {"repo": "leray-hopf", "artifact_kind": "issue_creation",
+               "artifact_number": 999999, "artifact_id": None}
+        auth, note = apply_authorization_override(art, "yes")
+        self.assertEqual(auth, "yes")
+        self.assertIsNone(note)
+
+    def test_build_rows_applies_override_end_to_end(self):
+        # Artifact identity matches an AUTHORIZATION_SPOT_CHECK_OVERRIDES
+        # entry; the message drives a genuine mechanical "yes" (earlier
+        # instruction, signal, repo mention via text_mentions AND
+        # bare_repo_mentions, in-window) which build_rows must then
+        # downgrade to "yes-rejected".
+        repo, kind, number, aid = ("KSE2026", "issue_creation", 61, None)
+        art = mk_artifact(repo, kind, number, aid, "2026-06-21T07:00:00+00:00", body="")
+        msgs = [
+            mk_msg("u1", None, "user", "2026-06-21T06:00:00+00:00",
+                   text_mentions=[{"repo_canonical": repo, "repo_raw": repo, "number": number}],
+                   bare_repo_mentions=[repo], instruction_signals=["post"]),
+        ]
+        conv = mk_conv_record("conv-override", msgs, current_node="u1")
+        anchor_idx = build_anchor_index([conv])
+        msg_hash_idx = build_message_hash_index([conv])
+        mention_idx = build_mention_index([conv])
+        conv_spans = build_conversation_spans([conv])
+        conv_index, current_node_of = build_conversation_index([conv])
+        rows = build_rows([art], anchor_idx, {}, msg_hash_idx, mention_idx, conv_spans,
+                           conv_index, current_node_of, 60)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["join_method"], "time-and-context")
+        self.assertEqual(rows[0]["authorization_present"], "yes-rejected")
+        self.assertIn("spot-check:", rows[0]["notes"])
 
 
 # ---------------------------------------------------------------------------

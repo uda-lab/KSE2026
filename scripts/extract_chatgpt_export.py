@@ -20,10 +20,14 @@ never a direct Connector attestation. `message.author.name` is always null.
 Per-message output is compact and text-free by default: `conversation_id,
 msg_id, parent_id, role, create_time (ISO UTC), content_type, on_live_path,
 text_len`, plus derived fields that never carry raw text themselves —
-`url_refs`, `text_mentions`, `body_hashes` (assistant only, via the shared
-`normalize()`/`normalized_hash()` in `scripts/join_connector_linkage.py`),
-and `instruction_signals` (user only, lexicon *hits*, not the surrounding
-text). `--with-text-preview N` adds truncated previews for PRIVATE manual
+`url_refs`, `text_mentions`, `bare_repo_mentions` (a repo name appearing
+anywhere, no URL or #number required — the per-message counterpart of the
+candidate-selection token match, so a natural-language instruction like
+"KSE2026 に issue を作成して" is still visible to authorization checking),
+`body_hashes` (assistant only, via the shared `normalize()`/
+`normalized_hash()` in `scripts/join_connector_linkage.py`), and
+`instruction_signals` (user only, lexicon *hits*, not the surrounding text).
+`--with-text-preview N` adds truncated previews for PRIVATE manual
 verification only — never pass it when the output might leave
 `/private/derived/`.
 
@@ -114,11 +118,22 @@ FENCE_RE = re.compile(r"```[^\n]*\n(.*?)```", re.DOTALL)
 HEADING_LINE_RE = re.compile(r"^\s{0,3}#{1,6}\s")
 
 
+# Lowercased lookup tables so canonicalization is fully case-insensitive on
+# input: both regexes above are re.IGNORECASE, so a match can arrive in any
+# casing (e.g. "kse2026#61", "LERAY-HOPF"). Mapping only the two renamed
+# aliases and leaving everything else in its as-matched casing (the original
+# bug, PR #82 review) meant a same-repo mention could be indexed under two
+# different casings and silently fail to join against the snapshot's
+# canonically-cased key.
+_REPO_ALIAS_LOWER = {old.lower(): new for old, new in REPO_ALIAS.items()}
+_CANONICAL_BY_LOWER = {t.lower(): t for t in TARGET_REPO_TOKENS}
+
+
 def canonical_repo(token: str) -> str:
-    for old, new in REPO_ALIAS.items():
-        if token.lower() == old.lower():
-            return new
-    return token
+    low = token.lower()
+    if low in _REPO_ALIAS_LOWER:
+        return _REPO_ALIAS_LOWER[low]
+    return _CANONICAL_BY_LOWER.get(low, token)
 
 
 def epoch_to_iso(t):
@@ -303,10 +318,17 @@ def process_conversation(conv, since_epoch, with_preview):
         # Candidate-selection signal: broad bare-substring tokens (see module
         # docstring) -- a strict superset of what url_refs/text_mentions can
         # ever match, since those require a full URL or a #number suffix.
+        # Stored per message (not just aggregated into matched_repos) so
+        # scripts/join_connector_linkage.py's authorization check can see a
+        # natural-language instruction that names the repo without a URL or
+        # #number ("KSE2026 に issue を作成して") -- PR #82 review finding:
+        # authorization was previously blind to exactly this phrasing because
+        # it only consulted url_refs/text_mentions.
         bare_tokens = REPO_TOKEN_RE.findall(text)
-        if bare_tokens:
+        bare_repo_mentions = sorted({canonical_repo(t) for t in bare_tokens})
+        if bare_repo_mentions:
             matched_tight = True
-            matched_repos.update(canonical_repo(t) for t in bare_tokens)
+            matched_repos.update(bare_repo_mentions)
         if WIDE_TOKEN_RE.search(text):
             matched_wide = True
 
@@ -321,6 +343,7 @@ def process_conversation(conv, since_epoch, with_preview):
             "text_len": len(text),
             "url_refs": url_refs,
             "text_mentions": text_mentions,
+            "bare_repo_mentions": bare_repo_mentions,
         }
         if role == "assistant" and content_type in POSTABLE_CONTENT_TYPES:
             hashes = body_hashes_for(text)

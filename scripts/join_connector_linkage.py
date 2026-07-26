@@ -56,17 +56,25 @@ Tier hierarchy (first tier that fires wins; a tie within a tier is
                      Confidence low.
   5. unmatched       none of the above.
 
-`authorization_present` in {yes, not-found, n/a}: conservative by
-construction, never `no`. `yes` requires a user-role message strictly
+`authorization_present` in {yes, not-found, n/a, yes-rejected}: conservative
+by construction, never `no`. `yes` requires a user-role message strictly
 earlier than the artifact's `created_at`, reachable by walking parent
 pointers from the matched message AND from the conversation's live-path leaf
 (`current_node`) — an edit-branch conversation can carry the authorizing
 instruction on either branch — that carries an action-verb lexicon hit AND
-mentions the artifact's repo. `n/a` covers `reconstructed` and `unmatched`
+mentions the artifact's repo (via `url_refs`, `text_mentions`, or the bare
+`bare_repo_mentions` a natural-language instruction leaves when it names the
+repo without a URL or #number). `n/a` covers `reconstructed` and `unmatched`
 rows, which have no single matched message to search from. Every `yes` row
 must be human-spot-checked privately (`--with-text-preview` on the
 extractor) before being treated as evidence — this script only proposes the
-candidate, it does not adjudicate it.
+candidate, it does not adjudicate it. `yes-rejected` is applied by
+`AUTHORIZATION_SPOT_CHECK_OVERRIDES` below: a human spot-check disproved a
+mechanically-produced `yes` (e.g. the instruction-verb lexicon cannot detect
+negation, and hit on a sentence that actually withheld authorization) —
+the public artifact must show the disproven verdict rather than either
+silently repeating an unreviewed "yes" or erasing the fact that automation
+flagged the row at all (PR #82 review finding).
 
 Redaction: rows never carry raw conversation text. `conversation_id_hash` is
 the first 16 hex chars of `sha256("KSE2026-i70:" + conversation_id)` — a
@@ -268,6 +276,56 @@ def artifact_key(art):
     return (art["repo"], art["artifact_kind"], art["artifact_number"], art["artifact_id"])
 
 
+# Manually spot-checked authorization_present=yes candidates (issue #70,
+# 2026-07-26): every "yes" this pipeline has ever produced was hand-checked
+# with --with-text-preview before being trusted (see
+# analysis/connector-linkage-methodology.md's authorization_present
+# section). This table is an append-only, human-reviewed OVERRIDE applied
+# after automatic resolution, keyed on the artifact identity -- it is not a
+# live filter, and a future run's "yes" NOT listed here is UNREVIEWED and
+# must be spot-checked the same way before being trusted (see the docstring
+# at the top of this module). Reasons are categorical, never a text excerpt.
+#
+# Update 2026-07-26 (same PR, after adding bare_repo_mentions to the
+# authorization check per review): the broader repo-mention signal raised
+# "yes" from 3 to 134 rows tracing to only 10 distinct trigger messages
+# across 7 conversations (many artifacts in one conversation share a single
+# early standing instruction as their nearest qualifying ancestor -- this is
+# by construction, not a bug). All 10 triggers were read. 8/10 are
+# unconditional standing instructions ("review new PRs and merge when
+# clean", "audit the whole repo", etc.) with no negation -- left as "yes",
+# though note this only means "a repo-relevant instruction preceded it",
+# not "the owner specifically pre-approved this exact write" (see
+# methodology doc). The other 2/10 explicitly DEFER issue-filing pending a
+# report ("don't file the issue yet -- report to me first" / "report to me
+# before creating an issue"). Of the 20 rows under those two triggers, the 3
+# that are literally `issue_creation` directly contradict their trigger's
+# specific deferral and are overridden below; the remaining 17 (comment/
+# review/PR-creation -- a different action type than what was deferred) are
+# left as "yes" but flagged as a genuine interpretive ambiguity in the
+# methodology doc, not silently resolved either way.
+AUTHORIZATION_SPOT_CHECK_OVERRIDES = {
+    ("KSE2026", "issue_creation", 61, None): "negated instruction (lexicon cannot detect negation)",
+    ("KSE2026", "pr_review", 59, 4775200029): "same ancestor-chain trigger as above",
+    ("KSE2026", "pr_review", 59, 4775335214): "same ancestor-chain trigger as above",
+    ("leray-hopf", "issue_creation", 178, None):
+        "trigger explicitly deferred issue-filing pending a report ('report to me first before creating an issue')",
+    ("leray-hopf-notes", "issue_creation", 100, None):
+        "trigger explicitly deferred issue-filing pending a report ('don't file the issue yet -- report first')",
+    ("leray-hopf-notes", "issue_creation", 63, None):
+        "trigger explicitly deferred issue-filing pending a report ('don't file the issue yet -- report first')",
+}
+
+
+def apply_authorization_override(art, auth):
+    if auth != "yes":
+        return auth, None
+    reason = AUTHORIZATION_SPOT_CHECK_OVERRIDES.get(artifact_key(art))
+    if reason is None:
+        return auth, None
+    return "yes-rejected", f"spot-check:{reason}"
+
+
 # ---------------------------------------------------------------------------
 # Candidate-side indices
 # ---------------------------------------------------------------------------
@@ -333,7 +391,8 @@ def build_conversation_spans(conversations):
 
 def build_conversation_index(conversations):
     """conv_id -> {msg_id: {parent_id, role, create_time_dt, url_refs,
-    text_mentions, instruction_signals}}, plus conv_id -> current_node."""
+    text_mentions, bare_repo_mentions, instruction_signals}}, plus
+    conv_id -> current_node."""
     conv_msgs = {}
     current_node_of = {}
     for conv in conversations:
@@ -346,6 +405,7 @@ def build_conversation_index(conversations):
                 "create_time_dt": parse_iso(msg.get("create_time")),
                 "url_refs": msg.get("url_refs", []),
                 "text_mentions": msg.get("text_mentions", []),
+                "bare_repo_mentions": msg.get("bare_repo_mentions", []),
                 "instruction_signals": msg.get("instruction_signals", []),
             }
         conv_msgs[conv["conversation_id"]] = by_id
@@ -376,14 +436,22 @@ def _exact_id(art, anchor_idx):
 
 
 def _exact_body(art, snap_hash_index, msg_hash_idx):
+    # Check msg_hits BEFORE deciding a snapshot-side collision matters (PR #82
+    # review finding): two snapshot artifacts sharing a body hash with no
+    # candidate message ever producing that hash is not evidence of anything
+    # -- there is no linkage candidate to be ambiguous ABOUT. Marking it
+    # ambiguous anyway blocked the artifact from ever falling through to
+    # time-and-context/reconstructed, inflating the reported ambiguity count
+    # on ordinary snapshot-side duplicates (e.g. repeated boilerplate review
+    # bodies) that no message ever referenced.
     collide = False
     for h in artifact_hashes(art):
+        msg_hits = msg_hash_idx.get(h)
+        if not msg_hits:
+            continue
         snap_hits = snap_hash_index.get(h, [])
         if len(snap_hits) > 1:
             collide = True
-            continue
-        msg_hits = msg_hash_idx.get(h)
-        if not msg_hits:
             continue
         msg_hits_sorted = sorted(msg_hits, key=lambda x: x[2] or "")
         conv_id, msg_id, ts, variant = msg_hits_sorted[0]
@@ -485,8 +553,14 @@ def compute_authorization(conv_index, msg_id, current_node, created_at_dt, repo_
         ct = rec["create_time_dt"]
         if ct is None or ct >= created_at_dt:
             continue  # not strictly earlier than the artifact -> cannot authorize it
+        # bare_repo_mentions matters here specifically: a natural-language
+        # instruction that names the repo without a URL or #number ("KSE2026
+        # に issue を作成して") only shows up there, never in url_refs/
+        # text_mentions -- omitting it made authorization systematically
+        # blind to exactly that phrasing (PR #82 review finding).
         repos_mentioned = {r["repo_canonical"] for r in rec["url_refs"]} | \
-            {r["repo_canonical"] for r in rec["text_mentions"]}
+            {r["repo_canonical"] for r in rec["text_mentions"]} | \
+            set(rec["bare_repo_mentions"])
         if rec["instruction_signals"] and repo_canonical in repos_mentioned:
             return "yes"
     return "not-found"
@@ -510,6 +584,10 @@ def build_rows(universe, anchor_idx, snap_hash_index, msg_hash_idx, mention_idx,
                 "exact-id", "exact-body", "time-and-context"):
             auth = compute_authorization(conv_index.get(conv_id, {}), msg_id,
                                           current_node_of.get(conv_id), created_at_dt, art["repo"])
+        auth, override_note = apply_authorization_override(art, auth)
+        notes = res.get("notes")
+        if override_note:
+            notes = ";".join(x for x in (notes, override_note) if x)
         rows.append({
             "repo": art["repo"],
             "artifact_kind": art["artifact_kind"],
@@ -524,7 +602,7 @@ def build_rows(universe, anchor_idx, snap_hash_index, msg_hash_idx, mention_idx,
             "msg_id": msg_id,
             "message_timestamp": res.get("message_timestamp"),
             "authorization_present": auth,
-            "notes": res.get("notes"),
+            "notes": notes,
         })
     return rows
 
@@ -646,6 +724,20 @@ def render_private_report(meta, coverage_all, coverage_connector, universe_size_
             lines.append("| " + " | ".join(str(r.get(k)) for k in
                           ("repo", "artifact_kind", "artifact_number", "artifact_id", "join_method",
                            "conversation_id", "msg_id", "message_timestamp")) + " | TBD |")
+    else:
+        lines.append("(none)")
+    lines.append("")
+    lines.append("## authorization_present = yes-rejected (already spot-checked and disproven; "
+                  "see AUTHORIZATION_SPOT_CHECK_OVERRIDES)")
+    lines.append("")
+    rejected_rows = [r for r in rows if r["authorization_present"] == "yes-rejected"]
+    if rejected_rows:
+        lines.append("| repo | artifact_kind | number | id | tier | notes |")
+        lines.append("|---|---|---|---|---|---|")
+        for r in rejected_rows:
+            lines.append("| " + " | ".join(str(r.get(k)) for k in
+                          ("repo", "artifact_kind", "artifact_number", "artifact_id", "join_method",
+                           "notes")) + " |")
     else:
         lines.append("(none)")
     lines.append("")

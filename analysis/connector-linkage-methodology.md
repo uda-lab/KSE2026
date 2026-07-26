@@ -155,27 +155,92 @@ GitHub 上の正規の rename であり，番号空間が偶然一致した別�
 
 ## `authorization_present` の演算子的定義と実証された限界
 
-`authorization_present ∈ {yes, not-found, n/a}`．`no` は返さない（保守的定義）．
-`yes` の条件: `created_at` より**厳密に早い** user ロールのメッセージが，一致した
-メッセージの祖先チェーン **または** 会話の live path（`current_node` の祖先）の
-いずれかに存在し，かつそのメッセージが指示動詞語彙（JP: 起票／投稿／作成／
-コメント／レビュー／提出／報告／依頼／お願い，EN: post/create/comment/review/
-open an issue/file an issue/submit/reply/publish/request review/@codex）に
-ヒットし，かつ artifact の repo に言及していること．`n/a` は `reconstructed` と
+`authorization_present ∈ {yes, not-found, n/a, yes-rejected}`．`no` は返さない
+（保守的定義）．`yes` の条件: `created_at` より**厳密に早い** user ロールの
+メッセージが，一致したメッセージの祖先チェーン **または** 会話の live path
+（`current_node` の祖先）のいずれかに存在し，かつそのメッセージが指示動詞語彙
+（JP: 起票／投稿／作成／コメント／レビュー／提出／報告／依頼／お願い，EN:
+post/create/comment/review/open an issue/file an issue/submit/reply/publish/
+request review/@codex）にヒットし，かつ artifact の repo に言及していること
+（`url_refs`／`text_mentions` の URL・`repo#number` 形，またはベアな repo 名
+言及 `bare_repo_mentions` のいずれか）．`n/a` は `reconstructed` と
 `unmatched`（単一の一致メッセージが存在しない）に付く．
 
-**実証された限界: 本語彙は否定を検出できない．** 本ラン全体で `yes` は 3 行のみ
-生じ（KSE2026 issue_creation #61，KSE2026 pr_review #59 の 2 review），
-すべて `--with-text-preview` による手動確認で **REJECTED**（0/3 が生存）．
-3 行はすべて同一の起点メッセージ（会話 `6a6391d0…`，2026-07-24T16:25:07Z）へ
-遡り，同メッセージは「投稿」「レビュー」の語彙ヒットと `KSE2026` への言及を持つが，
-文の実際の内容は「レビュー結果は，まだ投稿しないでください．ここで私と議論して
-からです．」という**投稿の保留を明示的に指示する文**であった．部分文字列一致の
-語彙には否定のスコープを判定する機構がなく，この誤検出を機械的には防げない．
-したがって: **本パイプラインが将来再実行されるたびに，`yes` となった行は必ず人手で
-再確認しなければならない．** これは Q4（authorization の伝送可能性）に対する
-本ランの回答でもある: 可視テキストのみからは信頼できる形で authorization を
-判定できない．
+`yes-rejected` は `AUTHORIZATION_SPOT_CHECK_OVERRIDES`
+（`scripts/join_connector_linkage.py`）による上書きで，人手の spot-check が
+機械判定の `yes` を**反証した**行に付く．反証した理由は消える方（`not-found`
+への書き換え）でも黙って残す方（`yes` のまま）でもなく，反証されたという事実
+自体を公開成果物に残す（PR #82 独立レビュー指摘）．
+
+### 開発の経緯: `bare_repo_mentions` 追加（PR #82 独立レビュー指摘）と，その結果判明した規模
+
+初版は `url_refs`／`text_mentions`（URL または `repo#number` 形が必要）のみを
+authorization の repo 言及判定に用いていたため，「KSE2026 に issue を作成して」
+のような URL も番号も伴わない自然文の指示を体系的に見落としていた（独立レビュー
+指摘）．`bare_repo_mentions`（メッセージごとの，候補選定と同じベア部分文字列
+一致）を authorization にも persist・使用するよう修正した結果，`yes` は
+**3 行から 131 行（反証後）** へ増加した．内訳は次の通り．
+
+- 修正直後（反証前）の `yes` は 134 行．うち 3 行は既存の overrides（前述，
+  `KSE2026 issue_creation #61` と `pr_review #59` の 2 件）でそのまま
+  `yes-rejected` を維持．
+- 残る 131 行は，**祖先チェーン探索の性質上わずか 10 通りの起点メッセージ**
+  （7 会話）に収斂する: 1 会話内の複数 artifact が，同一の早い時点の指示を
+  「一致メッセージの祖先または live path 上で最初に見つかる条件充足メッセージ」
+  として共有するため（設計通りであり バグではない）．したがって **10 件の
+  起点メッセージすべてを人手で全数確認した**（`--with-text-preview`）．これは
+  「131 行を個別に読む」ことと同値の被覆率である．
+
+| 起点メッセージ（先頭 8 桁） | 該当行数 | 内容の要約（カテゴリのみ，逐語引用なし） | 判定 |
+|---|---:|---|---|
+| `94cb6e66` | 51 | PR への追記コメント依頼＋関連 repo の参考共有 | 無条件・是認 |
+| `b0fc67db` | 29 | 新規 PR の監視・批判的レビュー・コメント・クリーンなら merge 承認，という標準作業指示 | 無条件・是認 |
+| `134949e3` | 17 | repo 全体監査の依頼．**「まだ issue 化はせず，いったん報告してください」と issue 化を明示的に保留** | **条件付き**（下記） |
+| `2c8fdbe1` | 12 | repo 全体の公開前最終レビュー依頼 | 無条件・是認 |
+| `4e42d807` | 10 | Lean 形式化品質の敵対的レビュー依頼 | 無条件・是認 |
+| `7819fec3` | 9 | rename 決定の通知を issue として依頼（issue 化を明示的に**指示**） | 無条件・是認 |
+| `993b92a3` | 3 | rename 後の事後レビュー依頼．**「起票する前に私にまず報告してください」と issue 化を明示的に保留** | **条件付き**（下記） |
+| `073a9560` | 1 | 進捗確認とコメントの示唆 | 無条件・是認（弱い間接指示） |
+| `863b6eac` | 1 | 完了報告の精査依頼 | 無条件・是認 |
+| `bbb2118c` | 1 | 進捗確認・報告依頼 | 無条件・是認 |
+
+**条件付き 2 件（`134949e3`／`993b92a3`，計 20 行）の扱い**: どちらも
+「issue 化はまず保留し，報告を先に」という文言を含む．該当 20 行の artifact_kind
+を確認したところ，`issue_creation` が 3 件（`leray-hopf#178`，
+`leray-hopf-notes#100`，`leray-hopf-notes#63`）含まれていた．これらは
+起点メッセージが明示的に保留した行為そのもの（issue 作成）と直接矛盾するため，
+最初の 3 件と同型の誤検出として `AUTHORIZATION_SPOT_CHECK_OVERRIDES` に追加し
+`yes-rejected` とした．残る 17 行（comment／review／PR 作成）は，保留された
+行為（issue 化）とは異なる action_kind であり，機械的には矛盾しない．しかし
+「報告を待ってから」という文脈全体がそれ以外の行為にも及ぶ可能性は文面だけでは
+排除できず，**確信を持って是認とも反証ともしない**（`yes` のまま残すが，本節
+に解釈上の未決着として記録する）．
+
+**残る限界**:
+1. 本語彙は否定を検出できない（実証済み: 本ラン（`bare_repo_mentions` 反映後）
+   で機械的に `yes` と判定された候補は `yes` 131 ＋ `yes-rejected` 6 の
+   計 137 件．うち 6 件（4.4%）が人手確認で明確な反証を要した）．
+2. `bare_repo_mentions` を含めたことで recall は改善したが precision は低下した:
+   「repo 名＋指示動詞が同一会話のどこかに，時系列で先行して存在する」という
+   条件は，**その指示が当該 artifact を具体的に指していたことを要求しない**．
+   131 件の `yes` は「関連する先行指示が存在した」ことの証拠であって，
+   「その特定の書き込みを owner が個別に事前承認した」ことの証拠ではない．
+   後者を機械的に判定する手段は本データにはない．
+3. 祖先チェーン探索に時間的な上限（window）がない．遠い過去の一度きりの
+   standing instruction が，何十件もの後続 artifact の `yes` を生み出し得る
+   （上表の通り，実際に生じている）．
+4. 上記の理由により，**本ランで確認された `authorization_present = yes` の
+   規模（131／174 connector-routed universe，比較参考として全 618 universe
+   行中では 131／618）は，issue #70 の Q3（明示的な事前指示に遡れる `t-uda`
+   投稿の割合）に対して，当初想定していたよりはるかに大きい肯定的シグナルを
+   与える．** ただし上記 2 の理由により，これを owner の役割モデル・
+   mediation census・本文の既存記述へ反映するかどうかは，本 PR の scope 外の
+   判断であり，別途 owner レビューを要する（issue #70 の non-goals: 「Broad
+   manuscript rewriting」）．本 PR は所見の記録に留める．
+
+**したがって: 本パイプラインが将来再実行されるたびに，未収載の `yes` 行は
+必ず人手で再確認しなければならない．** `AUTHORIZATION_SPOT_CHECK_OVERRIDES`
+は append-only の履歴であり，新しい `yes` を自動的にフィルタしない．
 
 ## セッションログ被覆窓（gate criterion 2）への寄与
 
@@ -215,8 +280,10 @@ tier（time-and-context = medium）に従う．`analysis/author-interface-traces
 - `exact-body` は本ランで 0 件．正規化ハッシュ照合の網が粗いのか，実際に
   assistant のドラフトが逐語で投稿されることが稀なのかは，本データからは
   判別できない．
-- `authorization_present` の語彙は否定文を検出できない（上記，実測 0/3）．将来の
-  `yes` は必ず手動確認を要する．
+- `authorization_present` の語彙は否定文を検出できない（上記，実測 6/137 が
+  人手確認で反証済み）．また `bare_repo_mentions` 導入後は「先行する指示の
+  存在」と「その artifact 個別への事前承認」を区別できない（上記，限界 2 も
+  参照）．将来の未収載 `yes` は必ず手動確認を要する．
 - `pr_review` は Reviews API の制約により connector 経由か否かを判定できず，
   universe から除外している．したがって本ドキュメントの coverage 数値は
   issue／PR 作成とコメントのみを対象とし，レビューの connector 帰属については
