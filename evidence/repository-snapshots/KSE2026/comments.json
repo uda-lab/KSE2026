@@ -1258,5 +1258,15 @@
   "performed_via_github_app": "chatgpt-codex-connector",
   "updated_at": "2026-07-25T12:39:21Z",
   "user_login": "t-uda"
+ },
+ {
+  "author_association": "MEMBER",
+  "body": "@codex please review this PR",
+  "created_at": "2026-07-26T08:21:03Z",
+  "id": 5082697491,
+  "issue_number": 80,
+  "performed_via_github_app": null,
+  "updated_at": "2026-07-26T08:21:03Z",
+  "user_login": "t-uda"
  }
 ]

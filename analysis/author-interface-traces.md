@@ -439,7 +439,9 @@ merge 可です．修正後に approve します」と述べ，**承認を保留
 - リポジトリ: `uda-lab/leray-hopf`（public），`uda-lab/KSE2026`（private，read 権限あり）．
 - snapshot: 両リポジトリの `issues.json` と `comments.json` の全行をプログラムで走査
   （抽出であってサンプリングではない）．
-- 番号: Wave A が列挙した leray-hopf の connector 経由 32 件と KSE2026 の 6 件，加えて
+- 番号: Wave A が列挙した leray-hopf の connector 経由 32 件と KSE2026 の 6 件（KSE2026 は
+  census と同じ 2026-07-24 時点 snapshot 基準．issue #79 の再収集で snapshot は前進して
+  おり，当時の snapshot は git 履歴 `e65b872` から参照できる），加えて
   connector 経由コメントが付いた全 issue．
 - ライブ endpoint: `repos/…/issues/N`（`state_reason`），`repos/…/issues/N/timeline`，
   `repos/…/pulls/N` と `…/pulls/N/reviews`．

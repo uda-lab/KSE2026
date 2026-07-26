@@ -1,16 +1,17 @@
 {
   "repo": "uda-lab/KSE2026",
   "private": true,
+  "name_masking_active": true,
   "head_sha_at_fetch": "e65b872e77abec6a61d673721565a5d8d6ba0461",
-  "fetched_at": "2026-07-26T08:18:53+00:00",
+  "fetched_at": "2026-07-26T08:37:06+00:00",
   "tool_versions": {
     "python": "3.11.2",
     "gh": "gh version 2.92.0 (2026-04-28)"
   },
   "counts": {
     "commits": 82,
-    "issues_and_prs": 79,
-    "comments": 126,
+    "issues_and_prs": 80,
+    "comments": 127,
     "releases": 0,
     "tags": 0
   },

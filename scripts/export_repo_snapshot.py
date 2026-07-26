@@ -34,7 +34,9 @@ listed in private/redact-names.txt (untracked; same file redact_check.py
 reads) are masked as <name-redacted> when that file is present at export
 time. Everything here is
 regenerable from the source repository via `gh api` — rerun this script
-rather than hand-editing. EXPORT.json records the source repo's `private`
+rather than hand-editing. Byte-identical regeneration of a snapshot exported
+with masking active additionally requires the same private/redact-names.txt
+(EXPORT.json's name_masking_active records whether masking ran). EXPORT.json records the source repo's `private`
 flag: for a private repo (e.g. this paper repo's own self-snapshot), that
 means the export is reproducible only by an account with read access, unlike
 a public-repo snapshot such as uda-lab/leray-hopf — this asymmetry must be
@@ -57,9 +59,15 @@ EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 
 # Mirrors redact_check.py's NAME_DENYLIST loader: one name per line, kept out
 # of git in private/redact-names.txt. When the file is absent (e.g. CI, or a
-# third party reproducing a public-repo snapshot), no names are masked — the
-# same names then also cannot be flagged by redact_check.py, so the gate and
-# the scrub degrade together rather than diverging.
+# third party reproducing a public-repo snapshot), no names are masked — in
+# that same environment redact_check.py cannot flag those names either, so
+# gate and scrub degrade together *within one environment*. Across
+# environments they can still diverge: an export made without the denylist
+# passes CI and that contributor's local gate, then blocks the next
+# environment that does hold the denylist (exactly the issue #79 sequence).
+# EXPORT.json records name_masking_active so a reader can tell which case a
+# committed snapshot is. Byte-identical regeneration of a masked snapshot
+# therefore requires the same denylist file in addition to `gh api` access.
 NAME_DENYLIST_FILE = Path(__file__).resolve().parent.parent / "private" / "redact-names.txt"
 
 
@@ -86,22 +94,41 @@ def scrub(text: str) -> str:
     return text
 
 
-def scrub_tree(obj):
-    """Apply scrub() to every string value (not keys) in a JSON tree.
+# Machine identifiers that downstream consumers group or join on (e.g.
+# compute_mediation_census.py groups by user_login × performed_via_github_app,
+# and shas identify commits). These are excluded from scrub_tree: silently
+# masking a grouping key would split/merge downstream categories instead of
+# failing loudly. If a denylisted name ever appears in one of these fields,
+# redact_check.py still flags the committed file and a human decides —
+# fail-closed at the gate rather than silent data mutation (PR #80 review).
+IDENTIFIER_KEYS = frozenset({
+    "sha", "parents", "commit_sha", "head_sha_at_fetch",
+    "user_login", "author_login", "committer_login",
+    "performed_via_github_app",
+})
 
-    write_json() runs this over each exported structure so the masking covers
-    *all* string-valued fields — commit author display names, milestone
-    titles, label and tag names, and any field a future exporter change adds
-    — not only the free-text bodies that call scrub() explicitly. Without
-    this, a denylisted name appearing in e.g. a commit author_name would
-    reach the committed snapshot verbatim and fail the redaction gate
-    (PR #80 review finding)."""
+
+def scrub_tree(obj, key=None):
+    """Apply scrub() to every string value (not keys) in a JSON tree, except
+    values of IDENTIFIER_KEYS.
+
+    write_json() runs this over each exported structure, so the masking is
+    authoritatively applied here for *all* string-valued fields — commit
+    author display names, milestone titles, label and tag names, and any
+    field a future exporter change adds — not only the free-text bodies.
+    (The explicit scrub() calls in the per-field comprehensions below are
+    redundant but harmless — scrub() is idempotent on its own output — and
+    are kept to minimize diff churn.) Without this, a denylisted name
+    appearing in e.g. a commit author_name would reach the committed
+    snapshot verbatim and fail the redaction gate (PR #80 review finding)."""
+    if key in IDENTIFIER_KEYS:
+        return obj
     if isinstance(obj, str):
         return scrub(obj)
     if isinstance(obj, list):
         return [scrub_tree(v) for v in obj]
     if isinstance(obj, dict):
-        return {k: scrub_tree(v) for k, v in obj.items()}
+        return {k: scrub_tree(v, k) for k, v in obj.items()}
     return obj
 
 
@@ -200,6 +227,7 @@ def main() -> int:
     meta = {
         "repo": args.repo,
         "private": is_private,
+        "name_masking_active": bool(NAME_PATTERNS),
         "head_sha_at_fetch": head,
         "fetched_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "tool_versions": {"python": sys.version.split()[0], "gh": gh_version},
