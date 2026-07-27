@@ -70,8 +70,7 @@
 
   <!-- Transmission: some author-account writes carry a GitHub App attribution -->
   <path d="M975 245 L1177 245" class="flow"/>
-  <text x="1076" y="199" text-anchor="middle" class="small">GitHub App</text>
-  <text x="1076" y="227" text-anchor="middle" class="small">attribution</text>
+  <text x="1076" y="225" text-anchor="middle" class="small">GitHub App</text>
   <path d="M245 395 L245 462 L1355 462 L1355 398" class="flow"/>
   <text x="800" y="452" text-anchor="middle" class="small">author correction</text>
 
