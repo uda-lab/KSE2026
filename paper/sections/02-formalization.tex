@@ -1,10 +1,5 @@
 \section{Formalization Target and Verified Results}\label{sec:formalization}
 
-% Scope: definition of weak solutions, the two capstone theorems, exact scope,
-% and the main analytic difficulties.
-% Statements MUST match claims/formalization-scope.md (pinned at
-% leray-hopf v0.1.0-rc1, commit 7c15710a). No claim beyond that file.
-
 The target is the classical existence theorem for
 Leray--Hopf weak solutions of the unforced, incompressible
 Navier--Stokes equations~\cite{leray1934,hopf1951}: given a
@@ -20,8 +15,10 @@ the result reported here. % CLAIM: CLM-001 (leray-hopf@7c15710a7b9068a2aa105fc7c
 \subsection{Weak solutions as formalized}
 
 A weak solution is represented by a velocity field
-$u : \mathrm{Time} \to D_\sigma$ that depends on time, together with proofs of the properties in
-Table~\ref{tab:solution-fields}. The abbreviations for the two domains are
+$u : \mathrm{Time} \to D_\sigma$, where $D_\sigma$ is the closed subspace of
+divergence-free fields in $L^2$ of the respective domain (Lean types
+\texttt{L2Sigma} and \texttt{L2Sigma\_R3}), together with proofs of the
+properties in Table~\ref{tab:solution-fields}. The abbreviations for the two domains are
 \texttt{LerayHopfSolutionFull} on $\mathbb{T}^3$ and
 \texttt{LerayHopfSolutionFull\_R3} on $\mathbb{R}^3$. Both instantiate
 the common \texttt{Galerkin.LerayHopfSolution} structure.
@@ -88,7 +85,6 @@ At the pinned commit, the formalization contains 96 files and about
 42,000 lines.
 % CLAIM: CLM-001 (formalization-metrics.json, measured at leray-hopf@7c15710a)
 It is organized around three analytic tasks shared by both domains.
-% source: leray-hopf@7c15710a docs/architecture.md (module organization)
 
 \emph{Galerkin approximation.}
 On each finite-dimensional subspace $V_n$, the truncated quadratic

@@ -17,11 +17,8 @@
 % --- Submission anonymity switch --------------------------------------------
 % \anonymoustrue   : temporary default while the real byline is pending.
 % \anonymousfalse : named byline plus the funding acknowledgment (submission target).
-% The KSE 2026 submission will use ordinary author-identifying output per
-% author decision (2026-07-25, provenance/author-decisions.md). Keep the
-% anonymous default until the TODO(author) placeholder is replaced, so the
-% default build does not publish an incomplete byline. Identity leaks the
-% switch does not cover are listed in notes/deanonymization-checklist.md.
+% Keep the anonymous default until the TODO(author) placeholder below is
+% replaced, so the default build does not publish an incomplete byline.
 \newif\ifanonymous%
 \anonymoustrue%
 
@@ -52,11 +49,9 @@ Harness Design and Reliability Lessons}
 \ifanonymous%
   \author{\IEEEauthorblockN{Anonymous Author(s)}}
 \else
-  % TODO(author): substitute the real byline and affiliation here. The placeholder
-  % below is deliberately conspicuous: flipping the switch without supplying the
-  % byline would otherwise emit a blind byline together with the searchable grant
-  % number, which is the worst of both. An affiliation email address will fail
-  % scripts/redact_check.py, which scans paper/.
+  % TODO(author): substitute the real byline and affiliation here. Flipping the
+  % switch before supplying it prints this placeholder next to the searchable
+  % grant number; an affiliation email address will fail scripts/redact_check.py.
   \author{\IEEEauthorblockN{TODO: REAL BYLINE NOT YET SUPPLIED}%
     \thanks{This work was supported by JST-Mirai Program Grant Number
       \mbox{JPMJMI22G1}, Japan.}}
@@ -77,7 +72,7 @@ three-dimensional weak existence theorem. During six weeks of development,
 a workflow defined by the author routed GitHub Issues through isolated Git
 worktrees and pull requests. The harness routes
 mathematical, Lean, interface, and resource checks according to the
-artifact being changed. Four incidents show where
+changed artifact. Four incidents show where
 these checks detected defects and where they did not. The evidence method
 links manuscript claims to redacted session records, repository history,
 verification results, cost estimates, and billing records.
