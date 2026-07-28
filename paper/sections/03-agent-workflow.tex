@@ -156,12 +156,13 @@ distinguishable from primary session evidence. % CLAIM: CLM-009
 
 From 2026-06-10 through the release on 2026-07-20, the collected logs
 record at least 15.1M output tokens, an estimated cost of \$6{,}973 at
-published API prices, and 199.1h of active session time when adjacent
-events are joined only across gaps of at most five minutes. These values
-are lower bounds because some session records were lost or unavailable.
+published API prices, and 199.1h of active session time, a coarse
+estimate obtained by joining adjacent events across gaps of at most five
+minutes. The token and cost figures are lower bounds because some
+session records were lost or unavailable.
 % CLAIM: CLM-002
 
-The July 2--3 completion phase occurred immediately after Fable~5 became
+The July 2--3 completion phase occurred immediately after Fable became
 available again. Fable orchestrated that work through Google Cloud's
 Vertex AI, with Opus agents used for some delegated tasks. The provider
 export records a charge of JPY~54{,}868 for all activity on the machine,
