@@ -1,12 +1,11 @@
 \section{Introduction}\label{sec:introduction}
 
 Large language model agents increasingly work on formalizations that span
-weeks rather than a single proof search. A project divided among many
-GitHub Issues, branches, agents, and reviews must preserve mathematical
-intent as well as proofs accepted by the kernel. The kernel checks a
-declaration against its type. The project must also decide which type
-should be proved, preserve the intended public declarations during
-refactoring, and verify the operating state behind progress reports.
+weeks rather than a single proof search. Such a project, divided among many
+GitHub Issues, branches, agents, and reviews, must do more than obtain
+proofs the kernel accepts: it must also decide which type should be proved,
+preserve the intended public declarations during refactoring, and verify
+the operating state behind progress reports.
 
 This paper studies those obligations through six weeks of work on the
 existence of Leray--Hopf weak solutions to the unforced incompressible
@@ -14,14 +13,12 @@ Navier--Stokes equations. The central artifact is a
 Lean~4~\cite{moura2021lean4} development on
 mathlib~\cite{mathlib2020}, with capstone existence theorems on the
 three dimensional torus and on $\mathbb{R}^3$~\cite{leray1934,hopf1951,
-lerayhopf2026repo}. Both theorem statements are given precisely in
-Section~\ref{sec:formalization}. % CLAIM: CLM-001
+lerayhopf2026repo}. % CLAIM: CLM-001
 To our knowledge, no prior machine-checked formalization establishes
 the existence of Leray--Hopf weak solutions to the three-dimensional
 Navier--Stokes equations. % CLAIM: CLM-006
 
-The nearest results in formalized analysis address adjacent problems.
-They include the
+The nearest results in formalized analysis address adjacent problems: the
 Gagliardo--Nirenberg--Sobolev inequality in
 mathlib~\cite{vandoorn2024gns}, a Lean formalization of
 De Giorgi--Nash--Moser elliptic regularity
@@ -29,10 +26,9 @@ theory~\cite{armstrong2026degiorginashmoser}, and a formalization of
 well-posedness and the mean-field derivation for the nonlinear Vlasov
 equation, conducted with AI assistance~\cite{miller2026vlasov}.
 
-Large collaborative formalization projects provide a second comparison.
-Human teams coordinated through blueprints in the Odd Order Theorem and
-the Liquid Tensor Experiment~\cite{gonthier2013oddorder,
-commelin2023abstraction}.
+Large collaborative formalizations offer a second comparison. Human teams
+coordinated through blueprints in the Odd Order Theorem and the Liquid
+Tensor Experiment~\cite{gonthier2013oddorder, commelin2023abstraction}.
 TauCeti uses human governance and a standing review rubric for
 a Lean library written by AI~\cite{tauceti2026}. % CLAIM: CLM-010
 The present study instead
@@ -45,37 +41,33 @@ yang2023leandojo,
 deepmind2025alphaproof,zhou2026leanatlas}. Studies of autonomous task
 horizons and pull requests (PRs) written by agents motivate reliability
 questions~\cite{metr2025longtasks,agenticprs2026security}.
-Lean Eval is an isolated theorem-completion benchmark: it fixes the
-benchmark statement, supplied dependencies, and trusted scaffolding in a
-generated workspace, then scores whether the comparator accepts the
-submitted solution~\cite{leaneval2026repo,
-leaneval2026site}. % CLAIM: CLM-011
-Our unit of analysis is a repository-level formalization campaign rather
-than an isolated proof task. Preserved records trace changes through the
-GitHub workflow, from Issue definition through implementation, semantic
-review, and mechanical checks. They also document incidents and resource
-use in the runtime environment.
+Lean Eval scores an isolated theorem completion against a fixed statement,
+supplied dependencies, and trusted scaffolding in a generated
+workspace~\cite{leaneval2026repo, leaneval2026site}. % CLAIM: CLM-011
+Our unit of analysis is instead a repository-level formalization campaign,
+whose preserved records trace changes from Issue definition through
+implementation, semantic review, and mechanical checks, and also document
+incidents and resource use in the runtime environment.
 
 This paper makes three contributions:
 \begin{enumerate}
 \item A completed Lean~4 and mathlib formalization, with no project
   axioms, of the existence of Leray--Hopf weak solutions on
-  $\mathbb{T}^3$ and $\mathbb{R}^3$. The formal result and its exact scope are independently
-  inspectable.
-\item A harness defined by the author that connects GitHub Issues, Git worktrees,
-  PRs, specialist agents, and the constrained runtime
-  environment. Issue scope, review decisions, and merge authority are
-  recorded outside agent sessions. Checks are selected according to the
-  changed artifact, and documented incidents show their observed reach
-  and limits.
+  $\mathbb{T}^3$ and $\mathbb{R}^3$, whose exact scope is independently
+  inspectable at a pinned release.
+\item A harness defined by the author that connects GitHub Issues, Git
+  worktrees, PRs, specialist agents, and the constrained runtime
+  environment, keeping scope and review decisions outside agent sessions.
+  Checks are selected according to the changed artifact, and documented
+  incidents show their observed reach and limits.
   % CLAIM: CLM-005, CLM-007, CLM-008, CLM-009
-\item An evidence method for research assisted by agents that combines
-  session log escrow, claim-to-evidence verification, and cost
-  reconciliation. It supports auditable statements about the project
-  while making coverage gaps explicit. % CLAIM: CLM-002, CLM-003
+\item An evidence method combining session log escrow, claim-to-evidence
+  verification, and cost reconciliation, which supports auditable
+  statements about the project while making coverage gaps explicit.
+  % CLAIM: CLM-002, CLM-003
 \end{enumerate}
 
-Section~\ref{sec:formalization} states the two capstone theorems.
-Section~\ref{sec:workflow} presents the harness, and
-Section~\ref{sec:incidents} examines four incidents at its boundaries.
+Section~\ref{sec:formalization} states the two capstone theorems,
+Section~\ref{sec:workflow} presents the harness,
+Section~\ref{sec:incidents} examines four incidents at its boundaries, and
 Section~\ref{sec:discussion} gives recommendations and limitations.

@@ -5,71 +5,58 @@
 The principal design question is which artifact each control can assess.
 The observed cases support the following recommendations for projects in
 which agents develop a substantial formalization under a mathematical
-author. They do not establish the causal effectiveness of the harness.
-% CLAIM: CLM-005, CLM-009
+author. % CLAIM: CLM-005, CLM-009
 
 \emph{Keep mathematical authority outside the implementation role.}
 Elaboration establishes that a proposition is well formed, not that it
-expresses the intended mathematics. The author should approve a
-statement card before implementation when the scope is delicate, and
-a reviewer who did not write the proof should test its hypotheses and
-boundary cases. Cases A and B show the different outcomes when this review
-occurs during release preparation or before merge.
-% CLAIM: CLM-005, INC-001, INC-002
+expresses the intended mathematics. The author should approve a statement
+card before implementation when the scope is delicate, and a reviewer who
+did not write the proof should test its hypotheses and boundary cases, as
+Cases A and B illustrate. % CLAIM: CLM-005, INC-001, INC-002
 
 \emph{Use the GitHub workflow to route mathematical feedback.}
-The repository's \texttt{github-driven-workflow} gave each approved Issue
-one branch, one assigned Git worktree, and one PR record. Its mathematical
-value came from routing semantic findings to the author and issue
-contract, while returning implementation findings to the worktree. The PR
-then preserved the candidate, the applicable checks, and the decision in
-one durable record. % CLAIM: CLM-007, CLM-009, EV-2076, EV-1669
+The mathematical value of \texttt{github-driven-workflow} came from its
+routing rule: semantic findings return to the author and the issue
+contract, implementation findings return to the worktree, and the PR
+preserves the candidate, the applicable checks, and the decision in one
+durable record. % CLAIM: CLM-007, CLM-009, EV-2076, EV-1669
 
 \emph{Separate observation from modification.}
-A scout inspected repository assumptions without edit permission, and
-specialist reviewers examined mathematical scope, module structure, or
-the public declaration inventory. These roles received only the authority
-needed for their task. The declaration comparison in PR~\#120 found a
+A read-only scout inspected repository assumptions, while specialist
+reviewers examined mathematical scope, module structure, and the public
+declaration inventory. The declaration comparison in PR~\#120 found a
 missing theorem after both the build and a structural review had passed.
 % CLAIM: CLM-007, CLM-008, CLM-009, INC-004
 
 \emph{Place resource rules in the dispatch path.}
-In the VPS container, exclusive assignment of each Git worktree, cleanup of helper
-processes, cache reuse, a global build lock, and available memory checks
-were prerequisites for verification. Recording an incident in an agent's
-memory was insufficient because later agents and tools could change. The
-resource contract was therefore placed in standing instructions and
-repeated in each relevant dispatch. % CLAIM: CLM-007, CLM-008, CLM-009, INC-005
+The VPS made resource contention visible, but the same mechanism applies to
+laptops and workstations that run many agents continuously: abandoned agent
+and helper process trees retain memory, while concurrent Lean builds add
+large transient demand. Dispatch rules should therefore clean up those
+process trees, bound agent and build concurrency, reuse the build cache,
+serialize heavy builds, and check the memory available to the whole machine
+or container rather than to the foreground prover alone. Recording such a
+rule in an agent's memory is insufficient because later agents and tools
+change; standing instructions and dispatch prompts carry it to replacement
+agents and later sessions.
+% CLAIM: CLM-007, CLM-008, CLM-009, INC-005
 
 \subsection{Evidence and limits}
 
-The study concerns one project under one author. Six sessions
-were chosen for incident reconstruction, so their coded events cannot
-estimate failure prevalence or the effectiveness of a control. There is
-no matched project without agent orchestration, and the observations do
-not identify causal effects. % CLAIM: CLM-004, CLM-005
+This observational account evaluates one author-supervised formalization
+workflow as a whole, including the author's own interventions. Comparative
+evaluation across projects would be needed to isolate the contribution of
+an individual control and to assess how far it transfers.
+% CLAIM: CLM-004, CLM-005
 
-The session record has gaps, including early records lost to log
-retention. Reconstructed events are distinguished from primary session
-evidence and carry an explicit confidence assessment. The models and
-proprietary tools also changed outside the project's control, which limits
-behavioral reproducibility. The recommendations are therefore expressed
-through artifacts, responsibilities, and observable checks rather than a
-requirement to use the same software. % CLAIM: CLM-008, INC-003
+Early session records are incomplete, and the models and proprietary tools
+changed during the project outside its control. Reconstructed events are
+distinguished from primary session evidence and carry an explicit
+confidence assessment. The recommendations are therefore expressed through
+durable artifacts, assigned responsibilities, and observable checks rather
+than a requirement to use the same software. % CLAIM: CLM-008, INC-003
 
-The author held authority and responsibility for the Issue and PR
-decisions recorded in the repository (Section~\ref{sec:workflow}). Where the
-record shows a departure from the author's intent, it lay in how an instruction
-was interpreted and carried out, not in where authority rested.
-% CLAIM: CLM-009, CLM-012, INC-001
-
-The author's supervision was part of the harness and cannot be separated
-from its outcome. Section~\ref{sec:formalization} bounds the mathematical
-result to the unforced equations, an arbitrary
-fixed finite horizon, test functions separated in time and space, and the
-stated energy class. The paper makes no claim about uniqueness or higher
-regularity.
-
-Redacted evidence excerpts, claim-to-evidence manifests, and scripts for
-the reported metrics are available in the paper repository. Raw session
-logs are withheld to protect the people and systems recorded in them.
+The paper repository provides redacted evidence excerpts,
+claim-to-evidence manifests, and scripts for the reported metrics. Raw
+session logs remain private because they contain information about the
+people and systems recorded in them.

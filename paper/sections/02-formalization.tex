@@ -4,10 +4,9 @@ The target is the classical existence theorem for
 Leray--Hopf weak solutions to the unforced, incompressible
 Navier--Stokes equations~\cite{leray1934,hopf1951}: given a
 divergence-free initial datum $u_0 \in L^2$, a viscosity $\nu > 0$, and a
-time horizon $T > 0$, a weak solution on $[0,T]$ exists. We report a
-Lean~4~\cite{moura2021lean4} formalization, built on
-mathlib~\cite{mathlib2020}, on two domains: the periodic unit 3-torus
-$\mathbb{T}^3$ and the whole space $\mathbb{R}^3$. All statements below are
+time horizon $T > 0$, a weak solution on $[0,T]$ exists. The two domains
+formalized here are the periodic unit 3-torus $\mathbb{T}^3$ and the whole
+space $\mathbb{R}^3$. All statements below are
 quoted from commit \texttt{7c15710a}, tagged
 \texttt{v0.1.0-rc1}~\cite{lerayhopf2026repo}, whose scope statement defines
 the result reported here. % CLAIM: CLM-001 (leray-hopf@7c15710a7b9068a2aa105fc7c11b432e7685b7b5)
@@ -26,7 +25,7 @@ the common \texttt{Galerkin.LerayHopfSolution} structure.
 The weak formulation is restricted to test functions separated in time and space,
 $\psi(t)w(x)$. General tests $\varphi(t,x)$ that depend jointly on time
 and space are outside the formalized relation. The initial trace is the one-sided strong limit
-$u(t)\to u_0$ in the ambient $L^2$ norm as $t\to0^+$. It does not assert
+$u(t)\to u_0$ in the ambient $L^2$ norm as $t\to0^+$, and does not assert
 weak continuity on the whole interval.
 
 \begin{table}[h]
@@ -72,19 +71,19 @@ witness scheme $\mathfrak{G}$ (a concrete Galerkin scheme built from a
 Schwartz divergence-free basis) is itself produced by the proof, not
 assumed.
 
-The result concerns the unforced equation on an arbitrary
-fixed finite horizon, using the weak formulation restricted to separated
-test functions and the stated energy class. It establishes existence and does not address
-uniqueness, nonuniqueness, or higher regularity. Developments outside this scope are
-kept in an experimental namespace that neither capstone imports
+The result establishes existence for the unforced equation on an arbitrary
+fixed finite horizon, under the weak formulation restricted to separated
+test functions and the energy class stated above; it does not address
+uniqueness, nonuniqueness, or higher regularity. Developments outside this
+scope are kept in an experimental namespace that neither capstone imports
 (Section~\ref{sec:release-surface}).
 
 \subsection{Main analytic difficulties}
 
 At the pinned commit, the formalization contains 96 files and about
-42,000 lines.
+42,000 lines,
 % CLAIM: CLM-001 (formalization-metrics.json, measured at leray-hopf@7c15710a)
-It is organized around three analytic tasks shared by both domains.
+organized around three analytic tasks shared by both domains.
 
 \emph{Galerkin approximation.}
 On each finite-dimensional subspace $V_n$, the truncated quadratic
@@ -109,11 +108,9 @@ $L^2\times L^2\times L^2$.
 \subsection{Kernel axioms and public imports}\label{sec:release-surface}
 
 For both capstones, \texttt{\#print axioms} reports exactly
-\texttt{propext},
-\texttt{Classical.choice}, and \texttt{Quot.sound}. There are no
-axioms declared by the project or occurrences of \texttt{sorryAx} in either
-capstone. By release preparation, the PR workflow ran textual guards for
-\texttt{sorry} and the public import closure. A manually dispatched full
-build checked the live declarations and recorded this exact axiom list for
-commit
-\texttt{7c15710a} under tag \texttt{v0.1.0-rc1}. % CLAIM: CLM-001
+\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}, so
+neither depends on an axiom declared by the project or on
+\texttt{sorryAx}. By release preparation, the PR workflow ran textual
+guards for \texttt{sorry} and the public import closure, and a manually
+dispatched full build recorded this axiom list from the live declarations
+at the pinned commit. % CLAIM: CLM-001

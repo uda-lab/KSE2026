@@ -42,45 +42,39 @@ box.}\label{fig:author-interface}
 % Mapping: CLM-007, CLM-009 ← analysis/workflow-evolution.md,
 % session indices 74aab39b 90fa24bb 7e6156bf cd98f32a 7dbee3de 8aed0316.
 Figure~\ref{fig:author-interface} places the work in three parts above one
-shared record. The author held final authority over scope and acceptance.
+shared record. The author held final authority over scope and acceptance,
 ChatGPT supported investigation, synthesis, recommendation, and drafting
-without deciding. The agent harness carried out issue-scoped work.
-Neither ChatGPT nor the implementing agents held independent authority.
-% CLAIM: CLM-012
+without deciding, and the agent harness carried out issue-scoped work
+without independent authority. % CLAIM: CLM-012
 
-Figure~\ref{fig:agent-harness} expands the agent harness into the synthesized
-end-state architecture. Its individual controls were introduced
-incrementally over the course of the campaign, including changes made
-in response to the incidents in Section~\ref{sec:incidents}; the
-diagram reconstructs this final configuration rather than an
-unvarying structure. % CLAIM: CLM-007, CLM-009
+Figure~\ref{fig:agent-harness} expands that harness. Its controls were
+introduced incrementally over the campaign, including in response to the
+incidents in Section~\ref{sec:incidents}, so the diagram reconstructs the
+end state rather than an unvarying structure. % CLAIM: CLM-007, CLM-009
 
 The work ran across two local computers and an isolated development
-container on a virtual private server (VPS). Many parallel orchestration
-sessions used the VPS container. Agents worked in separate Git worktrees
-but shared the repository, Lean build cache, and a memory ceiling of
-3.42\,GiB. This setting made computing resources part of the harness rather
-than background infrastructure. % CLAIM: CLM-007, CLM-009, EV-0247
+container on a virtual private server (VPS), which hosted many parallel
+orchestration sessions. Agents worked in separate Git worktrees but shared
+the repository, the Lean build cache, and one memory ceiling, which made
+computing resources part of the harness rather than background
+infrastructure. % CLAIM: CLM-007, CLM-009, EV-0247
 
 \subsection{Author authority and the GitHub workflow}
 
-The author retained authority over theorem scope. A GitHub Issue
-(hereafter Issue) defined each unit of work and its acceptance conditions.
-When a proposition could easily be overstated, a separate statement card
-recorded its hypotheses, conclusion, and permitted proof boundary. The
-Issue bounded implementation. The statement card exposed the mathematical
+A GitHub Issue (hereafter Issue) defined each unit of work and its
+acceptance conditions, bounding implementation. When a proposition could
+easily be overstated, a separate statement card recorded its hypotheses,
+conclusion, and permitted proof boundary, which exposed the mathematical
 contract to review. % CLAIM: CLM-009
 
 The main orchestrator assigned agents and checked their returned artifacts
 without editing Lean files itself. The repository skill
 \texttt{github-driven-workflow} required every change to begin with an
 Issue. An implementing agent received its own branch and Git worktree, then
-returned a committed candidate through a GitHub PR. The workflow contract
-required agents to submit changes through PRs rather than push directly to
-the main branch. A PR could merge only after the
-checks relevant to its changed artifacts had passed, an independent
-reviewer had left an attributable result, and all review threads were
-resolved.
+returned a committed candidate through a GitHub PR rather than pushing to
+the main branch. A PR could merge only after the checks relevant to its
+changed artifacts had passed, an independent reviewer had left an
+attributable result, and all review threads were resolved.
 
 Issue scope, review decisions, and merge authority were recorded in
 repository and GitHub artifacts rather than retained only in an agent
@@ -88,13 +82,12 @@ session. When Fable~5 resumed orchestration through Google Cloud's Vertex
 AI on July~2--3, it continued the existing workflow from those artifacts.
 % CLAIM: CLM-003, CLM-007, CLM-009, EV-1681
 
-This workflow also separated the destinations of review findings.
 Questions about mathematical meaning returned to the author and statement
-card. Lean errors and build failures returned to the implementing
-worktree. During the large July refactor, the orchestrator first assigned a
-scout that could inspect repository assumptions but not edit them, then assigned separate
-agents to implementation, module inspection, and comparison of public
-declarations. Inspection roles had no edit authority. % CLAIM: CLM-007, EV-1669
+card, while Lean errors and build failures returned to the implementing
+worktree. During the large July refactor, the orchestrator first assigned a scout
+that could inspect repository assumptions but not edit them, then assigned
+separate agents to implementation, module inspection, and comparison of
+public declarations. % CLAIM: CLM-007, EV-1669
 
 \subsection{Checks selected by artifact}
 
@@ -103,79 +96,63 @@ An agent independent of the implementer checked whether the proposition
 matched the intended mathematics and whether its hypotheses were
 sufficient. For statements near a boundary of validity, the reviewer
 looked for concrete counterexamples before proof search continued.
-Section~\ref{sec:incidents} contrasts a defect found by this procedure
-before merge with one that remained until release preparation.
 % CLAIM: CLM-005, CLM-007, EV-0925
 
 \emph{Lean declaration and assumptions.}
-The Lean build checked elaboration and type correctness.
+The Lean build checked elaboration and type correctness,
 \texttt{\#print axioms} recorded the assumptions of designated
 declarations, and an import check kept experimental modules outside the
-public root import. A full build was recorded for the release commit.
-% CLAIM: CLM-009
+public root import. % CLAIM: CLM-009
 
 \emph{Public declarations.}
 Refactoring was checked against the preceding inventory of public
-declarations. When exact preservation was required, the comparison also
-covered statement text. This check was independent of downstream use and
-therefore detected an unreferenced theorem omitted during refactoring.
-% CLAIM: CLM-007, EV-1669
+declarations, independently of whether anything downstream used them. When
+exact preservation was required, the comparison also covered statement
+text. % CLAIM: CLM-007, EV-1669
 
-The GitHub workflow preserved these results with the candidate they
-assessed. A review request alone was insufficient. The PR needed the
-reviewer's identity and result. This prevented a dispatched but unfinished
-review from being mistaken for completed assurance.
-% CLAIM: CLM-007, CLM-009, EV-1669
+The PR preserved each result with the candidate it assessed, and recorded
+the reviewer's identity and verdict rather than the fact that a review had
+been requested, so a dispatched but unfinished review could not be mistaken
+for completed assurance. % CLAIM: CLM-007, CLM-009, EV-1669
 
 \subsection{Worktree assignment, liveness, and computing resources}
 
 Each Git worktree had one active implementing agent, and shared import
 files had one designated writer. An apparent loss of contact did not by
-itself reassign the worktree. The orchestrator first checked the agent and
+itself reassign the worktree: the orchestrator first checked the agent and
 its process state, because starting a replacement in the same worktree
 could duplicate both edits and builds. % CLAIM: CLM-007, EV-2076, EV-1669, EV-0247
 
 Heavy Lean builds shared a cache and ran under a global lock. Before
 starting one, the harness checked memory available to the whole VPS
-container and removed helper processes left by completed jobs. Under
-pressure, it also reduced Lean's thread count. These requirements were
-placed in standing agent instructions and repeated in dispatch prompts.
-They did not depend on an agent recalling an earlier incident.
-% CLAIM: CLM-007, CLM-009, EV-0247
+container, removed helper processes left by completed jobs, and under
+pressure reduced Lean's thread count. % CLAIM: CLM-007, CLM-009, EV-0247
 
 \subsection{Evidence and measured use}
 
 Session records, GitHub Issues and PRs, build results, and release
-artifacts were retained as separate sources. Claim identifiers connect
-paper statements to those sources, while reconstructed intervals remain
+artifacts were retained as separate sources, and claim identifiers connect
+each statement in this paper to them. Reconstructed intervals remain
 distinguishable from primary session evidence. % CLAIM: CLM-009
 
 From 2026-06-10 through the release on 2026-07-20, the collected logs
-record at least 15.1M output tokens and 199.1h of active session time, a
-coarse estimate obtained by joining adjacent events across gaps of at most
-five minutes. Applying published API prices to that recorded use gives
-\$6{,}973. Apart from the Vertex AI phase below, the agents ran on
-subscription plans rather than metered API billing, so this figure is an
-API-price-equivalent estimate of recorded use and not an amount billed to
-the project. The token count and the estimate derived from it are lower
-bounds because some session records were lost or unavailable.
-% CLAIM: CLM-002
+record at least 15.1M output tokens and 199.1h of active session time,
+obtained by joining adjacent events across gaps of at most five minutes.
+Applying published API prices to that recorded use gives \$6{,}973. The
+agents ran on subscription plans rather than metered API billing, so this
+figure is an API-price equivalent of recorded use and a lower bound,
+because some session records were lost or unavailable. The one exception
+is the July 2--3 completion phase, which Fable orchestrated through Google
+Cloud's Vertex AI with Opus agents for some delegated tasks: the provider
+export records JPY~54{,}868 for all activity on that machine, of which the
+project's share is JPY~41{,}421--41{,}796 if the provider's aggregate
+token metric covers the same token classes as the logs.
+% CLAIM: CLM-002, CLM-003, CLM-007
 
-The July 2--3 completion phase occurred immediately after Fable became
-available again. Fable orchestrated that work through Google Cloud's
-Vertex AI, the one phase billed per token rather than covered by a
-subscription, with Opus agents used for some delegated tasks. The provider
-export records a charge of JPY~54{,}868 for all activity on the machine,
-while applying published API prices to the project logs gives
-\(\$258.28\). If the provider's aggregate token metric measures the same
-token classes as the logs, the project's share of the charge is
-JPY~41{,}421--41{,}796. % CLAIM: CLM-003, CLM-007
-
-For incident analysis, six sessions were selected for their
-reconstruction value and coded independently of the formal result. They
-contain four statement mismatches or weakenings, nineteen recovery
-actions, twelve resource failures, and five Git worktree assignment
-conflicts. No unresolved mismatch between a runtime success report and
-the state on disk was found. These counts describe the selected sessions.
-They do not estimate rates for the project or for agent systems in
-general. % CLAIM: CLM-004
+For incident analysis, six sessions were selected for their reconstruction
+value and coded independently of the formal result. They contain four
+statement mismatches or weakenings, nineteen recovery actions, twelve
+resource failures, and five Git worktree assignment conflicts, with no
+unresolved mismatch between a runtime success report and the state on
+disk. These counts describe the selected sessions and do not estimate
+rates for the project or for agent systems in general. % CLAIM: CLM-004
