@@ -24,11 +24,11 @@
 
   <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
 
-    
+
     <path d="M240 156 L240 112 L1360 112 L1360 154" fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow2)"></path>
     <text x="800" y="94" text-anchor="middle" font-size="25" fill="#4a5866">issue contract</text>
 
-    
+
     <rect x="50" y="156" width="380" height="270" rx="16" fill="#fbf0f0" stroke="#8e3030" stroke-width="2.6"></rect>
     <text x="76" y="193" font-size="28" font-weight="700" letter-spacing="1.4" fill="#8e3030">FINAL AUTHORITY</text>
     <text x="240" y="252" text-anchor="middle" font-size="38" font-weight="700" fill="#1b2733">Author</text>
@@ -36,7 +36,7 @@
     <rect x="90" y="352" width="300" height="48" rx="10" fill="#ffffff" stroke="#b36a6a" stroke-width="1.8"></rect>
     <text x="240" y="383" text-anchor="middle" font-size="26" fill="#4a5866">direct intervention</text>
 
-    
+
     <rect x="610" y="156" width="380" height="270" rx="16" fill="#eef4fb" stroke="#325b9b" stroke-width="2.6"></rect>
     <text x="636" y="193" font-size="28" font-weight="700" letter-spacing="1.4" fill="#325b9b">DECISION SUPPORT</text>
     <text x="800" y="248" text-anchor="middle" font-size="38" font-weight="700" fill="#1b2733">ChatGPT</text>
@@ -45,7 +45,7 @@
     <rect x="650" y="352" width="300" height="48" rx="10" fill="#ffffff" stroke="#7893b7" stroke-width="1.8"></rect>
     <text x="800" y="383" text-anchor="middle" font-size="26" fill="#4a5866">advisory only</text>
 
-    
+
     <rect x="1170" y="156" width="380" height="270" rx="16" fill="#eef7f2" stroke="#326b55" stroke-width="2.6"></rect>
     <text x="1196" y="193" font-size="28" font-weight="700" letter-spacing="1.4" fill="#326b55">EXECUTION</text>
     <text x="1360" y="252" text-anchor="middle" font-size="38" font-weight="700" fill="#1b2733">Agent harness</text>
@@ -53,7 +53,7 @@
     <rect x="1210" y="352" width="300" height="48" rx="10" fill="#ffffff" stroke="#73a28d" stroke-width="1.8"></rect>
     <text x="1360" y="383" text-anchor="middle" font-size="26" fill="#4a5866">issue-scoped</text>
 
-    
+
     <g fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow2)">
       <path d="M430 208 L608 208"></path>
       <path d="M610 374 L432 374"></path>
@@ -62,13 +62,13 @@
     <text x="519" y="190" text-anchor="middle" font-size="25" fill="#4a5866">context</text>
     <text x="521" y="404" text-anchor="middle" font-size="25" fill="#4a5866">summary</text>
 
-    
+
     <rect x="50" y="474" width="1500" height="68" rx="10" fill="#eef2f7" stroke="#b3c0cd" stroke-width="1.6"></rect>
     <g transform="translate(454,489) scale(2.125)"><path fill="#3d4c5a" d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"></path></g>
     <text x="500" y="516" font-size="28" font-weight="700" fill="#3d4c5a">GitHub</text>
     <text x="1080" y="516" text-anchor="middle" font-size="26" fill="#4a5866">Issues · PRs · reviews</text>
 
-    
+
     <path d="M110 426 L110 472" fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow2)"></path>
     <path d="M370 474 L370 430" fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow2)"></path>
     <rect x="140" y="440" width="200" height="86" rx="12" fill="#dde5ee" stroke="#b3c0cd" stroke-width="1.4"></rect>
@@ -79,7 +79,7 @@
     <circle cx="224" cy="456" r="2.4" fill="#6d8199"></circle>
     <text x="240" y="512" text-anchor="middle" font-size="23" fill="#3d4c5a">direct access</text>
 
-    
+
     <path d="M700 426 L700 472" fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow2)"></path>
     <text x="685" y="452" text-anchor="end" font-size="23" fill="#4a5866">write</text>
     <path d="M900 474 L900 430" fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow2)"></path>
@@ -92,7 +92,7 @@
     </g>
     <text x="800" y="512" text-anchor="middle" font-size="23" fill="#3d4c5a">GitHub App</text>
 
-    
+
     <path d="M1250 426 L1250 472" fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow2)"></path>
     <text x="1235" y="452" text-anchor="end" font-size="23" fill="#4a5866">write</text>
     <path d="M1470 474 L1470 430" fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow2)"></path>
