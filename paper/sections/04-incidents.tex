@@ -1,39 +1,35 @@
 \section{Incidents and Recovery}\label{sec:incidents}
 
 A successful Lean build establishes that the declarations in the checked
-dependency graph are well typed. It does not determine whether a theorem
-states the intended mathematics, whether a refactor preserved every public
-declaration, or whether the runtime can complete the next build. The four
-cases below concern these distinct boundaries. % CLAIM: CLM-008
-
-The evidence combines repository records with six agent sessions selected
-for their reconstruction value. The sample is neither random nor
-exhaustive, so the cases document observed failures and recoveries without
-estimating failure rates or causal effects. % CLAIM: CLM-004, CLM-008
-
-All PR numbers in this paper refer to the leray-hopf
-repository~\cite{lerayhopf2026repo}.
+dependency graph are well typed. The four cases below concern boundaries it
+does not reach: whether a theorem states the intended mathematics, whether
+a refactor preserved every public declaration, and whether the runtime can
+complete the next build. The evidence combines repository records with six
+agent sessions selected for their reconstruction value rather than at
+random or exhaustively, so the cases document observed failures and
+recoveries rather than failure rates. All PR
+numbers below refer to the leray-hopf repository~\cite{lerayhopf2026repo}.
+% CLAIM: CLM-004, CLM-008
 
 \subsection{Statement correctness}\label{sec:inc001}
 
 \emph{Case A. A false generalization detected before release.}
 A public continuity lemma accepted arbitrary exponents \(p,q\geq 1\),
 although the mathematical argument used \(p=q=2\) and
-Cauchy--Schwarz. The declaration carried an explicit \texttt{sorry}, and
-a later proof attempt checked only that no capstone theorem depended on
-it. The false general statement remained public for about a month and was
-also repeated in project documentation. The capstone theorems were
-unaffected. % CLAIM: CLM-008, INC-001
+Cauchy--Schwarz. The declaration carried an explicit \texttt{sorry}, and a
+later proof attempt checked only that no capstone theorem depended on it.
+The false general statement remained public for about a month and was
+repeated in project documentation. % CLAIM: CLM-008, INC-001
 
 \emph{Detection and response.}
 During release preparation, a statement reviewer tested the boundary case
 \(p=q=1\). A weighted Hilbert triple and spike sequence satisfied the
 stated integrability assumptions but admitted no almost everywhere
-equivalent representative that was continuous in the intermediate Hilbert space. The
-problem was therefore the proposition, not a difficult proof. The repair
-restricted the declaration to \(p=q=2\) and moved it outside the public
-imports in PR~\#162. PR~\#170 added a statement card and regression checks
-for both the unsupported signature and a placeholder without a card.
+equivalent representative that was continuous into the middle space of that
+triple. The problem was therefore the proposition, not a difficult proof.
+The repair restricted the declaration to \(p=q=2\) and moved it outside the
+public imports in PR~\#162. PR~\#170 added a statement card and regression
+checks for both the unsupported signature and a placeholder lacking a card.
 % CLAIM: CLM-008, INC-001
 
 \emph{Lesson.}
@@ -54,25 +50,24 @@ missing closure condition. % CLAIM: CLM-008, INC-002
 The reviewer tested inputs outside the intended subspace. A numerical
 diagnostic produced a discrepancy of approximately \(80.7\) without the
 projection hypotheses and approximately \(10^{-13}\) after imposing them.
-These values corroborated the structural diagnosis. They were not a
+These values corroborated the structural diagnosis; they were not a
 certified counterexample. PR~\#27 added the two projection invariance
 hypotheses, completed the Lean proof, and removed the placeholder before
 merge. % CLAIM: CLM-008, INC-002
 
 \emph{Lesson.}
 For identities derived from truncation or projection, review should test
-inputs outside the invariant subspace. Case B shows a defect caught by
-that review, whereas the analogous review occurred much later in Case A.
-The pair is informative but is not a controlled comparison.
-% CLAIM: CLM-005, CLM-008, INC-001, INC-002
+inputs outside the invariant subspace. Case B shows a defect caught by that
+review before merge, whereas the analogous review in Case A came only at
+release preparation. % CLAIM: CLM-005, CLM-008, INC-001, INC-002
 
 \subsection{Public declarations during refactoring}
 
 PR~\#120 replaced duplicate proofs in two files with instances of a shared
-module. The refactored code built successfully, but one unreferenced
-public theorem had disappeared. No downstream dependency failed, so the
-Lean build and an earlier review of module structure did not reveal the
-omission. % CLAIM: CLM-008, INC-004
+module. The refactored code built successfully, but one public theorem with
+no downstream users had disappeared, so neither the Lean build nor an
+earlier review of module structure revealed the omission.
+% CLAIM: CLM-008, INC-004
 
 \emph{Detection and response.}
 A separate reviewer compared the public declaration inventory before and
@@ -99,31 +94,31 @@ exit code 137 and no compiler diagnostic. % CLAIM: CLM-008, INC-005
 
 \emph{Detection and response.}
 Monitoring had covered the visible Lean process rather than memory
-available to the entire container. Roughly seventy minutes after an
-earlier status check had produced that misreading, the author's next
-status request reached the session only after an eight-minute delay and
-was followed at once by an explicit instruction from the author to kill
-stale processes. Only then did a memory check report 606\,MiB available,
-and inspection of each process working directory identified the fourteen
-stale chains. A cumulative control group counter, read during the
-response, was taken at the time as confirmation that the out of memory
-(OOM) killer had terminated the failed builds. A post-incident audit of
-host kernel logs overturned that reading: every counted kill belonged to
-a host-level OOM event two days earlier, no kernel OOM occurred on the
-incident day, and the mechanism that terminated the builds remains
-unidentified. Removing the stale processes raised available memory to
-2.2\,GiB. The worktree returned to the original agent, the duplicate
-stopped, and the build completed under a global lock. PRs~\#174, \#175,
-and \#176 merged later that day. % CLAIM: CLM-008, INC-005
+available to the entire container. Roughly seventy minutes after an earlier
+status check had reported the container as healthy on that basis, the
+author's next status request reached the session only after an eight-minute
+delay, and was followed at once by the author's explicit instruction to
+kill stale processes. Only then did a memory check report 606\,MiB
+available, and inspection of each process working directory identified the
+fourteen stale chains. A cumulative kill counter maintained by the Linux
+control group (cgroup) subsystem, read during the response, was taken at
+the time as confirmation that the out of memory (OOM) killer had terminated
+the failed builds; an audit of host kernel logs later overturned that
+reading, because every counted kill belonged to a host-level OOM event two
+days earlier and no kernel OOM occurred on the incident day. The mechanism
+that terminated the builds remains unidentified. Removing the stale
+processes raised available memory to 2.2\,GiB. The worktree returned to the
+original agent, the duplicate stopped, and the build completed under a
+global lock. PRs~\#174, \#175, and \#176 merged later that day.
+% CLAIM: CLM-008, INC-005
 
 \emph{Lesson.}
 An orchestrator must observe the complete process tree and available
-memory, not only the foreground prover. The standing instructions now
-require cleanup of helper processes, reuse of the build cache,
-serialization of heavy builds, and a memory check before compilation.
-Monitoring available memory also detected a later peak caused by one
-legitimate build, showing why a direct measurement of the resource is more
-general than cleanup tailored to one cause. The corrected diagnosis adds
-an evidence rule: a causal account assembled only from observations
-inside the agent session can misattribute the mechanism, so it must be
-checked against records outside the session. % CLAIM: CLM-008, INC-005
+memory, not only the foreground prover. Once monitoring tracked memory
+available to the whole container, it also detected a later peak caused by
+one legitimate build, so measuring the resource directly is more general
+than cleanup tailored to one cause. The
+corrected diagnosis adds an evidence rule: a causal account assembled only
+from observations inside the agent session can misattribute the mechanism,
+so it must be checked against records outside the session.
+% CLAIM: CLM-008, INC-005
