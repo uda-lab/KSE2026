@@ -101,8 +101,8 @@ exit code 137 and no compiler diagnostic. % CLAIM: CLM-008, INC-005
 Monitoring had covered the visible Lean process rather than memory
 available to the entire container. Roughly seventy minutes after an
 earlier status check had produced that misreading, the author's next
-status request was delivered to the session only after an eight-minute
-delay, and the author followed it with an explicit instruction to kill
+status request reached the session only after an eight-minute delay and
+was followed at once by an explicit instruction from the author to kill
 stale processes. Only then did a memory check report 606\,MiB available,
 and inspection of each process working directory identified the fourteen
 stale chains. A cumulative control group counter, read during the
