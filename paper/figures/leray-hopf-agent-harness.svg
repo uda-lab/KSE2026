@@ -7,9 +7,9 @@
     model-independent orchestrator selects agents, skills, and checks.
     Issue-scoped implementation is assessed by separate semantic and mechanical
     assurance, selected as applicable to the changed artifact. Semantic findings
-    return to both the author and the issue contract; technical findings return
-    to implementation along the dashed red paths. Runtime controls support
-    orchestration and execution.
+    return to the author panel, which holds both the author and the issue
+    contract; technical findings return to implementation along the dashed red
+    paths. Runtime controls support orchestration and execution.
   </desc>
   <defs>
     <marker id="arrow" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse">
@@ -27,7 +27,7 @@
 
   <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
 
-    
+
     <rect x="50" y="170" width="340" height="320" rx="16" fill="#fbf4f4" stroke="#8e3030" stroke-width="2.5"></rect>
     <text x="72" y="207" font-size="27" font-weight="700" letter-spacing="1.4" fill="#8e3030">AUTHOR</text>
     <rect x="70" y="228" width="300" height="88" rx="10" fill="#f5dfdf" stroke="#8e3030" stroke-width="2"></rect>
@@ -40,7 +40,7 @@
     <rect x="105" y="446" width="230" height="32" rx="8" fill="#ffffff" stroke="#65747e" stroke-width="1.6" stroke-dasharray="7 5"></rect>
     <text x="220" y="469" text-anchor="middle" font-size="23" fill="#4a5866">optional scouting</text>
 
-    
+
     <rect x="510" y="170" width="320" height="320" rx="16" fill="#f1f5fb" stroke="#325b9b" stroke-width="2.5"></rect>
     <text x="532" y="207" font-size="27" font-weight="700" letter-spacing="1.4" fill="#325b9b">ORCHESTRATION</text>
     <rect x="525" y="232" width="290" height="145" rx="11" fill="#dce8f8" stroke="#325b9b" stroke-width="2"></rect>
@@ -51,7 +51,7 @@
     <rect x="525" y="396" width="290" height="70" rx="10" fill="#ffffff" stroke="#7893b7" stroke-width="1.8"></rect>
     <text x="670" y="439" text-anchor="middle" font-size="27" fill="#2c3a47">route work + checks</text>
 
-    
+
     <rect x="920" y="170" width="630" height="320" rx="16" fill="#f2f8f5" stroke="#326b55" stroke-width="2.5"></rect>
     <text x="942" y="207" font-size="27" font-weight="700" letter-spacing="1.4" fill="#326b55">ISSUE-SCOPED EXECUTION / REVIEW</text>
 
@@ -71,7 +71,7 @@
     <text x="1476" y="304" text-anchor="middle" font-size="22" fill="#2c3a47">merge</text>
     <text x="1476" y="331" text-anchor="middle" font-size="22" fill="#2c3a47">state</text>
 
-    
+
     <g fill="none" stroke="#5e6d76" stroke-width="2.6" marker-end="url(#cond)">
       <path d="M1120 305 L1148 305 L1148 266 L1168 266"></path>
       <path d="M1120 305 L1148 305 L1148 358 L1168 358"></path>
@@ -82,7 +82,7 @@
       <path d="M1405 312 L1423 312" marker-end="url(#arrow)"></path>
     </g>
 
-    
+
     <g fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow)">
       <path d="M390 340 L508 340"></path>
       <path d="M830 340 L918 340"></path>
@@ -90,7 +90,7 @@
     <text x="450" y="322" text-anchor="middle" font-size="23" fill="#4a5866">contract</text>
     <text x="874" y="322" text-anchor="middle" font-size="25" fill="#4a5866">task</text>
 
-    
+
     <g fill="none" stroke="#9b3535" stroke-width="3" stroke-dasharray="11 8" marker-end="url(#feedback)">
       <path d="M1370 168 L1370 112 L220 112 L220 166"></path>
       <path d="M1278 398 L1278 444 L1033 444 L1033 364"></path>
@@ -99,7 +99,7 @@
     <text x="1160" y="432" text-anchor="middle" font-size="25" fill="#8e3030">rework</text>
     <text x="1380" y="432" text-anchor="middle" font-size="25" fill="#4a5866">as applicable</text>
 
-    
+
     <rect x="510" y="520" width="1040" height="90" rx="14" fill="#edf0f2" stroke="#5e6d76" stroke-width="2"></rect>
     <text x="535" y="554" font-size="27" font-weight="700" letter-spacing="1.4" fill="#4b5c66">RUNTIME GOVERNANCE</text>
     <text x="690" y="589" text-anchor="middle" font-size="27" fill="#2c3a47">worktree isolation</text>
@@ -107,6 +107,6 @@
     <text x="1370" y="589" text-anchor="middle" font-size="27" fill="#2c3a47">process hygiene</text>
     <path d="M860 566 L860 600 M1200 566 L1200 600" stroke="#aab3b9" stroke-width="1.6"></path>
 
-    
+
   </g>
 </svg>
