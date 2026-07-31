@@ -2,6 +2,17 @@
 % Keep entries alphabetized by key. Verify every entry against the actual
 % publication before submission (provenance/source-inventory.md).
 
+% IEEEtran.bst control entry: IEEE style prints the first author followed by
+% "et al." once a reference lists more than six names. Setting the control
+% fields keeps the full author data in this file while the bibliography
+% renders the truncated form. Cited by \bstctlcite in main.tex, which must be
+% the first citation in the document for the settings to take effect.
+@IEEEtranBSTCTL{bstctl:etal,
+  CTLuse_forced_etal       = "yes",
+  CTLmax_names_forced_etal = "6",
+  CTLnames_show_etal       = "1"
+}
+
 @misc{lerayhopf2026repo,
   author       = {{uda-lab}},
   title        = {leray-hopf: {A} {Lean}~4 + mathlib formalization of {Leray}--{Hopf}
@@ -62,19 +73,14 @@
   title        = {Security in the Age of {AI} Teammates: An Empirical Study of Agentic Pull
                   Requests on {GitHub}},
   howpublished = {arXiv:2601.00477 [cs.SE]},
-  year         = {2026},
-  note         = {Submitted 2026-01-01}
+  year         = {2026}
 }
 
-@inproceedings{armstrong2026degiorginashmoser,
-  author    = {Armstrong, Scott and Kempe, Julia},
-  title     = {Formalization of {De Giorgi--Nash--Moser} Theory in {Lean}},
-  booktitle = {arXiv preprint},
-  year      = {2026},
-  eprint    = {2604.05984},
-  archivePrefix = {arXiv},
-  primaryClass  = {math.AP},
-  note      = {Submitted 2026-04-07}
+@misc{armstrong2026degiorginashmoser,
+  author       = {Armstrong, Scott and Kempe, Julia},
+  title        = {Formalization of {De Giorgi--Nash--Moser} Theory in {Lean}},
+  howpublished = {arXiv:2604.05984 [math.AP]},
+  year         = {2026}
 }
 
 @inproceedings{boldo2010wave,
@@ -145,16 +151,14 @@
   author       = {{leanprover}},
   title        = {{Lean Eval}: Comparator-Based {Lean} Formal Mathematics Eval},
   howpublished = {\url{https://github.com/leanprover/lean-eval}},
-  year         = {2026},
-  note         = {Repository README consulted 2026-07-25}
+  year         = {2026}
 }
 
 @misc{leaneval2026site,
   author       = {{lean-lang.org}},
   title        = {Problems | {Lean} {AI} Formalization Leaderboard},
   howpublished = {\url{https://lean-lang.org/eval/problems/}},
-  year         = {2026},
-  note         = {Benchmark catalog website consulted 2026-07-25}
+  year         = {2026}
 }
 
 @misc{metr2025longtasks,
@@ -167,16 +171,14 @@
                   Ziegler, Daniel M. and Barnes, Elizabeth and Chan, Lawrence},
   title        = {Measuring {AI} Ability to Complete Long Software Tasks},
   howpublished = {arXiv:2503.14499 [cs.AI]},
-  year         = {2025},
-  note         = {METR; submitted 2025-03-18}
+  year         = {2025}
 }
 
 @misc{miller2026vlasov,
   author       = {Miller, Joseph K.},
   title        = {A Formalization of the Mean-Field Derivation of the {Vlasov} Equation},
-  howpublished = {arXiv preprint, 2607.08986 [cs.AI]},
-  year         = {2026},
-  note         = {Submitted 2026-07-09, revised 2026-07-20}
+  howpublished = {arXiv:2607.08986 [cs.AI]},
+  year         = {2026}
 }
 
 @misc{tauceti2026,
@@ -184,10 +186,7 @@
   title        = {{Tau Ceti}: An {AI}s-Welcome {Lean} Library Downstream of {Mathlib}},
   howpublished = {\url{https://github.com/TauCetiProject/TauCeti}},
   year         = {2026},
-  note         = {Incubated by the Lean FRO and the Mathlib Initiative. Pinned commit
-                  \texttt{3a933bde5e379d3b1d4610166090f207a5a90bb2} (2026-07-22); no
-                  accompanying paper or \texttt{CITATION.cff} found as of this citation.
-                  Companion repositories: TauCetiRoadmap, TauCetiReview, TauCetiData.}
+  note         = {Pinned commit \texttt{3a933bde} (2026-07-22)}
 }
 
 @inproceedings{vandoorn2024gns,
@@ -201,19 +200,6 @@
   doi       = {10.4230/LIPIcs.ITP.2024.37}
 }
 
-@misc{xin2025deepseekproverv2,
-  author       = {Ren, Z. Z. and Shao, Zhihong and Song, Junxiao and Xin, Huajian and
-                  Wang, Haocheng and Zhao, Wanjia and Zhang, Liyue and Fu, Zhe and
-                  Zhu, Qihao and Yang, Dejian and Wu, Z. F. and Gou, Zhibin and Ma, Shirong
-                  and Tang, Hongxuan and Liu, Yuxuan and Gao, Wenjun and Guo, Daya and
-                  Ruan, Chong},
-  title        = {{DeepSeek-Prover-V2}: Advancing Formal Mathematical Reasoning via
-                  Reinforcement Learning for Subgoal Decomposition},
-  howpublished = {arXiv:2504.21801 [cs.CL]},
-  year         = {2025},
-  note         = {Submitted 2025-04-30}
-}
-
 @inproceedings{yang2023leandojo,
   author    = {Yang, Kaiyu and Swope, Aidan M. and Gu, Alex and Chalamala, Rahul and
                Song, Peiyang and Yu, Shixing and Godil, Saad and Prenger, Ryan and
@@ -223,14 +209,4 @@
                and Benchmarks Track},
   year      = {2023},
   note      = {arXiv:2306.15626 [cs.LG]}
-}
-
-@misc{zhou2026leanatlas,
-  author       = {Yanahama, Banri and Sannai, Akiyoshi},
-  title        = {Lean Atlas: An Integrated Proof Environment for Scalable Human-{AI}
-                  Collaborative Formalization},
-  howpublished = {arXiv:2604.16347 [cs.LO]},
-  year         = {2026},
-  note         = {Submitted 2026-03-16; author names per arXiv abstract page, not
-                  independently cross-checked -- verify before freezing citation.}
 }

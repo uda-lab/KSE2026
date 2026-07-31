@@ -50,6 +50,10 @@
 
 \begin{document}
 
+% Must precede every other citation: IEEEtran.bst reads the control entry
+% only from the first \citation record in the .aux file. Prints nothing.
+\bstctlcite{bstctl:etal}
+
 \title{Formalizing Leray--Hopf in Lean~4 with AI Agents:\\
 Harness Design and Reliability Lessons}
 
