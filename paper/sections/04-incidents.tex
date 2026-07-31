@@ -99,16 +99,22 @@ exit code 137 and no compiler diagnostic. % CLAIM: CLM-008, INC-005
 
 \emph{Detection and response.}
 Monitoring had covered the visible Lean process rather than memory
-available to the entire container. Roughly seventy minutes after an earlier
-status check had produced that misreading, the author requested another when
-only 606\,MiB remained available. Inspection of each process working
-directory identified the fourteen stale chains, and the Linux control
-group counter confirmed intervention by the out of memory (OOM) killer.
-Because that counter was cumulative, it identifies the mechanism but not
-the number of kills in this incident. Removing the stale processes raised
-available memory to 2.2\,GiB. The worktree returned to the original agent,
-the duplicate stopped, and the build completed under a global lock.
-PRs~\#174, \#175, and \#176 merged later that day. % CLAIM: CLM-008, INC-005
+available to the entire container. Roughly seventy minutes after an
+earlier status check had produced that misreading, the author's next
+status request reached the session only after an eight-minute delay and
+was followed at once by an explicit instruction from the author to kill
+stale processes. Only then did a memory check report 606\,MiB available,
+and inspection of each process working directory identified the fourteen
+stale chains. A cumulative control group counter, read during the
+response, was taken at the time as confirmation that the out of memory
+(OOM) killer had terminated the failed builds. A post-incident audit of
+host kernel logs overturned that reading: every counted kill belonged to
+a host-level OOM event two days earlier, no kernel OOM occurred on the
+incident day, and the mechanism that terminated the builds remains
+unidentified. Removing the stale processes raised available memory to
+2.2\,GiB. The worktree returned to the original agent, the duplicate
+stopped, and the build completed under a global lock. PRs~\#174, \#175,
+and \#176 merged later that day. % CLAIM: CLM-008, INC-005
 
 \emph{Lesson.}
 An orchestrator must observe the complete process tree and available
@@ -117,4 +123,7 @@ require cleanup of helper processes, reuse of the build cache,
 serialization of heavy builds, and a memory check before compilation.
 Monitoring available memory also detected a later peak caused by one
 legitimate build, showing why a direct measurement of the resource is more
-general than cleanup tailored to one cause. % CLAIM: CLM-008, INC-005
+general than cleanup tailored to one cause. The corrected diagnosis adds
+an evidence rule: a causal account assembled only from observations
+inside the agent session can misattribute the mechanism, so it must be
+checked against records outside the session. % CLAIM: CLM-008, INC-005

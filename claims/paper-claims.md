@@ -112,8 +112,10 @@ contribution として掲げるのは 3 点以内（PLAN.md Phase 3）．
 - Notes: 04 節の各段落は本 claim を経由して該当 card へ解決する（本文中の
   `% CLAIM: CLM-008, INC-00N` タグが対応 card を指す）．card 側で reconstructed /
   medium とされた事項は本文でも同じ強度で書く（例: INC-001 の導入セッション未特定，
-  INC-005 の累積カウンタ帰属限界）．2026-07-23 夜間 freeze 分 — 朝の著者通読での
-  追認対象（CLM-006/007 と同扱い）．
+  INC-005 の当日 kill 機構未特定）．2026-07-23 夜間 freeze 分 — 朝の著者通読での
+  追認対象（CLM-006/007 と同扱い）．2026-07-31 追記（issue #100）: INC-005 card の
+  OOM 帰属・検出経緯は host 側一次記録との照合で訂正済み（累積カウンタは 07-16 の
+  別事象に帰属，当日の kernel OOM 0 件）．本文は訂正後の card に従う．
 
 ## CLM-009: 本 project の最終 harness は，著者の権限下で repository-local `github-driven-workflow` が GitHub Issue・専用 branch/Git worktree・GitHub PR を接続した．Issue scope，review decisions，merge authority は agent session 内だけでなく repository と GitHub の artifact に記録された．Fable は 7 月 2〜3 日に Vertex AI 経由で，これらの artifact から既存 workflow の orchestration を再開した．semantic statement review，Lean/kernel verification，public declaration preservation，VPS container の resource/liveness control，evidence capture は別の責務として扱われた
 - Status: frozen

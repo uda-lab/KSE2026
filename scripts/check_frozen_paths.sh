@@ -31,6 +31,35 @@ SELF_PATH="scripts/check_frozen_paths.sh"
 EDITABLE_PREFIX="paper/"
 base="${1:-origin/main}"
 
+# Owner-authorized amendments. Each entry is "path:blob-sha" — an exact
+# tracked path unfrozen by an explicit owner decision recorded in a GitHub
+# issue, pinned to the git blob hash of the authorized result. The exemption
+# admits only that exact content: the one transition the owner approved passes
+# the gate, and any later edit (or deletion) of the same path hashes
+# differently and is a violation again. The amendment is therefore one-shot,
+# not an ongoing bypass, and the pinned hash doubles as an audit record of
+# what was authorized.
+#
+# The gate script itself cannot be hash-pinned (the pin would have to include
+# itself), so it carries a plain self-exemption below. That is tamper-evident,
+# not tamper-proof — CI executes the pull request's copy of this script, so
+# every gate change is enforced only through diff review; pinning would add no
+# protection there either.
+#
+# issue #100 (2026-07-31): INC-005 evidence reconciliation. Host-side records
+# overturned the incident card's OOM attribution and detection narrative; the
+# owner authorized correcting the affected provenance records.
+FREEZE_EXEMPT_PINNED=(
+  "evidence/incidents/INC-005.md:468838e6516409137c0acb880f962d41a3e87425"
+  "evidence/session-index/de129390-559a-4ecd-950e-3667cf1c1c3c.md:6f0e3ab9b8e79f5f3452a212fa00fb1198bd3333"
+  "claims/paper-claims.md:74b0041a54c029d375cceadf92c9795abb760e32"
+  "analysis/incident-ranking.md:f669c68ea3a2ffa3381fdf8b997752909261f69c"
+  "analysis/incident-candidates.md:1ad4ab9df88fa2173f127f54354f7c333360ae80"
+)
+FREEZE_EXEMPT_UNPINNED=(
+  "scripts/check_frozen_paths.sh"
+)
+
 die() { printf 'freeze gate: %s\n' "$1" >&2; exit 2; }
 
 git rev-parse --is-inside-work-tree >/dev/null 2>&1 || die "not inside a git work tree"
@@ -58,8 +87,31 @@ pending=$(git status --porcelain --untracked-files=no -- \
           | sed 's/^...//; s/^.* -> //') \
   || die "git status failed"
 
+exempt_filter() {
+  # Drop a path only when it is exempt: unpinned entries match by path alone;
+  # pinned entries additionally require the working-tree content to hash to
+  # the authorized blob (a missing file fails the hash and stays a violation).
+  local line keep e p h
+  while IFS= read -r line; do
+    keep=1
+    for e in "${FREEZE_EXEMPT_UNPINNED[@]}"; do
+      [ "$line" = "$e" ] && { keep=0; break; }
+    done
+    if [ "$keep" = 1 ]; then
+      for e in "${FREEZE_EXEMPT_PINNED[@]}"; do
+        p="${e%:*}"; h="${e##*:}"
+        if [ "$line" = "$p" ] && [ -f "$line" ] \
+           && [ "$(git hash-object -- "$line" 2>/dev/null)" = "$h" ]; then
+          keep=0; break
+        fi
+      done
+    fi
+    [ "$keep" = 1 ] && printf '%s\n' "$line"
+  done
+}
+
 violations=$(printf '%s\n%s\n' "$committed" "$pending" \
-             | grep -v '^$' | grep -v "^$EDITABLE_PREFIX" | sort -u || true)
+             | grep -v '^$' | grep -v "^$EDITABLE_PREFIX" | exempt_filter | sort -u || true)
 
 if [ -n "$violations" ]; then
   echo "freeze gate FAILED: only ${EDITABLE_PREFIX} may change (issue #90)." >&2
@@ -71,4 +123,4 @@ if [ -n "$violations" ]; then
 fi
 
 n=$(printf '%s\n%s\n' "$committed" "$pending" | grep -c '^\S' || true)
-echo "freeze gate OK (${n} changed path(s), all under ${EDITABLE_PREFIX})"
+echo "freeze gate OK (${n} changed path(s), all under ${EDITABLE_PREFIX} or in the owner-authorized exemption list)"
