@@ -1,131 +1,112 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="650"
-     viewBox="0 0 1600 650" role="img"
-     aria-labelledby="title desc">
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="635" viewBox="0 0 1600 635" role="img" aria-labelledby="title desc">
   <title id="title">Synthesized agent-harness architecture</title>
   <desc id="desc">
-    A simplified three-part architecture. The author defines and adjudicates
-    the issue contract. A model-independent orchestrator selects agents,
-    skills, and checks. Issue-scoped implementation is assessed by separate
-    applicable semantic and mechanical assurance selected for the changed
-    artifact. Semantic findings return to both the author and issue contract;
-    technical findings return to implementation. Runtime controls support
+    A three-part architecture, expanding the agent harness of the preceding
+    figure. The author defines and adjudicates the issue contract. A
+    model-independent orchestrator selects agents, skills, and checks.
+    Issue-scoped implementation is assessed by separate semantic and mechanical
+    assurance, selected as applicable to the changed artifact. Semantic findings
+    return to both the author and the issue contract; technical findings return
+    to implementation along the dashed red paths. Runtime controls support
     orchestration and execution.
   </desc>
   <defs>
-    <marker id="arrow" markerWidth="11" markerHeight="11" refX="10" refY="5.5"
-            orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0,0 L11,5.5 L0,11 Z" fill="#263746"/>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0.5 L12,6 L0,11.5 Z" fill="#263746"></path>
     </marker>
-    <marker id="feedback" markerWidth="11" markerHeight="11" refX="10" refY="5.5"
-            orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0,0 L11,5.5 L0,11 Z" fill="#9b3535"/>
+    <marker id="feedback" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0.5 L12,6 L0,11.5 Z" fill="#9b3535"></path>
     </marker>
-    <style>
-      .title { font: 700 32px Arial, Helvetica, sans-serif; fill: #17232d; }
-      .layer { font: 700 30px Arial, Helvetica, sans-serif; letter-spacing: 0.8px; }
-      .head { font: 700 34px Arial, Helvetica, sans-serif; fill: #17232d; }
-      .body { font: 28px Arial, Helvetica, sans-serif; fill: #334653; }
-      .small { font: 26px Arial, Helvetica, sans-serif; fill: #4d5d68; }
-      .flow { fill: none; stroke: #263746; stroke-width: 3; marker-end: url(#arrow); }
-      .conditional { stroke-dasharray: 8 6; }
-      .join { fill: none; stroke: #263746; stroke-width: 3; }
-      .return { fill: none; stroke: #9b3535; stroke-width: 2.7; stroke-dasharray: 12 8; marker-end: url(#feedback); }
-      .return-trunk { fill: none; stroke: #9b3535; stroke-width: 2.7; stroke-dasharray: 12 8; }
-    </style>
+    <marker id="cond" markerWidth="11" markerHeight="11" refX="10" refY="5.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0.5 L11,5.5 L0,10.5 Z" fill="#5e6d76"></path>
+    </marker>
   </defs>
 
-  <rect width="1600" height="650" fill="#ffffff"/>
+  <rect width="1600" height="635" fill="#ffffff"></rect>
 
-  <!-- Layer 1: Author and contract -->
-  <rect x="60" y="150" width="370" height="300" rx="16"
-        fill="#fbf4f4" stroke="#8e3030" stroke-width="2.5"/>
-  <text x="85" y="182" class="layer" fill="#8e3030">AUTHOR</text>
-  <rect x="95" y="210" width="300" height="82" rx="10"
-        fill="#f5dfdf" stroke="#8e3030" stroke-width="2"/>
-  <text x="245" y="243" text-anchor="middle" class="head">Author</text>
-  <text x="245" y="271" text-anchor="middle" class="body">scope · decide</text>
-  <rect x="95" y="320" width="300" height="78" rx="10"
-        fill="#e6eff7" stroke="#355e84" stroke-width="2"/>
-  <text x="245" y="351" text-anchor="middle" class="head">Issue contract</text>
-  <text x="245" y="380" text-anchor="middle" class="body">target · boundaries</text>
-  <rect x="125" y="414" width="240" height="28" rx="7"
-        fill="#ffffff" stroke="#65747e" stroke-width="1.6"
-        stroke-dasharray="7 5"/>
-  <text x="245" y="434" text-anchor="middle" class="small">optional scouting</text>
-  <path d="M245 292 L245 318" class="flow"/>
+  <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
 
-  <!-- Layer 2: orchestration -->
-  <rect x="515" y="150" width="370" height="300" rx="16"
-        fill="#f1f5fb" stroke="#325b9b" stroke-width="2.5"/>
-  <text x="540" y="182" class="layer" fill="#325b9b">ORCHESTRATION</text>
-  <rect x="550" y="220" width="300" height="105" rx="11"
-        fill="#dce8f8" stroke="#325b9b" stroke-width="2"/>
-  <text x="700" y="257" text-anchor="middle" class="head">Orchestrator</text>
-  <text x="700" y="287" text-anchor="middle" class="body">plan · delegate</text>
-  <text x="700" y="313" text-anchor="middle" class="small">policy + skills</text>
-  <rect x="550" y="350" width="300" height="64" rx="10"
-        fill="#ffffff" stroke="#7893b7" stroke-width="1.8"/>
-  <text x="700" y="389" text-anchor="middle" class="body">route work + checks</text>
+    
+    <rect x="50" y="170" width="340" height="320" rx="16" fill="#fbf4f4" stroke="#8e3030" stroke-width="2.5"></rect>
+    <text x="72" y="207" font-size="27" font-weight="700" letter-spacing="1.4" fill="#8e3030">AUTHOR</text>
+    <rect x="70" y="228" width="300" height="88" rx="10" fill="#f5dfdf" stroke="#8e3030" stroke-width="2"></rect>
+    <text x="220" y="264" text-anchor="middle" font-size="32" font-weight="700" fill="#1b2733">Author</text>
+    <text x="220" y="298" text-anchor="middle" font-size="27" fill="#2c3a47">scope · decide</text>
+    <rect x="70" y="344" width="300" height="88" rx="10" fill="#e6eff7" stroke="#355e84" stroke-width="2"></rect>
+    <text x="220" y="380" text-anchor="middle" font-size="32" font-weight="700" fill="#1b2733">Issue contract</text>
+    <text x="220" y="414" text-anchor="middle" font-size="27" fill="#2c3a47">target · boundaries</text>
+    <path d="M220 316 L220 342" fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow)"></path>
+    <rect x="105" y="446" width="230" height="32" rx="8" fill="#ffffff" stroke="#65747e" stroke-width="1.6" stroke-dasharray="7 5"></rect>
+    <text x="220" y="469" text-anchor="middle" font-size="23" fill="#4a5866">optional scouting</text>
 
-  <!-- Layer 3: implementation and assurance -->
-  <rect x="970" y="150" width="570" height="300" rx="16"
-        fill="#f2f8f5" stroke="#326b55" stroke-width="2.5"/>
-  <text x="995" y="182" class="layer" fill="#326b55">ISSUE-SCOPED EXECUTION</text>
-  <rect x="1005" y="230" width="180" height="105" rx="11"
-        fill="#dff0e7" stroke="#326b55" stroke-width="2"/>
-  <text x="1095" y="267" text-anchor="middle" class="head">Implement</text>
-  <text x="1095" y="303" text-anchor="middle" class="body">worktree</text>
+    
+    <rect x="510" y="170" width="320" height="320" rx="16" fill="#f1f5fb" stroke="#325b9b" stroke-width="2.5"></rect>
+    <text x="532" y="207" font-size="27" font-weight="700" letter-spacing="1.4" fill="#325b9b">ORCHESTRATION</text>
+    <rect x="525" y="232" width="290" height="145" rx="11" fill="#dce8f8" stroke="#325b9b" stroke-width="2"></rect>
+    <text x="670" y="270" text-anchor="middle" font-size="34" font-weight="700" fill="#1b2733">Orchestrator</text>
+    <text x="670" y="302" text-anchor="middle" font-size="28" fill="#2c3a47">plan · delegate</text>
+    <text x="670" y="331" text-anchor="middle" font-size="25" fill="#4a5866">policy + skills</text>
+    <text x="670" y="358" text-anchor="middle" font-size="25" fill="#4a5866">loop engineering</text>
+    <rect x="525" y="396" width="290" height="70" rx="10" fill="#ffffff" stroke="#7893b7" stroke-width="1.8"></rect>
+    <text x="670" y="439" text-anchor="middle" font-size="27" fill="#2c3a47">route work + checks</text>
 
-  <rect x="1210" y="205" width="210" height="68" rx="10"
-        fill="#eee6f2" stroke="#6a4a7b" stroke-width="2"/>
-  <text x="1315" y="234" text-anchor="middle" class="head">Semantic</text>
-  <text x="1315" y="260" text-anchor="middle" class="small">claim · example</text>
+    
+    <rect x="920" y="170" width="630" height="320" rx="16" fill="#f2f8f5" stroke="#326b55" stroke-width="2.5"></rect>
+    <text x="942" y="207" font-size="27" font-weight="700" letter-spacing="1.4" fill="#326b55">ISSUE-SCOPED EXECUTION / REVIEW</text>
 
-  <rect x="1210" y="300" width="210" height="68" rx="10"
-        fill="#f7eadb" stroke="#a55e1f" stroke-width="2"/>
-  <text x="1315" y="329" text-anchor="middle" class="head">Lean checks</text>
-  <text x="1315" y="355" text-anchor="middle" class="small">build · API</text>
+    <rect x="945" y="250" width="175" height="110" rx="11" fill="#dff0e7" stroke="#326b55" stroke-width="2"></rect>
+    <text x="1033" y="291" text-anchor="middle" font-size="30" font-weight="700" fill="#1b2733">Implement</text>
+    <text x="1033" y="326" text-anchor="middle" font-size="26" fill="#2c3a47">worktree</text>
 
-  <rect x="1440" y="250" width="90" height="74" rx="10"
-        fill="#e3edf0" stroke="#405563" stroke-width="2"/>
-  <text x="1485" y="280" text-anchor="middle" class="small">merge</text>
-  <text x="1485" y="307" text-anchor="middle" class="small">state</text>
+    <rect x="1170" y="228" width="215" height="76" rx="10" fill="#eee6f2" stroke="#6a4a7b" stroke-width="2"></rect>
+    <text x="1278" y="262" text-anchor="middle" font-size="28" font-weight="700" fill="#1b2733">Semantic</text>
+    <text x="1278" y="291" text-anchor="middle" font-size="24" fill="#4a5866">claim · example</text>
 
-  <!-- Clear forward flow -->
-  <path d="M430 300 L512 300" class="flow"/>
-  <text x="471" y="282" text-anchor="middle" class="small">contract</text>
-  <path d="M885 300 L967 300" class="flow"/>
-  <text x="926" y="282" text-anchor="middle" class="small">task</text>
-  <text x="1375" y="430" text-anchor="middle" class="small">as applicable</text>
-  <path d="M1185 282 L1198 282 L1198 239 L1207 239" class="flow conditional"/>
-  <path d="M1185 282 L1198 282 L1198 334 L1207 334" class="flow conditional"/>
-  <path d="M1420 239 L1432 239 L1432 287" class="join"/>
-  <path d="M1420 334 L1432 334 L1432 287" class="join"/>
-  <path d="M1432 287 L1438 287" class="flow"/>
+    <rect x="1170" y="320" width="215" height="76" rx="10" fill="#f7eadb" stroke="#a55e1f" stroke-width="2"></rect>
+    <text x="1278" y="354" text-anchor="middle" font-size="28" font-weight="700" fill="#1b2733">Lean checks</text>
+    <text x="1278" y="383" text-anchor="middle" font-size="24" fill="#4a5866">build · API</text>
 
-  <!-- Feedback has dedicated lanes, away from labels -->
-  <path d="M1315 203 L1315 112 L35 112 L35 359" class="return-trunk"/>
-  <path d="M35 251 L93 251" class="return"/>
-  <path d="M35 359 L93 359" class="return"/>
-  <text x="700" y="101" text-anchor="middle" class="small" fill="#8e3030">semantic feedback</text>
-  <path d="M1315 370 L1315 404 L1095 404 L1095 337" class="return"/>
-  <text x="1218" y="430" text-anchor="middle" class="small" fill="#8e3030">rework</text>
+    <rect x="1425" y="272" width="103" height="80" rx="10" fill="#e3edf0" stroke="#405563" stroke-width="2"></rect>
+    <text x="1476" y="304" text-anchor="middle" font-size="22" fill="#2c3a47">merge</text>
+    <text x="1476" y="331" text-anchor="middle" font-size="22" fill="#2c3a47">state</text>
 
-  <!-- Runtime governance as a foundation, not an evidence lane -->
-  <rect x="515" y="500" width="1025" height="92" rx="14"
-        fill="#edf0f2" stroke="#5e6d76" stroke-width="2"/>
-  <text x="540" y="531" class="layer" fill="#4b5c66">RUNTIME GOVERNANCE</text>
-  <text x="700" y="561" text-anchor="middle" class="body">
-    worktree isolation
-  </text>
-  <text x="1027" y="561" text-anchor="middle" class="body">
-    cache + build lock
-  </text>
-  <text x="1360" y="561" text-anchor="middle" class="body">
-    process hygiene
-  </text>
-  <line x1="850" y1="540" x2="850" y2="574" stroke="#aab3b9"/>
-  <line x1="1195" y1="540" x2="1195" y2="574" stroke="#aab3b9"/>
+    
+    <g fill="none" stroke="#5e6d76" stroke-width="2.6" marker-end="url(#cond)">
+      <path d="M1120 305 L1148 305 L1148 266 L1168 266"></path>
+      <path d="M1120 305 L1148 305 L1148 358 L1168 358"></path>
+    </g>
+    <g fill="none" stroke="#405563" stroke-width="2.4">
+      <path d="M1385 266 L1405 266 L1405 312"></path>
+      <path d="M1385 358 L1405 358 L1405 312"></path>
+      <path d="M1405 312 L1423 312" marker-end="url(#arrow)"></path>
+    </g>
 
+    
+    <g fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow)">
+      <path d="M390 340 L508 340"></path>
+      <path d="M830 340 L918 340"></path>
+    </g>
+    <text x="450" y="322" text-anchor="middle" font-size="23" fill="#4a5866">contract</text>
+    <text x="874" y="322" text-anchor="middle" font-size="25" fill="#4a5866">task</text>
+
+    
+    <g fill="none" stroke="#9b3535" stroke-width="3" stroke-dasharray="11 8" marker-end="url(#feedback)">
+      <path d="M1370 168 L1370 112 L220 112 L220 166"></path>
+      <path d="M1278 398 L1278 444 L1033 444 L1033 364"></path>
+    </g>
+    <text x="795" y="96" text-anchor="middle" font-size="26" fill="#8e3030">semantic feedback</text>
+    <text x="1160" y="432" text-anchor="middle" font-size="25" fill="#8e3030">rework</text>
+    <text x="1380" y="432" text-anchor="middle" font-size="25" fill="#4a5866">as applicable</text>
+
+    
+    <rect x="510" y="520" width="1040" height="90" rx="14" fill="#edf0f2" stroke="#5e6d76" stroke-width="2"></rect>
+    <text x="535" y="554" font-size="27" font-weight="700" letter-spacing="1.4" fill="#4b5c66">RUNTIME GOVERNANCE</text>
+    <text x="690" y="589" text-anchor="middle" font-size="27" fill="#2c3a47">worktree isolation</text>
+    <text x="1030" y="589" text-anchor="middle" font-size="27" fill="#2c3a47">cache + build lock</text>
+    <text x="1370" y="589" text-anchor="middle" font-size="27" fill="#2c3a47">process hygiene</text>
+    <path d="M860 566 L860 600 M1200 566 L1200 600" stroke="#aab3b9" stroke-width="1.6"></path>
+
+    
+  </g>
 </svg>
