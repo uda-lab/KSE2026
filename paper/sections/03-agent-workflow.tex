@@ -11,7 +11,7 @@
 % implementation. Runtime controls support orchestration and execution.
 \centering
 \includegraphics[width=\textwidth]{figures/leray-hopf-agent-harness.pdf}
-\caption{Synthesized end-state architecture of the agent harness. Under the author's authority, an orchestrator routes each GitHub Issue through an implementing Git worktree and pull request. Semantic feedback returns to the author and issue contract, while technical rework returns to the worktree. Mechanical and semantic checks are selected conditionally according to the changed artifact. Runtime governance supports execution beneath orchestration. Individual controls entered the project at different stages across the campaign.}\label{fig:agent-harness}
+\caption{Synthesized end-state architecture of the agent harness. Under the author's authority, an orchestrator routes each GitHub Issue through an implementing Git worktree and PR. Semantic feedback returns to the author and issue contract, while technical rework returns to the worktree. Mechanical and semantic checks are selected conditionally according to the changed artifact. Runtime governance supports execution beneath orchestration. Individual controls entered the project at different stages across the campaign.}\label{fig:agent-harness}
 \end{figure*}
 
 \begin{figure*}[t]
@@ -50,7 +50,7 @@ unvarying structure. % CLAIM: CLM-007, CLM-009
 Figure~\ref{fig:author-interface} complements this technical view with the
 author-facing support and transmission paths recorded in the Issue~\#60 role
 model. Some Issue and comment writes from the author's account carry a GitHub
-App attribution in the repository record. Others, and the formal pull request
+App attribution in the repository record. Others, and the formal PR
 reviews, carry no such field, so their route is not recovered rather than
 assumed. Codex reviews come from a separate bot account, and the implementing
 agents wrote under accounts of their own. Neither is counted as a write from
@@ -80,7 +80,7 @@ The main orchestrator assigned agents and checked their returned artifacts
 without editing Lean files itself. The repository skill
 \texttt{github-driven-workflow} required every change to begin with an
 Issue. An implementing agent received its own branch and Git worktree, then
-returned a committed candidate through a GitHub pull request (PR). Direct
+returned a committed candidate through a GitHub PR. Direct
 pushes to the main branch were prohibited. A PR could merge only after the
 checks relevant to its changed artifacts had passed, an independent
 reviewer had left an attributable result, and all review threads were
