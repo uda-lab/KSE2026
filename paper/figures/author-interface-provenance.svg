@@ -1,81 +1,109 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="520"
-     viewBox="0 0 1600 520" role="img"
-     aria-labelledby="title desc">
-  <title id="title">Author support and the recorded GitHub write channels</title>
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="570" viewBox="0 0 1600 570" role="img" aria-labelledby="title desc">
+  <title id="title">Three actors over a shared GitHub rail</title>
   <desc id="desc">
-    The author retains final authority and responsibility. ChatGPT supports
-    investigation, synthesis, recommendation, and drafting, and the author may
-    also issue a correction directly. Some Issue and PR writes made
-    from the author's account carry a GitHub App attribution in the repository
-    record. Other author-account writes and formal reviews carry no route
-    attribution, and Codex review-bot posts come from a separate account.
-    Review findings return to the author.
+    The author retains final authority and is the hub: they exchange context and
+    summaries with ChatGPT, and separately hand an issue contract to the agent
+    harness. An unlabelled band between those two arrows narrows toward the
+    author, so that material returns as a summary rather than in full. ChatGPT
+    is advisory only and touches GitHub solely through the official GitHub App
+    connector. The agent harness reads and writes GitHub as its working context.
+    GitHub itself is not an actor but the medium that records Issues, PRs, and
+    reviews, drawn as a rail beneath all three. Each actor reaches the rail
+    through its own medium: the author directly, without ChatGPT in the path,
+    ChatGPT through the GitHub App connector, the agent harness through git and
+    the gh CLI.
   </desc>
   <defs>
-    <marker id="arrow" markerWidth="11" markerHeight="11" refX="10" refY="5.5"
-            orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0,0 L11,5.5 L0,11 Z" fill="#263746"/>
+    <marker id="arrow2" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0.5 L12,6 L0,11.5 Z" fill="#263746"></path>
     </marker>
-    <marker id="feedback" markerWidth="11" markerHeight="11" refX="10" refY="5.5"
-            orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0,0 L11,5.5 L0,11 Z" fill="#9b3535"/>
-    </marker>
-    <style>
-      .title { font: 700 32px Arial, Helvetica, sans-serif; fill: #17232d; }
-      .layer { font: 700 30px Arial, Helvetica, sans-serif; letter-spacing: 0.8px; }
-      .head { font: 700 34px Arial, Helvetica, sans-serif; fill: #17232d; }
-      .body { font: 28px Arial, Helvetica, sans-serif; fill: #334653; }
-      .small { font: 26px Arial, Helvetica, sans-serif; fill: #4d5d68; }
-      .flow { fill: none; stroke: #263746; stroke-width: 3; marker-end: url(#arrow); }
-      .return { fill: none; stroke: #9b3535; stroke-width: 2.7; stroke-dasharray: 12 8; marker-end: url(#feedback); }
-    </style>
   </defs>
 
-  <rect width="1600" height="520" fill="#ffffff"/>
-  <!-- Three deliberately sparse elements -->
-  <rect x="70" y="150" width="350" height="245" rx="16"
-        fill="#fbf0f0" stroke="#8e3030" stroke-width="2.6"/>
-  <text x="95" y="183" class="layer" fill="#8e3030">FINAL AUTHORITY</text>
-  <text x="245" y="235" text-anchor="middle" class="head">Author</text>
-  <text x="245" y="283" text-anchor="middle" class="body">scope · claims · accept</text>
-  <rect x="120" y="330" width="250" height="42" rx="9"
-        fill="#ffffff" stroke="#b36a6a" stroke-width="1.6"/>
-  <text x="245" y="358" text-anchor="middle" class="small">direct intervention</text>
+  <rect width="1600" height="570" fill="#ffffff"></rect>
 
-  <rect x="625" y="150" width="350" height="245" rx="16"
-        fill="#eef4fb" stroke="#325b9b" stroke-width="2.6"/>
-  <text x="650" y="183" class="layer" fill="#325b9b">DECISION SUPPORT</text>
-  <text x="800" y="235" text-anchor="middle" class="head">ChatGPT</text>
-  <text x="800" y="270" text-anchor="middle" class="body">investigate · synthesise</text>
-  <text x="800" y="298" text-anchor="middle" class="body">recommend · draft</text>
-  <rect x="675" y="330" width="250" height="42" rx="9"
-        fill="#ffffff" stroke="#7893b7" stroke-width="1.6"/>
-  <text x="800" y="358" text-anchor="middle" class="small">advisory only</text>
+  <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
 
-  <rect x="1180" y="150" width="350" height="245" rx="16"
-        fill="#eef7f2" stroke="#326b55" stroke-width="2.6"/>
-  <text x="1205" y="183" class="layer" fill="#326b55">GITHUB</text>
-  <text x="1355" y="244" text-anchor="middle" class="head">Issue / PR work</text>
-  <text x="1355" y="284" text-anchor="middle" class="body">draft · transmit · monitor</text>
-  <rect x="1230" y="342" width="250" height="38" rx="9"
-        fill="#ffffff" stroke="#73a28d" stroke-width="1.6"/>
-  <text x="1355" y="368" text-anchor="middle" class="small">recorded artifacts</text>
+    
+    <path d="M240 156 L240 112 L1360 112 L1360 154" fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow2)"></path>
+    <text x="800" y="94" text-anchor="middle" font-size="25" fill="#4a5866">issue contract</text>
 
-  <!-- Deliberation -->
-  <path d="M420 245 L622 245" class="flow"/>
-  <text x="521" y="225" text-anchor="middle" class="small">context</text>
-  <path d="M625 300 L423 300" class="flow"/>
-  <text x="524" y="326" text-anchor="middle" class="small">proposal</text>
+    
+    <rect x="50" y="156" width="380" height="270" rx="16" fill="#fbf0f0" stroke="#8e3030" stroke-width="2.6"></rect>
+    <text x="76" y="193" font-size="28" font-weight="700" letter-spacing="1.4" fill="#8e3030">FINAL AUTHORITY</text>
+    <text x="240" y="252" text-anchor="middle" font-size="38" font-weight="700" fill="#1b2733">Author</text>
+    <text x="240" y="296" text-anchor="middle" font-size="28" fill="#2c3a47">scope · claims · accept</text>
+    <rect x="90" y="352" width="300" height="48" rx="10" fill="#ffffff" stroke="#b36a6a" stroke-width="1.8"></rect>
+    <text x="240" y="383" text-anchor="middle" font-size="26" fill="#4a5866">direct intervention</text>
 
-  <!-- Transmission: some author-account writes carry a GitHub App attribution -->
-  <path d="M975 245 L1177 245" class="flow"/>
-  <text x="1076" y="225" text-anchor="middle" class="small">GitHub App</text>
-  <path d="M245 395 L245 462 L1355 462 L1355 398" class="flow"/>
-  <text x="800" y="452" text-anchor="middle" class="small">author correction</text>
+    
+    <rect x="610" y="156" width="380" height="270" rx="16" fill="#eef4fb" stroke="#325b9b" stroke-width="2.6"></rect>
+    <text x="636" y="193" font-size="28" font-weight="700" letter-spacing="1.4" fill="#325b9b">DECISION SUPPORT</text>
+    <text x="800" y="248" text-anchor="middle" font-size="38" font-weight="700" fill="#1b2733">ChatGPT</text>
+    <text x="800" y="288" text-anchor="middle" font-size="28" fill="#2c3a47">investigate · synthesise</text>
+    <text x="800" y="322" text-anchor="middle" font-size="28" fill="#2c3a47">recommend · draft</text>
+    <rect x="650" y="352" width="300" height="48" rx="10" fill="#ffffff" stroke="#7893b7" stroke-width="1.8"></rect>
+    <text x="800" y="383" text-anchor="middle" font-size="26" fill="#4a5866">advisory only</text>
 
-  <!-- Review return has its own upper lane -->
-  <path d="M1355 148 L1355 112 L245 112 L245 148" class="return"/>
-  <text x="800" y="101" text-anchor="middle" class="small" fill="#8e3030">feedback</text>
+    
+    <rect x="1170" y="156" width="380" height="270" rx="16" fill="#eef7f2" stroke="#326b55" stroke-width="2.6"></rect>
+    <text x="1196" y="193" font-size="28" font-weight="700" letter-spacing="1.4" fill="#326b55">EXECUTION</text>
+    <text x="1360" y="252" text-anchor="middle" font-size="38" font-weight="700" fill="#1b2733">Agent harness</text>
+    <text x="1360" y="296" text-anchor="middle" font-size="28" fill="#2c3a47">plan · implement · review</text>
+    <rect x="1210" y="352" width="300" height="48" rx="10" fill="#ffffff" stroke="#73a28d" stroke-width="1.8"></rect>
+    <text x="1360" y="383" text-anchor="middle" font-size="26" fill="#4a5866">issue-scoped</text>
 
+    
+    <g fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow2)">
+      <path d="M430 208 L608 208"></path>
+      <path d="M610 374 L432 374"></path>
+    </g>
+    <path d="M598 248 L598 334 L442 302 L442 280 Z" fill="#dde5ee" stroke="#b3c0cd" stroke-width="1.4"></path>
+    <text x="519" y="190" text-anchor="middle" font-size="25" fill="#4a5866">context</text>
+    <text x="521" y="404" text-anchor="middle" font-size="25" fill="#4a5866">summary</text>
+
+    
+    <rect x="50" y="474" width="1500" height="68" rx="10" fill="#eef2f7" stroke="#b3c0cd" stroke-width="1.6"></rect>
+    <g transform="translate(454,489) scale(2.125)"><path fill="#3d4c5a" d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"></path></g>
+    <text x="500" y="516" font-size="28" font-weight="700" fill="#3d4c5a">GitHub</text>
+    <text x="1080" y="516" text-anchor="middle" font-size="26" fill="#4a5866">Issues · PRs · reviews</text>
+
+    
+    <path d="M110 426 L110 472" fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow2)"></path>
+    <path d="M370 474 L370 430" fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow2)"></path>
+    <rect x="140" y="440" width="200" height="86" rx="12" fill="#dde5ee" stroke="#b3c0cd" stroke-width="1.4"></rect>
+    <g fill="none" stroke="#6d8199" stroke-width="3" stroke-linecap="round">
+      <rect x="216" y="450" width="48" height="34" rx="5"></rect>
+      <path d="M216 461 H264"></path>
+    </g>
+    <circle cx="224" cy="456" r="2.4" fill="#6d8199"></circle>
+    <text x="240" y="512" text-anchor="middle" font-size="23" fill="#3d4c5a">direct access</text>
+
+    
+    <path d="M700 426 L700 472" fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow2)"></path>
+    <text x="685" y="452" text-anchor="end" font-size="23" fill="#4a5866">write</text>
+    <path d="M900 474 L900 430" fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow2)"></path>
+    <text x="915" y="452" font-size="23" fill="#4a5866">read</text>
+    <rect x="715" y="440" width="170" height="86" rx="12" fill="#dde5ee" stroke="#b3c0cd" stroke-width="1.4"></rect>
+    <g fill="none" stroke="#6d8199" stroke-width="3.4" stroke-linecap="round">
+      <circle cx="774" cy="462" r="7"></circle>
+      <circle cx="826" cy="478" r="7"></circle>
+      <path d="M781 462 H791 C800 462, 800 478, 809 478 H819"></path>
+    </g>
+    <text x="800" y="512" text-anchor="middle" font-size="23" fill="#3d4c5a">GitHub App</text>
+
+    
+    <path d="M1250 426 L1250 472" fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow2)"></path>
+    <text x="1235" y="452" text-anchor="end" font-size="23" fill="#4a5866">write</text>
+    <path d="M1470 474 L1470 430" fill="none" stroke="#263746" stroke-width="3" marker-end="url(#arrow2)"></path>
+    <text x="1485" y="452" font-size="23" fill="#4a5866">read</text>
+    <rect x="1275" y="440" width="170" height="86" rx="12" fill="#dde5ee" stroke="#b3c0cd" stroke-width="1.4"></rect>
+    <g fill="none" stroke="#6d8199" stroke-width="3" stroke-linecap="round">
+      <rect x="1336" y="450" width="48" height="34" rx="5"></rect>
+      <path d="M1344 459 L1351 466 L1344 473"></path>
+      <path d="M1358 473 H1372"></path>
+    </g>
+    <text x="1360" y="512" text-anchor="middle" font-size="23" fill="#3d4c5a">git / gh</text>
+
+  </g>
 </svg>
