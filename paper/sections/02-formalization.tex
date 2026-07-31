@@ -23,7 +23,7 @@ properties in Table~\ref{tab:solution-fields}. The abbreviations for the two dom
 \texttt{LerayHopfSolutionFull\_R3} on $\mathbb{R}^3$. Both instantiate
 the common \texttt{Galerkin.LerayHopfSolution} structure.
 
-The weak identity is formulated for test functions separated in time and space,
+The weak formulation is restricted to test functions separated in time and space,
 $\psi(t)w(x)$. General tests $\varphi(t,x)$ that depend jointly on time
 and space are outside the formalized relation. The initial trace is the one-sided strong limit
 $u(t)\to u_0$ in the ambient $L^2$ norm as $t\to0^+$. It does not assert
@@ -37,7 +37,7 @@ weak continuity on the whole interval.
 Component & What is guaranteed \\
 \midrule
 Velocity field & valued in the closed divergence-free subspace $D_\sigma$ at every $t$ \\
-Weak identity & Navier--Stokes identity against tests $\psi(t)w(x)$ separated in time and space, with no forcing term \\
+Weak formulation & Navier--Stokes identity against tests $\psi(t)w(x)$ separated in time and space, with no forcing term \\
 Energy inequality & $\tfrac12\|u(t)\|^2 + \int_0^t \mathrm{dissip}(\nu,u(s))\,ds \le \tfrac12\|u_0\|^2$ for $t\in[0,T]$ \\
 Initial trace & $u(t)\to u_0$ in $L^2$ as $t\to 0^+$ \\
 Energy class & a.e.\ membership in the $H^1$ class and integrable viscous dissipation \\
@@ -73,8 +73,8 @@ Schwartz divergence-free basis) is itself produced by the proof, not
 assumed.
 
 The result concerns the unforced equation on an arbitrary
-fixed finite horizon, using the separated weak formulation and
-the stated energy class. It establishes existence and does not address
+fixed finite horizon, using the weak formulation restricted to separated
+test functions and the stated energy class. It establishes existence and does not address
 uniqueness, nonuniqueness, or higher regularity. Developments outside this scope are
 kept in an experimental namespace that neither capstone imports
 (Section~\ref{sec:release-surface}).
