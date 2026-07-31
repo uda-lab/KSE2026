@@ -31,6 +31,25 @@ SELF_PATH="scripts/check_frozen_paths.sh"
 EDITABLE_PREFIX="paper/"
 base="${1:-origin/main}"
 
+# Owner-authorized amendments. Each entry is an exact tracked path unfrozen by
+# an explicit owner decision recorded in a GitHub issue; the issue reference is
+# part of the record. The gate script itself appears here because an amendment
+# can only take effect by editing this list. This is tamper-evident, not
+# tamper-proof: CI executes the pull request's copy of this script, so any gate
+# change is enforced only through diff review.
+#
+# issue #100 (2026-07-31): INC-005 evidence reconciliation. Host-side records
+# overturned the incident card's OOM attribution and detection narrative; the
+# owner authorized correcting the affected provenance records.
+FREEZE_EXEMPT_PATHS=(
+  "scripts/check_frozen_paths.sh"
+  "evidence/incidents/INC-005.md"
+  "evidence/session-index/de129390-559a-4ecd-950e-3667cf1c1c3c.md"
+  "claims/paper-claims.md"
+  "analysis/incident-ranking.md"
+  "analysis/incident-candidates.md"
+)
+
 die() { printf 'freeze gate: %s\n' "$1" >&2; exit 2; }
 
 git rev-parse --is-inside-work-tree >/dev/null 2>&1 || die "not inside a git work tree"
@@ -58,8 +77,20 @@ pending=$(git status --porcelain --untracked-files=no -- \
           | sed 's/^...//; s/^.* -> //') \
   || die "git status failed"
 
+exempt_filter() {
+  # Drop paths present in FREEZE_EXEMPT_PATHS (exact match).
+  local line keep
+  while IFS= read -r line; do
+    keep=1
+    for e in "${FREEZE_EXEMPT_PATHS[@]}"; do
+      [ "$line" = "$e" ] && { keep=0; break; }
+    done
+    [ "$keep" = 1 ] && printf '%s\n' "$line"
+  done
+}
+
 violations=$(printf '%s\n%s\n' "$committed" "$pending" \
-             | grep -v '^$' | grep -v "^$EDITABLE_PREFIX" | sort -u || true)
+             | grep -v '^$' | grep -v "^$EDITABLE_PREFIX" | exempt_filter | sort -u || true)
 
 if [ -n "$violations" ]; then
   echo "freeze gate FAILED: only ${EDITABLE_PREFIX} may change (issue #90)." >&2
@@ -71,4 +102,4 @@ if [ -n "$violations" ]; then
 fi
 
 n=$(printf '%s\n%s\n' "$committed" "$pending" | grep -c '^\S' || true)
-echo "freeze gate OK (${n} changed path(s), all under ${EDITABLE_PREFIX})"
+echo "freeze gate OK (${n} changed path(s), all under ${EDITABLE_PREFIX} or in the owner-authorized exemption list)"
