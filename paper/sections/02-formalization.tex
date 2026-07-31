@@ -25,8 +25,8 @@ the common \texttt{Galerkin.LerayHopfSolution} structure.
 The weak formulation is restricted to test functions separated in time and space,
 $\psi(t)w(x)$. General tests $\varphi(t,x)$ that depend jointly on time
 and space are outside the formalized relation. The initial trace is the one-sided strong limit
-$u(t)\to u_0$ in the ambient $L^2$ norm as $t\to0^+$, and does not assert
-weak continuity on the whole interval.
+$u(t)\to u_0$ in the ambient $L^2$ norm as $t\to0^+$; weak continuity on
+the whole interval is not asserted.
 
 \begin{table}[h]
 \centering
@@ -101,8 +101,8 @@ A shared Gelfand triple and Bochner space layer provides the
 Aubin--Lions and weak limit arguments. It uses a spectral decomposition by
 mode on $\mathbb{T}^3$ and Steklov time averaging on
 $\mathbb{R}^3$. The nonlinear convection term is represented through a
-trilinear extension with explicit proofs for the Schwartz/Galerkin test class.
-The development does not postulate a bounded operator on
+trilinear extension with explicit proofs for the Schwartz/Galerkin test
+class, rather than by postulating a bounded operator on
 $L^2\times L^2\times L^2$.
 
 \subsection{Kernel axioms and public imports}\label{sec:release-surface}

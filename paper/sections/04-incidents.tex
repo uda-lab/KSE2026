@@ -5,8 +5,9 @@ dependency graph are well typed. The four cases below concern boundaries it
 does not reach: whether a theorem states the intended mathematics, whether
 a refactor preserved every public declaration, and whether the runtime can
 complete the next build. The evidence combines repository records with six
-agent sessions selected for their reconstruction value, so the cases
-document observed failures and recoveries rather than failure rates. All PR
+agent sessions selected for their reconstruction value rather than at
+random or exhaustively, so the cases document observed failures and
+recoveries rather than failure rates. All PR
 numbers below refer to the leray-hopf repository~\cite{lerayhopf2026repo}.
 % CLAIM: CLM-004, CLM-008
 
@@ -16,7 +17,7 @@ numbers below refer to the leray-hopf repository~\cite{lerayhopf2026repo}.
 A public continuity lemma accepted arbitrary exponents \(p,q\geq 1\),
 although the mathematical argument used \(p=q=2\) and
 Cauchy--Schwarz. The declaration carried an explicit \texttt{sorry}, and a
-later proof attempt confirmed only that no capstone theorem depended on it.
+later proof attempt checked only that no capstone theorem depended on it.
 The false general statement remained public for about a month and was
 repeated in project documentation. % CLAIM: CLM-008, INC-001
 
@@ -24,11 +25,12 @@ repeated in project documentation. % CLAIM: CLM-008, INC-001
 During release preparation, a statement reviewer tested the boundary case
 \(p=q=1\). A weighted Hilbert triple and spike sequence satisfied the
 stated integrability assumptions but admitted no almost everywhere
-equivalent representative that was continuous in the intermediate Hilbert space. The
-problem was therefore the proposition, not a difficult proof. The repair
-restricted the declaration to \(p=q=2\) and moved it outside the public
-imports in PR~\#162, and PR~\#170 added a statement card and regression
-checks against both defects. % CLAIM: CLM-008, INC-001
+equivalent representative that was continuous into the middle space of that
+triple. The problem was therefore the proposition, not a difficult proof.
+The repair restricted the declaration to \(p=q=2\) and moved it outside the
+public imports in PR~\#162. PR~\#170 added a statement card and regression
+checks for both the unsupported signature and a placeholder lacking a card.
+% CLAIM: CLM-008, INC-001
 
 \emph{Lesson.}
 A placeholder records only that a proof is absent; it provides no evidence
@@ -48,7 +50,7 @@ missing closure condition. % CLAIM: CLM-008, INC-002
 The reviewer tested inputs outside the intended subspace. A numerical
 diagnostic produced a discrepancy of approximately \(80.7\) without the
 projection hypotheses and approximately \(10^{-13}\) after imposing them.
-These values corroborated the structural diagnosis without constituting a
+These values corroborated the structural diagnosis; they were not a
 certified counterexample. PR~\#27 added the two projection invariance
 hypotheses, completed the Lean proof, and removed the placeholder before
 merge. % CLAIM: CLM-008, INC-002
@@ -92,28 +94,30 @@ exit code 137 and no compiler diagnostic. % CLAIM: CLM-008, INC-005
 
 \emph{Detection and response.}
 Monitoring had covered the visible Lean process rather than memory
-available to the entire container, and the correction came from the author,
-not the orchestrator. Roughly seventy minutes after an earlier
-status check had produced that misreading, the author's next status request
-reached the session only after an eight-minute delay, and was followed at
-once by an explicit instruction to kill stale processes. Only then did a
-memory check report 606\,MiB available, and inspection of each process
-working directory identified the fourteen stale chains. A cumulative
-control group counter read during the response was taken at the time as
-confirmation that the out of memory (OOM) killer had terminated the failed
-builds; an audit of host kernel logs later overturned that reading, because
-every counted kill belonged to a host-level OOM event two days earlier and
-no kernel OOM occurred on the incident day. The mechanism that terminated
-the builds remains unidentified. Removing the stale processes raised
-available memory to 2.2\,GiB, the worktree returned to the original agent,
-the duplicate stopped, and the build completed under a global lock.
-PRs~\#174, \#175, and \#176 merged later that day. % CLAIM: CLM-008, INC-005
+available to the entire container. Roughly seventy minutes after an earlier
+status check had reported the container as healthy on that basis, the
+author's next status request reached the session only after an eight-minute
+delay, and was followed at once by the author's explicit instruction to
+kill stale processes. Only then did a memory check report 606\,MiB
+available, and inspection of each process working directory identified the
+fourteen stale chains. A cumulative kill counter maintained by the Linux
+control group (cgroup) subsystem, read during the response, was taken at
+the time as confirmation that the out of memory (OOM) killer had terminated
+the failed builds; an audit of host kernel logs later overturned that
+reading, because every counted kill belonged to a host-level OOM event two
+days earlier and no kernel OOM occurred on the incident day. The mechanism
+that terminated the builds remains unidentified. Removing the stale
+processes raised available memory to 2.2\,GiB. The worktree returned to the
+original agent, the duplicate stopped, and the build completed under a
+global lock. PRs~\#174, \#175, and \#176 merged later that day.
+% CLAIM: CLM-008, INC-005
 
 \emph{Lesson.}
 An orchestrator must observe the complete process tree and available
-memory, not only the foreground prover. Monitoring available memory also
-detected a later peak caused by one legitimate build, so measuring the
-resource directly is more general than cleanup tailored to one cause. The
+memory, not only the foreground prover. Once monitoring tracked memory
+available to the whole container, it also detected a later peak caused by
+one legitimate build, so measuring the resource directly is more general
+than cleanup tailored to one cause. The
 corrected diagnosis adds an evidence rule: a causal account assembled only
 from observations inside the agent session can misattribute the mechanism,
 so it must be checked against records outside the session.

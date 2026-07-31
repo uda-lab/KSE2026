@@ -40,9 +40,10 @@ search or benchmarks~\cite{yang2023leandojo,
 deepmind2025alphaproof}. Studies of autonomous task
 horizons and pull requests (PRs) written by agents motivate reliability
 questions~\cite{metr2025longtasks,agenticprs2026security}.
-Lean Eval scores an isolated theorem completion against a fixed statement,
-supplied dependencies, and trusted scaffolding in a generated
-workspace~\cite{leaneval2026repo, leaneval2026site}. % CLAIM: CLM-011
+Lean Eval fixes the statement, the supplied dependencies, and the trusted
+scaffolding in a generated workspace, then scores whether a comparator
+accepts the submitted solution~\cite{leaneval2026repo,
+leaneval2026site}. % CLAIM: CLM-011
 Our unit of analysis is instead a repository-level formalization campaign,
 whose preserved records trace changes from Issue definition through
 implementation, semantic review, and mechanical checks, and also document
@@ -54,19 +55,20 @@ This paper makes three contributions:
   axioms, of the existence of Leray--Hopf weak solutions on
   $\mathbb{T}^3$ and $\mathbb{R}^3$, whose exact scope is independently
   inspectable at a pinned release.
-\item A harness defined by the author that connects GitHub Issues, Git
-  worktrees, PRs, specialist agents, and the constrained runtime
-  environment, keeping scope and review decisions outside agent sessions.
-  Checks are selected according to the changed artifact, and documented
-  incidents show their observed reach and limits.
+\item A harness defined by the author: the orchestration layer connecting
+  GitHub Issues, Git worktrees, PRs, specialist agents, and the
+  constrained runtime environment. Issue scope, review decisions, and
+  merge authority are recorded outside agent sessions, checks are selected
+  according to the changed artifact, and documented incidents show those
+  checks' observed reach and limits.
   % CLAIM: CLM-005, CLM-007, CLM-008, CLM-009
-\item An evidence method combining session log escrow, claim-to-evidence
+\item An evidence method combining retained session logs, claim-to-evidence
   verification, and cost reconciliation, which supports auditable
   statements about the project while making coverage gaps explicit.
   % CLAIM: CLM-002, CLM-003
 \end{enumerate}
 
-Section~\ref{sec:formalization} states the two capstone theorems,
-Section~\ref{sec:workflow} presents the harness,
+Section~\ref{sec:formalization} states the two capstone theorems and
+Section~\ref{sec:workflow} presents the harness.
 Section~\ref{sec:incidents} examines four incidents at its boundaries, and
 Section~\ref{sec:discussion} gives recommendations and limitations.
