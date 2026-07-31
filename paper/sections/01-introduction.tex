@@ -8,8 +8,8 @@ declaration against its type. The project must also decide which type
 should be proved, preserve the intended public declarations during
 refactoring, and verify the operating state behind progress reports.
 
-This paper studies those obligations through six weeks of work on
-Leray--Hopf weak solution existence for the unforced incompressible
+This paper studies those obligations through six weeks of work on the
+existence of Leray--Hopf weak solutions to the unforced incompressible
 Navier--Stokes equations. The central artifact is a
 Lean~4~\cite{moura2021lean4} development on
 mathlib~\cite{mathlib2020}, with capstone existence theorems on the
@@ -17,7 +17,7 @@ three dimensional torus and on $\mathbb{R}^3$~\cite{leray1934,hopf1951,
 lerayhopf2026repo}. Both theorem statements are given precisely in
 Section~\ref{sec:formalization}. % CLAIM: CLM-001
 To our knowledge, no prior machine-checked formalization establishes
-Leray--Hopf weak solution existence for the three-dimensional
+the existence of Leray--Hopf weak solutions to the three-dimensional
 Navier--Stokes equations. % CLAIM: CLM-006
 
 The nearest results in formalized analysis address adjacent problems.
@@ -43,28 +43,27 @@ Agentic theorem proving systems are commonly evaluated through proof
 search, benchmarks, or interactive assistance~\cite{xin2025deepseekproverv2,
 yang2023leandojo,
 deepmind2025alphaproof,zhou2026leanatlas}. Studies of autonomous task
-horizons and pull requests written by agents motivate reliability
+horizons and pull requests (PRs) written by agents motivate reliability
 questions~\cite{metr2025longtasks,agenticprs2026security}.
 Lean Eval is an isolated theorem-completion benchmark: it fixes the
 benchmark statement, supplied dependencies, and trusted scaffolding in a
 generated workspace, then scores whether the comparator accepts the
 submitted solution~\cite{leaneval2026repo,
 leaneval2026site}. % CLAIM: CLM-011
-Our unit of analysis is different: a repository-level formalization
-campaign in which proof generation is only one part of statement
-control, issue-scoped implementation and orchestration, semantic review
-and mechanical verification, worktree/runtime governance, and incident
-handling, with implementation, reviews, incidents, and resource use
-traced to preserved artifacts.
+Our unit of analysis is a repository-level formalization campaign rather
+than an isolated proof task. Preserved records trace changes through the
+GitHub workflow, from Issue definition through implementation, semantic
+review, and mechanical checks. They also document incidents and resource
+use in the runtime environment.
 
 This paper makes three contributions:
 \begin{enumerate}
 \item A completed Lean~4 and mathlib formalization, with no project
-  axioms, of Leray--Hopf weak solution existence on $\mathbb{T}^3$ and
-  $\mathbb{R}^3$. The formal result and its exact scope are independently
+  axioms, of the existence of Leray--Hopf weak solutions on
+  $\mathbb{T}^3$ and $\mathbb{R}^3$. The formal result and its exact scope are independently
   inspectable.
 \item A harness defined by the author that connects GitHub Issues, Git worktrees,
-  pull requests, specialist agents, and the constrained runtime
+  PRs, specialist agents, and the constrained runtime
   environment. Issue scope, review decisions, and merge authority are
   recorded outside agent sessions. Checks are selected according to the
   changed artifact, and documented incidents show their observed reach
