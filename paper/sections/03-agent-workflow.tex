@@ -74,8 +74,9 @@ The main orchestrator assigned agents and checked their returned artifacts
 without editing Lean files itself. The repository skill
 \texttt{github-driven-workflow} required every change to begin with an
 Issue. An implementing agent received its own branch and Git worktree, then
-returned a committed candidate through a GitHub PR. Direct
-pushes to the main branch were prohibited. A PR could merge only after the
+returned a committed candidate through a GitHub PR. The workflow contract
+required agents to submit changes through PRs rather than push directly to
+the main branch. A PR could merge only after the
 checks relevant to its changed artifacts had passed, an independent
 reviewer had left an attributable result, and all review threads were
 resolved.
