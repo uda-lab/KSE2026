@@ -49,7 +49,11 @@ base="${1:-origin/main}"
 # issue #100 (2026-07-31): INC-005 evidence reconciliation. Host-side records
 # overturned the incident card's OOM attribution and detection narrative; the
 # owner authorized correcting the affected provenance records.
+#
+# issue #109 (2026-08-01): the owner authorized synchronizing the CMT abstract
+# draft with the post-#106 manuscript abstract (decision record in issue #73).
 FREEZE_EXEMPT_PINNED=(
+  "notes/submission-metadata.md:c6bd2d13ed47e810e38efe0a9bee64a2f39c1ab2"
   "evidence/incidents/INC-005.md:468838e6516409137c0acb880f962d41a3e87425"
   "evidence/session-index/de129390-559a-4ecd-950e-3667cf1c1c3c.md:6f0e3ab9b8e79f5f3452a212fa00fb1198bd3333"
   "claims/paper-claims.md:74b0041a54c029d375cceadf92c9795abb760e32"
