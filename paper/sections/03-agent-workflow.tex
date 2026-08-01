@@ -103,7 +103,7 @@ before merge with one that remained until release preparation.
 % CLAIM: CLM-005, CLM-007, EV-0925
 
 \emph{Lean declaration and assumptions.}
-The Lean build checked elaboration and type correctness,
+The Lean build checked elaboration and type correctness.
 \texttt{\#print axioms} recorded the assumptions of designated
 declarations, and an import check kept experimental modules outside the
 public root import. % CLAIM: CLM-009
@@ -144,8 +144,9 @@ record at least 15.1M output tokens; joining adjacent events across gaps of
 at most five minutes gives a coarse estimate of 199.1h of active session
 time. Applying published API prices to that recorded use gives \$6{,}973.
 Apart from the Vertex AI phase below, the agents ran on subscription plans
-rather than metered API billing, so this figure is an API-price equivalent
-rather than an amount billed. It is also a lower bound, because some
+rather than metered API billing, so this figure is an API-price-equivalent
+estimate rather than an amount billed. The recorded token count and the
+estimate derived from the recorded use are lower bounds, because some
 session records were lost or unavailable. % CLAIM: CLM-002
 
 The July 2--3 completion phase was the one phase billed per token rather

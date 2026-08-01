@@ -32,8 +32,8 @@ missing theorem after both the build and a structural review had passed.
 
 \emph{Place resource rules in the dispatch path.}
 The VPS container's low memory ceiling made resource contention visible
-early, but the same contention can arise wherever many agents run
-continuously: process trees abandoned by agents and their helpers retain
+early, but similar contention can arise on shared hosts when many agents
+run continuously: abandoned agent and helper process trees retain
 memory, while concurrent Lean builds add large transient demand. Dispatch
 rules should therefore clean up abandoned process trees, bound agent
 concurrency, run heavy builds under a global lock, reuse the build cache,
@@ -48,7 +48,8 @@ and later sessions. % CLAIM: CLM-007, CLM-008, CLM-009, INC-005
 This observational account evaluates one author-supervised formalization
 workflow as a whole, including the author's own interventions. Comparative
 evaluation across projects would be needed to isolate the contribution of
-an individual control and to assess how far it transfers.
+an individual control and to assess its transferability to other
+settings.
 % CLAIM: CLM-004, CLM-005
 
 Early session records are incomplete, and the models and proprietary tools
