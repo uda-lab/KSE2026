@@ -5,8 +5,8 @@ dependency graph are well typed. The four cases below concern boundaries it
 does not reach: whether a theorem states the intended mathematics, whether
 a refactor preserved every public declaration, and whether the runtime can
 complete the next build. The evidence combines repository records with six
-agent sessions selected for their reconstruction value rather than at
-random or exhaustively, so the cases document observed failures and
+agent sessions selected for their reconstruction value, neither randomly
+nor exhaustively, so the cases document observed failures and
 recoveries rather than failure rates. All PR
 numbers below refer to the leray-hopf repository~\cite{lerayhopf2026repo}.
 % CLAIM: CLM-004, CLM-008
@@ -25,8 +25,8 @@ repeated in project documentation. % CLAIM: CLM-008, INC-001
 During release preparation, a statement reviewer tested the boundary case
 \(p=q=1\). A weighted Hilbert triple and spike sequence satisfied the
 stated integrability assumptions but admitted no almost everywhere
-equivalent representative that was continuous into the middle space of that
-triple. The problem was therefore the proposition, not a difficult proof.
+equivalent representative that was continuous in the intermediate Hilbert
+space. The problem was therefore the proposition, not a difficult proof.
 The repair restricted the declaration to \(p=q=2\) and moved it outside the
 public imports in PR~\#162. PR~\#170 added a statement card and regression
 checks for both the unsupported signature and a placeholder lacking a card.
