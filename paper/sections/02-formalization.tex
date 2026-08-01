@@ -124,8 +124,9 @@ dispatched full build recorded this axiom list from the live declarations
 at the pinned commit. % CLAIM: CLM-001
 
 Both capstones are existence propositions: each concludes in a
-\texttt{Nonempty} wrapper under an existential quantifier, so neither is a
-term intended for evaluation, and the Galerkin sequence and package
+\texttt{Nonempty} wrapper under an existential quantifier, so neither
+exposes a computational witness intended for \texttt{\#eval}, and the
+Galerkin sequence and package
 builders they invoke are declared \texttt{noncomputable}. Reporting no
 project axioms therefore does not make the development constructive:
 \texttt{Classical.choice} is in the recorded axiom list of both theorems.
