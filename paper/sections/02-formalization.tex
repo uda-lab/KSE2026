@@ -97,12 +97,13 @@ modes. The $\mathbb{R}^3$ proof uses a local Rellich--Kondrachov
 embedding based on a Fréchet--Kolmogorov criterion.
 
 \emph{Time compactness and limit passage.}
-A shared evolution-triple layer provides the Aubin--Lions and weak limit
-arguments, through a spectral decomposition by mode on $\mathbb{T}^3$ and
-an Arzel\`a--Ascoli argument in time over step-curve approximations on
-$\mathbb{R}^3$. mathlib supplies the ambient infrastructure --- $L^p$
+A shared evolution-triple and weak limit layer supports the
+domain-specific Aubin--Lions arguments: a spectral decomposition by mode
+on $\mathbb{T}^3$ and step-curve total boundedness in time on
+$\mathbb{R}^3$. The ambient infrastructure --- $L^p$
 spaces and the Bochner integral, Hilbert-space duality and projection,
-Fourier analysis, and Picard--Lindel\"of ODE theory --- while the
+Fourier analysis, and Picard--Lindel\"of ODE theory --- comes from
+mathlib, while the
 evolution triple, the Aubin--Lions and weak limit packages, the Rellich
 and Fr\'echet--Kolmogorov compactness arguments, and the trilinear
 convection extension are defined and proved in the project; the pinned
