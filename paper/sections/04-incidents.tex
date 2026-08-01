@@ -89,7 +89,7 @@ running after their Git worktrees were inactive, consuming about
 1--1.5\,GiB. At the same time, the orchestrator misclassified a slow agent
 as inactive and assigned a replacement to the same Git worktree. The
 replacement did not receive the shared cache rule and started a full
-mathlib build. Under the combined load, Lean builds repeatedly ended with
+mathlib build. Under this load, Lean builds repeatedly ended with
 exit code 137 and no compiler diagnostic. % CLAIM: CLM-008, INC-005
 
 \emph{Detection and response.}
@@ -114,7 +114,10 @@ global lock. PRs~\#174, \#175, and \#176 merged later that day.
 
 \emph{Lesson.}
 An orchestrator must observe the complete process tree and available
-memory, not only the foreground prover. Once monitoring tracked memory
+memory, not only the foreground prover. After the incident, helper-process
+cleanup, cache reuse, build serialization, and a pre-build memory check
+entered the standing instructions and dispatch prompts. Once
+monitoring tracked memory
 available to the whole container, it also detected a later peak caused by
 one legitimate build, so measuring the resource directly is more general
 than cleanup tailored to one cause. The

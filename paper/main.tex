@@ -15,12 +15,11 @@
 \usepackage[hidelinks]{hyperref}
 
 % --- Submission anonymity switch --------------------------------------------
-% \anonymoustrue   : temporary default while the real byline is pending.
-% \anonymousfalse : named byline plus the funding acknowledgment (submission target).
-% Keep the anonymous default until the TODO(author) placeholder below is
-% replaced, so the default build does not publish an incomplete byline.
+% \anonymoustrue  : anonymous draft build.
+% \anonymousfalse : named byline plus the funding acknowledgment (submission
+% target; the default since issue #114 supplied the owner byline).
 \newif\ifanonymous%
-\anonymoustrue%
+\anonymousfalse%
 
 % Lean 4 listings setup (minimal; extend as needed)
 \lstdefinelanguage{lean}{
@@ -63,10 +62,10 @@ Harness Design and Reliability Lessons}
 \ifanonymous%
   \author{\IEEEauthorblockN{Anonymous Author(s)}}
 \else
-  % TODO(author): substitute the real byline and affiliation here. Flipping the
-  % switch before supplying it prints this placeholder next to the searchable
-  % grant number; an affiliation email address will fail scripts/redact_check.py.
-  \author{\IEEEauthorblockN{TODO: REAL BYLINE NOT YET SUPPLIED}%
+  % Byline supplied by the owner (issue #114). No email address by design:
+  % an affiliation email would fail scripts/redact_check.py.
+  \author{\IEEEauthorblockN{Tomoki Uda}%
+    \IEEEauthorblockA{Nanzan University}%
     \thanks{This work was supported by JST-Mirai Program Grant Number
       \mbox{JPMJMI22G1}, Japan.}}
 \fi

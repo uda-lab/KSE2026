@@ -97,10 +97,18 @@ modes. The $\mathbb{R}^3$ proof uses a local Rellich--Kondrachov
 embedding based on a Fréchet--Kolmogorov criterion.
 
 \emph{Time compactness and limit passage.}
-A shared Gelfand triple and Bochner space layer provides the
-Aubin--Lions and weak limit arguments. It uses a spectral decomposition by
-mode on $\mathbb{T}^3$ and Steklov time averaging on
-$\mathbb{R}^3$. The nonlinear convection term is represented through a
+A shared evolution-triple and weak limit layer supports the
+domain-specific Aubin--Lions arguments: a spectral decomposition by mode
+on $\mathbb{T}^3$ and step-curve total boundedness in time on
+$\mathbb{R}^3$. The ambient infrastructure --- $L^p$
+spaces and the Bochner integral, Hilbert-space duality and projection,
+Fourier analysis, and Picard--Lindel\"of ODE theory --- comes from
+mathlib, while the
+evolution triple, the Aubin--Lions and weak limit packages, the Rellich
+and Fr\'echet--Kolmogorov compactness arguments, and the trilinear
+convection extension are defined and proved in the project; the pinned
+mathlib has no evolution-triple, Aubin--Lions, or Bochner--Sobolev-in-time
+theory. The nonlinear convection term is represented through that
 trilinear extension with explicit proofs for the Schwartz/Galerkin test
 class, rather than by postulating a bounded operator on
 $L^2\times L^2\times L^2$.
@@ -114,3 +122,13 @@ neither depends on an axiom declared by the project or on
 guards for \texttt{sorry} and the public import closure, and a manually
 dispatched full build recorded this axiom list from the live declarations
 at the pinned commit. % CLAIM: CLM-001
+
+Both capstones are existence propositions: each concludes in a
+\texttt{Nonempty} wrapper under an existential quantifier, so neither is a
+term intended for evaluation, and the Galerkin sequence and package
+builders they invoke are declared \texttt{noncomputable}. Reporting no
+project axioms therefore does not make the development constructive:
+\texttt{Classical.choice} is in the recorded axiom list of both theorems.
+What the paper reports is a machine-checked classical existence theorem,
+not an executable PDE solver, and no claim is made about extracting a
+computable weak solution from it. % CLAIM: CLM-001
