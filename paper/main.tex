@@ -39,6 +39,9 @@
   commentstyle=\itshape\color{gray},
   breaklines=true,
   columns=fullflexible,
+  % fullflexible collapses the space after each literate-replaced glyph, so
+  % "ν T" printed as "νT" in the verbatim-quoted statements (issue #107).
+  keepspaces=true,
 }
 
 % --- Claim tags (CLM-/INC-/EV-, "% CLAIM:" comments) -------------------------
