@@ -51,13 +51,7 @@ made different choices. Coordination ran through conventional development
 artifacts (Issues, worktrees, PRs, reviews, and CI) without an explicit
 proof DAG, a blueprint language, or fixed mathematical agent roles; the
 dependency structure of the mathematics was carried by the Lean sources
-and the author's Issue scoping. LeanMarathon reports ablations of two
-design choices, and neither paper isolates the contribution of each
-architectural component, so the comparison does not show either
-arrangement to be superior. The observation supported here is narrower: a
-six-week formalization of this size was coordinated mainly through
-persistent development artifacts. Whether stronger models reduce the
-orchestration structure required cannot be settled by one case.
+and the author's Issue scoping.
 
 The present study examines one deep formalization under a single
 author and retains evidence about its incidents and agent sessions.
@@ -65,8 +59,7 @@ Agentic theorem proving systems are commonly evaluated through proof
 search or benchmarks~\cite{yang2023leandojo,
 deepmind2025alphaproof}. Studies of autonomous task
 horizons and pull requests (PRs) written by agents motivate reliability
-questions~\cite{metr2025longtasks,agenticprs2026security}; agent-authored
-PRs are established practice, and the workflow used here is conventional.
+questions~\cite{metr2025longtasks,agenticprs2026security}.
 Lean Eval fixes the statement, the supplied dependencies, and the trusted
 scaffolding in a generated workspace, then scores whether a comparator
 accepts the submitted solution~\cite{leaneval2026repo,
