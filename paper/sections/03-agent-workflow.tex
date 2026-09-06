@@ -68,14 +68,15 @@ conclusion, and permitted proof boundary, which exposed the mathematical
 contract to review. % CLAIM: CLM-009
 
 The main orchestrator assigned agents and checked their returned artifacts
-without editing Lean files itself.
-\texttt{github-driven-workflow}, the repository's standing workflow rule,
-required every change to begin with an Issue. An implementing agent
-received its own branch and Git worktree, then
-returned a committed candidate through a GitHub PR rather than pushing to
-the main branch. A PR could merge only after the checks relevant to its
-changed artifacts had passed, an independent reviewer had left an
-attributable result, and all review threads were resolved.
+without editing Lean files itself. A standing repository rule required
+every change to begin with an Issue; the workflow was otherwise the
+conventional sequence of Issue, branch and worktree, PR, and review. An
+implementing agent received its own branch and
+Git worktree, then returned a committed candidate through a GitHub PR
+rather than pushing to the main branch. A PR could merge only after the
+checks relevant to its changed artifacts had passed, an independent
+reviewer had left an attributable result, and all review threads were
+resolved.
 
 Issue scope, review decisions, and merge authority were recorded in
 repository and GitHub artifacts rather than retained only in an agent

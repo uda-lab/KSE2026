@@ -16,19 +16,30 @@ Cases A and B show this review happening before merge and only at release
 preparation, a contrast consistent with the value of independent statement
 review. % CLAIM: CLM-005, INC-001, INC-002
 
-\emph{Use the GitHub workflow to route mathematical feedback.}
-The mathematical value of \texttt{github-driven-workflow} came from its
-routing rule: semantic findings return to the author and the issue
+\emph{Route feedback through durable artifacts.}
+The workflow's value for the mathematics came from its routing rule: semantic findings return to the author and the issue
 contract, implementation findings return to the worktree, and the PR
 preserves the candidate, the applicable checks, and the decision in one
-durable record. % CLAIM: CLM-007, CLM-009, EV-2076, EV-1669
+durable record. In platform-neutral terms, the structure is a versioned
+task contract, an isolated candidate change, a
+durable review record attached to that candidate, semantic and mechanical
+checks run independently of the implementer, integration gated on those
+checks and on an attributable review, and project state kept outside any
+single agent session. In this project the contract was a GitHub Issue;
+the candidate was a branch in its own Git worktree; the review record was
+the PR and its threads; and the persistent state was the repository
+together with the Issue and PR record. This mapping is one implementation
+of the structure. The July handover to a different orchestrating model
+(Section~\ref{sec:workflow}) continued the workflow from those artifacts.
+% CLAIM: CLM-007, CLM-009, EV-2076, EV-1669
 
 \emph{Separate observation from modification.}
 A read-only scout inspected repository assumptions, while specialist
 reviewers examined mathematical scope, module structure, and the public
 declaration inventory. These roles received only the authority their task
-needed. The declaration comparison in PR~\#120 found a
-missing theorem after both the build and a structural review had passed.
+needed. The declaration comparison after the refactor in
+Section~\ref{sec:incidents} (PR~\#120) found a missing theorem after both
+the build and a structural review had passed.
 % CLAIM: CLM-007, CLM-008, CLM-009, INC-004
 
 \emph{Place resource rules in the dispatch path.}

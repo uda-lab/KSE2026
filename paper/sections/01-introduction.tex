@@ -14,6 +14,9 @@ Lean~4~\cite{moura2021lean4} development on
 mathlib~\cite{mathlib2020}, with capstone existence theorems on the
 three dimensional torus and on $\mathbb{R}^3$~\cite{leray1934,hopf1951,
 lerayhopf2026repo}. % CLAIM: CLM-001
+The theorem is classical; the mathematical contribution is its
+machine-checked formalization within the scope stated in
+Section~\ref{sec:formalization}.
 To our knowledge, no prior machine-checked formalization establishes
 the existence of Leray--Hopf weak solutions to the three-dimensional
 Navier--Stokes equations. % CLAIM: CLM-006
@@ -31,15 +34,39 @@ coordinated through blueprints in the Odd Order Theorem and the Liquid
 Tensor Experiment~\cite{gonthier2013oddorder, commelin2023abstraction}.
 TauCeti uses human governance and a standing review rubric for
 a Lean library written by AI~\cite{tauceti2026}. % CLAIM: CLM-010
-The present study instead
-examines one deep formalization under a single author and
-retains evidence about its incidents and agent sessions.
 
+The closest engineering comparison is
+LeanMarathon~\cite{zhang2026leanmarathon}, a multi-agent harness for
+long-horizon Lean autoformalization. Its central abstraction is an
+evolving blueprint: a Lean file that holds the formal proof skeleton, a
+natural-language proof graph, and the shared record of the run. Four
+agents with fixed roles (Blueprinter, Target-Reviewer, Worker, and
+Refiner) construct, audit, prove, and repair the blueprint, and a
+two-stage orchestrator first stabilizes the target statements by
+adversarial review and then discharges the proof directed acyclic graph
+(DAG) from its current leaves upward in parallel, CI-gated rounds. In
+three autonomous runs it formalized seven target theorems from two
+research papers with no remaining \texttt{sorry}. The present project
+made different choices. Coordination ran through conventional development
+artifacts (Issues, worktrees, PRs, reviews, and CI) without an explicit
+proof DAG, a blueprint language, or fixed mathematical agent roles; the
+dependency structure of the mathematics was carried by the Lean sources
+and the author's Issue scoping. LeanMarathon reports ablations of two
+design choices, and neither paper isolates the contribution of each
+architectural component, so the comparison does not show either
+arrangement to be superior. The observation supported here is narrower: a
+six-week formalization of this size was coordinated mainly through
+persistent development artifacts. Whether stronger models reduce the
+orchestration structure required cannot be settled by one case.
+
+The present study examines one deep formalization under a single
+author and retains evidence about its incidents and agent sessions.
 Agentic theorem proving systems are commonly evaluated through proof
 search or benchmarks~\cite{yang2023leandojo,
 deepmind2025alphaproof}. Studies of autonomous task
 horizons and pull requests (PRs) written by agents motivate reliability
-questions~\cite{metr2025longtasks,agenticprs2026security}.
+questions~\cite{metr2025longtasks,agenticprs2026security}; agent-authored
+PRs are established practice, and the workflow used here is conventional.
 Lean Eval fixes the statement, the supplied dependencies, and the trusted
 scaffolding in a generated workspace, then scores whether a comparator
 accepts the submitted solution~\cite{leaneval2026repo,
@@ -52,15 +79,16 @@ incidents and resource use in the runtime environment.
 This paper makes three contributions:
 \begin{enumerate}
 \item A completed Lean~4 and mathlib formalization, with no project
-  axioms, of the existence of Leray--Hopf weak solutions on
-  $\mathbb{T}^3$ and $\mathbb{R}^3$, whose exact scope is independently
-  inspectable at a pinned release.
-\item A harness defined by the author: the orchestration layer connecting
-  GitHub Issues, Git worktrees, PRs, specialist agents, and the
-  constrained runtime environment. Issue scope, review decisions, and
-  merge authority are recorded outside agent sessions, checks are selected
-  according to the changed artifact, and documented incidents show those
-  checks' observed reach and limits.
+  axioms, of the classical existence theorem for Leray--Hopf weak
+  solutions on $\mathbb{T}^3$ and $\mathbb{R}^3$, whose exact scope is
+  independently inspectable at a pinned release.
+\item An empirical account of the six-week agent-driven development. The
+  author's harness connected a conventional Issue, worktree, PR, and
+  review workflow with specialist agents and a constrained runtime
+  environment; Issue scope, review decisions, and merge authority were
+  recorded outside agent sessions, checks were selected according to the
+  changed artifact, and four documented incidents show those checks'
+  observed reach and limits.
   % CLAIM: CLM-005, CLM-007, CLM-008, CLM-009
 \item An evidence method combining retained session logs, claim-to-evidence
   verification, and cost reconciliation, which supports auditable

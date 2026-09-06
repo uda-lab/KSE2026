@@ -78,13 +78,14 @@ proof kernel: the kernel checks a theorem against its stated type, but it
 does not choose the intended statement, preserve a public interface during
 refactoring, or manage the agents and computing resources used to produce
 the proof. We report a Lean~4 and mathlib formalization, with no project
-axioms, of the existence of Leray--Hopf weak solutions to the unforced
-Navier--Stokes equations on $\mathbb{T}^3$ and $\mathbb{R}^3$; to our
-knowledge, no prior machine-checked formalization establishes this
-three-dimensional weak existence theorem. During six weeks of development,
-a workflow defined by the author routed GitHub Issues through isolated Git
-worktrees and pull requests, and a harness selected mathematical, Lean,
-interface, and resource checks according to the changed artifact. Four
+axioms, of the classical existence theorem for Leray--Hopf weak solutions
+to the unforced Navier--Stokes equations on $\mathbb{T}^3$ and
+$\mathbb{R}^3$; to our knowledge no prior machine-checked formalization
+establishes it in three dimensions. During
+six weeks of development, a conventional GitHub-based workflow routed
+Issues through isolated Git worktrees and pull requests, and a harness
+assembled by the author selected mathematical, Lean, interface, and
+resource checks according to the changed artifact. Four
 incidents show where these checks detected defects and where they did not,
 and a claim-to-evidence method links the paper's tagged claims to
 redacted session records, repository history, verification results, cost
