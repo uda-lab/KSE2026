@@ -1,160 +1,140 @@
 \section{Incidents and Recovery}\label{sec:incidents}
 
-A successful Lean build establishes that the declarations in the checked
-dependency graph are well typed. The four cases below concern boundaries it
-does not reach: whether a theorem states the intended mathematics, whether
-a refactor preserved every public declaration, and whether the runtime can
-complete the next build. The evidence combines repository records with six
-agent sessions selected for their reconstruction value, neither randomly
-nor exhaustively, so the cases document observed failures and
-recoveries rather than failure rates. PR numbers refer to the leray-hopf
-repository~\cite{lerayhopf2026repo}; the cases do not depend on them.
+A successful Lean build establishes that the checked declarations are
+well typed. The four cases below concern boundaries it does not reach:
+whether a theorem states the intended mathematics, whether a refactor
+preserved every public declaration, and whether the runtime can complete
+the next build. The evidence combines repository records with the six selected sessions
+of Section~\ref{sec:workflow}, so the cases document observed failures
+and recoveries rather than failure rates. PR numbers refer to the leray-hopf
+repository~\cite{lerayhopf2026repo}. The cases do not depend on them.
 % CLAIM: CLM-004, CLM-008
 
 \subsection{Statement correctness}\label{sec:inc001}
 
 \emph{Case A. A false generalization detected before release.}
 The limit passage takes place in an evolution triple
-$V \hookrightarrow H \hookrightarrow V'$; in the classical theory, $H$ is
-the divergence-free $L^2$ space and $V$ its $H^1$ subspace. A standard
-lemma states that if $u \in L^2(0,T;V)$ and its weak time derivative
-satisfies $u' \in L^2(0,T;V')$, then $u$ agrees almost everywhere with a
-function continuous into $H$; classically this is what gives a weak
-solution a value at every time. The exponents matter because the proof
-integrates the pairing $t \mapsto \langle u'(t), u(t)\rangle$ over time,
-which Cauchy--Schwarz makes integrable when both exponents equal~2. A
-public lemma in the project, declared over an abstract triple, asserted
-the conclusion for arbitrary exponents $p,q\geq 1$, with
-$u \in L^p(0,T;V)$ and $u' \in L^q(0,T;V')$, although the only proof
-route examined was the case $p=q=2$. The declaration
-carried an explicit \texttt{sorry}, and a later proof attempt checked only
-that no capstone theorem depended on it. The false general statement
-remained public for about a month and was repeated in project
-documentation. % CLAIM: CLM-008, INC-001
+$V \hookrightarrow H \hookrightarrow V'$. Classically, $H$ is the
+divergence-free $L^2$ space and $V$ its $H^1$ subspace. A standard lemma
+states that if $u \in L^2(0,T;V)$ and its weak time derivative satisfies
+$u' \in L^2(0,T;V')$, then $u$ agrees almost everywhere with a function
+continuous into $H$. The exponents matter because the proof integrates the
+pairing $\langle u'(t), u(t)\rangle$ over time, which Cauchy--Schwarz makes
+integrable when both equal~2. A public lemma in the project, declared over
+an abstract triple, asserted the conclusion for arbitrary time-integrability
+exponents $p,q\geq 1$ of $u$ and $u'$, although the only proof route
+examined was $p=q=2$. The declaration carried an explicit \texttt{sorry},
+and a later proof attempt checked only that no capstone theorem depended on
+it. The false statement remained public for about a month. % CLAIM: CLM-008, INC-001
 
 \emph{Detection and response.}
 During release preparation, a statement reviewer tested the boundary case
-$p=q=1$. Take $H=\ell^2$ with a weighted triple in which the $n$th basis
-vector has $V$-norm $2^n$ and $V'$-norm $2^{-n}$, and let $u$ consist of
-spikes of unit $H$-norm along successive basis vectors, placed on
-disjoint intervals of width $4^{-n}$ that accumulate at $t=0$. The widths
-$4^{-n}$ against the $V$-norms $2^n$ make $u \in L^1(0,T;V)$, and the
-$V'$-norms $2^{-n}$ make $u' \in L^1(0,T;V')$, so the stated hypotheses
-hold, but the unit peaks accumulating at a point admit no
-almost everywhere equal representative continuous into $H$. The problem
-was therefore the proposition, not a difficult proof. The repair restricted
-the declaration to $p=q=2$ and moved it outside the public imports
-(PR~\#162). A follow-up added a statement card recording the exact type,
-the literature reference, and the boundary cases checked, together with a
-regression check that fails if the unrestricted signature reappears or a
-placeholder lacks a card (PR~\#170).
+$p=q=1$. In a weighted triple on $\ell^2$, a sequence of spikes of unit
+$H$-norm on disjoint intervals accumulating at $t=0$ satisfies both $L^1$
+hypotheses yet has no representative continuous into $H$. The problem was
+therefore the proposition, not a difficult proof. The repair restricted the
+declaration to $p=q=2$ and moved it outside the public imports
+(PR~\#162). A follow-up recorded the construction in a postmortem and
+added a statement card and a regression check against the unrestricted
+signature (PR~\#170).
 % CLAIM: CLM-008, INC-001
 
 \emph{Lesson.}
-A placeholder records only that a proof is absent; it provides no evidence
-that the proposition is true. Before proof search, reviewers should test the
-boundary cases admitted by a public statement, especially when its
-quantifiers or exponents exceed those used in the motivating argument.
+A placeholder records only that a proof is absent, not that the
+proposition is true. Before proof search, reviewers should test the
+boundary cases a public statement admits, especially when its quantifiers
+or exponents exceed those of the motivating argument.
 % CLAIM: CLM-008, INC-001
 
 \emph{Case B. A missing hypothesis found before merge.}
 On $\mathbb{T}^3$ the convection term enters the Galerkin equations
 through the trilinear form $b(u,v,w) = \int (u\cdot\nabla v)\cdot w$, and
 the energy inequality rests on its antisymmetry $b(u,v,w) = -b(u,w,v)$ for
-divergence-free $u$. The Galerkin scheme truncates Fourier modes to a
-finite box, and the truncated form $b_n$ is a finite sum over pairs of
-modes in the box. A second placeholder asserted antisymmetry of $b_n$ for
-arbitrary $v$ and $w$. The standard proof, however, reindexes the
-inner sum by an involution of the modes, which stays inside the box only
-when the Fourier coefficients of $v$ and $w$ vanish outside it, that is,
-when both lie in the finite projection space $V_n$. Two proof revisions had
-attempted the unrestricted statement before an independent reviewer
-identified this missing closure condition. % CLAIM: CLM-008, INC-002
+divergence-free $u$. The scheme truncates Fourier modes to a finite box. A
+second placeholder asserted antisymmetry of the truncated form $b_n$ for
+arbitrary $v$ and $w$. The proof reindexes the
+modes by an involution that stays inside the box only when the Fourier
+coefficients of $v$ and $w$ vanish outside it, that is, when both lie in
+the projection space $V_n$. Two proof revisions had attempted the
+unrestricted statement before an independent reviewer identified this
+missing closure condition. % CLAIM: CLM-008, INC-002
 
 \emph{Detection and response.}
-The reviewer tested inputs outside $V_n$. A numerical diagnostic gave a
-discrepancy between $b_n(u,v,w)$ and $-b_n(u,w,v)$ of approximately $80.7$
-without the projection hypotheses and approximately $10^{-13}$ after
-imposing them. These values corroborated the structural diagnosis; they
-were not a certified counterexample. The repair added the two hypotheses
-$P_n v = v$ and $P_n w = w$, where $P_n$ is the projection onto $V_n$,
-completed the Lean proof, and removed the placeholder before merge
-(PR~\#27). % CLAIM: CLM-008, INC-002
+The reviewer tested inputs outside $V_n$. A numerical diagnostic showed a
+discrepancy of approximately $80.7$ without the projection hypotheses and
+about $10^{-13}$ with them. These values corroborated the structural
+diagnosis but were not a certified counterexample. The repair added the hypotheses $P_n v = v$
+and $P_n w = w$ for the projection $P_n$ onto $V_n$, completed the Lean
+proof, and removed the placeholder before merge (PR~\#27).
+% CLAIM: CLM-008, INC-002
 
 \emph{Lesson.}
 For identities derived from truncation or projection, review should test
-inputs outside the invariant subspace. Case B shows a defect caught by that
-review before merge, whereas the analogous review in Case A came only at
-release preparation. % CLAIM: CLM-005, CLM-008, INC-001, INC-002
+inputs outside the invariant subspace. % CLAIM: CLM-005, CLM-008, INC-001, INC-002
 
 \subsection{Public declarations during refactoring}
 
-The construction of the convection form on $\mathbb{T}^3$ and on
-$\mathbb{R}^3$ shared a layer of tensor and gluing lemmas that had been
-written twice, once per domain. A refactor replaced both copies with
-instances of a single parametrized module and was required to preserve
-every public theorem of each domain file, most as thin instantiations of
-the shared one (PR~\#120). The refactored code built successfully, but one
-public theorem on the $\mathbb{R}^3$ side, which had no downstream users,
-was omitted from the list of theorems to reconnect and disappeared, so
-neither the Lean build nor an earlier review of module structure revealed
-the omission. % CLAIM: CLM-008, INC-004
+The convection-form construction on $\mathbb{T}^3$ and $\mathbb{R}^3$
+shared a layer of tensor and gluing lemmas written twice, once per domain.
+A refactor replaced both copies with instances of one parametrized module
+and was required to preserve every public theorem of each domain file
+(PR~\#120). The code built, but one public theorem on the $\mathbb{R}^3$
+side, with no downstream users, was omitted from the theorems to reconnect
+and disappeared. Neither the build nor an earlier review of module
+structure noticed. % CLAIM: CLM-008, INC-004
 
 \emph{Detection and response.}
 A separate reviewer compared the public declaration inventory before and
-after the refactor, statement by statement. The missing theorem was
-restored as a thin wrapper around the shared implementation with its
-original statement, and the reviewer repeated the comparison before merge.
-% CLAIM: CLM-008, INC-004
+after the refactor, statement by statement. The theorem was restored with
+its original statement, and the reviewer repeated the comparison before
+merge. % CLAIM: CLM-008, INC-004
 
 \emph{Lesson.}
-When a refactor promises interface preservation, the review target must be
-the complete public declaration set, including declarations with no
-current users. A build tests dependencies. An inventory comparison tests
+When a refactor promises interface preservation, the review target is the
+complete public declaration set, including declarations with no current
+users. A build tests dependencies. An inventory comparison tests
 preservation. % CLAIM: CLM-008, INC-004
 
 \subsection{Resource availability and orchestration}\label{sec:inc005}
 
-The VPS container had an effective memory limit of 3.42\,GiB and no swap.
-Review jobs from the previous night left fourteen helper process chains
-running after their Git worktrees were inactive, consuming about
+The VPS container had a memory limit of 3.42\,GiB and no swap. Review
+jobs from the previous night had left fourteen helper process chains
+running after their worktrees became inactive, holding about
 1--1.5\,GiB. At the same time, the orchestrator misclassified a slow agent
-as inactive and assigned a replacement to the same Git worktree. The
+as inactive and assigned a replacement to the same worktree. The
 replacement did not receive the shared cache rule and started a full
-mathlib build. Under this load, Lean builds repeatedly ended with
-exit code 137 and no compiler diagnostic. % CLAIM: CLM-008, INC-005
+mathlib build. Under this load, Lean builds repeatedly ended with exit
+code 137 and no compiler diagnostic. % CLAIM: CLM-008, INC-005
 
 \emph{Detection and response.}
 Monitoring had covered the visible Lean process rather than memory
-available to the entire container. Roughly seventy minutes after an earlier
-status check had reported the container as healthy on that basis, the
-author's next status request reached the session only after an eight-minute
-delay, and was followed at once by the author's explicit instruction to
-kill stale processes. Only then did a memory check report 606\,MiB
-available, and inspection of each process working directory identified the
-fourteen stale chains. A cumulative kill counter maintained by the Linux
-control group (cgroup) subsystem, read during the response, was taken at
-the time as confirmation that the out of memory (OOM) killer had terminated
-the failed builds; an audit of host kernel logs later overturned that
-reading, because every counted kill belonged to a host-level OOM event two
-days earlier and no kernel OOM occurred on the incident day. The mechanism
-that terminated the builds remains unidentified. Removing the stale
-processes raised available memory to 2.2\,GiB. The worktree returned to the
-original agent, the duplicate stopped, and the build completed under a
-global lock. The three PRs blocked by the failed builds merged later that
-day (PRs~\#174--\#176).
+available to the whole container. Roughly seventy minutes after a status
+check had reported the container healthy on that basis, the author's next
+status request arrived after an eight-minute delay, followed at once by
+an instruction to kill stale processes.
+Only then did a memory check report 606\,MiB available, and per-process
+inspection identified the fourteen stale chains. A
+cumulative kill counter kept by the Linux control group (cgroup) subsystem
+was read as confirmation that the out of memory (OOM) killer had
+terminated the builds; an audit of host kernel logs later overturned that
+reading, because every counted kill belonged to a host-level OOM event
+two days earlier and no kernel OOM occurred on the incident day. The
+mechanism that terminated the builds remains unidentified. Removing the
+stale processes raised available memory to 2.2\,GiB. The worktree returned
+to the original agent, the duplicate stopped, and the build completed
+under a global lock. The three PRs blocked by the failed builds merged
+later that day (PRs~\#174--\#176).
 % CLAIM: CLM-008, INC-005
 
 \emph{Lesson.}
 An orchestrator must observe the complete process tree and available
 memory, not only the foreground prover. After the incident, helper-process
 cleanup, cache reuse, build serialization, and a pre-build memory check
-entered the standing instructions and dispatch prompts. Once
-monitoring tracked memory
-available to the whole container, it also detected a later peak caused by
-one legitimate build, so measuring the resource directly is more general
-than cleanup tailored to one cause. The
-corrected diagnosis adds an evidence rule: a causal account assembled only
-from observations inside the agent session can misattribute the mechanism,
-so it must be checked against records outside the session.
+entered the standing instructions and dispatch prompts. Container-wide
+monitoring later also detected a peak caused by one legitimate build, so
+measuring the resource directly is more general than cleanup tailored to
+one cause. The corrected diagnosis adds an evidence rule: a causal account
+assembled only from observations inside the agent session can
+misattribute the mechanism and must be checked against records outside
+the session.
 % CLAIM: CLM-008, INC-005

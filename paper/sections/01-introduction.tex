@@ -1,11 +1,11 @@
 \section{Introduction}\label{sec:introduction}
 
 Large language model agents increasingly work on formalizations that span
-weeks rather than a single proof search. Such a project, divided among many
-GitHub Issues, branches, agents, and reviews, must do more than obtain
-proofs the kernel accepts: it must also decide which type should be proved,
-preserve the intended public declarations during refactoring, and verify
-the operating state behind progress reports.
+weeks rather than a single proof search. Such a project, divided among
+many GitHub Issues, branches, agents, and reviews, must do more than obtain proofs
+the kernel accepts: it must decide which type should be proved, preserve
+public declarations during refactoring, and verify the operating state
+behind progress reports.
 
 This paper studies those obligations through six weeks of work on the
 existence of Leray--Hopf weak solutions to the unforced incompressible
@@ -32,26 +32,21 @@ equation, conducted with AI assistance~\cite{miller2026vlasov}.
 Large collaborative formalizations offer a second comparison. Human teams
 coordinated through blueprints in the Odd Order Theorem and the Liquid
 Tensor Experiment~\cite{gonthier2013oddorder, commelin2023abstraction}.
-TauCeti uses human governance and a standing review rubric for
-a Lean library written by AI~\cite{tauceti2026}. % CLAIM: CLM-010
+TauCeti uses human governance and a standing review rubric for a Lean
+library written by AI~\cite{tauceti2026}. % CLAIM: CLM-010
 
 The closest engineering comparison is
 LeanMarathon~\cite{zhang2026leanmarathon}, a multi-agent harness for
-long-horizon Lean autoformalization. Its central abstraction is an
-evolving blueprint: a Lean file that holds the formal proof skeleton, a
-natural-language proof graph, and the shared record of the run. Four
-agents with fixed roles (Blueprinter, Target-Reviewer, Worker, and
-Refiner) construct, audit, prove, and repair the blueprint, and a
-two-stage orchestrator first stabilizes the target statements by
-adversarial review and then discharges the proof directed acyclic graph
-(DAG) from its current leaves upward in parallel, CI-gated rounds. In
-three autonomous runs it formalized seven target theorems from two
-research papers with no remaining \texttt{sorry}. The present project
-made different choices. Coordination ran through conventional development
-artifacts (Issues, worktrees, PRs, reviews, and CI) without an explicit
-proof DAG, a blueprint language, or fixed mathematical agent roles; the
-dependency structure of the mathematics was carried by the Lean sources
-and the author's Issue scoping.
+long-horizon Lean autoformalization. It coordinates four fixed agent
+roles (Blueprinter, Target-Reviewer, Worker, and Refiner) through an
+explicit blueprint that serves as proof skeleton, proof directed acyclic
+graph (DAG), and shared record. It discharges the DAG from its leaves in
+CI-gated rounds. The present project instead coordinated a six-week
+formalization mainly through conventional development artifacts (Issues,
+worktrees, PRs, reviews, CI, and the evolving Lean repository), without
+an explicit proof DAG, a blueprint language, or fixed mathematics-specific
+agent roles. The dependency structure of the mathematics was carried by
+the Lean sources and the author's Issue scoping.
 
 The present study examines one deep formalization under a single
 author and retains evidence about its incidents and agent sessions.
@@ -64,10 +59,10 @@ Lean Eval fixes the statement, the supplied dependencies, and the trusted
 scaffolding in a generated workspace, then scores whether a comparator
 accepts the submitted solution~\cite{leaneval2026repo,
 leaneval2026site}. % CLAIM: CLM-011
-Our unit of analysis is instead a repository-level formalization campaign,
-whose preserved records trace changes from Issue definition through
-implementation, semantic review, and mechanical checks, and also document
-incidents and resource use in the runtime environment.
+Our unit of analysis is instead a repository-level formalization
+campaign whose preserved records trace changes from Issue definition
+through review and mechanical checks, and document incidents and
+resource use.
 
 This paper makes three contributions:
 \begin{enumerate}
@@ -77,23 +72,16 @@ This paper makes three contributions:
   independently inspectable at a pinned release.
 \item An empirical account of the six-week agent-driven development. The
   author's harness connected a conventional Issue, worktree, PR, and
-  review workflow with specialist agents and a constrained runtime
-  environment; Issue scope, review decisions, and merge authority were
-  recorded outside agent sessions, checks were selected according to the
-  changed artifact, and four documented incidents show those checks'
-  observed reach and limits.
+  review workflow with specialist agents and a constrained runtime,
+  selecting checks by the changed artifact. Four documented incidents show
+  those checks' observed reach and limits.
   % CLAIM: CLM-005, CLM-007, CLM-008, CLM-009
 \item An evidence method combining retained session logs, claim-to-evidence
   verification, and cost reconciliation, which supports auditable
-  statements about the project while making coverage gaps explicit. The
-  retained records yield at least 15.1M output tokens, a coarse
-  estimate of 199.1h of active session time, and a lower-bound
-  API-price-equivalent estimate of \$6{,}973 --- not an amount billed
+  statements about the project, including token use and cost estimates,
+  while making coverage gaps explicit
   (Section~\ref{sec:workflow}).
   % CLAIM: CLM-002, CLM-003
 \end{enumerate}
 
-Section~\ref{sec:formalization} states the two capstone theorems and
-Section~\ref{sec:workflow} presents the harness.
-Section~\ref{sec:incidents} examines four incidents at its boundaries, and
-Section~\ref{sec:discussion} gives recommendations and limitations.
+
