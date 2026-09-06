@@ -112,8 +112,8 @@ code 137 and no compiler diagnostic. % CLAIM: CLM-008, INC-005
 Monitoring had covered the visible Lean process rather than memory
 available to the whole container. Roughly seventy minutes after a status
 check had reported the container healthy on that basis, the author's next
-status request reached the session only after an eight-minute delay and
-was followed at once by the author's instruction to kill stale processes.
+status request arrived after an eight-minute delay, followed at once by
+an instruction to kill stale processes.
 Only then did a memory check report 606\,MiB available, and per-process
 inspection identified the fourteen stale chains. A
 cumulative kill counter kept by the Linux control group (cgroup) subsystem

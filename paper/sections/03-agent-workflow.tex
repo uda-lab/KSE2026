@@ -10,7 +10,7 @@
 % the path; the harness reaches it through git and the gh CLI. GitHub is not
 % an actor but the medium that records Issues, PRs, and reviews.
 \centering
-\includegraphics[width=0.85\textwidth]{figures/author-interface-provenance.pdf}
+\includegraphics[width=\textwidth]{figures/author-interface-provenance.pdf}
 \caption{Author, ChatGPT, and the agent harness above the shared GitHub
 record. The author holds final authority and hands an issue contract to the
 harness; ChatGPT is advisory, returns material to the author as a summary
@@ -32,7 +32,7 @@ expands the Agent harness box.}\label{fig:author-interface}
 % findings return to implementation. Runtime controls support orchestration
 % and execution.
 \centering
-\includegraphics[width=0.85\textwidth]{figures/leray-hopf-agent-harness.pdf}
+\includegraphics[width=\textwidth]{figures/leray-hopf-agent-harness.pdf}
 \caption{End-state architecture of the agent harness, expanding Figure~\ref{fig:author-interface}. Under the author's authority, an orchestrator routes each Issue through an implementing worktree and a PR; semantic feedback returns to the author and the issue contract, technical rework to the worktree. Semantic and Lean checks are selected by the changed artifact. Runtime governance supports execution. Controls entered the project at different stages.}\label{fig:agent-harness}
 \end{figure*}
 
@@ -113,10 +113,9 @@ files had one designated writer. An apparent loss of contact did not by itself r
 since a replacement there could duplicate edits and builds; the
 orchestrator first checked the agent's process state. % CLAIM: CLM-007, EV-2076, EV-1669, EV-0247
 
-Heavy Lean builds shared a cache and ran under a global lock; before
-starting one, the harness checked memory available to the whole container,
-removed helper processes left by completed jobs, and under pressure
-reduced Lean's thread count. % CLAIM: CLM-007, CLM-009, EV-0247
+Heavy Lean builds shared a cache and ran under a global lock after a
+container-wide memory check and helper-process cleanup
+(Section~\ref{sec:inc005}). % CLAIM: CLM-007, CLM-009, EV-0247
 
 \subsection{Evidence and measured use}
 
