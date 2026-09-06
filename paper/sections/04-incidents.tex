@@ -7,14 +7,14 @@ preserved every public declaration, and whether the runtime can complete
 the next build. The evidence combines repository records with the six selected sessions
 of Section~\ref{sec:workflow}, so the cases document observed failures
 and recoveries rather than failure rates. PR numbers refer to the leray-hopf
-repository~\cite{lerayhopf2026repo}; the cases do not depend on them.
+repository~\cite{lerayhopf2026repo}. The cases do not depend on them.
 % CLAIM: CLM-004, CLM-008
 
 \subsection{Statement correctness}\label{sec:inc001}
 
 \emph{Case A. A false generalization detected before release.}
 The limit passage takes place in an evolution triple
-$V \hookrightarrow H \hookrightarrow V'$; classically $H$ is the
+$V \hookrightarrow H \hookrightarrow V'$. Classically, $H$ is the
 divergence-free $L^2$ space and $V$ its $H^1$ subspace. A standard lemma
 states that if $u \in L^2(0,T;V)$ and its weak time derivative satisfies
 $u' \in L^2(0,T;V')$, then $u$ agrees almost everywhere with a function
@@ -25,18 +25,17 @@ an abstract triple, asserted the conclusion for arbitrary time-integrability
 exponents $p,q\geq 1$ of $u$ and $u'$, although the only proof route
 examined was $p=q=2$. The declaration carried an explicit \texttt{sorry},
 and a later proof attempt checked only that no capstone theorem depended on
-it. The false statement remained public for about a month and was repeated
-in project documentation. % CLAIM: CLM-008, INC-001
+it. The false statement remained public for about a month. % CLAIM: CLM-008, INC-001
 
 \emph{Detection and response.}
 During release preparation, a statement reviewer tested the boundary case
-$p=q=1$: in a weighted triple on $\ell^2$, a sequence of spikes of unit
+$p=q=1$. In a weighted triple on $\ell^2$, a sequence of spikes of unit
 $H$-norm on disjoint intervals accumulating at $t=0$ satisfies both $L^1$
 hypotheses yet has no representative continuous into $H$. The problem was
 therefore the proposition, not a difficult proof. The repair restricted the
 declaration to $p=q=2$ and moved it outside the public imports
-(PR~\#162); a follow-up recorded the construction in a postmortem, added
-a statement card and a regression check against the unrestricted
+(PR~\#162). A follow-up recorded the construction in a postmortem and
+added a statement card and a regression check against the unrestricted
 signature (PR~\#170).
 % CLAIM: CLM-008, INC-001
 
@@ -49,11 +48,11 @@ or exponents exceed those of the motivating argument.
 
 \emph{Case B. A missing hypothesis found before merge.}
 On $\mathbb{T}^3$ the convection term enters the Galerkin equations
-through the trilinear form $b(u,v,w) = \int (u\cdot\nabla v)\cdot w$,
-whose antisymmetry $b(u,v,w) = -b(u,w,v)$ for divergence-free $u$
-underlies the energy inequality. The scheme truncates Fourier modes to a
-finite box; a second placeholder asserted antisymmetry of the
-truncated form $b_n$ for arbitrary $v$ and $w$. The proof reindexes the
+through the trilinear form $b(u,v,w) = \int (u\cdot\nabla v)\cdot w$, and
+the energy inequality rests on its antisymmetry $b(u,v,w) = -b(u,w,v)$ for
+divergence-free $u$. The scheme truncates Fourier modes to a finite box. A
+second placeholder asserted antisymmetry of the truncated form $b_n$ for
+arbitrary $v$ and $w$. The proof reindexes the
 modes by an involution that stays inside the box only when the Fourier
 coefficients of $v$ and $w$ vanish outside it, that is, when both lie in
 the projection space $V_n$. Two proof revisions had attempted the
@@ -61,18 +60,17 @@ unrestricted statement before an independent reviewer identified this
 missing closure condition. % CLAIM: CLM-008, INC-002
 
 \emph{Detection and response.}
-The reviewer tested inputs outside $V_n$; a numerical diagnostic showed a
+The reviewer tested inputs outside $V_n$. A numerical diagnostic showed a
 discrepancy of approximately $80.7$ without the projection hypotheses and
-about $10^{-13}$ with them, corroborating the structural diagnosis without being
-a certified counterexample. The repair added the hypotheses $P_n v = v$
+about $10^{-13}$ with them. These values corroborated the structural
+diagnosis but were not a certified counterexample. The repair added the hypotheses $P_n v = v$
 and $P_n w = w$ for the projection $P_n$ onto $V_n$, completed the Lean
 proof, and removed the placeholder before merge (PR~\#27).
 % CLAIM: CLM-008, INC-002
 
 \emph{Lesson.}
 For identities derived from truncation or projection, review should test
-inputs outside the invariant subspace. Here that review came before
-merge; in Case A it came only at release preparation. % CLAIM: CLM-005, CLM-008, INC-001, INC-002
+inputs outside the invariant subspace. % CLAIM: CLM-005, CLM-008, INC-001, INC-002
 
 \subsection{Public declarations during refactoring}
 
@@ -82,19 +80,19 @@ A refactor replaced both copies with instances of one parametrized module
 and was required to preserve every public theorem of each domain file
 (PR~\#120). The code built, but one public theorem on the $\mathbb{R}^3$
 side, with no downstream users, was omitted from the theorems to reconnect
-and disappeared; neither the build nor an earlier review of module
+and disappeared. Neither the build nor an earlier review of module
 structure noticed. % CLAIM: CLM-008, INC-004
 
 \emph{Detection and response.}
 A separate reviewer compared the public declaration inventory before and
-after the refactor, statement by statement, found the omission, and, once
-the theorem was restored with its original statement, repeated the
-comparison before merge. % CLAIM: CLM-008, INC-004
+after the refactor, statement by statement. The theorem was restored with
+its original statement, and the reviewer repeated the comparison before
+merge. % CLAIM: CLM-008, INC-004
 
 \emph{Lesson.}
 When a refactor promises interface preservation, the review target is the
 complete public declaration set, including declarations with no current
-users: a build tests dependencies; an inventory comparison tests
+users. A build tests dependencies. An inventory comparison tests
 preservation. % CLAIM: CLM-008, INC-004
 
 \subsection{Resource availability and orchestration}\label{sec:inc005}
@@ -103,7 +101,7 @@ The VPS container had a memory limit of 3.42\,GiB and no swap. Review
 jobs from the previous night had left fourteen helper process chains
 running after their worktrees became inactive, holding about
 1--1.5\,GiB. At the same time, the orchestrator misclassified a slow agent
-as inactive and assigned a replacement to the same worktree; the
+as inactive and assigned a replacement to the same worktree. The
 replacement did not receive the shared cache rule and started a full
 mathlib build. Under this load, Lean builds repeatedly ended with exit
 code 137 and no compiler diagnostic. % CLAIM: CLM-008, INC-005
@@ -122,7 +120,7 @@ terminated the builds; an audit of host kernel logs later overturned that
 reading, because every counted kill belonged to a host-level OOM event
 two days earlier and no kernel OOM occurred on the incident day. The
 mechanism that terminated the builds remains unidentified. Removing the
-stale processes raised available memory to 2.2\,GiB; the worktree returned
+stale processes raised available memory to 2.2\,GiB. The worktree returned
 to the original agent, the duplicate stopped, and the build completed
 under a global lock. The three PRs blocked by the failed builds merged
 later that day (PRs~\#174--\#176).
@@ -132,11 +130,11 @@ later that day (PRs~\#174--\#176).
 An orchestrator must observe the complete process tree and available
 memory, not only the foreground prover. After the incident, helper-process
 cleanup, cache reuse, build serialization, and a pre-build memory check
-entered the standing instructions and dispatch prompts; container-wide
+entered the standing instructions and dispatch prompts. Container-wide
 monitoring later also detected a peak caused by one legitimate build, so
 measuring the resource directly is more general than cleanup tailored to
 one cause. The corrected diagnosis adds an evidence rule: a causal account
 assembled only from observations inside the agent session can
 misattribute the mechanism and must be checked against records outside
-it.
+the session.
 % CLAIM: CLM-008, INC-005

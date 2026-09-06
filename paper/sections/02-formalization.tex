@@ -17,13 +17,13 @@ A weak solution is represented by a velocity field
 $u : \mathrm{Time} \to D_\sigma$, where $D_\sigma$ is the closed subspace of
 divergence-free fields in $L^2$ of the respective domain (Lean types
 \texttt{L2Sigma} and \texttt{L2Sigma\_R3}), together with proofs of the
-properties in Table~\ref{tab:solution-fields}; the two domains'
+properties in Table~\ref{tab:solution-fields}. The two domains'
 abbreviations, \texttt{LerayHopfSolutionFull} and
 \texttt{LerayHopfSolutionFull\_R3}, instantiate one common structure.
 
-The weak formulation is restricted to test functions $\psi(t)w(x)$
-separated in time and space; general tests $\varphi(t,x)$ are outside the
-formalized relation. The initial trace is the one-sided strong limit
+The weak formulation is restricted to test functions separated in time
+and space, $\psi(t)w(x)$. General tests $\varphi(t,x)$ that depend jointly
+on time and space are outside the formalized relation. The initial trace is the one-sided strong limit
 $u(t)\to u_0$ in the ambient $L^2$ norm as $t\to0^+$; weak continuity on
 the whole interval is not asserted.
 
@@ -101,7 +101,7 @@ domain-specific Aubin--Lions arguments: a spectral decomposition by mode
 on $\mathbb{T}^3$ and step-curve total boundedness in time on
 $\mathbb{R}^3$. Mathlib supplies $L^p$ spaces and the Bochner integral,
 Hilbert-space duality and projection, Fourier analysis, and
-Picard--Lindel\"of ODE theory; the pinned mathlib lacks evolution-triple,
+Picard--Lindel\"of ODE theory. The pinned mathlib lacks evolution-triple,
 Aubin--Lions, and Bochner--Sobolev theory in the time variable. The
 project develops the evolution triple, the Aubin--Lions and weak limit
 packages, the Rellich and Fr\'echet--Kolmogorov compactness arguments, and

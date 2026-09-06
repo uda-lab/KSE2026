@@ -74,9 +74,9 @@ Harness Design and Reliability Lessons}
 
 \begin{abstract}
 Formalization projects that run for weeks require safeguards beyond the
-proof kernel, which checks a theorem against its stated type but does not
-choose the intended statement, preserve a public interface during
-refactoring, or manage the agents and computing resources that produce
+proof kernel: the kernel checks a theorem against its stated type, but it
+does not choose the intended statement, preserve a public interface during
+refactoring, or manage the agents and computing resources used to produce
 the proof. We report a Lean~4 and mathlib formalization, with no project
 axioms, of the classical existence theorem for Leray--Hopf weak solutions
 to the unforced Navier--Stokes equations on $\mathbb{T}^3$ and

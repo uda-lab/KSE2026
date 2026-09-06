@@ -2,7 +2,7 @@
 
 Large language model agents increasingly work on formalizations that span
 weeks rather than a single proof search. Such a project, divided among
-many Issues, branches, agents, and reviews, must do more than obtain proofs
+many GitHub Issues, branches, agents, and reviews, must do more than obtain proofs
 the kernel accepts: it must decide which type should be proved, preserve
 public declarations during refactoring, and verify the operating state
 behind progress reports.
@@ -29,10 +29,10 @@ theory~\cite{armstrong2026degiorginashmoser}, and a formalization of
 well-posedness and the mean-field derivation for the nonlinear Vlasov
 equation, conducted with AI assistance~\cite{miller2026vlasov}.
 
-Large collaborative formalizations offer a second comparison: human teams
+Large collaborative formalizations offer a second comparison. Human teams
 coordinated through blueprints in the Odd Order Theorem and the Liquid
-Tensor Experiment~\cite{gonthier2013oddorder, commelin2023abstraction},
-and TauCeti uses human governance and a standing review rubric for a Lean
+Tensor Experiment~\cite{gonthier2013oddorder, commelin2023abstraction}.
+TauCeti uses human governance and a standing review rubric for a Lean
 library written by AI~\cite{tauceti2026}. % CLAIM: CLM-010
 
 The closest engineering comparison is
@@ -40,12 +40,12 @@ LeanMarathon~\cite{zhang2026leanmarathon}, a multi-agent harness for
 long-horizon Lean autoformalization. It coordinates four fixed agent
 roles (Blueprinter, Target-Reviewer, Worker, and Refiner) through an
 explicit blueprint that serves as proof skeleton, proof directed acyclic
-graph (DAG), and shared record; it discharges the DAG from its leaves in
+graph (DAG), and shared record. It discharges the DAG from its leaves in
 CI-gated rounds. The present project instead coordinated a six-week
 formalization mainly through conventional development artifacts (Issues,
 worktrees, PRs, reviews, CI, and the evolving Lean repository), without
 an explicit proof DAG, a blueprint language, or fixed mathematics-specific
-agent roles; the dependency structure of the mathematics was carried by
+agent roles. The dependency structure of the mathematics was carried by
 the Lean sources and the author's Issue scoping.
 
 The present study examines one deep formalization under a single
@@ -73,7 +73,7 @@ This paper makes three contributions:
 \item An empirical account of the six-week agent-driven development: the
   author's harness connected a conventional Issue, worktree, PR, and
   review workflow with specialist agents and a constrained runtime,
-  selecting checks by the changed artifact; four documented incidents show
+  selecting checks by the changed artifact. Four documented incidents show
   those checks' observed reach and limits.
   % CLAIM: CLM-005, CLM-007, CLM-008, CLM-009
 \item An evidence method combining retained session logs, claim-to-evidence

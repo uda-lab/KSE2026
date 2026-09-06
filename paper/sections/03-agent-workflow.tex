@@ -13,10 +13,10 @@
 \includegraphics[width=\textwidth]{figures/author-interface-provenance.pdf}
 \caption{Author, ChatGPT, and the agent harness above the shared GitHub
 record. The author holds final authority and hands an issue contract to the
-harness; ChatGPT is advisory, returns material to the author as a summary
+harness. ChatGPT is advisory, returns material to the author as a summary
 (the narrowing band), and reaches GitHub only through the official GitHub App
-connector. GitHub is the medium that records Issues, PRs, and reviews;
-implementation runs in local Git worktrees. Figure~\ref{fig:agent-harness}
+connector. GitHub is the medium that records Issues, PRs, and reviews.
+Implementation runs in local Git worktrees. Figure~\ref{fig:agent-harness}
 expands the Agent harness box.}\label{fig:author-interface}
 \end{figure*}
 
@@ -33,25 +33,25 @@ expands the Agent harness box.}\label{fig:author-interface}
 % and execution.
 \centering
 \includegraphics[width=\textwidth]{figures/leray-hopf-agent-harness.pdf}
-\caption{End-state architecture of the agent harness, expanding Figure~\ref{fig:author-interface}. Under the author's authority, an orchestrator routes each Issue through an implementing worktree and a PR; semantic feedback returns to the author and the issue contract, technical rework to the worktree. Semantic and Lean checks are selected by the changed artifact. Runtime governance supports execution. Controls entered the project at different stages.}\label{fig:agent-harness}
+\caption{End-state architecture of the agent harness, expanding Figure~\ref{fig:author-interface}. Under the author's authority, an orchestrator routes each Issue through an implementing worktree and a PR. Semantic feedback returns to the author and the issue contract, technical rework to the worktree. Semantic and Lean checks are selected by the changed artifact. Runtime governance supports execution. Controls entered the project at different stages.}\label{fig:agent-harness}
 \end{figure*}
 
 % Mapping: CLM-007, CLM-009 ← analysis/workflow-evolution.md,
 % session indices 74aab39b 90fa24bb 7e6156bf cd98f32a 7dbee3de 8aed0316.
 Figure~\ref{fig:author-interface} places the work in three parts above one
-shared record: the author held final authority over scope and acceptance;
-ChatGPT supported investigation, synthesis, and drafting without deciding;
-the agent harness carried out issue-scoped work without independent
+shared record. The author held final authority over scope and acceptance.
+ChatGPT supported investigation, synthesis, and drafting without deciding.
+The agent harness carried out issue-scoped work without independent
 authority. % CLAIM: CLM-012
-Figure~\ref{fig:agent-harness} expands that harness; its controls were
+Figure~\ref{fig:agent-harness} expands that harness. Its controls were
 introduced incrementally, including in response to the incidents in
 Section~\ref{sec:incidents}, so the diagram reconstructs the end state. % CLAIM: CLM-007, CLM-009
 
 The work ran on two local computers and an isolated development
-container on a virtual private server (VPS), where many orchestration
-sessions ran in parallel. Agents worked in separate Git worktrees but
-shared the repository, the Lean build cache, and a memory ceiling of
-3.42\,GiB, which made computing resources part of the harness. % CLAIM: CLM-007, CLM-009, EV-0247
+container on a virtual private server (VPS). Many orchestration sessions
+ran in parallel in that container. Agents worked in separate Git worktrees
+but shared the repository, the Lean build cache, and a memory ceiling of
+3.42\,GiB. That sharing made computing resources part of the harness. % CLAIM: CLM-007, CLM-009, EV-0247
 
 \subsection{Author authority and the GitHub workflow}
 
@@ -62,14 +62,14 @@ proof boundary, exposing the mathematical contract to review. % CLAIM: CLM-009
 
 The main orchestrator assigned agents and checked their returned artifacts
 without editing Lean files itself. A standing repository rule required every change to begin with an
-Issue; the workflow was otherwise conventional. An implementing agent received its own branch and Git worktree and
-returned a committed candidate through a PR, which could merge only after
-the checks relevant to its changed artifacts had passed, an independent
-reviewer had left an attributable result, and all review threads were
-resolved.
+Issue. The workflow was otherwise conventional. An implementing agent
+received its own branch and Git worktree and returned a committed
+candidate through a PR. A PR could merge only after the checks relevant
+to its changed artifacts had passed, an independent reviewer had left an
+attributable result, and all review threads were resolved.
 
 Issue scope, review decisions, and merge authority were recorded in
-repository and GitHub artifacts rather than only in an agent session; when
+repository and GitHub artifacts rather than only in an agent session. When
 a different orchestrating model (Fable~5) took over through Google Cloud's
 Vertex AI on July~2--3, it continued the workflow from those artifacts.
 % CLAIM: CLM-003, CLM-007, CLM-009, EV-1681
@@ -85,9 +85,9 @@ declarations. % CLAIM: CLM-007, EV-1669
 
 \emph{Mathematical statement.}
 An agent independent of the implementer checked whether the proposition
-matched the intended mathematics and whether its hypotheses sufficed,
-looking for concrete counterexamples near a boundary of validity before
-proof search continued.
+matched the intended mathematics and whether its hypotheses sufficed.
+For statements near a boundary of validity, the reviewer looked for
+concrete counterexamples before proof search continued.
 % CLAIM: CLM-005, CLM-007, EV-0925
 
 \emph{Lean declaration and assumptions.}
@@ -98,19 +98,19 @@ public root import. % CLAIM: CLM-009
 
 \emph{Public declarations.}
 Refactoring was checked against the preceding inventory of public
-declarations, whether or not anything downstream used them, and against
-statement text when exact preservation was required. % CLAIM: CLM-007, EV-1669
+declarations, whether or not anything downstream used them. When exact
+preservation was required, the comparison also covered statement text. % CLAIM: CLM-007, EV-1669
 
 The PR recorded each check's outcome and the reviewer's identity and
-result alongside the candidate, so a dispatched but unfinished review could
-not stand in for completed assurance.
+result alongside the candidate. A dispatched but unfinished review
+therefore could not stand in for completed assurance.
 % CLAIM: CLM-007, CLM-009, EV-1669
 
 \subsection{Worktree assignment, liveness, and computing resources}
 
 Each Git worktree had one active implementing agent, and shared import
 files had one designated writer. An apparent loss of contact did not by itself reassign the worktree,
-since a replacement there could duplicate edits and builds; the
+because a replacement there could duplicate edits and builds. The
 orchestrator first checked the agent's process state. % CLAIM: CLM-007, EV-2076, EV-1669, EV-0247
 
 Heavy Lean builds shared a cache and ran under a global lock after a
@@ -129,7 +129,7 @@ at most five minutes gives a coarse estimate of 199.1h of active session
 time. Applying published API prices to that use gives \$6{,}973. Apart from
 the Vertex AI phase below, the agents ran on subscription plans rather
 than metered billing, so this is an API-price-equivalent estimate, not an
-amount billed; both the token count and the estimate are lower bounds,
+amount billed. Both the token count and the estimate are lower bounds,
 because some session records are missing. % CLAIM: CLM-002
 
 The July 2--3 completion phase was the one phase billed per token rather
