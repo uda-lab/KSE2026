@@ -74,22 +74,22 @@ Harness Design and Reliability Lessons}
 
 \begin{abstract}
 Formalization projects that run for weeks require safeguards beyond the
-proof kernel: the kernel checks a theorem against its stated type, but it
-does not choose the intended statement, preserve a public interface during
-refactoring, or manage the agents and computing resources used to produce
+proof kernel, which checks a theorem against its stated type but does not
+choose the intended statement, preserve a public interface during
+refactoring, or manage the agents and computing resources that produce
 the proof. We report a Lean~4 and mathlib formalization, with no project
 axioms, of the classical existence theorem for Leray--Hopf weak solutions
 to the unforced Navier--Stokes equations on $\mathbb{T}^3$ and
 $\mathbb{R}^3$; to our knowledge no prior machine-checked formalization
 establishes it in three dimensions. During
 six weeks of development, a conventional GitHub-based workflow routed
-Issues through isolated Git worktrees and pull requests, and a harness
-assembled by the author selected mathematical, Lean, interface, and
-resource checks according to the changed artifact. Four
+Issues through isolated Git worktrees and pull requests, and the author's
+harness selected mathematical, Lean, interface, and resource checks
+according to the changed artifact. Four
 incidents show where these checks detected defects and where they did not,
 and a claim-to-evidence method links the paper's tagged claims to
-redacted session records, repository history, verification results, cost
-estimates, and billing records.
+redacted session records, repository history, verification results, and
+billing records.
 \end{abstract}
 % Abstract claims map: CLM-001 (result), CLM-006 (prior-work comparison),
 % CLM-007, CLM-009 (workflow and harness), CLM-008 (incident account).

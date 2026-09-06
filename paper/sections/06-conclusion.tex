@@ -1,16 +1,15 @@
 \section{Conclusion}\label{sec:conclusion}
 
 We formalized the classical existence theorem for Leray--Hopf weak
-solutions on $\mathbb{T}^3$ and $\mathbb{R}^3$ in Lean~4 and mathlib. At
+solutions on $\mathbb{T}^3$ and $\mathbb{R}^3$ in Lean~4 and mathlib; at
 the pinned release, the two capstone theorems depend on no project axioms.
 % CLAIM: CLM-001
 
-The engineering contribution is an observed division of responsibility.
-The author controls theorem scope, while an orchestrator assigns bounded
-work through GitHub Issues, Git worktrees, and PRs. Specialist reviewers assess the
-statement, Lean assumptions, and public declarations. Issue scope, review
-decisions, and merge authority are preserved in repository and GitHub
-artifacts, and standing dispatch rules govern the machine or container
-resources shared by agents and Lean builds. The incidents show defects
-observed at each boundary in this one supervised project, while the
-evidence record preserves what was checked. % CLAIM: CLM-007, CLM-009
+The engineering contribution is an observed division of responsibility:
+the author controls theorem scope, an orchestrator assigns bounded work
+through task contracts, isolated worktrees, and reviewed PRs, specialist
+reviewers assess the statement, Lean assumptions, and public declarations,
+and standing dispatch rules govern the resources shared by agents and Lean
+builds. The incidents show defects observed at each of these boundaries in
+one supervised project, and the retained evidence records what was
+checked. % CLAIM: CLM-007, CLM-009

@@ -3,75 +3,64 @@
 \subsection{Recommendations}
 
 The principal design question is which artifact each control can assess.
-The observed cases support the following recommendations for projects in
-which agents develop a substantial formalization under a mathematical
-author. % CLAIM: CLM-005, CLM-009
+The observed cases support the following recommendations for agent-driven
+formalization under a mathematical author. % CLAIM: CLM-005, CLM-009
 
 \emph{Keep mathematical authority outside the implementation role.}
 Elaboration establishes that a proposition is well formed, not that it
 expresses the intended mathematics. The author should approve a statement
 card before implementation when the scope is delicate, and a reviewer who
 did not write the proof should test its hypotheses and boundary cases;
-Cases A and B show this review happening before merge and only at release
+Case B shows this review before merge and Case A only at release
 preparation, a contrast consistent with the value of independent statement
 review. % CLAIM: CLM-005, INC-001, INC-002
 
 \emph{Route feedback through durable artifacts.}
-The workflow's value for the mathematics came from its routing rule: semantic findings return to the author and the issue
-contract, implementation findings return to the worktree, and the PR
-preserves the candidate, the applicable checks, and the decision in one
-durable record. In platform-neutral terms, the structure is a versioned
-task contract, an isolated candidate change, a
-durable review record attached to that candidate, semantic and mechanical
-checks run independently of the implementer, integration gated on those
-checks and on an attributable review, and project state kept outside any
-single agent session. In this project the contract was a GitHub Issue;
-the candidate was a branch in its own Git worktree; the review record was
-the PR and its threads; and the persistent state was the repository
-together with the Issue and PR record. This mapping is one implementation
-of the structure. The July handover to a different orchestrating model
-(Section~\ref{sec:workflow}) continued the workflow from those artifacts.
+The workflow's value for the mathematics came from its routing rule:
+semantic findings return to the author and the issue contract,
+implementation findings return to the worktree, and the review record
+preserves the candidate, the applicable checks, and the decision. In
+platform-neutral terms, the structure is a versioned task contract, an
+isolated candidate change, a durable review record attached to that
+candidate, semantic and mechanical checks run independently of the
+implementer, integration gated on those checks and on an attributable
+review, and project state kept outside any single agent session. GitHub
+Issues, Git worktrees, and PRs were the implementation used here.
 % CLAIM: CLM-007, CLM-009, EV-2076, EV-1669
 
 \emph{Separate observation from modification.}
 A read-only scout inspected repository assumptions, while specialist
 reviewers examined mathematical scope, module structure, and the public
-declaration inventory. These roles received only the authority their task
-needed. The declaration comparison after the refactor in
-Section~\ref{sec:incidents} (PR~\#120) found a missing theorem after both
-the build and a structural review had passed.
+declaration inventory, each with only the authority its task needed. The
+declaration comparison in Section~\ref{sec:incidents} found a missing
+theorem after both the build and a structural review had passed.
 % CLAIM: CLM-007, CLM-008, CLM-009, INC-004
 
 \emph{Place resource rules in the dispatch path.}
 The VPS container's low memory ceiling made resource contention visible
-early, but similar contention can arise on shared hosts when many agents
-run continuously: abandoned agent and helper process trees retain
-memory, while concurrent Lean builds add large transient demand. Dispatch
-rules should therefore clean up abandoned process trees, bound agent
-concurrency, run heavy builds under a global lock, reuse the build cache,
-and check the memory available to the whole machine or container rather
-than to the foreground prover alone. Recording such a rule in an agent's
-own persistent notes is insufficient because later agents and tools change;
-standing instructions and dispatch prompts carry it to replacement agents
-and later sessions. % CLAIM: CLM-007, CLM-008, CLM-009, INC-005
+early, but similar contention arises on any shared host where many agents
+run continuously: abandoned process trees retain memory and concurrent
+Lean builds add large transient demand. Dispatch rules should clean up
+abandoned process trees, bound agent concurrency, run heavy builds under a
+global lock, reuse the build cache, and check the memory available to the
+whole machine or container. Because later agents and tools change, such rules belong in standing
+instructions and dispatch prompts rather than in an agent's own notes. % CLAIM: CLM-007, CLM-008, CLM-009, INC-005
 
 \subsection{Evidence and limits}
 
-This observational account evaluates one author-supervised formalization
-workflow as a whole, including the author's own interventions. Comparative
-evaluation across projects would be needed to isolate the contribution of
-an individual control and to assess its transferability to other
-settings.
+This observational account evaluates one author-supervised workflow as a
+whole, including the author's own interventions. Comparative evaluation
+across projects would be needed to isolate the contribution of an
+individual control and to assess its transferability.
 % CLAIM: CLM-004, CLM-005
 
-Early session records are incomplete, and the models and proprietary tools
-changed during the project outside its control. Reconstructed events are
-distinguished from primary session evidence, with confidence assessments
-recorded in the accompanying manifests. The recommendations are therefore expressed through
-durable artifacts, assigned responsibilities, and observable checks rather
-than a requirement to use the same software. % CLAIM: CLM-008, INC-003
+Early session records are incomplete, and the models and proprietary
+tools changed during the project outside its control. Reconstructed events
+are distinguished from primary session evidence, with confidence recorded
+in the accompanying manifests. The recommendations are therefore expressed
+through durable artifacts, assigned responsibilities, and observable
+checks rather than a requirement to use the same software. % CLAIM: CLM-008, INC-003
 
 The paper repository provides redacted evidence excerpts,
-claim-to-evidence manifests, and scripts for the reported metrics. Raw
-session logs are withheld to protect the people and systems recorded in
-them.
+claim-to-evidence manifests, and metric scripts; raw session logs are
+withheld to protect the people and systems recorded in them.
