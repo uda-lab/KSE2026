@@ -25,7 +25,7 @@ isolated candidate change, a durable review record attached to that
 candidate, semantic and mechanical checks run independently of the
 implementer, integration gated on those checks and on an attributable
 review, and project state kept outside any single agent session. GitHub
-Issues, Git worktrees, and PRs were the implementation used here.
+Issues, Git worktrees, and PRs implemented this structure here.
 % CLAIM: CLM-007, CLM-009, EV-2076, EV-1669
 
 \emph{Separate observation from modification.}
@@ -38,7 +38,7 @@ theorem after both the build and a structural review had passed.
 
 \emph{Place resource rules in the dispatch path.}
 The VPS container's low memory ceiling made resource contention visible
-early, but similar contention arises on any shared host where many agents
+early, but similar contention can arise on shared hosts where many agents
 run continuously: abandoned process trees retain memory and concurrent
 Lean builds add large transient demand. Dispatch rules should clean up
 abandoned process trees, bound agent concurrency, run heavy builds under a

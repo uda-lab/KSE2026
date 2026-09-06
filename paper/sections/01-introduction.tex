@@ -40,7 +40,7 @@ LeanMarathon~\cite{zhang2026leanmarathon}, a multi-agent harness for
 long-horizon Lean autoformalization. It coordinates four fixed agent
 roles (Blueprinter, Target-Reviewer, Worker, and Refiner) through an
 explicit blueprint that serves as proof skeleton, proof directed acyclic
-graph (DAG), and shared record, and discharges the DAG from its leaves in
+graph (DAG), and shared record; it discharges the DAG from its leaves in
 CI-gated rounds. The present project instead coordinated a six-week
 formalization mainly through conventional development artifacts (Issues,
 worktrees, PRs, reviews, CI, and the evolving Lean repository), without
@@ -72,13 +72,13 @@ This paper makes three contributions:
   independently inspectable at a pinned release.
 \item An empirical account of the six-week agent-driven development: the
   author's harness connected a conventional Issue, worktree, PR, and
-  review workflow with specialist agents and a constrained runtime,
-  selected checks by the changed artifact, and four documented incidents
-  show those checks' observed reach and limits.
+  review workflow with specialist agents and a constrained runtime and
+  selected checks by the changed artifact; four documented incidents show
+  those checks' observed reach and limits.
   % CLAIM: CLM-005, CLM-007, CLM-008, CLM-009
 \item An evidence method combining retained session logs, claim-to-evidence
   verification, and cost reconciliation, which supports auditable
-  statements about the project, including measured token use and cost,
+  statements about the project, including token use and cost estimates,
   while making coverage gaps explicit
   (Section~\ref{sec:workflow}).
   % CLAIM: CLM-002, CLM-003

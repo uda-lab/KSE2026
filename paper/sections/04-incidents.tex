@@ -36,7 +36,7 @@ hypotheses yet has no representative continuous into $H$. The problem was
 therefore the proposition, not a difficult proof. The repair restricted the
 declaration to $p=q=2$ and moved it outside the public imports
 (PR~\#162); a follow-up recorded the construction in a postmortem, added
-a statement card, and added a regression check against the unrestricted
+a statement card and a regression check against the unrestricted
 signature (PR~\#170).
 % CLAIM: CLM-008, INC-001
 
@@ -52,7 +52,7 @@ On $\mathbb{T}^3$ the convection term enters the Galerkin equations
 through the trilinear form $b(u,v,w) = \int (u\cdot\nabla v)\cdot w$,
 whose antisymmetry $b(u,v,w) = -b(u,w,v)$ for divergence-free $u$
 underlies the energy inequality. The scheme truncates Fourier modes to a
-finite box, and a second placeholder asserted antisymmetry of the
+finite box; a second placeholder asserted antisymmetry of the
 truncated form $b_n$ for arbitrary $v$ and $w$. The proof reindexes the
 modes by an involution that stays inside the box only when the Fourier
 coefficients of $v$ and $w$ vanish outside it, that is, when both lie in
@@ -63,7 +63,7 @@ missing closure condition. % CLAIM: CLM-008, INC-002
 \emph{Detection and response.}
 The reviewer tested inputs outside $V_n$; a numerical diagnostic showed a
 discrepancy of approximately $80.7$ without the projection hypotheses and
-$10^{-13}$ with them, corroborating the structural diagnosis without being
+about $10^{-13}$ with them, corroborating the structural diagnosis without being
 a certified counterexample. The repair added the hypotheses $P_n v = v$
 and $P_n w = w$ for the projection $P_n$ onto $V_n$, completed the Lean
 proof, and removed the placeholder before merge (PR~\#27).
@@ -83,18 +83,18 @@ and was required to preserve every public theorem of each domain file
 (PR~\#120). The code built, but one public theorem on the $\mathbb{R}^3$
 side, with no downstream users, was omitted from the theorems to reconnect
 and disappeared; neither the build nor an earlier review of module
-structure revealed it. % CLAIM: CLM-008, INC-004
+structure noticed. % CLAIM: CLM-008, INC-004
 
 \emph{Detection and response.}
 A separate reviewer compared the public declaration inventory before and
-after the refactor, statement by statement, found the omission, and
-repeated the comparison after the theorem was restored with its original
-statement. % CLAIM: CLM-008, INC-004
+after the refactor, statement by statement, found the omission, and, once
+the theorem was restored with its original statement, repeated the
+comparison before merge. % CLAIM: CLM-008, INC-004
 
 \emph{Lesson.}
 When a refactor promises interface preservation, the review target is the
 complete public declaration set, including declarations with no current
-users: a build tests dependencies, an inventory comparison tests
+users: a build tests dependencies; an inventory comparison tests
 preservation. % CLAIM: CLM-008, INC-004
 
 \subsection{Resource availability and orchestration}\label{sec:inc005}
