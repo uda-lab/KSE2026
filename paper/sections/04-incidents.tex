@@ -62,9 +62,9 @@ On $\mathbb{T}^3$ the convection term enters the Galerkin equations
 through the trilinear form $b(u,v,w) = \int (u\cdot\nabla v)\cdot w$, and
 the energy inequality rests on its antisymmetry $b(u,v,w) = -b(u,w,v)$ for
 divergence-free $u$. The Galerkin scheme truncates Fourier modes to a
-finite box, and the truncated form is a finite sum over pairs of modes in
-the box. A second placeholder asserted antisymmetry of the truncated form
-for arbitrary $v$ and $w$. The standard proof, however, reindexes the
+finite box, and the truncated form $b_n$ is a finite sum over pairs of
+modes in the box. A second placeholder asserted antisymmetry of $b_n$ for
+arbitrary $v$ and $w$. The standard proof, however, reindexes the
 inner sum by an involution of the modes, which stays inside the box only
 when the Fourier coefficients of $v$ and $w$ vanish outside it, that is,
 when both lie in the finite projection space $V_n$. Two proof revisions had
@@ -73,7 +73,7 @@ identified this missing closure condition. % CLAIM: CLM-008, INC-002
 
 \emph{Detection and response.}
 The reviewer tested inputs outside $V_n$. A numerical diagnostic gave a
-discrepancy between $b(u,v,w)$ and $-b(u,w,v)$ of approximately $80.7$
+discrepancy between $b_n(u,v,w)$ and $-b_n(u,w,v)$ of approximately $80.7$
 without the projection hypotheses and approximately $10^{-13}$ after
 imposing them. These values corroborated the structural diagnosis; they
 were not a certified counterexample. The repair added the two hypotheses
