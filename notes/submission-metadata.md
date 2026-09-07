@@ -23,3 +23,14 @@ Character count: 1121 characters (including spaces; LF-free abstract field). The
 - Submission date: 2026-08-01
 
 No private CMT account, submission ID, or other private submission-system data are stored here.
+
+## Camera-ready revision
+
+Status: camera-ready manuscript fixed on 2026-09-07 as tag `v0.1.0`, repository revision `9affe502a22bd341e42d7816174a9bb64b577914` (merge of PR #122). Release: <https://github.com/uda-lab/KSE2026/releases/tag/v0.1.0>, with the CI pdflatex artifact `KSE2026-paper-v0.1.0.pdf` (paper.yml run 34044785111).
+
+- Byline: Tomoki Uda
+- Affiliation: Nanzan University
+- Format: named six-page PDF
+- Content: the reviewer-response revision (issues #119 and #121; PRs #120 and #122) of the submitted revision `da91668` above
+
+The manuscript abstract at `v0.1.0` differs from the abstract submitted to CMT on 2026-08-01 (recorded above); the current text is in `paper/main.tex` at the tagged revision. The camera-ready upload itself and any CMT-side metadata update are performed by the author and are not recorded here.
