@@ -52,6 +52,11 @@ base="${1:-origin/main}"
 #
 # issue #109 (2026-08-01): the owner authorized synchronizing the CMT abstract
 # draft with the post-#106 manuscript abstract (decision record in issue #73).
+#
+# issue #127 (2026-09-23): the manuscript states that the repository provides
+# redacted evidence excerpts, and the owner decided to bring the repository in
+# line with that sentence rather than change it. The excerpts for Cases A-D
+# are added under evidence/redacted-excerpts/ as owner-authorized additions.
 FREEZE_EXEMPT_PINNED=(
   "notes/submission-metadata.md:78cf2f79ede6b296e06b06071f2ed123a4491850"
   "evidence/incidents/INC-005.md:468838e6516409137c0acb880f962d41a3e87425"
@@ -59,6 +64,11 @@ FREEZE_EXEMPT_PINNED=(
   "claims/paper-claims.md:74b0041a54c029d375cceadf92c9795abb760e32"
   "analysis/incident-ranking.md:f669c68ea3a2ffa3381fdf8b997752909261f69c"
   "analysis/incident-candidates.md:1ad4ab9df88fa2173f127f54354f7c333360ae80"
+  "evidence/redacted-excerpts/README.md:8a3ecf68c20956b7224542b70a43fc0516973256"
+  "evidence/redacted-excerpts/INC-001-case-A.md:f39a2d71abe97c7d39482d2c4bd9f6fa6ef8eba7"
+  "evidence/redacted-excerpts/INC-002-case-B.md:aee802d27f2c4a219888cc1646c787fb364099ea"
+  "evidence/redacted-excerpts/INC-004-case-C.md:57841b42c7b24d9134d595541578905cc4d1956a"
+  "evidence/redacted-excerpts/INC-005-case-D.md:d3ab34cfde2b883faeacca5430982cde5b2901dc"
 )
 FREEZE_EXEMPT_UNPINNED=(
   "scripts/check_frozen_paths.sh"
